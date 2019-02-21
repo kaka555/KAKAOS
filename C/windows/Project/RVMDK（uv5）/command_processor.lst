@@ -1,0 +1,4782 @@
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccGojRvE.s 			page 1
+
+
+   1              		.cpu cortex-m3
+   2              		.eabi_attribute 20, 1
+   3              		.eabi_attribute 21, 1
+   4              		.eabi_attribute 23, 3
+   5              		.eabi_attribute 24, 1
+   6              		.eabi_attribute 25, 1
+   7              		.eabi_attribute 26, 1
+   8              		.eabi_attribute 30, 2
+   9              		.eabi_attribute 34, 1
+  10              		.eabi_attribute 18, 4
+  11              		.file	"command_processor.c"
+  12              		.text
+  13              	.Ltext0:
+  14              		.cfi_sections	.debug_frame
+  15              		.align	1
+  16              		.p2align 2,,3
+  17              		.syntax unified
+  18              		.thumb
+  19              		.thumb_func
+  20              		.fpu softvfp
+  21              		.type	command_list_hash, %function
+  22              	command_list_hash:
+  23              	.LFB5:
+  24              		.file 1 "../../source/src/user/shell/command_processor.c"
+   1:../../source/src/user/shell/command_processor.c **** #include <command_processor.h>
+   2:../../source/src/user/shell/command_processor.c **** #include <myassert.h>
+   3:../../source/src/user/shell/command_processor.c **** #include <myMicroLIB.h>
+   4:../../source/src/user/shell/command_processor.c **** #include <kakaosstdint.h>
+   5:../../source/src/user/shell/command_processor.c **** 
+   6:../../source/src/user/shell/command_processor.c **** #if CONFIG_SHELL_EN
+   7:../../source/src/user/shell/command_processor.c **** 
+   8:../../source/src/user/shell/command_processor.c **** /******
+   9:../../source/src/user/shell/command_processor.c **** *if you need to add command:  step 1: add the following three place if necessary
+  10:../../source/src/user/shell/command_processor.c **** *                             step 2: add struct command in shell.c
+  11:../../source/src/user/shell/command_processor.c **** */
+  12:../../source/src/user/shell/command_processor.c **** //1.hash array to store command
+  13:../../source/src/user/shell/command_processor.c **** static struct singly_list_head command_1_ptr_hash_array[ARRAY_SIZE];
+  14:../../source/src/user/shell/command_processor.c **** static struct singly_list_head command_2_ptr_hash_array[ARRAY_SIZE];
+  15:../../source/src/user/shell/command_processor.c **** static struct singly_list_head command_3_ptr_hash_array[ARRAY_SIZE];
+  16:../../source/src/user/shell/command_processor.c **** static struct singly_list_head command_4_ptr_hash_array[ARRAY_SIZE];
+  17:../../source/src/user/shell/command_processor.c **** static struct singly_list_head command_5_ptr_hash_array[ARRAY_SIZE];
+  18:../../source/src/user/shell/command_processor.c **** static struct singly_list_head command_6_ptr_hash_array[ARRAY_SIZE];
+  19:../../source/src/user/shell/command_processor.c **** static struct singly_list_head command_7_ptr_hash_array[ARRAY_SIZE];
+  20:../../source/src/user/shell/command_processor.c **** static struct singly_list_head command_8_ptr_hash_array[ARRAY_SIZE];
+  21:../../source/src/user/shell/command_processor.c **** //2.struct command_processer entity
+  22:../../source/src/user/shell/command_processor.c **** static struct command_processer command_1_processer = {1,command_1_ptr_hash_array};
+  23:../../source/src/user/shell/command_processor.c **** static struct command_processer command_2_processer = {2,command_2_ptr_hash_array};
+  24:../../source/src/user/shell/command_processor.c **** static struct command_processer command_3_processer = {3,command_3_ptr_hash_array};
+  25:../../source/src/user/shell/command_processor.c **** static struct command_processer command_4_processer = {4,command_4_ptr_hash_array};
+  26:../../source/src/user/shell/command_processor.c **** static struct command_processer command_5_processer = {5,command_5_ptr_hash_array};
+  27:../../source/src/user/shell/command_processor.c **** static struct command_processer command_6_processer = {6,command_6_ptr_hash_array};
+  28:../../source/src/user/shell/command_processor.c **** static struct command_processer command_7_processer = {7,command_7_ptr_hash_array};
+  29:../../source/src/user/shell/command_processor.c **** static struct command_processer command_8_processer = {8,command_8_ptr_hash_array};
+  30:../../source/src/user/shell/command_processor.c **** //3.array to store command_processor_ptr
+  31:../../source/src/user/shell/command_processor.c **** static struct command_processer* command_processer_ptr_array[] = {&command_1_processer,&command_2_p
+  32:../../source/src/user/shell/command_processor.c **** 	&command_3_processer,&command_4_processer,&command_5_processer,&command_6_processer,&command_7_pro
+  33:../../source/src/user/shell/command_processor.c **** 	&command_8_processer};
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccGojRvE.s 			page 2
+
+
+  34:../../source/src/user/shell/command_processor.c **** 
+  35:../../source/src/user/shell/command_processor.c **** struct command_processer *get_command_processer(unsigned int num)
+  36:../../source/src/user/shell/command_processor.c **** {
+  37:../../source/src/user/shell/command_processor.c **** 	if(!(num <= sizeof(command_processer_ptr_array)/sizeof(struct command_processer *)) || (num<1))
+  38:../../source/src/user/shell/command_processor.c **** 	{
+  39:../../source/src/user/shell/command_processor.c **** 		return NULL;
+  40:../../source/src/user/shell/command_processor.c **** 	}
+  41:../../source/src/user/shell/command_processor.c **** 	return command_processer_ptr_array[num-1];
+  42:../../source/src/user/shell/command_processor.c **** }
+  43:../../source/src/user/shell/command_processor.c **** 
+  44:../../source/src/user/shell/command_processor.c **** static unsigned int command_list_hash(const char *command_ptr)
+  45:../../source/src/user/shell/command_processor.c **** {
+  25              		.loc 1 45 0
+  26              		.cfi_startproc
+  27              		@ args = 0, pretend = 0, frame = 0
+  28              		@ frame_needed = 0, uses_anonymous_args = 0
+  29              	.LVL0:
+  30 0000 10B5     		push	{r4, lr}
+  31              	.LCFI0:
+  32              		.cfi_def_cfa_offset 8
+  33              		.cfi_offset 4, -8
+  34              		.cfi_offset 14, -4
+  46:../../source/src/user/shell/command_processor.c **** 	unsigned int sum = 0;
+  47:../../source/src/user/shell/command_processor.c **** 	ASSERT(NULL != command_ptr);
+  35              		.loc 1 47 0
+  36 0002 0446     		mov	r4, r0
+  37 0004 F0B1     		cbz	r0, .L14
+  48:../../source/src/user/shell/command_processor.c **** 	while((*command_ptr != ' ') && (*command_ptr != 0x0d) && (*command_ptr != 0x0a) && ('\0' != *comma
+  38              		.loc 1 48 0
+  39 0006 0378     		ldrb	r3, [r0]	@ zero_extendqisi2
+  40 0008 0D2B     		cmp	r3, #13
+  41 000a 21D0     		beq	.L8
+  42 000c 0A2B     		cmp	r3, #10
+  43 000e 1FD0     		beq	.L8
+  44 0010 13F0DF00 		ands	r0, r3, #223
+  45              	.LVL1:
+  46 0014 15D0     		beq	.L1
+  47 0016 0022     		movs	r2, #0
+  48 0018 04E0     		b	.L6
+  49              	.LVL2:
+  50              	.L4:
+  51              		.loc 1 48 0 is_stmt 0 discriminator 2
+  52 001a 0A2B     		cmp	r3, #10
+  53 001c 09D0     		beq	.L12
+  54              		.loc 1 48 0 discriminator 3
+  55 001e 13F0DF0F 		tst	r3, #223
+  56 0022 06D0     		beq	.L12
+  57              	.LVL3:
+  58              	.L6:
+  49:../../source/src/user/shell/command_processor.c **** 	{
+  50:../../source/src/user/shell/command_processor.c **** 		sum += *command_ptr++ - 'a';
+  59              		.loc 1 50 0 is_stmt 1
+  60 0024 A3F16101 		sub	r1, r3, #97
+  48:../../source/src/user/shell/command_processor.c **** 	while((*command_ptr != ' ') && (*command_ptr != 0x0d) && (*command_ptr != 0x0a) && ('\0' != *comma
+  61              		.loc 1 48 0
+  62 0028 14F8013F 		ldrb	r3, [r4, #1]!	@ zero_extendqisi2
+  63              	.LVL4:
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccGojRvE.s 			page 3
+
+
+  64              		.loc 1 50 0
+  65 002c 0A44     		add	r2, r2, r1
+  66              	.LVL5:
+  48:../../source/src/user/shell/command_processor.c **** 	while((*command_ptr != ' ') && (*command_ptr != 0x0d) && (*command_ptr != 0x0a) && ('\0' != *comma
+  67              		.loc 1 48 0
+  68 002e 0D2B     		cmp	r3, #13
+  69 0030 F3D1     		bne	.L4
+  70              	.L12:
+  71 0032 0848     		ldr	r0, .L15
+  72 0034 A0FB0230 		umull	r3, r0, r0, r2
+  73 0038 C008     		lsrs	r0, r0, #3
+  74 003a 00EB8000 		add	r0, r0, r0, lsl #2
+  75 003e A2EB4000 		sub	r0, r2, r0, lsl #1
+  76              	.LVL6:
+  77              	.L1:
+  51:../../source/src/user/shell/command_processor.c **** 	}
+  52:../../source/src/user/shell/command_processor.c **** #if DEBUG_SHELL
+  53:../../source/src/user/shell/command_processor.c **** 	ka_printf("hash is %u\n",sum % ARRAY_SIZE);
+  54:../../source/src/user/shell/command_processor.c **** #endif
+  55:../../source/src/user/shell/command_processor.c **** 	return sum % ARRAY_SIZE;
+  56:../../source/src/user/shell/command_processor.c **** }
+  78              		.loc 1 56 0
+  79 0042 10BD     		pop	{r4, pc}
+  80              	.LVL7:
+  81              	.L14:
+  47:../../source/src/user/shell/command_processor.c **** 	while((*command_ptr != ' ') && (*command_ptr != 0x0d) && (*command_ptr != 0x0a) && ('\0' != *comma
+  82              		.loc 1 47 0 discriminator 1
+  83 0044 2F21     		movs	r1, #47
+  84 0046 0448     		ldr	r0, .L15+4
+  85              	.LVL8:
+  86 0048 FFF7FEFF 		bl	_ASSERT
+  87              	.LVL9:
+  48:../../source/src/user/shell/command_processor.c **** 	{
+  88              		.loc 1 48 0 discriminator 1
+  89 004c 2378     		ldrb	r3, [r4]	@ zero_extendqisi2
+  90 004e FFDE     		.inst	0xdeff
+  91              	.LVL10:
+  92              	.L8:
+  48:../../source/src/user/shell/command_processor.c **** 	{
+  93              		.loc 1 48 0 is_stmt 0
+  94 0050 0020     		movs	r0, #0
+  95              	.LVL11:
+  96              		.loc 1 56 0 is_stmt 1
+  97 0052 10BD     		pop	{r4, pc}
+  98              	.LVL12:
+  99              	.L16:
+ 100              		.align	2
+ 101              	.L15:
+ 102 0054 CDCCCCCC 		.word	-858993459
+ 103 0058 00000000 		.word	.LC0
+ 104              		.cfi_endproc
+ 105              	.LFE5:
+ 106              		.size	command_list_hash, .-command_list_hash
+ 107              		.align	1
+ 108              		.p2align 2,,3
+ 109              		.global	get_command_processer
+ 110              		.syntax unified
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccGojRvE.s 			page 4
+
+
+ 111              		.thumb
+ 112              		.thumb_func
+ 113              		.fpu softvfp
+ 114              		.type	get_command_processer, %function
+ 115              	get_command_processer:
+ 116              	.LFB4:
+  36:../../source/src/user/shell/command_processor.c **** 	if(!(num <= sizeof(command_processer_ptr_array)/sizeof(struct command_processer *)) || (num<1))
+ 117              		.loc 1 36 0
+ 118              		.cfi_startproc
+ 119              		@ args = 0, pretend = 0, frame = 0
+ 120              		@ frame_needed = 0, uses_anonymous_args = 0
+ 121              		@ link register save eliminated.
+ 122              	.LVL13:
+  37:../../source/src/user/shell/command_processor.c **** 	{
+ 123              		.loc 1 37 0
+ 124 005c 0138     		subs	r0, r0, #1
+ 125              	.LVL14:
+ 126 005e 0728     		cmp	r0, #7
+  41:../../source/src/user/shell/command_processor.c **** }
+ 127              		.loc 1 41 0
+ 128 0060 9ABF     		itte	ls
+ 129 0062 024B     		ldrls	r3, .L20
+ 130 0064 53F82000 		ldrls	r0, [r3, r0, lsl #2]
+ 131              	.LVL15:
+  39:../../source/src/user/shell/command_processor.c **** 	}
+ 132              		.loc 1 39 0
+ 133 0068 0020     		movhi	r0, #0
+  42:../../source/src/user/shell/command_processor.c **** 
+ 134              		.loc 1 42 0
+ 135 006a 7047     		bx	lr
+ 136              	.L21:
+ 137              		.align	2
+ 138              	.L20:
+ 139 006c 00000000 		.word	.LANCHOR0
+ 140              		.cfi_endproc
+ 141              	.LFE4:
+ 142              		.size	get_command_processer, .-get_command_processer
+ 143              		.align	1
+ 144              		.p2align 2,,3
+ 145              		.global	__init_command_n_ptr_hash_array
+ 146              		.syntax unified
+ 147              		.thumb
+ 148              		.thumb_func
+ 149              		.fpu softvfp
+ 150              		.type	__init_command_n_ptr_hash_array, %function
+ 151              	__init_command_n_ptr_hash_array:
+ 152              	.LFB6:
+  57:../../source/src/user/shell/command_processor.c **** 
+  58:../../source/src/user/shell/command_processor.c **** void __init_command_n_ptr_hash_array(void)
+  59:../../source/src/user/shell/command_processor.c **** {
+ 153              		.loc 1 59 0
+ 154              		.cfi_startproc
+ 155              		@ args = 0, pretend = 0, frame = 0
+ 156              		@ frame_needed = 0, uses_anonymous_args = 0
+ 157              		@ link register save eliminated.
+ 158              	.LVL16:
+ 159 0070 0849     		ldr	r1, .L27
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccGojRvE.s 			page 5
+
+
+ 160              		.loc 1 59 0
+ 161 0072 094B     		ldr	r3, .L27+4
+ 162 0074 01F11C00 		add	r0, r1, #28
+ 163              	.LVL17:
+ 164              	.L23:
+ 165 0078 5B68     		ldr	r3, [r3, #4]
+ 166 007a 03F12802 		add	r2, r3, #40
+ 167              	.LVL18:
+ 168              	.L24:
+ 169              	.LBB6:
+ 170              	.LBB7:
+ 171              		.file 2 "../../source/include/os_lib/singly_linked_list.h"
+   1:../../source/include/os_lib/singly_linked_list.h **** #ifndef _SINGLY_LINKED_LIST_H
+   2:../../source/include/os_lib/singly_linked_list.h **** #define _SINGLY_LINKED_LIST_H
+   3:../../source/include/os_lib/singly_linked_list.h **** 
+   4:../../source/include/os_lib/singly_linked_list.h **** struct singly_list_head{
+   5:../../source/include/os_lib/singly_linked_list.h **** 	struct singly_list_head *next;
+   6:../../source/include/os_lib/singly_linked_list.h **** };
+   7:../../source/include/os_lib/singly_linked_list.h **** 
+   8:../../source/include/os_lib/singly_linked_list.h **** #define SINGLY_LIST_HEAD_INIT(name) { &(name) }
+   9:../../source/include/os_lib/singly_linked_list.h **** 
+  10:../../source/include/os_lib/singly_linked_list.h **** #define SINGLY_LIST_HEAD(name) \
+  11:../../source/include/os_lib/singly_linked_list.h ****     struct singly_list_head name = SINGLY_LIST_HEAD_INIT(name)
+  12:../../source/include/os_lib/singly_linked_list.h **** 
+  13:../../source/include/os_lib/singly_linked_list.h **** static inline void INIT_SINGLY_LIST_HEAD(struct singly_list_head *list)
+  14:../../source/include/os_lib/singly_linked_list.h **** {
+  15:../../source/include/os_lib/singly_linked_list.h **** 	list->next = list;
+ 172              		.loc 2 15 0 discriminator 3
+ 173 007e 1B60     		str	r3, [r3]
+ 174 0080 0433     		adds	r3, r3, #4
+ 175              	.LVL19:
+ 176              	.LBE7:
+ 177              	.LBE6:
+  60:../../source/src/user/shell/command_processor.c **** 	unsigned int i,j;
+  61:../../source/src/user/shell/command_processor.c **** 	for(i=0;i<sizeof(command_processer_ptr_array)/sizeof(struct command_processer *);++i)
+  62:../../source/src/user/shell/command_processor.c **** 	{
+  63:../../source/src/user/shell/command_processor.c **** 		for(j=0;j<ARRAY_SIZE;++j)
+ 178              		.loc 1 63 0 discriminator 3
+ 179 0082 9342     		cmp	r3, r2
+ 180 0084 FBD1     		bne	.L24
+  61:../../source/src/user/shell/command_processor.c **** 	{
+ 181              		.loc 1 61 0 discriminator 2
+ 182 0086 8142     		cmp	r1, r0
+ 183 0088 02D0     		beq	.L22
+ 184 008a 51F8043B 		ldr	r3, [r1], #4
+ 185 008e F3E7     		b	.L23
+ 186              	.L22:
+  64:../../source/src/user/shell/command_processor.c **** 		{
+  65:../../source/src/user/shell/command_processor.c **** 			INIT_SINGLY_LIST_HEAD(&(command_processer_ptr_array[i]->command_list_address[j]));
+  66:../../source/src/user/shell/command_processor.c **** 		}
+  67:../../source/src/user/shell/command_processor.c **** 	}
+  68:../../source/src/user/shell/command_processor.c **** }
+ 187              		.loc 1 68 0
+ 188 0090 7047     		bx	lr
+ 189              	.L28:
+ 190 0092 00BF     		.align	2
+ 191              	.L27:
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccGojRvE.s 			page 6
+
+
+ 192 0094 04000000 		.word	.LANCHOR0+4
+ 193 0098 00000000 		.word	.LANCHOR1
+ 194              		.cfi_endproc
+ 195              	.LFE6:
+ 196              		.size	__init_command_n_ptr_hash_array, .-__init_command_n_ptr_hash_array
+ 197              		.align	1
+ 198              		.p2align 2,,3
+ 199              		.global	match_and_execute_command
+ 200              		.syntax unified
+ 201              		.thumb
+ 202              		.thumb_func
+ 203              		.fpu softvfp
+ 204              		.type	match_and_execute_command, %function
+ 205              	match_and_execute_command:
+ 206              	.LFB7:
+  69:../../source/src/user/shell/command_processor.c **** 
+  70:../../source/src/user/shell/command_processor.c **** int match_and_execute_command(
+  71:../../source/src/user/shell/command_processor.c **** 	int num,
+  72:../../source/src/user/shell/command_processor.c **** 	char const *argv[],
+  73:../../source/src/user/shell/command_processor.c **** 	struct command_processer * const command_processer_ptr)
+  74:../../source/src/user/shell/command_processor.c **** {
+ 207              		.loc 1 74 0
+ 208              		.cfi_startproc
+ 209              		@ args = 0, pretend = 0, frame = 0
+ 210              		@ frame_needed = 0, uses_anonymous_args = 0
+ 211              	.LVL20:
+ 212 009c 2DE9F041 		push	{r4, r5, r6, r7, r8, lr}
+ 213              	.LCFI1:
+ 214              		.cfi_def_cfa_offset 24
+ 215              		.cfi_offset 4, -24
+ 216              		.cfi_offset 5, -20
+ 217              		.cfi_offset 6, -16
+ 218              		.cfi_offset 7, -12
+ 219              		.cfi_offset 8, -8
+ 220              		.cfi_offset 14, -4
+ 221              		.loc 1 74 0
+ 222 00a0 8046     		mov	r8, r0
+ 223 00a2 0F46     		mov	r7, r1
+  75:../../source/src/user/shell/command_processor.c **** 	if(NULL == command_processer_ptr)
+ 224              		.loc 1 75 0
+ 225 00a4 1646     		mov	r6, r2
+ 226 00a6 B2B1     		cbz	r2, .L35
+  76:../../source/src/user/shell/command_processor.c **** 	{
+  77:../../source/src/user/shell/command_processor.c **** 		ka_printf("%s\n","command not found");
+  78:../../source/src/user/shell/command_processor.c **** 		return -1;
+  79:../../source/src/user/shell/command_processor.c **** 	}
+  80:../../source/src/user/shell/command_processor.c **** 	struct command *struct_command_ptr;
+  81:../../source/src/user/shell/command_processor.c **** 	struct singly_list_head *pos;
+  82:../../source/src/user/shell/command_processor.c **** 	singly_list_for_each(pos,&command_processer_ptr->command_list_address[command_list_hash(argv[0])])
+ 227              		.loc 1 82 0
+ 228 00a8 0868     		ldr	r0, [r1]
+ 229              	.LVL21:
+ 230 00aa 5468     		ldr	r4, [r2, #4]
+ 231 00ac FFF7A8FF 		bl	command_list_hash
+ 232              	.LVL22:
+ 233 00b0 54F82050 		ldr	r5, [r4, r0, lsl #2]
+ 234              	.LVL23:
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccGojRvE.s 			page 7
+
+
+ 235 00b4 07E0     		b	.L32
+ 236              	.LVL24:
+ 237              	.L34:
+  83:../../source/src/user/shell/command_processor.c **** 	{
+  84:../../source/src/user/shell/command_processor.c **** 		struct_command_ptr = singly_list_entry(pos,struct command,list);
+  85:../../source/src/user/shell/command_processor.c **** 		if(0 == ka_strncmp(argv[0],struct_command_ptr->command_name,command_processer_ptr->command_length
+ 238              		.loc 1 85 0
+ 239 00b6 3268     		ldr	r2, [r6]
+ 240 00b8 55F8081C 		ldr	r1, [r5, #-8]
+ 241 00bc 3868     		ldr	r0, [r7]
+ 242 00be FFF7FEFF 		bl	ka_strncmp
+ 243              	.LVL25:
+ 244 00c2 80B1     		cbz	r0, .L36
+  82:../../source/src/user/shell/command_processor.c **** 	{
+ 245              		.loc 1 82 0 discriminator 2
+ 246 00c4 2D68     		ldr	r5, [r5]
+ 247              	.LVL26:
+ 248              	.L32:
+  82:../../source/src/user/shell/command_processor.c **** 	{
+ 249              		.loc 1 82 0 is_stmt 0 discriminator 1
+ 250 00c6 3868     		ldr	r0, [r7]
+ 251 00c8 7468     		ldr	r4, [r6, #4]
+ 252 00ca FFF799FF 		bl	command_list_hash
+ 253              	.LVL27:
+ 254 00ce 04EB8000 		add	r0, r4, r0, lsl #2
+ 255 00d2 8542     		cmp	r5, r0
+ 256 00d4 EFD1     		bne	.L34
+ 257              	.LVL28:
+ 258              	.L35:
+  77:../../source/src/user/shell/command_processor.c **** 		return -1;
+ 259              		.loc 1 77 0 is_stmt 1
+ 260 00d6 0B49     		ldr	r1, .L37
+ 261 00d8 0B48     		ldr	r0, .L37+4
+ 262 00da FFF7FEFF 		bl	ka_printf
+ 263              	.LVL29:
+  78:../../source/src/user/shell/command_processor.c **** 	}
+ 264              		.loc 1 78 0
+ 265 00de 4FF0FF30 		mov	r0, #-1
+  86:../../source/src/user/shell/command_processor.c **** 		{
+  87:../../source/src/user/shell/command_processor.c **** 			struct_command_ptr->f(num,argv);
+  88:../../source/src/user/shell/command_processor.c **** 			if(0 == ka_strcmp(argv[0],"r"))
+  89:../../source/src/user/shell/command_processor.c **** 			{
+  90:../../source/src/user/shell/command_processor.c **** 				return 1;
+  91:../../source/src/user/shell/command_processor.c **** 			}
+  92:../../source/src/user/shell/command_processor.c **** 			return 0;
+  93:../../source/src/user/shell/command_processor.c **** 		}
+  94:../../source/src/user/shell/command_processor.c **** 	}
+  95:../../source/src/user/shell/command_processor.c **** 	ka_printf("%s\n","command not found");
+  96:../../source/src/user/shell/command_processor.c **** 	return -1;
+  97:../../source/src/user/shell/command_processor.c **** }
+ 266              		.loc 1 97 0
+ 267 00e2 BDE8F081 		pop	{r4, r5, r6, r7, r8, pc}
+ 268              	.LVL30:
+ 269              	.L36:
+  87:../../source/src/user/shell/command_processor.c **** 			if(0 == ka_strcmp(argv[0],"r"))
+ 270              		.loc 1 87 0
+ 271 00e6 55F8043C 		ldr	r3, [r5, #-4]
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccGojRvE.s 			page 8
+
+
+ 272 00ea 4046     		mov	r0, r8
+ 273 00ec 3946     		mov	r1, r7
+ 274 00ee 9847     		blx	r3
+ 275              	.LVL31:
+  88:../../source/src/user/shell/command_processor.c **** 			{
+ 276              		.loc 1 88 0
+ 277 00f0 3868     		ldr	r0, [r7]
+ 278 00f2 0649     		ldr	r1, .L37+8
+ 279 00f4 FFF7FEFF 		bl	ka_strcmp
+ 280              	.LVL32:
+ 281 00f8 B0FA80F0 		clz	r0, r0
+ 282 00fc 4009     		lsrs	r0, r0, #5
+ 283              		.loc 1 97 0
+ 284 00fe BDE8F081 		pop	{r4, r5, r6, r7, r8, pc}
+ 285              	.LVL33:
+ 286              	.L38:
+ 287 0102 00BF     		.align	2
+ 288              	.L37:
+ 289 0104 30000000 		.word	.LC1
+ 290 0108 44000000 		.word	.LC2
+ 291 010c 48000000 		.word	.LC3
+ 292              		.cfi_endproc
+ 293              	.LFE7:
+ 294              		.size	match_and_execute_command, .-match_and_execute_command
+ 295              		.align	1
+ 296              		.p2align 2,,3
+ 297              		.global	insert_struct_command_1
+ 298              		.syntax unified
+ 299              		.thumb
+ 300              		.thumb_func
+ 301              		.fpu softvfp
+ 302              		.type	insert_struct_command_1, %function
+ 303              	insert_struct_command_1:
+ 304              	.LFB9:
+  98:../../source/src/user/shell/command_processor.c **** 
+  99:../../source/src/user/shell/command_processor.c **** inline static void insert_struct_command(struct command *command_ptr,struct singly_list_head *hash_
+ 100:../../source/src/user/shell/command_processor.c **** {
+ 101:../../source/src/user/shell/command_processor.c **** 	ASSERT(NULL != command_ptr);
+ 102:../../source/src/user/shell/command_processor.c **** 	unsigned int hash = command_list_hash(command_ptr->command_name);
+ 103:../../source/src/user/shell/command_processor.c **** 	singly_list_add(&command_ptr->list,&hash_array[hash]);
+ 104:../../source/src/user/shell/command_processor.c **** }
+ 105:../../source/src/user/shell/command_processor.c **** 
+ 106:../../source/src/user/shell/command_processor.c **** void insert_struct_command_1(struct command *ptr)
+ 107:../../source/src/user/shell/command_processor.c **** {
+ 305              		.loc 1 107 0
+ 306              		.cfi_startproc
+ 307              		@ args = 0, pretend = 0, frame = 0
+ 308              		@ frame_needed = 0, uses_anonymous_args = 0
+ 309              	.LVL34:
+ 310 0110 10B5     		push	{r4, lr}
+ 311              	.LCFI2:
+ 312              		.cfi_def_cfa_offset 8
+ 313              		.cfi_offset 4, -8
+ 314              		.cfi_offset 14, -4
+ 315              	.LBB12:
+ 316              	.LBB13:
+ 101:../../source/src/user/shell/command_processor.c **** 	unsigned int hash = command_list_hash(command_ptr->command_name);
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccGojRvE.s 			page 9
+
+
+ 317              		.loc 1 101 0
+ 318 0112 0446     		mov	r4, r0
+ 319 0114 50B1     		cbz	r0, .L41
+ 320              	.LVL35:
+ 321              	.L40:
+ 102:../../source/src/user/shell/command_processor.c **** 	singly_list_add(&command_ptr->list,&hash_array[hash]);
+ 322              		.loc 1 102 0
+ 323 0116 2068     		ldr	r0, [r4]
+ 324 0118 FFF772FF 		bl	command_list_hash
+ 325              	.LVL36:
+ 103:../../source/src/user/shell/command_processor.c **** }
+ 326              		.loc 1 103 0
+ 327 011c 064B     		ldr	r3, .L42
+ 328              	.LVL37:
+ 329              	.LBB14:
+ 330              	.LBB15:
+  16:../../source/include/os_lib/singly_linked_list.h **** }
+  17:../../source/include/os_lib/singly_linked_list.h **** 
+  18:../../source/include/os_lib/singly_linked_list.h **** static inline void singly_list_add(struct singly_list_head *new,struct singly_list_head *head)
+  19:../../source/include/os_lib/singly_linked_list.h **** {
+  20:../../source/include/os_lib/singly_linked_list.h **** 	new->next = head->next;
+ 331              		.loc 2 20 0
+ 332 011e 53F82020 		ldr	r2, [r3, r0, lsl #2]
+ 333 0122 44F8082F 		str	r2, [r4, #8]!
+ 334              	.LVL38:
+  21:../../source/include/os_lib/singly_linked_list.h **** 	head->next = new;
+ 335              		.loc 2 21 0
+ 336 0126 43F82040 		str	r4, [r3, r0, lsl #2]
+ 337              	.LVL39:
+ 338              	.LBE15:
+ 339              	.LBE14:
+ 340              	.LBE13:
+ 341              	.LBE12:
+ 108:../../source/src/user/shell/command_processor.c **** 	insert_struct_command(ptr,command_1_ptr_hash_array);
+ 109:../../source/src/user/shell/command_processor.c **** }
+ 342              		.loc 1 109 0
+ 343 012a 10BD     		pop	{r4, pc}
+ 344              	.LVL40:
+ 345              	.L41:
+ 346              	.LBB17:
+ 347              	.LBB16:
+ 101:../../source/src/user/shell/command_processor.c **** 	unsigned int hash = command_list_hash(command_ptr->command_name);
+ 348              		.loc 1 101 0
+ 349 012c 6521     		movs	r1, #101
+ 350 012e 0348     		ldr	r0, .L42+4
+ 351              	.LVL41:
+ 352 0130 FFF7FEFF 		bl	_ASSERT
+ 353              	.LVL42:
+ 354 0134 EFE7     		b	.L40
+ 355              	.L43:
+ 356 0136 00BF     		.align	2
+ 357              	.L42:
+ 358 0138 00000000 		.word	.LANCHOR2
+ 359 013c 00000000 		.word	.LC0
+ 360              	.LBE16:
+ 361              	.LBE17:
+ 362              		.cfi_endproc
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccGojRvE.s 			page 10
+
+
+ 363              	.LFE9:
+ 364              		.size	insert_struct_command_1, .-insert_struct_command_1
+ 365              		.align	1
+ 366              		.p2align 2,,3
+ 367              		.global	insert_struct_command_2
+ 368              		.syntax unified
+ 369              		.thumb
+ 370              		.thumb_func
+ 371              		.fpu softvfp
+ 372              		.type	insert_struct_command_2, %function
+ 373              	insert_struct_command_2:
+ 374              	.LFB10:
+ 110:../../source/src/user/shell/command_processor.c **** void insert_struct_command_2(struct command *ptr)
+ 111:../../source/src/user/shell/command_processor.c **** {
+ 375              		.loc 1 111 0
+ 376              		.cfi_startproc
+ 377              		@ args = 0, pretend = 0, frame = 0
+ 378              		@ frame_needed = 0, uses_anonymous_args = 0
+ 379              	.LVL43:
+ 380 0140 10B5     		push	{r4, lr}
+ 381              	.LCFI3:
+ 382              		.cfi_def_cfa_offset 8
+ 383              		.cfi_offset 4, -8
+ 384              		.cfi_offset 14, -4
+ 385              	.LBB22:
+ 386              	.LBB23:
+ 101:../../source/src/user/shell/command_processor.c **** 	unsigned int hash = command_list_hash(command_ptr->command_name);
+ 387              		.loc 1 101 0
+ 388 0142 0446     		mov	r4, r0
+ 389 0144 50B1     		cbz	r0, .L46
+ 390              	.LVL44:
+ 391              	.L45:
+ 102:../../source/src/user/shell/command_processor.c **** 	singly_list_add(&command_ptr->list,&hash_array[hash]);
+ 392              		.loc 1 102 0
+ 393 0146 2068     		ldr	r0, [r4]
+ 394 0148 FFF75AFF 		bl	command_list_hash
+ 395              	.LVL45:
+ 103:../../source/src/user/shell/command_processor.c **** }
+ 396              		.loc 1 103 0
+ 397 014c 064B     		ldr	r3, .L47
+ 398              	.LVL46:
+ 399              	.LBB24:
+ 400              	.LBB25:
+  20:../../source/include/os_lib/singly_linked_list.h **** 	head->next = new;
+ 401              		.loc 2 20 0
+ 402 014e 53F82020 		ldr	r2, [r3, r0, lsl #2]
+ 403 0152 44F8082F 		str	r2, [r4, #8]!
+ 404              	.LVL47:
+ 405              		.loc 2 21 0
+ 406 0156 43F82040 		str	r4, [r3, r0, lsl #2]
+ 407              	.LVL48:
+ 408              	.LBE25:
+ 409              	.LBE24:
+ 410              	.LBE23:
+ 411              	.LBE22:
+ 112:../../source/src/user/shell/command_processor.c **** 	insert_struct_command(ptr,command_2_ptr_hash_array);
+ 113:../../source/src/user/shell/command_processor.c **** }
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccGojRvE.s 			page 11
+
+
+ 412              		.loc 1 113 0
+ 413 015a 10BD     		pop	{r4, pc}
+ 414              	.LVL49:
+ 415              	.L46:
+ 416              	.LBB27:
+ 417              	.LBB26:
+ 101:../../source/src/user/shell/command_processor.c **** 	unsigned int hash = command_list_hash(command_ptr->command_name);
+ 418              		.loc 1 101 0
+ 419 015c 6521     		movs	r1, #101
+ 420 015e 0348     		ldr	r0, .L47+4
+ 421              	.LVL50:
+ 422 0160 FFF7FEFF 		bl	_ASSERT
+ 423              	.LVL51:
+ 424 0164 EFE7     		b	.L45
+ 425              	.L48:
+ 426 0166 00BF     		.align	2
+ 427              	.L47:
+ 428 0168 28000000 		.word	.LANCHOR2+40
+ 429 016c 00000000 		.word	.LC0
+ 430              	.LBE26:
+ 431              	.LBE27:
+ 432              		.cfi_endproc
+ 433              	.LFE10:
+ 434              		.size	insert_struct_command_2, .-insert_struct_command_2
+ 435              		.align	1
+ 436              		.p2align 2,,3
+ 437              		.global	insert_struct_command_3
+ 438              		.syntax unified
+ 439              		.thumb
+ 440              		.thumb_func
+ 441              		.fpu softvfp
+ 442              		.type	insert_struct_command_3, %function
+ 443              	insert_struct_command_3:
+ 444              	.LFB11:
+ 114:../../source/src/user/shell/command_processor.c **** void insert_struct_command_3(struct command *ptr)
+ 115:../../source/src/user/shell/command_processor.c **** {
+ 445              		.loc 1 115 0
+ 446              		.cfi_startproc
+ 447              		@ args = 0, pretend = 0, frame = 0
+ 448              		@ frame_needed = 0, uses_anonymous_args = 0
+ 449              	.LVL52:
+ 450 0170 10B5     		push	{r4, lr}
+ 451              	.LCFI4:
+ 452              		.cfi_def_cfa_offset 8
+ 453              		.cfi_offset 4, -8
+ 454              		.cfi_offset 14, -4
+ 455              	.LBB32:
+ 456              	.LBB33:
+ 101:../../source/src/user/shell/command_processor.c **** 	unsigned int hash = command_list_hash(command_ptr->command_name);
+ 457              		.loc 1 101 0
+ 458 0172 0446     		mov	r4, r0
+ 459 0174 50B1     		cbz	r0, .L51
+ 460              	.LVL53:
+ 461              	.L50:
+ 102:../../source/src/user/shell/command_processor.c **** 	singly_list_add(&command_ptr->list,&hash_array[hash]);
+ 462              		.loc 1 102 0
+ 463 0176 2068     		ldr	r0, [r4]
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccGojRvE.s 			page 12
+
+
+ 464 0178 FFF742FF 		bl	command_list_hash
+ 465              	.LVL54:
+ 103:../../source/src/user/shell/command_processor.c **** }
+ 466              		.loc 1 103 0
+ 467 017c 064B     		ldr	r3, .L52
+ 468              	.LVL55:
+ 469              	.LBB34:
+ 470              	.LBB35:
+  20:../../source/include/os_lib/singly_linked_list.h **** 	head->next = new;
+ 471              		.loc 2 20 0
+ 472 017e 53F82020 		ldr	r2, [r3, r0, lsl #2]
+ 473 0182 44F8082F 		str	r2, [r4, #8]!
+ 474              	.LVL56:
+ 475              		.loc 2 21 0
+ 476 0186 43F82040 		str	r4, [r3, r0, lsl #2]
+ 477              	.LVL57:
+ 478              	.LBE35:
+ 479              	.LBE34:
+ 480              	.LBE33:
+ 481              	.LBE32:
+ 116:../../source/src/user/shell/command_processor.c **** 	insert_struct_command(ptr,command_3_ptr_hash_array);
+ 117:../../source/src/user/shell/command_processor.c **** }
+ 482              		.loc 1 117 0
+ 483 018a 10BD     		pop	{r4, pc}
+ 484              	.LVL58:
+ 485              	.L51:
+ 486              	.LBB37:
+ 487              	.LBB36:
+ 101:../../source/src/user/shell/command_processor.c **** 	unsigned int hash = command_list_hash(command_ptr->command_name);
+ 488              		.loc 1 101 0
+ 489 018c 6521     		movs	r1, #101
+ 490 018e 0348     		ldr	r0, .L52+4
+ 491              	.LVL59:
+ 492 0190 FFF7FEFF 		bl	_ASSERT
+ 493              	.LVL60:
+ 494 0194 EFE7     		b	.L50
+ 495              	.L53:
+ 496 0196 00BF     		.align	2
+ 497              	.L52:
+ 498 0198 50000000 		.word	.LANCHOR2+80
+ 499 019c 00000000 		.word	.LC0
+ 500              	.LBE36:
+ 501              	.LBE37:
+ 502              		.cfi_endproc
+ 503              	.LFE11:
+ 504              		.size	insert_struct_command_3, .-insert_struct_command_3
+ 505              		.align	1
+ 506              		.p2align 2,,3
+ 507              		.global	insert_struct_command_4
+ 508              		.syntax unified
+ 509              		.thumb
+ 510              		.thumb_func
+ 511              		.fpu softvfp
+ 512              		.type	insert_struct_command_4, %function
+ 513              	insert_struct_command_4:
+ 514              	.LFB12:
+ 118:../../source/src/user/shell/command_processor.c **** void insert_struct_command_4(struct command *ptr)
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccGojRvE.s 			page 13
+
+
+ 119:../../source/src/user/shell/command_processor.c **** {
+ 515              		.loc 1 119 0
+ 516              		.cfi_startproc
+ 517              		@ args = 0, pretend = 0, frame = 0
+ 518              		@ frame_needed = 0, uses_anonymous_args = 0
+ 519              	.LVL61:
+ 520 01a0 10B5     		push	{r4, lr}
+ 521              	.LCFI5:
+ 522              		.cfi_def_cfa_offset 8
+ 523              		.cfi_offset 4, -8
+ 524              		.cfi_offset 14, -4
+ 525              	.LBB42:
+ 526              	.LBB43:
+ 101:../../source/src/user/shell/command_processor.c **** 	unsigned int hash = command_list_hash(command_ptr->command_name);
+ 527              		.loc 1 101 0
+ 528 01a2 0446     		mov	r4, r0
+ 529 01a4 50B1     		cbz	r0, .L56
+ 530              	.LVL62:
+ 531              	.L55:
+ 102:../../source/src/user/shell/command_processor.c **** 	singly_list_add(&command_ptr->list,&hash_array[hash]);
+ 532              		.loc 1 102 0
+ 533 01a6 2068     		ldr	r0, [r4]
+ 534 01a8 FFF72AFF 		bl	command_list_hash
+ 535              	.LVL63:
+ 103:../../source/src/user/shell/command_processor.c **** }
+ 536              		.loc 1 103 0
+ 537 01ac 064B     		ldr	r3, .L57
+ 538              	.LVL64:
+ 539              	.LBB44:
+ 540              	.LBB45:
+  20:../../source/include/os_lib/singly_linked_list.h **** 	head->next = new;
+ 541              		.loc 2 20 0
+ 542 01ae 53F82020 		ldr	r2, [r3, r0, lsl #2]
+ 543 01b2 44F8082F 		str	r2, [r4, #8]!
+ 544              	.LVL65:
+ 545              		.loc 2 21 0
+ 546 01b6 43F82040 		str	r4, [r3, r0, lsl #2]
+ 547              	.LVL66:
+ 548              	.LBE45:
+ 549              	.LBE44:
+ 550              	.LBE43:
+ 551              	.LBE42:
+ 120:../../source/src/user/shell/command_processor.c **** 	insert_struct_command(ptr,command_4_ptr_hash_array);
+ 121:../../source/src/user/shell/command_processor.c **** }
+ 552              		.loc 1 121 0
+ 553 01ba 10BD     		pop	{r4, pc}
+ 554              	.LVL67:
+ 555              	.L56:
+ 556              	.LBB47:
+ 557              	.LBB46:
+ 101:../../source/src/user/shell/command_processor.c **** 	unsigned int hash = command_list_hash(command_ptr->command_name);
+ 558              		.loc 1 101 0
+ 559 01bc 6521     		movs	r1, #101
+ 560 01be 0348     		ldr	r0, .L57+4
+ 561              	.LVL68:
+ 562 01c0 FFF7FEFF 		bl	_ASSERT
+ 563              	.LVL69:
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccGojRvE.s 			page 14
+
+
+ 564 01c4 EFE7     		b	.L55
+ 565              	.L58:
+ 566 01c6 00BF     		.align	2
+ 567              	.L57:
+ 568 01c8 78000000 		.word	.LANCHOR2+120
+ 569 01cc 00000000 		.word	.LC0
+ 570              	.LBE46:
+ 571              	.LBE47:
+ 572              		.cfi_endproc
+ 573              	.LFE12:
+ 574              		.size	insert_struct_command_4, .-insert_struct_command_4
+ 575              		.align	1
+ 576              		.p2align 2,,3
+ 577              		.global	insert_struct_command_5
+ 578              		.syntax unified
+ 579              		.thumb
+ 580              		.thumb_func
+ 581              		.fpu softvfp
+ 582              		.type	insert_struct_command_5, %function
+ 583              	insert_struct_command_5:
+ 584              	.LFB13:
+ 122:../../source/src/user/shell/command_processor.c **** 
+ 123:../../source/src/user/shell/command_processor.c **** void insert_struct_command_5(struct command *ptr)
+ 124:../../source/src/user/shell/command_processor.c **** {
+ 585              		.loc 1 124 0
+ 586              		.cfi_startproc
+ 587              		@ args = 0, pretend = 0, frame = 0
+ 588              		@ frame_needed = 0, uses_anonymous_args = 0
+ 589              	.LVL70:
+ 590 01d0 10B5     		push	{r4, lr}
+ 591              	.LCFI6:
+ 592              		.cfi_def_cfa_offset 8
+ 593              		.cfi_offset 4, -8
+ 594              		.cfi_offset 14, -4
+ 595              	.LBB52:
+ 596              	.LBB53:
+ 101:../../source/src/user/shell/command_processor.c **** 	unsigned int hash = command_list_hash(command_ptr->command_name);
+ 597              		.loc 1 101 0
+ 598 01d2 0446     		mov	r4, r0
+ 599 01d4 50B1     		cbz	r0, .L61
+ 600              	.LVL71:
+ 601              	.L60:
+ 102:../../source/src/user/shell/command_processor.c **** 	singly_list_add(&command_ptr->list,&hash_array[hash]);
+ 602              		.loc 1 102 0
+ 603 01d6 2068     		ldr	r0, [r4]
+ 604 01d8 FFF712FF 		bl	command_list_hash
+ 605              	.LVL72:
+ 103:../../source/src/user/shell/command_processor.c **** }
+ 606              		.loc 1 103 0
+ 607 01dc 064B     		ldr	r3, .L62
+ 608              	.LVL73:
+ 609              	.LBB54:
+ 610              	.LBB55:
+  20:../../source/include/os_lib/singly_linked_list.h **** 	head->next = new;
+ 611              		.loc 2 20 0
+ 612 01de 53F82020 		ldr	r2, [r3, r0, lsl #2]
+ 613 01e2 44F8082F 		str	r2, [r4, #8]!
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccGojRvE.s 			page 15
+
+
+ 614              	.LVL74:
+ 615              		.loc 2 21 0
+ 616 01e6 43F82040 		str	r4, [r3, r0, lsl #2]
+ 617              	.LVL75:
+ 618              	.LBE55:
+ 619              	.LBE54:
+ 620              	.LBE53:
+ 621              	.LBE52:
+ 125:../../source/src/user/shell/command_processor.c **** 	insert_struct_command(ptr,command_5_ptr_hash_array);
+ 126:../../source/src/user/shell/command_processor.c **** }
+ 622              		.loc 1 126 0
+ 623 01ea 10BD     		pop	{r4, pc}
+ 624              	.LVL76:
+ 625              	.L61:
+ 626              	.LBB57:
+ 627              	.LBB56:
+ 101:../../source/src/user/shell/command_processor.c **** 	unsigned int hash = command_list_hash(command_ptr->command_name);
+ 628              		.loc 1 101 0
+ 629 01ec 6521     		movs	r1, #101
+ 630 01ee 0348     		ldr	r0, .L62+4
+ 631              	.LVL77:
+ 632 01f0 FFF7FEFF 		bl	_ASSERT
+ 633              	.LVL78:
+ 634 01f4 EFE7     		b	.L60
+ 635              	.L63:
+ 636 01f6 00BF     		.align	2
+ 637              	.L62:
+ 638 01f8 A0000000 		.word	.LANCHOR2+160
+ 639 01fc 00000000 		.word	.LC0
+ 640              	.LBE56:
+ 641              	.LBE57:
+ 642              		.cfi_endproc
+ 643              	.LFE13:
+ 644              		.size	insert_struct_command_5, .-insert_struct_command_5
+ 645              		.align	1
+ 646              		.p2align 2,,3
+ 647              		.global	insert_struct_command_6
+ 648              		.syntax unified
+ 649              		.thumb
+ 650              		.thumb_func
+ 651              		.fpu softvfp
+ 652              		.type	insert_struct_command_6, %function
+ 653              	insert_struct_command_6:
+ 654              	.LFB14:
+ 127:../../source/src/user/shell/command_processor.c **** 
+ 128:../../source/src/user/shell/command_processor.c **** void insert_struct_command_6(struct command *ptr)
+ 129:../../source/src/user/shell/command_processor.c **** {
+ 655              		.loc 1 129 0
+ 656              		.cfi_startproc
+ 657              		@ args = 0, pretend = 0, frame = 0
+ 658              		@ frame_needed = 0, uses_anonymous_args = 0
+ 659              	.LVL79:
+ 660 0200 10B5     		push	{r4, lr}
+ 661              	.LCFI7:
+ 662              		.cfi_def_cfa_offset 8
+ 663              		.cfi_offset 4, -8
+ 664              		.cfi_offset 14, -4
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccGojRvE.s 			page 16
+
+
+ 665              	.LBB62:
+ 666              	.LBB63:
+ 101:../../source/src/user/shell/command_processor.c **** 	unsigned int hash = command_list_hash(command_ptr->command_name);
+ 667              		.loc 1 101 0
+ 668 0202 0446     		mov	r4, r0
+ 669 0204 50B1     		cbz	r0, .L66
+ 670              	.LVL80:
+ 671              	.L65:
+ 102:../../source/src/user/shell/command_processor.c **** 	singly_list_add(&command_ptr->list,&hash_array[hash]);
+ 672              		.loc 1 102 0
+ 673 0206 2068     		ldr	r0, [r4]
+ 674 0208 FFF7FAFE 		bl	command_list_hash
+ 675              	.LVL81:
+ 103:../../source/src/user/shell/command_processor.c **** }
+ 676              		.loc 1 103 0
+ 677 020c 064B     		ldr	r3, .L67
+ 678              	.LVL82:
+ 679              	.LBB64:
+ 680              	.LBB65:
+  20:../../source/include/os_lib/singly_linked_list.h **** 	head->next = new;
+ 681              		.loc 2 20 0
+ 682 020e 53F82020 		ldr	r2, [r3, r0, lsl #2]
+ 683 0212 44F8082F 		str	r2, [r4, #8]!
+ 684              	.LVL83:
+ 685              		.loc 2 21 0
+ 686 0216 43F82040 		str	r4, [r3, r0, lsl #2]
+ 687              	.LVL84:
+ 688              	.LBE65:
+ 689              	.LBE64:
+ 690              	.LBE63:
+ 691              	.LBE62:
+ 130:../../source/src/user/shell/command_processor.c **** 	insert_struct_command(ptr,command_6_ptr_hash_array);
+ 131:../../source/src/user/shell/command_processor.c **** }
+ 692              		.loc 1 131 0
+ 693 021a 10BD     		pop	{r4, pc}
+ 694              	.LVL85:
+ 695              	.L66:
+ 696              	.LBB67:
+ 697              	.LBB66:
+ 101:../../source/src/user/shell/command_processor.c **** 	unsigned int hash = command_list_hash(command_ptr->command_name);
+ 698              		.loc 1 101 0
+ 699 021c 6521     		movs	r1, #101
+ 700 021e 0348     		ldr	r0, .L67+4
+ 701              	.LVL86:
+ 702 0220 FFF7FEFF 		bl	_ASSERT
+ 703              	.LVL87:
+ 704 0224 EFE7     		b	.L65
+ 705              	.L68:
+ 706 0226 00BF     		.align	2
+ 707              	.L67:
+ 708 0228 C8000000 		.word	.LANCHOR2+200
+ 709 022c 00000000 		.word	.LC0
+ 710              	.LBE66:
+ 711              	.LBE67:
+ 712              		.cfi_endproc
+ 713              	.LFE14:
+ 714              		.size	insert_struct_command_6, .-insert_struct_command_6
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccGojRvE.s 			page 17
+
+
+ 715              		.align	1
+ 716              		.p2align 2,,3
+ 717              		.global	insert_struct_command_7
+ 718              		.syntax unified
+ 719              		.thumb
+ 720              		.thumb_func
+ 721              		.fpu softvfp
+ 722              		.type	insert_struct_command_7, %function
+ 723              	insert_struct_command_7:
+ 724              	.LFB15:
+ 132:../../source/src/user/shell/command_processor.c **** void insert_struct_command_7(struct command *ptr)
+ 133:../../source/src/user/shell/command_processor.c **** {
+ 725              		.loc 1 133 0
+ 726              		.cfi_startproc
+ 727              		@ args = 0, pretend = 0, frame = 0
+ 728              		@ frame_needed = 0, uses_anonymous_args = 0
+ 729              	.LVL88:
+ 730 0230 10B5     		push	{r4, lr}
+ 731              	.LCFI8:
+ 732              		.cfi_def_cfa_offset 8
+ 733              		.cfi_offset 4, -8
+ 734              		.cfi_offset 14, -4
+ 735              	.LBB72:
+ 736              	.LBB73:
+ 101:../../source/src/user/shell/command_processor.c **** 	unsigned int hash = command_list_hash(command_ptr->command_name);
+ 737              		.loc 1 101 0
+ 738 0232 0446     		mov	r4, r0
+ 739 0234 50B1     		cbz	r0, .L71
+ 740              	.LVL89:
+ 741              	.L70:
+ 102:../../source/src/user/shell/command_processor.c **** 	singly_list_add(&command_ptr->list,&hash_array[hash]);
+ 742              		.loc 1 102 0
+ 743 0236 2068     		ldr	r0, [r4]
+ 744 0238 FFF7E2FE 		bl	command_list_hash
+ 745              	.LVL90:
+ 103:../../source/src/user/shell/command_processor.c **** }
+ 746              		.loc 1 103 0
+ 747 023c 064B     		ldr	r3, .L72
+ 748              	.LVL91:
+ 749              	.LBB74:
+ 750              	.LBB75:
+  20:../../source/include/os_lib/singly_linked_list.h **** 	head->next = new;
+ 751              		.loc 2 20 0
+ 752 023e 53F82020 		ldr	r2, [r3, r0, lsl #2]
+ 753 0242 44F8082F 		str	r2, [r4, #8]!
+ 754              	.LVL92:
+ 755              		.loc 2 21 0
+ 756 0246 43F82040 		str	r4, [r3, r0, lsl #2]
+ 757              	.LVL93:
+ 758              	.LBE75:
+ 759              	.LBE74:
+ 760              	.LBE73:
+ 761              	.LBE72:
+ 134:../../source/src/user/shell/command_processor.c **** 	insert_struct_command(ptr,command_7_ptr_hash_array);
+ 135:../../source/src/user/shell/command_processor.c **** }
+ 762              		.loc 1 135 0
+ 763 024a 10BD     		pop	{r4, pc}
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccGojRvE.s 			page 18
+
+
+ 764              	.LVL94:
+ 765              	.L71:
+ 766              	.LBB77:
+ 767              	.LBB76:
+ 101:../../source/src/user/shell/command_processor.c **** 	unsigned int hash = command_list_hash(command_ptr->command_name);
+ 768              		.loc 1 101 0
+ 769 024c 6521     		movs	r1, #101
+ 770 024e 0348     		ldr	r0, .L72+4
+ 771              	.LVL95:
+ 772 0250 FFF7FEFF 		bl	_ASSERT
+ 773              	.LVL96:
+ 774 0254 EFE7     		b	.L70
+ 775              	.L73:
+ 776 0256 00BF     		.align	2
+ 777              	.L72:
+ 778 0258 F0000000 		.word	.LANCHOR2+240
+ 779 025c 00000000 		.word	.LC0
+ 780              	.LBE76:
+ 781              	.LBE77:
+ 782              		.cfi_endproc
+ 783              	.LFE15:
+ 784              		.size	insert_struct_command_7, .-insert_struct_command_7
+ 785              		.align	1
+ 786              		.p2align 2,,3
+ 787              		.global	insert_struct_command_8
+ 788              		.syntax unified
+ 789              		.thumb
+ 790              		.thumb_func
+ 791              		.fpu softvfp
+ 792              		.type	insert_struct_command_8, %function
+ 793              	insert_struct_command_8:
+ 794              	.LFB16:
+ 136:../../source/src/user/shell/command_processor.c **** void insert_struct_command_8(struct command *ptr)
+ 137:../../source/src/user/shell/command_processor.c **** {
+ 795              		.loc 1 137 0
+ 796              		.cfi_startproc
+ 797              		@ args = 0, pretend = 0, frame = 0
+ 798              		@ frame_needed = 0, uses_anonymous_args = 0
+ 799              	.LVL97:
+ 800 0260 10B5     		push	{r4, lr}
+ 801              	.LCFI9:
+ 802              		.cfi_def_cfa_offset 8
+ 803              		.cfi_offset 4, -8
+ 804              		.cfi_offset 14, -4
+ 805              	.LBB82:
+ 806              	.LBB83:
+ 101:../../source/src/user/shell/command_processor.c **** 	unsigned int hash = command_list_hash(command_ptr->command_name);
+ 807              		.loc 1 101 0
+ 808 0262 0446     		mov	r4, r0
+ 809 0264 50B1     		cbz	r0, .L76
+ 810              	.LVL98:
+ 811              	.L75:
+ 102:../../source/src/user/shell/command_processor.c **** 	singly_list_add(&command_ptr->list,&hash_array[hash]);
+ 812              		.loc 1 102 0
+ 813 0266 2068     		ldr	r0, [r4]
+ 814 0268 FFF7CAFE 		bl	command_list_hash
+ 815              	.LVL99:
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccGojRvE.s 			page 19
+
+
+ 103:../../source/src/user/shell/command_processor.c **** }
+ 816              		.loc 1 103 0
+ 817 026c 064B     		ldr	r3, .L77
+ 818              	.LVL100:
+ 819              	.LBB84:
+ 820              	.LBB85:
+  20:../../source/include/os_lib/singly_linked_list.h **** 	head->next = new;
+ 821              		.loc 2 20 0
+ 822 026e 53F82020 		ldr	r2, [r3, r0, lsl #2]
+ 823 0272 44F8082F 		str	r2, [r4, #8]!
+ 824              	.LVL101:
+ 825              		.loc 2 21 0
+ 826 0276 43F82040 		str	r4, [r3, r0, lsl #2]
+ 827              	.LVL102:
+ 828              	.LBE85:
+ 829              	.LBE84:
+ 830              	.LBE83:
+ 831              	.LBE82:
+ 138:../../source/src/user/shell/command_processor.c **** 	insert_struct_command(ptr,command_8_ptr_hash_array);
+ 139:../../source/src/user/shell/command_processor.c **** }
+ 832              		.loc 1 139 0
+ 833 027a 10BD     		pop	{r4, pc}
+ 834              	.LVL103:
+ 835              	.L76:
+ 836              	.LBB87:
+ 837              	.LBB86:
+ 101:../../source/src/user/shell/command_processor.c **** 	unsigned int hash = command_list_hash(command_ptr->command_name);
+ 838              		.loc 1 101 0
+ 839 027c 6521     		movs	r1, #101
+ 840 027e 0348     		ldr	r0, .L77+4
+ 841              	.LVL104:
+ 842 0280 FFF7FEFF 		bl	_ASSERT
+ 843              	.LVL105:
+ 844 0284 EFE7     		b	.L75
+ 845              	.L78:
+ 846 0286 00BF     		.align	2
+ 847              	.L77:
+ 848 0288 18010000 		.word	.LANCHOR2+280
+ 849 028c 00000000 		.word	.LC0
+ 850              	.LBE86:
+ 851              	.LBE87:
+ 852              		.cfi_endproc
+ 853              	.LFE16:
+ 854              		.size	insert_struct_command_8, .-insert_struct_command_8
+ 855              		.section	.rodata
+ 856              		.align	2
+ 857              		.set	.LANCHOR0,. + 0
+ 858              		.type	command_processer_ptr_array, %object
+ 859              		.size	command_processer_ptr_array, 32
+ 860              	command_processer_ptr_array:
+ 861 0000 00000000 		.word	command_1_processer
+ 862 0004 38000000 		.word	command_2_processer
+ 863 0008 30000000 		.word	command_3_processer
+ 864 000c 28000000 		.word	command_4_processer
+ 865 0010 20000000 		.word	command_5_processer
+ 866 0014 18000000 		.word	command_6_processer
+ 867 0018 10000000 		.word	command_7_processer
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccGojRvE.s 			page 20
+
+
+ 868 001c 08000000 		.word	command_8_processer
+ 869              		.data
+ 870              		.align	2
+ 871              		.set	.LANCHOR1,. + 0
+ 872              		.type	command_1_processer, %object
+ 873              		.size	command_1_processer, 8
+ 874              	command_1_processer:
+ 875 0000 01000000 		.word	1
+ 876 0004 00000000 		.word	command_1_ptr_hash_array
+ 877              		.type	command_8_processer, %object
+ 878              		.size	command_8_processer, 8
+ 879              	command_8_processer:
+ 880 0008 08000000 		.word	8
+ 881 000c 18010000 		.word	command_8_ptr_hash_array
+ 882              		.type	command_7_processer, %object
+ 883              		.size	command_7_processer, 8
+ 884              	command_7_processer:
+ 885 0010 07000000 		.word	7
+ 886 0014 F0000000 		.word	command_7_ptr_hash_array
+ 887              		.type	command_6_processer, %object
+ 888              		.size	command_6_processer, 8
+ 889              	command_6_processer:
+ 890 0018 06000000 		.word	6
+ 891 001c C8000000 		.word	command_6_ptr_hash_array
+ 892              		.type	command_5_processer, %object
+ 893              		.size	command_5_processer, 8
+ 894              	command_5_processer:
+ 895 0020 05000000 		.word	5
+ 896 0024 A0000000 		.word	command_5_ptr_hash_array
+ 897              		.type	command_4_processer, %object
+ 898              		.size	command_4_processer, 8
+ 899              	command_4_processer:
+ 900 0028 04000000 		.word	4
+ 901 002c 78000000 		.word	command_4_ptr_hash_array
+ 902              		.type	command_3_processer, %object
+ 903              		.size	command_3_processer, 8
+ 904              	command_3_processer:
+ 905 0030 03000000 		.word	3
+ 906 0034 50000000 		.word	command_3_ptr_hash_array
+ 907              		.type	command_2_processer, %object
+ 908              		.size	command_2_processer, 8
+ 909              	command_2_processer:
+ 910 0038 02000000 		.word	2
+ 911 003c 28000000 		.word	command_2_ptr_hash_array
+ 912              		.bss
+ 913              		.align	2
+ 914              		.set	.LANCHOR2,. + 0
+ 915              		.type	command_1_ptr_hash_array, %object
+ 916              		.size	command_1_ptr_hash_array, 40
+ 917              	command_1_ptr_hash_array:
+ 918 0000 00000000 		.space	40
+ 918      00000000 
+ 918      00000000 
+ 918      00000000 
+ 918      00000000 
+ 919              		.type	command_2_ptr_hash_array, %object
+ 920              		.size	command_2_ptr_hash_array, 40
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccGojRvE.s 			page 21
+
+
+ 921              	command_2_ptr_hash_array:
+ 922 0028 00000000 		.space	40
+ 922      00000000 
+ 922      00000000 
+ 922      00000000 
+ 922      00000000 
+ 923              		.type	command_3_ptr_hash_array, %object
+ 924              		.size	command_3_ptr_hash_array, 40
+ 925              	command_3_ptr_hash_array:
+ 926 0050 00000000 		.space	40
+ 926      00000000 
+ 926      00000000 
+ 926      00000000 
+ 926      00000000 
+ 927              		.type	command_4_ptr_hash_array, %object
+ 928              		.size	command_4_ptr_hash_array, 40
+ 929              	command_4_ptr_hash_array:
+ 930 0078 00000000 		.space	40
+ 930      00000000 
+ 930      00000000 
+ 930      00000000 
+ 930      00000000 
+ 931              		.type	command_5_ptr_hash_array, %object
+ 932              		.size	command_5_ptr_hash_array, 40
+ 933              	command_5_ptr_hash_array:
+ 934 00a0 00000000 		.space	40
+ 934      00000000 
+ 934      00000000 
+ 934      00000000 
+ 934      00000000 
+ 935              		.type	command_6_ptr_hash_array, %object
+ 936              		.size	command_6_ptr_hash_array, 40
+ 937              	command_6_ptr_hash_array:
+ 938 00c8 00000000 		.space	40
+ 938      00000000 
+ 938      00000000 
+ 938      00000000 
+ 938      00000000 
+ 939              		.type	command_7_ptr_hash_array, %object
+ 940              		.size	command_7_ptr_hash_array, 40
+ 941              	command_7_ptr_hash_array:
+ 942 00f0 00000000 		.space	40
+ 942      00000000 
+ 942      00000000 
+ 942      00000000 
+ 942      00000000 
+ 943              		.type	command_8_ptr_hash_array, %object
+ 944              		.size	command_8_ptr_hash_array, 40
+ 945              	command_8_ptr_hash_array:
+ 946 0118 00000000 		.space	40
+ 946      00000000 
+ 946      00000000 
+ 946      00000000 
+ 946      00000000 
+ 947              		.section	.rodata.str1.4,"aMS",%progbits,1
+ 948              		.align	2
+ 949              	.LC0:
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccGojRvE.s 			page 22
+
+
+ 950 0000 2E2E2F2E 		.ascii	"../../source/src/user/shell/command_processor.c\000"
+ 950      2E2F736F 
+ 950      75726365 
+ 950      2F737263 
+ 950      2F757365 
+ 951              	.LC1:
+ 952 0030 636F6D6D 		.ascii	"command not found\000"
+ 952      616E6420 
+ 952      6E6F7420 
+ 952      666F756E 
+ 952      6400
+ 953 0042 0000     		.space	2
+ 954              	.LC2:
+ 955 0044 25730A00 		.ascii	"%s\012\000"
+ 956              	.LC3:
+ 957 0048 7200     		.ascii	"r\000"
+ 958              		.text
+ 959              	.Letext0:
+ 960              		.file 3 "../../source/include/shell/command_processor.h"
+ 961              		.file 4 "../../source/include/os_lib/myassert.h"
+ 962              		.file 5 "../../source/include/os_lib/myMicroLIB.h"
+ 963              		.file 6 "../../source/include/os_cpu/kakaosstdint.h"
+ 964              		.section	.debug_info,"",%progbits
+ 965              	.Ldebug_info0:
+ 966 0000 E0090000 		.4byte	0x9e0
+ 967 0004 0200     		.2byte	0x2
+ 968 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 969 000a 04       		.byte	0x4
+ 970 000b 01       		.uleb128 0x1
+ 971 000c F3030000 		.4byte	.LASF59
+ 972 0010 0C       		.byte	0xc
+ 973 0011 99010000 		.4byte	.LASF60
+ 974 0015 FC040000 		.4byte	.LASF61
+ 975 0019 00000000 		.4byte	.Ltext0
+ 976 001d 90020000 		.4byte	.Letext0
+ 977 0021 00000000 		.4byte	.Ldebug_line0
+ 978 0025 02       		.uleb128 0x2
+ 979 0026 2A030000 		.4byte	.LASF0
+ 980 002a 04       		.byte	0x4
+ 981 002b 02       		.byte	0x2
+ 982 002c 04       		.byte	0x4
+ 983 002d 40000000 		.4byte	0x40
+ 984 0031 03       		.uleb128 0x3
+ 985 0032 00000000 		.4byte	.LASF2
+ 986 0036 02       		.byte	0x2
+ 987 0037 05       		.byte	0x5
+ 988 0038 45000000 		.4byte	0x45
+ 989 003c 02       		.byte	0x2
+ 990 003d 23       		.byte	0x23
+ 991 003e 00       		.uleb128 0
+ 992 003f 00       		.byte	0
+ 993 0040 04       		.uleb128 0x4
+ 994 0041 25000000 		.4byte	0x25
+ 995 0045 05       		.uleb128 0x5
+ 996 0046 04       		.byte	0x4
+ 997 0047 25000000 		.4byte	0x25
+ 998 004b 02       		.uleb128 0x2
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccGojRvE.s 			page 23
+
+
+ 999 004c 12010000 		.4byte	.LASF1
+ 1000 0050 0C       		.byte	0xc
+ 1001 0051 03       		.byte	0x3
+ 1002 0052 0E       		.byte	0xe
+ 1003 0053 80000000 		.4byte	0x80
+ 1004 0057 03       		.uleb128 0x3
+ 1005 0058 01020000 		.4byte	.LASF3
+ 1006 005c 03       		.byte	0x3
+ 1007 005d 0F       		.byte	0xf
+ 1008 005e 80000000 		.4byte	0x80
+ 1009 0062 02       		.byte	0x2
+ 1010 0063 23       		.byte	0x23
+ 1011 0064 00       		.uleb128 0
+ 1012 0065 06       		.uleb128 0x6
+ 1013 0066 6600     		.ascii	"f\000"
+ 1014 0068 03       		.byte	0x3
+ 1015 0069 10       		.byte	0x10
+ 1016 006a B6000000 		.4byte	0xb6
+ 1017 006e 02       		.byte	0x2
+ 1018 006f 23       		.byte	0x23
+ 1019 0070 04       		.uleb128 0x4
+ 1020 0071 03       		.uleb128 0x3
+ 1021 0072 27020000 		.4byte	.LASF4
+ 1022 0076 03       		.byte	0x3
+ 1023 0077 11       		.byte	0x11
+ 1024 0078 25000000 		.4byte	0x25
+ 1025 007c 02       		.byte	0x2
+ 1026 007d 23       		.byte	0x23
+ 1027 007e 08       		.uleb128 0x8
+ 1028 007f 00       		.byte	0
+ 1029 0080 05       		.uleb128 0x5
+ 1030 0081 04       		.byte	0x4
+ 1031 0082 8D000000 		.4byte	0x8d
+ 1032 0086 07       		.uleb128 0x7
+ 1033 0087 01       		.byte	0x1
+ 1034 0088 08       		.byte	0x8
+ 1035 0089 D1020000 		.4byte	.LASF5
+ 1036 008d 04       		.uleb128 0x4
+ 1037 008e 86000000 		.4byte	0x86
+ 1038 0092 08       		.uleb128 0x8
+ 1039 0093 01       		.byte	0x1
+ 1040 0094 A3000000 		.4byte	0xa3
+ 1041 0098 09       		.uleb128 0x9
+ 1042 0099 A3000000 		.4byte	0xa3
+ 1043 009d 09       		.uleb128 0x9
+ 1044 009e AA000000 		.4byte	0xaa
+ 1045 00a2 00       		.byte	0
+ 1046 00a3 0A       		.uleb128 0xa
+ 1047 00a4 04       		.byte	0x4
+ 1048 00a5 05       		.byte	0x5
+ 1049 00a6 696E7400 		.ascii	"int\000"
+ 1050 00aa 05       		.uleb128 0x5
+ 1051 00ab 04       		.byte	0x4
+ 1052 00ac 80000000 		.4byte	0x80
+ 1053 00b0 05       		.uleb128 0x5
+ 1054 00b1 04       		.byte	0x4
+ 1055 00b2 92000000 		.4byte	0x92
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccGojRvE.s 			page 24
+
+
+ 1056 00b6 04       		.uleb128 0x4
+ 1057 00b7 B0000000 		.4byte	0xb0
+ 1058 00bb 02       		.uleb128 0x2
+ 1059 00bc 1A010000 		.4byte	.LASF6
+ 1060 00c0 08       		.byte	0x8
+ 1061 00c1 03       		.byte	0x3
+ 1062 00c2 20       		.byte	0x20
+ 1063 00c3 E4000000 		.4byte	0xe4
+ 1064 00c7 03       		.uleb128 0x3
+ 1065 00c8 81020000 		.4byte	.LASF7
+ 1066 00cc 03       		.byte	0x3
+ 1067 00cd 21       		.byte	0x21
+ 1068 00ce EB000000 		.4byte	0xeb
+ 1069 00d2 02       		.byte	0x2
+ 1070 00d3 23       		.byte	0x23
+ 1071 00d4 00       		.uleb128 0
+ 1072 00d5 03       		.uleb128 0x3
+ 1073 00d6 6C010000 		.4byte	.LASF8
+ 1074 00da 03       		.byte	0x3
+ 1075 00db 22       		.byte	0x22
+ 1076 00dc 45000000 		.4byte	0x45
+ 1077 00e0 02       		.byte	0x2
+ 1078 00e1 23       		.byte	0x23
+ 1079 00e2 04       		.uleb128 0x4
+ 1080 00e3 00       		.byte	0
+ 1081 00e4 07       		.uleb128 0x7
+ 1082 00e5 04       		.byte	0x4
+ 1083 00e6 07       		.byte	0x7
+ 1084 00e7 A6020000 		.4byte	.LASF9
+ 1085 00eb 04       		.uleb128 0x4
+ 1086 00ec E4000000 		.4byte	0xe4
+ 1087 00f0 07       		.uleb128 0x7
+ 1088 00f1 01       		.byte	0x1
+ 1089 00f2 06       		.byte	0x6
+ 1090 00f3 B2040000 		.4byte	.LASF10
+ 1091 00f7 07       		.uleb128 0x7
+ 1092 00f8 02       		.byte	0x2
+ 1093 00f9 05       		.byte	0x5
+ 1094 00fa AA030000 		.4byte	.LASF11
+ 1095 00fe 07       		.uleb128 0x7
+ 1096 00ff 08       		.byte	0x8
+ 1097 0100 05       		.byte	0x5
+ 1098 0101 42030000 		.4byte	.LASF12
+ 1099 0105 07       		.uleb128 0x7
+ 1100 0106 01       		.byte	0x1
+ 1101 0107 08       		.byte	0x8
+ 1102 0108 E0010000 		.4byte	.LASF13
+ 1103 010c 07       		.uleb128 0x7
+ 1104 010d 02       		.byte	0x2
+ 1105 010e 07       		.byte	0x7
+ 1106 010f E6000000 		.4byte	.LASF14
+ 1107 0113 07       		.uleb128 0x7
+ 1108 0114 08       		.byte	0x8
+ 1109 0115 07       		.byte	0x7
+ 1110 0116 C9010000 		.4byte	.LASF15
+ 1111 011a 0B       		.uleb128 0xb
+ 1112 011b 2C020000 		.4byte	.LASF62
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccGojRvE.s 			page 25
+
+
+ 1113 011f 06       		.byte	0x6
+ 1114 0120 23       		.byte	0x23
+ 1115 0121 E4000000 		.4byte	0xe4
+ 1116 0125 0C       		.uleb128 0xc
+ 1117 0126 25000000 		.4byte	0x25
+ 1118 012a 35010000 		.4byte	0x135
+ 1119 012e 0D       		.uleb128 0xd
+ 1120 012f E4000000 		.4byte	0xe4
+ 1121 0133 09       		.byte	0x9
+ 1122 0134 00       		.byte	0
+ 1123 0135 0E       		.uleb128 0xe
+ 1124 0136 F9000000 		.4byte	.LASF16
+ 1125 013a 01       		.byte	0x1
+ 1126 013b 0D       		.byte	0xd
+ 1127 013c 25010000 		.4byte	0x125
+ 1128 0140 05       		.byte	0x5
+ 1129 0141 03       		.byte	0x3
+ 1130 0142 00000000 		.4byte	command_1_ptr_hash_array
+ 1131 0146 0E       		.uleb128 0xe
+ 1132 0147 3D020000 		.4byte	.LASF17
+ 1133 014b 01       		.byte	0x1
+ 1134 014c 0E       		.byte	0xe
+ 1135 014d 25010000 		.4byte	0x125
+ 1136 0151 05       		.byte	0x5
+ 1137 0152 03       		.byte	0x3
+ 1138 0153 28000000 		.4byte	command_2_ptr_hash_array
+ 1139 0157 0E       		.uleb128 0xe
+ 1140 0158 D6020000 		.4byte	.LASF18
+ 1141 015c 01       		.byte	0x1
+ 1142 015d 0F       		.byte	0xf
+ 1143 015e 25010000 		.4byte	0x125
+ 1144 0162 05       		.byte	0x5
+ 1145 0163 03       		.byte	0x3
+ 1146 0164 50000000 		.4byte	command_3_ptr_hash_array
+ 1147 0168 0E       		.uleb128 0xe
+ 1148 0169 99040000 		.4byte	.LASF19
+ 1149 016d 01       		.byte	0x1
+ 1150 016e 10       		.byte	0x10
+ 1151 016f 25010000 		.4byte	0x125
+ 1152 0173 05       		.byte	0x5
+ 1153 0174 03       		.byte	0x3
+ 1154 0175 78000000 		.4byte	command_4_ptr_hash_array
+ 1155 0179 0E       		.uleb128 0xe
+ 1156 017a 19000000 		.4byte	.LASF20
+ 1157 017e 01       		.byte	0x1
+ 1158 017f 11       		.byte	0x11
+ 1159 0180 25010000 		.4byte	0x125
+ 1160 0184 05       		.byte	0x5
+ 1161 0185 03       		.byte	0x3
+ 1162 0186 A0000000 		.4byte	command_5_ptr_hash_array
+ 1163 018a 0E       		.uleb128 0xe
+ 1164 018b 0E020000 		.4byte	.LASF21
+ 1165 018f 01       		.byte	0x1
+ 1166 0190 12       		.byte	0x12
+ 1167 0191 25010000 		.4byte	0x125
+ 1168 0195 05       		.byte	0x5
+ 1169 0196 03       		.byte	0x3
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccGojRvE.s 			page 26
+
+
+ 1170 0197 C8000000 		.4byte	command_6_ptr_hash_array
+ 1171 019b 0E       		.uleb128 0xe
+ 1172 019c 68020000 		.4byte	.LASF22
+ 1173 01a0 01       		.byte	0x1
+ 1174 01a1 13       		.byte	0x13
+ 1175 01a2 25010000 		.4byte	0x125
+ 1176 01a6 05       		.byte	0x5
+ 1177 01a7 03       		.byte	0x3
+ 1178 01a8 F0000000 		.4byte	command_7_ptr_hash_array
+ 1179 01ac 0E       		.uleb128 0xe
+ 1180 01ad B4030000 		.4byte	.LASF23
+ 1181 01b1 01       		.byte	0x1
+ 1182 01b2 14       		.byte	0x14
+ 1183 01b3 25010000 		.4byte	0x125
+ 1184 01b7 05       		.byte	0x5
+ 1185 01b8 03       		.byte	0x3
+ 1186 01b9 18010000 		.4byte	command_8_ptr_hash_array
+ 1187 01bd 0E       		.uleb128 0xe
+ 1188 01be E8040000 		.4byte	.LASF24
+ 1189 01c2 01       		.byte	0x1
+ 1190 01c3 16       		.byte	0x16
+ 1191 01c4 BB000000 		.4byte	0xbb
+ 1192 01c8 05       		.byte	0x5
+ 1193 01c9 03       		.byte	0x3
+ 1194 01ca 00000000 		.4byte	command_1_processer
+ 1195 01ce 0E       		.uleb128 0xe
+ 1196 01cf B3020000 		.4byte	.LASF25
+ 1197 01d3 01       		.byte	0x1
+ 1198 01d4 17       		.byte	0x17
+ 1199 01d5 BB000000 		.4byte	0xbb
+ 1200 01d9 05       		.byte	0x5
+ 1201 01da 03       		.byte	0x3
+ 1202 01db 38000000 		.4byte	command_2_processer
+ 1203 01df 0E       		.uleb128 0xe
+ 1204 01e0 05000000 		.4byte	.LASF26
+ 1205 01e4 01       		.byte	0x1
+ 1206 01e5 18       		.byte	0x18
+ 1207 01e6 BB000000 		.4byte	0xbb
+ 1208 01ea 05       		.byte	0x5
+ 1209 01eb 03       		.byte	0x3
+ 1210 01ec 30000000 		.4byte	command_3_processer
+ 1211 01f0 0E       		.uleb128 0xe
+ 1212 01f1 76030000 		.4byte	.LASF27
+ 1213 01f5 01       		.byte	0x1
+ 1214 01f6 19       		.byte	0x19
+ 1215 01f7 BB000000 		.4byte	0xbb
+ 1216 01fb 05       		.byte	0x5
+ 1217 01fc 03       		.byte	0x3
+ 1218 01fd 28000000 		.4byte	command_4_processer
+ 1219 0201 0E       		.uleb128 0xe
+ 1220 0202 16030000 		.4byte	.LASF28
+ 1221 0206 01       		.byte	0x1
+ 1222 0207 1A       		.byte	0x1a
+ 1223 0208 BB000000 		.4byte	0xbb
+ 1224 020c 05       		.byte	0x5
+ 1225 020d 03       		.byte	0x3
+ 1226 020e 20000000 		.4byte	command_5_processer
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccGojRvE.s 			page 27
+
+
+ 1227 0212 0E       		.uleb128 0xe
+ 1228 0213 D4040000 		.4byte	.LASF29
+ 1229 0217 01       		.byte	0x1
+ 1230 0218 1B       		.byte	0x1b
+ 1231 0219 BB000000 		.4byte	0xbb
+ 1232 021d 05       		.byte	0x5
+ 1233 021e 03       		.byte	0x3
+ 1234 021f 18000000 		.4byte	command_6_processer
+ 1235 0223 0E       		.uleb128 0xe
+ 1236 0224 72000000 		.4byte	.LASF30
+ 1237 0228 01       		.byte	0x1
+ 1238 0229 1C       		.byte	0x1c
+ 1239 022a BB000000 		.4byte	0xbb
+ 1240 022e 05       		.byte	0x5
+ 1241 022f 03       		.byte	0x3
+ 1242 0230 10000000 		.4byte	command_7_processer
+ 1243 0234 0E       		.uleb128 0xe
+ 1244 0235 47050000 		.4byte	.LASF31
+ 1245 0239 01       		.byte	0x1
+ 1246 023a 1D       		.byte	0x1d
+ 1247 023b BB000000 		.4byte	0xbb
+ 1248 023f 05       		.byte	0x5
+ 1249 0240 03       		.byte	0x3
+ 1250 0241 08000000 		.4byte	command_8_processer
+ 1251 0245 0C       		.uleb128 0xc
+ 1252 0246 55020000 		.4byte	0x255
+ 1253 024a 55020000 		.4byte	0x255
+ 1254 024e 0D       		.uleb128 0xd
+ 1255 024f E4000000 		.4byte	0xe4
+ 1256 0253 07       		.byte	0x7
+ 1257 0254 00       		.byte	0
+ 1258 0255 05       		.uleb128 0x5
+ 1259 0256 04       		.byte	0x4
+ 1260 0257 BB000000 		.4byte	0xbb
+ 1261 025b 04       		.uleb128 0x4
+ 1262 025c 55020000 		.4byte	0x255
+ 1263 0260 0E       		.uleb128 0xe
+ 1264 0261 FA020000 		.4byte	.LASF32
+ 1265 0265 01       		.byte	0x1
+ 1266 0266 1F       		.byte	0x1f
+ 1267 0267 45020000 		.4byte	0x245
+ 1268 026b 05       		.byte	0x5
+ 1269 026c 03       		.byte	0x3
+ 1270 026d 00000000 		.4byte	command_processer_ptr_array
+ 1271 0271 0F       		.uleb128 0xf
+ 1272 0272 01       		.byte	0x1
+ 1273 0273 81010000 		.4byte	.LASF33
+ 1274 0277 01       		.byte	0x1
+ 1275 0278 88       		.byte	0x88
+ 1276 0279 01       		.byte	0x1
+ 1277 027a 60020000 		.4byte	.LFB16
+ 1278 027e 90020000 		.4byte	.LFE16
+ 1279 0282 00000000 		.4byte	.LLST62
+ 1280 0286 01       		.byte	0x1
+ 1281 0287 14030000 		.4byte	0x314
+ 1282 028b 10       		.uleb128 0x10
+ 1283 028c 70747200 		.ascii	"ptr\000"
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccGojRvE.s 			page 28
+
+
+ 1284 0290 01       		.byte	0x1
+ 1285 0291 88       		.byte	0x88
+ 1286 0292 14030000 		.4byte	0x314
+ 1287 0296 20000000 		.4byte	.LLST63
+ 1288 029a 11       		.uleb128 0x11
+ 1289 029b 8F070000 		.4byte	0x78f
+ 1290 029f 62020000 		.4byte	.LBB82
+ 1291 02a3 A8000000 		.4byte	.Ldebug_ranges0+0xa8
+ 1292 02a7 01       		.byte	0x1
+ 1293 02a8 8A       		.byte	0x8a
+ 1294 02a9 12       		.uleb128 0x12
+ 1295 02aa A7070000 		.4byte	0x7a7
+ 1296 02ae 61000000 		.4byte	.LLST64
+ 1297 02b2 12       		.uleb128 0x12
+ 1298 02b3 9C070000 		.4byte	0x79c
+ 1299 02b7 89000000 		.4byte	.LLST65
+ 1300 02bb 13       		.uleb128 0x13
+ 1301 02bc A8000000 		.4byte	.Ldebug_ranges0+0xa8
+ 1302 02c0 14       		.uleb128 0x14
+ 1303 02c1 B2070000 		.4byte	0x7b2
+ 1304 02c5 CA000000 		.4byte	.LLST66
+ 1305 02c9 15       		.uleb128 0x15
+ 1306 02ca 72090000 		.4byte	0x972
+ 1307 02ce 6E020000 		.4byte	.LBB84
+ 1308 02d2 7A020000 		.4byte	.LBE84
+ 1309 02d6 01       		.byte	0x1
+ 1310 02d7 67       		.byte	0x67
+ 1311 02d8 EF020000 		.4byte	0x2ef
+ 1312 02dc 12       		.uleb128 0x12
+ 1313 02dd 8A090000 		.4byte	0x98a
+ 1314 02e1 DD000000 		.4byte	.LLST67
+ 1315 02e5 12       		.uleb128 0x12
+ 1316 02e6 7F090000 		.4byte	0x97f
+ 1317 02ea F7000000 		.4byte	.LLST68
+ 1318 02ee 00       		.byte	0
+ 1319 02ef 16       		.uleb128 0x16
+ 1320 02f0 6C020000 		.4byte	.LVL99
+ 1321 02f4 F0080000 		.4byte	0x8f0
+ 1322 02f8 17       		.uleb128 0x17
+ 1323 02f9 84020000 		.4byte	.LVL105
+ 1324 02fd AF090000 		.4byte	0x9af
+ 1325 0301 18       		.uleb128 0x18
+ 1326 0302 01       		.byte	0x1
+ 1327 0303 50       		.byte	0x50
+ 1328 0304 05       		.byte	0x5
+ 1329 0305 03       		.byte	0x3
+ 1330 0306 00000000 		.4byte	.LC0
+ 1331 030a 18       		.uleb128 0x18
+ 1332 030b 01       		.byte	0x1
+ 1333 030c 51       		.byte	0x51
+ 1334 030d 02       		.byte	0x2
+ 1335 030e 08       		.byte	0x8
+ 1336 030f 65       		.byte	0x65
+ 1337 0310 00       		.byte	0
+ 1338 0311 00       		.byte	0
+ 1339 0312 00       		.byte	0
+ 1340 0313 00       		.byte	0
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccGojRvE.s 			page 29
+
+
+ 1341 0314 05       		.uleb128 0x5
+ 1342 0315 04       		.byte	0x4
+ 1343 0316 4B000000 		.4byte	0x4b
+ 1344 031a 0F       		.uleb128 0xf
+ 1345 031b 01       		.byte	0x1
+ 1346 031c CE000000 		.4byte	.LASF34
+ 1347 0320 01       		.byte	0x1
+ 1348 0321 84       		.byte	0x84
+ 1349 0322 01       		.byte	0x1
+ 1350 0323 30020000 		.4byte	.LFB15
+ 1351 0327 60020000 		.4byte	.LFE15
+ 1352 032b 17010000 		.4byte	.LLST55
+ 1353 032f 01       		.byte	0x1
+ 1354 0330 BD030000 		.4byte	0x3bd
+ 1355 0334 10       		.uleb128 0x10
+ 1356 0335 70747200 		.ascii	"ptr\000"
+ 1357 0339 01       		.byte	0x1
+ 1358 033a 84       		.byte	0x84
+ 1359 033b 14030000 		.4byte	0x314
+ 1360 033f 37010000 		.4byte	.LLST56
+ 1361 0343 11       		.uleb128 0x11
+ 1362 0344 8F070000 		.4byte	0x78f
+ 1363 0348 32020000 		.4byte	.LBB72
+ 1364 034c 90000000 		.4byte	.Ldebug_ranges0+0x90
+ 1365 0350 01       		.byte	0x1
+ 1366 0351 86       		.byte	0x86
+ 1367 0352 12       		.uleb128 0x12
+ 1368 0353 A7070000 		.4byte	0x7a7
+ 1369 0357 78010000 		.4byte	.LLST57
+ 1370 035b 12       		.uleb128 0x12
+ 1371 035c 9C070000 		.4byte	0x79c
+ 1372 0360 A0010000 		.4byte	.LLST58
+ 1373 0364 13       		.uleb128 0x13
+ 1374 0365 90000000 		.4byte	.Ldebug_ranges0+0x90
+ 1375 0369 14       		.uleb128 0x14
+ 1376 036a B2070000 		.4byte	0x7b2
+ 1377 036e E1010000 		.4byte	.LLST59
+ 1378 0372 15       		.uleb128 0x15
+ 1379 0373 72090000 		.4byte	0x972
+ 1380 0377 3E020000 		.4byte	.LBB74
+ 1381 037b 4A020000 		.4byte	.LBE74
+ 1382 037f 01       		.byte	0x1
+ 1383 0380 67       		.byte	0x67
+ 1384 0381 98030000 		.4byte	0x398
+ 1385 0385 12       		.uleb128 0x12
+ 1386 0386 8A090000 		.4byte	0x98a
+ 1387 038a F4010000 		.4byte	.LLST60
+ 1388 038e 12       		.uleb128 0x12
+ 1389 038f 7F090000 		.4byte	0x97f
+ 1390 0393 0E020000 		.4byte	.LLST61
+ 1391 0397 00       		.byte	0
+ 1392 0398 16       		.uleb128 0x16
+ 1393 0399 3C020000 		.4byte	.LVL90
+ 1394 039d F0080000 		.4byte	0x8f0
+ 1395 03a1 17       		.uleb128 0x17
+ 1396 03a2 54020000 		.4byte	.LVL96
+ 1397 03a6 AF090000 		.4byte	0x9af
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccGojRvE.s 			page 30
+
+
+ 1398 03aa 18       		.uleb128 0x18
+ 1399 03ab 01       		.byte	0x1
+ 1400 03ac 50       		.byte	0x50
+ 1401 03ad 05       		.byte	0x5
+ 1402 03ae 03       		.byte	0x3
+ 1403 03af 00000000 		.4byte	.LC0
+ 1404 03b3 18       		.uleb128 0x18
+ 1405 03b4 01       		.byte	0x1
+ 1406 03b5 51       		.byte	0x51
+ 1407 03b6 02       		.byte	0x2
+ 1408 03b7 08       		.byte	0x8
+ 1409 03b8 65       		.byte	0x65
+ 1410 03b9 00       		.byte	0
+ 1411 03ba 00       		.byte	0
+ 1412 03bb 00       		.byte	0
+ 1413 03bc 00       		.byte	0
+ 1414 03bd 0F       		.uleb128 0xf
+ 1415 03be 01       		.byte	0x1
+ 1416 03bf B6000000 		.4byte	.LASF35
+ 1417 03c3 01       		.byte	0x1
+ 1418 03c4 80       		.byte	0x80
+ 1419 03c5 01       		.byte	0x1
+ 1420 03c6 00020000 		.4byte	.LFB14
+ 1421 03ca 30020000 		.4byte	.LFE14
+ 1422 03ce 2E020000 		.4byte	.LLST48
+ 1423 03d2 01       		.byte	0x1
+ 1424 03d3 60040000 		.4byte	0x460
+ 1425 03d7 10       		.uleb128 0x10
+ 1426 03d8 70747200 		.ascii	"ptr\000"
+ 1427 03dc 01       		.byte	0x1
+ 1428 03dd 80       		.byte	0x80
+ 1429 03de 14030000 		.4byte	0x314
+ 1430 03e2 4E020000 		.4byte	.LLST49
+ 1431 03e6 11       		.uleb128 0x11
+ 1432 03e7 8F070000 		.4byte	0x78f
+ 1433 03eb 02020000 		.4byte	.LBB62
+ 1434 03ef 78000000 		.4byte	.Ldebug_ranges0+0x78
+ 1435 03f3 01       		.byte	0x1
+ 1436 03f4 82       		.byte	0x82
+ 1437 03f5 12       		.uleb128 0x12
+ 1438 03f6 A7070000 		.4byte	0x7a7
+ 1439 03fa 8F020000 		.4byte	.LLST50
+ 1440 03fe 12       		.uleb128 0x12
+ 1441 03ff 9C070000 		.4byte	0x79c
+ 1442 0403 B7020000 		.4byte	.LLST51
+ 1443 0407 13       		.uleb128 0x13
+ 1444 0408 78000000 		.4byte	.Ldebug_ranges0+0x78
+ 1445 040c 14       		.uleb128 0x14
+ 1446 040d B2070000 		.4byte	0x7b2
+ 1447 0411 F8020000 		.4byte	.LLST52
+ 1448 0415 15       		.uleb128 0x15
+ 1449 0416 72090000 		.4byte	0x972
+ 1450 041a 0E020000 		.4byte	.LBB64
+ 1451 041e 1A020000 		.4byte	.LBE64
+ 1452 0422 01       		.byte	0x1
+ 1453 0423 67       		.byte	0x67
+ 1454 0424 3B040000 		.4byte	0x43b
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccGojRvE.s 			page 31
+
+
+ 1455 0428 12       		.uleb128 0x12
+ 1456 0429 8A090000 		.4byte	0x98a
+ 1457 042d 0B030000 		.4byte	.LLST53
+ 1458 0431 12       		.uleb128 0x12
+ 1459 0432 7F090000 		.4byte	0x97f
+ 1460 0436 25030000 		.4byte	.LLST54
+ 1461 043a 00       		.byte	0
+ 1462 043b 16       		.uleb128 0x16
+ 1463 043c 0C020000 		.4byte	.LVL81
+ 1464 0440 F0080000 		.4byte	0x8f0
+ 1465 0444 17       		.uleb128 0x17
+ 1466 0445 24020000 		.4byte	.LVL87
+ 1467 0449 AF090000 		.4byte	0x9af
+ 1468 044d 18       		.uleb128 0x18
+ 1469 044e 01       		.byte	0x1
+ 1470 044f 50       		.byte	0x50
+ 1471 0450 05       		.byte	0x5
+ 1472 0451 03       		.byte	0x3
+ 1473 0452 00000000 		.4byte	.LC0
+ 1474 0456 18       		.uleb128 0x18
+ 1475 0457 01       		.byte	0x1
+ 1476 0458 51       		.byte	0x51
+ 1477 0459 02       		.byte	0x2
+ 1478 045a 08       		.byte	0x8
+ 1479 045b 65       		.byte	0x65
+ 1480 045c 00       		.byte	0
+ 1481 045d 00       		.byte	0
+ 1482 045e 00       		.byte	0
+ 1483 045f 00       		.byte	0
+ 1484 0460 0F       		.uleb128 0xf
+ 1485 0461 01       		.byte	0x1
+ 1486 0462 9E000000 		.4byte	.LASF36
+ 1487 0466 01       		.byte	0x1
+ 1488 0467 7B       		.byte	0x7b
+ 1489 0468 01       		.byte	0x1
+ 1490 0469 D0010000 		.4byte	.LFB13
+ 1491 046d 00020000 		.4byte	.LFE13
+ 1492 0471 45030000 		.4byte	.LLST41
+ 1493 0475 01       		.byte	0x1
+ 1494 0476 03050000 		.4byte	0x503
+ 1495 047a 10       		.uleb128 0x10
+ 1496 047b 70747200 		.ascii	"ptr\000"
+ 1497 047f 01       		.byte	0x1
+ 1498 0480 7B       		.byte	0x7b
+ 1499 0481 14030000 		.4byte	0x314
+ 1500 0485 65030000 		.4byte	.LLST42
+ 1501 0489 11       		.uleb128 0x11
+ 1502 048a 8F070000 		.4byte	0x78f
+ 1503 048e D2010000 		.4byte	.LBB52
+ 1504 0492 60000000 		.4byte	.Ldebug_ranges0+0x60
+ 1505 0496 01       		.byte	0x1
+ 1506 0497 7D       		.byte	0x7d
+ 1507 0498 12       		.uleb128 0x12
+ 1508 0499 A7070000 		.4byte	0x7a7
+ 1509 049d A6030000 		.4byte	.LLST43
+ 1510 04a1 12       		.uleb128 0x12
+ 1511 04a2 9C070000 		.4byte	0x79c
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccGojRvE.s 			page 32
+
+
+ 1512 04a6 CE030000 		.4byte	.LLST44
+ 1513 04aa 13       		.uleb128 0x13
+ 1514 04ab 60000000 		.4byte	.Ldebug_ranges0+0x60
+ 1515 04af 14       		.uleb128 0x14
+ 1516 04b0 B2070000 		.4byte	0x7b2
+ 1517 04b4 0F040000 		.4byte	.LLST45
+ 1518 04b8 15       		.uleb128 0x15
+ 1519 04b9 72090000 		.4byte	0x972
+ 1520 04bd DE010000 		.4byte	.LBB54
+ 1521 04c1 EA010000 		.4byte	.LBE54
+ 1522 04c5 01       		.byte	0x1
+ 1523 04c6 67       		.byte	0x67
+ 1524 04c7 DE040000 		.4byte	0x4de
+ 1525 04cb 12       		.uleb128 0x12
+ 1526 04cc 8A090000 		.4byte	0x98a
+ 1527 04d0 22040000 		.4byte	.LLST46
+ 1528 04d4 12       		.uleb128 0x12
+ 1529 04d5 7F090000 		.4byte	0x97f
+ 1530 04d9 3C040000 		.4byte	.LLST47
+ 1531 04dd 00       		.byte	0
+ 1532 04de 16       		.uleb128 0x16
+ 1533 04df DC010000 		.4byte	.LVL72
+ 1534 04e3 F0080000 		.4byte	0x8f0
+ 1535 04e7 17       		.uleb128 0x17
+ 1536 04e8 F4010000 		.4byte	.LVL78
+ 1537 04ec AF090000 		.4byte	0x9af
+ 1538 04f0 18       		.uleb128 0x18
+ 1539 04f1 01       		.byte	0x1
+ 1540 04f2 50       		.byte	0x50
+ 1541 04f3 05       		.byte	0x5
+ 1542 04f4 03       		.byte	0x3
+ 1543 04f5 00000000 		.4byte	.LC0
+ 1544 04f9 18       		.uleb128 0x18
+ 1545 04fa 01       		.byte	0x1
+ 1546 04fb 51       		.byte	0x51
+ 1547 04fc 02       		.byte	0x2
+ 1548 04fd 08       		.byte	0x8
+ 1549 04fe 65       		.byte	0x65
+ 1550 04ff 00       		.byte	0
+ 1551 0500 00       		.byte	0
+ 1552 0501 00       		.byte	0
+ 1553 0502 00       		.byte	0
+ 1554 0503 0F       		.uleb128 0xf
+ 1555 0504 01       		.byte	0x1
+ 1556 0505 86000000 		.4byte	.LASF37
+ 1557 0509 01       		.byte	0x1
+ 1558 050a 76       		.byte	0x76
+ 1559 050b 01       		.byte	0x1
+ 1560 050c A0010000 		.4byte	.LFB12
+ 1561 0510 D0010000 		.4byte	.LFE12
+ 1562 0514 5C040000 		.4byte	.LLST34
+ 1563 0518 01       		.byte	0x1
+ 1564 0519 A6050000 		.4byte	0x5a6
+ 1565 051d 10       		.uleb128 0x10
+ 1566 051e 70747200 		.ascii	"ptr\000"
+ 1567 0522 01       		.byte	0x1
+ 1568 0523 76       		.byte	0x76
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccGojRvE.s 			page 33
+
+
+ 1569 0524 14030000 		.4byte	0x314
+ 1570 0528 7C040000 		.4byte	.LLST35
+ 1571 052c 11       		.uleb128 0x11
+ 1572 052d 8F070000 		.4byte	0x78f
+ 1573 0531 A2010000 		.4byte	.LBB42
+ 1574 0535 48000000 		.4byte	.Ldebug_ranges0+0x48
+ 1575 0539 01       		.byte	0x1
+ 1576 053a 78       		.byte	0x78
+ 1577 053b 12       		.uleb128 0x12
+ 1578 053c A7070000 		.4byte	0x7a7
+ 1579 0540 BD040000 		.4byte	.LLST36
+ 1580 0544 12       		.uleb128 0x12
+ 1581 0545 9C070000 		.4byte	0x79c
+ 1582 0549 E5040000 		.4byte	.LLST37
+ 1583 054d 13       		.uleb128 0x13
+ 1584 054e 48000000 		.4byte	.Ldebug_ranges0+0x48
+ 1585 0552 14       		.uleb128 0x14
+ 1586 0553 B2070000 		.4byte	0x7b2
+ 1587 0557 26050000 		.4byte	.LLST38
+ 1588 055b 15       		.uleb128 0x15
+ 1589 055c 72090000 		.4byte	0x972
+ 1590 0560 AE010000 		.4byte	.LBB44
+ 1591 0564 BA010000 		.4byte	.LBE44
+ 1592 0568 01       		.byte	0x1
+ 1593 0569 67       		.byte	0x67
+ 1594 056a 81050000 		.4byte	0x581
+ 1595 056e 12       		.uleb128 0x12
+ 1596 056f 8A090000 		.4byte	0x98a
+ 1597 0573 39050000 		.4byte	.LLST39
+ 1598 0577 12       		.uleb128 0x12
+ 1599 0578 7F090000 		.4byte	0x97f
+ 1600 057c 53050000 		.4byte	.LLST40
+ 1601 0580 00       		.byte	0
+ 1602 0581 16       		.uleb128 0x16
+ 1603 0582 AC010000 		.4byte	.LVL63
+ 1604 0586 F0080000 		.4byte	0x8f0
+ 1605 058a 17       		.uleb128 0x17
+ 1606 058b C4010000 		.4byte	.LVL69
+ 1607 058f AF090000 		.4byte	0x9af
+ 1608 0593 18       		.uleb128 0x18
+ 1609 0594 01       		.byte	0x1
+ 1610 0595 50       		.byte	0x50
+ 1611 0596 05       		.byte	0x5
+ 1612 0597 03       		.byte	0x3
+ 1613 0598 00000000 		.4byte	.LC0
+ 1614 059c 18       		.uleb128 0x18
+ 1615 059d 01       		.byte	0x1
+ 1616 059e 51       		.byte	0x51
+ 1617 059f 02       		.byte	0x2
+ 1618 05a0 08       		.byte	0x8
+ 1619 05a1 65       		.byte	0x65
+ 1620 05a2 00       		.byte	0
+ 1621 05a3 00       		.byte	0
+ 1622 05a4 00       		.byte	0
+ 1623 05a5 00       		.byte	0
+ 1624 05a6 0F       		.uleb128 0xf
+ 1625 05a7 01       		.byte	0x1
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccGojRvE.s 			page 34
+
+
+ 1626 05a8 2C010000 		.4byte	.LASF38
+ 1627 05ac 01       		.byte	0x1
+ 1628 05ad 72       		.byte	0x72
+ 1629 05ae 01       		.byte	0x1
+ 1630 05af 70010000 		.4byte	.LFB11
+ 1631 05b3 A0010000 		.4byte	.LFE11
+ 1632 05b7 73050000 		.4byte	.LLST27
+ 1633 05bb 01       		.byte	0x1
+ 1634 05bc 49060000 		.4byte	0x649
+ 1635 05c0 10       		.uleb128 0x10
+ 1636 05c1 70747200 		.ascii	"ptr\000"
+ 1637 05c5 01       		.byte	0x1
+ 1638 05c6 72       		.byte	0x72
+ 1639 05c7 14030000 		.4byte	0x314
+ 1640 05cb 93050000 		.4byte	.LLST28
+ 1641 05cf 11       		.uleb128 0x11
+ 1642 05d0 8F070000 		.4byte	0x78f
+ 1643 05d4 72010000 		.4byte	.LBB32
+ 1644 05d8 30000000 		.4byte	.Ldebug_ranges0+0x30
+ 1645 05dc 01       		.byte	0x1
+ 1646 05dd 74       		.byte	0x74
+ 1647 05de 12       		.uleb128 0x12
+ 1648 05df A7070000 		.4byte	0x7a7
+ 1649 05e3 D4050000 		.4byte	.LLST29
+ 1650 05e7 12       		.uleb128 0x12
+ 1651 05e8 9C070000 		.4byte	0x79c
+ 1652 05ec FC050000 		.4byte	.LLST30
+ 1653 05f0 13       		.uleb128 0x13
+ 1654 05f1 30000000 		.4byte	.Ldebug_ranges0+0x30
+ 1655 05f5 14       		.uleb128 0x14
+ 1656 05f6 B2070000 		.4byte	0x7b2
+ 1657 05fa 3D060000 		.4byte	.LLST31
+ 1658 05fe 15       		.uleb128 0x15
+ 1659 05ff 72090000 		.4byte	0x972
+ 1660 0603 7E010000 		.4byte	.LBB34
+ 1661 0607 8A010000 		.4byte	.LBE34
+ 1662 060b 01       		.byte	0x1
+ 1663 060c 67       		.byte	0x67
+ 1664 060d 24060000 		.4byte	0x624
+ 1665 0611 12       		.uleb128 0x12
+ 1666 0612 8A090000 		.4byte	0x98a
+ 1667 0616 50060000 		.4byte	.LLST32
+ 1668 061a 12       		.uleb128 0x12
+ 1669 061b 7F090000 		.4byte	0x97f
+ 1670 061f 6A060000 		.4byte	.LLST33
+ 1671 0623 00       		.byte	0
+ 1672 0624 16       		.uleb128 0x16
+ 1673 0625 7C010000 		.4byte	.LVL54
+ 1674 0629 F0080000 		.4byte	0x8f0
+ 1675 062d 17       		.uleb128 0x17
+ 1676 062e 94010000 		.4byte	.LVL60
+ 1677 0632 AF090000 		.4byte	0x9af
+ 1678 0636 18       		.uleb128 0x18
+ 1679 0637 01       		.byte	0x1
+ 1680 0638 50       		.byte	0x50
+ 1681 0639 05       		.byte	0x5
+ 1682 063a 03       		.byte	0x3
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccGojRvE.s 			page 35
+
+
+ 1683 063b 00000000 		.4byte	.LC0
+ 1684 063f 18       		.uleb128 0x18
+ 1685 0640 01       		.byte	0x1
+ 1686 0641 51       		.byte	0x51
+ 1687 0642 02       		.byte	0x2
+ 1688 0643 08       		.byte	0x8
+ 1689 0644 65       		.byte	0x65
+ 1690 0645 00       		.byte	0
+ 1691 0646 00       		.byte	0
+ 1692 0647 00       		.byte	0
+ 1693 0648 00       		.byte	0
+ 1694 0649 0F       		.uleb128 0xf
+ 1695 064a 01       		.byte	0x1
+ 1696 064b 5A000000 		.4byte	.LASF39
+ 1697 064f 01       		.byte	0x1
+ 1698 0650 6E       		.byte	0x6e
+ 1699 0651 01       		.byte	0x1
+ 1700 0652 40010000 		.4byte	.LFB10
+ 1701 0656 70010000 		.4byte	.LFE10
+ 1702 065a 8A060000 		.4byte	.LLST20
+ 1703 065e 01       		.byte	0x1
+ 1704 065f EC060000 		.4byte	0x6ec
+ 1705 0663 10       		.uleb128 0x10
+ 1706 0664 70747200 		.ascii	"ptr\000"
+ 1707 0668 01       		.byte	0x1
+ 1708 0669 6E       		.byte	0x6e
+ 1709 066a 14030000 		.4byte	0x314
+ 1710 066e AA060000 		.4byte	.LLST21
+ 1711 0672 11       		.uleb128 0x11
+ 1712 0673 8F070000 		.4byte	0x78f
+ 1713 0677 42010000 		.4byte	.LBB22
+ 1714 067b 18000000 		.4byte	.Ldebug_ranges0+0x18
+ 1715 067f 01       		.byte	0x1
+ 1716 0680 70       		.byte	0x70
+ 1717 0681 12       		.uleb128 0x12
+ 1718 0682 A7070000 		.4byte	0x7a7
+ 1719 0686 EC060000 		.4byte	.LLST22
+ 1720 068a 12       		.uleb128 0x12
+ 1721 068b 9C070000 		.4byte	0x79c
+ 1722 068f 14070000 		.4byte	.LLST23
+ 1723 0693 13       		.uleb128 0x13
+ 1724 0694 18000000 		.4byte	.Ldebug_ranges0+0x18
+ 1725 0698 14       		.uleb128 0x14
+ 1726 0699 B2070000 		.4byte	0x7b2
+ 1727 069d 56070000 		.4byte	.LLST24
+ 1728 06a1 15       		.uleb128 0x15
+ 1729 06a2 72090000 		.4byte	0x972
+ 1730 06a6 4E010000 		.4byte	.LBB24
+ 1731 06aa 5A010000 		.4byte	.LBE24
+ 1732 06ae 01       		.byte	0x1
+ 1733 06af 67       		.byte	0x67
+ 1734 06b0 C7060000 		.4byte	0x6c7
+ 1735 06b4 12       		.uleb128 0x12
+ 1736 06b5 8A090000 		.4byte	0x98a
+ 1737 06b9 69070000 		.4byte	.LLST25
+ 1738 06bd 12       		.uleb128 0x12
+ 1739 06be 7F090000 		.4byte	0x97f
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccGojRvE.s 			page 36
+
+
+ 1740 06c2 83070000 		.4byte	.LLST26
+ 1741 06c6 00       		.byte	0
+ 1742 06c7 16       		.uleb128 0x16
+ 1743 06c8 4C010000 		.4byte	.LVL45
+ 1744 06cc F0080000 		.4byte	0x8f0
+ 1745 06d0 17       		.uleb128 0x17
+ 1746 06d1 64010000 		.4byte	.LVL51
+ 1747 06d5 AF090000 		.4byte	0x9af
+ 1748 06d9 18       		.uleb128 0x18
+ 1749 06da 01       		.byte	0x1
+ 1750 06db 50       		.byte	0x50
+ 1751 06dc 05       		.byte	0x5
+ 1752 06dd 03       		.byte	0x3
+ 1753 06de 00000000 		.4byte	.LC0
+ 1754 06e2 18       		.uleb128 0x18
+ 1755 06e3 01       		.byte	0x1
+ 1756 06e4 51       		.byte	0x51
+ 1757 06e5 02       		.byte	0x2
+ 1758 06e6 08       		.byte	0x8
+ 1759 06e7 65       		.byte	0x65
+ 1760 06e8 00       		.byte	0
+ 1761 06e9 00       		.byte	0
+ 1762 06ea 00       		.byte	0
+ 1763 06eb 00       		.byte	0
+ 1764 06ec 0F       		.uleb128 0xf
+ 1765 06ed 01       		.byte	0x1
+ 1766 06ee 42000000 		.4byte	.LASF40
+ 1767 06f2 01       		.byte	0x1
+ 1768 06f3 6A       		.byte	0x6a
+ 1769 06f4 01       		.byte	0x1
+ 1770 06f5 10010000 		.4byte	.LFB9
+ 1771 06f9 40010000 		.4byte	.LFE9
+ 1772 06fd A3070000 		.4byte	.LLST13
+ 1773 0701 01       		.byte	0x1
+ 1774 0702 8F070000 		.4byte	0x78f
+ 1775 0706 10       		.uleb128 0x10
+ 1776 0707 70747200 		.ascii	"ptr\000"
+ 1777 070b 01       		.byte	0x1
+ 1778 070c 6A       		.byte	0x6a
+ 1779 070d 14030000 		.4byte	0x314
+ 1780 0711 C3070000 		.4byte	.LLST14
+ 1781 0715 11       		.uleb128 0x11
+ 1782 0716 8F070000 		.4byte	0x78f
+ 1783 071a 12010000 		.4byte	.LBB12
+ 1784 071e 00000000 		.4byte	.Ldebug_ranges0+0
+ 1785 0722 01       		.byte	0x1
+ 1786 0723 6C       		.byte	0x6c
+ 1787 0724 12       		.uleb128 0x12
+ 1788 0725 A7070000 		.4byte	0x7a7
+ 1789 0729 04080000 		.4byte	.LLST15
+ 1790 072d 12       		.uleb128 0x12
+ 1791 072e 9C070000 		.4byte	0x79c
+ 1792 0732 2C080000 		.4byte	.LLST16
+ 1793 0736 13       		.uleb128 0x13
+ 1794 0737 00000000 		.4byte	.Ldebug_ranges0+0
+ 1795 073b 14       		.uleb128 0x14
+ 1796 073c B2070000 		.4byte	0x7b2
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccGojRvE.s 			page 37
+
+
+ 1797 0740 6D080000 		.4byte	.LLST17
+ 1798 0744 15       		.uleb128 0x15
+ 1799 0745 72090000 		.4byte	0x972
+ 1800 0749 1E010000 		.4byte	.LBB14
+ 1801 074d 2A010000 		.4byte	.LBE14
+ 1802 0751 01       		.byte	0x1
+ 1803 0752 67       		.byte	0x67
+ 1804 0753 6A070000 		.4byte	0x76a
+ 1805 0757 12       		.uleb128 0x12
+ 1806 0758 8A090000 		.4byte	0x98a
+ 1807 075c 80080000 		.4byte	.LLST18
+ 1808 0760 12       		.uleb128 0x12
+ 1809 0761 7F090000 		.4byte	0x97f
+ 1810 0765 9A080000 		.4byte	.LLST19
+ 1811 0769 00       		.byte	0
+ 1812 076a 16       		.uleb128 0x16
+ 1813 076b 1C010000 		.4byte	.LVL36
+ 1814 076f F0080000 		.4byte	0x8f0
+ 1815 0773 17       		.uleb128 0x17
+ 1816 0774 34010000 		.4byte	.LVL42
+ 1817 0778 AF090000 		.4byte	0x9af
+ 1818 077c 18       		.uleb128 0x18
+ 1819 077d 01       		.byte	0x1
+ 1820 077e 50       		.byte	0x50
+ 1821 077f 05       		.byte	0x5
+ 1822 0780 03       		.byte	0x3
+ 1823 0781 00000000 		.4byte	.LC0
+ 1824 0785 18       		.uleb128 0x18
+ 1825 0786 01       		.byte	0x1
+ 1826 0787 51       		.byte	0x51
+ 1827 0788 02       		.byte	0x2
+ 1828 0789 08       		.byte	0x8
+ 1829 078a 65       		.byte	0x65
+ 1830 078b 00       		.byte	0
+ 1831 078c 00       		.byte	0
+ 1832 078d 00       		.byte	0
+ 1833 078e 00       		.byte	0
+ 1834 078f 19       		.uleb128 0x19
+ 1835 0790 90020000 		.4byte	.LASF51
+ 1836 0794 01       		.byte	0x1
+ 1837 0795 63       		.byte	0x63
+ 1838 0796 01       		.byte	0x1
+ 1839 0797 03       		.byte	0x3
+ 1840 0798 BE070000 		.4byte	0x7be
+ 1841 079c 1A       		.uleb128 0x1a
+ 1842 079d 6A030000 		.4byte	.LASF41
+ 1843 07a1 01       		.byte	0x1
+ 1844 07a2 63       		.byte	0x63
+ 1845 07a3 14030000 		.4byte	0x314
+ 1846 07a7 1A       		.uleb128 0x1a
+ 1847 07a8 EF020000 		.4byte	.LASF42
+ 1848 07ac 01       		.byte	0x1
+ 1849 07ad 63       		.byte	0x63
+ 1850 07ae 45000000 		.4byte	0x45
+ 1851 07b2 1B       		.uleb128 0x1b
+ 1852 07b3 56020000 		.4byte	.LASF46
+ 1853 07b7 01       		.byte	0x1
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccGojRvE.s 			page 38
+
+
+ 1854 07b8 66       		.byte	0x66
+ 1855 07b9 E4000000 		.4byte	0xe4
+ 1856 07bd 00       		.byte	0
+ 1857 07be 1C       		.uleb128 0x1c
+ 1858 07bf 01       		.byte	0x1
+ 1859 07c0 50030000 		.4byte	.LASF49
+ 1860 07c4 01       		.byte	0x1
+ 1861 07c5 46       		.byte	0x46
+ 1862 07c6 01       		.byte	0x1
+ 1863 07c7 A3000000 		.4byte	0xa3
+ 1864 07cb 9C000000 		.4byte	.LFB7
+ 1865 07cf 10010000 		.4byte	.LFE7
+ 1866 07d3 BA080000 		.4byte	.LLST7
+ 1867 07d7 01       		.byte	0x1
+ 1868 07d8 9D080000 		.4byte	0x89d
+ 1869 07dc 10       		.uleb128 0x10
+ 1870 07dd 6E756D00 		.ascii	"num\000"
+ 1871 07e1 01       		.byte	0x1
+ 1872 07e2 47       		.byte	0x47
+ 1873 07e3 A3000000 		.4byte	0xa3
+ 1874 07e7 DA080000 		.4byte	.LLST8
+ 1875 07eb 1D       		.uleb128 0x1d
+ 1876 07ec E3030000 		.4byte	.LASF43
+ 1877 07f0 01       		.byte	0x1
+ 1878 07f1 48       		.byte	0x48
+ 1879 07f2 AA000000 		.4byte	0xaa
+ 1880 07f6 06090000 		.4byte	.LLST9
+ 1881 07fa 1D       		.uleb128 0x1d
+ 1882 07fb 44010000 		.4byte	.LASF44
+ 1883 07ff 01       		.byte	0x1
+ 1884 0800 49       		.byte	0x49
+ 1885 0801 5B020000 		.4byte	0x25b
+ 1886 0805 32090000 		.4byte	.LLST10
+ 1887 0809 1E       		.uleb128 0x1e
+ 1888 080a EE010000 		.4byte	.LASF45
+ 1889 080e 01       		.byte	0x1
+ 1890 080f 50       		.byte	0x50
+ 1891 0810 14030000 		.4byte	0x314
+ 1892 0814 5E090000 		.4byte	.LLST11
+ 1893 0818 1F       		.uleb128 0x1f
+ 1894 0819 706F7300 		.ascii	"pos\000"
+ 1895 081d 01       		.byte	0x1
+ 1896 081e 51       		.byte	0x51
+ 1897 081f 45000000 		.4byte	0x45
+ 1898 0823 8D090000 		.4byte	.LLST12
+ 1899 0827 20       		.uleb128 0x20
+ 1900 0828 38080000 		.4byte	0x838
+ 1901 082c 1B       		.uleb128 0x1b
+ 1902 082d 3B030000 		.4byte	.LASF47
+ 1903 0831 01       		.byte	0x1
+ 1904 0832 54       		.byte	0x54
+ 1905 0833 9D080000 		.4byte	0x89d
+ 1906 0837 00       		.byte	0
+ 1907 0838 16       		.uleb128 0x16
+ 1908 0839 B0000000 		.4byte	.LVL22
+ 1909 083d F0080000 		.4byte	0x8f0
+ 1910 0841 16       		.uleb128 0x16
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccGojRvE.s 			page 39
+
+
+ 1911 0842 C2000000 		.4byte	.LVL25
+ 1912 0846 BC090000 		.4byte	0x9bc
+ 1913 084a 16       		.uleb128 0x16
+ 1914 084b CE000000 		.4byte	.LVL27
+ 1915 084f F0080000 		.4byte	0x8f0
+ 1916 0853 21       		.uleb128 0x21
+ 1917 0854 DE000000 		.4byte	.LVL29
+ 1918 0858 C9090000 		.4byte	0x9c9
+ 1919 085c 73080000 		.4byte	0x873
+ 1920 0860 18       		.uleb128 0x18
+ 1921 0861 01       		.byte	0x1
+ 1922 0862 50       		.byte	0x50
+ 1923 0863 05       		.byte	0x5
+ 1924 0864 03       		.byte	0x3
+ 1925 0865 44000000 		.4byte	.LC2
+ 1926 0869 18       		.uleb128 0x18
+ 1927 086a 01       		.byte	0x1
+ 1928 086b 51       		.byte	0x51
+ 1929 086c 05       		.byte	0x5
+ 1930 086d 03       		.byte	0x3
+ 1931 086e 30000000 		.4byte	.LC1
+ 1932 0872 00       		.byte	0
+ 1933 0873 22       		.uleb128 0x22
+ 1934 0874 F0000000 		.4byte	.LVL31
+ 1935 0878 89080000 		.4byte	0x889
+ 1936 087c 18       		.uleb128 0x18
+ 1937 087d 01       		.byte	0x1
+ 1938 087e 50       		.byte	0x50
+ 1939 087f 02       		.byte	0x2
+ 1940 0880 78       		.byte	0x78
+ 1941 0881 00       		.sleb128 0
+ 1942 0882 18       		.uleb128 0x18
+ 1943 0883 01       		.byte	0x1
+ 1944 0884 51       		.byte	0x51
+ 1945 0885 02       		.byte	0x2
+ 1946 0886 77       		.byte	0x77
+ 1947 0887 00       		.sleb128 0
+ 1948 0888 00       		.byte	0
+ 1949 0889 17       		.uleb128 0x17
+ 1950 088a F8000000 		.4byte	.LVL32
+ 1951 088e D6090000 		.4byte	0x9d6
+ 1952 0892 18       		.uleb128 0x18
+ 1953 0893 01       		.byte	0x1
+ 1954 0894 51       		.byte	0x51
+ 1955 0895 05       		.byte	0x5
+ 1956 0896 03       		.byte	0x3
+ 1957 0897 48000000 		.4byte	.LC3
+ 1958 089b 00       		.byte	0
+ 1959 089c 00       		.byte	0
+ 1960 089d 05       		.uleb128 0x5
+ 1961 089e 04       		.byte	0x4
+ 1962 089f 40000000 		.4byte	0x40
+ 1963 08a3 23       		.uleb128 0x23
+ 1964 08a4 01       		.byte	0x1
+ 1965 08a5 8A030000 		.4byte	.LASF48
+ 1966 08a9 01       		.byte	0x1
+ 1967 08aa 3A       		.byte	0x3a
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccGojRvE.s 			page 40
+
+
+ 1968 08ab 01       		.byte	0x1
+ 1969 08ac 70000000 		.4byte	.LFB6
+ 1970 08b0 9C000000 		.4byte	.LFE6
+ 1971 08b4 02       		.byte	0x2
+ 1972 08b5 7D       		.byte	0x7d
+ 1973 08b6 00       		.sleb128 0
+ 1974 08b7 01       		.byte	0x1
+ 1975 08b8 F0080000 		.4byte	0x8f0
+ 1976 08bc 1F       		.uleb128 0x1f
+ 1977 08bd 6900     		.ascii	"i\000"
+ 1978 08bf 01       		.byte	0x1
+ 1979 08c0 3C       		.byte	0x3c
+ 1980 08c1 E4000000 		.4byte	0xe4
+ 1981 08c5 AB090000 		.4byte	.LLST4
+ 1982 08c9 1F       		.uleb128 0x1f
+ 1983 08ca 6A00     		.ascii	"j\000"
+ 1984 08cc 01       		.byte	0x1
+ 1985 08cd 3C       		.byte	0x3c
+ 1986 08ce E4000000 		.4byte	0xe4
+ 1987 08d2 BF090000 		.4byte	.LLST5
+ 1988 08d6 24       		.uleb128 0x24
+ 1989 08d7 96090000 		.4byte	0x996
+ 1990 08db 7E000000 		.4byte	.LBB6
+ 1991 08df 82000000 		.4byte	.LBE6
+ 1992 08e3 01       		.byte	0x1
+ 1993 08e4 41       		.byte	0x41
+ 1994 08e5 12       		.uleb128 0x12
+ 1995 08e6 A3090000 		.4byte	0x9a3
+ 1996 08ea D3090000 		.4byte	.LLST6
+ 1997 08ee 00       		.byte	0
+ 1998 08ef 00       		.byte	0
+ 1999 08f0 25       		.uleb128 0x25
+ 2000 08f1 5A010000 		.4byte	.LASF63
+ 2001 08f5 01       		.byte	0x1
+ 2002 08f6 2C       		.byte	0x2c
+ 2003 08f7 01       		.byte	0x1
+ 2004 08f8 E4000000 		.4byte	0xe4
+ 2005 08fc 00000000 		.4byte	.LFB5
+ 2006 0900 5C000000 		.4byte	.LFE5
+ 2007 0904 E6090000 		.4byte	.LLST0
+ 2008 0908 01       		.byte	0x1
+ 2009 0909 45090000 		.4byte	0x945
+ 2010 090d 1D       		.uleb128 0x1d
+ 2011 090e 6A030000 		.4byte	.LASF41
+ 2012 0912 01       		.byte	0x1
+ 2013 0913 2C       		.byte	0x2c
+ 2014 0914 80000000 		.4byte	0x80
+ 2015 0918 060A0000 		.4byte	.LLST1
+ 2016 091c 1F       		.uleb128 0x1f
+ 2017 091d 73756D00 		.ascii	"sum\000"
+ 2018 0921 01       		.byte	0x1
+ 2019 0922 2E       		.byte	0x2e
+ 2020 0923 E4000000 		.4byte	0xe4
+ 2021 0927 820A0000 		.4byte	.LLST2
+ 2022 092b 17       		.uleb128 0x17
+ 2023 092c 4C000000 		.4byte	.LVL9
+ 2024 0930 AF090000 		.4byte	0x9af
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccGojRvE.s 			page 41
+
+
+ 2025 0934 18       		.uleb128 0x18
+ 2026 0935 01       		.byte	0x1
+ 2027 0936 50       		.byte	0x50
+ 2028 0937 05       		.byte	0x5
+ 2029 0938 03       		.byte	0x3
+ 2030 0939 00000000 		.4byte	.LC0
+ 2031 093d 18       		.uleb128 0x18
+ 2032 093e 01       		.byte	0x1
+ 2033 093f 51       		.byte	0x51
+ 2034 0940 02       		.byte	0x2
+ 2035 0941 08       		.byte	0x8
+ 2036 0942 2F       		.byte	0x2f
+ 2037 0943 00       		.byte	0
+ 2038 0944 00       		.byte	0
+ 2039 0945 26       		.uleb128 0x26
+ 2040 0946 01       		.byte	0x1
+ 2041 0947 BE040000 		.4byte	.LASF50
+ 2042 094b 01       		.byte	0x1
+ 2043 094c 23       		.byte	0x23
+ 2044 094d 01       		.byte	0x1
+ 2045 094e 55020000 		.4byte	0x255
+ 2046 0952 5C000000 		.4byte	.LFB4
+ 2047 0956 70000000 		.4byte	.LFE4
+ 2048 095a 02       		.byte	0x2
+ 2049 095b 7D       		.byte	0x7d
+ 2050 095c 00       		.sleb128 0
+ 2051 095d 01       		.byte	0x1
+ 2052 095e 72090000 		.4byte	0x972
+ 2053 0962 10       		.uleb128 0x10
+ 2054 0963 6E756D00 		.ascii	"num\000"
+ 2055 0967 01       		.byte	0x1
+ 2056 0968 23       		.byte	0x23
+ 2057 0969 E4000000 		.4byte	0xe4
+ 2058 096d AD0A0000 		.4byte	.LLST3
+ 2059 0971 00       		.byte	0
+ 2060 0972 19       		.uleb128 0x19
+ 2061 0973 32000000 		.4byte	.LASF52
+ 2062 0977 02       		.byte	0x2
+ 2063 0978 12       		.byte	0x12
+ 2064 0979 01       		.byte	0x1
+ 2065 097a 03       		.byte	0x3
+ 2066 097b 96090000 		.4byte	0x996
+ 2067 097f 27       		.uleb128 0x27
+ 2068 0980 6E657700 		.ascii	"new\000"
+ 2069 0984 02       		.byte	0x2
+ 2070 0985 12       		.byte	0x12
+ 2071 0986 45000000 		.4byte	0x45
+ 2072 098a 1A       		.uleb128 0x1a
+ 2073 098b 63020000 		.4byte	.LASF53
+ 2074 098f 02       		.byte	0x2
+ 2075 0990 12       		.byte	0x12
+ 2076 0991 45000000 		.4byte	0x45
+ 2077 0995 00       		.byte	0
+ 2078 0996 19       		.uleb128 0x19
+ 2079 0997 CD030000 		.4byte	.LASF54
+ 2080 099b 02       		.byte	0x2
+ 2081 099c 0D       		.byte	0xd
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccGojRvE.s 			page 42
+
+
+ 2082 099d 01       		.byte	0x1
+ 2083 099e 03       		.byte	0x3
+ 2084 099f AF090000 		.4byte	0x9af
+ 2085 09a3 1A       		.uleb128 0x1a
+ 2086 09a4 27020000 		.4byte	.LASF4
+ 2087 09a8 02       		.byte	0x2
+ 2088 09a9 0D       		.byte	0xd
+ 2089 09aa 45000000 		.4byte	0x45
+ 2090 09ae 00       		.byte	0
+ 2091 09af 28       		.uleb128 0x28
+ 2092 09b0 01       		.byte	0x1
+ 2093 09b1 01       		.byte	0x1
+ 2094 09b2 5B020000 		.4byte	.LASF55
+ 2095 09b6 5B020000 		.4byte	.LASF55
+ 2096 09ba 04       		.byte	0x4
+ 2097 09bb 06       		.byte	0x6
+ 2098 09bc 28       		.uleb128 0x28
+ 2099 09bd 01       		.byte	0x1
+ 2100 09be 01       		.byte	0x1
+ 2101 09bf E8030000 		.4byte	.LASF56
+ 2102 09c3 E8030000 		.4byte	.LASF56
+ 2103 09c7 05       		.byte	0x5
+ 2104 09c8 12       		.byte	0x12
+ 2105 09c9 28       		.uleb128 0x28
+ 2106 09ca 01       		.byte	0x1
+ 2107 09cb 01       		.byte	0x1
+ 2108 09cc 33020000 		.4byte	.LASF57
+ 2109 09d0 33020000 		.4byte	.LASF57
+ 2110 09d4 05       		.byte	0x5
+ 2111 09d5 0C       		.byte	0xc
+ 2112 09d6 28       		.uleb128 0x28
+ 2113 09d7 01       		.byte	0x1
+ 2114 09d8 01       		.byte	0x1
+ 2115 09d9 C7020000 		.4byte	.LASF58
+ 2116 09dd C7020000 		.4byte	.LASF58
+ 2117 09e1 05       		.byte	0x5
+ 2118 09e2 19       		.byte	0x19
+ 2119 09e3 00       		.byte	0
+ 2120              		.section	.debug_abbrev,"",%progbits
+ 2121              	.Ldebug_abbrev0:
+ 2122 0000 01       		.uleb128 0x1
+ 2123 0001 11       		.uleb128 0x11
+ 2124 0002 01       		.byte	0x1
+ 2125 0003 25       		.uleb128 0x25
+ 2126 0004 0E       		.uleb128 0xe
+ 2127 0005 13       		.uleb128 0x13
+ 2128 0006 0B       		.uleb128 0xb
+ 2129 0007 03       		.uleb128 0x3
+ 2130 0008 0E       		.uleb128 0xe
+ 2131 0009 1B       		.uleb128 0x1b
+ 2132 000a 0E       		.uleb128 0xe
+ 2133 000b 11       		.uleb128 0x11
+ 2134 000c 01       		.uleb128 0x1
+ 2135 000d 12       		.uleb128 0x12
+ 2136 000e 01       		.uleb128 0x1
+ 2137 000f 10       		.uleb128 0x10
+ 2138 0010 06       		.uleb128 0x6
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccGojRvE.s 			page 43
+
+
+ 2139 0011 00       		.byte	0
+ 2140 0012 00       		.byte	0
+ 2141 0013 02       		.uleb128 0x2
+ 2142 0014 13       		.uleb128 0x13
+ 2143 0015 01       		.byte	0x1
+ 2144 0016 03       		.uleb128 0x3
+ 2145 0017 0E       		.uleb128 0xe
+ 2146 0018 0B       		.uleb128 0xb
+ 2147 0019 0B       		.uleb128 0xb
+ 2148 001a 3A       		.uleb128 0x3a
+ 2149 001b 0B       		.uleb128 0xb
+ 2150 001c 3B       		.uleb128 0x3b
+ 2151 001d 0B       		.uleb128 0xb
+ 2152 001e 01       		.uleb128 0x1
+ 2153 001f 13       		.uleb128 0x13
+ 2154 0020 00       		.byte	0
+ 2155 0021 00       		.byte	0
+ 2156 0022 03       		.uleb128 0x3
+ 2157 0023 0D       		.uleb128 0xd
+ 2158 0024 00       		.byte	0
+ 2159 0025 03       		.uleb128 0x3
+ 2160 0026 0E       		.uleb128 0xe
+ 2161 0027 3A       		.uleb128 0x3a
+ 2162 0028 0B       		.uleb128 0xb
+ 2163 0029 3B       		.uleb128 0x3b
+ 2164 002a 0B       		.uleb128 0xb
+ 2165 002b 49       		.uleb128 0x49
+ 2166 002c 13       		.uleb128 0x13
+ 2167 002d 38       		.uleb128 0x38
+ 2168 002e 0A       		.uleb128 0xa
+ 2169 002f 00       		.byte	0
+ 2170 0030 00       		.byte	0
+ 2171 0031 04       		.uleb128 0x4
+ 2172 0032 26       		.uleb128 0x26
+ 2173 0033 00       		.byte	0
+ 2174 0034 49       		.uleb128 0x49
+ 2175 0035 13       		.uleb128 0x13
+ 2176 0036 00       		.byte	0
+ 2177 0037 00       		.byte	0
+ 2178 0038 05       		.uleb128 0x5
+ 2179 0039 0F       		.uleb128 0xf
+ 2180 003a 00       		.byte	0
+ 2181 003b 0B       		.uleb128 0xb
+ 2182 003c 0B       		.uleb128 0xb
+ 2183 003d 49       		.uleb128 0x49
+ 2184 003e 13       		.uleb128 0x13
+ 2185 003f 00       		.byte	0
+ 2186 0040 00       		.byte	0
+ 2187 0041 06       		.uleb128 0x6
+ 2188 0042 0D       		.uleb128 0xd
+ 2189 0043 00       		.byte	0
+ 2190 0044 03       		.uleb128 0x3
+ 2191 0045 08       		.uleb128 0x8
+ 2192 0046 3A       		.uleb128 0x3a
+ 2193 0047 0B       		.uleb128 0xb
+ 2194 0048 3B       		.uleb128 0x3b
+ 2195 0049 0B       		.uleb128 0xb
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccGojRvE.s 			page 44
+
+
+ 2196 004a 49       		.uleb128 0x49
+ 2197 004b 13       		.uleb128 0x13
+ 2198 004c 38       		.uleb128 0x38
+ 2199 004d 0A       		.uleb128 0xa
+ 2200 004e 00       		.byte	0
+ 2201 004f 00       		.byte	0
+ 2202 0050 07       		.uleb128 0x7
+ 2203 0051 24       		.uleb128 0x24
+ 2204 0052 00       		.byte	0
+ 2205 0053 0B       		.uleb128 0xb
+ 2206 0054 0B       		.uleb128 0xb
+ 2207 0055 3E       		.uleb128 0x3e
+ 2208 0056 0B       		.uleb128 0xb
+ 2209 0057 03       		.uleb128 0x3
+ 2210 0058 0E       		.uleb128 0xe
+ 2211 0059 00       		.byte	0
+ 2212 005a 00       		.byte	0
+ 2213 005b 08       		.uleb128 0x8
+ 2214 005c 15       		.uleb128 0x15
+ 2215 005d 01       		.byte	0x1
+ 2216 005e 27       		.uleb128 0x27
+ 2217 005f 0C       		.uleb128 0xc
+ 2218 0060 01       		.uleb128 0x1
+ 2219 0061 13       		.uleb128 0x13
+ 2220 0062 00       		.byte	0
+ 2221 0063 00       		.byte	0
+ 2222 0064 09       		.uleb128 0x9
+ 2223 0065 05       		.uleb128 0x5
+ 2224 0066 00       		.byte	0
+ 2225 0067 49       		.uleb128 0x49
+ 2226 0068 13       		.uleb128 0x13
+ 2227 0069 00       		.byte	0
+ 2228 006a 00       		.byte	0
+ 2229 006b 0A       		.uleb128 0xa
+ 2230 006c 24       		.uleb128 0x24
+ 2231 006d 00       		.byte	0
+ 2232 006e 0B       		.uleb128 0xb
+ 2233 006f 0B       		.uleb128 0xb
+ 2234 0070 3E       		.uleb128 0x3e
+ 2235 0071 0B       		.uleb128 0xb
+ 2236 0072 03       		.uleb128 0x3
+ 2237 0073 08       		.uleb128 0x8
+ 2238 0074 00       		.byte	0
+ 2239 0075 00       		.byte	0
+ 2240 0076 0B       		.uleb128 0xb
+ 2241 0077 16       		.uleb128 0x16
+ 2242 0078 00       		.byte	0
+ 2243 0079 03       		.uleb128 0x3
+ 2244 007a 0E       		.uleb128 0xe
+ 2245 007b 3A       		.uleb128 0x3a
+ 2246 007c 0B       		.uleb128 0xb
+ 2247 007d 3B       		.uleb128 0x3b
+ 2248 007e 0B       		.uleb128 0xb
+ 2249 007f 49       		.uleb128 0x49
+ 2250 0080 13       		.uleb128 0x13
+ 2251 0081 00       		.byte	0
+ 2252 0082 00       		.byte	0
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccGojRvE.s 			page 45
+
+
+ 2253 0083 0C       		.uleb128 0xc
+ 2254 0084 01       		.uleb128 0x1
+ 2255 0085 01       		.byte	0x1
+ 2256 0086 49       		.uleb128 0x49
+ 2257 0087 13       		.uleb128 0x13
+ 2258 0088 01       		.uleb128 0x1
+ 2259 0089 13       		.uleb128 0x13
+ 2260 008a 00       		.byte	0
+ 2261 008b 00       		.byte	0
+ 2262 008c 0D       		.uleb128 0xd
+ 2263 008d 21       		.uleb128 0x21
+ 2264 008e 00       		.byte	0
+ 2265 008f 49       		.uleb128 0x49
+ 2266 0090 13       		.uleb128 0x13
+ 2267 0091 2F       		.uleb128 0x2f
+ 2268 0092 0B       		.uleb128 0xb
+ 2269 0093 00       		.byte	0
+ 2270 0094 00       		.byte	0
+ 2271 0095 0E       		.uleb128 0xe
+ 2272 0096 34       		.uleb128 0x34
+ 2273 0097 00       		.byte	0
+ 2274 0098 03       		.uleb128 0x3
+ 2275 0099 0E       		.uleb128 0xe
+ 2276 009a 3A       		.uleb128 0x3a
+ 2277 009b 0B       		.uleb128 0xb
+ 2278 009c 3B       		.uleb128 0x3b
+ 2279 009d 0B       		.uleb128 0xb
+ 2280 009e 49       		.uleb128 0x49
+ 2281 009f 13       		.uleb128 0x13
+ 2282 00a0 02       		.uleb128 0x2
+ 2283 00a1 0A       		.uleb128 0xa
+ 2284 00a2 00       		.byte	0
+ 2285 00a3 00       		.byte	0
+ 2286 00a4 0F       		.uleb128 0xf
+ 2287 00a5 2E       		.uleb128 0x2e
+ 2288 00a6 01       		.byte	0x1
+ 2289 00a7 3F       		.uleb128 0x3f
+ 2290 00a8 0C       		.uleb128 0xc
+ 2291 00a9 03       		.uleb128 0x3
+ 2292 00aa 0E       		.uleb128 0xe
+ 2293 00ab 3A       		.uleb128 0x3a
+ 2294 00ac 0B       		.uleb128 0xb
+ 2295 00ad 3B       		.uleb128 0x3b
+ 2296 00ae 0B       		.uleb128 0xb
+ 2297 00af 27       		.uleb128 0x27
+ 2298 00b0 0C       		.uleb128 0xc
+ 2299 00b1 11       		.uleb128 0x11
+ 2300 00b2 01       		.uleb128 0x1
+ 2301 00b3 12       		.uleb128 0x12
+ 2302 00b4 01       		.uleb128 0x1
+ 2303 00b5 40       		.uleb128 0x40
+ 2304 00b6 06       		.uleb128 0x6
+ 2305 00b7 9742     		.uleb128 0x2117
+ 2306 00b9 0C       		.uleb128 0xc
+ 2307 00ba 01       		.uleb128 0x1
+ 2308 00bb 13       		.uleb128 0x13
+ 2309 00bc 00       		.byte	0
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccGojRvE.s 			page 46
+
+
+ 2310 00bd 00       		.byte	0
+ 2311 00be 10       		.uleb128 0x10
+ 2312 00bf 05       		.uleb128 0x5
+ 2313 00c0 00       		.byte	0
+ 2314 00c1 03       		.uleb128 0x3
+ 2315 00c2 08       		.uleb128 0x8
+ 2316 00c3 3A       		.uleb128 0x3a
+ 2317 00c4 0B       		.uleb128 0xb
+ 2318 00c5 3B       		.uleb128 0x3b
+ 2319 00c6 0B       		.uleb128 0xb
+ 2320 00c7 49       		.uleb128 0x49
+ 2321 00c8 13       		.uleb128 0x13
+ 2322 00c9 02       		.uleb128 0x2
+ 2323 00ca 06       		.uleb128 0x6
+ 2324 00cb 00       		.byte	0
+ 2325 00cc 00       		.byte	0
+ 2326 00cd 11       		.uleb128 0x11
+ 2327 00ce 1D       		.uleb128 0x1d
+ 2328 00cf 01       		.byte	0x1
+ 2329 00d0 31       		.uleb128 0x31
+ 2330 00d1 13       		.uleb128 0x13
+ 2331 00d2 52       		.uleb128 0x52
+ 2332 00d3 01       		.uleb128 0x1
+ 2333 00d4 55       		.uleb128 0x55
+ 2334 00d5 06       		.uleb128 0x6
+ 2335 00d6 58       		.uleb128 0x58
+ 2336 00d7 0B       		.uleb128 0xb
+ 2337 00d8 59       		.uleb128 0x59
+ 2338 00d9 0B       		.uleb128 0xb
+ 2339 00da 00       		.byte	0
+ 2340 00db 00       		.byte	0
+ 2341 00dc 12       		.uleb128 0x12
+ 2342 00dd 05       		.uleb128 0x5
+ 2343 00de 00       		.byte	0
+ 2344 00df 31       		.uleb128 0x31
+ 2345 00e0 13       		.uleb128 0x13
+ 2346 00e1 02       		.uleb128 0x2
+ 2347 00e2 06       		.uleb128 0x6
+ 2348 00e3 00       		.byte	0
+ 2349 00e4 00       		.byte	0
+ 2350 00e5 13       		.uleb128 0x13
+ 2351 00e6 0B       		.uleb128 0xb
+ 2352 00e7 01       		.byte	0x1
+ 2353 00e8 55       		.uleb128 0x55
+ 2354 00e9 06       		.uleb128 0x6
+ 2355 00ea 00       		.byte	0
+ 2356 00eb 00       		.byte	0
+ 2357 00ec 14       		.uleb128 0x14
+ 2358 00ed 34       		.uleb128 0x34
+ 2359 00ee 00       		.byte	0
+ 2360 00ef 31       		.uleb128 0x31
+ 2361 00f0 13       		.uleb128 0x13
+ 2362 00f1 02       		.uleb128 0x2
+ 2363 00f2 06       		.uleb128 0x6
+ 2364 00f3 00       		.byte	0
+ 2365 00f4 00       		.byte	0
+ 2366 00f5 15       		.uleb128 0x15
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccGojRvE.s 			page 47
+
+
+ 2367 00f6 1D       		.uleb128 0x1d
+ 2368 00f7 01       		.byte	0x1
+ 2369 00f8 31       		.uleb128 0x31
+ 2370 00f9 13       		.uleb128 0x13
+ 2371 00fa 11       		.uleb128 0x11
+ 2372 00fb 01       		.uleb128 0x1
+ 2373 00fc 12       		.uleb128 0x12
+ 2374 00fd 01       		.uleb128 0x1
+ 2375 00fe 58       		.uleb128 0x58
+ 2376 00ff 0B       		.uleb128 0xb
+ 2377 0100 59       		.uleb128 0x59
+ 2378 0101 0B       		.uleb128 0xb
+ 2379 0102 01       		.uleb128 0x1
+ 2380 0103 13       		.uleb128 0x13
+ 2381 0104 00       		.byte	0
+ 2382 0105 00       		.byte	0
+ 2383 0106 16       		.uleb128 0x16
+ 2384 0107 898201   		.uleb128 0x4109
+ 2385 010a 00       		.byte	0
+ 2386 010b 11       		.uleb128 0x11
+ 2387 010c 01       		.uleb128 0x1
+ 2388 010d 31       		.uleb128 0x31
+ 2389 010e 13       		.uleb128 0x13
+ 2390 010f 00       		.byte	0
+ 2391 0110 00       		.byte	0
+ 2392 0111 17       		.uleb128 0x17
+ 2393 0112 898201   		.uleb128 0x4109
+ 2394 0115 01       		.byte	0x1
+ 2395 0116 11       		.uleb128 0x11
+ 2396 0117 01       		.uleb128 0x1
+ 2397 0118 31       		.uleb128 0x31
+ 2398 0119 13       		.uleb128 0x13
+ 2399 011a 00       		.byte	0
+ 2400 011b 00       		.byte	0
+ 2401 011c 18       		.uleb128 0x18
+ 2402 011d 8A8201   		.uleb128 0x410a
+ 2403 0120 00       		.byte	0
+ 2404 0121 02       		.uleb128 0x2
+ 2405 0122 0A       		.uleb128 0xa
+ 2406 0123 9142     		.uleb128 0x2111
+ 2407 0125 0A       		.uleb128 0xa
+ 2408 0126 00       		.byte	0
+ 2409 0127 00       		.byte	0
+ 2410 0128 19       		.uleb128 0x19
+ 2411 0129 2E       		.uleb128 0x2e
+ 2412 012a 01       		.byte	0x1
+ 2413 012b 03       		.uleb128 0x3
+ 2414 012c 0E       		.uleb128 0xe
+ 2415 012d 3A       		.uleb128 0x3a
+ 2416 012e 0B       		.uleb128 0xb
+ 2417 012f 3B       		.uleb128 0x3b
+ 2418 0130 0B       		.uleb128 0xb
+ 2419 0131 27       		.uleb128 0x27
+ 2420 0132 0C       		.uleb128 0xc
+ 2421 0133 20       		.uleb128 0x20
+ 2422 0134 0B       		.uleb128 0xb
+ 2423 0135 01       		.uleb128 0x1
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccGojRvE.s 			page 48
+
+
+ 2424 0136 13       		.uleb128 0x13
+ 2425 0137 00       		.byte	0
+ 2426 0138 00       		.byte	0
+ 2427 0139 1A       		.uleb128 0x1a
+ 2428 013a 05       		.uleb128 0x5
+ 2429 013b 00       		.byte	0
+ 2430 013c 03       		.uleb128 0x3
+ 2431 013d 0E       		.uleb128 0xe
+ 2432 013e 3A       		.uleb128 0x3a
+ 2433 013f 0B       		.uleb128 0xb
+ 2434 0140 3B       		.uleb128 0x3b
+ 2435 0141 0B       		.uleb128 0xb
+ 2436 0142 49       		.uleb128 0x49
+ 2437 0143 13       		.uleb128 0x13
+ 2438 0144 00       		.byte	0
+ 2439 0145 00       		.byte	0
+ 2440 0146 1B       		.uleb128 0x1b
+ 2441 0147 34       		.uleb128 0x34
+ 2442 0148 00       		.byte	0
+ 2443 0149 03       		.uleb128 0x3
+ 2444 014a 0E       		.uleb128 0xe
+ 2445 014b 3A       		.uleb128 0x3a
+ 2446 014c 0B       		.uleb128 0xb
+ 2447 014d 3B       		.uleb128 0x3b
+ 2448 014e 0B       		.uleb128 0xb
+ 2449 014f 49       		.uleb128 0x49
+ 2450 0150 13       		.uleb128 0x13
+ 2451 0151 00       		.byte	0
+ 2452 0152 00       		.byte	0
+ 2453 0153 1C       		.uleb128 0x1c
+ 2454 0154 2E       		.uleb128 0x2e
+ 2455 0155 01       		.byte	0x1
+ 2456 0156 3F       		.uleb128 0x3f
+ 2457 0157 0C       		.uleb128 0xc
+ 2458 0158 03       		.uleb128 0x3
+ 2459 0159 0E       		.uleb128 0xe
+ 2460 015a 3A       		.uleb128 0x3a
+ 2461 015b 0B       		.uleb128 0xb
+ 2462 015c 3B       		.uleb128 0x3b
+ 2463 015d 0B       		.uleb128 0xb
+ 2464 015e 27       		.uleb128 0x27
+ 2465 015f 0C       		.uleb128 0xc
+ 2466 0160 49       		.uleb128 0x49
+ 2467 0161 13       		.uleb128 0x13
+ 2468 0162 11       		.uleb128 0x11
+ 2469 0163 01       		.uleb128 0x1
+ 2470 0164 12       		.uleb128 0x12
+ 2471 0165 01       		.uleb128 0x1
+ 2472 0166 40       		.uleb128 0x40
+ 2473 0167 06       		.uleb128 0x6
+ 2474 0168 9742     		.uleb128 0x2117
+ 2475 016a 0C       		.uleb128 0xc
+ 2476 016b 01       		.uleb128 0x1
+ 2477 016c 13       		.uleb128 0x13
+ 2478 016d 00       		.byte	0
+ 2479 016e 00       		.byte	0
+ 2480 016f 1D       		.uleb128 0x1d
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccGojRvE.s 			page 49
+
+
+ 2481 0170 05       		.uleb128 0x5
+ 2482 0171 00       		.byte	0
+ 2483 0172 03       		.uleb128 0x3
+ 2484 0173 0E       		.uleb128 0xe
+ 2485 0174 3A       		.uleb128 0x3a
+ 2486 0175 0B       		.uleb128 0xb
+ 2487 0176 3B       		.uleb128 0x3b
+ 2488 0177 0B       		.uleb128 0xb
+ 2489 0178 49       		.uleb128 0x49
+ 2490 0179 13       		.uleb128 0x13
+ 2491 017a 02       		.uleb128 0x2
+ 2492 017b 06       		.uleb128 0x6
+ 2493 017c 00       		.byte	0
+ 2494 017d 00       		.byte	0
+ 2495 017e 1E       		.uleb128 0x1e
+ 2496 017f 34       		.uleb128 0x34
+ 2497 0180 00       		.byte	0
+ 2498 0181 03       		.uleb128 0x3
+ 2499 0182 0E       		.uleb128 0xe
+ 2500 0183 3A       		.uleb128 0x3a
+ 2501 0184 0B       		.uleb128 0xb
+ 2502 0185 3B       		.uleb128 0x3b
+ 2503 0186 0B       		.uleb128 0xb
+ 2504 0187 49       		.uleb128 0x49
+ 2505 0188 13       		.uleb128 0x13
+ 2506 0189 02       		.uleb128 0x2
+ 2507 018a 06       		.uleb128 0x6
+ 2508 018b 00       		.byte	0
+ 2509 018c 00       		.byte	0
+ 2510 018d 1F       		.uleb128 0x1f
+ 2511 018e 34       		.uleb128 0x34
+ 2512 018f 00       		.byte	0
+ 2513 0190 03       		.uleb128 0x3
+ 2514 0191 08       		.uleb128 0x8
+ 2515 0192 3A       		.uleb128 0x3a
+ 2516 0193 0B       		.uleb128 0xb
+ 2517 0194 3B       		.uleb128 0x3b
+ 2518 0195 0B       		.uleb128 0xb
+ 2519 0196 49       		.uleb128 0x49
+ 2520 0197 13       		.uleb128 0x13
+ 2521 0198 02       		.uleb128 0x2
+ 2522 0199 06       		.uleb128 0x6
+ 2523 019a 00       		.byte	0
+ 2524 019b 00       		.byte	0
+ 2525 019c 20       		.uleb128 0x20
+ 2526 019d 0B       		.uleb128 0xb
+ 2527 019e 01       		.byte	0x1
+ 2528 019f 01       		.uleb128 0x1
+ 2529 01a0 13       		.uleb128 0x13
+ 2530 01a1 00       		.byte	0
+ 2531 01a2 00       		.byte	0
+ 2532 01a3 21       		.uleb128 0x21
+ 2533 01a4 898201   		.uleb128 0x4109
+ 2534 01a7 01       		.byte	0x1
+ 2535 01a8 11       		.uleb128 0x11
+ 2536 01a9 01       		.uleb128 0x1
+ 2537 01aa 31       		.uleb128 0x31
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccGojRvE.s 			page 50
+
+
+ 2538 01ab 13       		.uleb128 0x13
+ 2539 01ac 01       		.uleb128 0x1
+ 2540 01ad 13       		.uleb128 0x13
+ 2541 01ae 00       		.byte	0
+ 2542 01af 00       		.byte	0
+ 2543 01b0 22       		.uleb128 0x22
+ 2544 01b1 898201   		.uleb128 0x4109
+ 2545 01b4 01       		.byte	0x1
+ 2546 01b5 11       		.uleb128 0x11
+ 2547 01b6 01       		.uleb128 0x1
+ 2548 01b7 01       		.uleb128 0x1
+ 2549 01b8 13       		.uleb128 0x13
+ 2550 01b9 00       		.byte	0
+ 2551 01ba 00       		.byte	0
+ 2552 01bb 23       		.uleb128 0x23
+ 2553 01bc 2E       		.uleb128 0x2e
+ 2554 01bd 01       		.byte	0x1
+ 2555 01be 3F       		.uleb128 0x3f
+ 2556 01bf 0C       		.uleb128 0xc
+ 2557 01c0 03       		.uleb128 0x3
+ 2558 01c1 0E       		.uleb128 0xe
+ 2559 01c2 3A       		.uleb128 0x3a
+ 2560 01c3 0B       		.uleb128 0xb
+ 2561 01c4 3B       		.uleb128 0x3b
+ 2562 01c5 0B       		.uleb128 0xb
+ 2563 01c6 27       		.uleb128 0x27
+ 2564 01c7 0C       		.uleb128 0xc
+ 2565 01c8 11       		.uleb128 0x11
+ 2566 01c9 01       		.uleb128 0x1
+ 2567 01ca 12       		.uleb128 0x12
+ 2568 01cb 01       		.uleb128 0x1
+ 2569 01cc 40       		.uleb128 0x40
+ 2570 01cd 0A       		.uleb128 0xa
+ 2571 01ce 9742     		.uleb128 0x2117
+ 2572 01d0 0C       		.uleb128 0xc
+ 2573 01d1 01       		.uleb128 0x1
+ 2574 01d2 13       		.uleb128 0x13
+ 2575 01d3 00       		.byte	0
+ 2576 01d4 00       		.byte	0
+ 2577 01d5 24       		.uleb128 0x24
+ 2578 01d6 1D       		.uleb128 0x1d
+ 2579 01d7 01       		.byte	0x1
+ 2580 01d8 31       		.uleb128 0x31
+ 2581 01d9 13       		.uleb128 0x13
+ 2582 01da 11       		.uleb128 0x11
+ 2583 01db 01       		.uleb128 0x1
+ 2584 01dc 12       		.uleb128 0x12
+ 2585 01dd 01       		.uleb128 0x1
+ 2586 01de 58       		.uleb128 0x58
+ 2587 01df 0B       		.uleb128 0xb
+ 2588 01e0 59       		.uleb128 0x59
+ 2589 01e1 0B       		.uleb128 0xb
+ 2590 01e2 00       		.byte	0
+ 2591 01e3 00       		.byte	0
+ 2592 01e4 25       		.uleb128 0x25
+ 2593 01e5 2E       		.uleb128 0x2e
+ 2594 01e6 01       		.byte	0x1
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccGojRvE.s 			page 51
+
+
+ 2595 01e7 03       		.uleb128 0x3
+ 2596 01e8 0E       		.uleb128 0xe
+ 2597 01e9 3A       		.uleb128 0x3a
+ 2598 01ea 0B       		.uleb128 0xb
+ 2599 01eb 3B       		.uleb128 0x3b
+ 2600 01ec 0B       		.uleb128 0xb
+ 2601 01ed 27       		.uleb128 0x27
+ 2602 01ee 0C       		.uleb128 0xc
+ 2603 01ef 49       		.uleb128 0x49
+ 2604 01f0 13       		.uleb128 0x13
+ 2605 01f1 11       		.uleb128 0x11
+ 2606 01f2 01       		.uleb128 0x1
+ 2607 01f3 12       		.uleb128 0x12
+ 2608 01f4 01       		.uleb128 0x1
+ 2609 01f5 40       		.uleb128 0x40
+ 2610 01f6 06       		.uleb128 0x6
+ 2611 01f7 9742     		.uleb128 0x2117
+ 2612 01f9 0C       		.uleb128 0xc
+ 2613 01fa 01       		.uleb128 0x1
+ 2614 01fb 13       		.uleb128 0x13
+ 2615 01fc 00       		.byte	0
+ 2616 01fd 00       		.byte	0
+ 2617 01fe 26       		.uleb128 0x26
+ 2618 01ff 2E       		.uleb128 0x2e
+ 2619 0200 01       		.byte	0x1
+ 2620 0201 3F       		.uleb128 0x3f
+ 2621 0202 0C       		.uleb128 0xc
+ 2622 0203 03       		.uleb128 0x3
+ 2623 0204 0E       		.uleb128 0xe
+ 2624 0205 3A       		.uleb128 0x3a
+ 2625 0206 0B       		.uleb128 0xb
+ 2626 0207 3B       		.uleb128 0x3b
+ 2627 0208 0B       		.uleb128 0xb
+ 2628 0209 27       		.uleb128 0x27
+ 2629 020a 0C       		.uleb128 0xc
+ 2630 020b 49       		.uleb128 0x49
+ 2631 020c 13       		.uleb128 0x13
+ 2632 020d 11       		.uleb128 0x11
+ 2633 020e 01       		.uleb128 0x1
+ 2634 020f 12       		.uleb128 0x12
+ 2635 0210 01       		.uleb128 0x1
+ 2636 0211 40       		.uleb128 0x40
+ 2637 0212 0A       		.uleb128 0xa
+ 2638 0213 9742     		.uleb128 0x2117
+ 2639 0215 0C       		.uleb128 0xc
+ 2640 0216 01       		.uleb128 0x1
+ 2641 0217 13       		.uleb128 0x13
+ 2642 0218 00       		.byte	0
+ 2643 0219 00       		.byte	0
+ 2644 021a 27       		.uleb128 0x27
+ 2645 021b 05       		.uleb128 0x5
+ 2646 021c 00       		.byte	0
+ 2647 021d 03       		.uleb128 0x3
+ 2648 021e 08       		.uleb128 0x8
+ 2649 021f 3A       		.uleb128 0x3a
+ 2650 0220 0B       		.uleb128 0xb
+ 2651 0221 3B       		.uleb128 0x3b
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccGojRvE.s 			page 52
+
+
+ 2652 0222 0B       		.uleb128 0xb
+ 2653 0223 49       		.uleb128 0x49
+ 2654 0224 13       		.uleb128 0x13
+ 2655 0225 00       		.byte	0
+ 2656 0226 00       		.byte	0
+ 2657 0227 28       		.uleb128 0x28
+ 2658 0228 2E       		.uleb128 0x2e
+ 2659 0229 00       		.byte	0
+ 2660 022a 3F       		.uleb128 0x3f
+ 2661 022b 0C       		.uleb128 0xc
+ 2662 022c 3C       		.uleb128 0x3c
+ 2663 022d 0C       		.uleb128 0xc
+ 2664 022e 8740     		.uleb128 0x2007
+ 2665 0230 0E       		.uleb128 0xe
+ 2666 0231 03       		.uleb128 0x3
+ 2667 0232 0E       		.uleb128 0xe
+ 2668 0233 3A       		.uleb128 0x3a
+ 2669 0234 0B       		.uleb128 0xb
+ 2670 0235 3B       		.uleb128 0x3b
+ 2671 0236 0B       		.uleb128 0xb
+ 2672 0237 00       		.byte	0
+ 2673 0238 00       		.byte	0
+ 2674 0239 00       		.byte	0
+ 2675              		.section	.debug_loc,"",%progbits
+ 2676              	.Ldebug_loc0:
+ 2677              	.LLST62:
+ 2678 0000 60020000 		.4byte	.LFB16-.Ltext0
+ 2679 0004 62020000 		.4byte	.LCFI9-.Ltext0
+ 2680 0008 0200     		.2byte	0x2
+ 2681 000a 7D       		.byte	0x7d
+ 2682 000b 00       		.sleb128 0
+ 2683 000c 62020000 		.4byte	.LCFI9-.Ltext0
+ 2684 0010 90020000 		.4byte	.LFE16-.Ltext0
+ 2685 0014 0200     		.2byte	0x2
+ 2686 0016 7D       		.byte	0x7d
+ 2687 0017 08       		.sleb128 8
+ 2688 0018 00000000 		.4byte	0
+ 2689 001c 00000000 		.4byte	0
+ 2690              	.LLST63:
+ 2691 0020 60020000 		.4byte	.LVL97-.Ltext0
+ 2692 0024 66020000 		.4byte	.LVL98-.Ltext0
+ 2693 0028 0100     		.2byte	0x1
+ 2694 002a 50       		.byte	0x50
+ 2695 002b 66020000 		.4byte	.LVL98-.Ltext0
+ 2696 002f 76020000 		.4byte	.LVL101-.Ltext0
+ 2697 0033 0100     		.2byte	0x1
+ 2698 0035 54       		.byte	0x54
+ 2699 0036 76020000 		.4byte	.LVL101-.Ltext0
+ 2700 003a 7C020000 		.4byte	.LVL103-.Ltext0
+ 2701 003e 0300     		.2byte	0x3
+ 2702 0040 74       		.byte	0x74
+ 2703 0041 78       		.sleb128 -8
+ 2704 0042 9F       		.byte	0x9f
+ 2705 0043 7C020000 		.4byte	.LVL103-.Ltext0
+ 2706 0047 80020000 		.4byte	.LVL104-.Ltext0
+ 2707 004b 0100     		.2byte	0x1
+ 2708 004d 50       		.byte	0x50
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccGojRvE.s 			page 53
+
+
+ 2709 004e 80020000 		.4byte	.LVL104-.Ltext0
+ 2710 0052 90020000 		.4byte	.LFE16-.Ltext0
+ 2711 0056 0100     		.2byte	0x1
+ 2712 0058 54       		.byte	0x54
+ 2713 0059 00000000 		.4byte	0
+ 2714 005d 00000000 		.4byte	0
+ 2715              	.LLST64:
+ 2716 0061 60020000 		.4byte	.LVL97-.Ltext0
+ 2717 0065 7A020000 		.4byte	.LVL102-.Ltext0
+ 2718 0069 0600     		.2byte	0x6
+ 2719 006b 03       		.byte	0x3
+ 2720 006c 18010000 		.4byte	command_8_ptr_hash_array
+ 2721 0070 9F       		.byte	0x9f
+ 2722 0071 7C020000 		.4byte	.LVL103-.Ltext0
+ 2723 0075 90020000 		.4byte	.LFE16-.Ltext0
+ 2724 0079 0600     		.2byte	0x6
+ 2725 007b 03       		.byte	0x3
+ 2726 007c 18010000 		.4byte	command_8_ptr_hash_array
+ 2727 0080 9F       		.byte	0x9f
+ 2728 0081 00000000 		.4byte	0
+ 2729 0085 00000000 		.4byte	0
+ 2730              	.LLST65:
+ 2731 0089 60020000 		.4byte	.LVL97-.Ltext0
+ 2732 008d 66020000 		.4byte	.LVL98-.Ltext0
+ 2733 0091 0100     		.2byte	0x1
+ 2734 0093 50       		.byte	0x50
+ 2735 0094 66020000 		.4byte	.LVL98-.Ltext0
+ 2736 0098 76020000 		.4byte	.LVL101-.Ltext0
+ 2737 009c 0100     		.2byte	0x1
+ 2738 009e 54       		.byte	0x54
+ 2739 009f 76020000 		.4byte	.LVL101-.Ltext0
+ 2740 00a3 7A020000 		.4byte	.LVL102-.Ltext0
+ 2741 00a7 0300     		.2byte	0x3
+ 2742 00a9 74       		.byte	0x74
+ 2743 00aa 78       		.sleb128 -8
+ 2744 00ab 9F       		.byte	0x9f
+ 2745 00ac 7C020000 		.4byte	.LVL103-.Ltext0
+ 2746 00b0 80020000 		.4byte	.LVL104-.Ltext0
+ 2747 00b4 0100     		.2byte	0x1
+ 2748 00b6 50       		.byte	0x50
+ 2749 00b7 80020000 		.4byte	.LVL104-.Ltext0
+ 2750 00bb 90020000 		.4byte	.LFE16-.Ltext0
+ 2751 00bf 0100     		.2byte	0x1
+ 2752 00c1 54       		.byte	0x54
+ 2753 00c2 00000000 		.4byte	0
+ 2754 00c6 00000000 		.4byte	0
+ 2755              	.LLST66:
+ 2756 00ca 6C020000 		.4byte	.LVL99-.Ltext0
+ 2757 00ce 7A020000 		.4byte	.LVL102-.Ltext0
+ 2758 00d2 0100     		.2byte	0x1
+ 2759 00d4 50       		.byte	0x50
+ 2760 00d5 00000000 		.4byte	0
+ 2761 00d9 00000000 		.4byte	0
+ 2762              	.LLST67:
+ 2763 00dd 6E020000 		.4byte	.LVL100-.Ltext0
+ 2764 00e1 7A020000 		.4byte	.LVL102-.Ltext0
+ 2765 00e5 0800     		.2byte	0x8
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccGojRvE.s 			page 54
+
+
+ 2766 00e7 70       		.byte	0x70
+ 2767 00e8 00       		.sleb128 0
+ 2768 00e9 32       		.byte	0x32
+ 2769 00ea 24       		.byte	0x24
+ 2770 00eb 73       		.byte	0x73
+ 2771 00ec 00       		.sleb128 0
+ 2772 00ed 22       		.byte	0x22
+ 2773 00ee 9F       		.byte	0x9f
+ 2774 00ef 00000000 		.4byte	0
+ 2775 00f3 00000000 		.4byte	0
+ 2776              	.LLST68:
+ 2777 00f7 6E020000 		.4byte	.LVL100-.Ltext0
+ 2778 00fb 76020000 		.4byte	.LVL101-.Ltext0
+ 2779 00ff 0300     		.2byte	0x3
+ 2780 0101 74       		.byte	0x74
+ 2781 0102 08       		.sleb128 8
+ 2782 0103 9F       		.byte	0x9f
+ 2783 0104 76020000 		.4byte	.LVL101-.Ltext0
+ 2784 0108 7A020000 		.4byte	.LVL102-.Ltext0
+ 2785 010c 0100     		.2byte	0x1
+ 2786 010e 54       		.byte	0x54
+ 2787 010f 00000000 		.4byte	0
+ 2788 0113 00000000 		.4byte	0
+ 2789              	.LLST55:
+ 2790 0117 30020000 		.4byte	.LFB15-.Ltext0
+ 2791 011b 32020000 		.4byte	.LCFI8-.Ltext0
+ 2792 011f 0200     		.2byte	0x2
+ 2793 0121 7D       		.byte	0x7d
+ 2794 0122 00       		.sleb128 0
+ 2795 0123 32020000 		.4byte	.LCFI8-.Ltext0
+ 2796 0127 60020000 		.4byte	.LFE15-.Ltext0
+ 2797 012b 0200     		.2byte	0x2
+ 2798 012d 7D       		.byte	0x7d
+ 2799 012e 08       		.sleb128 8
+ 2800 012f 00000000 		.4byte	0
+ 2801 0133 00000000 		.4byte	0
+ 2802              	.LLST56:
+ 2803 0137 30020000 		.4byte	.LVL88-.Ltext0
+ 2804 013b 36020000 		.4byte	.LVL89-.Ltext0
+ 2805 013f 0100     		.2byte	0x1
+ 2806 0141 50       		.byte	0x50
+ 2807 0142 36020000 		.4byte	.LVL89-.Ltext0
+ 2808 0146 46020000 		.4byte	.LVL92-.Ltext0
+ 2809 014a 0100     		.2byte	0x1
+ 2810 014c 54       		.byte	0x54
+ 2811 014d 46020000 		.4byte	.LVL92-.Ltext0
+ 2812 0151 4C020000 		.4byte	.LVL94-.Ltext0
+ 2813 0155 0300     		.2byte	0x3
+ 2814 0157 74       		.byte	0x74
+ 2815 0158 78       		.sleb128 -8
+ 2816 0159 9F       		.byte	0x9f
+ 2817 015a 4C020000 		.4byte	.LVL94-.Ltext0
+ 2818 015e 50020000 		.4byte	.LVL95-.Ltext0
+ 2819 0162 0100     		.2byte	0x1
+ 2820 0164 50       		.byte	0x50
+ 2821 0165 50020000 		.4byte	.LVL95-.Ltext0
+ 2822 0169 60020000 		.4byte	.LFE15-.Ltext0
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccGojRvE.s 			page 55
+
+
+ 2823 016d 0100     		.2byte	0x1
+ 2824 016f 54       		.byte	0x54
+ 2825 0170 00000000 		.4byte	0
+ 2826 0174 00000000 		.4byte	0
+ 2827              	.LLST57:
+ 2828 0178 30020000 		.4byte	.LVL88-.Ltext0
+ 2829 017c 4A020000 		.4byte	.LVL93-.Ltext0
+ 2830 0180 0600     		.2byte	0x6
+ 2831 0182 03       		.byte	0x3
+ 2832 0183 F0000000 		.4byte	command_7_ptr_hash_array
+ 2833 0187 9F       		.byte	0x9f
+ 2834 0188 4C020000 		.4byte	.LVL94-.Ltext0
+ 2835 018c 60020000 		.4byte	.LFE15-.Ltext0
+ 2836 0190 0600     		.2byte	0x6
+ 2837 0192 03       		.byte	0x3
+ 2838 0193 F0000000 		.4byte	command_7_ptr_hash_array
+ 2839 0197 9F       		.byte	0x9f
+ 2840 0198 00000000 		.4byte	0
+ 2841 019c 00000000 		.4byte	0
+ 2842              	.LLST58:
+ 2843 01a0 30020000 		.4byte	.LVL88-.Ltext0
+ 2844 01a4 36020000 		.4byte	.LVL89-.Ltext0
+ 2845 01a8 0100     		.2byte	0x1
+ 2846 01aa 50       		.byte	0x50
+ 2847 01ab 36020000 		.4byte	.LVL89-.Ltext0
+ 2848 01af 46020000 		.4byte	.LVL92-.Ltext0
+ 2849 01b3 0100     		.2byte	0x1
+ 2850 01b5 54       		.byte	0x54
+ 2851 01b6 46020000 		.4byte	.LVL92-.Ltext0
+ 2852 01ba 4A020000 		.4byte	.LVL93-.Ltext0
+ 2853 01be 0300     		.2byte	0x3
+ 2854 01c0 74       		.byte	0x74
+ 2855 01c1 78       		.sleb128 -8
+ 2856 01c2 9F       		.byte	0x9f
+ 2857 01c3 4C020000 		.4byte	.LVL94-.Ltext0
+ 2858 01c7 50020000 		.4byte	.LVL95-.Ltext0
+ 2859 01cb 0100     		.2byte	0x1
+ 2860 01cd 50       		.byte	0x50
+ 2861 01ce 50020000 		.4byte	.LVL95-.Ltext0
+ 2862 01d2 60020000 		.4byte	.LFE15-.Ltext0
+ 2863 01d6 0100     		.2byte	0x1
+ 2864 01d8 54       		.byte	0x54
+ 2865 01d9 00000000 		.4byte	0
+ 2866 01dd 00000000 		.4byte	0
+ 2867              	.LLST59:
+ 2868 01e1 3C020000 		.4byte	.LVL90-.Ltext0
+ 2869 01e5 4A020000 		.4byte	.LVL93-.Ltext0
+ 2870 01e9 0100     		.2byte	0x1
+ 2871 01eb 50       		.byte	0x50
+ 2872 01ec 00000000 		.4byte	0
+ 2873 01f0 00000000 		.4byte	0
+ 2874              	.LLST60:
+ 2875 01f4 3E020000 		.4byte	.LVL91-.Ltext0
+ 2876 01f8 4A020000 		.4byte	.LVL93-.Ltext0
+ 2877 01fc 0800     		.2byte	0x8
+ 2878 01fe 70       		.byte	0x70
+ 2879 01ff 00       		.sleb128 0
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccGojRvE.s 			page 56
+
+
+ 2880 0200 32       		.byte	0x32
+ 2881 0201 24       		.byte	0x24
+ 2882 0202 73       		.byte	0x73
+ 2883 0203 00       		.sleb128 0
+ 2884 0204 22       		.byte	0x22
+ 2885 0205 9F       		.byte	0x9f
+ 2886 0206 00000000 		.4byte	0
+ 2887 020a 00000000 		.4byte	0
+ 2888              	.LLST61:
+ 2889 020e 3E020000 		.4byte	.LVL91-.Ltext0
+ 2890 0212 46020000 		.4byte	.LVL92-.Ltext0
+ 2891 0216 0300     		.2byte	0x3
+ 2892 0218 74       		.byte	0x74
+ 2893 0219 08       		.sleb128 8
+ 2894 021a 9F       		.byte	0x9f
+ 2895 021b 46020000 		.4byte	.LVL92-.Ltext0
+ 2896 021f 4A020000 		.4byte	.LVL93-.Ltext0
+ 2897 0223 0100     		.2byte	0x1
+ 2898 0225 54       		.byte	0x54
+ 2899 0226 00000000 		.4byte	0
+ 2900 022a 00000000 		.4byte	0
+ 2901              	.LLST48:
+ 2902 022e 00020000 		.4byte	.LFB14-.Ltext0
+ 2903 0232 02020000 		.4byte	.LCFI7-.Ltext0
+ 2904 0236 0200     		.2byte	0x2
+ 2905 0238 7D       		.byte	0x7d
+ 2906 0239 00       		.sleb128 0
+ 2907 023a 02020000 		.4byte	.LCFI7-.Ltext0
+ 2908 023e 30020000 		.4byte	.LFE14-.Ltext0
+ 2909 0242 0200     		.2byte	0x2
+ 2910 0244 7D       		.byte	0x7d
+ 2911 0245 08       		.sleb128 8
+ 2912 0246 00000000 		.4byte	0
+ 2913 024a 00000000 		.4byte	0
+ 2914              	.LLST49:
+ 2915 024e 00020000 		.4byte	.LVL79-.Ltext0
+ 2916 0252 06020000 		.4byte	.LVL80-.Ltext0
+ 2917 0256 0100     		.2byte	0x1
+ 2918 0258 50       		.byte	0x50
+ 2919 0259 06020000 		.4byte	.LVL80-.Ltext0
+ 2920 025d 16020000 		.4byte	.LVL83-.Ltext0
+ 2921 0261 0100     		.2byte	0x1
+ 2922 0263 54       		.byte	0x54
+ 2923 0264 16020000 		.4byte	.LVL83-.Ltext0
+ 2924 0268 1C020000 		.4byte	.LVL85-.Ltext0
+ 2925 026c 0300     		.2byte	0x3
+ 2926 026e 74       		.byte	0x74
+ 2927 026f 78       		.sleb128 -8
+ 2928 0270 9F       		.byte	0x9f
+ 2929 0271 1C020000 		.4byte	.LVL85-.Ltext0
+ 2930 0275 20020000 		.4byte	.LVL86-.Ltext0
+ 2931 0279 0100     		.2byte	0x1
+ 2932 027b 50       		.byte	0x50
+ 2933 027c 20020000 		.4byte	.LVL86-.Ltext0
+ 2934 0280 30020000 		.4byte	.LFE14-.Ltext0
+ 2935 0284 0100     		.2byte	0x1
+ 2936 0286 54       		.byte	0x54
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccGojRvE.s 			page 57
+
+
+ 2937 0287 00000000 		.4byte	0
+ 2938 028b 00000000 		.4byte	0
+ 2939              	.LLST50:
+ 2940 028f 00020000 		.4byte	.LVL79-.Ltext0
+ 2941 0293 1A020000 		.4byte	.LVL84-.Ltext0
+ 2942 0297 0600     		.2byte	0x6
+ 2943 0299 03       		.byte	0x3
+ 2944 029a C8000000 		.4byte	command_6_ptr_hash_array
+ 2945 029e 9F       		.byte	0x9f
+ 2946 029f 1C020000 		.4byte	.LVL85-.Ltext0
+ 2947 02a3 30020000 		.4byte	.LFE14-.Ltext0
+ 2948 02a7 0600     		.2byte	0x6
+ 2949 02a9 03       		.byte	0x3
+ 2950 02aa C8000000 		.4byte	command_6_ptr_hash_array
+ 2951 02ae 9F       		.byte	0x9f
+ 2952 02af 00000000 		.4byte	0
+ 2953 02b3 00000000 		.4byte	0
+ 2954              	.LLST51:
+ 2955 02b7 00020000 		.4byte	.LVL79-.Ltext0
+ 2956 02bb 06020000 		.4byte	.LVL80-.Ltext0
+ 2957 02bf 0100     		.2byte	0x1
+ 2958 02c1 50       		.byte	0x50
+ 2959 02c2 06020000 		.4byte	.LVL80-.Ltext0
+ 2960 02c6 16020000 		.4byte	.LVL83-.Ltext0
+ 2961 02ca 0100     		.2byte	0x1
+ 2962 02cc 54       		.byte	0x54
+ 2963 02cd 16020000 		.4byte	.LVL83-.Ltext0
+ 2964 02d1 1A020000 		.4byte	.LVL84-.Ltext0
+ 2965 02d5 0300     		.2byte	0x3
+ 2966 02d7 74       		.byte	0x74
+ 2967 02d8 78       		.sleb128 -8
+ 2968 02d9 9F       		.byte	0x9f
+ 2969 02da 1C020000 		.4byte	.LVL85-.Ltext0
+ 2970 02de 20020000 		.4byte	.LVL86-.Ltext0
+ 2971 02e2 0100     		.2byte	0x1
+ 2972 02e4 50       		.byte	0x50
+ 2973 02e5 20020000 		.4byte	.LVL86-.Ltext0
+ 2974 02e9 30020000 		.4byte	.LFE14-.Ltext0
+ 2975 02ed 0100     		.2byte	0x1
+ 2976 02ef 54       		.byte	0x54
+ 2977 02f0 00000000 		.4byte	0
+ 2978 02f4 00000000 		.4byte	0
+ 2979              	.LLST52:
+ 2980 02f8 0C020000 		.4byte	.LVL81-.Ltext0
+ 2981 02fc 1A020000 		.4byte	.LVL84-.Ltext0
+ 2982 0300 0100     		.2byte	0x1
+ 2983 0302 50       		.byte	0x50
+ 2984 0303 00000000 		.4byte	0
+ 2985 0307 00000000 		.4byte	0
+ 2986              	.LLST53:
+ 2987 030b 0E020000 		.4byte	.LVL82-.Ltext0
+ 2988 030f 1A020000 		.4byte	.LVL84-.Ltext0
+ 2989 0313 0800     		.2byte	0x8
+ 2990 0315 70       		.byte	0x70
+ 2991 0316 00       		.sleb128 0
+ 2992 0317 32       		.byte	0x32
+ 2993 0318 24       		.byte	0x24
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccGojRvE.s 			page 58
+
+
+ 2994 0319 73       		.byte	0x73
+ 2995 031a 00       		.sleb128 0
+ 2996 031b 22       		.byte	0x22
+ 2997 031c 9F       		.byte	0x9f
+ 2998 031d 00000000 		.4byte	0
+ 2999 0321 00000000 		.4byte	0
+ 3000              	.LLST54:
+ 3001 0325 0E020000 		.4byte	.LVL82-.Ltext0
+ 3002 0329 16020000 		.4byte	.LVL83-.Ltext0
+ 3003 032d 0300     		.2byte	0x3
+ 3004 032f 74       		.byte	0x74
+ 3005 0330 08       		.sleb128 8
+ 3006 0331 9F       		.byte	0x9f
+ 3007 0332 16020000 		.4byte	.LVL83-.Ltext0
+ 3008 0336 1A020000 		.4byte	.LVL84-.Ltext0
+ 3009 033a 0100     		.2byte	0x1
+ 3010 033c 54       		.byte	0x54
+ 3011 033d 00000000 		.4byte	0
+ 3012 0341 00000000 		.4byte	0
+ 3013              	.LLST41:
+ 3014 0345 D0010000 		.4byte	.LFB13-.Ltext0
+ 3015 0349 D2010000 		.4byte	.LCFI6-.Ltext0
+ 3016 034d 0200     		.2byte	0x2
+ 3017 034f 7D       		.byte	0x7d
+ 3018 0350 00       		.sleb128 0
+ 3019 0351 D2010000 		.4byte	.LCFI6-.Ltext0
+ 3020 0355 00020000 		.4byte	.LFE13-.Ltext0
+ 3021 0359 0200     		.2byte	0x2
+ 3022 035b 7D       		.byte	0x7d
+ 3023 035c 08       		.sleb128 8
+ 3024 035d 00000000 		.4byte	0
+ 3025 0361 00000000 		.4byte	0
+ 3026              	.LLST42:
+ 3027 0365 D0010000 		.4byte	.LVL70-.Ltext0
+ 3028 0369 D6010000 		.4byte	.LVL71-.Ltext0
+ 3029 036d 0100     		.2byte	0x1
+ 3030 036f 50       		.byte	0x50
+ 3031 0370 D6010000 		.4byte	.LVL71-.Ltext0
+ 3032 0374 E6010000 		.4byte	.LVL74-.Ltext0
+ 3033 0378 0100     		.2byte	0x1
+ 3034 037a 54       		.byte	0x54
+ 3035 037b E6010000 		.4byte	.LVL74-.Ltext0
+ 3036 037f EC010000 		.4byte	.LVL76-.Ltext0
+ 3037 0383 0300     		.2byte	0x3
+ 3038 0385 74       		.byte	0x74
+ 3039 0386 78       		.sleb128 -8
+ 3040 0387 9F       		.byte	0x9f
+ 3041 0388 EC010000 		.4byte	.LVL76-.Ltext0
+ 3042 038c F0010000 		.4byte	.LVL77-.Ltext0
+ 3043 0390 0100     		.2byte	0x1
+ 3044 0392 50       		.byte	0x50
+ 3045 0393 F0010000 		.4byte	.LVL77-.Ltext0
+ 3046 0397 00020000 		.4byte	.LFE13-.Ltext0
+ 3047 039b 0100     		.2byte	0x1
+ 3048 039d 54       		.byte	0x54
+ 3049 039e 00000000 		.4byte	0
+ 3050 03a2 00000000 		.4byte	0
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccGojRvE.s 			page 59
+
+
+ 3051              	.LLST43:
+ 3052 03a6 D0010000 		.4byte	.LVL70-.Ltext0
+ 3053 03aa EA010000 		.4byte	.LVL75-.Ltext0
+ 3054 03ae 0600     		.2byte	0x6
+ 3055 03b0 03       		.byte	0x3
+ 3056 03b1 A0000000 		.4byte	command_5_ptr_hash_array
+ 3057 03b5 9F       		.byte	0x9f
+ 3058 03b6 EC010000 		.4byte	.LVL76-.Ltext0
+ 3059 03ba 00020000 		.4byte	.LFE13-.Ltext0
+ 3060 03be 0600     		.2byte	0x6
+ 3061 03c0 03       		.byte	0x3
+ 3062 03c1 A0000000 		.4byte	command_5_ptr_hash_array
+ 3063 03c5 9F       		.byte	0x9f
+ 3064 03c6 00000000 		.4byte	0
+ 3065 03ca 00000000 		.4byte	0
+ 3066              	.LLST44:
+ 3067 03ce D0010000 		.4byte	.LVL70-.Ltext0
+ 3068 03d2 D6010000 		.4byte	.LVL71-.Ltext0
+ 3069 03d6 0100     		.2byte	0x1
+ 3070 03d8 50       		.byte	0x50
+ 3071 03d9 D6010000 		.4byte	.LVL71-.Ltext0
+ 3072 03dd E6010000 		.4byte	.LVL74-.Ltext0
+ 3073 03e1 0100     		.2byte	0x1
+ 3074 03e3 54       		.byte	0x54
+ 3075 03e4 E6010000 		.4byte	.LVL74-.Ltext0
+ 3076 03e8 EA010000 		.4byte	.LVL75-.Ltext0
+ 3077 03ec 0300     		.2byte	0x3
+ 3078 03ee 74       		.byte	0x74
+ 3079 03ef 78       		.sleb128 -8
+ 3080 03f0 9F       		.byte	0x9f
+ 3081 03f1 EC010000 		.4byte	.LVL76-.Ltext0
+ 3082 03f5 F0010000 		.4byte	.LVL77-.Ltext0
+ 3083 03f9 0100     		.2byte	0x1
+ 3084 03fb 50       		.byte	0x50
+ 3085 03fc F0010000 		.4byte	.LVL77-.Ltext0
+ 3086 0400 00020000 		.4byte	.LFE13-.Ltext0
+ 3087 0404 0100     		.2byte	0x1
+ 3088 0406 54       		.byte	0x54
+ 3089 0407 00000000 		.4byte	0
+ 3090 040b 00000000 		.4byte	0
+ 3091              	.LLST45:
+ 3092 040f DC010000 		.4byte	.LVL72-.Ltext0
+ 3093 0413 EA010000 		.4byte	.LVL75-.Ltext0
+ 3094 0417 0100     		.2byte	0x1
+ 3095 0419 50       		.byte	0x50
+ 3096 041a 00000000 		.4byte	0
+ 3097 041e 00000000 		.4byte	0
+ 3098              	.LLST46:
+ 3099 0422 DE010000 		.4byte	.LVL73-.Ltext0
+ 3100 0426 EA010000 		.4byte	.LVL75-.Ltext0
+ 3101 042a 0800     		.2byte	0x8
+ 3102 042c 70       		.byte	0x70
+ 3103 042d 00       		.sleb128 0
+ 3104 042e 32       		.byte	0x32
+ 3105 042f 24       		.byte	0x24
+ 3106 0430 73       		.byte	0x73
+ 3107 0431 00       		.sleb128 0
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccGojRvE.s 			page 60
+
+
+ 3108 0432 22       		.byte	0x22
+ 3109 0433 9F       		.byte	0x9f
+ 3110 0434 00000000 		.4byte	0
+ 3111 0438 00000000 		.4byte	0
+ 3112              	.LLST47:
+ 3113 043c DE010000 		.4byte	.LVL73-.Ltext0
+ 3114 0440 E6010000 		.4byte	.LVL74-.Ltext0
+ 3115 0444 0300     		.2byte	0x3
+ 3116 0446 74       		.byte	0x74
+ 3117 0447 08       		.sleb128 8
+ 3118 0448 9F       		.byte	0x9f
+ 3119 0449 E6010000 		.4byte	.LVL74-.Ltext0
+ 3120 044d EA010000 		.4byte	.LVL75-.Ltext0
+ 3121 0451 0100     		.2byte	0x1
+ 3122 0453 54       		.byte	0x54
+ 3123 0454 00000000 		.4byte	0
+ 3124 0458 00000000 		.4byte	0
+ 3125              	.LLST34:
+ 3126 045c A0010000 		.4byte	.LFB12-.Ltext0
+ 3127 0460 A2010000 		.4byte	.LCFI5-.Ltext0
+ 3128 0464 0200     		.2byte	0x2
+ 3129 0466 7D       		.byte	0x7d
+ 3130 0467 00       		.sleb128 0
+ 3131 0468 A2010000 		.4byte	.LCFI5-.Ltext0
+ 3132 046c D0010000 		.4byte	.LFE12-.Ltext0
+ 3133 0470 0200     		.2byte	0x2
+ 3134 0472 7D       		.byte	0x7d
+ 3135 0473 08       		.sleb128 8
+ 3136 0474 00000000 		.4byte	0
+ 3137 0478 00000000 		.4byte	0
+ 3138              	.LLST35:
+ 3139 047c A0010000 		.4byte	.LVL61-.Ltext0
+ 3140 0480 A6010000 		.4byte	.LVL62-.Ltext0
+ 3141 0484 0100     		.2byte	0x1
+ 3142 0486 50       		.byte	0x50
+ 3143 0487 A6010000 		.4byte	.LVL62-.Ltext0
+ 3144 048b B6010000 		.4byte	.LVL65-.Ltext0
+ 3145 048f 0100     		.2byte	0x1
+ 3146 0491 54       		.byte	0x54
+ 3147 0492 B6010000 		.4byte	.LVL65-.Ltext0
+ 3148 0496 BC010000 		.4byte	.LVL67-.Ltext0
+ 3149 049a 0300     		.2byte	0x3
+ 3150 049c 74       		.byte	0x74
+ 3151 049d 78       		.sleb128 -8
+ 3152 049e 9F       		.byte	0x9f
+ 3153 049f BC010000 		.4byte	.LVL67-.Ltext0
+ 3154 04a3 C0010000 		.4byte	.LVL68-.Ltext0
+ 3155 04a7 0100     		.2byte	0x1
+ 3156 04a9 50       		.byte	0x50
+ 3157 04aa C0010000 		.4byte	.LVL68-.Ltext0
+ 3158 04ae D0010000 		.4byte	.LFE12-.Ltext0
+ 3159 04b2 0100     		.2byte	0x1
+ 3160 04b4 54       		.byte	0x54
+ 3161 04b5 00000000 		.4byte	0
+ 3162 04b9 00000000 		.4byte	0
+ 3163              	.LLST36:
+ 3164 04bd A0010000 		.4byte	.LVL61-.Ltext0
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccGojRvE.s 			page 61
+
+
+ 3165 04c1 BA010000 		.4byte	.LVL66-.Ltext0
+ 3166 04c5 0600     		.2byte	0x6
+ 3167 04c7 03       		.byte	0x3
+ 3168 04c8 78000000 		.4byte	command_4_ptr_hash_array
+ 3169 04cc 9F       		.byte	0x9f
+ 3170 04cd BC010000 		.4byte	.LVL67-.Ltext0
+ 3171 04d1 D0010000 		.4byte	.LFE12-.Ltext0
+ 3172 04d5 0600     		.2byte	0x6
+ 3173 04d7 03       		.byte	0x3
+ 3174 04d8 78000000 		.4byte	command_4_ptr_hash_array
+ 3175 04dc 9F       		.byte	0x9f
+ 3176 04dd 00000000 		.4byte	0
+ 3177 04e1 00000000 		.4byte	0
+ 3178              	.LLST37:
+ 3179 04e5 A0010000 		.4byte	.LVL61-.Ltext0
+ 3180 04e9 A6010000 		.4byte	.LVL62-.Ltext0
+ 3181 04ed 0100     		.2byte	0x1
+ 3182 04ef 50       		.byte	0x50
+ 3183 04f0 A6010000 		.4byte	.LVL62-.Ltext0
+ 3184 04f4 B6010000 		.4byte	.LVL65-.Ltext0
+ 3185 04f8 0100     		.2byte	0x1
+ 3186 04fa 54       		.byte	0x54
+ 3187 04fb B6010000 		.4byte	.LVL65-.Ltext0
+ 3188 04ff BA010000 		.4byte	.LVL66-.Ltext0
+ 3189 0503 0300     		.2byte	0x3
+ 3190 0505 74       		.byte	0x74
+ 3191 0506 78       		.sleb128 -8
+ 3192 0507 9F       		.byte	0x9f
+ 3193 0508 BC010000 		.4byte	.LVL67-.Ltext0
+ 3194 050c C0010000 		.4byte	.LVL68-.Ltext0
+ 3195 0510 0100     		.2byte	0x1
+ 3196 0512 50       		.byte	0x50
+ 3197 0513 C0010000 		.4byte	.LVL68-.Ltext0
+ 3198 0517 D0010000 		.4byte	.LFE12-.Ltext0
+ 3199 051b 0100     		.2byte	0x1
+ 3200 051d 54       		.byte	0x54
+ 3201 051e 00000000 		.4byte	0
+ 3202 0522 00000000 		.4byte	0
+ 3203              	.LLST38:
+ 3204 0526 AC010000 		.4byte	.LVL63-.Ltext0
+ 3205 052a BA010000 		.4byte	.LVL66-.Ltext0
+ 3206 052e 0100     		.2byte	0x1
+ 3207 0530 50       		.byte	0x50
+ 3208 0531 00000000 		.4byte	0
+ 3209 0535 00000000 		.4byte	0
+ 3210              	.LLST39:
+ 3211 0539 AE010000 		.4byte	.LVL64-.Ltext0
+ 3212 053d BA010000 		.4byte	.LVL66-.Ltext0
+ 3213 0541 0800     		.2byte	0x8
+ 3214 0543 70       		.byte	0x70
+ 3215 0544 00       		.sleb128 0
+ 3216 0545 32       		.byte	0x32
+ 3217 0546 24       		.byte	0x24
+ 3218 0547 73       		.byte	0x73
+ 3219 0548 00       		.sleb128 0
+ 3220 0549 22       		.byte	0x22
+ 3221 054a 9F       		.byte	0x9f
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccGojRvE.s 			page 62
+
+
+ 3222 054b 00000000 		.4byte	0
+ 3223 054f 00000000 		.4byte	0
+ 3224              	.LLST40:
+ 3225 0553 AE010000 		.4byte	.LVL64-.Ltext0
+ 3226 0557 B6010000 		.4byte	.LVL65-.Ltext0
+ 3227 055b 0300     		.2byte	0x3
+ 3228 055d 74       		.byte	0x74
+ 3229 055e 08       		.sleb128 8
+ 3230 055f 9F       		.byte	0x9f
+ 3231 0560 B6010000 		.4byte	.LVL65-.Ltext0
+ 3232 0564 BA010000 		.4byte	.LVL66-.Ltext0
+ 3233 0568 0100     		.2byte	0x1
+ 3234 056a 54       		.byte	0x54
+ 3235 056b 00000000 		.4byte	0
+ 3236 056f 00000000 		.4byte	0
+ 3237              	.LLST27:
+ 3238 0573 70010000 		.4byte	.LFB11-.Ltext0
+ 3239 0577 72010000 		.4byte	.LCFI4-.Ltext0
+ 3240 057b 0200     		.2byte	0x2
+ 3241 057d 7D       		.byte	0x7d
+ 3242 057e 00       		.sleb128 0
+ 3243 057f 72010000 		.4byte	.LCFI4-.Ltext0
+ 3244 0583 A0010000 		.4byte	.LFE11-.Ltext0
+ 3245 0587 0200     		.2byte	0x2
+ 3246 0589 7D       		.byte	0x7d
+ 3247 058a 08       		.sleb128 8
+ 3248 058b 00000000 		.4byte	0
+ 3249 058f 00000000 		.4byte	0
+ 3250              	.LLST28:
+ 3251 0593 70010000 		.4byte	.LVL52-.Ltext0
+ 3252 0597 76010000 		.4byte	.LVL53-.Ltext0
+ 3253 059b 0100     		.2byte	0x1
+ 3254 059d 50       		.byte	0x50
+ 3255 059e 76010000 		.4byte	.LVL53-.Ltext0
+ 3256 05a2 86010000 		.4byte	.LVL56-.Ltext0
+ 3257 05a6 0100     		.2byte	0x1
+ 3258 05a8 54       		.byte	0x54
+ 3259 05a9 86010000 		.4byte	.LVL56-.Ltext0
+ 3260 05ad 8C010000 		.4byte	.LVL58-.Ltext0
+ 3261 05b1 0300     		.2byte	0x3
+ 3262 05b3 74       		.byte	0x74
+ 3263 05b4 78       		.sleb128 -8
+ 3264 05b5 9F       		.byte	0x9f
+ 3265 05b6 8C010000 		.4byte	.LVL58-.Ltext0
+ 3266 05ba 90010000 		.4byte	.LVL59-.Ltext0
+ 3267 05be 0100     		.2byte	0x1
+ 3268 05c0 50       		.byte	0x50
+ 3269 05c1 90010000 		.4byte	.LVL59-.Ltext0
+ 3270 05c5 A0010000 		.4byte	.LFE11-.Ltext0
+ 3271 05c9 0100     		.2byte	0x1
+ 3272 05cb 54       		.byte	0x54
+ 3273 05cc 00000000 		.4byte	0
+ 3274 05d0 00000000 		.4byte	0
+ 3275              	.LLST29:
+ 3276 05d4 70010000 		.4byte	.LVL52-.Ltext0
+ 3277 05d8 8A010000 		.4byte	.LVL57-.Ltext0
+ 3278 05dc 0600     		.2byte	0x6
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccGojRvE.s 			page 63
+
+
+ 3279 05de 03       		.byte	0x3
+ 3280 05df 50000000 		.4byte	command_3_ptr_hash_array
+ 3281 05e3 9F       		.byte	0x9f
+ 3282 05e4 8C010000 		.4byte	.LVL58-.Ltext0
+ 3283 05e8 A0010000 		.4byte	.LFE11-.Ltext0
+ 3284 05ec 0600     		.2byte	0x6
+ 3285 05ee 03       		.byte	0x3
+ 3286 05ef 50000000 		.4byte	command_3_ptr_hash_array
+ 3287 05f3 9F       		.byte	0x9f
+ 3288 05f4 00000000 		.4byte	0
+ 3289 05f8 00000000 		.4byte	0
+ 3290              	.LLST30:
+ 3291 05fc 70010000 		.4byte	.LVL52-.Ltext0
+ 3292 0600 76010000 		.4byte	.LVL53-.Ltext0
+ 3293 0604 0100     		.2byte	0x1
+ 3294 0606 50       		.byte	0x50
+ 3295 0607 76010000 		.4byte	.LVL53-.Ltext0
+ 3296 060b 86010000 		.4byte	.LVL56-.Ltext0
+ 3297 060f 0100     		.2byte	0x1
+ 3298 0611 54       		.byte	0x54
+ 3299 0612 86010000 		.4byte	.LVL56-.Ltext0
+ 3300 0616 8A010000 		.4byte	.LVL57-.Ltext0
+ 3301 061a 0300     		.2byte	0x3
+ 3302 061c 74       		.byte	0x74
+ 3303 061d 78       		.sleb128 -8
+ 3304 061e 9F       		.byte	0x9f
+ 3305 061f 8C010000 		.4byte	.LVL58-.Ltext0
+ 3306 0623 90010000 		.4byte	.LVL59-.Ltext0
+ 3307 0627 0100     		.2byte	0x1
+ 3308 0629 50       		.byte	0x50
+ 3309 062a 90010000 		.4byte	.LVL59-.Ltext0
+ 3310 062e A0010000 		.4byte	.LFE11-.Ltext0
+ 3311 0632 0100     		.2byte	0x1
+ 3312 0634 54       		.byte	0x54
+ 3313 0635 00000000 		.4byte	0
+ 3314 0639 00000000 		.4byte	0
+ 3315              	.LLST31:
+ 3316 063d 7C010000 		.4byte	.LVL54-.Ltext0
+ 3317 0641 8A010000 		.4byte	.LVL57-.Ltext0
+ 3318 0645 0100     		.2byte	0x1
+ 3319 0647 50       		.byte	0x50
+ 3320 0648 00000000 		.4byte	0
+ 3321 064c 00000000 		.4byte	0
+ 3322              	.LLST32:
+ 3323 0650 7E010000 		.4byte	.LVL55-.Ltext0
+ 3324 0654 8A010000 		.4byte	.LVL57-.Ltext0
+ 3325 0658 0800     		.2byte	0x8
+ 3326 065a 70       		.byte	0x70
+ 3327 065b 00       		.sleb128 0
+ 3328 065c 32       		.byte	0x32
+ 3329 065d 24       		.byte	0x24
+ 3330 065e 73       		.byte	0x73
+ 3331 065f 00       		.sleb128 0
+ 3332 0660 22       		.byte	0x22
+ 3333 0661 9F       		.byte	0x9f
+ 3334 0662 00000000 		.4byte	0
+ 3335 0666 00000000 		.4byte	0
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccGojRvE.s 			page 64
+
+
+ 3336              	.LLST33:
+ 3337 066a 7E010000 		.4byte	.LVL55-.Ltext0
+ 3338 066e 86010000 		.4byte	.LVL56-.Ltext0
+ 3339 0672 0300     		.2byte	0x3
+ 3340 0674 74       		.byte	0x74
+ 3341 0675 08       		.sleb128 8
+ 3342 0676 9F       		.byte	0x9f
+ 3343 0677 86010000 		.4byte	.LVL56-.Ltext0
+ 3344 067b 8A010000 		.4byte	.LVL57-.Ltext0
+ 3345 067f 0100     		.2byte	0x1
+ 3346 0681 54       		.byte	0x54
+ 3347 0682 00000000 		.4byte	0
+ 3348 0686 00000000 		.4byte	0
+ 3349              	.LLST20:
+ 3350 068a 40010000 		.4byte	.LFB10-.Ltext0
+ 3351 068e 42010000 		.4byte	.LCFI3-.Ltext0
+ 3352 0692 0200     		.2byte	0x2
+ 3353 0694 7D       		.byte	0x7d
+ 3354 0695 00       		.sleb128 0
+ 3355 0696 42010000 		.4byte	.LCFI3-.Ltext0
+ 3356 069a 70010000 		.4byte	.LFE10-.Ltext0
+ 3357 069e 0200     		.2byte	0x2
+ 3358 06a0 7D       		.byte	0x7d
+ 3359 06a1 08       		.sleb128 8
+ 3360 06a2 00000000 		.4byte	0
+ 3361 06a6 00000000 		.4byte	0
+ 3362              	.LLST21:
+ 3363 06aa 40010000 		.4byte	.LVL43-.Ltext0
+ 3364 06ae 46010000 		.4byte	.LVL44-.Ltext0
+ 3365 06b2 0100     		.2byte	0x1
+ 3366 06b4 50       		.byte	0x50
+ 3367 06b5 46010000 		.4byte	.LVL44-.Ltext0
+ 3368 06b9 56010000 		.4byte	.LVL47-.Ltext0
+ 3369 06bd 0100     		.2byte	0x1
+ 3370 06bf 54       		.byte	0x54
+ 3371 06c0 56010000 		.4byte	.LVL47-.Ltext0
+ 3372 06c4 5C010000 		.4byte	.LVL49-.Ltext0
+ 3373 06c8 0400     		.2byte	0x4
+ 3374 06ca F3       		.byte	0xf3
+ 3375 06cb 01       		.uleb128 0x1
+ 3376 06cc 50       		.byte	0x50
+ 3377 06cd 9F       		.byte	0x9f
+ 3378 06ce 5C010000 		.4byte	.LVL49-.Ltext0
+ 3379 06d2 60010000 		.4byte	.LVL50-.Ltext0
+ 3380 06d6 0100     		.2byte	0x1
+ 3381 06d8 50       		.byte	0x50
+ 3382 06d9 60010000 		.4byte	.LVL50-.Ltext0
+ 3383 06dd 70010000 		.4byte	.LFE10-.Ltext0
+ 3384 06e1 0100     		.2byte	0x1
+ 3385 06e3 54       		.byte	0x54
+ 3386 06e4 00000000 		.4byte	0
+ 3387 06e8 00000000 		.4byte	0
+ 3388              	.LLST22:
+ 3389 06ec 40010000 		.4byte	.LVL43-.Ltext0
+ 3390 06f0 5A010000 		.4byte	.LVL48-.Ltext0
+ 3391 06f4 0600     		.2byte	0x6
+ 3392 06f6 03       		.byte	0x3
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccGojRvE.s 			page 65
+
+
+ 3393 06f7 28000000 		.4byte	command_2_ptr_hash_array
+ 3394 06fb 9F       		.byte	0x9f
+ 3395 06fc 5C010000 		.4byte	.LVL49-.Ltext0
+ 3396 0700 70010000 		.4byte	.LFE10-.Ltext0
+ 3397 0704 0600     		.2byte	0x6
+ 3398 0706 03       		.byte	0x3
+ 3399 0707 28000000 		.4byte	command_2_ptr_hash_array
+ 3400 070b 9F       		.byte	0x9f
+ 3401 070c 00000000 		.4byte	0
+ 3402 0710 00000000 		.4byte	0
+ 3403              	.LLST23:
+ 3404 0714 40010000 		.4byte	.LVL43-.Ltext0
+ 3405 0718 46010000 		.4byte	.LVL44-.Ltext0
+ 3406 071c 0100     		.2byte	0x1
+ 3407 071e 50       		.byte	0x50
+ 3408 071f 46010000 		.4byte	.LVL44-.Ltext0
+ 3409 0723 56010000 		.4byte	.LVL47-.Ltext0
+ 3410 0727 0100     		.2byte	0x1
+ 3411 0729 54       		.byte	0x54
+ 3412 072a 56010000 		.4byte	.LVL47-.Ltext0
+ 3413 072e 5A010000 		.4byte	.LVL48-.Ltext0
+ 3414 0732 0400     		.2byte	0x4
+ 3415 0734 F3       		.byte	0xf3
+ 3416 0735 01       		.uleb128 0x1
+ 3417 0736 50       		.byte	0x50
+ 3418 0737 9F       		.byte	0x9f
+ 3419 0738 5C010000 		.4byte	.LVL49-.Ltext0
+ 3420 073c 60010000 		.4byte	.LVL50-.Ltext0
+ 3421 0740 0100     		.2byte	0x1
+ 3422 0742 50       		.byte	0x50
+ 3423 0743 60010000 		.4byte	.LVL50-.Ltext0
+ 3424 0747 70010000 		.4byte	.LFE10-.Ltext0
+ 3425 074b 0100     		.2byte	0x1
+ 3426 074d 54       		.byte	0x54
+ 3427 074e 00000000 		.4byte	0
+ 3428 0752 00000000 		.4byte	0
+ 3429              	.LLST24:
+ 3430 0756 4C010000 		.4byte	.LVL45-.Ltext0
+ 3431 075a 5A010000 		.4byte	.LVL48-.Ltext0
+ 3432 075e 0100     		.2byte	0x1
+ 3433 0760 50       		.byte	0x50
+ 3434 0761 00000000 		.4byte	0
+ 3435 0765 00000000 		.4byte	0
+ 3436              	.LLST25:
+ 3437 0769 4E010000 		.4byte	.LVL46-.Ltext0
+ 3438 076d 5A010000 		.4byte	.LVL48-.Ltext0
+ 3439 0771 0800     		.2byte	0x8
+ 3440 0773 70       		.byte	0x70
+ 3441 0774 00       		.sleb128 0
+ 3442 0775 32       		.byte	0x32
+ 3443 0776 24       		.byte	0x24
+ 3444 0777 73       		.byte	0x73
+ 3445 0778 00       		.sleb128 0
+ 3446 0779 22       		.byte	0x22
+ 3447 077a 9F       		.byte	0x9f
+ 3448 077b 00000000 		.4byte	0
+ 3449 077f 00000000 		.4byte	0
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccGojRvE.s 			page 66
+
+
+ 3450              	.LLST26:
+ 3451 0783 4E010000 		.4byte	.LVL46-.Ltext0
+ 3452 0787 56010000 		.4byte	.LVL47-.Ltext0
+ 3453 078b 0300     		.2byte	0x3
+ 3454 078d 74       		.byte	0x74
+ 3455 078e 08       		.sleb128 8
+ 3456 078f 9F       		.byte	0x9f
+ 3457 0790 56010000 		.4byte	.LVL47-.Ltext0
+ 3458 0794 5A010000 		.4byte	.LVL48-.Ltext0
+ 3459 0798 0100     		.2byte	0x1
+ 3460 079a 54       		.byte	0x54
+ 3461 079b 00000000 		.4byte	0
+ 3462 079f 00000000 		.4byte	0
+ 3463              	.LLST13:
+ 3464 07a3 10010000 		.4byte	.LFB9-.Ltext0
+ 3465 07a7 12010000 		.4byte	.LCFI2-.Ltext0
+ 3466 07ab 0200     		.2byte	0x2
+ 3467 07ad 7D       		.byte	0x7d
+ 3468 07ae 00       		.sleb128 0
+ 3469 07af 12010000 		.4byte	.LCFI2-.Ltext0
+ 3470 07b3 40010000 		.4byte	.LFE9-.Ltext0
+ 3471 07b7 0200     		.2byte	0x2
+ 3472 07b9 7D       		.byte	0x7d
+ 3473 07ba 08       		.sleb128 8
+ 3474 07bb 00000000 		.4byte	0
+ 3475 07bf 00000000 		.4byte	0
+ 3476              	.LLST14:
+ 3477 07c3 10010000 		.4byte	.LVL34-.Ltext0
+ 3478 07c7 16010000 		.4byte	.LVL35-.Ltext0
+ 3479 07cb 0100     		.2byte	0x1
+ 3480 07cd 50       		.byte	0x50
+ 3481 07ce 16010000 		.4byte	.LVL35-.Ltext0
+ 3482 07d2 26010000 		.4byte	.LVL38-.Ltext0
+ 3483 07d6 0100     		.2byte	0x1
+ 3484 07d8 54       		.byte	0x54
+ 3485 07d9 26010000 		.4byte	.LVL38-.Ltext0
+ 3486 07dd 2C010000 		.4byte	.LVL40-.Ltext0
+ 3487 07e1 0300     		.2byte	0x3
+ 3488 07e3 74       		.byte	0x74
+ 3489 07e4 78       		.sleb128 -8
+ 3490 07e5 9F       		.byte	0x9f
+ 3491 07e6 2C010000 		.4byte	.LVL40-.Ltext0
+ 3492 07ea 30010000 		.4byte	.LVL41-.Ltext0
+ 3493 07ee 0100     		.2byte	0x1
+ 3494 07f0 50       		.byte	0x50
+ 3495 07f1 30010000 		.4byte	.LVL41-.Ltext0
+ 3496 07f5 40010000 		.4byte	.LFE9-.Ltext0
+ 3497 07f9 0100     		.2byte	0x1
+ 3498 07fb 54       		.byte	0x54
+ 3499 07fc 00000000 		.4byte	0
+ 3500 0800 00000000 		.4byte	0
+ 3501              	.LLST15:
+ 3502 0804 10010000 		.4byte	.LVL34-.Ltext0
+ 3503 0808 2A010000 		.4byte	.LVL39-.Ltext0
+ 3504 080c 0600     		.2byte	0x6
+ 3505 080e 03       		.byte	0x3
+ 3506 080f 00000000 		.4byte	command_1_ptr_hash_array
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccGojRvE.s 			page 67
+
+
+ 3507 0813 9F       		.byte	0x9f
+ 3508 0814 2C010000 		.4byte	.LVL40-.Ltext0
+ 3509 0818 40010000 		.4byte	.LFE9-.Ltext0
+ 3510 081c 0600     		.2byte	0x6
+ 3511 081e 03       		.byte	0x3
+ 3512 081f 00000000 		.4byte	command_1_ptr_hash_array
+ 3513 0823 9F       		.byte	0x9f
+ 3514 0824 00000000 		.4byte	0
+ 3515 0828 00000000 		.4byte	0
+ 3516              	.LLST16:
+ 3517 082c 10010000 		.4byte	.LVL34-.Ltext0
+ 3518 0830 16010000 		.4byte	.LVL35-.Ltext0
+ 3519 0834 0100     		.2byte	0x1
+ 3520 0836 50       		.byte	0x50
+ 3521 0837 16010000 		.4byte	.LVL35-.Ltext0
+ 3522 083b 26010000 		.4byte	.LVL38-.Ltext0
+ 3523 083f 0100     		.2byte	0x1
+ 3524 0841 54       		.byte	0x54
+ 3525 0842 26010000 		.4byte	.LVL38-.Ltext0
+ 3526 0846 2A010000 		.4byte	.LVL39-.Ltext0
+ 3527 084a 0300     		.2byte	0x3
+ 3528 084c 74       		.byte	0x74
+ 3529 084d 78       		.sleb128 -8
+ 3530 084e 9F       		.byte	0x9f
+ 3531 084f 2C010000 		.4byte	.LVL40-.Ltext0
+ 3532 0853 30010000 		.4byte	.LVL41-.Ltext0
+ 3533 0857 0100     		.2byte	0x1
+ 3534 0859 50       		.byte	0x50
+ 3535 085a 30010000 		.4byte	.LVL41-.Ltext0
+ 3536 085e 40010000 		.4byte	.LFE9-.Ltext0
+ 3537 0862 0100     		.2byte	0x1
+ 3538 0864 54       		.byte	0x54
+ 3539 0865 00000000 		.4byte	0
+ 3540 0869 00000000 		.4byte	0
+ 3541              	.LLST17:
+ 3542 086d 1C010000 		.4byte	.LVL36-.Ltext0
+ 3543 0871 2A010000 		.4byte	.LVL39-.Ltext0
+ 3544 0875 0100     		.2byte	0x1
+ 3545 0877 50       		.byte	0x50
+ 3546 0878 00000000 		.4byte	0
+ 3547 087c 00000000 		.4byte	0
+ 3548              	.LLST18:
+ 3549 0880 1E010000 		.4byte	.LVL37-.Ltext0
+ 3550 0884 2A010000 		.4byte	.LVL39-.Ltext0
+ 3551 0888 0800     		.2byte	0x8
+ 3552 088a 70       		.byte	0x70
+ 3553 088b 00       		.sleb128 0
+ 3554 088c 32       		.byte	0x32
+ 3555 088d 24       		.byte	0x24
+ 3556 088e 73       		.byte	0x73
+ 3557 088f 00       		.sleb128 0
+ 3558 0890 22       		.byte	0x22
+ 3559 0891 9F       		.byte	0x9f
+ 3560 0892 00000000 		.4byte	0
+ 3561 0896 00000000 		.4byte	0
+ 3562              	.LLST19:
+ 3563 089a 1E010000 		.4byte	.LVL37-.Ltext0
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccGojRvE.s 			page 68
+
+
+ 3564 089e 26010000 		.4byte	.LVL38-.Ltext0
+ 3565 08a2 0300     		.2byte	0x3
+ 3566 08a4 74       		.byte	0x74
+ 3567 08a5 08       		.sleb128 8
+ 3568 08a6 9F       		.byte	0x9f
+ 3569 08a7 26010000 		.4byte	.LVL38-.Ltext0
+ 3570 08ab 2A010000 		.4byte	.LVL39-.Ltext0
+ 3571 08af 0100     		.2byte	0x1
+ 3572 08b1 54       		.byte	0x54
+ 3573 08b2 00000000 		.4byte	0
+ 3574 08b6 00000000 		.4byte	0
+ 3575              	.LLST7:
+ 3576 08ba 9C000000 		.4byte	.LFB7-.Ltext0
+ 3577 08be A0000000 		.4byte	.LCFI1-.Ltext0
+ 3578 08c2 0200     		.2byte	0x2
+ 3579 08c4 7D       		.byte	0x7d
+ 3580 08c5 00       		.sleb128 0
+ 3581 08c6 A0000000 		.4byte	.LCFI1-.Ltext0
+ 3582 08ca 10010000 		.4byte	.LFE7-.Ltext0
+ 3583 08ce 0200     		.2byte	0x2
+ 3584 08d0 7D       		.byte	0x7d
+ 3585 08d1 18       		.sleb128 24
+ 3586 08d2 00000000 		.4byte	0
+ 3587 08d6 00000000 		.4byte	0
+ 3588              	.LLST8:
+ 3589 08da 9C000000 		.4byte	.LVL20-.Ltext0
+ 3590 08de AA000000 		.4byte	.LVL21-.Ltext0
+ 3591 08e2 0100     		.2byte	0x1
+ 3592 08e4 50       		.byte	0x50
+ 3593 08e5 AA000000 		.4byte	.LVL21-.Ltext0
+ 3594 08e9 02010000 		.4byte	.LVL33-.Ltext0
+ 3595 08ed 0100     		.2byte	0x1
+ 3596 08ef 58       		.byte	0x58
+ 3597 08f0 02010000 		.4byte	.LVL33-.Ltext0
+ 3598 08f4 10010000 		.4byte	.LFE7-.Ltext0
+ 3599 08f8 0400     		.2byte	0x4
+ 3600 08fa F3       		.byte	0xf3
+ 3601 08fb 01       		.uleb128 0x1
+ 3602 08fc 50       		.byte	0x50
+ 3603 08fd 9F       		.byte	0x9f
+ 3604 08fe 00000000 		.4byte	0
+ 3605 0902 00000000 		.4byte	0
+ 3606              	.LLST9:
+ 3607 0906 9C000000 		.4byte	.LVL20-.Ltext0
+ 3608 090a AF000000 		.4byte	.LVL22-1-.Ltext0
+ 3609 090e 0100     		.2byte	0x1
+ 3610 0910 51       		.byte	0x51
+ 3611 0911 AF000000 		.4byte	.LVL22-1-.Ltext0
+ 3612 0915 02010000 		.4byte	.LVL33-.Ltext0
+ 3613 0919 0100     		.2byte	0x1
+ 3614 091b 57       		.byte	0x57
+ 3615 091c 02010000 		.4byte	.LVL33-.Ltext0
+ 3616 0920 10010000 		.4byte	.LFE7-.Ltext0
+ 3617 0924 0400     		.2byte	0x4
+ 3618 0926 F3       		.byte	0xf3
+ 3619 0927 01       		.uleb128 0x1
+ 3620 0928 51       		.byte	0x51
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccGojRvE.s 			page 69
+
+
+ 3621 0929 9F       		.byte	0x9f
+ 3622 092a 00000000 		.4byte	0
+ 3623 092e 00000000 		.4byte	0
+ 3624              	.LLST10:
+ 3625 0932 9C000000 		.4byte	.LVL20-.Ltext0
+ 3626 0936 AF000000 		.4byte	.LVL22-1-.Ltext0
+ 3627 093a 0100     		.2byte	0x1
+ 3628 093c 52       		.byte	0x52
+ 3629 093d AF000000 		.4byte	.LVL22-1-.Ltext0
+ 3630 0941 02010000 		.4byte	.LVL33-.Ltext0
+ 3631 0945 0100     		.2byte	0x1
+ 3632 0947 56       		.byte	0x56
+ 3633 0948 02010000 		.4byte	.LVL33-.Ltext0
+ 3634 094c 10010000 		.4byte	.LFE7-.Ltext0
+ 3635 0950 0400     		.2byte	0x4
+ 3636 0952 F3       		.byte	0xf3
+ 3637 0953 01       		.uleb128 0x1
+ 3638 0954 52       		.byte	0x52
+ 3639 0955 9F       		.byte	0x9f
+ 3640 0956 00000000 		.4byte	0
+ 3641 095a 00000000 		.4byte	0
+ 3642              	.LLST11:
+ 3643 095e B6000000 		.4byte	.LVL24-.Ltext0
+ 3644 0962 C6000000 		.4byte	.LVL26-.Ltext0
+ 3645 0966 0300     		.2byte	0x3
+ 3646 0968 75       		.byte	0x75
+ 3647 0969 78       		.sleb128 -8
+ 3648 096a 9F       		.byte	0x9f
+ 3649 096b CE000000 		.4byte	.LVL27-.Ltext0
+ 3650 096f D6000000 		.4byte	.LVL28-.Ltext0
+ 3651 0973 0300     		.2byte	0x3
+ 3652 0975 75       		.byte	0x75
+ 3653 0976 78       		.sleb128 -8
+ 3654 0977 9F       		.byte	0x9f
+ 3655 0978 E6000000 		.4byte	.LVL30-.Ltext0
+ 3656 097c 02010000 		.4byte	.LVL33-.Ltext0
+ 3657 0980 0300     		.2byte	0x3
+ 3658 0982 75       		.byte	0x75
+ 3659 0983 78       		.sleb128 -8
+ 3660 0984 9F       		.byte	0x9f
+ 3661 0985 00000000 		.4byte	0
+ 3662 0989 00000000 		.4byte	0
+ 3663              	.LLST12:
+ 3664 098d B4000000 		.4byte	.LVL23-.Ltext0
+ 3665 0991 D6000000 		.4byte	.LVL28-.Ltext0
+ 3666 0995 0100     		.2byte	0x1
+ 3667 0997 55       		.byte	0x55
+ 3668 0998 E6000000 		.4byte	.LVL30-.Ltext0
+ 3669 099c 02010000 		.4byte	.LVL33-.Ltext0
+ 3670 09a0 0100     		.2byte	0x1
+ 3671 09a2 55       		.byte	0x55
+ 3672 09a3 00000000 		.4byte	0
+ 3673 09a7 00000000 		.4byte	0
+ 3674              	.LLST4:
+ 3675 09ab 70000000 		.4byte	.LVL16-.Ltext0
+ 3676 09af 78000000 		.4byte	.LVL17-.Ltext0
+ 3677 09b3 0200     		.2byte	0x2
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccGojRvE.s 			page 70
+
+
+ 3678 09b5 30       		.byte	0x30
+ 3679 09b6 9F       		.byte	0x9f
+ 3680 09b7 00000000 		.4byte	0
+ 3681 09bb 00000000 		.4byte	0
+ 3682              	.LLST5:
+ 3683 09bf 78000000 		.4byte	.LVL17-.Ltext0
+ 3684 09c3 7E000000 		.4byte	.LVL18-.Ltext0
+ 3685 09c7 0200     		.2byte	0x2
+ 3686 09c9 30       		.byte	0x30
+ 3687 09ca 9F       		.byte	0x9f
+ 3688 09cb 00000000 		.4byte	0
+ 3689 09cf 00000000 		.4byte	0
+ 3690              	.LLST6:
+ 3691 09d3 7E000000 		.4byte	.LVL18-.Ltext0
+ 3692 09d7 82000000 		.4byte	.LVL19-.Ltext0
+ 3693 09db 0100     		.2byte	0x1
+ 3694 09dd 53       		.byte	0x53
+ 3695 09de 00000000 		.4byte	0
+ 3696 09e2 00000000 		.4byte	0
+ 3697              	.LLST0:
+ 3698 09e6 00000000 		.4byte	.LFB5-.Ltext0
+ 3699 09ea 02000000 		.4byte	.LCFI0-.Ltext0
+ 3700 09ee 0200     		.2byte	0x2
+ 3701 09f0 7D       		.byte	0x7d
+ 3702 09f1 00       		.sleb128 0
+ 3703 09f2 02000000 		.4byte	.LCFI0-.Ltext0
+ 3704 09f6 5C000000 		.4byte	.LFE5-.Ltext0
+ 3705 09fa 0200     		.2byte	0x2
+ 3706 09fc 7D       		.byte	0x7d
+ 3707 09fd 08       		.sleb128 8
+ 3708 09fe 00000000 		.4byte	0
+ 3709 0a02 00000000 		.4byte	0
+ 3710              	.LLST1:
+ 3711 0a06 00000000 		.4byte	.LVL0-.Ltext0
+ 3712 0a0a 14000000 		.4byte	.LVL1-.Ltext0
+ 3713 0a0e 0100     		.2byte	0x1
+ 3714 0a10 50       		.byte	0x50
+ 3715 0a11 14000000 		.4byte	.LVL1-.Ltext0
+ 3716 0a15 1A000000 		.4byte	.LVL2-.Ltext0
+ 3717 0a19 0100     		.2byte	0x1
+ 3718 0a1b 54       		.byte	0x54
+ 3719 0a1c 24000000 		.4byte	.LVL3-.Ltext0
+ 3720 0a20 2C000000 		.4byte	.LVL4-.Ltext0
+ 3721 0a24 0100     		.2byte	0x1
+ 3722 0a26 54       		.byte	0x54
+ 3723 0a27 2C000000 		.4byte	.LVL4-.Ltext0
+ 3724 0a2b 2E000000 		.4byte	.LVL5-.Ltext0
+ 3725 0a2f 0300     		.2byte	0x3
+ 3726 0a31 74       		.byte	0x74
+ 3727 0a32 7F       		.sleb128 -1
+ 3728 0a33 9F       		.byte	0x9f
+ 3729 0a34 44000000 		.4byte	.LVL7-.Ltext0
+ 3730 0a38 48000000 		.4byte	.LVL8-.Ltext0
+ 3731 0a3c 0100     		.2byte	0x1
+ 3732 0a3e 50       		.byte	0x50
+ 3733 0a3f 48000000 		.4byte	.LVL8-.Ltext0
+ 3734 0a43 4C000000 		.4byte	.LVL9-.Ltext0
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccGojRvE.s 			page 71
+
+
+ 3735 0a47 0100     		.2byte	0x1
+ 3736 0a49 54       		.byte	0x54
+ 3737 0a4a 4C000000 		.4byte	.LVL9-.Ltext0
+ 3738 0a4e 50000000 		.4byte	.LVL10-.Ltext0
+ 3739 0a52 0200     		.2byte	0x2
+ 3740 0a54 30       		.byte	0x30
+ 3741 0a55 9F       		.byte	0x9f
+ 3742 0a56 50000000 		.4byte	.LVL10-.Ltext0
+ 3743 0a5a 52000000 		.4byte	.LVL11-.Ltext0
+ 3744 0a5e 0100     		.2byte	0x1
+ 3745 0a60 50       		.byte	0x50
+ 3746 0a61 52000000 		.4byte	.LVL11-.Ltext0
+ 3747 0a65 54000000 		.4byte	.LVL12-.Ltext0
+ 3748 0a69 0100     		.2byte	0x1
+ 3749 0a6b 54       		.byte	0x54
+ 3750 0a6c 54000000 		.4byte	.LVL12-.Ltext0
+ 3751 0a70 5C000000 		.4byte	.LFE5-.Ltext0
+ 3752 0a74 0400     		.2byte	0x4
+ 3753 0a76 F3       		.byte	0xf3
+ 3754 0a77 01       		.uleb128 0x1
+ 3755 0a78 50       		.byte	0x50
+ 3756 0a79 9F       		.byte	0x9f
+ 3757 0a7a 00000000 		.4byte	0
+ 3758 0a7e 00000000 		.4byte	0
+ 3759              	.LLST2:
+ 3760 0a82 00000000 		.4byte	.LVL0-.Ltext0
+ 3761 0a86 1A000000 		.4byte	.LVL2-.Ltext0
+ 3762 0a8a 0200     		.2byte	0x2
+ 3763 0a8c 30       		.byte	0x30
+ 3764 0a8d 9F       		.byte	0x9f
+ 3765 0a8e 1A000000 		.4byte	.LVL2-.Ltext0
+ 3766 0a92 42000000 		.4byte	.LVL6-.Ltext0
+ 3767 0a96 0100     		.2byte	0x1
+ 3768 0a98 52       		.byte	0x52
+ 3769 0a99 44000000 		.4byte	.LVL7-.Ltext0
+ 3770 0a9d 5C000000 		.4byte	.LFE5-.Ltext0
+ 3771 0aa1 0200     		.2byte	0x2
+ 3772 0aa3 30       		.byte	0x30
+ 3773 0aa4 9F       		.byte	0x9f
+ 3774 0aa5 00000000 		.4byte	0
+ 3775 0aa9 00000000 		.4byte	0
+ 3776              	.LLST3:
+ 3777 0aad 5C000000 		.4byte	.LVL13-.Ltext0
+ 3778 0ab1 5E000000 		.4byte	.LVL14-.Ltext0
+ 3779 0ab5 0100     		.2byte	0x1
+ 3780 0ab7 50       		.byte	0x50
+ 3781 0ab8 5E000000 		.4byte	.LVL14-.Ltext0
+ 3782 0abc 68000000 		.4byte	.LVL15-.Ltext0
+ 3783 0ac0 0300     		.2byte	0x3
+ 3784 0ac2 70       		.byte	0x70
+ 3785 0ac3 01       		.sleb128 1
+ 3786 0ac4 9F       		.byte	0x9f
+ 3787 0ac5 68000000 		.4byte	.LVL15-.Ltext0
+ 3788 0ac9 70000000 		.4byte	.LFE4-.Ltext0
+ 3789 0acd 0400     		.2byte	0x4
+ 3790 0acf F3       		.byte	0xf3
+ 3791 0ad0 01       		.uleb128 0x1
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccGojRvE.s 			page 72
+
+
+ 3792 0ad1 50       		.byte	0x50
+ 3793 0ad2 9F       		.byte	0x9f
+ 3794 0ad3 00000000 		.4byte	0
+ 3795 0ad7 00000000 		.4byte	0
+ 3796              		.section	.debug_aranges,"",%progbits
+ 3797 0000 1C000000 		.4byte	0x1c
+ 3798 0004 0200     		.2byte	0x2
+ 3799 0006 00000000 		.4byte	.Ldebug_info0
+ 3800 000a 04       		.byte	0x4
+ 3801 000b 00       		.byte	0
+ 3802 000c 0000     		.2byte	0
+ 3803 000e 0000     		.2byte	0
+ 3804 0010 00000000 		.4byte	.Ltext0
+ 3805 0014 90020000 		.4byte	.Letext0-.Ltext0
+ 3806 0018 00000000 		.4byte	0
+ 3807 001c 00000000 		.4byte	0
+ 3808              		.section	.debug_ranges,"",%progbits
+ 3809              	.Ldebug_ranges0:
+ 3810 0000 12010000 		.4byte	.LBB12-.Ltext0
+ 3811 0004 2A010000 		.4byte	.LBE12-.Ltext0
+ 3812 0008 2C010000 		.4byte	.LBB17-.Ltext0
+ 3813 000c 40010000 		.4byte	.LBE17-.Ltext0
+ 3814 0010 00000000 		.4byte	0
+ 3815 0014 00000000 		.4byte	0
+ 3816 0018 42010000 		.4byte	.LBB22-.Ltext0
+ 3817 001c 5A010000 		.4byte	.LBE22-.Ltext0
+ 3818 0020 5C010000 		.4byte	.LBB27-.Ltext0
+ 3819 0024 70010000 		.4byte	.LBE27-.Ltext0
+ 3820 0028 00000000 		.4byte	0
+ 3821 002c 00000000 		.4byte	0
+ 3822 0030 72010000 		.4byte	.LBB32-.Ltext0
+ 3823 0034 8A010000 		.4byte	.LBE32-.Ltext0
+ 3824 0038 8C010000 		.4byte	.LBB37-.Ltext0
+ 3825 003c A0010000 		.4byte	.LBE37-.Ltext0
+ 3826 0040 00000000 		.4byte	0
+ 3827 0044 00000000 		.4byte	0
+ 3828 0048 A2010000 		.4byte	.LBB42-.Ltext0
+ 3829 004c BA010000 		.4byte	.LBE42-.Ltext0
+ 3830 0050 BC010000 		.4byte	.LBB47-.Ltext0
+ 3831 0054 D0010000 		.4byte	.LBE47-.Ltext0
+ 3832 0058 00000000 		.4byte	0
+ 3833 005c 00000000 		.4byte	0
+ 3834 0060 D2010000 		.4byte	.LBB52-.Ltext0
+ 3835 0064 EA010000 		.4byte	.LBE52-.Ltext0
+ 3836 0068 EC010000 		.4byte	.LBB57-.Ltext0
+ 3837 006c 00020000 		.4byte	.LBE57-.Ltext0
+ 3838 0070 00000000 		.4byte	0
+ 3839 0074 00000000 		.4byte	0
+ 3840 0078 02020000 		.4byte	.LBB62-.Ltext0
+ 3841 007c 1A020000 		.4byte	.LBE62-.Ltext0
+ 3842 0080 1C020000 		.4byte	.LBB67-.Ltext0
+ 3843 0084 30020000 		.4byte	.LBE67-.Ltext0
+ 3844 0088 00000000 		.4byte	0
+ 3845 008c 00000000 		.4byte	0
+ 3846 0090 32020000 		.4byte	.LBB72-.Ltext0
+ 3847 0094 4A020000 		.4byte	.LBE72-.Ltext0
+ 3848 0098 4C020000 		.4byte	.LBB77-.Ltext0
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccGojRvE.s 			page 73
+
+
+ 3849 009c 60020000 		.4byte	.LBE77-.Ltext0
+ 3850 00a0 00000000 		.4byte	0
+ 3851 00a4 00000000 		.4byte	0
+ 3852 00a8 62020000 		.4byte	.LBB82-.Ltext0
+ 3853 00ac 7A020000 		.4byte	.LBE82-.Ltext0
+ 3854 00b0 7C020000 		.4byte	.LBB87-.Ltext0
+ 3855 00b4 90020000 		.4byte	.LBE87-.Ltext0
+ 3856 00b8 00000000 		.4byte	0
+ 3857 00bc 00000000 		.4byte	0
+ 3858              		.section	.debug_line,"",%progbits
+ 3859              	.Ldebug_line0:
+ 3860 0000 30020000 		.section	.debug_str,"MS",%progbits,1
+ 3860      0200F800 
+ 3860      00000201 
+ 3860      FB0E0D00 
+ 3860      01010101 
+ 3861              	.LASF2:
+ 3862 0000 6E657874 		.ascii	"next\000"
+ 3862      00
+ 3863              	.LASF26:
+ 3864 0005 636F6D6D 		.ascii	"command_3_processer\000"
+ 3864      616E645F 
+ 3864      335F7072 
+ 3864      6F636573 
+ 3864      73657200 
+ 3865              	.LASF20:
+ 3866 0019 636F6D6D 		.ascii	"command_5_ptr_hash_array\000"
+ 3866      616E645F 
+ 3866      355F7074 
+ 3866      725F6861 
+ 3866      73685F61 
+ 3867              	.LASF52:
+ 3868 0032 73696E67 		.ascii	"singly_list_add\000"
+ 3868      6C795F6C 
+ 3868      6973745F 
+ 3868      61646400 
+ 3869              	.LASF40:
+ 3870 0042 696E7365 		.ascii	"insert_struct_command_1\000"
+ 3870      72745F73 
+ 3870      74727563 
+ 3870      745F636F 
+ 3870      6D6D616E 
+ 3871              	.LASF39:
+ 3872 005a 696E7365 		.ascii	"insert_struct_command_2\000"
+ 3872      72745F73 
+ 3872      74727563 
+ 3872      745F636F 
+ 3872      6D6D616E 
+ 3873              	.LASF30:
+ 3874 0072 636F6D6D 		.ascii	"command_7_processer\000"
+ 3874      616E645F 
+ 3874      375F7072 
+ 3874      6F636573 
+ 3874      73657200 
+ 3875              	.LASF37:
+ 3876 0086 696E7365 		.ascii	"insert_struct_command_4\000"
+ 3876      72745F73 
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccGojRvE.s 			page 74
+
+
+ 3876      74727563 
+ 3876      745F636F 
+ 3876      6D6D616E 
+ 3877              	.LASF36:
+ 3878 009e 696E7365 		.ascii	"insert_struct_command_5\000"
+ 3878      72745F73 
+ 3878      74727563 
+ 3878      745F636F 
+ 3878      6D6D616E 
+ 3879              	.LASF35:
+ 3880 00b6 696E7365 		.ascii	"insert_struct_command_6\000"
+ 3880      72745F73 
+ 3880      74727563 
+ 3880      745F636F 
+ 3880      6D6D616E 
+ 3881              	.LASF34:
+ 3882 00ce 696E7365 		.ascii	"insert_struct_command_7\000"
+ 3882      72745F73 
+ 3882      74727563 
+ 3882      745F636F 
+ 3882      6D6D616E 
+ 3883              	.LASF14:
+ 3884 00e6 73686F72 		.ascii	"short unsigned int\000"
+ 3884      7420756E 
+ 3884      7369676E 
+ 3884      65642069 
+ 3884      6E7400
+ 3885              	.LASF16:
+ 3886 00f9 636F6D6D 		.ascii	"command_1_ptr_hash_array\000"
+ 3886      616E645F 
+ 3886      315F7074 
+ 3886      725F6861 
+ 3886      73685F61 
+ 3887              	.LASF1:
+ 3888 0112 636F6D6D 		.ascii	"command\000"
+ 3888      616E6400 
+ 3889              	.LASF6:
+ 3890 011a 636F6D6D 		.ascii	"command_processer\000"
+ 3890      616E645F 
+ 3890      70726F63 
+ 3890      65737365 
+ 3890      7200
+ 3891              	.LASF38:
+ 3892 012c 696E7365 		.ascii	"insert_struct_command_3\000"
+ 3892      72745F73 
+ 3892      74727563 
+ 3892      745F636F 
+ 3892      6D6D616E 
+ 3893              	.LASF44:
+ 3894 0144 636F6D6D 		.ascii	"command_processer_ptr\000"
+ 3894      616E645F 
+ 3894      70726F63 
+ 3894      65737365 
+ 3894      725F7074 
+ 3895              	.LASF63:
+ 3896 015a 636F6D6D 		.ascii	"command_list_hash\000"
+ 3896      616E645F 
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccGojRvE.s 			page 75
+
+
+ 3896      6C697374 
+ 3896      5F686173 
+ 3896      6800
+ 3897              	.LASF8:
+ 3898 016c 636F6D6D 		.ascii	"command_list_address\000"
+ 3898      616E645F 
+ 3898      6C697374 
+ 3898      5F616464 
+ 3898      72657373 
+ 3899              	.LASF33:
+ 3900 0181 696E7365 		.ascii	"insert_struct_command_8\000"
+ 3900      72745F73 
+ 3900      74727563 
+ 3900      745F636F 
+ 3900      6D6D616E 
+ 3901              	.LASF60:
+ 3902 0199 2E2E2F2E 		.ascii	"../../source/src/user/shell/command_processor.c\000"
+ 3902      2E2F736F 
+ 3902      75726365 
+ 3902      2F737263 
+ 3902      2F757365 
+ 3903              	.LASF15:
+ 3904 01c9 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 3904      206C6F6E 
+ 3904      6720756E 
+ 3904      7369676E 
+ 3904      65642069 
+ 3905              	.LASF13:
+ 3906 01e0 756E7369 		.ascii	"unsigned char\000"
+ 3906      676E6564 
+ 3906      20636861 
+ 3906      7200
+ 3907              	.LASF45:
+ 3908 01ee 73747275 		.ascii	"struct_command_ptr\000"
+ 3908      63745F63 
+ 3908      6F6D6D61 
+ 3908      6E645F70 
+ 3908      747200
+ 3909              	.LASF3:
+ 3910 0201 636F6D6D 		.ascii	"command_name\000"
+ 3910      616E645F 
+ 3910      6E616D65 
+ 3910      00
+ 3911              	.LASF21:
+ 3912 020e 636F6D6D 		.ascii	"command_6_ptr_hash_array\000"
+ 3912      616E645F 
+ 3912      365F7074 
+ 3912      725F6861 
+ 3912      73685F61 
+ 3913              	.LASF4:
+ 3914 0227 6C697374 		.ascii	"list\000"
+ 3914      00
+ 3915              	.LASF62:
+ 3916 022c 73697A65 		.ascii	"size_t\000"
+ 3916      5F7400
+ 3917              	.LASF57:
+ 3918 0233 6B615F70 		.ascii	"ka_printf\000"
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccGojRvE.s 			page 76
+
+
+ 3918      72696E74 
+ 3918      6600
+ 3919              	.LASF17:
+ 3920 023d 636F6D6D 		.ascii	"command_2_ptr_hash_array\000"
+ 3920      616E645F 
+ 3920      325F7074 
+ 3920      725F6861 
+ 3920      73685F61 
+ 3921              	.LASF46:
+ 3922 0256 68617368 		.ascii	"hash\000"
+ 3922      00
+ 3923              	.LASF55:
+ 3924 025b 5F415353 		.ascii	"_ASSERT\000"
+ 3924      45525400 
+ 3925              	.LASF53:
+ 3926 0263 68656164 		.ascii	"head\000"
+ 3926      00
+ 3927              	.LASF22:
+ 3928 0268 636F6D6D 		.ascii	"command_7_ptr_hash_array\000"
+ 3928      616E645F 
+ 3928      375F7074 
+ 3928      725F6861 
+ 3928      73685F61 
+ 3929              	.LASF7:
+ 3930 0281 636F6D6D 		.ascii	"command_length\000"
+ 3930      616E645F 
+ 3930      6C656E67 
+ 3930      746800
+ 3931              	.LASF51:
+ 3932 0290 696E7365 		.ascii	"insert_struct_command\000"
+ 3932      72745F73 
+ 3932      74727563 
+ 3932      745F636F 
+ 3932      6D6D616E 
+ 3933              	.LASF9:
+ 3934 02a6 756E7369 		.ascii	"unsigned int\000"
+ 3934      676E6564 
+ 3934      20696E74 
+ 3934      00
+ 3935              	.LASF25:
+ 3936 02b3 636F6D6D 		.ascii	"command_2_processer\000"
+ 3936      616E645F 
+ 3936      325F7072 
+ 3936      6F636573 
+ 3936      73657200 
+ 3937              	.LASF58:
+ 3938 02c7 6B615F73 		.ascii	"ka_strcmp\000"
+ 3938      7472636D 
+ 3938      7000
+ 3939              	.LASF5:
+ 3940 02d1 63686172 		.ascii	"char\000"
+ 3940      00
+ 3941              	.LASF18:
+ 3942 02d6 636F6D6D 		.ascii	"command_3_ptr_hash_array\000"
+ 3942      616E645F 
+ 3942      335F7074 
+ 3942      725F6861 
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccGojRvE.s 			page 77
+
+
+ 3942      73685F61 
+ 3943              	.LASF42:
+ 3944 02ef 68617368 		.ascii	"hash_array\000"
+ 3944      5F617272 
+ 3944      617900
+ 3945              	.LASF32:
+ 3946 02fa 636F6D6D 		.ascii	"command_processer_ptr_array\000"
+ 3946      616E645F 
+ 3946      70726F63 
+ 3946      65737365 
+ 3946      725F7074 
+ 3947              	.LASF28:
+ 3948 0316 636F6D6D 		.ascii	"command_5_processer\000"
+ 3948      616E645F 
+ 3948      355F7072 
+ 3948      6F636573 
+ 3948      73657200 
+ 3949              	.LASF0:
+ 3950 032a 73696E67 		.ascii	"singly_list_head\000"
+ 3950      6C795F6C 
+ 3950      6973745F 
+ 3950      68656164 
+ 3950      00
+ 3951              	.LASF47:
+ 3952 033b 5F5F6D70 		.ascii	"__mptr\000"
+ 3952      747200
+ 3953              	.LASF12:
+ 3954 0342 6C6F6E67 		.ascii	"long long int\000"
+ 3954      206C6F6E 
+ 3954      6720696E 
+ 3954      7400
+ 3955              	.LASF49:
+ 3956 0350 6D617463 		.ascii	"match_and_execute_command\000"
+ 3956      685F616E 
+ 3956      645F6578 
+ 3956      65637574 
+ 3956      655F636F 
+ 3957              	.LASF41:
+ 3958 036a 636F6D6D 		.ascii	"command_ptr\000"
+ 3958      616E645F 
+ 3958      70747200 
+ 3959              	.LASF27:
+ 3960 0376 636F6D6D 		.ascii	"command_4_processer\000"
+ 3960      616E645F 
+ 3960      345F7072 
+ 3960      6F636573 
+ 3960      73657200 
+ 3961              	.LASF48:
+ 3962 038a 5F5F696E 		.ascii	"__init_command_n_ptr_hash_array\000"
+ 3962      69745F63 
+ 3962      6F6D6D61 
+ 3962      6E645F6E 
+ 3962      5F707472 
+ 3963              	.LASF11:
+ 3964 03aa 73686F72 		.ascii	"short int\000"
+ 3964      7420696E 
+ 3964      7400
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccGojRvE.s 			page 78
+
+
+ 3965              	.LASF23:
+ 3966 03b4 636F6D6D 		.ascii	"command_8_ptr_hash_array\000"
+ 3966      616E645F 
+ 3966      385F7074 
+ 3966      725F6861 
+ 3966      73685F61 
+ 3967              	.LASF54:
+ 3968 03cd 494E4954 		.ascii	"INIT_SINGLY_LIST_HEAD\000"
+ 3968      5F53494E 
+ 3968      474C595F 
+ 3968      4C495354 
+ 3968      5F484541 
+ 3969              	.LASF43:
+ 3970 03e3 61726776 		.ascii	"argv\000"
+ 3970      00
+ 3971              	.LASF56:
+ 3972 03e8 6B615F73 		.ascii	"ka_strncmp\000"
+ 3972      74726E63 
+ 3972      6D7000
+ 3973              	.LASF59:
+ 3974 03f3 474E5520 		.ascii	"GNU C11 7.3.1 20180622 (release) [ARM/embedded-7-br"
+ 3974      43313120 
+ 3974      372E332E 
+ 3974      31203230 
+ 3974      31383036 
+ 3975 0426 616E6368 		.ascii	"anch revision 261907] -mcpu=cortex-m3 -mthumb -mapc"
+ 3975      20726576 
+ 3975      6973696F 
+ 3975      6E203236 
+ 3975      31393037 
+ 3976 0459 732D6672 		.ascii	"s-frame -mthumb-interwork -mcpu=cortex-m3 -mthumb -"
+ 3976      616D6520 
+ 3976      2D6D7468 
+ 3976      756D622D 
+ 3976      696E7465 
+ 3977 048c 67647761 		.ascii	"gdwarf-2 -O2\000"
+ 3977      72662D32 
+ 3977      202D4F32 
+ 3977      00
+ 3978              	.LASF19:
+ 3979 0499 636F6D6D 		.ascii	"command_4_ptr_hash_array\000"
+ 3979      616E645F 
+ 3979      345F7074 
+ 3979      725F6861 
+ 3979      73685F61 
+ 3980              	.LASF10:
+ 3981 04b2 7369676E 		.ascii	"signed char\000"
+ 3981      65642063 
+ 3981      68617200 
+ 3982              	.LASF50:
+ 3983 04be 6765745F 		.ascii	"get_command_processer\000"
+ 3983      636F6D6D 
+ 3983      616E645F 
+ 3983      70726F63 
+ 3983      65737365 
+ 3984              	.LASF29:
+ 3985 04d4 636F6D6D 		.ascii	"command_6_processer\000"
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccGojRvE.s 			page 79
+
+
+ 3985      616E645F 
+ 3985      365F7072 
+ 3985      6F636573 
+ 3985      73657200 
+ 3986              	.LASF24:
+ 3987 04e8 636F6D6D 		.ascii	"command_1_processer\000"
+ 3987      616E645F 
+ 3987      315F7072 
+ 3987      6F636573 
+ 3987      73657200 
+ 3988              	.LASF61:
+ 3989 04fc 473A5C55 		.ascii	"G:\\Users\\Jaxb\\Desktop\\KAKAOS-0.07  2019.2.21  f"
+ 3989      73657273 
+ 3989      5C4A6178 
+ 3989      625C4465 
+ 3989      736B746F 
+ 3990 052b 6F722067 		.ascii	"or gcc\\Project\\RVMDK\243\250uv5\243\251\000"
+ 3990      63635C50 
+ 3990      726F6A65 
+ 3990      63745C52 
+ 3990      564D444B 
+ 3991              	.LASF31:
+ 3992 0547 636F6D6D 		.ascii	"command_8_processer\000"
+ 3992      616E645F 
+ 3992      385F7072 
+ 3992      6F636573 
+ 3992      73657200 
+ 3993              		.ident	"GCC: (GNU Tools for Arm Embedded Processors 7-2018-q2-update) 7.3.1 20180622 (release) [AR
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccGojRvE.s 			page 80
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 command_processor.c
+G:\Users\Jaxb\AppData\Local\Temp\ccGojRvE.s:15     .text:00000000 $t
+G:\Users\Jaxb\AppData\Local\Temp\ccGojRvE.s:22     .text:00000000 command_list_hash
+G:\Users\Jaxb\AppData\Local\Temp\ccGojRvE.s:102    .text:00000054 $d
+G:\Users\Jaxb\AppData\Local\Temp\ccGojRvE.s:107    .text:0000005c $t
+G:\Users\Jaxb\AppData\Local\Temp\ccGojRvE.s:115    .text:0000005c get_command_processer
+G:\Users\Jaxb\AppData\Local\Temp\ccGojRvE.s:139    .text:0000006c $d
+G:\Users\Jaxb\AppData\Local\Temp\ccGojRvE.s:143    .text:00000070 $t
+G:\Users\Jaxb\AppData\Local\Temp\ccGojRvE.s:151    .text:00000070 __init_command_n_ptr_hash_array
+G:\Users\Jaxb\AppData\Local\Temp\ccGojRvE.s:192    .text:00000094 $d
+G:\Users\Jaxb\AppData\Local\Temp\ccGojRvE.s:197    .text:0000009c $t
+G:\Users\Jaxb\AppData\Local\Temp\ccGojRvE.s:205    .text:0000009c match_and_execute_command
+G:\Users\Jaxb\AppData\Local\Temp\ccGojRvE.s:289    .text:00000104 $d
+G:\Users\Jaxb\AppData\Local\Temp\ccGojRvE.s:295    .text:00000110 $t
+G:\Users\Jaxb\AppData\Local\Temp\ccGojRvE.s:303    .text:00000110 insert_struct_command_1
+G:\Users\Jaxb\AppData\Local\Temp\ccGojRvE.s:358    .text:00000138 $d
+G:\Users\Jaxb\AppData\Local\Temp\ccGojRvE.s:365    .text:00000140 $t
+G:\Users\Jaxb\AppData\Local\Temp\ccGojRvE.s:373    .text:00000140 insert_struct_command_2
+G:\Users\Jaxb\AppData\Local\Temp\ccGojRvE.s:428    .text:00000168 $d
+G:\Users\Jaxb\AppData\Local\Temp\ccGojRvE.s:435    .text:00000170 $t
+G:\Users\Jaxb\AppData\Local\Temp\ccGojRvE.s:443    .text:00000170 insert_struct_command_3
+G:\Users\Jaxb\AppData\Local\Temp\ccGojRvE.s:498    .text:00000198 $d
+G:\Users\Jaxb\AppData\Local\Temp\ccGojRvE.s:505    .text:000001a0 $t
+G:\Users\Jaxb\AppData\Local\Temp\ccGojRvE.s:513    .text:000001a0 insert_struct_command_4
+G:\Users\Jaxb\AppData\Local\Temp\ccGojRvE.s:568    .text:000001c8 $d
+G:\Users\Jaxb\AppData\Local\Temp\ccGojRvE.s:575    .text:000001d0 $t
+G:\Users\Jaxb\AppData\Local\Temp\ccGojRvE.s:583    .text:000001d0 insert_struct_command_5
+G:\Users\Jaxb\AppData\Local\Temp\ccGojRvE.s:638    .text:000001f8 $d
+G:\Users\Jaxb\AppData\Local\Temp\ccGojRvE.s:645    .text:00000200 $t
+G:\Users\Jaxb\AppData\Local\Temp\ccGojRvE.s:653    .text:00000200 insert_struct_command_6
+G:\Users\Jaxb\AppData\Local\Temp\ccGojRvE.s:708    .text:00000228 $d
+G:\Users\Jaxb\AppData\Local\Temp\ccGojRvE.s:715    .text:00000230 $t
+G:\Users\Jaxb\AppData\Local\Temp\ccGojRvE.s:723    .text:00000230 insert_struct_command_7
+G:\Users\Jaxb\AppData\Local\Temp\ccGojRvE.s:778    .text:00000258 $d
+G:\Users\Jaxb\AppData\Local\Temp\ccGojRvE.s:785    .text:00000260 $t
+G:\Users\Jaxb\AppData\Local\Temp\ccGojRvE.s:793    .text:00000260 insert_struct_command_8
+G:\Users\Jaxb\AppData\Local\Temp\ccGojRvE.s:848    .text:00000288 $d
+G:\Users\Jaxb\AppData\Local\Temp\ccGojRvE.s:856    .rodata:00000000 $d
+G:\Users\Jaxb\AppData\Local\Temp\ccGojRvE.s:860    .rodata:00000000 command_processer_ptr_array
+G:\Users\Jaxb\AppData\Local\Temp\ccGojRvE.s:874    .data:00000000 command_1_processer
+G:\Users\Jaxb\AppData\Local\Temp\ccGojRvE.s:909    .data:00000038 command_2_processer
+G:\Users\Jaxb\AppData\Local\Temp\ccGojRvE.s:904    .data:00000030 command_3_processer
+G:\Users\Jaxb\AppData\Local\Temp\ccGojRvE.s:899    .data:00000028 command_4_processer
+G:\Users\Jaxb\AppData\Local\Temp\ccGojRvE.s:894    .data:00000020 command_5_processer
+G:\Users\Jaxb\AppData\Local\Temp\ccGojRvE.s:889    .data:00000018 command_6_processer
+G:\Users\Jaxb\AppData\Local\Temp\ccGojRvE.s:884    .data:00000010 command_7_processer
+G:\Users\Jaxb\AppData\Local\Temp\ccGojRvE.s:879    .data:00000008 command_8_processer
+G:\Users\Jaxb\AppData\Local\Temp\ccGojRvE.s:870    .data:00000000 $d
+G:\Users\Jaxb\AppData\Local\Temp\ccGojRvE.s:917    .bss:00000000 command_1_ptr_hash_array
+G:\Users\Jaxb\AppData\Local\Temp\ccGojRvE.s:945    .bss:00000118 command_8_ptr_hash_array
+G:\Users\Jaxb\AppData\Local\Temp\ccGojRvE.s:941    .bss:000000f0 command_7_ptr_hash_array
+G:\Users\Jaxb\AppData\Local\Temp\ccGojRvE.s:937    .bss:000000c8 command_6_ptr_hash_array
+G:\Users\Jaxb\AppData\Local\Temp\ccGojRvE.s:933    .bss:000000a0 command_5_ptr_hash_array
+G:\Users\Jaxb\AppData\Local\Temp\ccGojRvE.s:929    .bss:00000078 command_4_ptr_hash_array
+G:\Users\Jaxb\AppData\Local\Temp\ccGojRvE.s:925    .bss:00000050 command_3_ptr_hash_array
+G:\Users\Jaxb\AppData\Local\Temp\ccGojRvE.s:921    .bss:00000028 command_2_ptr_hash_array
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccGojRvE.s 			page 81
+
+
+G:\Users\Jaxb\AppData\Local\Temp\ccGojRvE.s:913    .bss:00000000 $d
+G:\Users\Jaxb\AppData\Local\Temp\ccGojRvE.s:948    .rodata.str1.4:00000000 $d
+
+UNDEFINED SYMBOLS
+_ASSERT
+ka_strncmp
+ka_printf
+ka_strcmp

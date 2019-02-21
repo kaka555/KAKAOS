@@ -1,0 +1,1312 @@
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccgXnRTk.s 			page 1
+
+
+   1              		.cpu cortex-m3
+   2              		.eabi_attribute 20, 1
+   3              		.eabi_attribute 21, 1
+   4              		.eabi_attribute 23, 3
+   5              		.eabi_attribute 24, 1
+   6              		.eabi_attribute 25, 1
+   7              		.eabi_attribute 26, 1
+   8              		.eabi_attribute 30, 2
+   9              		.eabi_attribute 34, 1
+  10              		.eabi_attribute 18, 4
+  11              		.file	"stm32f10x_iwdg.c"
+  12              		.text
+  13              	.Ltext0:
+  14              		.cfi_sections	.debug_frame
+  15              		.align	1
+  16              		.p2align 2,,3
+  17              		.global	IWDG_WriteAccessCmd
+  18              		.syntax unified
+  19              		.thumb
+  20              		.thumb_func
+  21              		.fpu softvfp
+  22              		.type	IWDG_WriteAccessCmd, %function
+  23              	IWDG_WriteAccessCmd:
+  24              	.LFB29:
+  25              		.file 1 "../../source/src/FWlib/src/stm32f10x_iwdg.c"
+   1:../../source/src/FWlib/src/stm32f10x_iwdg.c **** /**
+   2:../../source/src/FWlib/src/stm32f10x_iwdg.c ****   ******************************************************************************
+   3:../../source/src/FWlib/src/stm32f10x_iwdg.c ****   * @file    stm32f10x_iwdg.c
+   4:../../source/src/FWlib/src/stm32f10x_iwdg.c ****   * @author  MCD Application Team
+   5:../../source/src/FWlib/src/stm32f10x_iwdg.c ****   * @version V3.5.0
+   6:../../source/src/FWlib/src/stm32f10x_iwdg.c ****   * @date    11-March-2011
+   7:../../source/src/FWlib/src/stm32f10x_iwdg.c ****   * @brief   This file provides all the IWDG firmware functions.
+   8:../../source/src/FWlib/src/stm32f10x_iwdg.c ****   ******************************************************************************
+   9:../../source/src/FWlib/src/stm32f10x_iwdg.c ****   * @attention
+  10:../../source/src/FWlib/src/stm32f10x_iwdg.c ****   *
+  11:../../source/src/FWlib/src/stm32f10x_iwdg.c ****   * THE PRESENT FIRMWARE WHICH IS FOR GUIDANCE ONLY AIMS AT PROVIDING CUSTOMERS
+  12:../../source/src/FWlib/src/stm32f10x_iwdg.c ****   * WITH CODING INFORMATION REGARDING THEIR PRODUCTS IN ORDER FOR THEM TO SAVE
+  13:../../source/src/FWlib/src/stm32f10x_iwdg.c ****   * TIME. AS A RESULT, STMICROELECTRONICS SHALL NOT BE HELD LIABLE FOR ANY
+  14:../../source/src/FWlib/src/stm32f10x_iwdg.c ****   * DIRECT, INDIRECT OR CONSEQUENTIAL DAMAGES WITH RESPECT TO ANY CLAIMS ARISING
+  15:../../source/src/FWlib/src/stm32f10x_iwdg.c ****   * FROM THE CONTENT OF SUCH FIRMWARE AND/OR THE USE MADE BY CUSTOMERS OF THE
+  16:../../source/src/FWlib/src/stm32f10x_iwdg.c ****   * CODING INFORMATION CONTAINED HEREIN IN CONNECTION WITH THEIR PRODUCTS.
+  17:../../source/src/FWlib/src/stm32f10x_iwdg.c ****   *
+  18:../../source/src/FWlib/src/stm32f10x_iwdg.c ****   * <h2><center>&copy; COPYRIGHT 2011 STMicroelectronics</center></h2>
+  19:../../source/src/FWlib/src/stm32f10x_iwdg.c ****   ******************************************************************************
+  20:../../source/src/FWlib/src/stm32f10x_iwdg.c ****   */
+  21:../../source/src/FWlib/src/stm32f10x_iwdg.c **** 
+  22:../../source/src/FWlib/src/stm32f10x_iwdg.c **** /* Includes ------------------------------------------------------------------*/
+  23:../../source/src/FWlib/src/stm32f10x_iwdg.c **** #include "stm32f10x_iwdg.h"
+  24:../../source/src/FWlib/src/stm32f10x_iwdg.c **** 
+  25:../../source/src/FWlib/src/stm32f10x_iwdg.c **** /** @addtogroup STM32F10x_StdPeriph_Driver
+  26:../../source/src/FWlib/src/stm32f10x_iwdg.c ****   * @{
+  27:../../source/src/FWlib/src/stm32f10x_iwdg.c ****   */
+  28:../../source/src/FWlib/src/stm32f10x_iwdg.c **** 
+  29:../../source/src/FWlib/src/stm32f10x_iwdg.c **** /** @defgroup IWDG 
+  30:../../source/src/FWlib/src/stm32f10x_iwdg.c ****   * @brief IWDG driver modules
+  31:../../source/src/FWlib/src/stm32f10x_iwdg.c ****   * @{
+  32:../../source/src/FWlib/src/stm32f10x_iwdg.c ****   */ 
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccgXnRTk.s 			page 2
+
+
+  33:../../source/src/FWlib/src/stm32f10x_iwdg.c **** 
+  34:../../source/src/FWlib/src/stm32f10x_iwdg.c **** /** @defgroup IWDG_Private_TypesDefinitions
+  35:../../source/src/FWlib/src/stm32f10x_iwdg.c ****   * @{
+  36:../../source/src/FWlib/src/stm32f10x_iwdg.c ****   */
+  37:../../source/src/FWlib/src/stm32f10x_iwdg.c **** 
+  38:../../source/src/FWlib/src/stm32f10x_iwdg.c **** /**
+  39:../../source/src/FWlib/src/stm32f10x_iwdg.c ****   * @}
+  40:../../source/src/FWlib/src/stm32f10x_iwdg.c ****   */
+  41:../../source/src/FWlib/src/stm32f10x_iwdg.c **** 
+  42:../../source/src/FWlib/src/stm32f10x_iwdg.c **** /** @defgroup IWDG_Private_Defines
+  43:../../source/src/FWlib/src/stm32f10x_iwdg.c ****   * @{
+  44:../../source/src/FWlib/src/stm32f10x_iwdg.c ****   */ 
+  45:../../source/src/FWlib/src/stm32f10x_iwdg.c **** 
+  46:../../source/src/FWlib/src/stm32f10x_iwdg.c **** /* ---------------------- IWDG registers bit mask ----------------------------*/
+  47:../../source/src/FWlib/src/stm32f10x_iwdg.c **** 
+  48:../../source/src/FWlib/src/stm32f10x_iwdg.c **** /* KR register bit mask */
+  49:../../source/src/FWlib/src/stm32f10x_iwdg.c **** #define KR_KEY_Reload    ((uint16_t)0xAAAA)
+  50:../../source/src/FWlib/src/stm32f10x_iwdg.c **** #define KR_KEY_Enable    ((uint16_t)0xCCCC)
+  51:../../source/src/FWlib/src/stm32f10x_iwdg.c **** 
+  52:../../source/src/FWlib/src/stm32f10x_iwdg.c **** /**
+  53:../../source/src/FWlib/src/stm32f10x_iwdg.c ****   * @}
+  54:../../source/src/FWlib/src/stm32f10x_iwdg.c ****   */ 
+  55:../../source/src/FWlib/src/stm32f10x_iwdg.c **** 
+  56:../../source/src/FWlib/src/stm32f10x_iwdg.c **** /** @defgroup IWDG_Private_Macros
+  57:../../source/src/FWlib/src/stm32f10x_iwdg.c ****   * @{
+  58:../../source/src/FWlib/src/stm32f10x_iwdg.c ****   */
+  59:../../source/src/FWlib/src/stm32f10x_iwdg.c **** 
+  60:../../source/src/FWlib/src/stm32f10x_iwdg.c **** /**
+  61:../../source/src/FWlib/src/stm32f10x_iwdg.c ****   * @}
+  62:../../source/src/FWlib/src/stm32f10x_iwdg.c ****   */
+  63:../../source/src/FWlib/src/stm32f10x_iwdg.c **** 
+  64:../../source/src/FWlib/src/stm32f10x_iwdg.c **** /** @defgroup IWDG_Private_Variables
+  65:../../source/src/FWlib/src/stm32f10x_iwdg.c ****   * @{
+  66:../../source/src/FWlib/src/stm32f10x_iwdg.c ****   */
+  67:../../source/src/FWlib/src/stm32f10x_iwdg.c **** 
+  68:../../source/src/FWlib/src/stm32f10x_iwdg.c **** /**
+  69:../../source/src/FWlib/src/stm32f10x_iwdg.c ****   * @}
+  70:../../source/src/FWlib/src/stm32f10x_iwdg.c ****   */
+  71:../../source/src/FWlib/src/stm32f10x_iwdg.c **** 
+  72:../../source/src/FWlib/src/stm32f10x_iwdg.c **** /** @defgroup IWDG_Private_FunctionPrototypes
+  73:../../source/src/FWlib/src/stm32f10x_iwdg.c ****   * @{
+  74:../../source/src/FWlib/src/stm32f10x_iwdg.c ****   */
+  75:../../source/src/FWlib/src/stm32f10x_iwdg.c **** 
+  76:../../source/src/FWlib/src/stm32f10x_iwdg.c **** /**
+  77:../../source/src/FWlib/src/stm32f10x_iwdg.c ****   * @}
+  78:../../source/src/FWlib/src/stm32f10x_iwdg.c ****   */
+  79:../../source/src/FWlib/src/stm32f10x_iwdg.c **** 
+  80:../../source/src/FWlib/src/stm32f10x_iwdg.c **** /** @defgroup IWDG_Private_Functions
+  81:../../source/src/FWlib/src/stm32f10x_iwdg.c ****   * @{
+  82:../../source/src/FWlib/src/stm32f10x_iwdg.c ****   */
+  83:../../source/src/FWlib/src/stm32f10x_iwdg.c **** 
+  84:../../source/src/FWlib/src/stm32f10x_iwdg.c **** /**
+  85:../../source/src/FWlib/src/stm32f10x_iwdg.c ****   * @brief  Enables or disables write access to IWDG_PR and IWDG_RLR registers.
+  86:../../source/src/FWlib/src/stm32f10x_iwdg.c ****   * @param  IWDG_WriteAccess: new state of write access to IWDG_PR and IWDG_RLR registers.
+  87:../../source/src/FWlib/src/stm32f10x_iwdg.c ****   *   This parameter can be one of the following values:
+  88:../../source/src/FWlib/src/stm32f10x_iwdg.c ****   *     @arg IWDG_WriteAccess_Enable: Enable write access to IWDG_PR and IWDG_RLR registers
+  89:../../source/src/FWlib/src/stm32f10x_iwdg.c ****   *     @arg IWDG_WriteAccess_Disable: Disable write access to IWDG_PR and IWDG_RLR registers
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccgXnRTk.s 			page 3
+
+
+  90:../../source/src/FWlib/src/stm32f10x_iwdg.c ****   * @retval None
+  91:../../source/src/FWlib/src/stm32f10x_iwdg.c ****   */
+  92:../../source/src/FWlib/src/stm32f10x_iwdg.c **** void IWDG_WriteAccessCmd(uint16_t IWDG_WriteAccess)
+  93:../../source/src/FWlib/src/stm32f10x_iwdg.c **** {
+  26              		.loc 1 93 0
+  27              		.cfi_startproc
+  28              		@ args = 0, pretend = 0, frame = 0
+  29              		@ frame_needed = 0, uses_anonymous_args = 0
+  30              		@ link register save eliminated.
+  31              	.LVL0:
+  94:../../source/src/FWlib/src/stm32f10x_iwdg.c ****   /* Check the parameters */
+  95:../../source/src/FWlib/src/stm32f10x_iwdg.c ****   assert_param(IS_IWDG_WRITE_ACCESS(IWDG_WriteAccess));
+  96:../../source/src/FWlib/src/stm32f10x_iwdg.c ****   IWDG->KR = IWDG_WriteAccess;
+  32              		.loc 1 96 0
+  33 0000 014B     		ldr	r3, .L3
+  34 0002 1860     		str	r0, [r3]
+  97:../../source/src/FWlib/src/stm32f10x_iwdg.c **** }
+  35              		.loc 1 97 0
+  36 0004 7047     		bx	lr
+  37              	.L4:
+  38 0006 00BF     		.align	2
+  39              	.L3:
+  40 0008 00300040 		.word	1073754112
+  41              		.cfi_endproc
+  42              	.LFE29:
+  43              		.size	IWDG_WriteAccessCmd, .-IWDG_WriteAccessCmd
+  44              		.align	1
+  45              		.p2align 2,,3
+  46              		.global	IWDG_SetPrescaler
+  47              		.syntax unified
+  48              		.thumb
+  49              		.thumb_func
+  50              		.fpu softvfp
+  51              		.type	IWDG_SetPrescaler, %function
+  52              	IWDG_SetPrescaler:
+  53              	.LFB30:
+  98:../../source/src/FWlib/src/stm32f10x_iwdg.c **** 
+  99:../../source/src/FWlib/src/stm32f10x_iwdg.c **** /**
+ 100:../../source/src/FWlib/src/stm32f10x_iwdg.c ****   * @brief  Sets IWDG Prescaler value.
+ 101:../../source/src/FWlib/src/stm32f10x_iwdg.c ****   * @param  IWDG_Prescaler: specifies the IWDG Prescaler value.
+ 102:../../source/src/FWlib/src/stm32f10x_iwdg.c ****   *   This parameter can be one of the following values:
+ 103:../../source/src/FWlib/src/stm32f10x_iwdg.c ****   *     @arg IWDG_Prescaler_4: IWDG prescaler set to 4
+ 104:../../source/src/FWlib/src/stm32f10x_iwdg.c ****   *     @arg IWDG_Prescaler_8: IWDG prescaler set to 8
+ 105:../../source/src/FWlib/src/stm32f10x_iwdg.c ****   *     @arg IWDG_Prescaler_16: IWDG prescaler set to 16
+ 106:../../source/src/FWlib/src/stm32f10x_iwdg.c ****   *     @arg IWDG_Prescaler_32: IWDG prescaler set to 32
+ 107:../../source/src/FWlib/src/stm32f10x_iwdg.c ****   *     @arg IWDG_Prescaler_64: IWDG prescaler set to 64
+ 108:../../source/src/FWlib/src/stm32f10x_iwdg.c ****   *     @arg IWDG_Prescaler_128: IWDG prescaler set to 128
+ 109:../../source/src/FWlib/src/stm32f10x_iwdg.c ****   *     @arg IWDG_Prescaler_256: IWDG prescaler set to 256
+ 110:../../source/src/FWlib/src/stm32f10x_iwdg.c ****   * @retval None
+ 111:../../source/src/FWlib/src/stm32f10x_iwdg.c ****   */
+ 112:../../source/src/FWlib/src/stm32f10x_iwdg.c **** void IWDG_SetPrescaler(uint8_t IWDG_Prescaler)
+ 113:../../source/src/FWlib/src/stm32f10x_iwdg.c **** {
+  54              		.loc 1 113 0
+  55              		.cfi_startproc
+  56              		@ args = 0, pretend = 0, frame = 0
+  57              		@ frame_needed = 0, uses_anonymous_args = 0
+  58              		@ link register save eliminated.
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccgXnRTk.s 			page 4
+
+
+  59              	.LVL1:
+ 114:../../source/src/FWlib/src/stm32f10x_iwdg.c ****   /* Check the parameters */
+ 115:../../source/src/FWlib/src/stm32f10x_iwdg.c ****   assert_param(IS_IWDG_PRESCALER(IWDG_Prescaler));
+ 116:../../source/src/FWlib/src/stm32f10x_iwdg.c ****   IWDG->PR = IWDG_Prescaler;
+  60              		.loc 1 116 0
+  61 000c 014B     		ldr	r3, .L6
+  62 000e 5860     		str	r0, [r3, #4]
+ 117:../../source/src/FWlib/src/stm32f10x_iwdg.c **** }
+  63              		.loc 1 117 0
+  64 0010 7047     		bx	lr
+  65              	.L7:
+  66 0012 00BF     		.align	2
+  67              	.L6:
+  68 0014 00300040 		.word	1073754112
+  69              		.cfi_endproc
+  70              	.LFE30:
+  71              		.size	IWDG_SetPrescaler, .-IWDG_SetPrescaler
+  72              		.align	1
+  73              		.p2align 2,,3
+  74              		.global	IWDG_SetReload
+  75              		.syntax unified
+  76              		.thumb
+  77              		.thumb_func
+  78              		.fpu softvfp
+  79              		.type	IWDG_SetReload, %function
+  80              	IWDG_SetReload:
+  81              	.LFB31:
+ 118:../../source/src/FWlib/src/stm32f10x_iwdg.c **** 
+ 119:../../source/src/FWlib/src/stm32f10x_iwdg.c **** /**
+ 120:../../source/src/FWlib/src/stm32f10x_iwdg.c ****   * @brief  Sets IWDG Reload value.
+ 121:../../source/src/FWlib/src/stm32f10x_iwdg.c ****   * @param  Reload: specifies the IWDG Reload value.
+ 122:../../source/src/FWlib/src/stm32f10x_iwdg.c ****   *   This parameter must be a number between 0 and 0x0FFF.
+ 123:../../source/src/FWlib/src/stm32f10x_iwdg.c ****   * @retval None
+ 124:../../source/src/FWlib/src/stm32f10x_iwdg.c ****   */
+ 125:../../source/src/FWlib/src/stm32f10x_iwdg.c **** void IWDG_SetReload(uint16_t Reload)
+ 126:../../source/src/FWlib/src/stm32f10x_iwdg.c **** {
+  82              		.loc 1 126 0
+  83              		.cfi_startproc
+  84              		@ args = 0, pretend = 0, frame = 0
+  85              		@ frame_needed = 0, uses_anonymous_args = 0
+  86              		@ link register save eliminated.
+  87              	.LVL2:
+ 127:../../source/src/FWlib/src/stm32f10x_iwdg.c ****   /* Check the parameters */
+ 128:../../source/src/FWlib/src/stm32f10x_iwdg.c ****   assert_param(IS_IWDG_RELOAD(Reload));
+ 129:../../source/src/FWlib/src/stm32f10x_iwdg.c ****   IWDG->RLR = Reload;
+  88              		.loc 1 129 0
+  89 0018 014B     		ldr	r3, .L9
+  90 001a 9860     		str	r0, [r3, #8]
+ 130:../../source/src/FWlib/src/stm32f10x_iwdg.c **** }
+  91              		.loc 1 130 0
+  92 001c 7047     		bx	lr
+  93              	.L10:
+  94 001e 00BF     		.align	2
+  95              	.L9:
+  96 0020 00300040 		.word	1073754112
+  97              		.cfi_endproc
+  98              	.LFE31:
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccgXnRTk.s 			page 5
+
+
+  99              		.size	IWDG_SetReload, .-IWDG_SetReload
+ 100              		.align	1
+ 101              		.p2align 2,,3
+ 102              		.global	IWDG_ReloadCounter
+ 103              		.syntax unified
+ 104              		.thumb
+ 105              		.thumb_func
+ 106              		.fpu softvfp
+ 107              		.type	IWDG_ReloadCounter, %function
+ 108              	IWDG_ReloadCounter:
+ 109              	.LFB32:
+ 131:../../source/src/FWlib/src/stm32f10x_iwdg.c **** 
+ 132:../../source/src/FWlib/src/stm32f10x_iwdg.c **** /**
+ 133:../../source/src/FWlib/src/stm32f10x_iwdg.c ****   * @brief  Reloads IWDG counter with value defined in the reload register
+ 134:../../source/src/FWlib/src/stm32f10x_iwdg.c ****   *   (write access to IWDG_PR and IWDG_RLR registers disabled).
+ 135:../../source/src/FWlib/src/stm32f10x_iwdg.c ****   * @param  None
+ 136:../../source/src/FWlib/src/stm32f10x_iwdg.c ****   * @retval None
+ 137:../../source/src/FWlib/src/stm32f10x_iwdg.c ****   */
+ 138:../../source/src/FWlib/src/stm32f10x_iwdg.c **** void IWDG_ReloadCounter(void)
+ 139:../../source/src/FWlib/src/stm32f10x_iwdg.c **** {
+ 110              		.loc 1 139 0
+ 111              		.cfi_startproc
+ 112              		@ args = 0, pretend = 0, frame = 0
+ 113              		@ frame_needed = 0, uses_anonymous_args = 0
+ 114              		@ link register save eliminated.
+ 140:../../source/src/FWlib/src/stm32f10x_iwdg.c ****   IWDG->KR = KR_KEY_Reload;
+ 115              		.loc 1 140 0
+ 116 0024 4AF6AA22 		movw	r2, #43690
+ 117 0028 014B     		ldr	r3, .L12
+ 118 002a 1A60     		str	r2, [r3]
+ 141:../../source/src/FWlib/src/stm32f10x_iwdg.c **** }
+ 119              		.loc 1 141 0
+ 120 002c 7047     		bx	lr
+ 121              	.L13:
+ 122 002e 00BF     		.align	2
+ 123              	.L12:
+ 124 0030 00300040 		.word	1073754112
+ 125              		.cfi_endproc
+ 126              	.LFE32:
+ 127              		.size	IWDG_ReloadCounter, .-IWDG_ReloadCounter
+ 128              		.align	1
+ 129              		.p2align 2,,3
+ 130              		.global	IWDG_Enable
+ 131              		.syntax unified
+ 132              		.thumb
+ 133              		.thumb_func
+ 134              		.fpu softvfp
+ 135              		.type	IWDG_Enable, %function
+ 136              	IWDG_Enable:
+ 137              	.LFB33:
+ 142:../../source/src/FWlib/src/stm32f10x_iwdg.c **** 
+ 143:../../source/src/FWlib/src/stm32f10x_iwdg.c **** /**
+ 144:../../source/src/FWlib/src/stm32f10x_iwdg.c ****   * @brief  Enables IWDG (write access to IWDG_PR and IWDG_RLR registers disabled).
+ 145:../../source/src/FWlib/src/stm32f10x_iwdg.c ****   * @param  None
+ 146:../../source/src/FWlib/src/stm32f10x_iwdg.c ****   * @retval None
+ 147:../../source/src/FWlib/src/stm32f10x_iwdg.c ****   */
+ 148:../../source/src/FWlib/src/stm32f10x_iwdg.c **** void IWDG_Enable(void)
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccgXnRTk.s 			page 6
+
+
+ 149:../../source/src/FWlib/src/stm32f10x_iwdg.c **** {
+ 138              		.loc 1 149 0
+ 139              		.cfi_startproc
+ 140              		@ args = 0, pretend = 0, frame = 0
+ 141              		@ frame_needed = 0, uses_anonymous_args = 0
+ 142              		@ link register save eliminated.
+ 150:../../source/src/FWlib/src/stm32f10x_iwdg.c ****   IWDG->KR = KR_KEY_Enable;
+ 143              		.loc 1 150 0
+ 144 0034 4CF6CC42 		movw	r2, #52428
+ 145 0038 014B     		ldr	r3, .L15
+ 146 003a 1A60     		str	r2, [r3]
+ 151:../../source/src/FWlib/src/stm32f10x_iwdg.c **** }
+ 147              		.loc 1 151 0
+ 148 003c 7047     		bx	lr
+ 149              	.L16:
+ 150 003e 00BF     		.align	2
+ 151              	.L15:
+ 152 0040 00300040 		.word	1073754112
+ 153              		.cfi_endproc
+ 154              	.LFE33:
+ 155              		.size	IWDG_Enable, .-IWDG_Enable
+ 156              		.align	1
+ 157              		.p2align 2,,3
+ 158              		.global	IWDG_GetFlagStatus
+ 159              		.syntax unified
+ 160              		.thumb
+ 161              		.thumb_func
+ 162              		.fpu softvfp
+ 163              		.type	IWDG_GetFlagStatus, %function
+ 164              	IWDG_GetFlagStatus:
+ 165              	.LFB34:
+ 152:../../source/src/FWlib/src/stm32f10x_iwdg.c **** 
+ 153:../../source/src/FWlib/src/stm32f10x_iwdg.c **** /**
+ 154:../../source/src/FWlib/src/stm32f10x_iwdg.c ****   * @brief  Checks whether the specified IWDG flag is set or not.
+ 155:../../source/src/FWlib/src/stm32f10x_iwdg.c ****   * @param  IWDG_FLAG: specifies the flag to check.
+ 156:../../source/src/FWlib/src/stm32f10x_iwdg.c ****   *   This parameter can be one of the following values:
+ 157:../../source/src/FWlib/src/stm32f10x_iwdg.c ****   *     @arg IWDG_FLAG_PVU: Prescaler Value Update on going
+ 158:../../source/src/FWlib/src/stm32f10x_iwdg.c ****   *     @arg IWDG_FLAG_RVU: Reload Value Update on going
+ 159:../../source/src/FWlib/src/stm32f10x_iwdg.c ****   * @retval The new state of IWDG_FLAG (SET or RESET).
+ 160:../../source/src/FWlib/src/stm32f10x_iwdg.c ****   */
+ 161:../../source/src/FWlib/src/stm32f10x_iwdg.c **** FlagStatus IWDG_GetFlagStatus(uint16_t IWDG_FLAG)
+ 162:../../source/src/FWlib/src/stm32f10x_iwdg.c **** {
+ 166              		.loc 1 162 0
+ 167              		.cfi_startproc
+ 168              		@ args = 0, pretend = 0, frame = 0
+ 169              		@ frame_needed = 0, uses_anonymous_args = 0
+ 170              		@ link register save eliminated.
+ 171              	.LVL3:
+ 163:../../source/src/FWlib/src/stm32f10x_iwdg.c ****   FlagStatus bitstatus = RESET;
+ 164:../../source/src/FWlib/src/stm32f10x_iwdg.c ****   /* Check the parameters */
+ 165:../../source/src/FWlib/src/stm32f10x_iwdg.c ****   assert_param(IS_IWDG_FLAG(IWDG_FLAG));
+ 166:../../source/src/FWlib/src/stm32f10x_iwdg.c ****   if ((IWDG->SR & IWDG_FLAG) != (uint32_t)RESET)
+ 172              		.loc 1 166 0
+ 173 0044 034B     		ldr	r3, .L18
+ 174 0046 DB68     		ldr	r3, [r3, #12]
+ 175              	.LVL4:
+ 176 0048 1842     		tst	r0, r3
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccgXnRTk.s 			page 7
+
+
+ 167:../../source/src/FWlib/src/stm32f10x_iwdg.c ****   {
+ 168:../../source/src/FWlib/src/stm32f10x_iwdg.c ****     bitstatus = SET;
+ 169:../../source/src/FWlib/src/stm32f10x_iwdg.c ****   }
+ 170:../../source/src/FWlib/src/stm32f10x_iwdg.c ****   else
+ 171:../../source/src/FWlib/src/stm32f10x_iwdg.c ****   {
+ 172:../../source/src/FWlib/src/stm32f10x_iwdg.c ****     bitstatus = RESET;
+ 173:../../source/src/FWlib/src/stm32f10x_iwdg.c ****   }
+ 174:../../source/src/FWlib/src/stm32f10x_iwdg.c ****   /* Return the flag status */
+ 175:../../source/src/FWlib/src/stm32f10x_iwdg.c ****   return bitstatus;
+ 176:../../source/src/FWlib/src/stm32f10x_iwdg.c **** }
+ 177              		.loc 1 176 0
+ 178 004a 14BF     		ite	ne
+ 179 004c 0120     		movne	r0, #1
+ 180              	.LVL5:
+ 181 004e 0020     		moveq	r0, #0
+ 182 0050 7047     		bx	lr
+ 183              	.L19:
+ 184 0052 00BF     		.align	2
+ 185              	.L18:
+ 186 0054 00300040 		.word	1073754112
+ 187              		.cfi_endproc
+ 188              	.LFE34:
+ 189              		.size	IWDG_GetFlagStatus, .-IWDG_GetFlagStatus
+ 190              	.Letext0:
+ 191              		.file 2 "f:\\arm\\gcc2018\\arm-none-eabi\\include\\machine\\_default_types.h"
+ 192              		.file 3 "f:\\arm\\gcc2018\\arm-none-eabi\\include\\sys\\_stdint.h"
+ 193              		.file 4 "../../source/include/core_cm3.h"
+ 194              		.file 5 "../../source/include/system_stm32f10x.h"
+ 195              		.file 6 "../../source/include/stm32f10x.h"
+ 196              		.section	.debug_info,"",%progbits
+ 197              	.Ldebug_info0:
+ 198 0000 1C020000 		.4byte	0x21c
+ 199 0004 0200     		.2byte	0x2
+ 200 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 201 000a 04       		.byte	0x4
+ 202 000b 01       		.uleb128 0x1
+ 203 000c 9B010000 		.4byte	.LASF28
+ 204 0010 0C       		.byte	0xc
+ 205 0011 6F010000 		.4byte	.LASF29
+ 206 0015 6D020000 		.4byte	.LASF30
+ 207 0019 00000000 		.4byte	.Ltext0
+ 208 001d 58000000 		.4byte	.Letext0
+ 209 0021 00000000 		.4byte	.Ldebug_line0
+ 210 0025 02       		.uleb128 0x2
+ 211 0026 01       		.byte	0x1
+ 212 0027 06       		.byte	0x6
+ 213 0028 41020000 		.4byte	.LASF0
+ 214 002c 03       		.uleb128 0x3
+ 215 002d 00000000 		.4byte	.LASF3
+ 216 0031 02       		.byte	0x2
+ 217 0032 2B       		.byte	0x2b
+ 218 0033 37000000 		.4byte	0x37
+ 219 0037 02       		.uleb128 0x2
+ 220 0038 01       		.byte	0x1
+ 221 0039 08       		.byte	0x8
+ 222 003a 51000000 		.4byte	.LASF1
+ 223 003e 02       		.uleb128 0x2
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccgXnRTk.s 			page 8
+
+
+ 224 003f 02       		.byte	0x2
+ 225 0040 05       		.byte	0x5
+ 226 0041 53010000 		.4byte	.LASF2
+ 227 0045 03       		.uleb128 0x3
+ 228 0046 C5000000 		.4byte	.LASF4
+ 229 004a 02       		.byte	0x2
+ 230 004b 39       		.byte	0x39
+ 231 004c 50000000 		.4byte	0x50
+ 232 0050 02       		.uleb128 0x2
+ 233 0051 02       		.byte	0x2
+ 234 0052 07       		.byte	0x7
+ 235 0053 4D020000 		.4byte	.LASF5
+ 236 0057 02       		.uleb128 0x2
+ 237 0058 04       		.byte	0x4
+ 238 0059 05       		.byte	0x5
+ 239 005a 1D000000 		.4byte	.LASF6
+ 240 005e 03       		.uleb128 0x3
+ 241 005f E1000000 		.4byte	.LASF7
+ 242 0063 02       		.byte	0x2
+ 243 0064 4F       		.byte	0x4f
+ 244 0065 69000000 		.4byte	0x69
+ 245 0069 02       		.uleb128 0x2
+ 246 006a 04       		.byte	0x4
+ 247 006b 07       		.byte	0x7
+ 248 006c 8C000000 		.4byte	.LASF8
+ 249 0070 02       		.uleb128 0x2
+ 250 0071 08       		.byte	0x8
+ 251 0072 05       		.byte	0x5
+ 252 0073 35010000 		.4byte	.LASF9
+ 253 0077 02       		.uleb128 0x2
+ 254 0078 08       		.byte	0x8
+ 255 0079 07       		.byte	0x7
+ 256 007a 0C010000 		.4byte	.LASF10
+ 257 007e 04       		.uleb128 0x4
+ 258 007f 04       		.byte	0x4
+ 259 0080 05       		.byte	0x5
+ 260 0081 696E7400 		.ascii	"int\000"
+ 261 0085 05       		.uleb128 0x5
+ 262 0086 7E000000 		.4byte	0x7e
+ 263 008a 02       		.uleb128 0x2
+ 264 008b 04       		.byte	0x4
+ 265 008c 07       		.byte	0x7
+ 266 008d FF000000 		.4byte	.LASF11
+ 267 0091 03       		.uleb128 0x3
+ 268 0092 23010000 		.4byte	.LASF12
+ 269 0096 03       		.byte	0x3
+ 270 0097 18       		.byte	0x18
+ 271 0098 2C000000 		.4byte	0x2c
+ 272 009c 03       		.uleb128 0x3
+ 273 009d 5D010000 		.4byte	.LASF13
+ 274 00a1 03       		.byte	0x3
+ 275 00a2 24       		.byte	0x24
+ 276 00a3 45000000 		.4byte	0x45
+ 277 00a7 03       		.uleb128 0x3
+ 278 00a8 66010000 		.4byte	.LASF14
+ 279 00ac 03       		.byte	0x3
+ 280 00ad 30       		.byte	0x30
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccgXnRTk.s 			page 9
+
+
+ 281 00ae 5E000000 		.4byte	0x5e
+ 282 00b2 05       		.uleb128 0x5
+ 283 00b3 A7000000 		.4byte	0xa7
+ 284 00b7 06       		.uleb128 0x6
+ 285 00b8 B8000000 		.4byte	.LASF15
+ 286 00bc 04       		.byte	0x4
+ 287 00bd CE06     		.2byte	0x6ce
+ 288 00bf 85000000 		.4byte	0x85
+ 289 00c3 01       		.byte	0x1
+ 290 00c4 01       		.byte	0x1
+ 291 00c5 07       		.uleb128 0x7
+ 292 00c6 43010000 		.4byte	.LASF16
+ 293 00ca 05       		.byte	0x5
+ 294 00cb 35       		.byte	0x35
+ 295 00cc A7000000 		.4byte	0xa7
+ 296 00d0 01       		.byte	0x1
+ 297 00d1 01       		.byte	0x1
+ 298 00d2 08       		.uleb128 0x8
+ 299 00d3 07       		.byte	0x7
+ 300 00d4 01       		.byte	0x1
+ 301 00d5 37000000 		.4byte	0x37
+ 302 00d9 06       		.byte	0x6
+ 303 00da 0702     		.2byte	0x207
+ 304 00dc ED000000 		.4byte	0xed
+ 305 00e0 09       		.uleb128 0x9
+ 306 00e1 B2000000 		.4byte	.LASF17
+ 307 00e5 00       		.byte	0
+ 308 00e6 0A       		.uleb128 0xa
+ 309 00e7 53455400 		.ascii	"SET\000"
+ 310 00eb 01       		.byte	0x1
+ 311 00ec 00       		.byte	0
+ 312 00ed 0B       		.uleb128 0xb
+ 313 00ee 81000000 		.4byte	.LASF18
+ 314 00f2 06       		.byte	0x6
+ 315 00f3 0702     		.2byte	0x207
+ 316 00f5 D2000000 		.4byte	0xd2
+ 317 00f9 0C       		.uleb128 0xc
+ 318 00fa 10       		.byte	0x10
+ 319 00fb 06       		.byte	0x6
+ 320 00fc 1E04     		.2byte	0x41e
+ 321 00fe 3C010000 		.4byte	0x13c
+ 322 0102 0D       		.uleb128 0xd
+ 323 0103 4B5200   		.ascii	"KR\000"
+ 324 0106 06       		.byte	0x6
+ 325 0107 2004     		.2byte	0x420
+ 326 0109 B2000000 		.4byte	0xb2
+ 327 010d 02       		.byte	0x2
+ 328 010e 23       		.byte	0x23
+ 329 010f 00       		.uleb128 0
+ 330 0110 0D       		.uleb128 0xd
+ 331 0111 505200   		.ascii	"PR\000"
+ 332 0114 06       		.byte	0x6
+ 333 0115 2104     		.2byte	0x421
+ 334 0117 B2000000 		.4byte	0xb2
+ 335 011b 02       		.byte	0x2
+ 336 011c 23       		.byte	0x23
+ 337 011d 04       		.uleb128 0x4
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccgXnRTk.s 			page 10
+
+
+ 338 011e 0D       		.uleb128 0xd
+ 339 011f 524C5200 		.ascii	"RLR\000"
+ 340 0123 06       		.byte	0x6
+ 341 0124 2204     		.2byte	0x422
+ 342 0126 B2000000 		.4byte	0xb2
+ 343 012a 02       		.byte	0x2
+ 344 012b 23       		.byte	0x23
+ 345 012c 08       		.uleb128 0x8
+ 346 012d 0D       		.uleb128 0xd
+ 347 012e 535200   		.ascii	"SR\000"
+ 348 0131 06       		.byte	0x6
+ 349 0132 2304     		.2byte	0x423
+ 350 0134 B2000000 		.4byte	0xb2
+ 351 0138 02       		.byte	0x2
+ 352 0139 23       		.byte	0x23
+ 353 013a 0C       		.uleb128 0xc
+ 354 013b 00       		.byte	0
+ 355 013c 0B       		.uleb128 0xb
+ 356 013d 60020000 		.4byte	.LASF19
+ 357 0141 06       		.byte	0x6
+ 358 0142 2404     		.2byte	0x424
+ 359 0144 F9000000 		.4byte	0xf9
+ 360 0148 0E       		.uleb128 0xe
+ 361 0149 01       		.byte	0x1
+ 362 014a EC000000 		.4byte	.LASF31
+ 363 014e 01       		.byte	0x1
+ 364 014f A1       		.byte	0xa1
+ 365 0150 01       		.byte	0x1
+ 366 0151 ED000000 		.4byte	0xed
+ 367 0155 44000000 		.4byte	.LFB34
+ 368 0159 58000000 		.4byte	.LFE34
+ 369 015d 02       		.byte	0x2
+ 370 015e 7D       		.byte	0x7d
+ 371 015f 00       		.sleb128 0
+ 372 0160 01       		.byte	0x1
+ 373 0161 84010000 		.4byte	0x184
+ 374 0165 0F       		.uleb128 0xf
+ 375 0166 2B010000 		.4byte	.LASF22
+ 376 016a 01       		.byte	0x1
+ 377 016b A1       		.byte	0xa1
+ 378 016c 9C000000 		.4byte	0x9c
+ 379 0170 00000000 		.4byte	.LLST0
+ 380 0174 10       		.uleb128 0x10
+ 381 0175 35000000 		.4byte	.LASF32
+ 382 0179 01       		.byte	0x1
+ 383 017a A3       		.byte	0xa3
+ 384 017b ED000000 		.4byte	0xed
+ 385 017f 21000000 		.4byte	.LLST1
+ 386 0183 00       		.byte	0
+ 387 0184 11       		.uleb128 0x11
+ 388 0185 01       		.byte	0x1
+ 389 0186 11000000 		.4byte	.LASF20
+ 390 018a 01       		.byte	0x1
+ 391 018b 94       		.byte	0x94
+ 392 018c 01       		.byte	0x1
+ 393 018d 34000000 		.4byte	.LFB33
+ 394 0191 44000000 		.4byte	.LFE33
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccgXnRTk.s 			page 11
+
+
+ 395 0195 02       		.byte	0x2
+ 396 0196 7D       		.byte	0x7d
+ 397 0197 00       		.sleb128 0
+ 398 0198 01       		.byte	0x1
+ 399 0199 11       		.uleb128 0x11
+ 400 019a 01       		.byte	0x1
+ 401 019b 6E000000 		.4byte	.LASF21
+ 402 019f 01       		.byte	0x1
+ 403 01a0 8A       		.byte	0x8a
+ 404 01a1 01       		.byte	0x1
+ 405 01a2 24000000 		.4byte	.LFB32
+ 406 01a6 34000000 		.4byte	.LFE32
+ 407 01aa 02       		.byte	0x2
+ 408 01ab 7D       		.byte	0x7d
+ 409 01ac 00       		.sleb128 0
+ 410 01ad 01       		.byte	0x1
+ 411 01ae 12       		.uleb128 0x12
+ 412 01af 01       		.byte	0x1
+ 413 01b0 5F000000 		.4byte	.LASF24
+ 414 01b4 01       		.byte	0x1
+ 415 01b5 7D       		.byte	0x7d
+ 416 01b6 01       		.byte	0x1
+ 417 01b7 18000000 		.4byte	.LFB31
+ 418 01bb 24000000 		.4byte	.LFE31
+ 419 01bf 02       		.byte	0x2
+ 420 01c0 7D       		.byte	0x7d
+ 421 01c1 00       		.sleb128 0
+ 422 01c2 01       		.byte	0x1
+ 423 01c3 D5010000 		.4byte	0x1d5
+ 424 01c7 13       		.uleb128 0x13
+ 425 01c8 0A000000 		.4byte	.LASF23
+ 426 01cc 01       		.byte	0x1
+ 427 01cd 7D       		.byte	0x7d
+ 428 01ce 9C000000 		.4byte	0x9c
+ 429 01d2 01       		.byte	0x1
+ 430 01d3 50       		.byte	0x50
+ 431 01d4 00       		.byte	0
+ 432 01d5 12       		.uleb128 0x12
+ 433 01d6 01       		.byte	0x1
+ 434 01d7 3F000000 		.4byte	.LASF25
+ 435 01db 01       		.byte	0x1
+ 436 01dc 70       		.byte	0x70
+ 437 01dd 01       		.byte	0x1
+ 438 01de 0C000000 		.4byte	.LFB30
+ 439 01e2 18000000 		.4byte	.LFE30
+ 440 01e6 02       		.byte	0x2
+ 441 01e7 7D       		.byte	0x7d
+ 442 01e8 00       		.sleb128 0
+ 443 01e9 01       		.byte	0x1
+ 444 01ea FC010000 		.4byte	0x1fc
+ 445 01ee 13       		.uleb128 0x13
+ 446 01ef 26000000 		.4byte	.LASF26
+ 447 01f3 01       		.byte	0x1
+ 448 01f4 70       		.byte	0x70
+ 449 01f5 91000000 		.4byte	0x91
+ 450 01f9 01       		.byte	0x1
+ 451 01fa 50       		.byte	0x50
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccgXnRTk.s 			page 12
+
+
+ 452 01fb 00       		.byte	0
+ 453 01fc 14       		.uleb128 0x14
+ 454 01fd 01       		.byte	0x1
+ 455 01fe 9E000000 		.4byte	.LASF33
+ 456 0202 01       		.byte	0x1
+ 457 0203 5C       		.byte	0x5c
+ 458 0204 01       		.byte	0x1
+ 459 0205 00000000 		.4byte	.LFB29
+ 460 0209 0C000000 		.4byte	.LFE29
+ 461 020d 02       		.byte	0x2
+ 462 020e 7D       		.byte	0x7d
+ 463 020f 00       		.sleb128 0
+ 464 0210 01       		.byte	0x1
+ 465 0211 13       		.uleb128 0x13
+ 466 0212 D0000000 		.4byte	.LASF27
+ 467 0216 01       		.byte	0x1
+ 468 0217 5C       		.byte	0x5c
+ 469 0218 9C000000 		.4byte	0x9c
+ 470 021c 01       		.byte	0x1
+ 471 021d 50       		.byte	0x50
+ 472 021e 00       		.byte	0
+ 473 021f 00       		.byte	0
+ 474              		.section	.debug_abbrev,"",%progbits
+ 475              	.Ldebug_abbrev0:
+ 476 0000 01       		.uleb128 0x1
+ 477 0001 11       		.uleb128 0x11
+ 478 0002 01       		.byte	0x1
+ 479 0003 25       		.uleb128 0x25
+ 480 0004 0E       		.uleb128 0xe
+ 481 0005 13       		.uleb128 0x13
+ 482 0006 0B       		.uleb128 0xb
+ 483 0007 03       		.uleb128 0x3
+ 484 0008 0E       		.uleb128 0xe
+ 485 0009 1B       		.uleb128 0x1b
+ 486 000a 0E       		.uleb128 0xe
+ 487 000b 11       		.uleb128 0x11
+ 488 000c 01       		.uleb128 0x1
+ 489 000d 12       		.uleb128 0x12
+ 490 000e 01       		.uleb128 0x1
+ 491 000f 10       		.uleb128 0x10
+ 492 0010 06       		.uleb128 0x6
+ 493 0011 00       		.byte	0
+ 494 0012 00       		.byte	0
+ 495 0013 02       		.uleb128 0x2
+ 496 0014 24       		.uleb128 0x24
+ 497 0015 00       		.byte	0
+ 498 0016 0B       		.uleb128 0xb
+ 499 0017 0B       		.uleb128 0xb
+ 500 0018 3E       		.uleb128 0x3e
+ 501 0019 0B       		.uleb128 0xb
+ 502 001a 03       		.uleb128 0x3
+ 503 001b 0E       		.uleb128 0xe
+ 504 001c 00       		.byte	0
+ 505 001d 00       		.byte	0
+ 506 001e 03       		.uleb128 0x3
+ 507 001f 16       		.uleb128 0x16
+ 508 0020 00       		.byte	0
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccgXnRTk.s 			page 13
+
+
+ 509 0021 03       		.uleb128 0x3
+ 510 0022 0E       		.uleb128 0xe
+ 511 0023 3A       		.uleb128 0x3a
+ 512 0024 0B       		.uleb128 0xb
+ 513 0025 3B       		.uleb128 0x3b
+ 514 0026 0B       		.uleb128 0xb
+ 515 0027 49       		.uleb128 0x49
+ 516 0028 13       		.uleb128 0x13
+ 517 0029 00       		.byte	0
+ 518 002a 00       		.byte	0
+ 519 002b 04       		.uleb128 0x4
+ 520 002c 24       		.uleb128 0x24
+ 521 002d 00       		.byte	0
+ 522 002e 0B       		.uleb128 0xb
+ 523 002f 0B       		.uleb128 0xb
+ 524 0030 3E       		.uleb128 0x3e
+ 525 0031 0B       		.uleb128 0xb
+ 526 0032 03       		.uleb128 0x3
+ 527 0033 08       		.uleb128 0x8
+ 528 0034 00       		.byte	0
+ 529 0035 00       		.byte	0
+ 530 0036 05       		.uleb128 0x5
+ 531 0037 35       		.uleb128 0x35
+ 532 0038 00       		.byte	0
+ 533 0039 49       		.uleb128 0x49
+ 534 003a 13       		.uleb128 0x13
+ 535 003b 00       		.byte	0
+ 536 003c 00       		.byte	0
+ 537 003d 06       		.uleb128 0x6
+ 538 003e 34       		.uleb128 0x34
+ 539 003f 00       		.byte	0
+ 540 0040 03       		.uleb128 0x3
+ 541 0041 0E       		.uleb128 0xe
+ 542 0042 3A       		.uleb128 0x3a
+ 543 0043 0B       		.uleb128 0xb
+ 544 0044 3B       		.uleb128 0x3b
+ 545 0045 05       		.uleb128 0x5
+ 546 0046 49       		.uleb128 0x49
+ 547 0047 13       		.uleb128 0x13
+ 548 0048 3F       		.uleb128 0x3f
+ 549 0049 0C       		.uleb128 0xc
+ 550 004a 3C       		.uleb128 0x3c
+ 551 004b 0C       		.uleb128 0xc
+ 552 004c 00       		.byte	0
+ 553 004d 00       		.byte	0
+ 554 004e 07       		.uleb128 0x7
+ 555 004f 34       		.uleb128 0x34
+ 556 0050 00       		.byte	0
+ 557 0051 03       		.uleb128 0x3
+ 558 0052 0E       		.uleb128 0xe
+ 559 0053 3A       		.uleb128 0x3a
+ 560 0054 0B       		.uleb128 0xb
+ 561 0055 3B       		.uleb128 0x3b
+ 562 0056 0B       		.uleb128 0xb
+ 563 0057 49       		.uleb128 0x49
+ 564 0058 13       		.uleb128 0x13
+ 565 0059 3F       		.uleb128 0x3f
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccgXnRTk.s 			page 14
+
+
+ 566 005a 0C       		.uleb128 0xc
+ 567 005b 3C       		.uleb128 0x3c
+ 568 005c 0C       		.uleb128 0xc
+ 569 005d 00       		.byte	0
+ 570 005e 00       		.byte	0
+ 571 005f 08       		.uleb128 0x8
+ 572 0060 04       		.uleb128 0x4
+ 573 0061 01       		.byte	0x1
+ 574 0062 3E       		.uleb128 0x3e
+ 575 0063 0B       		.uleb128 0xb
+ 576 0064 0B       		.uleb128 0xb
+ 577 0065 0B       		.uleb128 0xb
+ 578 0066 49       		.uleb128 0x49
+ 579 0067 13       		.uleb128 0x13
+ 580 0068 3A       		.uleb128 0x3a
+ 581 0069 0B       		.uleb128 0xb
+ 582 006a 3B       		.uleb128 0x3b
+ 583 006b 05       		.uleb128 0x5
+ 584 006c 01       		.uleb128 0x1
+ 585 006d 13       		.uleb128 0x13
+ 586 006e 00       		.byte	0
+ 587 006f 00       		.byte	0
+ 588 0070 09       		.uleb128 0x9
+ 589 0071 28       		.uleb128 0x28
+ 590 0072 00       		.byte	0
+ 591 0073 03       		.uleb128 0x3
+ 592 0074 0E       		.uleb128 0xe
+ 593 0075 1C       		.uleb128 0x1c
+ 594 0076 0B       		.uleb128 0xb
+ 595 0077 00       		.byte	0
+ 596 0078 00       		.byte	0
+ 597 0079 0A       		.uleb128 0xa
+ 598 007a 28       		.uleb128 0x28
+ 599 007b 00       		.byte	0
+ 600 007c 03       		.uleb128 0x3
+ 601 007d 08       		.uleb128 0x8
+ 602 007e 1C       		.uleb128 0x1c
+ 603 007f 0B       		.uleb128 0xb
+ 604 0080 00       		.byte	0
+ 605 0081 00       		.byte	0
+ 606 0082 0B       		.uleb128 0xb
+ 607 0083 16       		.uleb128 0x16
+ 608 0084 00       		.byte	0
+ 609 0085 03       		.uleb128 0x3
+ 610 0086 0E       		.uleb128 0xe
+ 611 0087 3A       		.uleb128 0x3a
+ 612 0088 0B       		.uleb128 0xb
+ 613 0089 3B       		.uleb128 0x3b
+ 614 008a 05       		.uleb128 0x5
+ 615 008b 49       		.uleb128 0x49
+ 616 008c 13       		.uleb128 0x13
+ 617 008d 00       		.byte	0
+ 618 008e 00       		.byte	0
+ 619 008f 0C       		.uleb128 0xc
+ 620 0090 13       		.uleb128 0x13
+ 621 0091 01       		.byte	0x1
+ 622 0092 0B       		.uleb128 0xb
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccgXnRTk.s 			page 15
+
+
+ 623 0093 0B       		.uleb128 0xb
+ 624 0094 3A       		.uleb128 0x3a
+ 625 0095 0B       		.uleb128 0xb
+ 626 0096 3B       		.uleb128 0x3b
+ 627 0097 05       		.uleb128 0x5
+ 628 0098 01       		.uleb128 0x1
+ 629 0099 13       		.uleb128 0x13
+ 630 009a 00       		.byte	0
+ 631 009b 00       		.byte	0
+ 632 009c 0D       		.uleb128 0xd
+ 633 009d 0D       		.uleb128 0xd
+ 634 009e 00       		.byte	0
+ 635 009f 03       		.uleb128 0x3
+ 636 00a0 08       		.uleb128 0x8
+ 637 00a1 3A       		.uleb128 0x3a
+ 638 00a2 0B       		.uleb128 0xb
+ 639 00a3 3B       		.uleb128 0x3b
+ 640 00a4 05       		.uleb128 0x5
+ 641 00a5 49       		.uleb128 0x49
+ 642 00a6 13       		.uleb128 0x13
+ 643 00a7 38       		.uleb128 0x38
+ 644 00a8 0A       		.uleb128 0xa
+ 645 00a9 00       		.byte	0
+ 646 00aa 00       		.byte	0
+ 647 00ab 0E       		.uleb128 0xe
+ 648 00ac 2E       		.uleb128 0x2e
+ 649 00ad 01       		.byte	0x1
+ 650 00ae 3F       		.uleb128 0x3f
+ 651 00af 0C       		.uleb128 0xc
+ 652 00b0 03       		.uleb128 0x3
+ 653 00b1 0E       		.uleb128 0xe
+ 654 00b2 3A       		.uleb128 0x3a
+ 655 00b3 0B       		.uleb128 0xb
+ 656 00b4 3B       		.uleb128 0x3b
+ 657 00b5 0B       		.uleb128 0xb
+ 658 00b6 27       		.uleb128 0x27
+ 659 00b7 0C       		.uleb128 0xc
+ 660 00b8 49       		.uleb128 0x49
+ 661 00b9 13       		.uleb128 0x13
+ 662 00ba 11       		.uleb128 0x11
+ 663 00bb 01       		.uleb128 0x1
+ 664 00bc 12       		.uleb128 0x12
+ 665 00bd 01       		.uleb128 0x1
+ 666 00be 40       		.uleb128 0x40
+ 667 00bf 0A       		.uleb128 0xa
+ 668 00c0 9742     		.uleb128 0x2117
+ 669 00c2 0C       		.uleb128 0xc
+ 670 00c3 01       		.uleb128 0x1
+ 671 00c4 13       		.uleb128 0x13
+ 672 00c5 00       		.byte	0
+ 673 00c6 00       		.byte	0
+ 674 00c7 0F       		.uleb128 0xf
+ 675 00c8 05       		.uleb128 0x5
+ 676 00c9 00       		.byte	0
+ 677 00ca 03       		.uleb128 0x3
+ 678 00cb 0E       		.uleb128 0xe
+ 679 00cc 3A       		.uleb128 0x3a
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccgXnRTk.s 			page 16
+
+
+ 680 00cd 0B       		.uleb128 0xb
+ 681 00ce 3B       		.uleb128 0x3b
+ 682 00cf 0B       		.uleb128 0xb
+ 683 00d0 49       		.uleb128 0x49
+ 684 00d1 13       		.uleb128 0x13
+ 685 00d2 02       		.uleb128 0x2
+ 686 00d3 06       		.uleb128 0x6
+ 687 00d4 00       		.byte	0
+ 688 00d5 00       		.byte	0
+ 689 00d6 10       		.uleb128 0x10
+ 690 00d7 34       		.uleb128 0x34
+ 691 00d8 00       		.byte	0
+ 692 00d9 03       		.uleb128 0x3
+ 693 00da 0E       		.uleb128 0xe
+ 694 00db 3A       		.uleb128 0x3a
+ 695 00dc 0B       		.uleb128 0xb
+ 696 00dd 3B       		.uleb128 0x3b
+ 697 00de 0B       		.uleb128 0xb
+ 698 00df 49       		.uleb128 0x49
+ 699 00e0 13       		.uleb128 0x13
+ 700 00e1 02       		.uleb128 0x2
+ 701 00e2 06       		.uleb128 0x6
+ 702 00e3 00       		.byte	0
+ 703 00e4 00       		.byte	0
+ 704 00e5 11       		.uleb128 0x11
+ 705 00e6 2E       		.uleb128 0x2e
+ 706 00e7 00       		.byte	0
+ 707 00e8 3F       		.uleb128 0x3f
+ 708 00e9 0C       		.uleb128 0xc
+ 709 00ea 03       		.uleb128 0x3
+ 710 00eb 0E       		.uleb128 0xe
+ 711 00ec 3A       		.uleb128 0x3a
+ 712 00ed 0B       		.uleb128 0xb
+ 713 00ee 3B       		.uleb128 0x3b
+ 714 00ef 0B       		.uleb128 0xb
+ 715 00f0 27       		.uleb128 0x27
+ 716 00f1 0C       		.uleb128 0xc
+ 717 00f2 11       		.uleb128 0x11
+ 718 00f3 01       		.uleb128 0x1
+ 719 00f4 12       		.uleb128 0x12
+ 720 00f5 01       		.uleb128 0x1
+ 721 00f6 40       		.uleb128 0x40
+ 722 00f7 0A       		.uleb128 0xa
+ 723 00f8 9742     		.uleb128 0x2117
+ 724 00fa 0C       		.uleb128 0xc
+ 725 00fb 00       		.byte	0
+ 726 00fc 00       		.byte	0
+ 727 00fd 12       		.uleb128 0x12
+ 728 00fe 2E       		.uleb128 0x2e
+ 729 00ff 01       		.byte	0x1
+ 730 0100 3F       		.uleb128 0x3f
+ 731 0101 0C       		.uleb128 0xc
+ 732 0102 03       		.uleb128 0x3
+ 733 0103 0E       		.uleb128 0xe
+ 734 0104 3A       		.uleb128 0x3a
+ 735 0105 0B       		.uleb128 0xb
+ 736 0106 3B       		.uleb128 0x3b
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccgXnRTk.s 			page 17
+
+
+ 737 0107 0B       		.uleb128 0xb
+ 738 0108 27       		.uleb128 0x27
+ 739 0109 0C       		.uleb128 0xc
+ 740 010a 11       		.uleb128 0x11
+ 741 010b 01       		.uleb128 0x1
+ 742 010c 12       		.uleb128 0x12
+ 743 010d 01       		.uleb128 0x1
+ 744 010e 40       		.uleb128 0x40
+ 745 010f 0A       		.uleb128 0xa
+ 746 0110 9742     		.uleb128 0x2117
+ 747 0112 0C       		.uleb128 0xc
+ 748 0113 01       		.uleb128 0x1
+ 749 0114 13       		.uleb128 0x13
+ 750 0115 00       		.byte	0
+ 751 0116 00       		.byte	0
+ 752 0117 13       		.uleb128 0x13
+ 753 0118 05       		.uleb128 0x5
+ 754 0119 00       		.byte	0
+ 755 011a 03       		.uleb128 0x3
+ 756 011b 0E       		.uleb128 0xe
+ 757 011c 3A       		.uleb128 0x3a
+ 758 011d 0B       		.uleb128 0xb
+ 759 011e 3B       		.uleb128 0x3b
+ 760 011f 0B       		.uleb128 0xb
+ 761 0120 49       		.uleb128 0x49
+ 762 0121 13       		.uleb128 0x13
+ 763 0122 02       		.uleb128 0x2
+ 764 0123 0A       		.uleb128 0xa
+ 765 0124 00       		.byte	0
+ 766 0125 00       		.byte	0
+ 767 0126 14       		.uleb128 0x14
+ 768 0127 2E       		.uleb128 0x2e
+ 769 0128 01       		.byte	0x1
+ 770 0129 3F       		.uleb128 0x3f
+ 771 012a 0C       		.uleb128 0xc
+ 772 012b 03       		.uleb128 0x3
+ 773 012c 0E       		.uleb128 0xe
+ 774 012d 3A       		.uleb128 0x3a
+ 775 012e 0B       		.uleb128 0xb
+ 776 012f 3B       		.uleb128 0x3b
+ 777 0130 0B       		.uleb128 0xb
+ 778 0131 27       		.uleb128 0x27
+ 779 0132 0C       		.uleb128 0xc
+ 780 0133 11       		.uleb128 0x11
+ 781 0134 01       		.uleb128 0x1
+ 782 0135 12       		.uleb128 0x12
+ 783 0136 01       		.uleb128 0x1
+ 784 0137 40       		.uleb128 0x40
+ 785 0138 0A       		.uleb128 0xa
+ 786 0139 9742     		.uleb128 0x2117
+ 787 013b 0C       		.uleb128 0xc
+ 788 013c 00       		.byte	0
+ 789 013d 00       		.byte	0
+ 790 013e 00       		.byte	0
+ 791              		.section	.debug_loc,"",%progbits
+ 792              	.Ldebug_loc0:
+ 793              	.LLST0:
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccgXnRTk.s 			page 18
+
+
+ 794 0000 44000000 		.4byte	.LVL3-.Ltext0
+ 795 0004 4E000000 		.4byte	.LVL5-.Ltext0
+ 796 0008 0100     		.2byte	0x1
+ 797 000a 50       		.byte	0x50
+ 798 000b 4E000000 		.4byte	.LVL5-.Ltext0
+ 799 000f 58000000 		.4byte	.LFE34-.Ltext0
+ 800 0013 0400     		.2byte	0x4
+ 801 0015 F3       		.byte	0xf3
+ 802 0016 01       		.uleb128 0x1
+ 803 0017 50       		.byte	0x50
+ 804 0018 9F       		.byte	0x9f
+ 805 0019 00000000 		.4byte	0
+ 806 001d 00000000 		.4byte	0
+ 807              	.LLST1:
+ 808 0021 44000000 		.4byte	.LVL3-.Ltext0
+ 809 0025 48000000 		.4byte	.LVL4-.Ltext0
+ 810 0029 0200     		.2byte	0x2
+ 811 002b 30       		.byte	0x30
+ 812 002c 9F       		.byte	0x9f
+ 813 002d 48000000 		.4byte	.LVL4-.Ltext0
+ 814 0031 4E000000 		.4byte	.LVL5-.Ltext0
+ 815 0035 0C00     		.2byte	0xc
+ 816 0037 70       		.byte	0x70
+ 817 0038 00       		.sleb128 0
+ 818 0039 0A       		.byte	0xa
+ 819 003a FFFF     		.2byte	0xffff
+ 820 003c 1A       		.byte	0x1a
+ 821 003d 73       		.byte	0x73
+ 822 003e 00       		.sleb128 0
+ 823 003f 1A       		.byte	0x1a
+ 824 0040 30       		.byte	0x30
+ 825 0041 2E       		.byte	0x2e
+ 826 0042 9F       		.byte	0x9f
+ 827 0043 4E000000 		.4byte	.LVL5-.Ltext0
+ 828 0047 58000000 		.4byte	.LFE34-.Ltext0
+ 829 004b 0D00     		.2byte	0xd
+ 830 004d F3       		.byte	0xf3
+ 831 004e 01       		.uleb128 0x1
+ 832 004f 50       		.byte	0x50
+ 833 0050 0A       		.byte	0xa
+ 834 0051 FFFF     		.2byte	0xffff
+ 835 0053 1A       		.byte	0x1a
+ 836 0054 73       		.byte	0x73
+ 837 0055 00       		.sleb128 0
+ 838 0056 1A       		.byte	0x1a
+ 839 0057 30       		.byte	0x30
+ 840 0058 2E       		.byte	0x2e
+ 841 0059 9F       		.byte	0x9f
+ 842 005a 00000000 		.4byte	0
+ 843 005e 00000000 		.4byte	0
+ 844              		.section	.debug_aranges,"",%progbits
+ 845 0000 1C000000 		.4byte	0x1c
+ 846 0004 0200     		.2byte	0x2
+ 847 0006 00000000 		.4byte	.Ldebug_info0
+ 848 000a 04       		.byte	0x4
+ 849 000b 00       		.byte	0
+ 850 000c 0000     		.2byte	0
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccgXnRTk.s 			page 19
+
+
+ 851 000e 0000     		.2byte	0
+ 852 0010 00000000 		.4byte	.Ltext0
+ 853 0014 58000000 		.4byte	.Letext0-.Ltext0
+ 854 0018 00000000 		.4byte	0
+ 855 001c 00000000 		.4byte	0
+ 856              		.section	.debug_line,"",%progbits
+ 857              	.Ldebug_line0:
+ 858 0000 32010000 		.section	.debug_str,"MS",%progbits,1
+ 858      02000101 
+ 858      00000201 
+ 858      FB0E0D00 
+ 858      01010101 
+ 859              	.LASF3:
+ 860 0000 5F5F7569 		.ascii	"__uint8_t\000"
+ 860      6E74385F 
+ 860      7400
+ 861              	.LASF23:
+ 862 000a 52656C6F 		.ascii	"Reload\000"
+ 862      616400
+ 863              	.LASF20:
+ 864 0011 49574447 		.ascii	"IWDG_Enable\000"
+ 864      5F456E61 
+ 864      626C6500 
+ 865              	.LASF6:
+ 866 001d 6C6F6E67 		.ascii	"long int\000"
+ 866      20696E74 
+ 866      00
+ 867              	.LASF26:
+ 868 0026 49574447 		.ascii	"IWDG_Prescaler\000"
+ 868      5F507265 
+ 868      7363616C 
+ 868      657200
+ 869              	.LASF32:
+ 870 0035 62697473 		.ascii	"bitstatus\000"
+ 870      74617475 
+ 870      7300
+ 871              	.LASF25:
+ 872 003f 49574447 		.ascii	"IWDG_SetPrescaler\000"
+ 872      5F536574 
+ 872      50726573 
+ 872      63616C65 
+ 872      7200
+ 873              	.LASF1:
+ 874 0051 756E7369 		.ascii	"unsigned char\000"
+ 874      676E6564 
+ 874      20636861 
+ 874      7200
+ 875              	.LASF24:
+ 876 005f 49574447 		.ascii	"IWDG_SetReload\000"
+ 876      5F536574 
+ 876      52656C6F 
+ 876      616400
+ 877              	.LASF21:
+ 878 006e 49574447 		.ascii	"IWDG_ReloadCounter\000"
+ 878      5F52656C 
+ 878      6F616443 
+ 878      6F756E74 
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccgXnRTk.s 			page 20
+
+
+ 878      657200
+ 879              	.LASF18:
+ 880 0081 466C6167 		.ascii	"FlagStatus\000"
+ 880      53746174 
+ 880      757300
+ 881              	.LASF8:
+ 882 008c 6C6F6E67 		.ascii	"long unsigned int\000"
+ 882      20756E73 
+ 882      69676E65 
+ 882      6420696E 
+ 882      7400
+ 883              	.LASF33:
+ 884 009e 49574447 		.ascii	"IWDG_WriteAccessCmd\000"
+ 884      5F577269 
+ 884      74654163 
+ 884      63657373 
+ 884      436D6400 
+ 885              	.LASF17:
+ 886 00b2 52455345 		.ascii	"RESET\000"
+ 886      5400
+ 887              	.LASF15:
+ 888 00b8 49544D5F 		.ascii	"ITM_RxBuffer\000"
+ 888      52784275 
+ 888      66666572 
+ 888      00
+ 889              	.LASF4:
+ 890 00c5 5F5F7569 		.ascii	"__uint16_t\000"
+ 890      6E743136 
+ 890      5F7400
+ 891              	.LASF27:
+ 892 00d0 49574447 		.ascii	"IWDG_WriteAccess\000"
+ 892      5F577269 
+ 892      74654163 
+ 892      63657373 
+ 892      00
+ 893              	.LASF7:
+ 894 00e1 5F5F7569 		.ascii	"__uint32_t\000"
+ 894      6E743332 
+ 894      5F7400
+ 895              	.LASF31:
+ 896 00ec 49574447 		.ascii	"IWDG_GetFlagStatus\000"
+ 896      5F476574 
+ 896      466C6167 
+ 896      53746174 
+ 896      757300
+ 897              	.LASF11:
+ 898 00ff 756E7369 		.ascii	"unsigned int\000"
+ 898      676E6564 
+ 898      20696E74 
+ 898      00
+ 899              	.LASF10:
+ 900 010c 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 900      206C6F6E 
+ 900      6720756E 
+ 900      7369676E 
+ 900      65642069 
+ 901              	.LASF12:
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccgXnRTk.s 			page 21
+
+
+ 902 0123 75696E74 		.ascii	"uint8_t\000"
+ 902      385F7400 
+ 903              	.LASF22:
+ 904 012b 49574447 		.ascii	"IWDG_FLAG\000"
+ 904      5F464C41 
+ 904      4700
+ 905              	.LASF9:
+ 906 0135 6C6F6E67 		.ascii	"long long int\000"
+ 906      206C6F6E 
+ 906      6720696E 
+ 906      7400
+ 907              	.LASF16:
+ 908 0143 53797374 		.ascii	"SystemCoreClock\000"
+ 908      656D436F 
+ 908      7265436C 
+ 908      6F636B00 
+ 909              	.LASF2:
+ 910 0153 73686F72 		.ascii	"short int\000"
+ 910      7420696E 
+ 910      7400
+ 911              	.LASF13:
+ 912 015d 75696E74 		.ascii	"uint16_t\000"
+ 912      31365F74 
+ 912      00
+ 913              	.LASF14:
+ 914 0166 75696E74 		.ascii	"uint32_t\000"
+ 914      33325F74 
+ 914      00
+ 915              	.LASF29:
+ 916 016f 2E2E2F2E 		.ascii	"../../source/src/FWlib/src/stm32f10x_iwdg.c\000"
+ 916      2E2F736F 
+ 916      75726365 
+ 916      2F737263 
+ 916      2F46576C 
+ 917              	.LASF28:
+ 918 019b 474E5520 		.ascii	"GNU C11 7.3.1 20180622 (release) [ARM/embedded-7-br"
+ 918      43313120 
+ 918      372E332E 
+ 918      31203230 
+ 918      31383036 
+ 919 01ce 616E6368 		.ascii	"anch revision 261907] -mcpu=cortex-m3 -mthumb -mapc"
+ 919      20726576 
+ 919      6973696F 
+ 919      6E203236 
+ 919      31393037 
+ 920 0201 732D6672 		.ascii	"s-frame -mthumb-interwork -mcpu=cortex-m3 -mthumb -"
+ 920      616D6520 
+ 920      2D6D7468 
+ 920      756D622D 
+ 920      696E7465 
+ 921 0234 67647761 		.ascii	"gdwarf-2 -O2\000"
+ 921      72662D32 
+ 921      202D4F32 
+ 921      00
+ 922              	.LASF0:
+ 923 0241 7369676E 		.ascii	"signed char\000"
+ 923      65642063 
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccgXnRTk.s 			page 22
+
+
+ 923      68617200 
+ 924              	.LASF5:
+ 925 024d 73686F72 		.ascii	"short unsigned int\000"
+ 925      7420756E 
+ 925      7369676E 
+ 925      65642069 
+ 925      6E7400
+ 926              	.LASF19:
+ 927 0260 49574447 		.ascii	"IWDG_TypeDef\000"
+ 927      5F547970 
+ 927      65446566 
+ 927      00
+ 928              	.LASF30:
+ 929 026d 473A5C55 		.ascii	"G:\\Users\\Jaxb\\Desktop\\KAKAOS-0.07  2019.2.21  f"
+ 929      73657273 
+ 929      5C4A6178 
+ 929      625C4465 
+ 929      736B746F 
+ 930 029c 6F722067 		.ascii	"or gcc\\Project\\RVMDK\243\250uv5\243\251\000"
+ 930      63635C50 
+ 930      726F6A65 
+ 930      63745C52 
+ 930      564D444B 
+ 931              		.ident	"GCC: (GNU Tools for Arm Embedded Processors 7-2018-q2-update) 7.3.1 20180622 (release) [AR
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccgXnRTk.s 			page 23
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 stm32f10x_iwdg.c
+G:\Users\Jaxb\AppData\Local\Temp\ccgXnRTk.s:15     .text:00000000 $t
+G:\Users\Jaxb\AppData\Local\Temp\ccgXnRTk.s:23     .text:00000000 IWDG_WriteAccessCmd
+G:\Users\Jaxb\AppData\Local\Temp\ccgXnRTk.s:40     .text:00000008 $d
+G:\Users\Jaxb\AppData\Local\Temp\ccgXnRTk.s:44     .text:0000000c $t
+G:\Users\Jaxb\AppData\Local\Temp\ccgXnRTk.s:52     .text:0000000c IWDG_SetPrescaler
+G:\Users\Jaxb\AppData\Local\Temp\ccgXnRTk.s:68     .text:00000014 $d
+G:\Users\Jaxb\AppData\Local\Temp\ccgXnRTk.s:72     .text:00000018 $t
+G:\Users\Jaxb\AppData\Local\Temp\ccgXnRTk.s:80     .text:00000018 IWDG_SetReload
+G:\Users\Jaxb\AppData\Local\Temp\ccgXnRTk.s:96     .text:00000020 $d
+G:\Users\Jaxb\AppData\Local\Temp\ccgXnRTk.s:100    .text:00000024 $t
+G:\Users\Jaxb\AppData\Local\Temp\ccgXnRTk.s:108    .text:00000024 IWDG_ReloadCounter
+G:\Users\Jaxb\AppData\Local\Temp\ccgXnRTk.s:124    .text:00000030 $d
+G:\Users\Jaxb\AppData\Local\Temp\ccgXnRTk.s:128    .text:00000034 $t
+G:\Users\Jaxb\AppData\Local\Temp\ccgXnRTk.s:136    .text:00000034 IWDG_Enable
+G:\Users\Jaxb\AppData\Local\Temp\ccgXnRTk.s:152    .text:00000040 $d
+G:\Users\Jaxb\AppData\Local\Temp\ccgXnRTk.s:156    .text:00000044 $t
+G:\Users\Jaxb\AppData\Local\Temp\ccgXnRTk.s:164    .text:00000044 IWDG_GetFlagStatus
+G:\Users\Jaxb\AppData\Local\Temp\ccgXnRTk.s:186    .text:00000054 $d
+
+NO UNDEFINED SYMBOLS

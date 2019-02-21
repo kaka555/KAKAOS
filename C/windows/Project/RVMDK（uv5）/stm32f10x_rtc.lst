@@ -1,0 +1,2804 @@
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccAK3oUr.s 			page 1
+
+
+   1              		.cpu cortex-m3
+   2              		.eabi_attribute 20, 1
+   3              		.eabi_attribute 21, 1
+   4              		.eabi_attribute 23, 3
+   5              		.eabi_attribute 24, 1
+   6              		.eabi_attribute 25, 1
+   7              		.eabi_attribute 26, 1
+   8              		.eabi_attribute 30, 2
+   9              		.eabi_attribute 34, 1
+  10              		.eabi_attribute 18, 4
+  11              		.file	"stm32f10x_rtc.c"
+  12              		.text
+  13              	.Ltext0:
+  14              		.cfi_sections	.debug_frame
+  15              		.align	1
+  16              		.p2align 2,,3
+  17              		.global	RTC_ITConfig
+  18              		.syntax unified
+  19              		.thumb
+  20              		.thumb_func
+  21              		.fpu softvfp
+  22              		.type	RTC_ITConfig, %function
+  23              	RTC_ITConfig:
+  24              	.LFB29:
+  25              		.file 1 "../../source/src/FWlib/src/stm32f10x_rtc.c"
+   1:../../source/src/FWlib/src/stm32f10x_rtc.c **** /**
+   2:../../source/src/FWlib/src/stm32f10x_rtc.c ****   ******************************************************************************
+   3:../../source/src/FWlib/src/stm32f10x_rtc.c ****   * @file    stm32f10x_rtc.c
+   4:../../source/src/FWlib/src/stm32f10x_rtc.c ****   * @author  MCD Application Team
+   5:../../source/src/FWlib/src/stm32f10x_rtc.c ****   * @version V3.5.0
+   6:../../source/src/FWlib/src/stm32f10x_rtc.c ****   * @date    11-March-2011
+   7:../../source/src/FWlib/src/stm32f10x_rtc.c ****   * @brief   This file provides all the RTC firmware functions.
+   8:../../source/src/FWlib/src/stm32f10x_rtc.c ****   ******************************************************************************
+   9:../../source/src/FWlib/src/stm32f10x_rtc.c ****   * @attention
+  10:../../source/src/FWlib/src/stm32f10x_rtc.c ****   *
+  11:../../source/src/FWlib/src/stm32f10x_rtc.c ****   * THE PRESENT FIRMWARE WHICH IS FOR GUIDANCE ONLY AIMS AT PROVIDING CUSTOMERS
+  12:../../source/src/FWlib/src/stm32f10x_rtc.c ****   * WITH CODING INFORMATION REGARDING THEIR PRODUCTS IN ORDER FOR THEM TO SAVE
+  13:../../source/src/FWlib/src/stm32f10x_rtc.c ****   * TIME. AS A RESULT, STMICROELECTRONICS SHALL NOT BE HELD LIABLE FOR ANY
+  14:../../source/src/FWlib/src/stm32f10x_rtc.c ****   * DIRECT, INDIRECT OR CONSEQUENTIAL DAMAGES WITH RESPECT TO ANY CLAIMS ARISING
+  15:../../source/src/FWlib/src/stm32f10x_rtc.c ****   * FROM THE CONTENT OF SUCH FIRMWARE AND/OR THE USE MADE BY CUSTOMERS OF THE
+  16:../../source/src/FWlib/src/stm32f10x_rtc.c ****   * CODING INFORMATION CONTAINED HEREIN IN CONNECTION WITH THEIR PRODUCTS.
+  17:../../source/src/FWlib/src/stm32f10x_rtc.c ****   *
+  18:../../source/src/FWlib/src/stm32f10x_rtc.c ****   * <h2><center>&copy; COPYRIGHT 2011 STMicroelectronics</center></h2>
+  19:../../source/src/FWlib/src/stm32f10x_rtc.c ****   ******************************************************************************
+  20:../../source/src/FWlib/src/stm32f10x_rtc.c ****   */
+  21:../../source/src/FWlib/src/stm32f10x_rtc.c **** 
+  22:../../source/src/FWlib/src/stm32f10x_rtc.c **** /* Includes ------------------------------------------------------------------*/
+  23:../../source/src/FWlib/src/stm32f10x_rtc.c **** #include "stm32f10x_rtc.h"
+  24:../../source/src/FWlib/src/stm32f10x_rtc.c **** 
+  25:../../source/src/FWlib/src/stm32f10x_rtc.c **** /** @addtogroup STM32F10x_StdPeriph_Driver
+  26:../../source/src/FWlib/src/stm32f10x_rtc.c ****   * @{
+  27:../../source/src/FWlib/src/stm32f10x_rtc.c ****   */
+  28:../../source/src/FWlib/src/stm32f10x_rtc.c **** 
+  29:../../source/src/FWlib/src/stm32f10x_rtc.c **** /** @defgroup RTC 
+  30:../../source/src/FWlib/src/stm32f10x_rtc.c ****   * @brief RTC driver modules
+  31:../../source/src/FWlib/src/stm32f10x_rtc.c ****   * @{
+  32:../../source/src/FWlib/src/stm32f10x_rtc.c ****   */
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccAK3oUr.s 			page 2
+
+
+  33:../../source/src/FWlib/src/stm32f10x_rtc.c **** 
+  34:../../source/src/FWlib/src/stm32f10x_rtc.c **** /** @defgroup RTC_Private_TypesDefinitions
+  35:../../source/src/FWlib/src/stm32f10x_rtc.c ****   * @{
+  36:../../source/src/FWlib/src/stm32f10x_rtc.c ****   */ 
+  37:../../source/src/FWlib/src/stm32f10x_rtc.c **** /**
+  38:../../source/src/FWlib/src/stm32f10x_rtc.c ****   * @}
+  39:../../source/src/FWlib/src/stm32f10x_rtc.c ****   */
+  40:../../source/src/FWlib/src/stm32f10x_rtc.c **** 
+  41:../../source/src/FWlib/src/stm32f10x_rtc.c **** /** @defgroup RTC_Private_Defines
+  42:../../source/src/FWlib/src/stm32f10x_rtc.c ****   * @{
+  43:../../source/src/FWlib/src/stm32f10x_rtc.c ****   */
+  44:../../source/src/FWlib/src/stm32f10x_rtc.c **** #define RTC_LSB_MASK     ((uint32_t)0x0000FFFF)  /*!< RTC LSB Mask */
+  45:../../source/src/FWlib/src/stm32f10x_rtc.c **** #define PRLH_MSB_MASK    ((uint32_t)0x000F0000)  /*!< RTC Prescaler MSB Mask */
+  46:../../source/src/FWlib/src/stm32f10x_rtc.c **** 
+  47:../../source/src/FWlib/src/stm32f10x_rtc.c **** /**
+  48:../../source/src/FWlib/src/stm32f10x_rtc.c ****   * @}
+  49:../../source/src/FWlib/src/stm32f10x_rtc.c ****   */
+  50:../../source/src/FWlib/src/stm32f10x_rtc.c **** 
+  51:../../source/src/FWlib/src/stm32f10x_rtc.c **** /** @defgroup RTC_Private_Macros
+  52:../../source/src/FWlib/src/stm32f10x_rtc.c ****   * @{
+  53:../../source/src/FWlib/src/stm32f10x_rtc.c ****   */
+  54:../../source/src/FWlib/src/stm32f10x_rtc.c **** 
+  55:../../source/src/FWlib/src/stm32f10x_rtc.c **** /**
+  56:../../source/src/FWlib/src/stm32f10x_rtc.c ****   * @}
+  57:../../source/src/FWlib/src/stm32f10x_rtc.c ****   */
+  58:../../source/src/FWlib/src/stm32f10x_rtc.c **** 
+  59:../../source/src/FWlib/src/stm32f10x_rtc.c **** /** @defgroup RTC_Private_Variables
+  60:../../source/src/FWlib/src/stm32f10x_rtc.c ****   * @{
+  61:../../source/src/FWlib/src/stm32f10x_rtc.c ****   */
+  62:../../source/src/FWlib/src/stm32f10x_rtc.c **** 
+  63:../../source/src/FWlib/src/stm32f10x_rtc.c **** /**
+  64:../../source/src/FWlib/src/stm32f10x_rtc.c ****   * @}
+  65:../../source/src/FWlib/src/stm32f10x_rtc.c ****   */
+  66:../../source/src/FWlib/src/stm32f10x_rtc.c **** 
+  67:../../source/src/FWlib/src/stm32f10x_rtc.c **** /** @defgroup RTC_Private_FunctionPrototypes
+  68:../../source/src/FWlib/src/stm32f10x_rtc.c ****   * @{
+  69:../../source/src/FWlib/src/stm32f10x_rtc.c ****   */
+  70:../../source/src/FWlib/src/stm32f10x_rtc.c **** 
+  71:../../source/src/FWlib/src/stm32f10x_rtc.c **** /**
+  72:../../source/src/FWlib/src/stm32f10x_rtc.c ****   * @}
+  73:../../source/src/FWlib/src/stm32f10x_rtc.c ****   */
+  74:../../source/src/FWlib/src/stm32f10x_rtc.c **** 
+  75:../../source/src/FWlib/src/stm32f10x_rtc.c **** /** @defgroup RTC_Private_Functions
+  76:../../source/src/FWlib/src/stm32f10x_rtc.c ****   * @{
+  77:../../source/src/FWlib/src/stm32f10x_rtc.c ****   */
+  78:../../source/src/FWlib/src/stm32f10x_rtc.c **** 
+  79:../../source/src/FWlib/src/stm32f10x_rtc.c **** /**
+  80:../../source/src/FWlib/src/stm32f10x_rtc.c ****   * @brief  Enables or disables the specified RTC interrupts.
+  81:../../source/src/FWlib/src/stm32f10x_rtc.c ****   * @param  RTC_IT: specifies the RTC interrupts sources to be enabled or disabled.
+  82:../../source/src/FWlib/src/stm32f10x_rtc.c ****   *   This parameter can be any combination of the following values:
+  83:../../source/src/FWlib/src/stm32f10x_rtc.c ****   *     @arg RTC_IT_OW: Overflow interrupt
+  84:../../source/src/FWlib/src/stm32f10x_rtc.c ****   *     @arg RTC_IT_ALR: Alarm interrupt
+  85:../../source/src/FWlib/src/stm32f10x_rtc.c ****   *     @arg RTC_IT_SEC: Second interrupt
+  86:../../source/src/FWlib/src/stm32f10x_rtc.c ****   * @param  NewState: new state of the specified RTC interrupts.
+  87:../../source/src/FWlib/src/stm32f10x_rtc.c ****   *   This parameter can be: ENABLE or DISABLE.
+  88:../../source/src/FWlib/src/stm32f10x_rtc.c ****   * @retval None
+  89:../../source/src/FWlib/src/stm32f10x_rtc.c ****   */
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccAK3oUr.s 			page 3
+
+
+  90:../../source/src/FWlib/src/stm32f10x_rtc.c **** void RTC_ITConfig(uint16_t RTC_IT, FunctionalState NewState)
+  91:../../source/src/FWlib/src/stm32f10x_rtc.c **** {
+  26              		.loc 1 91 0
+  27              		.cfi_startproc
+  28              		@ args = 0, pretend = 0, frame = 0
+  29              		@ frame_needed = 0, uses_anonymous_args = 0
+  30              		@ link register save eliminated.
+  31              	.LVL0:
+  92:../../source/src/FWlib/src/stm32f10x_rtc.c ****   /* Check the parameters */
+  93:../../source/src/FWlib/src/stm32f10x_rtc.c ****   assert_param(IS_RTC_IT(RTC_IT));  
+  94:../../source/src/FWlib/src/stm32f10x_rtc.c ****   assert_param(IS_FUNCTIONAL_STATE(NewState));
+  95:../../source/src/FWlib/src/stm32f10x_rtc.c ****   
+  96:../../source/src/FWlib/src/stm32f10x_rtc.c ****   if (NewState != DISABLE)
+  32              		.loc 1 96 0
+  33 0000 29B9     		cbnz	r1, .L5
+  97:../../source/src/FWlib/src/stm32f10x_rtc.c ****   {
+  98:../../source/src/FWlib/src/stm32f10x_rtc.c ****     RTC->CRH |= RTC_IT;
+  99:../../source/src/FWlib/src/stm32f10x_rtc.c ****   }
+ 100:../../source/src/FWlib/src/stm32f10x_rtc.c ****   else
+ 101:../../source/src/FWlib/src/stm32f10x_rtc.c ****   {
+ 102:../../source/src/FWlib/src/stm32f10x_rtc.c ****     RTC->CRH &= (uint16_t)~RTC_IT;
+  34              		.loc 1 102 0
+  35 0002 054A     		ldr	r2, .L6
+  36 0004 1388     		ldrh	r3, [r2]
+  37 0006 23EA0000 		bic	r0, r3, r0
+  38              	.LVL1:
+  39 000a 1080     		strh	r0, [r2]	@ movhi
+ 103:../../source/src/FWlib/src/stm32f10x_rtc.c ****   }
+ 104:../../source/src/FWlib/src/stm32f10x_rtc.c **** }
+  40              		.loc 1 104 0
+  41 000c 7047     		bx	lr
+  42              	.LVL2:
+  43              	.L5:
+  98:../../source/src/FWlib/src/stm32f10x_rtc.c ****   }
+  44              		.loc 1 98 0
+  45 000e 024B     		ldr	r3, .L6
+  46 0010 1A88     		ldrh	r2, [r3]
+  47 0012 1043     		orrs	r0, r0, r2
+  48              	.LVL3:
+  49 0014 1880     		strh	r0, [r3]	@ movhi
+  50 0016 7047     		bx	lr
+  51              	.L7:
+  52              		.align	2
+  53              	.L6:
+  54 0018 00280040 		.word	1073752064
+  55              		.cfi_endproc
+  56              	.LFE29:
+  57              		.size	RTC_ITConfig, .-RTC_ITConfig
+  58              		.align	1
+  59              		.p2align 2,,3
+  60              		.global	RTC_EnterConfigMode
+  61              		.syntax unified
+  62              		.thumb
+  63              		.thumb_func
+  64              		.fpu softvfp
+  65              		.type	RTC_EnterConfigMode, %function
+  66              	RTC_EnterConfigMode:
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccAK3oUr.s 			page 4
+
+
+  67              	.LFB30:
+ 105:../../source/src/FWlib/src/stm32f10x_rtc.c **** 
+ 106:../../source/src/FWlib/src/stm32f10x_rtc.c **** /**
+ 107:../../source/src/FWlib/src/stm32f10x_rtc.c ****   * @brief  Enters the RTC configuration mode.
+ 108:../../source/src/FWlib/src/stm32f10x_rtc.c ****   * @param  None
+ 109:../../source/src/FWlib/src/stm32f10x_rtc.c ****   * @retval None
+ 110:../../source/src/FWlib/src/stm32f10x_rtc.c ****   */
+ 111:../../source/src/FWlib/src/stm32f10x_rtc.c **** void RTC_EnterConfigMode(void)
+ 112:../../source/src/FWlib/src/stm32f10x_rtc.c **** {
+  68              		.loc 1 112 0
+  69              		.cfi_startproc
+  70              		@ args = 0, pretend = 0, frame = 0
+  71              		@ frame_needed = 0, uses_anonymous_args = 0
+  72              		@ link register save eliminated.
+ 113:../../source/src/FWlib/src/stm32f10x_rtc.c ****   /* Set the CNF flag to enter in the Configuration Mode */
+ 114:../../source/src/FWlib/src/stm32f10x_rtc.c ****   RTC->CRL |= RTC_CRL_CNF;
+  73              		.loc 1 114 0
+  74 001c 024A     		ldr	r2, .L9
+  75 001e 9388     		ldrh	r3, [r2, #4]
+  76 0020 43F01003 		orr	r3, r3, #16
+  77 0024 9380     		strh	r3, [r2, #4]	@ movhi
+ 115:../../source/src/FWlib/src/stm32f10x_rtc.c **** }
+  78              		.loc 1 115 0
+  79 0026 7047     		bx	lr
+  80              	.L10:
+  81              		.align	2
+  82              	.L9:
+  83 0028 00280040 		.word	1073752064
+  84              		.cfi_endproc
+  85              	.LFE30:
+  86              		.size	RTC_EnterConfigMode, .-RTC_EnterConfigMode
+  87              		.align	1
+  88              		.p2align 2,,3
+  89              		.global	RTC_ExitConfigMode
+  90              		.syntax unified
+  91              		.thumb
+  92              		.thumb_func
+  93              		.fpu softvfp
+  94              		.type	RTC_ExitConfigMode, %function
+  95              	RTC_ExitConfigMode:
+  96              	.LFB31:
+ 116:../../source/src/FWlib/src/stm32f10x_rtc.c **** 
+ 117:../../source/src/FWlib/src/stm32f10x_rtc.c **** /**
+ 118:../../source/src/FWlib/src/stm32f10x_rtc.c ****   * @brief  Exits from the RTC configuration mode.
+ 119:../../source/src/FWlib/src/stm32f10x_rtc.c ****   * @param  None
+ 120:../../source/src/FWlib/src/stm32f10x_rtc.c ****   * @retval None
+ 121:../../source/src/FWlib/src/stm32f10x_rtc.c ****   */
+ 122:../../source/src/FWlib/src/stm32f10x_rtc.c **** void RTC_ExitConfigMode(void)
+ 123:../../source/src/FWlib/src/stm32f10x_rtc.c **** {
+  97              		.loc 1 123 0
+  98              		.cfi_startproc
+  99              		@ args = 0, pretend = 0, frame = 0
+ 100              		@ frame_needed = 0, uses_anonymous_args = 0
+ 101              		@ link register save eliminated.
+ 124:../../source/src/FWlib/src/stm32f10x_rtc.c ****   /* Reset the CNF flag to exit from the Configuration Mode */
+ 125:../../source/src/FWlib/src/stm32f10x_rtc.c ****   RTC->CRL &= (uint16_t)~((uint16_t)RTC_CRL_CNF); 
+ 102              		.loc 1 125 0
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccAK3oUr.s 			page 5
+
+
+ 103 002c 034A     		ldr	r2, .L12
+ 104 002e 9388     		ldrh	r3, [r2, #4]
+ 105 0030 23F01003 		bic	r3, r3, #16
+ 106 0034 1B04     		lsls	r3, r3, #16
+ 107 0036 1B0C     		lsrs	r3, r3, #16
+ 108 0038 9380     		strh	r3, [r2, #4]	@ movhi
+ 126:../../source/src/FWlib/src/stm32f10x_rtc.c **** }
+ 109              		.loc 1 126 0
+ 110 003a 7047     		bx	lr
+ 111              	.L13:
+ 112              		.align	2
+ 113              	.L12:
+ 114 003c 00280040 		.word	1073752064
+ 115              		.cfi_endproc
+ 116              	.LFE31:
+ 117              		.size	RTC_ExitConfigMode, .-RTC_ExitConfigMode
+ 118              		.align	1
+ 119              		.p2align 2,,3
+ 120              		.global	RTC_GetCounter
+ 121              		.syntax unified
+ 122              		.thumb
+ 123              		.thumb_func
+ 124              		.fpu softvfp
+ 125              		.type	RTC_GetCounter, %function
+ 126              	RTC_GetCounter:
+ 127              	.LFB32:
+ 127:../../source/src/FWlib/src/stm32f10x_rtc.c **** 
+ 128:../../source/src/FWlib/src/stm32f10x_rtc.c **** /**
+ 129:../../source/src/FWlib/src/stm32f10x_rtc.c ****   * @brief  Gets the RTC counter value.
+ 130:../../source/src/FWlib/src/stm32f10x_rtc.c ****   * @param  None
+ 131:../../source/src/FWlib/src/stm32f10x_rtc.c ****   * @retval RTC counter value.
+ 132:../../source/src/FWlib/src/stm32f10x_rtc.c ****   */
+ 133:../../source/src/FWlib/src/stm32f10x_rtc.c **** uint32_t RTC_GetCounter(void)
+ 134:../../source/src/FWlib/src/stm32f10x_rtc.c **** {
+ 128              		.loc 1 134 0
+ 129              		.cfi_startproc
+ 130              		@ args = 0, pretend = 0, frame = 0
+ 131              		@ frame_needed = 0, uses_anonymous_args = 0
+ 132              		@ link register save eliminated.
+ 133              	.LVL4:
+ 135:../../source/src/FWlib/src/stm32f10x_rtc.c ****   uint16_t tmp = 0;
+ 136:../../source/src/FWlib/src/stm32f10x_rtc.c ****   tmp = RTC->CNTL;
+ 134              		.loc 1 136 0
+ 135 0040 024B     		ldr	r3, .L15
+ 136 0042 9A8B     		ldrh	r2, [r3, #28]
+ 137              	.LVL5:
+ 137:../../source/src/FWlib/src/stm32f10x_rtc.c ****   return (((uint32_t)RTC->CNTH << 16 ) | tmp) ;
+ 138              		.loc 1 137 0
+ 139 0044 188B     		ldrh	r0, [r3, #24]
+ 138:../../source/src/FWlib/src/stm32f10x_rtc.c **** }
+ 140              		.loc 1 138 0
+ 141 0046 42EA0040 		orr	r0, r2, r0, lsl #16
+ 142 004a 7047     		bx	lr
+ 143              	.L16:
+ 144              		.align	2
+ 145              	.L15:
+ 146 004c 00280040 		.word	1073752064
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccAK3oUr.s 			page 6
+
+
+ 147              		.cfi_endproc
+ 148              	.LFE32:
+ 149              		.size	RTC_GetCounter, .-RTC_GetCounter
+ 150              		.align	1
+ 151              		.p2align 2,,3
+ 152              		.global	RTC_SetCounter
+ 153              		.syntax unified
+ 154              		.thumb
+ 155              		.thumb_func
+ 156              		.fpu softvfp
+ 157              		.type	RTC_SetCounter, %function
+ 158              	RTC_SetCounter:
+ 159              	.LFB33:
+ 139:../../source/src/FWlib/src/stm32f10x_rtc.c **** 
+ 140:../../source/src/FWlib/src/stm32f10x_rtc.c **** /**
+ 141:../../source/src/FWlib/src/stm32f10x_rtc.c ****   * @brief  Sets the RTC counter value.
+ 142:../../source/src/FWlib/src/stm32f10x_rtc.c ****   * @param  CounterValue: RTC counter new value.
+ 143:../../source/src/FWlib/src/stm32f10x_rtc.c ****   * @retval None
+ 144:../../source/src/FWlib/src/stm32f10x_rtc.c ****   */
+ 145:../../source/src/FWlib/src/stm32f10x_rtc.c **** void RTC_SetCounter(uint32_t CounterValue)
+ 146:../../source/src/FWlib/src/stm32f10x_rtc.c **** { 
+ 160              		.loc 1 146 0
+ 161              		.cfi_startproc
+ 162              		@ args = 0, pretend = 0, frame = 0
+ 163              		@ frame_needed = 0, uses_anonymous_args = 0
+ 164              		@ link register save eliminated.
+ 165              	.LVL6:
+ 166              	.LBB14:
+ 167              	.LBB15:
+ 114:../../source/src/FWlib/src/stm32f10x_rtc.c **** }
+ 168              		.loc 1 114 0
+ 169 0050 074A     		ldr	r2, .L18
+ 170              	.LBE15:
+ 171              	.LBE14:
+ 147:../../source/src/FWlib/src/stm32f10x_rtc.c ****   RTC_EnterConfigMode();
+ 148:../../source/src/FWlib/src/stm32f10x_rtc.c ****   /* Set RTC COUNTER MSB word */
+ 149:../../source/src/FWlib/src/stm32f10x_rtc.c ****   RTC->CNTH = CounterValue >> 16;
+ 172              		.loc 1 149 0
+ 173 0052 010C     		lsrs	r1, r0, #16
+ 174              	.LBB18:
+ 175              	.LBB16:
+ 114:../../source/src/FWlib/src/stm32f10x_rtc.c **** }
+ 176              		.loc 1 114 0
+ 177 0054 9388     		ldrh	r3, [r2, #4]
+ 178              	.LBE16:
+ 179              	.LBE18:
+ 150:../../source/src/FWlib/src/stm32f10x_rtc.c ****   /* Set RTC COUNTER LSB word */
+ 151:../../source/src/FWlib/src/stm32f10x_rtc.c ****   RTC->CNTL = (CounterValue & RTC_LSB_MASK);
+ 180              		.loc 1 151 0
+ 181 0056 80B2     		uxth	r0, r0
+ 182              	.LVL7:
+ 183              	.LBB19:
+ 184              	.LBB17:
+ 114:../../source/src/FWlib/src/stm32f10x_rtc.c **** }
+ 185              		.loc 1 114 0
+ 186 0058 43F01003 		orr	r3, r3, #16
+ 187 005c 9380     		strh	r3, [r2, #4]	@ movhi
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccAK3oUr.s 			page 7
+
+
+ 188              	.LBE17:
+ 189              	.LBE19:
+ 149:../../source/src/FWlib/src/stm32f10x_rtc.c ****   /* Set RTC COUNTER LSB word */
+ 190              		.loc 1 149 0
+ 191 005e 1183     		strh	r1, [r2, #24]	@ movhi
+ 192              		.loc 1 151 0
+ 193 0060 9083     		strh	r0, [r2, #28]	@ movhi
+ 194              	.LBB20:
+ 195              	.LBB21:
+ 125:../../source/src/FWlib/src/stm32f10x_rtc.c **** }
+ 196              		.loc 1 125 0
+ 197 0062 9388     		ldrh	r3, [r2, #4]
+ 198 0064 23F01003 		bic	r3, r3, #16
+ 199 0068 1B04     		lsls	r3, r3, #16
+ 200 006a 1B0C     		lsrs	r3, r3, #16
+ 201 006c 9380     		strh	r3, [r2, #4]	@ movhi
+ 202              	.LBE21:
+ 203              	.LBE20:
+ 152:../../source/src/FWlib/src/stm32f10x_rtc.c ****   RTC_ExitConfigMode();
+ 153:../../source/src/FWlib/src/stm32f10x_rtc.c **** }
+ 204              		.loc 1 153 0
+ 205 006e 7047     		bx	lr
+ 206              	.L19:
+ 207              		.align	2
+ 208              	.L18:
+ 209 0070 00280040 		.word	1073752064
+ 210              		.cfi_endproc
+ 211              	.LFE33:
+ 212              		.size	RTC_SetCounter, .-RTC_SetCounter
+ 213              		.align	1
+ 214              		.p2align 2,,3
+ 215              		.global	RTC_SetPrescaler
+ 216              		.syntax unified
+ 217              		.thumb
+ 218              		.thumb_func
+ 219              		.fpu softvfp
+ 220              		.type	RTC_SetPrescaler, %function
+ 221              	RTC_SetPrescaler:
+ 222              	.LFB34:
+ 154:../../source/src/FWlib/src/stm32f10x_rtc.c **** 
+ 155:../../source/src/FWlib/src/stm32f10x_rtc.c **** /**
+ 156:../../source/src/FWlib/src/stm32f10x_rtc.c ****   * @brief  Sets the RTC prescaler value.
+ 157:../../source/src/FWlib/src/stm32f10x_rtc.c ****   * @param  PrescalerValue: RTC prescaler new value.
+ 158:../../source/src/FWlib/src/stm32f10x_rtc.c ****   * @retval None
+ 159:../../source/src/FWlib/src/stm32f10x_rtc.c ****   */
+ 160:../../source/src/FWlib/src/stm32f10x_rtc.c **** void RTC_SetPrescaler(uint32_t PrescalerValue)
+ 161:../../source/src/FWlib/src/stm32f10x_rtc.c **** {
+ 223              		.loc 1 161 0
+ 224              		.cfi_startproc
+ 225              		@ args = 0, pretend = 0, frame = 0
+ 226              		@ frame_needed = 0, uses_anonymous_args = 0
+ 227              		@ link register save eliminated.
+ 228              	.LVL8:
+ 229              	.LBB22:
+ 230              	.LBB23:
+ 114:../../source/src/FWlib/src/stm32f10x_rtc.c **** }
+ 231              		.loc 1 114 0
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccAK3oUr.s 			page 8
+
+
+ 232 0074 084A     		ldr	r2, .L21
+ 233              	.LBE23:
+ 234              	.LBE22:
+ 162:../../source/src/FWlib/src/stm32f10x_rtc.c ****   /* Check the parameters */
+ 163:../../source/src/FWlib/src/stm32f10x_rtc.c ****   assert_param(IS_RTC_PRESCALER(PrescalerValue));
+ 164:../../source/src/FWlib/src/stm32f10x_rtc.c ****   
+ 165:../../source/src/FWlib/src/stm32f10x_rtc.c ****   RTC_EnterConfigMode();
+ 166:../../source/src/FWlib/src/stm32f10x_rtc.c ****   /* Set RTC PRESCALER MSB word */
+ 167:../../source/src/FWlib/src/stm32f10x_rtc.c ****   RTC->PRLH = (PrescalerValue & PRLH_MSB_MASK) >> 16;
+ 235              		.loc 1 167 0
+ 236 0076 C0F30341 		ubfx	r1, r0, #16, #4
+ 237              	.LBB26:
+ 238              	.LBB24:
+ 114:../../source/src/FWlib/src/stm32f10x_rtc.c **** }
+ 239              		.loc 1 114 0
+ 240 007a 9388     		ldrh	r3, [r2, #4]
+ 241              	.LBE24:
+ 242              	.LBE26:
+ 168:../../source/src/FWlib/src/stm32f10x_rtc.c ****   /* Set RTC PRESCALER LSB word */
+ 169:../../source/src/FWlib/src/stm32f10x_rtc.c ****   RTC->PRLL = (PrescalerValue & RTC_LSB_MASK);
+ 243              		.loc 1 169 0
+ 244 007c 80B2     		uxth	r0, r0
+ 245              	.LVL9:
+ 246              	.LBB27:
+ 247              	.LBB25:
+ 114:../../source/src/FWlib/src/stm32f10x_rtc.c **** }
+ 248              		.loc 1 114 0
+ 249 007e 43F01003 		orr	r3, r3, #16
+ 250 0082 9380     		strh	r3, [r2, #4]	@ movhi
+ 251              	.LBE25:
+ 252              	.LBE27:
+ 167:../../source/src/FWlib/src/stm32f10x_rtc.c ****   /* Set RTC PRESCALER LSB word */
+ 253              		.loc 1 167 0
+ 254 0084 1181     		strh	r1, [r2, #8]	@ movhi
+ 255              		.loc 1 169 0
+ 256 0086 9081     		strh	r0, [r2, #12]	@ movhi
+ 257              	.LBB28:
+ 258              	.LBB29:
+ 125:../../source/src/FWlib/src/stm32f10x_rtc.c **** }
+ 259              		.loc 1 125 0
+ 260 0088 9388     		ldrh	r3, [r2, #4]
+ 261 008a 23F01003 		bic	r3, r3, #16
+ 262 008e 1B04     		lsls	r3, r3, #16
+ 263 0090 1B0C     		lsrs	r3, r3, #16
+ 264 0092 9380     		strh	r3, [r2, #4]	@ movhi
+ 265              	.LBE29:
+ 266              	.LBE28:
+ 170:../../source/src/FWlib/src/stm32f10x_rtc.c ****   RTC_ExitConfigMode();
+ 171:../../source/src/FWlib/src/stm32f10x_rtc.c **** }
+ 267              		.loc 1 171 0
+ 268 0094 7047     		bx	lr
+ 269              	.L22:
+ 270 0096 00BF     		.align	2
+ 271              	.L21:
+ 272 0098 00280040 		.word	1073752064
+ 273              		.cfi_endproc
+ 274              	.LFE34:
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccAK3oUr.s 			page 9
+
+
+ 275              		.size	RTC_SetPrescaler, .-RTC_SetPrescaler
+ 276              		.align	1
+ 277              		.p2align 2,,3
+ 278              		.global	RTC_SetAlarm
+ 279              		.syntax unified
+ 280              		.thumb
+ 281              		.thumb_func
+ 282              		.fpu softvfp
+ 283              		.type	RTC_SetAlarm, %function
+ 284              	RTC_SetAlarm:
+ 285              	.LFB35:
+ 172:../../source/src/FWlib/src/stm32f10x_rtc.c **** 
+ 173:../../source/src/FWlib/src/stm32f10x_rtc.c **** /**
+ 174:../../source/src/FWlib/src/stm32f10x_rtc.c ****   * @brief  Sets the RTC alarm value.
+ 175:../../source/src/FWlib/src/stm32f10x_rtc.c ****   * @param  AlarmValue: RTC alarm new value.
+ 176:../../source/src/FWlib/src/stm32f10x_rtc.c ****   * @retval None
+ 177:../../source/src/FWlib/src/stm32f10x_rtc.c ****   */
+ 178:../../source/src/FWlib/src/stm32f10x_rtc.c **** void RTC_SetAlarm(uint32_t AlarmValue)
+ 179:../../source/src/FWlib/src/stm32f10x_rtc.c **** {  
+ 286              		.loc 1 179 0
+ 287              		.cfi_startproc
+ 288              		@ args = 0, pretend = 0, frame = 0
+ 289              		@ frame_needed = 0, uses_anonymous_args = 0
+ 290              		@ link register save eliminated.
+ 291              	.LVL10:
+ 292              	.LBB30:
+ 293              	.LBB31:
+ 114:../../source/src/FWlib/src/stm32f10x_rtc.c **** }
+ 294              		.loc 1 114 0
+ 295 009c 074A     		ldr	r2, .L24
+ 296              	.LBE31:
+ 297              	.LBE30:
+ 180:../../source/src/FWlib/src/stm32f10x_rtc.c ****   RTC_EnterConfigMode();
+ 181:../../source/src/FWlib/src/stm32f10x_rtc.c ****   /* Set the ALARM MSB word */
+ 182:../../source/src/FWlib/src/stm32f10x_rtc.c ****   RTC->ALRH = AlarmValue >> 16;
+ 298              		.loc 1 182 0
+ 299 009e 010C     		lsrs	r1, r0, #16
+ 300              	.LBB34:
+ 301              	.LBB32:
+ 114:../../source/src/FWlib/src/stm32f10x_rtc.c **** }
+ 302              		.loc 1 114 0
+ 303 00a0 9388     		ldrh	r3, [r2, #4]
+ 304              	.LBE32:
+ 305              	.LBE34:
+ 183:../../source/src/FWlib/src/stm32f10x_rtc.c ****   /* Set the ALARM LSB word */
+ 184:../../source/src/FWlib/src/stm32f10x_rtc.c ****   RTC->ALRL = (AlarmValue & RTC_LSB_MASK);
+ 306              		.loc 1 184 0
+ 307 00a2 80B2     		uxth	r0, r0
+ 308              	.LVL11:
+ 309              	.LBB35:
+ 310              	.LBB33:
+ 114:../../source/src/FWlib/src/stm32f10x_rtc.c **** }
+ 311              		.loc 1 114 0
+ 312 00a4 43F01003 		orr	r3, r3, #16
+ 313 00a8 9380     		strh	r3, [r2, #4]	@ movhi
+ 314              	.LBE33:
+ 315              	.LBE35:
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccAK3oUr.s 			page 10
+
+
+ 182:../../source/src/FWlib/src/stm32f10x_rtc.c ****   /* Set the ALARM LSB word */
+ 316              		.loc 1 182 0
+ 317 00aa 1184     		strh	r1, [r2, #32]	@ movhi
+ 318              		.loc 1 184 0
+ 319 00ac 9084     		strh	r0, [r2, #36]	@ movhi
+ 320              	.LBB36:
+ 321              	.LBB37:
+ 125:../../source/src/FWlib/src/stm32f10x_rtc.c **** }
+ 322              		.loc 1 125 0
+ 323 00ae 9388     		ldrh	r3, [r2, #4]
+ 324 00b0 23F01003 		bic	r3, r3, #16
+ 325 00b4 1B04     		lsls	r3, r3, #16
+ 326 00b6 1B0C     		lsrs	r3, r3, #16
+ 327 00b8 9380     		strh	r3, [r2, #4]	@ movhi
+ 328              	.LBE37:
+ 329              	.LBE36:
+ 185:../../source/src/FWlib/src/stm32f10x_rtc.c ****   RTC_ExitConfigMode();
+ 186:../../source/src/FWlib/src/stm32f10x_rtc.c **** }
+ 330              		.loc 1 186 0
+ 331 00ba 7047     		bx	lr
+ 332              	.L25:
+ 333              		.align	2
+ 334              	.L24:
+ 335 00bc 00280040 		.word	1073752064
+ 336              		.cfi_endproc
+ 337              	.LFE35:
+ 338              		.size	RTC_SetAlarm, .-RTC_SetAlarm
+ 339              		.align	1
+ 340              		.p2align 2,,3
+ 341              		.global	RTC_GetDivider
+ 342              		.syntax unified
+ 343              		.thumb
+ 344              		.thumb_func
+ 345              		.fpu softvfp
+ 346              		.type	RTC_GetDivider, %function
+ 347              	RTC_GetDivider:
+ 348              	.LFB36:
+ 187:../../source/src/FWlib/src/stm32f10x_rtc.c **** 
+ 188:../../source/src/FWlib/src/stm32f10x_rtc.c **** /**
+ 189:../../source/src/FWlib/src/stm32f10x_rtc.c ****   * @brief  Gets the RTC divider value.
+ 190:../../source/src/FWlib/src/stm32f10x_rtc.c ****   * @param  None
+ 191:../../source/src/FWlib/src/stm32f10x_rtc.c ****   * @retval RTC Divider value.
+ 192:../../source/src/FWlib/src/stm32f10x_rtc.c ****   */
+ 193:../../source/src/FWlib/src/stm32f10x_rtc.c **** uint32_t RTC_GetDivider(void)
+ 194:../../source/src/FWlib/src/stm32f10x_rtc.c **** {
+ 349              		.loc 1 194 0
+ 350              		.cfi_startproc
+ 351              		@ args = 0, pretend = 0, frame = 0
+ 352              		@ frame_needed = 0, uses_anonymous_args = 0
+ 353              		@ link register save eliminated.
+ 354              	.LVL12:
+ 195:../../source/src/FWlib/src/stm32f10x_rtc.c ****   uint32_t tmp = 0x00;
+ 196:../../source/src/FWlib/src/stm32f10x_rtc.c ****   tmp = ((uint32_t)RTC->DIVH & (uint32_t)0x000F) << 16;
+ 355              		.loc 1 196 0
+ 356 00c0 034A     		ldr	r2, .L27
+ 357 00c2 138A     		ldrh	r3, [r2, #16]
+ 197:../../source/src/FWlib/src/stm32f10x_rtc.c ****   tmp |= RTC->DIVL;
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccAK3oUr.s 			page 11
+
+
+ 358              		.loc 1 197 0
+ 359 00c4 908A     		ldrh	r0, [r2, #20]
+ 196:../../source/src/FWlib/src/stm32f10x_rtc.c ****   tmp |= RTC->DIVL;
+ 360              		.loc 1 196 0
+ 361 00c6 1B04     		lsls	r3, r3, #16
+ 362 00c8 03F47023 		and	r3, r3, #983040
+ 363              	.LVL13:
+ 198:../../source/src/FWlib/src/stm32f10x_rtc.c ****   return tmp;
+ 199:../../source/src/FWlib/src/stm32f10x_rtc.c **** }
+ 364              		.loc 1 199 0
+ 365 00cc 1843     		orrs	r0, r0, r3
+ 366              	.LVL14:
+ 367 00ce 7047     		bx	lr
+ 368              	.L28:
+ 369              		.align	2
+ 370              	.L27:
+ 371 00d0 00280040 		.word	1073752064
+ 372              		.cfi_endproc
+ 373              	.LFE36:
+ 374              		.size	RTC_GetDivider, .-RTC_GetDivider
+ 375              		.align	1
+ 376              		.p2align 2,,3
+ 377              		.global	RTC_WaitForLastTask
+ 378              		.syntax unified
+ 379              		.thumb
+ 380              		.thumb_func
+ 381              		.fpu softvfp
+ 382              		.type	RTC_WaitForLastTask, %function
+ 383              	RTC_WaitForLastTask:
+ 384              	.LFB37:
+ 200:../../source/src/FWlib/src/stm32f10x_rtc.c **** 
+ 201:../../source/src/FWlib/src/stm32f10x_rtc.c **** /**
+ 202:../../source/src/FWlib/src/stm32f10x_rtc.c ****   * @brief  Waits until last write operation on RTC registers has finished.
+ 203:../../source/src/FWlib/src/stm32f10x_rtc.c ****   * @note   This function must be called before any write to RTC registers.
+ 204:../../source/src/FWlib/src/stm32f10x_rtc.c ****   * @param  None
+ 205:../../source/src/FWlib/src/stm32f10x_rtc.c ****   * @retval None
+ 206:../../source/src/FWlib/src/stm32f10x_rtc.c ****   */
+ 207:../../source/src/FWlib/src/stm32f10x_rtc.c **** void RTC_WaitForLastTask(void)
+ 208:../../source/src/FWlib/src/stm32f10x_rtc.c **** {
+ 385              		.loc 1 208 0
+ 386              		.cfi_startproc
+ 387              		@ args = 0, pretend = 0, frame = 0
+ 388              		@ frame_needed = 0, uses_anonymous_args = 0
+ 389              		@ link register save eliminated.
+ 209:../../source/src/FWlib/src/stm32f10x_rtc.c ****   /* Loop until RTOFF flag is set */
+ 210:../../source/src/FWlib/src/stm32f10x_rtc.c ****   while ((RTC->CRL & RTC_FLAG_RTOFF) == (uint16_t)RESET)
+ 390              		.loc 1 210 0
+ 391 00d4 024A     		ldr	r2, .L33
+ 392              	.L30:
+ 393              		.loc 1 210 0 is_stmt 0 discriminator 1
+ 394 00d6 9388     		ldrh	r3, [r2, #4]
+ 395 00d8 9B06     		lsls	r3, r3, #26
+ 396 00da FCD5     		bpl	.L30
+ 211:../../source/src/FWlib/src/stm32f10x_rtc.c ****   {
+ 212:../../source/src/FWlib/src/stm32f10x_rtc.c ****   }
+ 213:../../source/src/FWlib/src/stm32f10x_rtc.c **** }
+ 397              		.loc 1 213 0 is_stmt 1
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccAK3oUr.s 			page 12
+
+
+ 398 00dc 7047     		bx	lr
+ 399              	.L34:
+ 400 00de 00BF     		.align	2
+ 401              	.L33:
+ 402 00e0 00280040 		.word	1073752064
+ 403              		.cfi_endproc
+ 404              	.LFE37:
+ 405              		.size	RTC_WaitForLastTask, .-RTC_WaitForLastTask
+ 406              		.align	1
+ 407              		.p2align 2,,3
+ 408              		.global	RTC_WaitForSynchro
+ 409              		.syntax unified
+ 410              		.thumb
+ 411              		.thumb_func
+ 412              		.fpu softvfp
+ 413              		.type	RTC_WaitForSynchro, %function
+ 414              	RTC_WaitForSynchro:
+ 415              	.LFB38:
+ 214:../../source/src/FWlib/src/stm32f10x_rtc.c **** 
+ 215:../../source/src/FWlib/src/stm32f10x_rtc.c **** /**
+ 216:../../source/src/FWlib/src/stm32f10x_rtc.c ****   * @brief  Waits until the RTC registers (RTC_CNT, RTC_ALR and RTC_PRL)
+ 217:../../source/src/FWlib/src/stm32f10x_rtc.c ****   *   are synchronized with RTC APB clock.
+ 218:../../source/src/FWlib/src/stm32f10x_rtc.c ****   * @note   This function must be called before any read operation after an APB reset
+ 219:../../source/src/FWlib/src/stm32f10x_rtc.c ****   *   or an APB clock stop.
+ 220:../../source/src/FWlib/src/stm32f10x_rtc.c ****   * @param  None
+ 221:../../source/src/FWlib/src/stm32f10x_rtc.c ****   * @retval None
+ 222:../../source/src/FWlib/src/stm32f10x_rtc.c ****   */
+ 223:../../source/src/FWlib/src/stm32f10x_rtc.c **** void RTC_WaitForSynchro(void)
+ 224:../../source/src/FWlib/src/stm32f10x_rtc.c **** {
+ 416              		.loc 1 224 0
+ 417              		.cfi_startproc
+ 418              		@ args = 0, pretend = 0, frame = 0
+ 419              		@ frame_needed = 0, uses_anonymous_args = 0
+ 420              		@ link register save eliminated.
+ 225:../../source/src/FWlib/src/stm32f10x_rtc.c ****   /* Clear RSF flag */
+ 226:../../source/src/FWlib/src/stm32f10x_rtc.c ****   RTC->CRL &= (uint16_t)~RTC_FLAG_RSF;
+ 421              		.loc 1 226 0
+ 422 00e4 0549     		ldr	r1, .L39
+ 227:../../source/src/FWlib/src/stm32f10x_rtc.c ****   /* Loop until RSF flag is set */
+ 228:../../source/src/FWlib/src/stm32f10x_rtc.c ****   while ((RTC->CRL & RTC_FLAG_RSF) == (uint16_t)RESET)
+ 423              		.loc 1 228 0
+ 424 00e6 0A46     		mov	r2, r1
+ 226:../../source/src/FWlib/src/stm32f10x_rtc.c ****   /* Loop until RSF flag is set */
+ 425              		.loc 1 226 0
+ 426 00e8 8B88     		ldrh	r3, [r1, #4]
+ 427 00ea 23F00803 		bic	r3, r3, #8
+ 428 00ee 1B04     		lsls	r3, r3, #16
+ 429 00f0 1B0C     		lsrs	r3, r3, #16
+ 430 00f2 8B80     		strh	r3, [r1, #4]	@ movhi
+ 431              	.L36:
+ 432              		.loc 1 228 0 discriminator 1
+ 433 00f4 9388     		ldrh	r3, [r2, #4]
+ 434 00f6 1B07     		lsls	r3, r3, #28
+ 435 00f8 FCD5     		bpl	.L36
+ 229:../../source/src/FWlib/src/stm32f10x_rtc.c ****   {
+ 230:../../source/src/FWlib/src/stm32f10x_rtc.c ****   }
+ 231:../../source/src/FWlib/src/stm32f10x_rtc.c **** }
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccAK3oUr.s 			page 13
+
+
+ 436              		.loc 1 231 0
+ 437 00fa 7047     		bx	lr
+ 438              	.L40:
+ 439              		.align	2
+ 440              	.L39:
+ 441 00fc 00280040 		.word	1073752064
+ 442              		.cfi_endproc
+ 443              	.LFE38:
+ 444              		.size	RTC_WaitForSynchro, .-RTC_WaitForSynchro
+ 445              		.align	1
+ 446              		.p2align 2,,3
+ 447              		.global	RTC_GetFlagStatus
+ 448              		.syntax unified
+ 449              		.thumb
+ 450              		.thumb_func
+ 451              		.fpu softvfp
+ 452              		.type	RTC_GetFlagStatus, %function
+ 453              	RTC_GetFlagStatus:
+ 454              	.LFB39:
+ 232:../../source/src/FWlib/src/stm32f10x_rtc.c **** 
+ 233:../../source/src/FWlib/src/stm32f10x_rtc.c **** /**
+ 234:../../source/src/FWlib/src/stm32f10x_rtc.c ****   * @brief  Checks whether the specified RTC flag is set or not.
+ 235:../../source/src/FWlib/src/stm32f10x_rtc.c ****   * @param  RTC_FLAG: specifies the flag to check.
+ 236:../../source/src/FWlib/src/stm32f10x_rtc.c ****   *   This parameter can be one the following values:
+ 237:../../source/src/FWlib/src/stm32f10x_rtc.c ****   *     @arg RTC_FLAG_RTOFF: RTC Operation OFF flag
+ 238:../../source/src/FWlib/src/stm32f10x_rtc.c ****   *     @arg RTC_FLAG_RSF: Registers Synchronized flag
+ 239:../../source/src/FWlib/src/stm32f10x_rtc.c ****   *     @arg RTC_FLAG_OW: Overflow flag
+ 240:../../source/src/FWlib/src/stm32f10x_rtc.c ****   *     @arg RTC_FLAG_ALR: Alarm flag
+ 241:../../source/src/FWlib/src/stm32f10x_rtc.c ****   *     @arg RTC_FLAG_SEC: Second flag
+ 242:../../source/src/FWlib/src/stm32f10x_rtc.c ****   * @retval The new state of RTC_FLAG (SET or RESET).
+ 243:../../source/src/FWlib/src/stm32f10x_rtc.c ****   */
+ 244:../../source/src/FWlib/src/stm32f10x_rtc.c **** FlagStatus RTC_GetFlagStatus(uint16_t RTC_FLAG)
+ 245:../../source/src/FWlib/src/stm32f10x_rtc.c **** {
+ 455              		.loc 1 245 0
+ 456              		.cfi_startproc
+ 457              		@ args = 0, pretend = 0, frame = 0
+ 458              		@ frame_needed = 0, uses_anonymous_args = 0
+ 459              		@ link register save eliminated.
+ 460              	.LVL15:
+ 246:../../source/src/FWlib/src/stm32f10x_rtc.c ****   FlagStatus bitstatus = RESET;
+ 247:../../source/src/FWlib/src/stm32f10x_rtc.c ****   
+ 248:../../source/src/FWlib/src/stm32f10x_rtc.c ****   /* Check the parameters */
+ 249:../../source/src/FWlib/src/stm32f10x_rtc.c ****   assert_param(IS_RTC_GET_FLAG(RTC_FLAG)); 
+ 250:../../source/src/FWlib/src/stm32f10x_rtc.c ****   
+ 251:../../source/src/FWlib/src/stm32f10x_rtc.c ****   if ((RTC->CRL & RTC_FLAG) != (uint16_t)RESET)
+ 461              		.loc 1 251 0
+ 462 0100 034B     		ldr	r3, .L42
+ 463 0102 9B88     		ldrh	r3, [r3, #4]
+ 464              	.LVL16:
+ 465 0104 1842     		tst	r0, r3
+ 252:../../source/src/FWlib/src/stm32f10x_rtc.c ****   {
+ 253:../../source/src/FWlib/src/stm32f10x_rtc.c ****     bitstatus = SET;
+ 254:../../source/src/FWlib/src/stm32f10x_rtc.c ****   }
+ 255:../../source/src/FWlib/src/stm32f10x_rtc.c ****   else
+ 256:../../source/src/FWlib/src/stm32f10x_rtc.c ****   {
+ 257:../../source/src/FWlib/src/stm32f10x_rtc.c ****     bitstatus = RESET;
+ 258:../../source/src/FWlib/src/stm32f10x_rtc.c ****   }
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccAK3oUr.s 			page 14
+
+
+ 259:../../source/src/FWlib/src/stm32f10x_rtc.c ****   return bitstatus;
+ 260:../../source/src/FWlib/src/stm32f10x_rtc.c **** }
+ 466              		.loc 1 260 0
+ 467 0106 14BF     		ite	ne
+ 468 0108 0120     		movne	r0, #1
+ 469              	.LVL17:
+ 470 010a 0020     		moveq	r0, #0
+ 471 010c 7047     		bx	lr
+ 472              	.L43:
+ 473 010e 00BF     		.align	2
+ 474              	.L42:
+ 475 0110 00280040 		.word	1073752064
+ 476              		.cfi_endproc
+ 477              	.LFE39:
+ 478              		.size	RTC_GetFlagStatus, .-RTC_GetFlagStatus
+ 479              		.align	1
+ 480              		.p2align 2,,3
+ 481              		.global	RTC_ClearFlag
+ 482              		.syntax unified
+ 483              		.thumb
+ 484              		.thumb_func
+ 485              		.fpu softvfp
+ 486              		.type	RTC_ClearFlag, %function
+ 487              	RTC_ClearFlag:
+ 488              	.LFB40:
+ 261:../../source/src/FWlib/src/stm32f10x_rtc.c **** 
+ 262:../../source/src/FWlib/src/stm32f10x_rtc.c **** /**
+ 263:../../source/src/FWlib/src/stm32f10x_rtc.c ****   * @brief  Clears the RTC's pending flags.
+ 264:../../source/src/FWlib/src/stm32f10x_rtc.c ****   * @param  RTC_FLAG: specifies the flag to clear.
+ 265:../../source/src/FWlib/src/stm32f10x_rtc.c ****   *   This parameter can be any combination of the following values:
+ 266:../../source/src/FWlib/src/stm32f10x_rtc.c ****   *     @arg RTC_FLAG_RSF: Registers Synchronized flag. This flag is cleared only after
+ 267:../../source/src/FWlib/src/stm32f10x_rtc.c ****   *                        an APB reset or an APB Clock stop.
+ 268:../../source/src/FWlib/src/stm32f10x_rtc.c ****   *     @arg RTC_FLAG_OW: Overflow flag
+ 269:../../source/src/FWlib/src/stm32f10x_rtc.c ****   *     @arg RTC_FLAG_ALR: Alarm flag
+ 270:../../source/src/FWlib/src/stm32f10x_rtc.c ****   *     @arg RTC_FLAG_SEC: Second flag
+ 271:../../source/src/FWlib/src/stm32f10x_rtc.c ****   * @retval None
+ 272:../../source/src/FWlib/src/stm32f10x_rtc.c ****   */
+ 273:../../source/src/FWlib/src/stm32f10x_rtc.c **** void RTC_ClearFlag(uint16_t RTC_FLAG)
+ 274:../../source/src/FWlib/src/stm32f10x_rtc.c **** {
+ 489              		.loc 1 274 0
+ 490              		.cfi_startproc
+ 491              		@ args = 0, pretend = 0, frame = 0
+ 492              		@ frame_needed = 0, uses_anonymous_args = 0
+ 493              		@ link register save eliminated.
+ 494              	.LVL18:
+ 275:../../source/src/FWlib/src/stm32f10x_rtc.c ****   /* Check the parameters */
+ 276:../../source/src/FWlib/src/stm32f10x_rtc.c ****   assert_param(IS_RTC_CLEAR_FLAG(RTC_FLAG)); 
+ 277:../../source/src/FWlib/src/stm32f10x_rtc.c ****     
+ 278:../../source/src/FWlib/src/stm32f10x_rtc.c ****   /* Clear the corresponding RTC flag */
+ 279:../../source/src/FWlib/src/stm32f10x_rtc.c ****   RTC->CRL &= (uint16_t)~RTC_FLAG;
+ 495              		.loc 1 279 0
+ 496 0114 024A     		ldr	r2, .L45
+ 497 0116 9388     		ldrh	r3, [r2, #4]
+ 498 0118 23EA0000 		bic	r0, r3, r0
+ 499              	.LVL19:
+ 500 011c 9080     		strh	r0, [r2, #4]	@ movhi
+ 280:../../source/src/FWlib/src/stm32f10x_rtc.c **** }
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccAK3oUr.s 			page 15
+
+
+ 501              		.loc 1 280 0
+ 502 011e 7047     		bx	lr
+ 503              	.L46:
+ 504              		.align	2
+ 505              	.L45:
+ 506 0120 00280040 		.word	1073752064
+ 507              		.cfi_endproc
+ 508              	.LFE40:
+ 509              		.size	RTC_ClearFlag, .-RTC_ClearFlag
+ 510              		.align	1
+ 511              		.p2align 2,,3
+ 512              		.global	RTC_GetITStatus
+ 513              		.syntax unified
+ 514              		.thumb
+ 515              		.thumb_func
+ 516              		.fpu softvfp
+ 517              		.type	RTC_GetITStatus, %function
+ 518              	RTC_GetITStatus:
+ 519              	.LFB41:
+ 281:../../source/src/FWlib/src/stm32f10x_rtc.c **** 
+ 282:../../source/src/FWlib/src/stm32f10x_rtc.c **** /**
+ 283:../../source/src/FWlib/src/stm32f10x_rtc.c ****   * @brief  Checks whether the specified RTC interrupt has occurred or not.
+ 284:../../source/src/FWlib/src/stm32f10x_rtc.c ****   * @param  RTC_IT: specifies the RTC interrupts sources to check.
+ 285:../../source/src/FWlib/src/stm32f10x_rtc.c ****   *   This parameter can be one of the following values:
+ 286:../../source/src/FWlib/src/stm32f10x_rtc.c ****   *     @arg RTC_IT_OW: Overflow interrupt
+ 287:../../source/src/FWlib/src/stm32f10x_rtc.c ****   *     @arg RTC_IT_ALR: Alarm interrupt
+ 288:../../source/src/FWlib/src/stm32f10x_rtc.c ****   *     @arg RTC_IT_SEC: Second interrupt
+ 289:../../source/src/FWlib/src/stm32f10x_rtc.c ****   * @retval The new state of the RTC_IT (SET or RESET).
+ 290:../../source/src/FWlib/src/stm32f10x_rtc.c ****   */
+ 291:../../source/src/FWlib/src/stm32f10x_rtc.c **** ITStatus RTC_GetITStatus(uint16_t RTC_IT)
+ 292:../../source/src/FWlib/src/stm32f10x_rtc.c **** {
+ 520              		.loc 1 292 0
+ 521              		.cfi_startproc
+ 522              		@ args = 0, pretend = 0, frame = 0
+ 523              		@ frame_needed = 0, uses_anonymous_args = 0
+ 524              		@ link register save eliminated.
+ 525              	.LVL20:
+ 293:../../source/src/FWlib/src/stm32f10x_rtc.c ****   ITStatus bitstatus = RESET;
+ 294:../../source/src/FWlib/src/stm32f10x_rtc.c ****   /* Check the parameters */
+ 295:../../source/src/FWlib/src/stm32f10x_rtc.c ****   assert_param(IS_RTC_GET_IT(RTC_IT)); 
+ 296:../../source/src/FWlib/src/stm32f10x_rtc.c ****   
+ 297:../../source/src/FWlib/src/stm32f10x_rtc.c ****   bitstatus = (ITStatus)(RTC->CRL & RTC_IT);
+ 526              		.loc 1 297 0
+ 527 0124 064B     		ldr	r3, .L50
+ 528 0126 9A88     		ldrh	r2, [r3, #4]
+ 298:../../source/src/FWlib/src/stm32f10x_rtc.c ****   if (((RTC->CRH & RTC_IT) != (uint16_t)RESET) && (bitstatus != (uint16_t)RESET))
+ 529              		.loc 1 298 0
+ 530 0128 1B88     		ldrh	r3, [r3]
+ 297:../../source/src/FWlib/src/stm32f10x_rtc.c ****   if (((RTC->CRH & RTC_IT) != (uint16_t)RESET) && (bitstatus != (uint16_t)RESET))
+ 531              		.loc 1 297 0
+ 532 012a 92B2     		uxth	r2, r2
+ 533              	.LVL21:
+ 534              		.loc 1 298 0
+ 535 012c 0340     		ands	r3, r0, r3
+ 536 012e 05D0     		beq	.L49
+ 297:../../source/src/FWlib/src/stm32f10x_rtc.c ****   if (((RTC->CRH & RTC_IT) != (uint16_t)RESET) && (bitstatus != (uint16_t)RESET))
+ 537              		.loc 1 297 0 discriminator 1
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccAK3oUr.s 			page 16
+
+
+ 538 0130 1040     		ands	r0, r0, r2
+ 539              	.LVL22:
+ 540              		.loc 1 298 0 discriminator 1
+ 541 0132 C0B2     		uxtb	r0, r0
+ 299:../../source/src/FWlib/src/stm32f10x_rtc.c ****   {
+ 300:../../source/src/FWlib/src/stm32f10x_rtc.c ****     bitstatus = SET;
+ 542              		.loc 1 300 0 discriminator 1
+ 543 0134 0030     		adds	r0, r0, #0
+ 544 0136 18BF     		it	ne
+ 545 0138 0120     		movne	r0, #1
+ 546 013a 7047     		bx	lr
+ 547              	.LVL23:
+ 548              	.L49:
+ 301:../../source/src/FWlib/src/stm32f10x_rtc.c ****   }
+ 302:../../source/src/FWlib/src/stm32f10x_rtc.c ****   else
+ 303:../../source/src/FWlib/src/stm32f10x_rtc.c ****   {
+ 304:../../source/src/FWlib/src/stm32f10x_rtc.c ****     bitstatus = RESET;
+ 549              		.loc 1 304 0
+ 550 013c 1846     		mov	r0, r3
+ 551              	.LVL24:
+ 305:../../source/src/FWlib/src/stm32f10x_rtc.c ****   }
+ 306:../../source/src/FWlib/src/stm32f10x_rtc.c ****   return bitstatus;
+ 307:../../source/src/FWlib/src/stm32f10x_rtc.c **** }
+ 552              		.loc 1 307 0
+ 553 013e 7047     		bx	lr
+ 554              	.L51:
+ 555              		.align	2
+ 556              	.L50:
+ 557 0140 00280040 		.word	1073752064
+ 558              		.cfi_endproc
+ 559              	.LFE41:
+ 560              		.size	RTC_GetITStatus, .-RTC_GetITStatus
+ 561              		.align	1
+ 562              		.p2align 2,,3
+ 563              		.global	RTC_ClearITPendingBit
+ 564              		.syntax unified
+ 565              		.thumb
+ 566              		.thumb_func
+ 567              		.fpu softvfp
+ 568              		.type	RTC_ClearITPendingBit, %function
+ 569              	RTC_ClearITPendingBit:
+ 570              	.LFB44:
+ 571              		.cfi_startproc
+ 572              		@ args = 0, pretend = 0, frame = 0
+ 573              		@ frame_needed = 0, uses_anonymous_args = 0
+ 574              		@ link register save eliminated.
+ 575 0144 FFF7FEBF 		b	RTC_ClearFlag
+ 576              		.cfi_endproc
+ 577              	.LFE44:
+ 578              		.size	RTC_ClearITPendingBit, .-RTC_ClearITPendingBit
+ 579              	.Letext0:
+ 580              		.file 2 "f:\\arm\\gcc2018\\arm-none-eabi\\include\\machine\\_default_types.h"
+ 581              		.file 3 "f:\\arm\\gcc2018\\arm-none-eabi\\include\\sys\\_stdint.h"
+ 582              		.file 4 "../../source/include/core_cm3.h"
+ 583              		.file 5 "../../source/include/system_stm32f10x.h"
+ 584              		.file 6 "../../source/include/stm32f10x.h"
+ 585              		.section	.debug_info,"",%progbits
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccAK3oUr.s 			page 17
+
+
+ 586              	.Ldebug_info0:
+ 587 0000 F1040000 		.4byte	0x4f1
+ 588 0004 0200     		.2byte	0x2
+ 589 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 590 000a 04       		.byte	0x4
+ 591 000b 01       		.uleb128 0x1
+ 592 000c 2D030000 		.4byte	.LASF62
+ 593 0010 0C       		.byte	0xc
+ 594 0011 5F000000 		.4byte	.LASF63
+ 595 0015 9F020000 		.4byte	.LASF64
+ 596 0019 00000000 		.4byte	.Ltext0
+ 597 001d 48010000 		.4byte	.Letext0
+ 598 0021 00000000 		.4byte	.Ldebug_line0
+ 599 0025 02       		.uleb128 0x2
+ 600 0026 01       		.byte	0x1
+ 601 0027 06       		.byte	0x6
+ 602 0028 E5000000 		.4byte	.LASF0
+ 603 002c 03       		.uleb128 0x3
+ 604 002d 33010000 		.4byte	.LASF3
+ 605 0031 02       		.byte	0x2
+ 606 0032 2B       		.byte	0x2b
+ 607 0033 37000000 		.4byte	0x37
+ 608 0037 02       		.uleb128 0x2
+ 609 0038 01       		.byte	0x1
+ 610 0039 08       		.byte	0x8
+ 611 003a 5B010000 		.4byte	.LASF1
+ 612 003e 02       		.uleb128 0x2
+ 613 003f 02       		.byte	0x2
+ 614 0040 05       		.byte	0x5
+ 615 0041 A3000000 		.4byte	.LASF2
+ 616 0045 03       		.uleb128 0x3
+ 617 0046 98000000 		.4byte	.LASF4
+ 618 004a 02       		.byte	0x2
+ 619 004b 39       		.byte	0x39
+ 620 004c 50000000 		.4byte	0x50
+ 621 0050 02       		.uleb128 0x2
+ 622 0051 02       		.byte	0x2
+ 623 0052 07       		.byte	0x7
+ 624 0053 E7010000 		.4byte	.LASF5
+ 625 0057 02       		.uleb128 0x2
+ 626 0058 04       		.byte	0x4
+ 627 0059 05       		.byte	0x5
+ 628 005a 2A010000 		.4byte	.LASF6
+ 629 005e 03       		.uleb128 0x3
+ 630 005f 54000000 		.4byte	.LASF7
+ 631 0063 02       		.byte	0x2
+ 632 0064 4F       		.byte	0x4f
+ 633 0065 69000000 		.4byte	0x69
+ 634 0069 02       		.uleb128 0x2
+ 635 006a 04       		.byte	0x4
+ 636 006b 07       		.byte	0x7
+ 637 006c CA010000 		.4byte	.LASF8
+ 638 0070 02       		.uleb128 0x2
+ 639 0071 08       		.byte	0x8
+ 640 0072 05       		.byte	0x5
+ 641 0073 13010000 		.4byte	.LASF9
+ 642 0077 02       		.uleb128 0x2
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccAK3oUr.s 			page 18
+
+
+ 643 0078 08       		.byte	0x8
+ 644 0079 07       		.byte	0x7
+ 645 007a 94010000 		.4byte	.LASF10
+ 646 007e 04       		.uleb128 0x4
+ 647 007f 04       		.byte	0x4
+ 648 0080 05       		.byte	0x5
+ 649 0081 696E7400 		.ascii	"int\000"
+ 650 0085 05       		.uleb128 0x5
+ 651 0086 7E000000 		.4byte	0x7e
+ 652 008a 02       		.uleb128 0x2
+ 653 008b 04       		.byte	0x4
+ 654 008c 07       		.byte	0x7
+ 655 008d B4010000 		.4byte	.LASF11
+ 656 0091 03       		.uleb128 0x3
+ 657 0092 AD000000 		.4byte	.LASF12
+ 658 0096 03       		.byte	0x3
+ 659 0097 18       		.byte	0x18
+ 660 0098 2C000000 		.4byte	0x2c
+ 661 009c 03       		.uleb128 0x3
+ 662 009d C1010000 		.4byte	.LASF13
+ 663 00a1 03       		.byte	0x3
+ 664 00a2 24       		.byte	0x24
+ 665 00a3 45000000 		.4byte	0x45
+ 666 00a7 05       		.uleb128 0x5
+ 667 00a8 9C000000 		.4byte	0x9c
+ 668 00ac 03       		.uleb128 0x3
+ 669 00ad AB010000 		.4byte	.LASF14
+ 670 00b1 03       		.byte	0x3
+ 671 00b2 30       		.byte	0x30
+ 672 00b3 5E000000 		.4byte	0x5e
+ 673 00b7 06       		.uleb128 0x6
+ 674 00b8 DF030000 		.4byte	.LASF15
+ 675 00bc 04       		.byte	0x4
+ 676 00bd CE06     		.2byte	0x6ce
+ 677 00bf 85000000 		.4byte	0x85
+ 678 00c3 01       		.byte	0x1
+ 679 00c4 01       		.byte	0x1
+ 680 00c5 07       		.uleb128 0x7
+ 681 00c6 0D020000 		.4byte	.LASF16
+ 682 00ca 05       		.byte	0x5
+ 683 00cb 35       		.byte	0x35
+ 684 00cc AC000000 		.4byte	0xac
+ 685 00d0 01       		.byte	0x1
+ 686 00d1 01       		.byte	0x1
+ 687 00d2 08       		.uleb128 0x8
+ 688 00d3 07       		.byte	0x7
+ 689 00d4 01       		.byte	0x1
+ 690 00d5 37000000 		.4byte	0x37
+ 691 00d9 06       		.byte	0x6
+ 692 00da 0702     		.2byte	0x207
+ 693 00dc ED000000 		.4byte	0xed
+ 694 00e0 09       		.uleb128 0x9
+ 695 00e1 13030000 		.4byte	.LASF17
+ 696 00e5 00       		.byte	0
+ 697 00e6 0A       		.uleb128 0xa
+ 698 00e7 53455400 		.ascii	"SET\000"
+ 699 00eb 01       		.byte	0x1
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccAK3oUr.s 			page 19
+
+
+ 700 00ec 00       		.byte	0
+ 701 00ed 0B       		.uleb128 0xb
+ 702 00ee EC030000 		.4byte	.LASF18
+ 703 00f2 06       		.byte	0x6
+ 704 00f3 0702     		.2byte	0x207
+ 705 00f5 D2000000 		.4byte	0xd2
+ 706 00f9 0B       		.uleb128 0xb
+ 707 00fa 21010000 		.4byte	.LASF19
+ 708 00fe 06       		.byte	0x6
+ 709 00ff 0702     		.2byte	0x207
+ 710 0101 D2000000 		.4byte	0xd2
+ 711 0105 08       		.uleb128 0x8
+ 712 0106 07       		.byte	0x7
+ 713 0107 01       		.byte	0x1
+ 714 0108 37000000 		.4byte	0x37
+ 715 010c 06       		.byte	0x6
+ 716 010d 0902     		.2byte	0x209
+ 717 010f 20010000 		.4byte	0x120
+ 718 0113 09       		.uleb128 0x9
+ 719 0114 C7000000 		.4byte	.LASF20
+ 720 0118 00       		.byte	0
+ 721 0119 09       		.uleb128 0x9
+ 722 011a F7030000 		.4byte	.LASF21
+ 723 011e 01       		.byte	0x1
+ 724 011f 00       		.byte	0
+ 725 0120 0B       		.uleb128 0xb
+ 726 0121 EA020000 		.4byte	.LASF22
+ 727 0125 06       		.byte	0x6
+ 728 0126 0902     		.2byte	0x209
+ 729 0128 05010000 		.4byte	0x105
+ 730 012c 0C       		.uleb128 0xc
+ 731 012d 28       		.byte	0x28
+ 732 012e 06       		.byte	0x6
+ 733 012f 5004     		.2byte	0x450
+ 734 0131 62020000 		.4byte	0x262
+ 735 0135 0D       		.uleb128 0xd
+ 736 0136 43524800 		.ascii	"CRH\000"
+ 737 013a 06       		.byte	0x6
+ 738 013b 5204     		.2byte	0x452
+ 739 013d A7000000 		.4byte	0xa7
+ 740 0141 02       		.byte	0x2
+ 741 0142 23       		.byte	0x23
+ 742 0143 00       		.uleb128 0
+ 743 0144 0E       		.uleb128 0xe
+ 744 0145 2E020000 		.4byte	.LASF23
+ 745 0149 06       		.byte	0x6
+ 746 014a 5304     		.2byte	0x453
+ 747 014c 9C000000 		.4byte	0x9c
+ 748 0150 02       		.byte	0x2
+ 749 0151 23       		.byte	0x23
+ 750 0152 02       		.uleb128 0x2
+ 751 0153 0D       		.uleb128 0xd
+ 752 0154 43524C00 		.ascii	"CRL\000"
+ 753 0158 06       		.byte	0x6
+ 754 0159 5404     		.2byte	0x454
+ 755 015b A7000000 		.4byte	0xa7
+ 756 015f 02       		.byte	0x2
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccAK3oUr.s 			page 20
+
+
+ 757 0160 23       		.byte	0x23
+ 758 0161 04       		.uleb128 0x4
+ 759 0162 0E       		.uleb128 0xe
+ 760 0163 38020000 		.4byte	.LASF24
+ 761 0167 06       		.byte	0x6
+ 762 0168 5504     		.2byte	0x455
+ 763 016a 9C000000 		.4byte	0x9c
+ 764 016e 02       		.byte	0x2
+ 765 016f 23       		.byte	0x23
+ 766 0170 06       		.uleb128 0x6
+ 767 0171 0E       		.uleb128 0xe
+ 768 0172 7B010000 		.4byte	.LASF25
+ 769 0176 06       		.byte	0x6
+ 770 0177 5604     		.2byte	0x456
+ 771 0179 A7000000 		.4byte	0xa7
+ 772 017d 02       		.byte	0x2
+ 773 017e 23       		.byte	0x23
+ 774 017f 08       		.uleb128 0x8
+ 775 0180 0E       		.uleb128 0xe
+ 776 0181 42020000 		.4byte	.LASF26
+ 777 0185 06       		.byte	0x6
+ 778 0186 5704     		.2byte	0x457
+ 779 0188 9C000000 		.4byte	0x9c
+ 780 018c 02       		.byte	0x2
+ 781 018d 23       		.byte	0x23
+ 782 018e 0A       		.uleb128 0xa
+ 783 018f 0E       		.uleb128 0xe
+ 784 0190 80010000 		.4byte	.LASF27
+ 785 0194 06       		.byte	0x6
+ 786 0195 5804     		.2byte	0x458
+ 787 0197 A7000000 		.4byte	0xa7
+ 788 019b 02       		.byte	0x2
+ 789 019c 23       		.byte	0x23
+ 790 019d 0C       		.uleb128 0xc
+ 791 019e 0E       		.uleb128 0xe
+ 792 019f 4C020000 		.4byte	.LASF28
+ 793 01a3 06       		.byte	0x6
+ 794 01a4 5904     		.2byte	0x459
+ 795 01a6 9C000000 		.4byte	0x9c
+ 796 01aa 02       		.byte	0x2
+ 797 01ab 23       		.byte	0x23
+ 798 01ac 0E       		.uleb128 0xe
+ 799 01ad 0E       		.uleb128 0xe
+ 800 01ae 1E000000 		.4byte	.LASF29
+ 801 01b2 06       		.byte	0x6
+ 802 01b3 5A04     		.2byte	0x45a
+ 803 01b5 A7000000 		.4byte	0xa7
+ 804 01b9 02       		.byte	0x2
+ 805 01ba 23       		.byte	0x23
+ 806 01bb 10       		.uleb128 0x10
+ 807 01bc 0E       		.uleb128 0xe
+ 808 01bd 56020000 		.4byte	.LASF30
+ 809 01c1 06       		.byte	0x6
+ 810 01c2 5B04     		.2byte	0x45b
+ 811 01c4 9C000000 		.4byte	0x9c
+ 812 01c8 02       		.byte	0x2
+ 813 01c9 23       		.byte	0x23
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccAK3oUr.s 			page 21
+
+
+ 814 01ca 12       		.uleb128 0x12
+ 815 01cb 0E       		.uleb128 0xe
+ 816 01cc 23000000 		.4byte	.LASF31
+ 817 01d0 06       		.byte	0x6
+ 818 01d1 5C04     		.2byte	0x45c
+ 819 01d3 A7000000 		.4byte	0xa7
+ 820 01d7 02       		.byte	0x2
+ 821 01d8 23       		.byte	0x23
+ 822 01d9 14       		.uleb128 0x14
+ 823 01da 0E       		.uleb128 0xe
+ 824 01db 60020000 		.4byte	.LASF32
+ 825 01df 06       		.byte	0x6
+ 826 01e0 5D04     		.2byte	0x45d
+ 827 01e2 9C000000 		.4byte	0x9c
+ 828 01e6 02       		.byte	0x2
+ 829 01e7 23       		.byte	0x23
+ 830 01e8 16       		.uleb128 0x16
+ 831 01e9 0E       		.uleb128 0xe
+ 832 01ea 29020000 		.4byte	.LASF33
+ 833 01ee 06       		.byte	0x6
+ 834 01ef 5E04     		.2byte	0x45e
+ 835 01f1 A7000000 		.4byte	0xa7
+ 836 01f5 02       		.byte	0x2
+ 837 01f6 23       		.byte	0x23
+ 838 01f7 18       		.uleb128 0x18
+ 839 01f8 0E       		.uleb128 0xe
+ 840 01f9 6A020000 		.4byte	.LASF34
+ 841 01fd 06       		.byte	0x6
+ 842 01fe 5F04     		.2byte	0x45f
+ 843 0200 9C000000 		.4byte	0x9c
+ 844 0204 02       		.byte	0x2
+ 845 0205 23       		.byte	0x23
+ 846 0206 1A       		.uleb128 0x1a
+ 847 0207 0E       		.uleb128 0xe
+ 848 0208 0E030000 		.4byte	.LASF35
+ 849 020c 06       		.byte	0x6
+ 850 020d 6004     		.2byte	0x460
+ 851 020f A7000000 		.4byte	0xa7
+ 852 0213 02       		.byte	0x2
+ 853 0214 23       		.byte	0x23
+ 854 0215 1C       		.uleb128 0x1c
+ 855 0216 0E       		.uleb128 0xe
+ 856 0217 95020000 		.4byte	.LASF36
+ 857 021b 06       		.byte	0x6
+ 858 021c 6104     		.2byte	0x461
+ 859 021e 9C000000 		.4byte	0x9c
+ 860 0222 02       		.byte	0x2
+ 861 0223 23       		.byte	0x23
+ 862 0224 1E       		.uleb128 0x1e
+ 863 0225 0E       		.uleb128 0xe
+ 864 0226 28030000 		.4byte	.LASF37
+ 865 022a 06       		.byte	0x6
+ 866 022b 6204     		.2byte	0x462
+ 867 022d A7000000 		.4byte	0xa7
+ 868 0231 02       		.byte	0x2
+ 869 0232 23       		.byte	0x23
+ 870 0233 20       		.uleb128 0x20
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccAK3oUr.s 			page 22
+
+
+ 871 0234 0E       		.uleb128 0xe
+ 872 0235 81020000 		.4byte	.LASF38
+ 873 0239 06       		.byte	0x6
+ 874 023a 6304     		.2byte	0x463
+ 875 023c 9C000000 		.4byte	0x9c
+ 876 0240 02       		.byte	0x2
+ 877 0241 23       		.byte	0x23
+ 878 0242 22       		.uleb128 0x22
+ 879 0243 0E       		.uleb128 0xe
+ 880 0244 D3030000 		.4byte	.LASF39
+ 881 0248 06       		.byte	0x6
+ 882 0249 6404     		.2byte	0x464
+ 883 024b A7000000 		.4byte	0xa7
+ 884 024f 02       		.byte	0x2
+ 885 0250 23       		.byte	0x23
+ 886 0251 24       		.uleb128 0x24
+ 887 0252 0E       		.uleb128 0xe
+ 888 0253 8B020000 		.4byte	.LASF40
+ 889 0257 06       		.byte	0x6
+ 890 0258 6504     		.2byte	0x465
+ 891 025a 9C000000 		.4byte	0x9c
+ 892 025e 02       		.byte	0x2
+ 893 025f 23       		.byte	0x23
+ 894 0260 26       		.uleb128 0x26
+ 895 0261 00       		.byte	0
+ 896 0262 0B       		.uleb128 0xb
+ 897 0263 1D020000 		.4byte	.LASF41
+ 898 0267 06       		.byte	0x6
+ 899 0268 6604     		.2byte	0x466
+ 900 026a 2C010000 		.4byte	0x12c
+ 901 026e 0F       		.uleb128 0xf
+ 902 026f 01       		.byte	0x1
+ 903 0270 CF000000 		.4byte	.LASF65
+ 904 0274 01       		.byte	0x1
+ 905 0275 3E01     		.2byte	0x13e
+ 906 0277 01       		.byte	0x1
+ 907 0278 89020000 		.4byte	0x289
+ 908 027c 10       		.uleb128 0x10
+ 909 027d D8030000 		.4byte	.LASF42
+ 910 0281 01       		.byte	0x1
+ 911 0282 3E01     		.2byte	0x13e
+ 912 0284 9C000000 		.4byte	0x9c
+ 913 0288 00       		.byte	0
+ 914 0289 11       		.uleb128 0x11
+ 915 028a 01       		.byte	0x1
+ 916 028b 35000000 		.4byte	.LASF44
+ 917 028f 01       		.byte	0x1
+ 918 0290 2301     		.2byte	0x123
+ 919 0292 01       		.byte	0x1
+ 920 0293 F9000000 		.4byte	0xf9
+ 921 0297 24010000 		.4byte	.LFB41
+ 922 029b 44010000 		.4byte	.LFE41
+ 923 029f 02       		.byte	0x2
+ 924 02a0 7D       		.byte	0x7d
+ 925 02a1 00       		.sleb128 0
+ 926 02a2 01       		.byte	0x1
+ 927 02a3 C8020000 		.4byte	0x2c8
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccAK3oUr.s 			page 23
+
+
+ 928 02a7 12       		.uleb128 0x12
+ 929 02a8 D8030000 		.4byte	.LASF42
+ 930 02ac 01       		.byte	0x1
+ 931 02ad 2301     		.2byte	0x123
+ 932 02af 9C000000 		.4byte	0x9c
+ 933 02b3 00000000 		.4byte	.LLST9
+ 934 02b7 13       		.uleb128 0x13
+ 935 02b8 51010000 		.4byte	.LASF46
+ 936 02bc 01       		.byte	0x1
+ 937 02bd 2501     		.2byte	0x125
+ 938 02bf F9000000 		.4byte	0xf9
+ 939 02c3 3A000000 		.4byte	.LLST10
+ 940 02c7 00       		.byte	0
+ 941 02c8 14       		.uleb128 0x14
+ 942 02c9 01       		.byte	0x1
+ 943 02ca 8A000000 		.4byte	.LASF50
+ 944 02ce 01       		.byte	0x1
+ 945 02cf 1101     		.2byte	0x111
+ 946 02d1 01       		.byte	0x1
+ 947 02d2 14010000 		.4byte	.LFB40
+ 948 02d6 24010000 		.4byte	.LFE40
+ 949 02da 02       		.byte	0x2
+ 950 02db 7D       		.byte	0x7d
+ 951 02dc 00       		.sleb128 0
+ 952 02dd 01       		.byte	0x1
+ 953 02de F3020000 		.4byte	0x2f3
+ 954 02e2 12       		.uleb128 0x12
+ 955 02e3 B5000000 		.4byte	.LASF43
+ 956 02e7 01       		.byte	0x1
+ 957 02e8 1101     		.2byte	0x111
+ 958 02ea 9C000000 		.4byte	0x9c
+ 959 02ee 8A000000 		.4byte	.LLST8
+ 960 02f2 00       		.byte	0
+ 961 02f3 15       		.uleb128 0x15
+ 962 02f4 01       		.byte	0x1
+ 963 02f5 69010000 		.4byte	.LASF45
+ 964 02f9 01       		.byte	0x1
+ 965 02fa F4       		.byte	0xf4
+ 966 02fb 01       		.byte	0x1
+ 967 02fc ED000000 		.4byte	0xed
+ 968 0300 00010000 		.4byte	.LFB39
+ 969 0304 14010000 		.4byte	.LFE39
+ 970 0308 02       		.byte	0x2
+ 971 0309 7D       		.byte	0x7d
+ 972 030a 00       		.sleb128 0
+ 973 030b 01       		.byte	0x1
+ 974 030c 2F030000 		.4byte	0x32f
+ 975 0310 16       		.uleb128 0x16
+ 976 0311 B5000000 		.4byte	.LASF43
+ 977 0315 01       		.byte	0x1
+ 978 0316 F4       		.byte	0xf4
+ 979 0317 9C000000 		.4byte	0x9c
+ 980 031b AB000000 		.4byte	.LLST6
+ 981 031f 17       		.uleb128 0x17
+ 982 0320 51010000 		.4byte	.LASF46
+ 983 0324 01       		.byte	0x1
+ 984 0325 F6       		.byte	0xf6
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccAK3oUr.s 			page 24
+
+
+ 985 0326 ED000000 		.4byte	0xed
+ 986 032a CC000000 		.4byte	.LLST7
+ 987 032e 00       		.byte	0
+ 988 032f 18       		.uleb128 0x18
+ 989 0330 01       		.byte	0x1
+ 990 0331 F1000000 		.4byte	.LASF47
+ 991 0335 01       		.byte	0x1
+ 992 0336 DF       		.byte	0xdf
+ 993 0337 01       		.byte	0x1
+ 994 0338 E4000000 		.4byte	.LFB38
+ 995 033c 00010000 		.4byte	.LFE38
+ 996 0340 02       		.byte	0x2
+ 997 0341 7D       		.byte	0x7d
+ 998 0342 00       		.sleb128 0
+ 999 0343 01       		.byte	0x1
+ 1000 0344 18       		.uleb128 0x18
+ 1001 0345 01       		.byte	0x1
+ 1002 0346 3D010000 		.4byte	.LASF48
+ 1003 034a 01       		.byte	0x1
+ 1004 034b CF       		.byte	0xcf
+ 1005 034c 01       		.byte	0x1
+ 1006 034d D4000000 		.4byte	.LFB37
+ 1007 0351 E4000000 		.4byte	.LFE37
+ 1008 0355 02       		.byte	0x2
+ 1009 0356 7D       		.byte	0x7d
+ 1010 0357 00       		.sleb128 0
+ 1011 0358 01       		.byte	0x1
+ 1012 0359 15       		.uleb128 0x15
+ 1013 035a 01       		.byte	0x1
+ 1014 035b 04010000 		.4byte	.LASF49
+ 1015 035f 01       		.byte	0x1
+ 1016 0360 C1       		.byte	0xc1
+ 1017 0361 01       		.byte	0x1
+ 1018 0362 AC000000 		.4byte	0xac
+ 1019 0366 C0000000 		.4byte	.LFB36
+ 1020 036a D4000000 		.4byte	.LFE36
+ 1021 036e 02       		.byte	0x2
+ 1022 036f 7D       		.byte	0x7d
+ 1023 0370 00       		.sleb128 0
+ 1024 0371 01       		.byte	0x1
+ 1025 0372 86030000 		.4byte	0x386
+ 1026 0376 19       		.uleb128 0x19
+ 1027 0377 746D7000 		.ascii	"tmp\000"
+ 1028 037b 01       		.byte	0x1
+ 1029 037c C3       		.byte	0xc3
+ 1030 037d AC000000 		.4byte	0xac
+ 1031 0381 09010000 		.4byte	.LLST5
+ 1032 0385 00       		.byte	0
+ 1033 0386 1A       		.uleb128 0x1a
+ 1034 0387 01       		.byte	0x1
+ 1035 0388 74020000 		.4byte	.LASF51
+ 1036 038c 01       		.byte	0x1
+ 1037 038d B2       		.byte	0xb2
+ 1038 038e 01       		.byte	0x1
+ 1039 038f 9C000000 		.4byte	.LFB35
+ 1040 0393 C0000000 		.4byte	.LFE35
+ 1041 0397 02       		.byte	0x2
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccAK3oUr.s 			page 25
+
+
+ 1042 0398 7D       		.byte	0x7d
+ 1043 0399 00       		.sleb128 0
+ 1044 039a 01       		.byte	0x1
+ 1045 039b CD030000 		.4byte	0x3cd
+ 1046 039f 16       		.uleb128 0x16
+ 1047 03a0 DC010000 		.4byte	.LASF52
+ 1048 03a4 01       		.byte	0x1
+ 1049 03a5 B2       		.byte	0xb2
+ 1050 03a6 AC000000 		.4byte	0xac
+ 1051 03aa 31010000 		.4byte	.LLST4
+ 1052 03ae 1B       		.uleb128 0x1b
+ 1053 03af 92040000 		.4byte	0x492
+ 1054 03b3 9C000000 		.4byte	.LBB30
+ 1055 03b7 40000000 		.4byte	.Ldebug_ranges0+0x40
+ 1056 03bb 01       		.byte	0x1
+ 1057 03bc B4       		.byte	0xb4
+ 1058 03bd 1C       		.uleb128 0x1c
+ 1059 03be 88040000 		.4byte	0x488
+ 1060 03c2 AE000000 		.4byte	.LBB36
+ 1061 03c6 BA000000 		.4byte	.LBE36
+ 1062 03ca 01       		.byte	0x1
+ 1063 03cb B9       		.byte	0xb9
+ 1064 03cc 00       		.byte	0
+ 1065 03cd 1A       		.uleb128 0x1a
+ 1066 03ce 01       		.byte	0x1
+ 1067 03cf 00000000 		.4byte	.LASF53
+ 1068 03d3 01       		.byte	0x1
+ 1069 03d4 A0       		.byte	0xa0
+ 1070 03d5 01       		.byte	0x1
+ 1071 03d6 74000000 		.4byte	.LFB34
+ 1072 03da 9C000000 		.4byte	.LFE34
+ 1073 03de 02       		.byte	0x2
+ 1074 03df 7D       		.byte	0x7d
+ 1075 03e0 00       		.sleb128 0
+ 1076 03e1 01       		.byte	0x1
+ 1077 03e2 14040000 		.4byte	0x414
+ 1078 03e6 16       		.uleb128 0x16
+ 1079 03e7 85010000 		.4byte	.LASF54
+ 1080 03eb 01       		.byte	0x1
+ 1081 03ec A0       		.byte	0xa0
+ 1082 03ed AC000000 		.4byte	0xac
+ 1083 03f1 52010000 		.4byte	.LLST3
+ 1084 03f5 1B       		.uleb128 0x1b
+ 1085 03f6 92040000 		.4byte	0x492
+ 1086 03fa 74000000 		.4byte	.LBB22
+ 1087 03fe 20000000 		.4byte	.Ldebug_ranges0+0x20
+ 1088 0402 01       		.byte	0x1
+ 1089 0403 A5       		.byte	0xa5
+ 1090 0404 1C       		.uleb128 0x1c
+ 1091 0405 88040000 		.4byte	0x488
+ 1092 0409 88000000 		.4byte	.LBB28
+ 1093 040d 94000000 		.4byte	.LBE28
+ 1094 0411 01       		.byte	0x1
+ 1095 0412 AA       		.byte	0xaa
+ 1096 0413 00       		.byte	0
+ 1097 0414 1A       		.uleb128 0x1a
+ 1098 0415 01       		.byte	0x1
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccAK3oUr.s 			page 26
+
+
+ 1099 0416 45000000 		.4byte	.LASF55
+ 1100 041a 01       		.byte	0x1
+ 1101 041b 91       		.byte	0x91
+ 1102 041c 01       		.byte	0x1
+ 1103 041d 50000000 		.4byte	.LFB33
+ 1104 0421 74000000 		.4byte	.LFE33
+ 1105 0425 02       		.byte	0x2
+ 1106 0426 7D       		.byte	0x7d
+ 1107 0427 00       		.sleb128 0
+ 1108 0428 01       		.byte	0x1
+ 1109 0429 5B040000 		.4byte	0x45b
+ 1110 042d 16       		.uleb128 0x16
+ 1111 042e 28000000 		.4byte	.LASF56
+ 1112 0432 01       		.byte	0x1
+ 1113 0433 91       		.byte	0x91
+ 1114 0434 AC000000 		.4byte	0xac
+ 1115 0438 73010000 		.4byte	.LLST2
+ 1116 043c 1B       		.uleb128 0x1b
+ 1117 043d 92040000 		.4byte	0x492
+ 1118 0441 50000000 		.4byte	.LBB14
+ 1119 0445 00000000 		.4byte	.Ldebug_ranges0+0
+ 1120 0449 01       		.byte	0x1
+ 1121 044a 93       		.byte	0x93
+ 1122 044b 1C       		.uleb128 0x1c
+ 1123 044c 88040000 		.4byte	0x488
+ 1124 0450 62000000 		.4byte	.LBB20
+ 1125 0454 6E000000 		.4byte	.LBE20
+ 1126 0458 01       		.byte	0x1
+ 1127 0459 98       		.byte	0x98
+ 1128 045a 00       		.byte	0
+ 1129 045b 15       		.uleb128 0x15
+ 1130 045c 01       		.byte	0x1
+ 1131 045d 19030000 		.4byte	.LASF57
+ 1132 0461 01       		.byte	0x1
+ 1133 0462 85       		.byte	0x85
+ 1134 0463 01       		.byte	0x1
+ 1135 0464 AC000000 		.4byte	0xac
+ 1136 0468 40000000 		.4byte	.LFB32
+ 1137 046c 50000000 		.4byte	.LFE32
+ 1138 0470 02       		.byte	0x2
+ 1139 0471 7D       		.byte	0x7d
+ 1140 0472 00       		.sleb128 0
+ 1141 0473 01       		.byte	0x1
+ 1142 0474 88040000 		.4byte	0x488
+ 1143 0478 19       		.uleb128 0x19
+ 1144 0479 746D7000 		.ascii	"tmp\000"
+ 1145 047d 01       		.byte	0x1
+ 1146 047e 87       		.byte	0x87
+ 1147 047f 9C000000 		.4byte	0x9c
+ 1148 0483 94010000 		.4byte	.LLST1
+ 1149 0487 00       		.byte	0
+ 1150 0488 1D       		.uleb128 0x1d
+ 1151 0489 01       		.byte	0x1
+ 1152 048a FA010000 		.4byte	.LASF58
+ 1153 048e 01       		.byte	0x1
+ 1154 048f 7A       		.byte	0x7a
+ 1155 0490 01       		.byte	0x1
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccAK3oUr.s 			page 27
+
+
+ 1156 0491 01       		.byte	0x1
+ 1157 0492 1D       		.uleb128 0x1d
+ 1158 0493 01       		.byte	0x1
+ 1159 0494 FA020000 		.4byte	.LASF59
+ 1160 0498 01       		.byte	0x1
+ 1161 0499 6F       		.byte	0x6f
+ 1162 049a 01       		.byte	0x1
+ 1163 049b 01       		.byte	0x1
+ 1164 049c 1A       		.uleb128 0x1a
+ 1165 049d 01       		.byte	0x1
+ 1166 049e 11000000 		.4byte	.LASF60
+ 1167 04a2 01       		.byte	0x1
+ 1168 04a3 5A       		.byte	0x5a
+ 1169 04a4 01       		.byte	0x1
+ 1170 04a5 00000000 		.4byte	.LFB29
+ 1171 04a9 1C000000 		.4byte	.LFE29
+ 1172 04ad 02       		.byte	0x2
+ 1173 04ae 7D       		.byte	0x7d
+ 1174 04af 00       		.sleb128 0
+ 1175 04b0 01       		.byte	0x1
+ 1176 04b1 D2040000 		.4byte	0x4d2
+ 1177 04b5 16       		.uleb128 0x16
+ 1178 04b6 D8030000 		.4byte	.LASF42
+ 1179 04ba 01       		.byte	0x1
+ 1180 04bb 5A       		.byte	0x5a
+ 1181 04bc 9C000000 		.4byte	0x9c
+ 1182 04c0 B3010000 		.4byte	.LLST0
+ 1183 04c4 1E       		.uleb128 0x1e
+ 1184 04c5 BE000000 		.4byte	.LASF61
+ 1185 04c9 01       		.byte	0x1
+ 1186 04ca 5A       		.byte	0x5a
+ 1187 04cb 20010000 		.4byte	0x120
+ 1188 04cf 01       		.byte	0x1
+ 1189 04d0 51       		.byte	0x51
+ 1190 04d1 00       		.byte	0
+ 1191 04d2 1F       		.uleb128 0x1f
+ 1192 04d3 92040000 		.4byte	0x492
+ 1193 04d7 1C000000 		.4byte	.LFB30
+ 1194 04db 2C000000 		.4byte	.LFE30
+ 1195 04df 02       		.byte	0x2
+ 1196 04e0 7D       		.byte	0x7d
+ 1197 04e1 00       		.sleb128 0
+ 1198 04e2 01       		.byte	0x1
+ 1199 04e3 1F       		.uleb128 0x1f
+ 1200 04e4 88040000 		.4byte	0x488
+ 1201 04e8 2C000000 		.4byte	.LFB31
+ 1202 04ec 40000000 		.4byte	.LFE31
+ 1203 04f0 02       		.byte	0x2
+ 1204 04f1 7D       		.byte	0x7d
+ 1205 04f2 00       		.sleb128 0
+ 1206 04f3 01       		.byte	0x1
+ 1207 04f4 00       		.byte	0
+ 1208              		.section	.debug_abbrev,"",%progbits
+ 1209              	.Ldebug_abbrev0:
+ 1210 0000 01       		.uleb128 0x1
+ 1211 0001 11       		.uleb128 0x11
+ 1212 0002 01       		.byte	0x1
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccAK3oUr.s 			page 28
+
+
+ 1213 0003 25       		.uleb128 0x25
+ 1214 0004 0E       		.uleb128 0xe
+ 1215 0005 13       		.uleb128 0x13
+ 1216 0006 0B       		.uleb128 0xb
+ 1217 0007 03       		.uleb128 0x3
+ 1218 0008 0E       		.uleb128 0xe
+ 1219 0009 1B       		.uleb128 0x1b
+ 1220 000a 0E       		.uleb128 0xe
+ 1221 000b 11       		.uleb128 0x11
+ 1222 000c 01       		.uleb128 0x1
+ 1223 000d 12       		.uleb128 0x12
+ 1224 000e 01       		.uleb128 0x1
+ 1225 000f 10       		.uleb128 0x10
+ 1226 0010 06       		.uleb128 0x6
+ 1227 0011 00       		.byte	0
+ 1228 0012 00       		.byte	0
+ 1229 0013 02       		.uleb128 0x2
+ 1230 0014 24       		.uleb128 0x24
+ 1231 0015 00       		.byte	0
+ 1232 0016 0B       		.uleb128 0xb
+ 1233 0017 0B       		.uleb128 0xb
+ 1234 0018 3E       		.uleb128 0x3e
+ 1235 0019 0B       		.uleb128 0xb
+ 1236 001a 03       		.uleb128 0x3
+ 1237 001b 0E       		.uleb128 0xe
+ 1238 001c 00       		.byte	0
+ 1239 001d 00       		.byte	0
+ 1240 001e 03       		.uleb128 0x3
+ 1241 001f 16       		.uleb128 0x16
+ 1242 0020 00       		.byte	0
+ 1243 0021 03       		.uleb128 0x3
+ 1244 0022 0E       		.uleb128 0xe
+ 1245 0023 3A       		.uleb128 0x3a
+ 1246 0024 0B       		.uleb128 0xb
+ 1247 0025 3B       		.uleb128 0x3b
+ 1248 0026 0B       		.uleb128 0xb
+ 1249 0027 49       		.uleb128 0x49
+ 1250 0028 13       		.uleb128 0x13
+ 1251 0029 00       		.byte	0
+ 1252 002a 00       		.byte	0
+ 1253 002b 04       		.uleb128 0x4
+ 1254 002c 24       		.uleb128 0x24
+ 1255 002d 00       		.byte	0
+ 1256 002e 0B       		.uleb128 0xb
+ 1257 002f 0B       		.uleb128 0xb
+ 1258 0030 3E       		.uleb128 0x3e
+ 1259 0031 0B       		.uleb128 0xb
+ 1260 0032 03       		.uleb128 0x3
+ 1261 0033 08       		.uleb128 0x8
+ 1262 0034 00       		.byte	0
+ 1263 0035 00       		.byte	0
+ 1264 0036 05       		.uleb128 0x5
+ 1265 0037 35       		.uleb128 0x35
+ 1266 0038 00       		.byte	0
+ 1267 0039 49       		.uleb128 0x49
+ 1268 003a 13       		.uleb128 0x13
+ 1269 003b 00       		.byte	0
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccAK3oUr.s 			page 29
+
+
+ 1270 003c 00       		.byte	0
+ 1271 003d 06       		.uleb128 0x6
+ 1272 003e 34       		.uleb128 0x34
+ 1273 003f 00       		.byte	0
+ 1274 0040 03       		.uleb128 0x3
+ 1275 0041 0E       		.uleb128 0xe
+ 1276 0042 3A       		.uleb128 0x3a
+ 1277 0043 0B       		.uleb128 0xb
+ 1278 0044 3B       		.uleb128 0x3b
+ 1279 0045 05       		.uleb128 0x5
+ 1280 0046 49       		.uleb128 0x49
+ 1281 0047 13       		.uleb128 0x13
+ 1282 0048 3F       		.uleb128 0x3f
+ 1283 0049 0C       		.uleb128 0xc
+ 1284 004a 3C       		.uleb128 0x3c
+ 1285 004b 0C       		.uleb128 0xc
+ 1286 004c 00       		.byte	0
+ 1287 004d 00       		.byte	0
+ 1288 004e 07       		.uleb128 0x7
+ 1289 004f 34       		.uleb128 0x34
+ 1290 0050 00       		.byte	0
+ 1291 0051 03       		.uleb128 0x3
+ 1292 0052 0E       		.uleb128 0xe
+ 1293 0053 3A       		.uleb128 0x3a
+ 1294 0054 0B       		.uleb128 0xb
+ 1295 0055 3B       		.uleb128 0x3b
+ 1296 0056 0B       		.uleb128 0xb
+ 1297 0057 49       		.uleb128 0x49
+ 1298 0058 13       		.uleb128 0x13
+ 1299 0059 3F       		.uleb128 0x3f
+ 1300 005a 0C       		.uleb128 0xc
+ 1301 005b 3C       		.uleb128 0x3c
+ 1302 005c 0C       		.uleb128 0xc
+ 1303 005d 00       		.byte	0
+ 1304 005e 00       		.byte	0
+ 1305 005f 08       		.uleb128 0x8
+ 1306 0060 04       		.uleb128 0x4
+ 1307 0061 01       		.byte	0x1
+ 1308 0062 3E       		.uleb128 0x3e
+ 1309 0063 0B       		.uleb128 0xb
+ 1310 0064 0B       		.uleb128 0xb
+ 1311 0065 0B       		.uleb128 0xb
+ 1312 0066 49       		.uleb128 0x49
+ 1313 0067 13       		.uleb128 0x13
+ 1314 0068 3A       		.uleb128 0x3a
+ 1315 0069 0B       		.uleb128 0xb
+ 1316 006a 3B       		.uleb128 0x3b
+ 1317 006b 05       		.uleb128 0x5
+ 1318 006c 01       		.uleb128 0x1
+ 1319 006d 13       		.uleb128 0x13
+ 1320 006e 00       		.byte	0
+ 1321 006f 00       		.byte	0
+ 1322 0070 09       		.uleb128 0x9
+ 1323 0071 28       		.uleb128 0x28
+ 1324 0072 00       		.byte	0
+ 1325 0073 03       		.uleb128 0x3
+ 1326 0074 0E       		.uleb128 0xe
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccAK3oUr.s 			page 30
+
+
+ 1327 0075 1C       		.uleb128 0x1c
+ 1328 0076 0B       		.uleb128 0xb
+ 1329 0077 00       		.byte	0
+ 1330 0078 00       		.byte	0
+ 1331 0079 0A       		.uleb128 0xa
+ 1332 007a 28       		.uleb128 0x28
+ 1333 007b 00       		.byte	0
+ 1334 007c 03       		.uleb128 0x3
+ 1335 007d 08       		.uleb128 0x8
+ 1336 007e 1C       		.uleb128 0x1c
+ 1337 007f 0B       		.uleb128 0xb
+ 1338 0080 00       		.byte	0
+ 1339 0081 00       		.byte	0
+ 1340 0082 0B       		.uleb128 0xb
+ 1341 0083 16       		.uleb128 0x16
+ 1342 0084 00       		.byte	0
+ 1343 0085 03       		.uleb128 0x3
+ 1344 0086 0E       		.uleb128 0xe
+ 1345 0087 3A       		.uleb128 0x3a
+ 1346 0088 0B       		.uleb128 0xb
+ 1347 0089 3B       		.uleb128 0x3b
+ 1348 008a 05       		.uleb128 0x5
+ 1349 008b 49       		.uleb128 0x49
+ 1350 008c 13       		.uleb128 0x13
+ 1351 008d 00       		.byte	0
+ 1352 008e 00       		.byte	0
+ 1353 008f 0C       		.uleb128 0xc
+ 1354 0090 13       		.uleb128 0x13
+ 1355 0091 01       		.byte	0x1
+ 1356 0092 0B       		.uleb128 0xb
+ 1357 0093 0B       		.uleb128 0xb
+ 1358 0094 3A       		.uleb128 0x3a
+ 1359 0095 0B       		.uleb128 0xb
+ 1360 0096 3B       		.uleb128 0x3b
+ 1361 0097 05       		.uleb128 0x5
+ 1362 0098 01       		.uleb128 0x1
+ 1363 0099 13       		.uleb128 0x13
+ 1364 009a 00       		.byte	0
+ 1365 009b 00       		.byte	0
+ 1366 009c 0D       		.uleb128 0xd
+ 1367 009d 0D       		.uleb128 0xd
+ 1368 009e 00       		.byte	0
+ 1369 009f 03       		.uleb128 0x3
+ 1370 00a0 08       		.uleb128 0x8
+ 1371 00a1 3A       		.uleb128 0x3a
+ 1372 00a2 0B       		.uleb128 0xb
+ 1373 00a3 3B       		.uleb128 0x3b
+ 1374 00a4 05       		.uleb128 0x5
+ 1375 00a5 49       		.uleb128 0x49
+ 1376 00a6 13       		.uleb128 0x13
+ 1377 00a7 38       		.uleb128 0x38
+ 1378 00a8 0A       		.uleb128 0xa
+ 1379 00a9 00       		.byte	0
+ 1380 00aa 00       		.byte	0
+ 1381 00ab 0E       		.uleb128 0xe
+ 1382 00ac 0D       		.uleb128 0xd
+ 1383 00ad 00       		.byte	0
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccAK3oUr.s 			page 31
+
+
+ 1384 00ae 03       		.uleb128 0x3
+ 1385 00af 0E       		.uleb128 0xe
+ 1386 00b0 3A       		.uleb128 0x3a
+ 1387 00b1 0B       		.uleb128 0xb
+ 1388 00b2 3B       		.uleb128 0x3b
+ 1389 00b3 05       		.uleb128 0x5
+ 1390 00b4 49       		.uleb128 0x49
+ 1391 00b5 13       		.uleb128 0x13
+ 1392 00b6 38       		.uleb128 0x38
+ 1393 00b7 0A       		.uleb128 0xa
+ 1394 00b8 00       		.byte	0
+ 1395 00b9 00       		.byte	0
+ 1396 00ba 0F       		.uleb128 0xf
+ 1397 00bb 2E       		.uleb128 0x2e
+ 1398 00bc 01       		.byte	0x1
+ 1399 00bd 3F       		.uleb128 0x3f
+ 1400 00be 0C       		.uleb128 0xc
+ 1401 00bf 03       		.uleb128 0x3
+ 1402 00c0 0E       		.uleb128 0xe
+ 1403 00c1 3A       		.uleb128 0x3a
+ 1404 00c2 0B       		.uleb128 0xb
+ 1405 00c3 3B       		.uleb128 0x3b
+ 1406 00c4 05       		.uleb128 0x5
+ 1407 00c5 27       		.uleb128 0x27
+ 1408 00c6 0C       		.uleb128 0xc
+ 1409 00c7 01       		.uleb128 0x1
+ 1410 00c8 13       		.uleb128 0x13
+ 1411 00c9 00       		.byte	0
+ 1412 00ca 00       		.byte	0
+ 1413 00cb 10       		.uleb128 0x10
+ 1414 00cc 05       		.uleb128 0x5
+ 1415 00cd 00       		.byte	0
+ 1416 00ce 03       		.uleb128 0x3
+ 1417 00cf 0E       		.uleb128 0xe
+ 1418 00d0 3A       		.uleb128 0x3a
+ 1419 00d1 0B       		.uleb128 0xb
+ 1420 00d2 3B       		.uleb128 0x3b
+ 1421 00d3 05       		.uleb128 0x5
+ 1422 00d4 49       		.uleb128 0x49
+ 1423 00d5 13       		.uleb128 0x13
+ 1424 00d6 00       		.byte	0
+ 1425 00d7 00       		.byte	0
+ 1426 00d8 11       		.uleb128 0x11
+ 1427 00d9 2E       		.uleb128 0x2e
+ 1428 00da 01       		.byte	0x1
+ 1429 00db 3F       		.uleb128 0x3f
+ 1430 00dc 0C       		.uleb128 0xc
+ 1431 00dd 03       		.uleb128 0x3
+ 1432 00de 0E       		.uleb128 0xe
+ 1433 00df 3A       		.uleb128 0x3a
+ 1434 00e0 0B       		.uleb128 0xb
+ 1435 00e1 3B       		.uleb128 0x3b
+ 1436 00e2 05       		.uleb128 0x5
+ 1437 00e3 27       		.uleb128 0x27
+ 1438 00e4 0C       		.uleb128 0xc
+ 1439 00e5 49       		.uleb128 0x49
+ 1440 00e6 13       		.uleb128 0x13
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccAK3oUr.s 			page 32
+
+
+ 1441 00e7 11       		.uleb128 0x11
+ 1442 00e8 01       		.uleb128 0x1
+ 1443 00e9 12       		.uleb128 0x12
+ 1444 00ea 01       		.uleb128 0x1
+ 1445 00eb 40       		.uleb128 0x40
+ 1446 00ec 0A       		.uleb128 0xa
+ 1447 00ed 9742     		.uleb128 0x2117
+ 1448 00ef 0C       		.uleb128 0xc
+ 1449 00f0 01       		.uleb128 0x1
+ 1450 00f1 13       		.uleb128 0x13
+ 1451 00f2 00       		.byte	0
+ 1452 00f3 00       		.byte	0
+ 1453 00f4 12       		.uleb128 0x12
+ 1454 00f5 05       		.uleb128 0x5
+ 1455 00f6 00       		.byte	0
+ 1456 00f7 03       		.uleb128 0x3
+ 1457 00f8 0E       		.uleb128 0xe
+ 1458 00f9 3A       		.uleb128 0x3a
+ 1459 00fa 0B       		.uleb128 0xb
+ 1460 00fb 3B       		.uleb128 0x3b
+ 1461 00fc 05       		.uleb128 0x5
+ 1462 00fd 49       		.uleb128 0x49
+ 1463 00fe 13       		.uleb128 0x13
+ 1464 00ff 02       		.uleb128 0x2
+ 1465 0100 06       		.uleb128 0x6
+ 1466 0101 00       		.byte	0
+ 1467 0102 00       		.byte	0
+ 1468 0103 13       		.uleb128 0x13
+ 1469 0104 34       		.uleb128 0x34
+ 1470 0105 00       		.byte	0
+ 1471 0106 03       		.uleb128 0x3
+ 1472 0107 0E       		.uleb128 0xe
+ 1473 0108 3A       		.uleb128 0x3a
+ 1474 0109 0B       		.uleb128 0xb
+ 1475 010a 3B       		.uleb128 0x3b
+ 1476 010b 05       		.uleb128 0x5
+ 1477 010c 49       		.uleb128 0x49
+ 1478 010d 13       		.uleb128 0x13
+ 1479 010e 02       		.uleb128 0x2
+ 1480 010f 06       		.uleb128 0x6
+ 1481 0110 00       		.byte	0
+ 1482 0111 00       		.byte	0
+ 1483 0112 14       		.uleb128 0x14
+ 1484 0113 2E       		.uleb128 0x2e
+ 1485 0114 01       		.byte	0x1
+ 1486 0115 3F       		.uleb128 0x3f
+ 1487 0116 0C       		.uleb128 0xc
+ 1488 0117 03       		.uleb128 0x3
+ 1489 0118 0E       		.uleb128 0xe
+ 1490 0119 3A       		.uleb128 0x3a
+ 1491 011a 0B       		.uleb128 0xb
+ 1492 011b 3B       		.uleb128 0x3b
+ 1493 011c 05       		.uleb128 0x5
+ 1494 011d 27       		.uleb128 0x27
+ 1495 011e 0C       		.uleb128 0xc
+ 1496 011f 11       		.uleb128 0x11
+ 1497 0120 01       		.uleb128 0x1
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccAK3oUr.s 			page 33
+
+
+ 1498 0121 12       		.uleb128 0x12
+ 1499 0122 01       		.uleb128 0x1
+ 1500 0123 40       		.uleb128 0x40
+ 1501 0124 0A       		.uleb128 0xa
+ 1502 0125 9742     		.uleb128 0x2117
+ 1503 0127 0C       		.uleb128 0xc
+ 1504 0128 01       		.uleb128 0x1
+ 1505 0129 13       		.uleb128 0x13
+ 1506 012a 00       		.byte	0
+ 1507 012b 00       		.byte	0
+ 1508 012c 15       		.uleb128 0x15
+ 1509 012d 2E       		.uleb128 0x2e
+ 1510 012e 01       		.byte	0x1
+ 1511 012f 3F       		.uleb128 0x3f
+ 1512 0130 0C       		.uleb128 0xc
+ 1513 0131 03       		.uleb128 0x3
+ 1514 0132 0E       		.uleb128 0xe
+ 1515 0133 3A       		.uleb128 0x3a
+ 1516 0134 0B       		.uleb128 0xb
+ 1517 0135 3B       		.uleb128 0x3b
+ 1518 0136 0B       		.uleb128 0xb
+ 1519 0137 27       		.uleb128 0x27
+ 1520 0138 0C       		.uleb128 0xc
+ 1521 0139 49       		.uleb128 0x49
+ 1522 013a 13       		.uleb128 0x13
+ 1523 013b 11       		.uleb128 0x11
+ 1524 013c 01       		.uleb128 0x1
+ 1525 013d 12       		.uleb128 0x12
+ 1526 013e 01       		.uleb128 0x1
+ 1527 013f 40       		.uleb128 0x40
+ 1528 0140 0A       		.uleb128 0xa
+ 1529 0141 9742     		.uleb128 0x2117
+ 1530 0143 0C       		.uleb128 0xc
+ 1531 0144 01       		.uleb128 0x1
+ 1532 0145 13       		.uleb128 0x13
+ 1533 0146 00       		.byte	0
+ 1534 0147 00       		.byte	0
+ 1535 0148 16       		.uleb128 0x16
+ 1536 0149 05       		.uleb128 0x5
+ 1537 014a 00       		.byte	0
+ 1538 014b 03       		.uleb128 0x3
+ 1539 014c 0E       		.uleb128 0xe
+ 1540 014d 3A       		.uleb128 0x3a
+ 1541 014e 0B       		.uleb128 0xb
+ 1542 014f 3B       		.uleb128 0x3b
+ 1543 0150 0B       		.uleb128 0xb
+ 1544 0151 49       		.uleb128 0x49
+ 1545 0152 13       		.uleb128 0x13
+ 1546 0153 02       		.uleb128 0x2
+ 1547 0154 06       		.uleb128 0x6
+ 1548 0155 00       		.byte	0
+ 1549 0156 00       		.byte	0
+ 1550 0157 17       		.uleb128 0x17
+ 1551 0158 34       		.uleb128 0x34
+ 1552 0159 00       		.byte	0
+ 1553 015a 03       		.uleb128 0x3
+ 1554 015b 0E       		.uleb128 0xe
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccAK3oUr.s 			page 34
+
+
+ 1555 015c 3A       		.uleb128 0x3a
+ 1556 015d 0B       		.uleb128 0xb
+ 1557 015e 3B       		.uleb128 0x3b
+ 1558 015f 0B       		.uleb128 0xb
+ 1559 0160 49       		.uleb128 0x49
+ 1560 0161 13       		.uleb128 0x13
+ 1561 0162 02       		.uleb128 0x2
+ 1562 0163 06       		.uleb128 0x6
+ 1563 0164 00       		.byte	0
+ 1564 0165 00       		.byte	0
+ 1565 0166 18       		.uleb128 0x18
+ 1566 0167 2E       		.uleb128 0x2e
+ 1567 0168 00       		.byte	0
+ 1568 0169 3F       		.uleb128 0x3f
+ 1569 016a 0C       		.uleb128 0xc
+ 1570 016b 03       		.uleb128 0x3
+ 1571 016c 0E       		.uleb128 0xe
+ 1572 016d 3A       		.uleb128 0x3a
+ 1573 016e 0B       		.uleb128 0xb
+ 1574 016f 3B       		.uleb128 0x3b
+ 1575 0170 0B       		.uleb128 0xb
+ 1576 0171 27       		.uleb128 0x27
+ 1577 0172 0C       		.uleb128 0xc
+ 1578 0173 11       		.uleb128 0x11
+ 1579 0174 01       		.uleb128 0x1
+ 1580 0175 12       		.uleb128 0x12
+ 1581 0176 01       		.uleb128 0x1
+ 1582 0177 40       		.uleb128 0x40
+ 1583 0178 0A       		.uleb128 0xa
+ 1584 0179 9742     		.uleb128 0x2117
+ 1585 017b 0C       		.uleb128 0xc
+ 1586 017c 00       		.byte	0
+ 1587 017d 00       		.byte	0
+ 1588 017e 19       		.uleb128 0x19
+ 1589 017f 34       		.uleb128 0x34
+ 1590 0180 00       		.byte	0
+ 1591 0181 03       		.uleb128 0x3
+ 1592 0182 08       		.uleb128 0x8
+ 1593 0183 3A       		.uleb128 0x3a
+ 1594 0184 0B       		.uleb128 0xb
+ 1595 0185 3B       		.uleb128 0x3b
+ 1596 0186 0B       		.uleb128 0xb
+ 1597 0187 49       		.uleb128 0x49
+ 1598 0188 13       		.uleb128 0x13
+ 1599 0189 02       		.uleb128 0x2
+ 1600 018a 06       		.uleb128 0x6
+ 1601 018b 00       		.byte	0
+ 1602 018c 00       		.byte	0
+ 1603 018d 1A       		.uleb128 0x1a
+ 1604 018e 2E       		.uleb128 0x2e
+ 1605 018f 01       		.byte	0x1
+ 1606 0190 3F       		.uleb128 0x3f
+ 1607 0191 0C       		.uleb128 0xc
+ 1608 0192 03       		.uleb128 0x3
+ 1609 0193 0E       		.uleb128 0xe
+ 1610 0194 3A       		.uleb128 0x3a
+ 1611 0195 0B       		.uleb128 0xb
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccAK3oUr.s 			page 35
+
+
+ 1612 0196 3B       		.uleb128 0x3b
+ 1613 0197 0B       		.uleb128 0xb
+ 1614 0198 27       		.uleb128 0x27
+ 1615 0199 0C       		.uleb128 0xc
+ 1616 019a 11       		.uleb128 0x11
+ 1617 019b 01       		.uleb128 0x1
+ 1618 019c 12       		.uleb128 0x12
+ 1619 019d 01       		.uleb128 0x1
+ 1620 019e 40       		.uleb128 0x40
+ 1621 019f 0A       		.uleb128 0xa
+ 1622 01a0 9742     		.uleb128 0x2117
+ 1623 01a2 0C       		.uleb128 0xc
+ 1624 01a3 01       		.uleb128 0x1
+ 1625 01a4 13       		.uleb128 0x13
+ 1626 01a5 00       		.byte	0
+ 1627 01a6 00       		.byte	0
+ 1628 01a7 1B       		.uleb128 0x1b
+ 1629 01a8 1D       		.uleb128 0x1d
+ 1630 01a9 00       		.byte	0
+ 1631 01aa 31       		.uleb128 0x31
+ 1632 01ab 13       		.uleb128 0x13
+ 1633 01ac 52       		.uleb128 0x52
+ 1634 01ad 01       		.uleb128 0x1
+ 1635 01ae 55       		.uleb128 0x55
+ 1636 01af 06       		.uleb128 0x6
+ 1637 01b0 58       		.uleb128 0x58
+ 1638 01b1 0B       		.uleb128 0xb
+ 1639 01b2 59       		.uleb128 0x59
+ 1640 01b3 0B       		.uleb128 0xb
+ 1641 01b4 00       		.byte	0
+ 1642 01b5 00       		.byte	0
+ 1643 01b6 1C       		.uleb128 0x1c
+ 1644 01b7 1D       		.uleb128 0x1d
+ 1645 01b8 00       		.byte	0
+ 1646 01b9 31       		.uleb128 0x31
+ 1647 01ba 13       		.uleb128 0x13
+ 1648 01bb 11       		.uleb128 0x11
+ 1649 01bc 01       		.uleb128 0x1
+ 1650 01bd 12       		.uleb128 0x12
+ 1651 01be 01       		.uleb128 0x1
+ 1652 01bf 58       		.uleb128 0x58
+ 1653 01c0 0B       		.uleb128 0xb
+ 1654 01c1 59       		.uleb128 0x59
+ 1655 01c2 0B       		.uleb128 0xb
+ 1656 01c3 00       		.byte	0
+ 1657 01c4 00       		.byte	0
+ 1658 01c5 1D       		.uleb128 0x1d
+ 1659 01c6 2E       		.uleb128 0x2e
+ 1660 01c7 00       		.byte	0
+ 1661 01c8 3F       		.uleb128 0x3f
+ 1662 01c9 0C       		.uleb128 0xc
+ 1663 01ca 03       		.uleb128 0x3
+ 1664 01cb 0E       		.uleb128 0xe
+ 1665 01cc 3A       		.uleb128 0x3a
+ 1666 01cd 0B       		.uleb128 0xb
+ 1667 01ce 3B       		.uleb128 0x3b
+ 1668 01cf 0B       		.uleb128 0xb
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccAK3oUr.s 			page 36
+
+
+ 1669 01d0 27       		.uleb128 0x27
+ 1670 01d1 0C       		.uleb128 0xc
+ 1671 01d2 20       		.uleb128 0x20
+ 1672 01d3 0B       		.uleb128 0xb
+ 1673 01d4 00       		.byte	0
+ 1674 01d5 00       		.byte	0
+ 1675 01d6 1E       		.uleb128 0x1e
+ 1676 01d7 05       		.uleb128 0x5
+ 1677 01d8 00       		.byte	0
+ 1678 01d9 03       		.uleb128 0x3
+ 1679 01da 0E       		.uleb128 0xe
+ 1680 01db 3A       		.uleb128 0x3a
+ 1681 01dc 0B       		.uleb128 0xb
+ 1682 01dd 3B       		.uleb128 0x3b
+ 1683 01de 0B       		.uleb128 0xb
+ 1684 01df 49       		.uleb128 0x49
+ 1685 01e0 13       		.uleb128 0x13
+ 1686 01e1 02       		.uleb128 0x2
+ 1687 01e2 0A       		.uleb128 0xa
+ 1688 01e3 00       		.byte	0
+ 1689 01e4 00       		.byte	0
+ 1690 01e5 1F       		.uleb128 0x1f
+ 1691 01e6 2E       		.uleb128 0x2e
+ 1692 01e7 00       		.byte	0
+ 1693 01e8 31       		.uleb128 0x31
+ 1694 01e9 13       		.uleb128 0x13
+ 1695 01ea 11       		.uleb128 0x11
+ 1696 01eb 01       		.uleb128 0x1
+ 1697 01ec 12       		.uleb128 0x12
+ 1698 01ed 01       		.uleb128 0x1
+ 1699 01ee 40       		.uleb128 0x40
+ 1700 01ef 0A       		.uleb128 0xa
+ 1701 01f0 9742     		.uleb128 0x2117
+ 1702 01f2 0C       		.uleb128 0xc
+ 1703 01f3 00       		.byte	0
+ 1704 01f4 00       		.byte	0
+ 1705 01f5 00       		.byte	0
+ 1706              		.section	.debug_loc,"",%progbits
+ 1707              	.Ldebug_loc0:
+ 1708              	.LLST9:
+ 1709 0000 24010000 		.4byte	.LVL20-.Ltext0
+ 1710 0004 32010000 		.4byte	.LVL22-.Ltext0
+ 1711 0008 0100     		.2byte	0x1
+ 1712 000a 50       		.byte	0x50
+ 1713 000b 32010000 		.4byte	.LVL22-.Ltext0
+ 1714 000f 3C010000 		.4byte	.LVL23-.Ltext0
+ 1715 0013 0400     		.2byte	0x4
+ 1716 0015 F3       		.byte	0xf3
+ 1717 0016 01       		.uleb128 0x1
+ 1718 0017 50       		.byte	0x50
+ 1719 0018 9F       		.byte	0x9f
+ 1720 0019 3C010000 		.4byte	.LVL23-.Ltext0
+ 1721 001d 3E010000 		.4byte	.LVL24-.Ltext0
+ 1722 0021 0100     		.2byte	0x1
+ 1723 0023 50       		.byte	0x50
+ 1724 0024 3E010000 		.4byte	.LVL24-.Ltext0
+ 1725 0028 44010000 		.4byte	.LFE41-.Ltext0
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccAK3oUr.s 			page 37
+
+
+ 1726 002c 0400     		.2byte	0x4
+ 1727 002e F3       		.byte	0xf3
+ 1728 002f 01       		.uleb128 0x1
+ 1729 0030 50       		.byte	0x50
+ 1730 0031 9F       		.byte	0x9f
+ 1731 0032 00000000 		.4byte	0
+ 1732 0036 00000000 		.4byte	0
+ 1733              	.LLST10:
+ 1734 003a 24010000 		.4byte	.LVL20-.Ltext0
+ 1735 003e 2C010000 		.4byte	.LVL21-.Ltext0
+ 1736 0042 0200     		.2byte	0x2
+ 1737 0044 30       		.byte	0x30
+ 1738 0045 9F       		.byte	0x9f
+ 1739 0046 2C010000 		.4byte	.LVL21-.Ltext0
+ 1740 004a 32010000 		.4byte	.LVL22-.Ltext0
+ 1741 004e 0600     		.2byte	0x6
+ 1742 0050 72       		.byte	0x72
+ 1743 0051 00       		.sleb128 0
+ 1744 0052 70       		.byte	0x70
+ 1745 0053 00       		.sleb128 0
+ 1746 0054 1A       		.byte	0x1a
+ 1747 0055 9F       		.byte	0x9f
+ 1748 0056 32010000 		.4byte	.LVL22-.Ltext0
+ 1749 005a 3C010000 		.4byte	.LVL23-.Ltext0
+ 1750 005e 0700     		.2byte	0x7
+ 1751 0060 72       		.byte	0x72
+ 1752 0061 00       		.sleb128 0
+ 1753 0062 F3       		.byte	0xf3
+ 1754 0063 01       		.uleb128 0x1
+ 1755 0064 50       		.byte	0x50
+ 1756 0065 1A       		.byte	0x1a
+ 1757 0066 9F       		.byte	0x9f
+ 1758 0067 3C010000 		.4byte	.LVL23-.Ltext0
+ 1759 006b 3E010000 		.4byte	.LVL24-.Ltext0
+ 1760 006f 0600     		.2byte	0x6
+ 1761 0071 72       		.byte	0x72
+ 1762 0072 00       		.sleb128 0
+ 1763 0073 70       		.byte	0x70
+ 1764 0074 00       		.sleb128 0
+ 1765 0075 1A       		.byte	0x1a
+ 1766 0076 9F       		.byte	0x9f
+ 1767 0077 3E010000 		.4byte	.LVL24-.Ltext0
+ 1768 007b 44010000 		.4byte	.LFE41-.Ltext0
+ 1769 007f 0100     		.2byte	0x1
+ 1770 0081 50       		.byte	0x50
+ 1771 0082 00000000 		.4byte	0
+ 1772 0086 00000000 		.4byte	0
+ 1773              	.LLST8:
+ 1774 008a 14010000 		.4byte	.LVL18-.Ltext0
+ 1775 008e 1C010000 		.4byte	.LVL19-.Ltext0
+ 1776 0092 0100     		.2byte	0x1
+ 1777 0094 50       		.byte	0x50
+ 1778 0095 1C010000 		.4byte	.LVL19-.Ltext0
+ 1779 0099 24010000 		.4byte	.LFE40-.Ltext0
+ 1780 009d 0400     		.2byte	0x4
+ 1781 009f F3       		.byte	0xf3
+ 1782 00a0 01       		.uleb128 0x1
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccAK3oUr.s 			page 38
+
+
+ 1783 00a1 50       		.byte	0x50
+ 1784 00a2 9F       		.byte	0x9f
+ 1785 00a3 00000000 		.4byte	0
+ 1786 00a7 00000000 		.4byte	0
+ 1787              	.LLST6:
+ 1788 00ab 00010000 		.4byte	.LVL15-.Ltext0
+ 1789 00af 0A010000 		.4byte	.LVL17-.Ltext0
+ 1790 00b3 0100     		.2byte	0x1
+ 1791 00b5 50       		.byte	0x50
+ 1792 00b6 0A010000 		.4byte	.LVL17-.Ltext0
+ 1793 00ba 14010000 		.4byte	.LFE39-.Ltext0
+ 1794 00be 0400     		.2byte	0x4
+ 1795 00c0 F3       		.byte	0xf3
+ 1796 00c1 01       		.uleb128 0x1
+ 1797 00c2 50       		.byte	0x50
+ 1798 00c3 9F       		.byte	0x9f
+ 1799 00c4 00000000 		.4byte	0
+ 1800 00c8 00000000 		.4byte	0
+ 1801              	.LLST7:
+ 1802 00cc 00010000 		.4byte	.LVL15-.Ltext0
+ 1803 00d0 04010000 		.4byte	.LVL16-.Ltext0
+ 1804 00d4 0200     		.2byte	0x2
+ 1805 00d6 30       		.byte	0x30
+ 1806 00d7 9F       		.byte	0x9f
+ 1807 00d8 04010000 		.4byte	.LVL16-.Ltext0
+ 1808 00dc 0A010000 		.4byte	.LVL17-.Ltext0
+ 1809 00e0 0A00     		.2byte	0xa
+ 1810 00e2 70       		.byte	0x70
+ 1811 00e3 00       		.sleb128 0
+ 1812 00e4 73       		.byte	0x73
+ 1813 00e5 00       		.sleb128 0
+ 1814 00e6 1A       		.byte	0x1a
+ 1815 00e7 40       		.byte	0x40
+ 1816 00e8 24       		.byte	0x24
+ 1817 00e9 30       		.byte	0x30
+ 1818 00ea 2E       		.byte	0x2e
+ 1819 00eb 9F       		.byte	0x9f
+ 1820 00ec 0A010000 		.4byte	.LVL17-.Ltext0
+ 1821 00f0 14010000 		.4byte	.LFE39-.Ltext0
+ 1822 00f4 0B00     		.2byte	0xb
+ 1823 00f6 F3       		.byte	0xf3
+ 1824 00f7 01       		.uleb128 0x1
+ 1825 00f8 50       		.byte	0x50
+ 1826 00f9 73       		.byte	0x73
+ 1827 00fa 00       		.sleb128 0
+ 1828 00fb 1A       		.byte	0x1a
+ 1829 00fc 40       		.byte	0x40
+ 1830 00fd 24       		.byte	0x24
+ 1831 00fe 30       		.byte	0x30
+ 1832 00ff 2E       		.byte	0x2e
+ 1833 0100 9F       		.byte	0x9f
+ 1834 0101 00000000 		.4byte	0
+ 1835 0105 00000000 		.4byte	0
+ 1836              	.LLST5:
+ 1837 0109 C0000000 		.4byte	.LVL12-.Ltext0
+ 1838 010d CC000000 		.4byte	.LVL13-.Ltext0
+ 1839 0111 0200     		.2byte	0x2
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccAK3oUr.s 			page 39
+
+
+ 1840 0113 30       		.byte	0x30
+ 1841 0114 9F       		.byte	0x9f
+ 1842 0115 CC000000 		.4byte	.LVL13-.Ltext0
+ 1843 0119 CE000000 		.4byte	.LVL14-.Ltext0
+ 1844 011d 0A00     		.2byte	0xa
+ 1845 011f 70       		.byte	0x70
+ 1846 0120 00       		.sleb128 0
+ 1847 0121 0A       		.byte	0xa
+ 1848 0122 FFFF     		.2byte	0xffff
+ 1849 0124 1A       		.byte	0x1a
+ 1850 0125 73       		.byte	0x73
+ 1851 0126 00       		.sleb128 0
+ 1852 0127 21       		.byte	0x21
+ 1853 0128 9F       		.byte	0x9f
+ 1854 0129 00000000 		.4byte	0
+ 1855 012d 00000000 		.4byte	0
+ 1856              	.LLST4:
+ 1857 0131 9C000000 		.4byte	.LVL10-.Ltext0
+ 1858 0135 A4000000 		.4byte	.LVL11-.Ltext0
+ 1859 0139 0100     		.2byte	0x1
+ 1860 013b 50       		.byte	0x50
+ 1861 013c A4000000 		.4byte	.LVL11-.Ltext0
+ 1862 0140 C0000000 		.4byte	.LFE35-.Ltext0
+ 1863 0144 0400     		.2byte	0x4
+ 1864 0146 F3       		.byte	0xf3
+ 1865 0147 01       		.uleb128 0x1
+ 1866 0148 50       		.byte	0x50
+ 1867 0149 9F       		.byte	0x9f
+ 1868 014a 00000000 		.4byte	0
+ 1869 014e 00000000 		.4byte	0
+ 1870              	.LLST3:
+ 1871 0152 74000000 		.4byte	.LVL8-.Ltext0
+ 1872 0156 7E000000 		.4byte	.LVL9-.Ltext0
+ 1873 015a 0100     		.2byte	0x1
+ 1874 015c 50       		.byte	0x50
+ 1875 015d 7E000000 		.4byte	.LVL9-.Ltext0
+ 1876 0161 9C000000 		.4byte	.LFE34-.Ltext0
+ 1877 0165 0400     		.2byte	0x4
+ 1878 0167 F3       		.byte	0xf3
+ 1879 0168 01       		.uleb128 0x1
+ 1880 0169 50       		.byte	0x50
+ 1881 016a 9F       		.byte	0x9f
+ 1882 016b 00000000 		.4byte	0
+ 1883 016f 00000000 		.4byte	0
+ 1884              	.LLST2:
+ 1885 0173 50000000 		.4byte	.LVL6-.Ltext0
+ 1886 0177 58000000 		.4byte	.LVL7-.Ltext0
+ 1887 017b 0100     		.2byte	0x1
+ 1888 017d 50       		.byte	0x50
+ 1889 017e 58000000 		.4byte	.LVL7-.Ltext0
+ 1890 0182 74000000 		.4byte	.LFE33-.Ltext0
+ 1891 0186 0400     		.2byte	0x4
+ 1892 0188 F3       		.byte	0xf3
+ 1893 0189 01       		.uleb128 0x1
+ 1894 018a 50       		.byte	0x50
+ 1895 018b 9F       		.byte	0x9f
+ 1896 018c 00000000 		.4byte	0
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccAK3oUr.s 			page 40
+
+
+ 1897 0190 00000000 		.4byte	0
+ 1898              	.LLST1:
+ 1899 0194 40000000 		.4byte	.LVL4-.Ltext0
+ 1900 0198 44000000 		.4byte	.LVL5-.Ltext0
+ 1901 019c 0200     		.2byte	0x2
+ 1902 019e 30       		.byte	0x30
+ 1903 019f 9F       		.byte	0x9f
+ 1904 01a0 44000000 		.4byte	.LVL5-.Ltext0
+ 1905 01a4 50000000 		.4byte	.LFE32-.Ltext0
+ 1906 01a8 0100     		.2byte	0x1
+ 1907 01aa 52       		.byte	0x52
+ 1908 01ab 00000000 		.4byte	0
+ 1909 01af 00000000 		.4byte	0
+ 1910              	.LLST0:
+ 1911 01b3 00000000 		.4byte	.LVL0-.Ltext0
+ 1912 01b7 0A000000 		.4byte	.LVL1-.Ltext0
+ 1913 01bb 0100     		.2byte	0x1
+ 1914 01bd 50       		.byte	0x50
+ 1915 01be 0A000000 		.4byte	.LVL1-.Ltext0
+ 1916 01c2 0E000000 		.4byte	.LVL2-.Ltext0
+ 1917 01c6 0400     		.2byte	0x4
+ 1918 01c8 F3       		.byte	0xf3
+ 1919 01c9 01       		.uleb128 0x1
+ 1920 01ca 50       		.byte	0x50
+ 1921 01cb 9F       		.byte	0x9f
+ 1922 01cc 0E000000 		.4byte	.LVL2-.Ltext0
+ 1923 01d0 14000000 		.4byte	.LVL3-.Ltext0
+ 1924 01d4 0100     		.2byte	0x1
+ 1925 01d6 50       		.byte	0x50
+ 1926 01d7 14000000 		.4byte	.LVL3-.Ltext0
+ 1927 01db 1C000000 		.4byte	.LFE29-.Ltext0
+ 1928 01df 0400     		.2byte	0x4
+ 1929 01e1 F3       		.byte	0xf3
+ 1930 01e2 01       		.uleb128 0x1
+ 1931 01e3 50       		.byte	0x50
+ 1932 01e4 9F       		.byte	0x9f
+ 1933 01e5 00000000 		.4byte	0
+ 1934 01e9 00000000 		.4byte	0
+ 1935              		.section	.debug_aranges,"",%progbits
+ 1936 0000 1C000000 		.4byte	0x1c
+ 1937 0004 0200     		.2byte	0x2
+ 1938 0006 00000000 		.4byte	.Ldebug_info0
+ 1939 000a 04       		.byte	0x4
+ 1940 000b 00       		.byte	0
+ 1941 000c 0000     		.2byte	0
+ 1942 000e 0000     		.2byte	0
+ 1943 0010 00000000 		.4byte	.Ltext0
+ 1944 0014 48010000 		.4byte	.Letext0-.Ltext0
+ 1945 0018 00000000 		.4byte	0
+ 1946 001c 00000000 		.4byte	0
+ 1947              		.section	.debug_ranges,"",%progbits
+ 1948              	.Ldebug_ranges0:
+ 1949 0000 50000000 		.4byte	.LBB14-.Ltext0
+ 1950 0004 52000000 		.4byte	.LBE14-.Ltext0
+ 1951 0008 54000000 		.4byte	.LBB18-.Ltext0
+ 1952 000c 56000000 		.4byte	.LBE18-.Ltext0
+ 1953 0010 58000000 		.4byte	.LBB19-.Ltext0
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccAK3oUr.s 			page 41
+
+
+ 1954 0014 5E000000 		.4byte	.LBE19-.Ltext0
+ 1955 0018 00000000 		.4byte	0
+ 1956 001c 00000000 		.4byte	0
+ 1957 0020 74000000 		.4byte	.LBB22-.Ltext0
+ 1958 0024 76000000 		.4byte	.LBE22-.Ltext0
+ 1959 0028 7A000000 		.4byte	.LBB26-.Ltext0
+ 1960 002c 7C000000 		.4byte	.LBE26-.Ltext0
+ 1961 0030 7E000000 		.4byte	.LBB27-.Ltext0
+ 1962 0034 84000000 		.4byte	.LBE27-.Ltext0
+ 1963 0038 00000000 		.4byte	0
+ 1964 003c 00000000 		.4byte	0
+ 1965 0040 9C000000 		.4byte	.LBB30-.Ltext0
+ 1966 0044 9E000000 		.4byte	.LBE30-.Ltext0
+ 1967 0048 A0000000 		.4byte	.LBB34-.Ltext0
+ 1968 004c A2000000 		.4byte	.LBE34-.Ltext0
+ 1969 0050 A4000000 		.4byte	.LBB35-.Ltext0
+ 1970 0054 AA000000 		.4byte	.LBE35-.Ltext0
+ 1971 0058 00000000 		.4byte	0
+ 1972 005c 00000000 		.4byte	0
+ 1973              		.section	.debug_line,"",%progbits
+ 1974              	.Ldebug_line0:
+ 1975 0000 BD010000 		.section	.debug_str,"MS",%progbits,1
+ 1975      02000001 
+ 1975      00000201 
+ 1975      FB0E0D00 
+ 1975      01010101 
+ 1976              	.LASF53:
+ 1977 0000 5254435F 		.ascii	"RTC_SetPrescaler\000"
+ 1977      53657450 
+ 1977      72657363 
+ 1977      616C6572 
+ 1977      00
+ 1978              	.LASF60:
+ 1979 0011 5254435F 		.ascii	"RTC_ITConfig\000"
+ 1979      4954436F 
+ 1979      6E666967 
+ 1979      00
+ 1980              	.LASF29:
+ 1981 001e 44495648 		.ascii	"DIVH\000"
+ 1981      00
+ 1982              	.LASF31:
+ 1983 0023 4449564C 		.ascii	"DIVL\000"
+ 1983      00
+ 1984              	.LASF56:
+ 1985 0028 436F756E 		.ascii	"CounterValue\000"
+ 1985      74657256 
+ 1985      616C7565 
+ 1985      00
+ 1986              	.LASF44:
+ 1987 0035 5254435F 		.ascii	"RTC_GetITStatus\000"
+ 1987      47657449 
+ 1987      54537461 
+ 1987      74757300 
+ 1988              	.LASF55:
+ 1989 0045 5254435F 		.ascii	"RTC_SetCounter\000"
+ 1989      53657443 
+ 1989      6F756E74 
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccAK3oUr.s 			page 42
+
+
+ 1989      657200
+ 1990              	.LASF7:
+ 1991 0054 5F5F7569 		.ascii	"__uint32_t\000"
+ 1991      6E743332 
+ 1991      5F7400
+ 1992              	.LASF63:
+ 1993 005f 2E2E2F2E 		.ascii	"../../source/src/FWlib/src/stm32f10x_rtc.c\000"
+ 1993      2E2F736F 
+ 1993      75726365 
+ 1993      2F737263 
+ 1993      2F46576C 
+ 1994              	.LASF50:
+ 1995 008a 5254435F 		.ascii	"RTC_ClearFlag\000"
+ 1995      436C6561 
+ 1995      72466C61 
+ 1995      6700
+ 1996              	.LASF4:
+ 1997 0098 5F5F7569 		.ascii	"__uint16_t\000"
+ 1997      6E743136 
+ 1997      5F7400
+ 1998              	.LASF2:
+ 1999 00a3 73686F72 		.ascii	"short int\000"
+ 1999      7420696E 
+ 1999      7400
+ 2000              	.LASF12:
+ 2001 00ad 75696E74 		.ascii	"uint8_t\000"
+ 2001      385F7400 
+ 2002              	.LASF43:
+ 2003 00b5 5254435F 		.ascii	"RTC_FLAG\000"
+ 2003      464C4147 
+ 2003      00
+ 2004              	.LASF61:
+ 2005 00be 4E657753 		.ascii	"NewState\000"
+ 2005      74617465 
+ 2005      00
+ 2006              	.LASF20:
+ 2007 00c7 44495341 		.ascii	"DISABLE\000"
+ 2007      424C4500 
+ 2008              	.LASF65:
+ 2009 00cf 5254435F 		.ascii	"RTC_ClearITPendingBit\000"
+ 2009      436C6561 
+ 2009      72495450 
+ 2009      656E6469 
+ 2009      6E674269 
+ 2010              	.LASF0:
+ 2011 00e5 7369676E 		.ascii	"signed char\000"
+ 2011      65642063 
+ 2011      68617200 
+ 2012              	.LASF47:
+ 2013 00f1 5254435F 		.ascii	"RTC_WaitForSynchro\000"
+ 2013      57616974 
+ 2013      466F7253 
+ 2013      796E6368 
+ 2013      726F00
+ 2014              	.LASF49:
+ 2015 0104 5254435F 		.ascii	"RTC_GetDivider\000"
+ 2015      47657444 
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccAK3oUr.s 			page 43
+
+
+ 2015      69766964 
+ 2015      657200
+ 2016              	.LASF9:
+ 2017 0113 6C6F6E67 		.ascii	"long long int\000"
+ 2017      206C6F6E 
+ 2017      6720696E 
+ 2017      7400
+ 2018              	.LASF19:
+ 2019 0121 49545374 		.ascii	"ITStatus\000"
+ 2019      61747573 
+ 2019      00
+ 2020              	.LASF6:
+ 2021 012a 6C6F6E67 		.ascii	"long int\000"
+ 2021      20696E74 
+ 2021      00
+ 2022              	.LASF3:
+ 2023 0133 5F5F7569 		.ascii	"__uint8_t\000"
+ 2023      6E74385F 
+ 2023      7400
+ 2024              	.LASF48:
+ 2025 013d 5254435F 		.ascii	"RTC_WaitForLastTask\000"
+ 2025      57616974 
+ 2025      466F724C 
+ 2025      61737454 
+ 2025      61736B00 
+ 2026              	.LASF46:
+ 2027 0151 62697473 		.ascii	"bitstatus\000"
+ 2027      74617475 
+ 2027      7300
+ 2028              	.LASF1:
+ 2029 015b 756E7369 		.ascii	"unsigned char\000"
+ 2029      676E6564 
+ 2029      20636861 
+ 2029      7200
+ 2030              	.LASF45:
+ 2031 0169 5254435F 		.ascii	"RTC_GetFlagStatus\000"
+ 2031      47657446 
+ 2031      6C616753 
+ 2031      74617475 
+ 2031      7300
+ 2032              	.LASF25:
+ 2033 017b 50524C48 		.ascii	"PRLH\000"
+ 2033      00
+ 2034              	.LASF27:
+ 2035 0180 50524C4C 		.ascii	"PRLL\000"
+ 2035      00
+ 2036              	.LASF54:
+ 2037 0185 50726573 		.ascii	"PrescalerValue\000"
+ 2037      63616C65 
+ 2037      7256616C 
+ 2037      756500
+ 2038              	.LASF10:
+ 2039 0194 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 2039      206C6F6E 
+ 2039      6720756E 
+ 2039      7369676E 
+ 2039      65642069 
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccAK3oUr.s 			page 44
+
+
+ 2040              	.LASF14:
+ 2041 01ab 75696E74 		.ascii	"uint32_t\000"
+ 2041      33325F74 
+ 2041      00
+ 2042              	.LASF11:
+ 2043 01b4 756E7369 		.ascii	"unsigned int\000"
+ 2043      676E6564 
+ 2043      20696E74 
+ 2043      00
+ 2044              	.LASF13:
+ 2045 01c1 75696E74 		.ascii	"uint16_t\000"
+ 2045      31365F74 
+ 2045      00
+ 2046              	.LASF8:
+ 2047 01ca 6C6F6E67 		.ascii	"long unsigned int\000"
+ 2047      20756E73 
+ 2047      69676E65 
+ 2047      6420696E 
+ 2047      7400
+ 2048              	.LASF52:
+ 2049 01dc 416C6172 		.ascii	"AlarmValue\000"
+ 2049      6D56616C 
+ 2049      756500
+ 2050              	.LASF5:
+ 2051 01e7 73686F72 		.ascii	"short unsigned int\000"
+ 2051      7420756E 
+ 2051      7369676E 
+ 2051      65642069 
+ 2051      6E7400
+ 2052              	.LASF58:
+ 2053 01fa 5254435F 		.ascii	"RTC_ExitConfigMode\000"
+ 2053      45786974 
+ 2053      436F6E66 
+ 2053      69674D6F 
+ 2053      646500
+ 2054              	.LASF16:
+ 2055 020d 53797374 		.ascii	"SystemCoreClock\000"
+ 2055      656D436F 
+ 2055      7265436C 
+ 2055      6F636B00 
+ 2056              	.LASF41:
+ 2057 021d 5254435F 		.ascii	"RTC_TypeDef\000"
+ 2057      54797065 
+ 2057      44656600 
+ 2058              	.LASF33:
+ 2059 0229 434E5448 		.ascii	"CNTH\000"
+ 2059      00
+ 2060              	.LASF23:
+ 2061 022e 52455345 		.ascii	"RESERVED0\000"
+ 2061      52564544 
+ 2061      3000
+ 2062              	.LASF24:
+ 2063 0238 52455345 		.ascii	"RESERVED1\000"
+ 2063      52564544 
+ 2063      3100
+ 2064              	.LASF26:
+ 2065 0242 52455345 		.ascii	"RESERVED2\000"
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccAK3oUr.s 			page 45
+
+
+ 2065      52564544 
+ 2065      3200
+ 2066              	.LASF28:
+ 2067 024c 52455345 		.ascii	"RESERVED3\000"
+ 2067      52564544 
+ 2067      3300
+ 2068              	.LASF30:
+ 2069 0256 52455345 		.ascii	"RESERVED4\000"
+ 2069      52564544 
+ 2069      3400
+ 2070              	.LASF32:
+ 2071 0260 52455345 		.ascii	"RESERVED5\000"
+ 2071      52564544 
+ 2071      3500
+ 2072              	.LASF34:
+ 2073 026a 52455345 		.ascii	"RESERVED6\000"
+ 2073      52564544 
+ 2073      3600
+ 2074              	.LASF51:
+ 2075 0274 5254435F 		.ascii	"RTC_SetAlarm\000"
+ 2075      53657441 
+ 2075      6C61726D 
+ 2075      00
+ 2076              	.LASF38:
+ 2077 0281 52455345 		.ascii	"RESERVED8\000"
+ 2077      52564544 
+ 2077      3800
+ 2078              	.LASF40:
+ 2079 028b 52455345 		.ascii	"RESERVED9\000"
+ 2079      52564544 
+ 2079      3900
+ 2080              	.LASF36:
+ 2081 0295 52455345 		.ascii	"RESERVED7\000"
+ 2081      52564544 
+ 2081      3700
+ 2082              	.LASF64:
+ 2083 029f 473A5C55 		.ascii	"G:\\Users\\Jaxb\\Desktop\\KAKAOS-0.07  2019.2.21  f"
+ 2083      73657273 
+ 2083      5C4A6178 
+ 2083      625C4465 
+ 2083      736B746F 
+ 2084 02ce 6F722067 		.ascii	"or gcc\\Project\\RVMDK\243\250uv5\243\251\000"
+ 2084      63635C50 
+ 2084      726F6A65 
+ 2084      63745C52 
+ 2084      564D444B 
+ 2085              	.LASF22:
+ 2086 02ea 46756E63 		.ascii	"FunctionalState\000"
+ 2086      74696F6E 
+ 2086      616C5374 
+ 2086      61746500 
+ 2087              	.LASF59:
+ 2088 02fa 5254435F 		.ascii	"RTC_EnterConfigMode\000"
+ 2088      456E7465 
+ 2088      72436F6E 
+ 2088      6669674D 
+ 2088      6F646500 
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccAK3oUr.s 			page 46
+
+
+ 2089              	.LASF35:
+ 2090 030e 434E544C 		.ascii	"CNTL\000"
+ 2090      00
+ 2091              	.LASF17:
+ 2092 0313 52455345 		.ascii	"RESET\000"
+ 2092      5400
+ 2093              	.LASF57:
+ 2094 0319 5254435F 		.ascii	"RTC_GetCounter\000"
+ 2094      47657443 
+ 2094      6F756E74 
+ 2094      657200
+ 2095              	.LASF37:
+ 2096 0328 414C5248 		.ascii	"ALRH\000"
+ 2096      00
+ 2097              	.LASF62:
+ 2098 032d 474E5520 		.ascii	"GNU C11 7.3.1 20180622 (release) [ARM/embedded-7-br"
+ 2098      43313120 
+ 2098      372E332E 
+ 2098      31203230 
+ 2098      31383036 
+ 2099 0360 616E6368 		.ascii	"anch revision 261907] -mcpu=cortex-m3 -mthumb -mapc"
+ 2099      20726576 
+ 2099      6973696F 
+ 2099      6E203236 
+ 2099      31393037 
+ 2100 0393 732D6672 		.ascii	"s-frame -mthumb-interwork -mcpu=cortex-m3 -mthumb -"
+ 2100      616D6520 
+ 2100      2D6D7468 
+ 2100      756D622D 
+ 2100      696E7465 
+ 2101 03c6 67647761 		.ascii	"gdwarf-2 -O2\000"
+ 2101      72662D32 
+ 2101      202D4F32 
+ 2101      00
+ 2102              	.LASF39:
+ 2103 03d3 414C524C 		.ascii	"ALRL\000"
+ 2103      00
+ 2104              	.LASF42:
+ 2105 03d8 5254435F 		.ascii	"RTC_IT\000"
+ 2105      495400
+ 2106              	.LASF15:
+ 2107 03df 49544D5F 		.ascii	"ITM_RxBuffer\000"
+ 2107      52784275 
+ 2107      66666572 
+ 2107      00
+ 2108              	.LASF18:
+ 2109 03ec 466C6167 		.ascii	"FlagStatus\000"
+ 2109      53746174 
+ 2109      757300
+ 2110              	.LASF21:
+ 2111 03f7 454E4142 		.ascii	"ENABLE\000"
+ 2111      4C4500
+ 2112              		.ident	"GCC: (GNU Tools for Arm Embedded Processors 7-2018-q2-update) 7.3.1 20180622 (release) [AR
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccAK3oUr.s 			page 47
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 stm32f10x_rtc.c
+G:\Users\Jaxb\AppData\Local\Temp\ccAK3oUr.s:15     .text:00000000 $t
+G:\Users\Jaxb\AppData\Local\Temp\ccAK3oUr.s:23     .text:00000000 RTC_ITConfig
+G:\Users\Jaxb\AppData\Local\Temp\ccAK3oUr.s:54     .text:00000018 $d
+G:\Users\Jaxb\AppData\Local\Temp\ccAK3oUr.s:58     .text:0000001c $t
+G:\Users\Jaxb\AppData\Local\Temp\ccAK3oUr.s:66     .text:0000001c RTC_EnterConfigMode
+G:\Users\Jaxb\AppData\Local\Temp\ccAK3oUr.s:83     .text:00000028 $d
+G:\Users\Jaxb\AppData\Local\Temp\ccAK3oUr.s:87     .text:0000002c $t
+G:\Users\Jaxb\AppData\Local\Temp\ccAK3oUr.s:95     .text:0000002c RTC_ExitConfigMode
+G:\Users\Jaxb\AppData\Local\Temp\ccAK3oUr.s:114    .text:0000003c $d
+G:\Users\Jaxb\AppData\Local\Temp\ccAK3oUr.s:118    .text:00000040 $t
+G:\Users\Jaxb\AppData\Local\Temp\ccAK3oUr.s:126    .text:00000040 RTC_GetCounter
+G:\Users\Jaxb\AppData\Local\Temp\ccAK3oUr.s:146    .text:0000004c $d
+G:\Users\Jaxb\AppData\Local\Temp\ccAK3oUr.s:150    .text:00000050 $t
+G:\Users\Jaxb\AppData\Local\Temp\ccAK3oUr.s:158    .text:00000050 RTC_SetCounter
+G:\Users\Jaxb\AppData\Local\Temp\ccAK3oUr.s:209    .text:00000070 $d
+G:\Users\Jaxb\AppData\Local\Temp\ccAK3oUr.s:213    .text:00000074 $t
+G:\Users\Jaxb\AppData\Local\Temp\ccAK3oUr.s:221    .text:00000074 RTC_SetPrescaler
+G:\Users\Jaxb\AppData\Local\Temp\ccAK3oUr.s:272    .text:00000098 $d
+G:\Users\Jaxb\AppData\Local\Temp\ccAK3oUr.s:276    .text:0000009c $t
+G:\Users\Jaxb\AppData\Local\Temp\ccAK3oUr.s:284    .text:0000009c RTC_SetAlarm
+G:\Users\Jaxb\AppData\Local\Temp\ccAK3oUr.s:335    .text:000000bc $d
+G:\Users\Jaxb\AppData\Local\Temp\ccAK3oUr.s:339    .text:000000c0 $t
+G:\Users\Jaxb\AppData\Local\Temp\ccAK3oUr.s:347    .text:000000c0 RTC_GetDivider
+G:\Users\Jaxb\AppData\Local\Temp\ccAK3oUr.s:371    .text:000000d0 $d
+G:\Users\Jaxb\AppData\Local\Temp\ccAK3oUr.s:375    .text:000000d4 $t
+G:\Users\Jaxb\AppData\Local\Temp\ccAK3oUr.s:383    .text:000000d4 RTC_WaitForLastTask
+G:\Users\Jaxb\AppData\Local\Temp\ccAK3oUr.s:402    .text:000000e0 $d
+G:\Users\Jaxb\AppData\Local\Temp\ccAK3oUr.s:406    .text:000000e4 $t
+G:\Users\Jaxb\AppData\Local\Temp\ccAK3oUr.s:414    .text:000000e4 RTC_WaitForSynchro
+G:\Users\Jaxb\AppData\Local\Temp\ccAK3oUr.s:441    .text:000000fc $d
+G:\Users\Jaxb\AppData\Local\Temp\ccAK3oUr.s:445    .text:00000100 $t
+G:\Users\Jaxb\AppData\Local\Temp\ccAK3oUr.s:453    .text:00000100 RTC_GetFlagStatus
+G:\Users\Jaxb\AppData\Local\Temp\ccAK3oUr.s:475    .text:00000110 $d
+G:\Users\Jaxb\AppData\Local\Temp\ccAK3oUr.s:479    .text:00000114 $t
+G:\Users\Jaxb\AppData\Local\Temp\ccAK3oUr.s:487    .text:00000114 RTC_ClearFlag
+G:\Users\Jaxb\AppData\Local\Temp\ccAK3oUr.s:506    .text:00000120 $d
+G:\Users\Jaxb\AppData\Local\Temp\ccAK3oUr.s:510    .text:00000124 $t
+G:\Users\Jaxb\AppData\Local\Temp\ccAK3oUr.s:518    .text:00000124 RTC_GetITStatus
+G:\Users\Jaxb\AppData\Local\Temp\ccAK3oUr.s:557    .text:00000140 $d
+G:\Users\Jaxb\AppData\Local\Temp\ccAK3oUr.s:561    .text:00000144 $t
+G:\Users\Jaxb\AppData\Local\Temp\ccAK3oUr.s:569    .text:00000144 RTC_ClearITPendingBit
+
+NO UNDEFINED SYMBOLS

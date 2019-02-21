@@ -1,0 +1,3238 @@
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccHiRVaW.s 			page 1
+
+
+   1              		.cpu cortex-m3
+   2              		.eabi_attribute 20, 1
+   3              		.eabi_attribute 21, 1
+   4              		.eabi_attribute 23, 3
+   5              		.eabi_attribute 24, 1
+   6              		.eabi_attribute 25, 1
+   7              		.eabi_attribute 26, 1
+   8              		.eabi_attribute 30, 2
+   9              		.eabi_attribute 34, 1
+  10              		.eabi_attribute 18, 4
+  11              		.file	"stm32f10x_bkp.c"
+  12              		.text
+  13              	.Ltext0:
+  14              		.cfi_sections	.debug_frame
+  15              		.align	1
+  16              		.p2align 2,,3
+  17              		.global	BKP_DeInit
+  18              		.syntax unified
+  19              		.thumb
+  20              		.thumb_func
+  21              		.fpu softvfp
+  22              		.type	BKP_DeInit, %function
+  23              	BKP_DeInit:
+  24              	.LFB29:
+  25              		.file 1 "../../source/src/FWlib/src/stm32f10x_bkp.c"
+   1:../../source/src/FWlib/src/stm32f10x_bkp.c **** /**
+   2:../../source/src/FWlib/src/stm32f10x_bkp.c ****   ******************************************************************************
+   3:../../source/src/FWlib/src/stm32f10x_bkp.c ****   * @file    stm32f10x_bkp.c
+   4:../../source/src/FWlib/src/stm32f10x_bkp.c ****   * @author  MCD Application Team
+   5:../../source/src/FWlib/src/stm32f10x_bkp.c ****   * @version V3.5.0
+   6:../../source/src/FWlib/src/stm32f10x_bkp.c ****   * @date    11-March-2011
+   7:../../source/src/FWlib/src/stm32f10x_bkp.c ****   * @brief   This file provides all the BKP firmware functions.
+   8:../../source/src/FWlib/src/stm32f10x_bkp.c ****   ******************************************************************************
+   9:../../source/src/FWlib/src/stm32f10x_bkp.c ****   * @attention
+  10:../../source/src/FWlib/src/stm32f10x_bkp.c ****   *
+  11:../../source/src/FWlib/src/stm32f10x_bkp.c ****   * THE PRESENT FIRMWARE WHICH IS FOR GUIDANCE ONLY AIMS AT PROVIDING CUSTOMERS
+  12:../../source/src/FWlib/src/stm32f10x_bkp.c ****   * WITH CODING INFORMATION REGARDING THEIR PRODUCTS IN ORDER FOR THEM TO SAVE
+  13:../../source/src/FWlib/src/stm32f10x_bkp.c ****   * TIME. AS A RESULT, STMICROELECTRONICS SHALL NOT BE HELD LIABLE FOR ANY
+  14:../../source/src/FWlib/src/stm32f10x_bkp.c ****   * DIRECT, INDIRECT OR CONSEQUENTIAL DAMAGES WITH RESPECT TO ANY CLAIMS ARISING
+  15:../../source/src/FWlib/src/stm32f10x_bkp.c ****   * FROM THE CONTENT OF SUCH FIRMWARE AND/OR THE USE MADE BY CUSTOMERS OF THE
+  16:../../source/src/FWlib/src/stm32f10x_bkp.c ****   * CODING INFORMATION CONTAINED HEREIN IN CONNECTION WITH THEIR PRODUCTS.
+  17:../../source/src/FWlib/src/stm32f10x_bkp.c ****   *
+  18:../../source/src/FWlib/src/stm32f10x_bkp.c ****   * <h2><center>&copy; COPYRIGHT 2011 STMicroelectronics</center></h2>
+  19:../../source/src/FWlib/src/stm32f10x_bkp.c ****   ******************************************************************************
+  20:../../source/src/FWlib/src/stm32f10x_bkp.c ****   */
+  21:../../source/src/FWlib/src/stm32f10x_bkp.c **** 
+  22:../../source/src/FWlib/src/stm32f10x_bkp.c **** /* Includes ------------------------------------------------------------------*/
+  23:../../source/src/FWlib/src/stm32f10x_bkp.c **** #include "stm32f10x_bkp.h"
+  24:../../source/src/FWlib/src/stm32f10x_bkp.c **** #include "stm32f10x_rcc.h"
+  25:../../source/src/FWlib/src/stm32f10x_bkp.c **** 
+  26:../../source/src/FWlib/src/stm32f10x_bkp.c **** /** @addtogroup STM32F10x_StdPeriph_Driver
+  27:../../source/src/FWlib/src/stm32f10x_bkp.c ****   * @{
+  28:../../source/src/FWlib/src/stm32f10x_bkp.c ****   */
+  29:../../source/src/FWlib/src/stm32f10x_bkp.c **** 
+  30:../../source/src/FWlib/src/stm32f10x_bkp.c **** /** @defgroup BKP 
+  31:../../source/src/FWlib/src/stm32f10x_bkp.c ****   * @brief BKP driver modules
+  32:../../source/src/FWlib/src/stm32f10x_bkp.c ****   * @{
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccHiRVaW.s 			page 2
+
+
+  33:../../source/src/FWlib/src/stm32f10x_bkp.c ****   */
+  34:../../source/src/FWlib/src/stm32f10x_bkp.c **** 
+  35:../../source/src/FWlib/src/stm32f10x_bkp.c **** /** @defgroup BKP_Private_TypesDefinitions
+  36:../../source/src/FWlib/src/stm32f10x_bkp.c ****   * @{
+  37:../../source/src/FWlib/src/stm32f10x_bkp.c ****   */
+  38:../../source/src/FWlib/src/stm32f10x_bkp.c **** 
+  39:../../source/src/FWlib/src/stm32f10x_bkp.c **** /**
+  40:../../source/src/FWlib/src/stm32f10x_bkp.c ****   * @}
+  41:../../source/src/FWlib/src/stm32f10x_bkp.c ****   */
+  42:../../source/src/FWlib/src/stm32f10x_bkp.c **** 
+  43:../../source/src/FWlib/src/stm32f10x_bkp.c **** /** @defgroup BKP_Private_Defines
+  44:../../source/src/FWlib/src/stm32f10x_bkp.c ****   * @{
+  45:../../source/src/FWlib/src/stm32f10x_bkp.c ****   */
+  46:../../source/src/FWlib/src/stm32f10x_bkp.c **** 
+  47:../../source/src/FWlib/src/stm32f10x_bkp.c **** /* ------------ BKP registers bit address in the alias region --------------- */
+  48:../../source/src/FWlib/src/stm32f10x_bkp.c **** #define BKP_OFFSET        (BKP_BASE - PERIPH_BASE)
+  49:../../source/src/FWlib/src/stm32f10x_bkp.c **** 
+  50:../../source/src/FWlib/src/stm32f10x_bkp.c **** /* --- CR Register ----*/
+  51:../../source/src/FWlib/src/stm32f10x_bkp.c **** 
+  52:../../source/src/FWlib/src/stm32f10x_bkp.c **** /* Alias word address of TPAL bit */
+  53:../../source/src/FWlib/src/stm32f10x_bkp.c **** #define CR_OFFSET         (BKP_OFFSET + 0x30)
+  54:../../source/src/FWlib/src/stm32f10x_bkp.c **** #define TPAL_BitNumber    0x01
+  55:../../source/src/FWlib/src/stm32f10x_bkp.c **** #define CR_TPAL_BB        (PERIPH_BB_BASE + (CR_OFFSET * 32) + (TPAL_BitNumber * 4))
+  56:../../source/src/FWlib/src/stm32f10x_bkp.c **** 
+  57:../../source/src/FWlib/src/stm32f10x_bkp.c **** /* Alias word address of TPE bit */
+  58:../../source/src/FWlib/src/stm32f10x_bkp.c **** #define TPE_BitNumber     0x00
+  59:../../source/src/FWlib/src/stm32f10x_bkp.c **** #define CR_TPE_BB         (PERIPH_BB_BASE + (CR_OFFSET * 32) + (TPE_BitNumber * 4))
+  60:../../source/src/FWlib/src/stm32f10x_bkp.c **** 
+  61:../../source/src/FWlib/src/stm32f10x_bkp.c **** /* --- CSR Register ---*/
+  62:../../source/src/FWlib/src/stm32f10x_bkp.c **** 
+  63:../../source/src/FWlib/src/stm32f10x_bkp.c **** /* Alias word address of TPIE bit */
+  64:../../source/src/FWlib/src/stm32f10x_bkp.c **** #define CSR_OFFSET        (BKP_OFFSET + 0x34)
+  65:../../source/src/FWlib/src/stm32f10x_bkp.c **** #define TPIE_BitNumber    0x02
+  66:../../source/src/FWlib/src/stm32f10x_bkp.c **** #define CSR_TPIE_BB       (PERIPH_BB_BASE + (CSR_OFFSET * 32) + (TPIE_BitNumber * 4))
+  67:../../source/src/FWlib/src/stm32f10x_bkp.c **** 
+  68:../../source/src/FWlib/src/stm32f10x_bkp.c **** /* Alias word address of TIF bit */
+  69:../../source/src/FWlib/src/stm32f10x_bkp.c **** #define TIF_BitNumber     0x09
+  70:../../source/src/FWlib/src/stm32f10x_bkp.c **** #define CSR_TIF_BB        (PERIPH_BB_BASE + (CSR_OFFSET * 32) + (TIF_BitNumber * 4))
+  71:../../source/src/FWlib/src/stm32f10x_bkp.c **** 
+  72:../../source/src/FWlib/src/stm32f10x_bkp.c **** /* Alias word address of TEF bit */
+  73:../../source/src/FWlib/src/stm32f10x_bkp.c **** #define TEF_BitNumber     0x08
+  74:../../source/src/FWlib/src/stm32f10x_bkp.c **** #define CSR_TEF_BB        (PERIPH_BB_BASE + (CSR_OFFSET * 32) + (TEF_BitNumber * 4))
+  75:../../source/src/FWlib/src/stm32f10x_bkp.c **** 
+  76:../../source/src/FWlib/src/stm32f10x_bkp.c **** /* ---------------------- BKP registers bit mask ------------------------ */
+  77:../../source/src/FWlib/src/stm32f10x_bkp.c **** 
+  78:../../source/src/FWlib/src/stm32f10x_bkp.c **** /* RTCCR register bit mask */
+  79:../../source/src/FWlib/src/stm32f10x_bkp.c **** #define RTCCR_CAL_MASK    ((uint16_t)0xFF80)
+  80:../../source/src/FWlib/src/stm32f10x_bkp.c **** #define RTCCR_MASK        ((uint16_t)0xFC7F)
+  81:../../source/src/FWlib/src/stm32f10x_bkp.c **** 
+  82:../../source/src/FWlib/src/stm32f10x_bkp.c **** /**
+  83:../../source/src/FWlib/src/stm32f10x_bkp.c ****   * @}
+  84:../../source/src/FWlib/src/stm32f10x_bkp.c ****   */ 
+  85:../../source/src/FWlib/src/stm32f10x_bkp.c **** 
+  86:../../source/src/FWlib/src/stm32f10x_bkp.c **** 
+  87:../../source/src/FWlib/src/stm32f10x_bkp.c **** /** @defgroup BKP_Private_Macros
+  88:../../source/src/FWlib/src/stm32f10x_bkp.c ****   * @{
+  89:../../source/src/FWlib/src/stm32f10x_bkp.c ****   */
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccHiRVaW.s 			page 3
+
+
+  90:../../source/src/FWlib/src/stm32f10x_bkp.c **** 
+  91:../../source/src/FWlib/src/stm32f10x_bkp.c **** /**
+  92:../../source/src/FWlib/src/stm32f10x_bkp.c ****   * @}
+  93:../../source/src/FWlib/src/stm32f10x_bkp.c ****   */
+  94:../../source/src/FWlib/src/stm32f10x_bkp.c **** 
+  95:../../source/src/FWlib/src/stm32f10x_bkp.c **** /** @defgroup BKP_Private_Variables
+  96:../../source/src/FWlib/src/stm32f10x_bkp.c ****   * @{
+  97:../../source/src/FWlib/src/stm32f10x_bkp.c ****   */
+  98:../../source/src/FWlib/src/stm32f10x_bkp.c **** 
+  99:../../source/src/FWlib/src/stm32f10x_bkp.c **** /**
+ 100:../../source/src/FWlib/src/stm32f10x_bkp.c ****   * @}
+ 101:../../source/src/FWlib/src/stm32f10x_bkp.c ****   */
+ 102:../../source/src/FWlib/src/stm32f10x_bkp.c **** 
+ 103:../../source/src/FWlib/src/stm32f10x_bkp.c **** /** @defgroup BKP_Private_FunctionPrototypes
+ 104:../../source/src/FWlib/src/stm32f10x_bkp.c ****   * @{
+ 105:../../source/src/FWlib/src/stm32f10x_bkp.c ****   */
+ 106:../../source/src/FWlib/src/stm32f10x_bkp.c **** 
+ 107:../../source/src/FWlib/src/stm32f10x_bkp.c **** /**
+ 108:../../source/src/FWlib/src/stm32f10x_bkp.c ****   * @}
+ 109:../../source/src/FWlib/src/stm32f10x_bkp.c ****   */
+ 110:../../source/src/FWlib/src/stm32f10x_bkp.c **** 
+ 111:../../source/src/FWlib/src/stm32f10x_bkp.c **** /** @defgroup BKP_Private_Functions
+ 112:../../source/src/FWlib/src/stm32f10x_bkp.c ****   * @{
+ 113:../../source/src/FWlib/src/stm32f10x_bkp.c ****   */
+ 114:../../source/src/FWlib/src/stm32f10x_bkp.c **** 
+ 115:../../source/src/FWlib/src/stm32f10x_bkp.c **** /**
+ 116:../../source/src/FWlib/src/stm32f10x_bkp.c ****   * @brief  Deinitializes the BKP peripheral registers to their default reset values.
+ 117:../../source/src/FWlib/src/stm32f10x_bkp.c ****   * @param  None
+ 118:../../source/src/FWlib/src/stm32f10x_bkp.c ****   * @retval None
+ 119:../../source/src/FWlib/src/stm32f10x_bkp.c ****   */
+ 120:../../source/src/FWlib/src/stm32f10x_bkp.c **** void BKP_DeInit(void)
+ 121:../../source/src/FWlib/src/stm32f10x_bkp.c **** {
+  26              		.loc 1 121 0
+  27              		.cfi_startproc
+  28              		@ args = 0, pretend = 0, frame = 0
+  29              		@ frame_needed = 0, uses_anonymous_args = 0
+  30 0000 08B5     		push	{r3, lr}
+  31              	.LCFI0:
+  32              		.cfi_def_cfa_offset 8
+  33              		.cfi_offset 3, -8
+  34              		.cfi_offset 14, -4
+ 122:../../source/src/FWlib/src/stm32f10x_bkp.c ****   RCC_BackupResetCmd(ENABLE);
+  35              		.loc 1 122 0
+  36 0002 0120     		movs	r0, #1
+  37 0004 FFF7FEFF 		bl	RCC_BackupResetCmd
+  38              	.LVL0:
+ 123:../../source/src/FWlib/src/stm32f10x_bkp.c ****   RCC_BackupResetCmd(DISABLE);
+ 124:../../source/src/FWlib/src/stm32f10x_bkp.c **** }
+  39              		.loc 1 124 0
+  40 0008 BDE80840 		pop	{r3, lr}
+  41              	.LCFI1:
+  42              		.cfi_restore 14
+  43              		.cfi_restore 3
+  44              		.cfi_def_cfa_offset 0
+ 123:../../source/src/FWlib/src/stm32f10x_bkp.c ****   RCC_BackupResetCmd(DISABLE);
+  45              		.loc 1 123 0
+  46 000c 0020     		movs	r0, #0
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccHiRVaW.s 			page 4
+
+
+  47 000e FFF7FEBF 		b	RCC_BackupResetCmd
+  48              	.LVL1:
+  49              		.cfi_endproc
+  50              	.LFE29:
+  51              		.size	BKP_DeInit, .-BKP_DeInit
+  52              		.align	1
+  53 0012 00BF     		.p2align 2,,3
+  54              		.global	BKP_TamperPinLevelConfig
+  55              		.syntax unified
+  56              		.thumb
+  57              		.thumb_func
+  58              		.fpu softvfp
+  59              		.type	BKP_TamperPinLevelConfig, %function
+  60              	BKP_TamperPinLevelConfig:
+  61              	.LFB30:
+ 125:../../source/src/FWlib/src/stm32f10x_bkp.c **** 
+ 126:../../source/src/FWlib/src/stm32f10x_bkp.c **** /**
+ 127:../../source/src/FWlib/src/stm32f10x_bkp.c ****   * @brief  Configures the Tamper Pin active level.
+ 128:../../source/src/FWlib/src/stm32f10x_bkp.c ****   * @param  BKP_TamperPinLevel: specifies the Tamper Pin active level.
+ 129:../../source/src/FWlib/src/stm32f10x_bkp.c ****   *   This parameter can be one of the following values:
+ 130:../../source/src/FWlib/src/stm32f10x_bkp.c ****   *     @arg BKP_TamperPinLevel_High: Tamper pin active on high level
+ 131:../../source/src/FWlib/src/stm32f10x_bkp.c ****   *     @arg BKP_TamperPinLevel_Low: Tamper pin active on low level
+ 132:../../source/src/FWlib/src/stm32f10x_bkp.c ****   * @retval None
+ 133:../../source/src/FWlib/src/stm32f10x_bkp.c ****   */
+ 134:../../source/src/FWlib/src/stm32f10x_bkp.c **** void BKP_TamperPinLevelConfig(uint16_t BKP_TamperPinLevel)
+ 135:../../source/src/FWlib/src/stm32f10x_bkp.c **** {
+  62              		.loc 1 135 0
+  63              		.cfi_startproc
+  64              		@ args = 0, pretend = 0, frame = 0
+  65              		@ frame_needed = 0, uses_anonymous_args = 0
+  66              		@ link register save eliminated.
+  67              	.LVL2:
+ 136:../../source/src/FWlib/src/stm32f10x_bkp.c ****   /* Check the parameters */
+ 137:../../source/src/FWlib/src/stm32f10x_bkp.c ****   assert_param(IS_BKP_TAMPER_PIN_LEVEL(BKP_TamperPinLevel));
+ 138:../../source/src/FWlib/src/stm32f10x_bkp.c ****   *(__IO uint32_t *) CR_TPAL_BB = BKP_TamperPinLevel;
+  68              		.loc 1 138 0
+  69 0014 014B     		ldr	r3, .L4
+  70 0016 1860     		str	r0, [r3]
+ 139:../../source/src/FWlib/src/stm32f10x_bkp.c **** }
+  71              		.loc 1 139 0
+  72 0018 7047     		bx	lr
+  73              	.L5:
+  74 001a 00BF     		.align	2
+  75              	.L4:
+  76 001c 04860D42 		.word	1108182532
+  77              		.cfi_endproc
+  78              	.LFE30:
+  79              		.size	BKP_TamperPinLevelConfig, .-BKP_TamperPinLevelConfig
+  80              		.align	1
+  81              		.p2align 2,,3
+  82              		.global	BKP_TamperPinCmd
+  83              		.syntax unified
+  84              		.thumb
+  85              		.thumb_func
+  86              		.fpu softvfp
+  87              		.type	BKP_TamperPinCmd, %function
+  88              	BKP_TamperPinCmd:
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccHiRVaW.s 			page 5
+
+
+  89              	.LFB31:
+ 140:../../source/src/FWlib/src/stm32f10x_bkp.c **** 
+ 141:../../source/src/FWlib/src/stm32f10x_bkp.c **** /**
+ 142:../../source/src/FWlib/src/stm32f10x_bkp.c ****   * @brief  Enables or disables the Tamper Pin activation.
+ 143:../../source/src/FWlib/src/stm32f10x_bkp.c ****   * @param  NewState: new state of the Tamper Pin activation.
+ 144:../../source/src/FWlib/src/stm32f10x_bkp.c ****   *   This parameter can be: ENABLE or DISABLE.
+ 145:../../source/src/FWlib/src/stm32f10x_bkp.c ****   * @retval None
+ 146:../../source/src/FWlib/src/stm32f10x_bkp.c ****   */
+ 147:../../source/src/FWlib/src/stm32f10x_bkp.c **** void BKP_TamperPinCmd(FunctionalState NewState)
+ 148:../../source/src/FWlib/src/stm32f10x_bkp.c **** {
+  90              		.loc 1 148 0
+  91              		.cfi_startproc
+  92              		@ args = 0, pretend = 0, frame = 0
+  93              		@ frame_needed = 0, uses_anonymous_args = 0
+  94              		@ link register save eliminated.
+  95              	.LVL3:
+ 149:../../source/src/FWlib/src/stm32f10x_bkp.c ****   /* Check the parameters */
+ 150:../../source/src/FWlib/src/stm32f10x_bkp.c ****   assert_param(IS_FUNCTIONAL_STATE(NewState));
+ 151:../../source/src/FWlib/src/stm32f10x_bkp.c ****   *(__IO uint32_t *) CR_TPE_BB = (uint32_t)NewState;
+  96              		.loc 1 151 0
+  97 0020 014B     		ldr	r3, .L7
+  98 0022 1860     		str	r0, [r3]
+ 152:../../source/src/FWlib/src/stm32f10x_bkp.c **** }
+  99              		.loc 1 152 0
+ 100 0024 7047     		bx	lr
+ 101              	.L8:
+ 102 0026 00BF     		.align	2
+ 103              	.L7:
+ 104 0028 00860D42 		.word	1108182528
+ 105              		.cfi_endproc
+ 106              	.LFE31:
+ 107              		.size	BKP_TamperPinCmd, .-BKP_TamperPinCmd
+ 108              		.align	1
+ 109              		.p2align 2,,3
+ 110              		.global	BKP_ITConfig
+ 111              		.syntax unified
+ 112              		.thumb
+ 113              		.thumb_func
+ 114              		.fpu softvfp
+ 115              		.type	BKP_ITConfig, %function
+ 116              	BKP_ITConfig:
+ 117              	.LFB32:
+ 153:../../source/src/FWlib/src/stm32f10x_bkp.c **** 
+ 154:../../source/src/FWlib/src/stm32f10x_bkp.c **** /**
+ 155:../../source/src/FWlib/src/stm32f10x_bkp.c ****   * @brief  Enables or disables the Tamper Pin Interrupt.
+ 156:../../source/src/FWlib/src/stm32f10x_bkp.c ****   * @param  NewState: new state of the Tamper Pin Interrupt.
+ 157:../../source/src/FWlib/src/stm32f10x_bkp.c ****   *   This parameter can be: ENABLE or DISABLE.
+ 158:../../source/src/FWlib/src/stm32f10x_bkp.c ****   * @retval None
+ 159:../../source/src/FWlib/src/stm32f10x_bkp.c ****   */
+ 160:../../source/src/FWlib/src/stm32f10x_bkp.c **** void BKP_ITConfig(FunctionalState NewState)
+ 161:../../source/src/FWlib/src/stm32f10x_bkp.c **** {
+ 118              		.loc 1 161 0
+ 119              		.cfi_startproc
+ 120              		@ args = 0, pretend = 0, frame = 0
+ 121              		@ frame_needed = 0, uses_anonymous_args = 0
+ 122              		@ link register save eliminated.
+ 123              	.LVL4:
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccHiRVaW.s 			page 6
+
+
+ 162:../../source/src/FWlib/src/stm32f10x_bkp.c ****   /* Check the parameters */
+ 163:../../source/src/FWlib/src/stm32f10x_bkp.c ****   assert_param(IS_FUNCTIONAL_STATE(NewState));
+ 164:../../source/src/FWlib/src/stm32f10x_bkp.c ****   *(__IO uint32_t *) CSR_TPIE_BB = (uint32_t)NewState;
+ 124              		.loc 1 164 0
+ 125 002c 014B     		ldr	r3, .L10
+ 126 002e 1860     		str	r0, [r3]
+ 165:../../source/src/FWlib/src/stm32f10x_bkp.c **** }
+ 127              		.loc 1 165 0
+ 128 0030 7047     		bx	lr
+ 129              	.L11:
+ 130 0032 00BF     		.align	2
+ 131              	.L10:
+ 132 0034 88860D42 		.word	1108182664
+ 133              		.cfi_endproc
+ 134              	.LFE32:
+ 135              		.size	BKP_ITConfig, .-BKP_ITConfig
+ 136              		.align	1
+ 137              		.p2align 2,,3
+ 138              		.global	BKP_RTCOutputConfig
+ 139              		.syntax unified
+ 140              		.thumb
+ 141              		.thumb_func
+ 142              		.fpu softvfp
+ 143              		.type	BKP_RTCOutputConfig, %function
+ 144              	BKP_RTCOutputConfig:
+ 145              	.LFB33:
+ 166:../../source/src/FWlib/src/stm32f10x_bkp.c **** 
+ 167:../../source/src/FWlib/src/stm32f10x_bkp.c **** /**
+ 168:../../source/src/FWlib/src/stm32f10x_bkp.c ****   * @brief  Select the RTC output source to output on the Tamper pin.
+ 169:../../source/src/FWlib/src/stm32f10x_bkp.c ****   * @param  BKP_RTCOutputSource: specifies the RTC output source.
+ 170:../../source/src/FWlib/src/stm32f10x_bkp.c ****   *   This parameter can be one of the following values:
+ 171:../../source/src/FWlib/src/stm32f10x_bkp.c ****   *     @arg BKP_RTCOutputSource_None: no RTC output on the Tamper pin.
+ 172:../../source/src/FWlib/src/stm32f10x_bkp.c ****   *     @arg BKP_RTCOutputSource_CalibClock: output the RTC clock with frequency
+ 173:../../source/src/FWlib/src/stm32f10x_bkp.c ****   *                                          divided by 64 on the Tamper pin.
+ 174:../../source/src/FWlib/src/stm32f10x_bkp.c ****   *     @arg BKP_RTCOutputSource_Alarm: output the RTC Alarm pulse signal on
+ 175:../../source/src/FWlib/src/stm32f10x_bkp.c ****   *                                     the Tamper pin.
+ 176:../../source/src/FWlib/src/stm32f10x_bkp.c ****   *     @arg BKP_RTCOutputSource_Second: output the RTC Second pulse signal on
+ 177:../../source/src/FWlib/src/stm32f10x_bkp.c ****   *                                      the Tamper pin.  
+ 178:../../source/src/FWlib/src/stm32f10x_bkp.c ****   * @retval None
+ 179:../../source/src/FWlib/src/stm32f10x_bkp.c ****   */
+ 180:../../source/src/FWlib/src/stm32f10x_bkp.c **** void BKP_RTCOutputConfig(uint16_t BKP_RTCOutputSource)
+ 181:../../source/src/FWlib/src/stm32f10x_bkp.c **** {
+ 146              		.loc 1 181 0
+ 147              		.cfi_startproc
+ 148              		@ args = 0, pretend = 0, frame = 0
+ 149              		@ frame_needed = 0, uses_anonymous_args = 0
+ 150              		@ link register save eliminated.
+ 151              	.LVL5:
+ 182:../../source/src/FWlib/src/stm32f10x_bkp.c ****   uint16_t tmpreg = 0;
+ 183:../../source/src/FWlib/src/stm32f10x_bkp.c ****   /* Check the parameters */
+ 184:../../source/src/FWlib/src/stm32f10x_bkp.c ****   assert_param(IS_BKP_RTC_OUTPUT_SOURCE(BKP_RTCOutputSource));
+ 185:../../source/src/FWlib/src/stm32f10x_bkp.c ****   tmpreg = BKP->RTCCR;
+ 152              		.loc 1 185 0
+ 153 0038 044A     		ldr	r2, .L13
+ 154 003a 938D     		ldrh	r3, [r2, #44]
+ 155              	.LVL6:
+ 186:../../source/src/FWlib/src/stm32f10x_bkp.c ****   /* Clear CCO, ASOE and ASOS bits */
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccHiRVaW.s 			page 7
+
+
+ 187:../../source/src/FWlib/src/stm32f10x_bkp.c ****   tmpreg &= RTCCR_MASK;
+ 156              		.loc 1 187 0
+ 157 003c 23F46073 		bic	r3, r3, #896
+ 158              	.LVL7:
+ 159 0040 1B04     		lsls	r3, r3, #16
+ 160 0042 1B0C     		lsrs	r3, r3, #16
+ 161              	.LVL8:
+ 188:../../source/src/FWlib/src/stm32f10x_bkp.c ****   
+ 189:../../source/src/FWlib/src/stm32f10x_bkp.c ****   /* Set CCO, ASOE and ASOS bits according to BKP_RTCOutputSource value */
+ 190:../../source/src/FWlib/src/stm32f10x_bkp.c ****   tmpreg |= BKP_RTCOutputSource;
+ 162              		.loc 1 190 0
+ 163 0044 1843     		orrs	r0, r0, r3
+ 164              	.LVL9:
+ 191:../../source/src/FWlib/src/stm32f10x_bkp.c ****   /* Store the new value */
+ 192:../../source/src/FWlib/src/stm32f10x_bkp.c ****   BKP->RTCCR = tmpreg;
+ 165              		.loc 1 192 0
+ 166 0046 9085     		strh	r0, [r2, #44]	@ movhi
+ 193:../../source/src/FWlib/src/stm32f10x_bkp.c **** }
+ 167              		.loc 1 193 0
+ 168 0048 7047     		bx	lr
+ 169              	.L14:
+ 170 004a 00BF     		.align	2
+ 171              	.L13:
+ 172 004c 006C0040 		.word	1073769472
+ 173              		.cfi_endproc
+ 174              	.LFE33:
+ 175              		.size	BKP_RTCOutputConfig, .-BKP_RTCOutputConfig
+ 176              		.align	1
+ 177              		.p2align 2,,3
+ 178              		.global	BKP_SetRTCCalibrationValue
+ 179              		.syntax unified
+ 180              		.thumb
+ 181              		.thumb_func
+ 182              		.fpu softvfp
+ 183              		.type	BKP_SetRTCCalibrationValue, %function
+ 184              	BKP_SetRTCCalibrationValue:
+ 185              	.LFB34:
+ 194:../../source/src/FWlib/src/stm32f10x_bkp.c **** 
+ 195:../../source/src/FWlib/src/stm32f10x_bkp.c **** /**
+ 196:../../source/src/FWlib/src/stm32f10x_bkp.c ****   * @brief  Sets RTC Clock Calibration value.
+ 197:../../source/src/FWlib/src/stm32f10x_bkp.c ****   * @param  CalibrationValue: specifies the RTC Clock Calibration value.
+ 198:../../source/src/FWlib/src/stm32f10x_bkp.c ****   *   This parameter must be a number between 0 and 0x7F.
+ 199:../../source/src/FWlib/src/stm32f10x_bkp.c ****   * @retval None
+ 200:../../source/src/FWlib/src/stm32f10x_bkp.c ****   */
+ 201:../../source/src/FWlib/src/stm32f10x_bkp.c **** void BKP_SetRTCCalibrationValue(uint8_t CalibrationValue)
+ 202:../../source/src/FWlib/src/stm32f10x_bkp.c **** {
+ 186              		.loc 1 202 0
+ 187              		.cfi_startproc
+ 188              		@ args = 0, pretend = 0, frame = 0
+ 189              		@ frame_needed = 0, uses_anonymous_args = 0
+ 190              		@ link register save eliminated.
+ 191              	.LVL10:
+ 203:../../source/src/FWlib/src/stm32f10x_bkp.c ****   uint16_t tmpreg = 0;
+ 204:../../source/src/FWlib/src/stm32f10x_bkp.c ****   /* Check the parameters */
+ 205:../../source/src/FWlib/src/stm32f10x_bkp.c ****   assert_param(IS_BKP_CALIBRATION_VALUE(CalibrationValue));
+ 206:../../source/src/FWlib/src/stm32f10x_bkp.c ****   tmpreg = BKP->RTCCR;
+ 192              		.loc 1 206 0
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccHiRVaW.s 			page 8
+
+
+ 193 0050 044A     		ldr	r2, .L16
+ 194 0052 938D     		ldrh	r3, [r2, #44]
+ 195              	.LVL11:
+ 207:../../source/src/FWlib/src/stm32f10x_bkp.c ****   /* Clear CAL[6:0] bits */
+ 208:../../source/src/FWlib/src/stm32f10x_bkp.c ****   tmpreg &= RTCCR_CAL_MASK;
+ 196              		.loc 1 208 0
+ 197 0054 23F07F03 		bic	r3, r3, #127
+ 198              	.LVL12:
+ 199 0058 1B04     		lsls	r3, r3, #16
+ 200 005a 1B0C     		lsrs	r3, r3, #16
+ 201              	.LVL13:
+ 209:../../source/src/FWlib/src/stm32f10x_bkp.c ****   /* Set CAL[6:0] bits according to CalibrationValue value */
+ 210:../../source/src/FWlib/src/stm32f10x_bkp.c ****   tmpreg |= CalibrationValue;
+ 202              		.loc 1 210 0
+ 203 005c 1843     		orrs	r0, r0, r3
+ 204              	.LVL14:
+ 211:../../source/src/FWlib/src/stm32f10x_bkp.c ****   /* Store the new value */
+ 212:../../source/src/FWlib/src/stm32f10x_bkp.c ****   BKP->RTCCR = tmpreg;
+ 205              		.loc 1 212 0
+ 206 005e 9085     		strh	r0, [r2, #44]	@ movhi
+ 213:../../source/src/FWlib/src/stm32f10x_bkp.c **** }
+ 207              		.loc 1 213 0
+ 208 0060 7047     		bx	lr
+ 209              	.L17:
+ 210 0062 00BF     		.align	2
+ 211              	.L16:
+ 212 0064 006C0040 		.word	1073769472
+ 213              		.cfi_endproc
+ 214              	.LFE34:
+ 215              		.size	BKP_SetRTCCalibrationValue, .-BKP_SetRTCCalibrationValue
+ 216              		.align	1
+ 217              		.p2align 2,,3
+ 218              		.global	BKP_WriteBackupRegister
+ 219              		.syntax unified
+ 220              		.thumb
+ 221              		.thumb_func
+ 222              		.fpu softvfp
+ 223              		.type	BKP_WriteBackupRegister, %function
+ 224              	BKP_WriteBackupRegister:
+ 225              	.LFB35:
+ 214:../../source/src/FWlib/src/stm32f10x_bkp.c **** 
+ 215:../../source/src/FWlib/src/stm32f10x_bkp.c **** /**
+ 216:../../source/src/FWlib/src/stm32f10x_bkp.c ****   * @brief  Writes user data to the specified Data Backup Register.
+ 217:../../source/src/FWlib/src/stm32f10x_bkp.c ****   * @param  BKP_DR: specifies the Data Backup Register.
+ 218:../../source/src/FWlib/src/stm32f10x_bkp.c ****   *   This parameter can be BKP_DRx where x:[1, 42]
+ 219:../../source/src/FWlib/src/stm32f10x_bkp.c ****   * @param  Data: data to write
+ 220:../../source/src/FWlib/src/stm32f10x_bkp.c ****   * @retval None
+ 221:../../source/src/FWlib/src/stm32f10x_bkp.c ****   */
+ 222:../../source/src/FWlib/src/stm32f10x_bkp.c **** void BKP_WriteBackupRegister(uint16_t BKP_DR, uint16_t Data)
+ 223:../../source/src/FWlib/src/stm32f10x_bkp.c **** {
+ 226              		.loc 1 223 0
+ 227              		.cfi_startproc
+ 228              		@ args = 0, pretend = 0, frame = 8
+ 229              		@ frame_needed = 0, uses_anonymous_args = 0
+ 230              		@ link register save eliminated.
+ 231              	.LVL15:
+ 224:../../source/src/FWlib/src/stm32f10x_bkp.c ****   __IO uint32_t tmp = 0;
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccHiRVaW.s 			page 9
+
+
+ 232              		.loc 1 224 0
+ 233 0068 0022     		movs	r2, #0
+ 225:../../source/src/FWlib/src/stm32f10x_bkp.c **** 
+ 226:../../source/src/FWlib/src/stm32f10x_bkp.c ****   /* Check the parameters */
+ 227:../../source/src/FWlib/src/stm32f10x_bkp.c ****   assert_param(IS_BKP_DR(BKP_DR));
+ 228:../../source/src/FWlib/src/stm32f10x_bkp.c **** 
+ 229:../../source/src/FWlib/src/stm32f10x_bkp.c ****   tmp = (uint32_t)BKP_BASE; 
+ 234              		.loc 1 229 0
+ 235 006a 054B     		ldr	r3, .L19
+ 223:../../source/src/FWlib/src/stm32f10x_bkp.c ****   __IO uint32_t tmp = 0;
+ 236              		.loc 1 223 0
+ 237 006c 82B0     		sub	sp, sp, #8
+ 238              	.LCFI2:
+ 239              		.cfi_def_cfa_offset 8
+ 224:../../source/src/FWlib/src/stm32f10x_bkp.c ****   __IO uint32_t tmp = 0;
+ 240              		.loc 1 224 0
+ 241 006e 0192     		str	r2, [sp, #4]
+ 242              		.loc 1 229 0
+ 243 0070 0193     		str	r3, [sp, #4]
+ 230:../../source/src/FWlib/src/stm32f10x_bkp.c ****   tmp += BKP_DR;
+ 244              		.loc 1 230 0
+ 245 0072 019B     		ldr	r3, [sp, #4]
+ 246 0074 1844     		add	r0, r0, r3
+ 247              	.LVL16:
+ 248 0076 0190     		str	r0, [sp, #4]
+ 231:../../source/src/FWlib/src/stm32f10x_bkp.c **** 
+ 232:../../source/src/FWlib/src/stm32f10x_bkp.c ****   *(__IO uint32_t *) tmp = Data;
+ 249              		.loc 1 232 0
+ 250 0078 019B     		ldr	r3, [sp, #4]
+ 251 007a 1960     		str	r1, [r3]
+ 233:../../source/src/FWlib/src/stm32f10x_bkp.c **** }
+ 252              		.loc 1 233 0
+ 253 007c 02B0     		add	sp, sp, #8
+ 254              	.LCFI3:
+ 255              		.cfi_def_cfa_offset 0
+ 256              		@ sp needed
+ 257 007e 7047     		bx	lr
+ 258              	.L20:
+ 259              		.align	2
+ 260              	.L19:
+ 261 0080 006C0040 		.word	1073769472
+ 262              		.cfi_endproc
+ 263              	.LFE35:
+ 264              		.size	BKP_WriteBackupRegister, .-BKP_WriteBackupRegister
+ 265              		.align	1
+ 266              		.p2align 2,,3
+ 267              		.global	BKP_ReadBackupRegister
+ 268              		.syntax unified
+ 269              		.thumb
+ 270              		.thumb_func
+ 271              		.fpu softvfp
+ 272              		.type	BKP_ReadBackupRegister, %function
+ 273              	BKP_ReadBackupRegister:
+ 274              	.LFB36:
+ 234:../../source/src/FWlib/src/stm32f10x_bkp.c **** 
+ 235:../../source/src/FWlib/src/stm32f10x_bkp.c **** /**
+ 236:../../source/src/FWlib/src/stm32f10x_bkp.c ****   * @brief  Reads data from the specified Data Backup Register.
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccHiRVaW.s 			page 10
+
+
+ 237:../../source/src/FWlib/src/stm32f10x_bkp.c ****   * @param  BKP_DR: specifies the Data Backup Register.
+ 238:../../source/src/FWlib/src/stm32f10x_bkp.c ****   *   This parameter can be BKP_DRx where x:[1, 42]
+ 239:../../source/src/FWlib/src/stm32f10x_bkp.c ****   * @retval The content of the specified Data Backup Register
+ 240:../../source/src/FWlib/src/stm32f10x_bkp.c ****   */
+ 241:../../source/src/FWlib/src/stm32f10x_bkp.c **** uint16_t BKP_ReadBackupRegister(uint16_t BKP_DR)
+ 242:../../source/src/FWlib/src/stm32f10x_bkp.c **** {
+ 275              		.loc 1 242 0
+ 276              		.cfi_startproc
+ 277              		@ args = 0, pretend = 0, frame = 8
+ 278              		@ frame_needed = 0, uses_anonymous_args = 0
+ 279              		@ link register save eliminated.
+ 280              	.LVL17:
+ 243:../../source/src/FWlib/src/stm32f10x_bkp.c ****   __IO uint32_t tmp = 0;
+ 281              		.loc 1 243 0
+ 282 0084 0022     		movs	r2, #0
+ 244:../../source/src/FWlib/src/stm32f10x_bkp.c **** 
+ 245:../../source/src/FWlib/src/stm32f10x_bkp.c ****   /* Check the parameters */
+ 246:../../source/src/FWlib/src/stm32f10x_bkp.c ****   assert_param(IS_BKP_DR(BKP_DR));
+ 247:../../source/src/FWlib/src/stm32f10x_bkp.c **** 
+ 248:../../source/src/FWlib/src/stm32f10x_bkp.c ****   tmp = (uint32_t)BKP_BASE; 
+ 283              		.loc 1 248 0
+ 284 0086 054B     		ldr	r3, .L22
+ 242:../../source/src/FWlib/src/stm32f10x_bkp.c ****   __IO uint32_t tmp = 0;
+ 285              		.loc 1 242 0
+ 286 0088 82B0     		sub	sp, sp, #8
+ 287              	.LCFI4:
+ 288              		.cfi_def_cfa_offset 8
+ 243:../../source/src/FWlib/src/stm32f10x_bkp.c ****   __IO uint32_t tmp = 0;
+ 289              		.loc 1 243 0
+ 290 008a 0192     		str	r2, [sp, #4]
+ 291              		.loc 1 248 0
+ 292 008c 0193     		str	r3, [sp, #4]
+ 249:../../source/src/FWlib/src/stm32f10x_bkp.c ****   tmp += BKP_DR;
+ 293              		.loc 1 249 0
+ 294 008e 019B     		ldr	r3, [sp, #4]
+ 295 0090 1844     		add	r0, r0, r3
+ 296              	.LVL18:
+ 297 0092 0190     		str	r0, [sp, #4]
+ 250:../../source/src/FWlib/src/stm32f10x_bkp.c **** 
+ 251:../../source/src/FWlib/src/stm32f10x_bkp.c ****   return (*(__IO uint16_t *) tmp);
+ 298              		.loc 1 251 0
+ 299 0094 019B     		ldr	r3, [sp, #4]
+ 300 0096 1888     		ldrh	r0, [r3]
+ 252:../../source/src/FWlib/src/stm32f10x_bkp.c **** }
+ 301              		.loc 1 252 0
+ 302 0098 02B0     		add	sp, sp, #8
+ 303              	.LCFI5:
+ 304              		.cfi_def_cfa_offset 0
+ 305              		@ sp needed
+ 306 009a 7047     		bx	lr
+ 307              	.L23:
+ 308              		.align	2
+ 309              	.L22:
+ 310 009c 006C0040 		.word	1073769472
+ 311              		.cfi_endproc
+ 312              	.LFE36:
+ 313              		.size	BKP_ReadBackupRegister, .-BKP_ReadBackupRegister
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccHiRVaW.s 			page 11
+
+
+ 314              		.align	1
+ 315              		.p2align 2,,3
+ 316              		.global	BKP_GetFlagStatus
+ 317              		.syntax unified
+ 318              		.thumb
+ 319              		.thumb_func
+ 320              		.fpu softvfp
+ 321              		.type	BKP_GetFlagStatus, %function
+ 322              	BKP_GetFlagStatus:
+ 323              	.LFB37:
+ 253:../../source/src/FWlib/src/stm32f10x_bkp.c **** 
+ 254:../../source/src/FWlib/src/stm32f10x_bkp.c **** /**
+ 255:../../source/src/FWlib/src/stm32f10x_bkp.c ****   * @brief  Checks whether the Tamper Pin Event flag is set or not.
+ 256:../../source/src/FWlib/src/stm32f10x_bkp.c ****   * @param  None
+ 257:../../source/src/FWlib/src/stm32f10x_bkp.c ****   * @retval The new state of the Tamper Pin Event flag (SET or RESET).
+ 258:../../source/src/FWlib/src/stm32f10x_bkp.c ****   */
+ 259:../../source/src/FWlib/src/stm32f10x_bkp.c **** FlagStatus BKP_GetFlagStatus(void)
+ 260:../../source/src/FWlib/src/stm32f10x_bkp.c **** {
+ 324              		.loc 1 260 0
+ 325              		.cfi_startproc
+ 326              		@ args = 0, pretend = 0, frame = 0
+ 327              		@ frame_needed = 0, uses_anonymous_args = 0
+ 328              		@ link register save eliminated.
+ 261:../../source/src/FWlib/src/stm32f10x_bkp.c ****   return (FlagStatus)(*(__IO uint32_t *) CSR_TEF_BB);
+ 329              		.loc 1 261 0
+ 330 00a0 014B     		ldr	r3, .L25
+ 331 00a2 1868     		ldr	r0, [r3]
+ 262:../../source/src/FWlib/src/stm32f10x_bkp.c **** }
+ 332              		.loc 1 262 0
+ 333 00a4 C0B2     		uxtb	r0, r0
+ 334 00a6 7047     		bx	lr
+ 335              	.L26:
+ 336              		.align	2
+ 337              	.L25:
+ 338 00a8 A0860D42 		.word	1108182688
+ 339              		.cfi_endproc
+ 340              	.LFE37:
+ 341              		.size	BKP_GetFlagStatus, .-BKP_GetFlagStatus
+ 342              		.align	1
+ 343              		.p2align 2,,3
+ 344              		.global	BKP_ClearFlag
+ 345              		.syntax unified
+ 346              		.thumb
+ 347              		.thumb_func
+ 348              		.fpu softvfp
+ 349              		.type	BKP_ClearFlag, %function
+ 350              	BKP_ClearFlag:
+ 351              	.LFB38:
+ 263:../../source/src/FWlib/src/stm32f10x_bkp.c **** 
+ 264:../../source/src/FWlib/src/stm32f10x_bkp.c **** /**
+ 265:../../source/src/FWlib/src/stm32f10x_bkp.c ****   * @brief  Clears Tamper Pin Event pending flag.
+ 266:../../source/src/FWlib/src/stm32f10x_bkp.c ****   * @param  None
+ 267:../../source/src/FWlib/src/stm32f10x_bkp.c ****   * @retval None
+ 268:../../source/src/FWlib/src/stm32f10x_bkp.c ****   */
+ 269:../../source/src/FWlib/src/stm32f10x_bkp.c **** void BKP_ClearFlag(void)
+ 270:../../source/src/FWlib/src/stm32f10x_bkp.c **** {
+ 352              		.loc 1 270 0
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccHiRVaW.s 			page 12
+
+
+ 353              		.cfi_startproc
+ 354              		@ args = 0, pretend = 0, frame = 0
+ 355              		@ frame_needed = 0, uses_anonymous_args = 0
+ 356              		@ link register save eliminated.
+ 271:../../source/src/FWlib/src/stm32f10x_bkp.c ****   /* Set CTE bit to clear Tamper Pin Event flag */
+ 272:../../source/src/FWlib/src/stm32f10x_bkp.c ****   BKP->CSR |= BKP_CSR_CTE;
+ 357              		.loc 1 272 0
+ 358 00ac 024A     		ldr	r2, .L28
+ 359 00ae 938E     		ldrh	r3, [r2, #52]
+ 360 00b0 43F00103 		orr	r3, r3, #1
+ 361 00b4 9386     		strh	r3, [r2, #52]	@ movhi
+ 273:../../source/src/FWlib/src/stm32f10x_bkp.c **** }
+ 362              		.loc 1 273 0
+ 363 00b6 7047     		bx	lr
+ 364              	.L29:
+ 365              		.align	2
+ 366              	.L28:
+ 367 00b8 006C0040 		.word	1073769472
+ 368              		.cfi_endproc
+ 369              	.LFE38:
+ 370              		.size	BKP_ClearFlag, .-BKP_ClearFlag
+ 371              		.align	1
+ 372              		.p2align 2,,3
+ 373              		.global	BKP_GetITStatus
+ 374              		.syntax unified
+ 375              		.thumb
+ 376              		.thumb_func
+ 377              		.fpu softvfp
+ 378              		.type	BKP_GetITStatus, %function
+ 379              	BKP_GetITStatus:
+ 380              	.LFB39:
+ 274:../../source/src/FWlib/src/stm32f10x_bkp.c **** 
+ 275:../../source/src/FWlib/src/stm32f10x_bkp.c **** /**
+ 276:../../source/src/FWlib/src/stm32f10x_bkp.c ****   * @brief  Checks whether the Tamper Pin Interrupt has occurred or not.
+ 277:../../source/src/FWlib/src/stm32f10x_bkp.c ****   * @param  None
+ 278:../../source/src/FWlib/src/stm32f10x_bkp.c ****   * @retval The new state of the Tamper Pin Interrupt (SET or RESET).
+ 279:../../source/src/FWlib/src/stm32f10x_bkp.c ****   */
+ 280:../../source/src/FWlib/src/stm32f10x_bkp.c **** ITStatus BKP_GetITStatus(void)
+ 281:../../source/src/FWlib/src/stm32f10x_bkp.c **** {
+ 381              		.loc 1 281 0
+ 382              		.cfi_startproc
+ 383              		@ args = 0, pretend = 0, frame = 0
+ 384              		@ frame_needed = 0, uses_anonymous_args = 0
+ 385              		@ link register save eliminated.
+ 282:../../source/src/FWlib/src/stm32f10x_bkp.c ****   return (ITStatus)(*(__IO uint32_t *) CSR_TIF_BB);
+ 386              		.loc 1 282 0
+ 387 00bc 014B     		ldr	r3, .L31
+ 388 00be 1868     		ldr	r0, [r3]
+ 283:../../source/src/FWlib/src/stm32f10x_bkp.c **** }
+ 389              		.loc 1 283 0
+ 390 00c0 C0B2     		uxtb	r0, r0
+ 391 00c2 7047     		bx	lr
+ 392              	.L32:
+ 393              		.align	2
+ 394              	.L31:
+ 395 00c4 A4860D42 		.word	1108182692
+ 396              		.cfi_endproc
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccHiRVaW.s 			page 13
+
+
+ 397              	.LFE39:
+ 398              		.size	BKP_GetITStatus, .-BKP_GetITStatus
+ 399              		.align	1
+ 400              		.p2align 2,,3
+ 401              		.global	BKP_ClearITPendingBit
+ 402              		.syntax unified
+ 403              		.thumb
+ 404              		.thumb_func
+ 405              		.fpu softvfp
+ 406              		.type	BKP_ClearITPendingBit, %function
+ 407              	BKP_ClearITPendingBit:
+ 408              	.LFB40:
+ 284:../../source/src/FWlib/src/stm32f10x_bkp.c **** 
+ 285:../../source/src/FWlib/src/stm32f10x_bkp.c **** /**
+ 286:../../source/src/FWlib/src/stm32f10x_bkp.c ****   * @brief  Clears Tamper Pin Interrupt pending bit.
+ 287:../../source/src/FWlib/src/stm32f10x_bkp.c ****   * @param  None
+ 288:../../source/src/FWlib/src/stm32f10x_bkp.c ****   * @retval None
+ 289:../../source/src/FWlib/src/stm32f10x_bkp.c ****   */
+ 290:../../source/src/FWlib/src/stm32f10x_bkp.c **** void BKP_ClearITPendingBit(void)
+ 291:../../source/src/FWlib/src/stm32f10x_bkp.c **** {
+ 409              		.loc 1 291 0
+ 410              		.cfi_startproc
+ 411              		@ args = 0, pretend = 0, frame = 0
+ 412              		@ frame_needed = 0, uses_anonymous_args = 0
+ 413              		@ link register save eliminated.
+ 292:../../source/src/FWlib/src/stm32f10x_bkp.c ****   /* Set CTI bit to clear Tamper Pin Interrupt pending bit */
+ 293:../../source/src/FWlib/src/stm32f10x_bkp.c ****   BKP->CSR |= BKP_CSR_CTI;
+ 414              		.loc 1 293 0
+ 415 00c8 024A     		ldr	r2, .L34
+ 416 00ca 938E     		ldrh	r3, [r2, #52]
+ 417 00cc 43F00203 		orr	r3, r3, #2
+ 418 00d0 9386     		strh	r3, [r2, #52]	@ movhi
+ 294:../../source/src/FWlib/src/stm32f10x_bkp.c **** }
+ 419              		.loc 1 294 0
+ 420 00d2 7047     		bx	lr
+ 421              	.L35:
+ 422              		.align	2
+ 423              	.L34:
+ 424 00d4 006C0040 		.word	1073769472
+ 425              		.cfi_endproc
+ 426              	.LFE40:
+ 427              		.size	BKP_ClearITPendingBit, .-BKP_ClearITPendingBit
+ 428              	.Letext0:
+ 429              		.file 2 "f:\\arm\\gcc2018\\arm-none-eabi\\include\\machine\\_default_types.h"
+ 430              		.file 3 "f:\\arm\\gcc2018\\arm-none-eabi\\include\\sys\\_stdint.h"
+ 431              		.file 4 "../../source/include/core_cm3.h"
+ 432              		.file 5 "../../source/include/system_stm32f10x.h"
+ 433              		.file 6 "../../source/include/stm32f10x.h"
+ 434              		.file 7 "../../source/src/FWlib/inc/stm32f10x_rcc.h"
+ 435              		.section	.debug_info,"",%progbits
+ 436              	.Ldebug_info0:
+ 437 0000 DA080000 		.4byte	0x8da
+ 438 0004 0200     		.2byte	0x2
+ 439 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 440 000a 04       		.byte	0x4
+ 441 000b 01       		.uleb128 0x1
+ 442 000c 0C020000 		.4byte	.LASF122
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccHiRVaW.s 			page 14
+
+
+ 443 0010 0C       		.byte	0xc
+ 444 0011 B2020000 		.4byte	.LASF123
+ 445 0015 9C000000 		.4byte	.LASF124
+ 446 0019 00000000 		.4byte	.Ltext0
+ 447 001d D8000000 		.4byte	.Letext0
+ 448 0021 00000000 		.4byte	.Ldebug_line0
+ 449 0025 02       		.uleb128 0x2
+ 450 0026 01       		.byte	0x1
+ 451 0027 06       		.byte	0x6
+ 452 0028 1A050000 		.4byte	.LASF0
+ 453 002c 03       		.uleb128 0x3
+ 454 002d 2E040000 		.4byte	.LASF3
+ 455 0031 02       		.byte	0x2
+ 456 0032 2B       		.byte	0x2b
+ 457 0033 37000000 		.4byte	0x37
+ 458 0037 02       		.uleb128 0x2
+ 459 0038 01       		.byte	0x1
+ 460 0039 08       		.byte	0x8
+ 461 003a 80040000 		.4byte	.LASF1
+ 462 003e 02       		.uleb128 0x2
+ 463 003f 02       		.byte	0x2
+ 464 0040 05       		.byte	0x5
+ 465 0041 AC030000 		.4byte	.LASF2
+ 466 0045 03       		.uleb128 0x3
+ 467 0046 20010000 		.4byte	.LASF4
+ 468 004a 02       		.byte	0x2
+ 469 004b 39       		.byte	0x39
+ 470 004c 50000000 		.4byte	0x50
+ 471 0050 02       		.uleb128 0x2
+ 472 0051 02       		.byte	0x2
+ 473 0052 07       		.byte	0x7
+ 474 0053 26050000 		.4byte	.LASF5
+ 475 0057 02       		.uleb128 0x2
+ 476 0058 04       		.byte	0x4
+ 477 0059 05       		.byte	0x5
+ 478 005a CA030000 		.4byte	.LASF6
+ 479 005e 03       		.uleb128 0x3
+ 480 005f 8E040000 		.4byte	.LASF7
+ 481 0063 02       		.byte	0x2
+ 482 0064 4F       		.byte	0x4f
+ 483 0065 69000000 		.4byte	0x69
+ 484 0069 02       		.uleb128 0x2
+ 485 006a 04       		.byte	0x4
+ 486 006b 07       		.byte	0x7
+ 487 006c 5B040000 		.4byte	.LASF8
+ 488 0070 02       		.uleb128 0x2
+ 489 0071 08       		.byte	0x8
+ 490 0072 05       		.byte	0x5
+ 491 0073 D0010000 		.4byte	.LASF9
+ 492 0077 02       		.uleb128 0x2
+ 493 0078 08       		.byte	0x8
+ 494 0079 07       		.byte	0x7
+ 495 007a 09010000 		.4byte	.LASF10
+ 496 007e 04       		.uleb128 0x4
+ 497 007f 04       		.byte	0x4
+ 498 0080 05       		.byte	0x5
+ 499 0081 696E7400 		.ascii	"int\000"
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccHiRVaW.s 			page 15
+
+
+ 500 0085 05       		.uleb128 0x5
+ 501 0086 7E000000 		.4byte	0x7e
+ 502 008a 02       		.uleb128 0x2
+ 503 008b 04       		.byte	0x4
+ 504 008c 07       		.byte	0x7
+ 505 008d 53000000 		.4byte	.LASF11
+ 506 0091 03       		.uleb128 0x3
+ 507 0092 9B010000 		.4byte	.LASF12
+ 508 0096 03       		.byte	0x3
+ 509 0097 18       		.byte	0x18
+ 510 0098 2C000000 		.4byte	0x2c
+ 511 009c 03       		.uleb128 0x3
+ 512 009d 20030000 		.4byte	.LASF13
+ 513 00a1 03       		.byte	0x3
+ 514 00a2 24       		.byte	0x24
+ 515 00a3 45000000 		.4byte	0x45
+ 516 00a7 05       		.uleb128 0x5
+ 517 00a8 9C000000 		.4byte	0x9c
+ 518 00ac 03       		.uleb128 0x3
+ 519 00ad 93000000 		.4byte	.LASF14
+ 520 00b1 03       		.byte	0x3
+ 521 00b2 30       		.byte	0x30
+ 522 00b3 5E000000 		.4byte	0x5e
+ 523 00b7 05       		.uleb128 0x5
+ 524 00b8 AC000000 		.4byte	0xac
+ 525 00bc 06       		.uleb128 0x6
+ 526 00bd D3030000 		.4byte	.LASF15
+ 527 00c1 04       		.byte	0x4
+ 528 00c2 CE06     		.2byte	0x6ce
+ 529 00c4 85000000 		.4byte	0x85
+ 530 00c8 01       		.byte	0x1
+ 531 00c9 01       		.byte	0x1
+ 532 00ca 07       		.uleb128 0x7
+ 533 00cb 00000000 		.4byte	.LASF16
+ 534 00cf 05       		.byte	0x5
+ 535 00d0 35       		.byte	0x35
+ 536 00d1 AC000000 		.4byte	0xac
+ 537 00d5 01       		.byte	0x1
+ 538 00d6 01       		.byte	0x1
+ 539 00d7 08       		.uleb128 0x8
+ 540 00d8 07       		.byte	0x7
+ 541 00d9 01       		.byte	0x1
+ 542 00da 37000000 		.4byte	0x37
+ 543 00de 06       		.byte	0x6
+ 544 00df 0702     		.2byte	0x207
+ 545 00e1 F2000000 		.4byte	0xf2
+ 546 00e5 09       		.uleb128 0x9
+ 547 00e6 E0030000 		.4byte	.LASF17
+ 548 00ea 00       		.byte	0
+ 549 00eb 0A       		.uleb128 0xa
+ 550 00ec 53455400 		.ascii	"SET\000"
+ 551 00f0 01       		.byte	0x1
+ 552 00f1 00       		.byte	0
+ 553 00f2 0B       		.uleb128 0xb
+ 554 00f3 77000000 		.4byte	.LASF18
+ 555 00f7 06       		.byte	0x6
+ 556 00f8 0702     		.2byte	0x207
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccHiRVaW.s 			page 16
+
+
+ 557 00fa D7000000 		.4byte	0xd7
+ 558 00fe 0B       		.uleb128 0xb
+ 559 00ff 4F010000 		.4byte	.LASF19
+ 560 0103 06       		.byte	0x6
+ 561 0104 0702     		.2byte	0x207
+ 562 0106 D7000000 		.4byte	0xd7
+ 563 010a 08       		.uleb128 0x8
+ 564 010b 07       		.byte	0x7
+ 565 010c 01       		.byte	0x1
+ 566 010d 37000000 		.4byte	0x37
+ 567 0111 06       		.byte	0x6
+ 568 0112 0902     		.2byte	0x209
+ 569 0114 25010000 		.4byte	0x125
+ 570 0118 09       		.uleb128 0x9
+ 571 0119 85010000 		.4byte	.LASF20
+ 572 011d 00       		.byte	0
+ 573 011e 09       		.uleb128 0x9
+ 574 011f 45040000 		.4byte	.LASF21
+ 575 0123 01       		.byte	0x1
+ 576 0124 00       		.byte	0
+ 577 0125 0B       		.uleb128 0xb
+ 578 0126 60000000 		.4byte	.LASF22
+ 579 012a 06       		.byte	0x6
+ 580 012b 0902     		.2byte	0x209
+ 581 012d 0A010000 		.4byte	0x10a
+ 582 0131 0C       		.uleb128 0xc
+ 583 0132 C0       		.byte	0xc0
+ 584 0133 06       		.byte	0x6
+ 585 0134 3A02     		.2byte	0x23a
+ 586 0136 AF060000 		.4byte	0x6af
+ 587 013a 0D       		.uleb128 0xd
+ 588 013b 66030000 		.4byte	.LASF23
+ 589 013f 06       		.byte	0x6
+ 590 0140 3C02     		.2byte	0x23c
+ 591 0142 AC000000 		.4byte	0xac
+ 592 0146 02       		.byte	0x2
+ 593 0147 23       		.byte	0x23
+ 594 0148 00       		.uleb128 0
+ 595 0149 0E       		.uleb128 0xe
+ 596 014a 44523100 		.ascii	"DR1\000"
+ 597 014e 06       		.byte	0x6
+ 598 014f 3D02     		.2byte	0x23d
+ 599 0151 A7000000 		.4byte	0xa7
+ 600 0155 02       		.byte	0x2
+ 601 0156 23       		.byte	0x23
+ 602 0157 04       		.uleb128 0x4
+ 603 0158 0D       		.uleb128 0xd
+ 604 0159 70030000 		.4byte	.LASF24
+ 605 015d 06       		.byte	0x6
+ 606 015e 3E02     		.2byte	0x23e
+ 607 0160 9C000000 		.4byte	0x9c
+ 608 0164 02       		.byte	0x2
+ 609 0165 23       		.byte	0x23
+ 610 0166 06       		.uleb128 0x6
+ 611 0167 0E       		.uleb128 0xe
+ 612 0168 44523200 		.ascii	"DR2\000"
+ 613 016c 06       		.byte	0x6
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccHiRVaW.s 			page 17
+
+
+ 614 016d 3F02     		.2byte	0x23f
+ 615 016f A7000000 		.4byte	0xa7
+ 616 0173 02       		.byte	0x2
+ 617 0174 23       		.byte	0x23
+ 618 0175 08       		.uleb128 0x8
+ 619 0176 0D       		.uleb128 0xd
+ 620 0177 7A030000 		.4byte	.LASF25
+ 621 017b 06       		.byte	0x6
+ 622 017c 4002     		.2byte	0x240
+ 623 017e 9C000000 		.4byte	0x9c
+ 624 0182 02       		.byte	0x2
+ 625 0183 23       		.byte	0x23
+ 626 0184 0A       		.uleb128 0xa
+ 627 0185 0E       		.uleb128 0xe
+ 628 0186 44523300 		.ascii	"DR3\000"
+ 629 018a 06       		.byte	0x6
+ 630 018b 4102     		.2byte	0x241
+ 631 018d A7000000 		.4byte	0xa7
+ 632 0191 02       		.byte	0x2
+ 633 0192 23       		.byte	0x23
+ 634 0193 0C       		.uleb128 0xc
+ 635 0194 0D       		.uleb128 0xd
+ 636 0195 84030000 		.4byte	.LASF26
+ 637 0199 06       		.byte	0x6
+ 638 019a 4202     		.2byte	0x242
+ 639 019c 9C000000 		.4byte	0x9c
+ 640 01a0 02       		.byte	0x2
+ 641 01a1 23       		.byte	0x23
+ 642 01a2 0E       		.uleb128 0xe
+ 643 01a3 0E       		.uleb128 0xe
+ 644 01a4 44523400 		.ascii	"DR4\000"
+ 645 01a8 06       		.byte	0x6
+ 646 01a9 4302     		.2byte	0x243
+ 647 01ab A7000000 		.4byte	0xa7
+ 648 01af 02       		.byte	0x2
+ 649 01b0 23       		.byte	0x23
+ 650 01b1 10       		.uleb128 0x10
+ 651 01b2 0D       		.uleb128 0xd
+ 652 01b3 8E030000 		.4byte	.LASF27
+ 653 01b7 06       		.byte	0x6
+ 654 01b8 4402     		.2byte	0x244
+ 655 01ba 9C000000 		.4byte	0x9c
+ 656 01be 02       		.byte	0x2
+ 657 01bf 23       		.byte	0x23
+ 658 01c0 12       		.uleb128 0x12
+ 659 01c1 0E       		.uleb128 0xe
+ 660 01c2 44523500 		.ascii	"DR5\000"
+ 661 01c6 06       		.byte	0x6
+ 662 01c7 4502     		.2byte	0x245
+ 663 01c9 A7000000 		.4byte	0xa7
+ 664 01cd 02       		.byte	0x2
+ 665 01ce 23       		.byte	0x23
+ 666 01cf 14       		.uleb128 0x14
+ 667 01d0 0D       		.uleb128 0xd
+ 668 01d1 98030000 		.4byte	.LASF28
+ 669 01d5 06       		.byte	0x6
+ 670 01d6 4602     		.2byte	0x246
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccHiRVaW.s 			page 18
+
+
+ 671 01d8 9C000000 		.4byte	0x9c
+ 672 01dc 02       		.byte	0x2
+ 673 01dd 23       		.byte	0x23
+ 674 01de 16       		.uleb128 0x16
+ 675 01df 0E       		.uleb128 0xe
+ 676 01e0 44523600 		.ascii	"DR6\000"
+ 677 01e4 06       		.byte	0x6
+ 678 01e5 4702     		.2byte	0x247
+ 679 01e7 A7000000 		.4byte	0xa7
+ 680 01eb 02       		.byte	0x2
+ 681 01ec 23       		.byte	0x23
+ 682 01ed 18       		.uleb128 0x18
+ 683 01ee 0D       		.uleb128 0xd
+ 684 01ef A2030000 		.4byte	.LASF29
+ 685 01f3 06       		.byte	0x6
+ 686 01f4 4802     		.2byte	0x248
+ 687 01f6 9C000000 		.4byte	0x9c
+ 688 01fa 02       		.byte	0x2
+ 689 01fb 23       		.byte	0x23
+ 690 01fc 1A       		.uleb128 0x1a
+ 691 01fd 0E       		.uleb128 0xe
+ 692 01fe 44523700 		.ascii	"DR7\000"
+ 693 0202 06       		.byte	0x6
+ 694 0203 4902     		.2byte	0x249
+ 695 0205 A7000000 		.4byte	0xa7
+ 696 0209 02       		.byte	0x2
+ 697 020a 23       		.byte	0x23
+ 698 020b 1C       		.uleb128 0x1c
+ 699 020c 0D       		.uleb128 0xd
+ 700 020d A7050000 		.4byte	.LASF30
+ 701 0211 06       		.byte	0x6
+ 702 0212 4A02     		.2byte	0x24a
+ 703 0214 9C000000 		.4byte	0x9c
+ 704 0218 02       		.byte	0x2
+ 705 0219 23       		.byte	0x23
+ 706 021a 1E       		.uleb128 0x1e
+ 707 021b 0E       		.uleb128 0xe
+ 708 021c 44523800 		.ascii	"DR8\000"
+ 709 0220 06       		.byte	0x6
+ 710 0221 4B02     		.2byte	0x24b
+ 711 0223 A7000000 		.4byte	0xa7
+ 712 0227 02       		.byte	0x2
+ 713 0228 23       		.byte	0x23
+ 714 0229 20       		.uleb128 0x20
+ 715 022a 0D       		.uleb128 0xd
+ 716 022b B6030000 		.4byte	.LASF31
+ 717 022f 06       		.byte	0x6
+ 718 0230 4C02     		.2byte	0x24c
+ 719 0232 9C000000 		.4byte	0x9c
+ 720 0236 02       		.byte	0x2
+ 721 0237 23       		.byte	0x23
+ 722 0238 22       		.uleb128 0x22
+ 723 0239 0E       		.uleb128 0xe
+ 724 023a 44523900 		.ascii	"DR9\000"
+ 725 023e 06       		.byte	0x6
+ 726 023f 4D02     		.2byte	0x24d
+ 727 0241 A7000000 		.4byte	0xa7
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccHiRVaW.s 			page 19
+
+
+ 728 0245 02       		.byte	0x2
+ 729 0246 23       		.byte	0x23
+ 730 0247 24       		.uleb128 0x24
+ 731 0248 0D       		.uleb128 0xd
+ 732 0249 C0030000 		.4byte	.LASF32
+ 733 024d 06       		.byte	0x6
+ 734 024e 4E02     		.2byte	0x24e
+ 735 0250 9C000000 		.4byte	0x9c
+ 736 0254 02       		.byte	0x2
+ 737 0255 23       		.byte	0x23
+ 738 0256 26       		.uleb128 0x26
+ 739 0257 0D       		.uleb128 0xd
+ 740 0258 DD020000 		.4byte	.LASF33
+ 741 025c 06       		.byte	0x6
+ 742 025d 4F02     		.2byte	0x24f
+ 743 025f A7000000 		.4byte	0xa7
+ 744 0263 02       		.byte	0x2
+ 745 0264 23       		.byte	0x23
+ 746 0265 28       		.uleb128 0x28
+ 747 0266 0D       		.uleb128 0xd
+ 748 0267 99040000 		.4byte	.LASF34
+ 749 026b 06       		.byte	0x6
+ 750 026c 5002     		.2byte	0x250
+ 751 026e 9C000000 		.4byte	0x9c
+ 752 0272 02       		.byte	0x2
+ 753 0273 23       		.byte	0x23
+ 754 0274 2A       		.uleb128 0x2a
+ 755 0275 0D       		.uleb128 0xd
+ 756 0276 FC040000 		.4byte	.LASF35
+ 757 027a 06       		.byte	0x6
+ 758 027b 5102     		.2byte	0x251
+ 759 027d A7000000 		.4byte	0xa7
+ 760 0281 02       		.byte	0x2
+ 761 0282 23       		.byte	0x23
+ 762 0283 2C       		.uleb128 0x2c
+ 763 0284 0D       		.uleb128 0xd
+ 764 0285 A4040000 		.4byte	.LASF36
+ 765 0289 06       		.byte	0x6
+ 766 028a 5202     		.2byte	0x252
+ 767 028c 9C000000 		.4byte	0x9c
+ 768 0290 02       		.byte	0x2
+ 769 0291 23       		.byte	0x23
+ 770 0292 2E       		.uleb128 0x2e
+ 771 0293 0E       		.uleb128 0xe
+ 772 0294 435200   		.ascii	"CR\000"
+ 773 0297 06       		.byte	0x6
+ 774 0298 5302     		.2byte	0x253
+ 775 029a A7000000 		.4byte	0xa7
+ 776 029e 02       		.byte	0x2
+ 777 029f 23       		.byte	0x23
+ 778 02a0 30       		.uleb128 0x30
+ 779 02a1 0D       		.uleb128 0xd
+ 780 02a2 AF040000 		.4byte	.LASF37
+ 781 02a6 06       		.byte	0x6
+ 782 02a7 5402     		.2byte	0x254
+ 783 02a9 9C000000 		.4byte	0x9c
+ 784 02ad 02       		.byte	0x2
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccHiRVaW.s 			page 20
+
+
+ 785 02ae 23       		.byte	0x23
+ 786 02af 32       		.uleb128 0x32
+ 787 02b0 0E       		.uleb128 0xe
+ 788 02b1 43535200 		.ascii	"CSR\000"
+ 789 02b5 06       		.byte	0x6
+ 790 02b6 5502     		.2byte	0x255
+ 791 02b8 A7000000 		.4byte	0xa7
+ 792 02bc 02       		.byte	0x2
+ 793 02bd 23       		.byte	0x23
+ 794 02be 34       		.uleb128 0x34
+ 795 02bf 0D       		.uleb128 0xd
+ 796 02c0 BA040000 		.4byte	.LASF38
+ 797 02c4 06       		.byte	0x6
+ 798 02c5 5602     		.2byte	0x256
+ 799 02c7 AF060000 		.4byte	0x6af
+ 800 02cb 02       		.byte	0x2
+ 801 02cc 23       		.byte	0x23
+ 802 02cd 36       		.uleb128 0x36
+ 803 02ce 0D       		.uleb128 0xd
+ 804 02cf E2020000 		.4byte	.LASF39
+ 805 02d3 06       		.byte	0x6
+ 806 02d4 5702     		.2byte	0x257
+ 807 02d6 A7000000 		.4byte	0xa7
+ 808 02da 02       		.byte	0x2
+ 809 02db 23       		.byte	0x23
+ 810 02dc 40       		.uleb128 0x40
+ 811 02dd 0D       		.uleb128 0xd
+ 812 02de C5040000 		.4byte	.LASF40
+ 813 02e2 06       		.byte	0x6
+ 814 02e3 5802     		.2byte	0x258
+ 815 02e5 9C000000 		.4byte	0x9c
+ 816 02e9 02       		.byte	0x2
+ 817 02ea 23       		.byte	0x23
+ 818 02eb 42       		.uleb128 0x42
+ 819 02ec 0D       		.uleb128 0xd
+ 820 02ed E7020000 		.4byte	.LASF41
+ 821 02f1 06       		.byte	0x6
+ 822 02f2 5902     		.2byte	0x259
+ 823 02f4 A7000000 		.4byte	0xa7
+ 824 02f8 02       		.byte	0x2
+ 825 02f9 23       		.byte	0x23
+ 826 02fa 44       		.uleb128 0x44
+ 827 02fb 0D       		.uleb128 0xd
+ 828 02fc 2B010000 		.4byte	.LASF42
+ 829 0300 06       		.byte	0x6
+ 830 0301 5A02     		.2byte	0x25a
+ 831 0303 9C000000 		.4byte	0x9c
+ 832 0307 02       		.byte	0x2
+ 833 0308 23       		.byte	0x23
+ 834 0309 46       		.uleb128 0x46
+ 835 030a 0D       		.uleb128 0xd
+ 836 030b EC020000 		.4byte	.LASF43
+ 837 030f 06       		.byte	0x6
+ 838 0310 5B02     		.2byte	0x25b
+ 839 0312 A7000000 		.4byte	0xa7
+ 840 0316 02       		.byte	0x2
+ 841 0317 23       		.byte	0x23
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccHiRVaW.s 			page 21
+
+
+ 842 0318 48       		.uleb128 0x48
+ 843 0319 0D       		.uleb128 0xd
+ 844 031a D0040000 		.4byte	.LASF44
+ 845 031e 06       		.byte	0x6
+ 846 031f 5C02     		.2byte	0x25c
+ 847 0321 9C000000 		.4byte	0x9c
+ 848 0325 02       		.byte	0x2
+ 849 0326 23       		.byte	0x23
+ 850 0327 4A       		.uleb128 0x4a
+ 851 0328 0D       		.uleb128 0xd
+ 852 0329 F1020000 		.4byte	.LASF45
+ 853 032d 06       		.byte	0x6
+ 854 032e 5D02     		.2byte	0x25d
+ 855 0330 A7000000 		.4byte	0xa7
+ 856 0334 02       		.byte	0x2
+ 857 0335 23       		.byte	0x23
+ 858 0336 4C       		.uleb128 0x4c
+ 859 0337 0D       		.uleb128 0xd
+ 860 0338 DB040000 		.4byte	.LASF46
+ 861 033c 06       		.byte	0x6
+ 862 033d 5E02     		.2byte	0x25e
+ 863 033f 9C000000 		.4byte	0x9c
+ 864 0343 02       		.byte	0x2
+ 865 0344 23       		.byte	0x23
+ 866 0345 4E       		.uleb128 0x4e
+ 867 0346 0D       		.uleb128 0xd
+ 868 0347 F6020000 		.4byte	.LASF47
+ 869 034b 06       		.byte	0x6
+ 870 034c 5F02     		.2byte	0x25f
+ 871 034e A7000000 		.4byte	0xa7
+ 872 0352 02       		.byte	0x2
+ 873 0353 23       		.byte	0x23
+ 874 0354 50       		.uleb128 0x50
+ 875 0355 0D       		.uleb128 0xd
+ 876 0356 E6040000 		.4byte	.LASF48
+ 877 035a 06       		.byte	0x6
+ 878 035b 6002     		.2byte	0x260
+ 879 035d 9C000000 		.4byte	0x9c
+ 880 0361 02       		.byte	0x2
+ 881 0362 23       		.byte	0x23
+ 882 0363 52       		.uleb128 0x52
+ 883 0364 0D       		.uleb128 0xd
+ 884 0365 FB020000 		.4byte	.LASF49
+ 885 0369 06       		.byte	0x6
+ 886 036a 6102     		.2byte	0x261
+ 887 036c A7000000 		.4byte	0xa7
+ 888 0370 02       		.byte	0x2
+ 889 0371 23       		.byte	0x23
+ 890 0372 54       		.uleb128 0x54
+ 891 0373 0D       		.uleb128 0xd
+ 892 0374 F1040000 		.4byte	.LASF50
+ 893 0378 06       		.byte	0x6
+ 894 0379 6202     		.2byte	0x262
+ 895 037b 9C000000 		.4byte	0x9c
+ 896 037f 02       		.byte	0x2
+ 897 0380 23       		.byte	0x23
+ 898 0381 56       		.uleb128 0x56
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccHiRVaW.s 			page 22
+
+
+ 899 0382 0D       		.uleb128 0xd
+ 900 0383 00030000 		.4byte	.LASF51
+ 901 0387 06       		.byte	0x6
+ 902 0388 6302     		.2byte	0x263
+ 903 038a A7000000 		.4byte	0xa7
+ 904 038e 02       		.byte	0x2
+ 905 038f 23       		.byte	0x23
+ 906 0390 58       		.uleb128 0x58
+ 907 0391 0D       		.uleb128 0xd
+ 908 0392 39050000 		.4byte	.LASF52
+ 909 0396 06       		.byte	0x6
+ 910 0397 6402     		.2byte	0x264
+ 911 0399 9C000000 		.4byte	0x9c
+ 912 039d 02       		.byte	0x2
+ 913 039e 23       		.byte	0x23
+ 914 039f 5A       		.uleb128 0x5a
+ 915 03a0 0D       		.uleb128 0xd
+ 916 03a1 05030000 		.4byte	.LASF53
+ 917 03a5 06       		.byte	0x6
+ 918 03a6 6502     		.2byte	0x265
+ 919 03a8 A7000000 		.4byte	0xa7
+ 920 03ac 02       		.byte	0x2
+ 921 03ad 23       		.byte	0x23
+ 922 03ae 5C       		.uleb128 0x5c
+ 923 03af 0D       		.uleb128 0xd
+ 924 03b0 44050000 		.4byte	.LASF54
+ 925 03b4 06       		.byte	0x6
+ 926 03b5 6602     		.2byte	0x266
+ 927 03b7 9C000000 		.4byte	0x9c
+ 928 03bb 02       		.byte	0x2
+ 929 03bc 23       		.byte	0x23
+ 930 03bd 5E       		.uleb128 0x5e
+ 931 03be 0D       		.uleb128 0xd
+ 932 03bf 0A030000 		.4byte	.LASF55
+ 933 03c3 06       		.byte	0x6
+ 934 03c4 6702     		.2byte	0x267
+ 935 03c6 A7000000 		.4byte	0xa7
+ 936 03ca 02       		.byte	0x2
+ 937 03cb 23       		.byte	0x23
+ 938 03cc 60       		.uleb128 0x60
+ 939 03cd 0D       		.uleb128 0xd
+ 940 03ce 4F050000 		.4byte	.LASF56
+ 941 03d2 06       		.byte	0x6
+ 942 03d3 6802     		.2byte	0x268
+ 943 03d5 9C000000 		.4byte	0x9c
+ 944 03d9 02       		.byte	0x2
+ 945 03da 23       		.byte	0x23
+ 946 03db 62       		.uleb128 0x62
+ 947 03dc 0D       		.uleb128 0xd
+ 948 03dd 29030000 		.4byte	.LASF57
+ 949 03e1 06       		.byte	0x6
+ 950 03e2 6902     		.2byte	0x269
+ 951 03e4 A7000000 		.4byte	0xa7
+ 952 03e8 02       		.byte	0x2
+ 953 03e9 23       		.byte	0x23
+ 954 03ea 64       		.uleb128 0x64
+ 955 03eb 0D       		.uleb128 0xd
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccHiRVaW.s 			page 23
+
+
+ 956 03ec 5A050000 		.4byte	.LASF58
+ 957 03f0 06       		.byte	0x6
+ 958 03f1 6A02     		.2byte	0x26a
+ 959 03f3 9C000000 		.4byte	0x9c
+ 960 03f7 02       		.byte	0x2
+ 961 03f8 23       		.byte	0x23
+ 962 03f9 66       		.uleb128 0x66
+ 963 03fa 0D       		.uleb128 0xd
+ 964 03fb 2E030000 		.4byte	.LASF59
+ 965 03ff 06       		.byte	0x6
+ 966 0400 6B02     		.2byte	0x26b
+ 967 0402 A7000000 		.4byte	0xa7
+ 968 0406 02       		.byte	0x2
+ 969 0407 23       		.byte	0x23
+ 970 0408 68       		.uleb128 0x68
+ 971 0409 0D       		.uleb128 0xd
+ 972 040a 65050000 		.4byte	.LASF60
+ 973 040e 06       		.byte	0x6
+ 974 040f 6C02     		.2byte	0x26c
+ 975 0411 9C000000 		.4byte	0x9c
+ 976 0415 02       		.byte	0x2
+ 977 0416 23       		.byte	0x23
+ 978 0417 6A       		.uleb128 0x6a
+ 979 0418 0D       		.uleb128 0xd
+ 980 0419 33030000 		.4byte	.LASF61
+ 981 041d 06       		.byte	0x6
+ 982 041e 6D02     		.2byte	0x26d
+ 983 0420 A7000000 		.4byte	0xa7
+ 984 0424 02       		.byte	0x2
+ 985 0425 23       		.byte	0x23
+ 986 0426 6C       		.uleb128 0x6c
+ 987 0427 0D       		.uleb128 0xd
+ 988 0428 70050000 		.4byte	.LASF62
+ 989 042c 06       		.byte	0x6
+ 990 042d 6E02     		.2byte	0x26e
+ 991 042f 9C000000 		.4byte	0x9c
+ 992 0433 02       		.byte	0x2
+ 993 0434 23       		.byte	0x23
+ 994 0435 6E       		.uleb128 0x6e
+ 995 0436 0D       		.uleb128 0xd
+ 996 0437 38030000 		.4byte	.LASF63
+ 997 043b 06       		.byte	0x6
+ 998 043c 6F02     		.2byte	0x26f
+ 999 043e A7000000 		.4byte	0xa7
+ 1000 0442 02       		.byte	0x2
+ 1001 0443 23       		.byte	0x23
+ 1002 0444 70       		.uleb128 0x70
+ 1003 0445 0D       		.uleb128 0xd
+ 1004 0446 7B050000 		.4byte	.LASF64
+ 1005 044a 06       		.byte	0x6
+ 1006 044b 7002     		.2byte	0x270
+ 1007 044d 9C000000 		.4byte	0x9c
+ 1008 0451 02       		.byte	0x2
+ 1009 0452 23       		.byte	0x23
+ 1010 0453 72       		.uleb128 0x72
+ 1011 0454 0D       		.uleb128 0xd
+ 1012 0455 3D030000 		.4byte	.LASF65
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccHiRVaW.s 			page 24
+
+
+ 1013 0459 06       		.byte	0x6
+ 1014 045a 7102     		.2byte	0x271
+ 1015 045c A7000000 		.4byte	0xa7
+ 1016 0460 02       		.byte	0x2
+ 1017 0461 23       		.byte	0x23
+ 1018 0462 74       		.uleb128 0x74
+ 1019 0463 0D       		.uleb128 0xd
+ 1020 0464 86050000 		.4byte	.LASF66
+ 1021 0468 06       		.byte	0x6
+ 1022 0469 7202     		.2byte	0x272
+ 1023 046b 9C000000 		.4byte	0x9c
+ 1024 046f 02       		.byte	0x2
+ 1025 0470 23       		.byte	0x23
+ 1026 0471 76       		.uleb128 0x76
+ 1027 0472 0D       		.uleb128 0xd
+ 1028 0473 42030000 		.4byte	.LASF67
+ 1029 0477 06       		.byte	0x6
+ 1030 0478 7302     		.2byte	0x273
+ 1031 047a A7000000 		.4byte	0xa7
+ 1032 047e 02       		.byte	0x2
+ 1033 047f 23       		.byte	0x23
+ 1034 0480 78       		.uleb128 0x78
+ 1035 0481 0D       		.uleb128 0xd
+ 1036 0482 91050000 		.4byte	.LASF68
+ 1037 0486 06       		.byte	0x6
+ 1038 0487 7402     		.2byte	0x274
+ 1039 0489 9C000000 		.4byte	0x9c
+ 1040 048d 02       		.byte	0x2
+ 1041 048e 23       		.byte	0x23
+ 1042 048f 7A       		.uleb128 0x7a
+ 1043 0490 0D       		.uleb128 0xd
+ 1044 0491 47030000 		.4byte	.LASF69
+ 1045 0495 06       		.byte	0x6
+ 1046 0496 7502     		.2byte	0x275
+ 1047 0498 A7000000 		.4byte	0xa7
+ 1048 049c 02       		.byte	0x2
+ 1049 049d 23       		.byte	0x23
+ 1050 049e 7C       		.uleb128 0x7c
+ 1051 049f 0D       		.uleb128 0xd
+ 1052 04a0 9C050000 		.4byte	.LASF70
+ 1053 04a4 06       		.byte	0x6
+ 1054 04a5 7602     		.2byte	0x276
+ 1055 04a7 9C000000 		.4byte	0x9c
+ 1056 04ab 02       		.byte	0x2
+ 1057 04ac 23       		.byte	0x23
+ 1058 04ad 7E       		.uleb128 0x7e
+ 1059 04ae 0D       		.uleb128 0xd
+ 1060 04af 4C030000 		.4byte	.LASF71
+ 1061 04b3 06       		.byte	0x6
+ 1062 04b4 7702     		.2byte	0x277
+ 1063 04b6 A7000000 		.4byte	0xa7
+ 1064 04ba 03       		.byte	0x3
+ 1065 04bb 23       		.byte	0x23
+ 1066 04bc 8001     		.uleb128 0x80
+ 1067 04be 0D       		.uleb128 0xd
+ 1068 04bf B6050000 		.4byte	.LASF72
+ 1069 04c3 06       		.byte	0x6
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccHiRVaW.s 			page 25
+
+
+ 1070 04c4 7802     		.2byte	0x278
+ 1071 04c6 9C000000 		.4byte	0x9c
+ 1072 04ca 03       		.byte	0x3
+ 1073 04cb 23       		.byte	0x23
+ 1074 04cc 8201     		.uleb128 0x82
+ 1075 04ce 0D       		.uleb128 0xd
+ 1076 04cf 51030000 		.4byte	.LASF73
+ 1077 04d3 06       		.byte	0x6
+ 1078 04d4 7902     		.2byte	0x279
+ 1079 04d6 A7000000 		.4byte	0xa7
+ 1080 04da 03       		.byte	0x3
+ 1081 04db 23       		.byte	0x23
+ 1082 04dc 8401     		.uleb128 0x84
+ 1083 04de 0D       		.uleb128 0xd
+ 1084 04df C1050000 		.4byte	.LASF74
+ 1085 04e3 06       		.byte	0x6
+ 1086 04e4 7A02     		.2byte	0x27a
+ 1087 04e6 9C000000 		.4byte	0x9c
+ 1088 04ea 03       		.byte	0x3
+ 1089 04eb 23       		.byte	0x23
+ 1090 04ec 8601     		.uleb128 0x86
+ 1091 04ee 0D       		.uleb128 0xd
+ 1092 04ef 56030000 		.4byte	.LASF75
+ 1093 04f3 06       		.byte	0x6
+ 1094 04f4 7B02     		.2byte	0x27b
+ 1095 04f6 A7000000 		.4byte	0xa7
+ 1096 04fa 03       		.byte	0x3
+ 1097 04fb 23       		.byte	0x23
+ 1098 04fc 8801     		.uleb128 0x88
+ 1099 04fe 0D       		.uleb128 0xd
+ 1100 04ff CC050000 		.4byte	.LASF76
+ 1101 0503 06       		.byte	0x6
+ 1102 0504 7C02     		.2byte	0x27c
+ 1103 0506 9C000000 		.4byte	0x9c
+ 1104 050a 03       		.byte	0x3
+ 1105 050b 23       		.byte	0x23
+ 1106 050c 8A01     		.uleb128 0x8a
+ 1107 050e 0D       		.uleb128 0xd
+ 1108 050f E6030000 		.4byte	.LASF77
+ 1109 0513 06       		.byte	0x6
+ 1110 0514 7D02     		.2byte	0x27d
+ 1111 0516 A7000000 		.4byte	0xa7
+ 1112 051a 03       		.byte	0x3
+ 1113 051b 23       		.byte	0x23
+ 1114 051c 8C01     		.uleb128 0x8c
+ 1115 051e 0D       		.uleb128 0xd
+ 1116 051f D7050000 		.4byte	.LASF78
+ 1117 0523 06       		.byte	0x6
+ 1118 0524 7E02     		.2byte	0x27e
+ 1119 0526 9C000000 		.4byte	0x9c
+ 1120 052a 03       		.byte	0x3
+ 1121 052b 23       		.byte	0x23
+ 1122 052c 8E01     		.uleb128 0x8e
+ 1123 052e 0D       		.uleb128 0xd
+ 1124 052f EB030000 		.4byte	.LASF79
+ 1125 0533 06       		.byte	0x6
+ 1126 0534 7F02     		.2byte	0x27f
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccHiRVaW.s 			page 26
+
+
+ 1127 0536 A7000000 		.4byte	0xa7
+ 1128 053a 03       		.byte	0x3
+ 1129 053b 23       		.byte	0x23
+ 1130 053c 9001     		.uleb128 0x90
+ 1131 053e 0D       		.uleb128 0xd
+ 1132 053f E2050000 		.4byte	.LASF80
+ 1133 0543 06       		.byte	0x6
+ 1134 0544 8002     		.2byte	0x280
+ 1135 0546 9C000000 		.4byte	0x9c
+ 1136 054a 03       		.byte	0x3
+ 1137 054b 23       		.byte	0x23
+ 1138 054c 9201     		.uleb128 0x92
+ 1139 054e 0D       		.uleb128 0xd
+ 1140 054f F0030000 		.4byte	.LASF81
+ 1141 0553 06       		.byte	0x6
+ 1142 0554 8102     		.2byte	0x281
+ 1143 0556 A7000000 		.4byte	0xa7
+ 1144 055a 03       		.byte	0x3
+ 1145 055b 23       		.byte	0x23
+ 1146 055c 9401     		.uleb128 0x94
+ 1147 055e 0D       		.uleb128 0xd
+ 1148 055f ED050000 		.4byte	.LASF82
+ 1149 0563 06       		.byte	0x6
+ 1150 0564 8202     		.2byte	0x282
+ 1151 0566 9C000000 		.4byte	0x9c
+ 1152 056a 03       		.byte	0x3
+ 1153 056b 23       		.byte	0x23
+ 1154 056c 9601     		.uleb128 0x96
+ 1155 056e 0D       		.uleb128 0xd
+ 1156 056f F5030000 		.4byte	.LASF83
+ 1157 0573 06       		.byte	0x6
+ 1158 0574 8302     		.2byte	0x283
+ 1159 0576 A7000000 		.4byte	0xa7
+ 1160 057a 03       		.byte	0x3
+ 1161 057b 23       		.byte	0x23
+ 1162 057c 9801     		.uleb128 0x98
+ 1163 057e 0D       		.uleb128 0xd
+ 1164 057f F8050000 		.4byte	.LASF84
+ 1165 0583 06       		.byte	0x6
+ 1166 0584 8402     		.2byte	0x284
+ 1167 0586 9C000000 		.4byte	0x9c
+ 1168 058a 03       		.byte	0x3
+ 1169 058b 23       		.byte	0x23
+ 1170 058c 9A01     		.uleb128 0x9a
+ 1171 058e 0D       		.uleb128 0xd
+ 1172 058f FA030000 		.4byte	.LASF85
+ 1173 0593 06       		.byte	0x6
+ 1174 0594 8502     		.2byte	0x285
+ 1175 0596 A7000000 		.4byte	0xa7
+ 1176 059a 03       		.byte	0x3
+ 1177 059b 23       		.byte	0x23
+ 1178 059c 9C01     		.uleb128 0x9c
+ 1179 059e 0D       		.uleb128 0xd
+ 1180 059f 03060000 		.4byte	.LASF86
+ 1181 05a3 06       		.byte	0x6
+ 1182 05a4 8602     		.2byte	0x286
+ 1183 05a6 9C000000 		.4byte	0x9c
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccHiRVaW.s 			page 27
+
+
+ 1184 05aa 03       		.byte	0x3
+ 1185 05ab 23       		.byte	0x23
+ 1186 05ac 9E01     		.uleb128 0x9e
+ 1187 05ae 0D       		.uleb128 0xd
+ 1188 05af FF030000 		.4byte	.LASF87
+ 1189 05b3 06       		.byte	0x6
+ 1190 05b4 8702     		.2byte	0x287
+ 1191 05b6 A7000000 		.4byte	0xa7
+ 1192 05ba 03       		.byte	0x3
+ 1193 05bb 23       		.byte	0x23
+ 1194 05bc A001     		.uleb128 0xa0
+ 1195 05be 0D       		.uleb128 0xd
+ 1196 05bf 0E060000 		.4byte	.LASF88
+ 1197 05c3 06       		.byte	0x6
+ 1198 05c4 8802     		.2byte	0x288
+ 1199 05c6 9C000000 		.4byte	0x9c
+ 1200 05ca 03       		.byte	0x3
+ 1201 05cb 23       		.byte	0x23
+ 1202 05cc A201     		.uleb128 0xa2
+ 1203 05ce 0D       		.uleb128 0xd
+ 1204 05cf 04040000 		.4byte	.LASF89
+ 1205 05d3 06       		.byte	0x6
+ 1206 05d4 8902     		.2byte	0x289
+ 1207 05d6 A7000000 		.4byte	0xa7
+ 1208 05da 03       		.byte	0x3
+ 1209 05db 23       		.byte	0x23
+ 1210 05dc A401     		.uleb128 0xa4
+ 1211 05de 0D       		.uleb128 0xd
+ 1212 05df 19060000 		.4byte	.LASF90
+ 1213 05e3 06       		.byte	0x6
+ 1214 05e4 8A02     		.2byte	0x28a
+ 1215 05e6 9C000000 		.4byte	0x9c
+ 1216 05ea 03       		.byte	0x3
+ 1217 05eb 23       		.byte	0x23
+ 1218 05ec A601     		.uleb128 0xa6
+ 1219 05ee 0D       		.uleb128 0xd
+ 1220 05ef 09040000 		.4byte	.LASF91
+ 1221 05f3 06       		.byte	0x6
+ 1222 05f4 8B02     		.2byte	0x28b
+ 1223 05f6 A7000000 		.4byte	0xa7
+ 1224 05fa 03       		.byte	0x3
+ 1225 05fb 23       		.byte	0x23
+ 1226 05fc A801     		.uleb128 0xa8
+ 1227 05fe 0D       		.uleb128 0xd
+ 1228 05ff 1C000000 		.4byte	.LASF92
+ 1229 0603 06       		.byte	0x6
+ 1230 0604 8C02     		.2byte	0x28c
+ 1231 0606 9C000000 		.4byte	0x9c
+ 1232 060a 03       		.byte	0x3
+ 1233 060b 23       		.byte	0x23
+ 1234 060c AA01     		.uleb128 0xaa
+ 1235 060e 0D       		.uleb128 0xd
+ 1236 060f 0E040000 		.4byte	.LASF93
+ 1237 0613 06       		.byte	0x6
+ 1238 0614 8D02     		.2byte	0x28d
+ 1239 0616 A7000000 		.4byte	0xa7
+ 1240 061a 03       		.byte	0x3
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccHiRVaW.s 			page 28
+
+
+ 1241 061b 23       		.byte	0x23
+ 1242 061c AC01     		.uleb128 0xac
+ 1243 061e 0D       		.uleb128 0xd
+ 1244 061f 27000000 		.4byte	.LASF94
+ 1245 0623 06       		.byte	0x6
+ 1246 0624 8E02     		.2byte	0x28e
+ 1247 0626 9C000000 		.4byte	0x9c
+ 1248 062a 03       		.byte	0x3
+ 1249 062b 23       		.byte	0x23
+ 1250 062c AE01     		.uleb128 0xae
+ 1251 062e 0D       		.uleb128 0xd
+ 1252 062f 13040000 		.4byte	.LASF95
+ 1253 0633 06       		.byte	0x6
+ 1254 0634 8F02     		.2byte	0x28f
+ 1255 0636 A7000000 		.4byte	0xa7
+ 1256 063a 03       		.byte	0x3
+ 1257 063b 23       		.byte	0x23
+ 1258 063c B001     		.uleb128 0xb0
+ 1259 063e 0D       		.uleb128 0xd
+ 1260 063f 32000000 		.4byte	.LASF96
+ 1261 0643 06       		.byte	0x6
+ 1262 0644 9002     		.2byte	0x290
+ 1263 0646 9C000000 		.4byte	0x9c
+ 1264 064a 03       		.byte	0x3
+ 1265 064b 23       		.byte	0x23
+ 1266 064c B201     		.uleb128 0xb2
+ 1267 064e 0D       		.uleb128 0xd
+ 1268 064f 4C040000 		.4byte	.LASF97
+ 1269 0653 06       		.byte	0x6
+ 1270 0654 9102     		.2byte	0x291
+ 1271 0656 A7000000 		.4byte	0xa7
+ 1272 065a 03       		.byte	0x3
+ 1273 065b 23       		.byte	0x23
+ 1274 065c B401     		.uleb128 0xb4
+ 1275 065e 0D       		.uleb128 0xd
+ 1276 065f 3D000000 		.4byte	.LASF98
+ 1277 0663 06       		.byte	0x6
+ 1278 0664 9202     		.2byte	0x292
+ 1279 0666 9C000000 		.4byte	0x9c
+ 1280 066a 03       		.byte	0x3
+ 1281 066b 23       		.byte	0x23
+ 1282 066c B601     		.uleb128 0xb6
+ 1283 066e 0D       		.uleb128 0xd
+ 1284 066f 51040000 		.4byte	.LASF99
+ 1285 0673 06       		.byte	0x6
+ 1286 0674 9302     		.2byte	0x293
+ 1287 0676 A7000000 		.4byte	0xa7
+ 1288 067a 03       		.byte	0x3
+ 1289 067b 23       		.byte	0x23
+ 1290 067c B801     		.uleb128 0xb8
+ 1291 067e 0D       		.uleb128 0xd
+ 1292 067f 48000000 		.4byte	.LASF100
+ 1293 0683 06       		.byte	0x6
+ 1294 0684 9402     		.2byte	0x294
+ 1295 0686 9C000000 		.4byte	0x9c
+ 1296 068a 03       		.byte	0x3
+ 1297 068b 23       		.byte	0x23
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccHiRVaW.s 			page 29
+
+
+ 1298 068c BA01     		.uleb128 0xba
+ 1299 068e 0D       		.uleb128 0xd
+ 1300 068f 56040000 		.4byte	.LASF101
+ 1301 0693 06       		.byte	0x6
+ 1302 0694 9502     		.2byte	0x295
+ 1303 0696 A7000000 		.4byte	0xa7
+ 1304 069a 03       		.byte	0x3
+ 1305 069b 23       		.byte	0x23
+ 1306 069c BC01     		.uleb128 0xbc
+ 1307 069e 0D       		.uleb128 0xd
+ 1308 069f 5B030000 		.4byte	.LASF102
+ 1309 06a3 06       		.byte	0x6
+ 1310 06a4 9602     		.2byte	0x296
+ 1311 06a6 9C000000 		.4byte	0x9c
+ 1312 06aa 03       		.byte	0x3
+ 1313 06ab 23       		.byte	0x23
+ 1314 06ac BE01     		.uleb128 0xbe
+ 1315 06ae 00       		.byte	0
+ 1316 06af 0F       		.uleb128 0xf
+ 1317 06b0 9C000000 		.4byte	0x9c
+ 1318 06b4 BF060000 		.4byte	0x6bf
+ 1319 06b8 10       		.uleb128 0x10
+ 1320 06b9 8A000000 		.4byte	0x8a
+ 1321 06bd 04       		.byte	0x4
+ 1322 06be 00       		.byte	0
+ 1323 06bf 0B       		.uleb128 0xb
+ 1324 06c0 10000000 		.4byte	.LASF103
+ 1325 06c4 06       		.byte	0x6
+ 1326 06c5 9702     		.2byte	0x297
+ 1327 06c7 31010000 		.4byte	0x131
+ 1328 06cb 11       		.uleb128 0x11
+ 1329 06cc 01       		.byte	0x1
+ 1330 06cd 18040000 		.4byte	.LASF104
+ 1331 06d1 01       		.byte	0x1
+ 1332 06d2 2201     		.2byte	0x122
+ 1333 06d4 01       		.byte	0x1
+ 1334 06d5 C8000000 		.4byte	.LFB40
+ 1335 06d9 D8000000 		.4byte	.LFE40
+ 1336 06dd 02       		.byte	0x2
+ 1337 06de 7D       		.byte	0x7d
+ 1338 06df 00       		.sleb128 0
+ 1339 06e0 01       		.byte	0x1
+ 1340 06e1 12       		.uleb128 0x12
+ 1341 06e2 01       		.byte	0x1
+ 1342 06e3 75010000 		.4byte	.LASF106
+ 1343 06e7 01       		.byte	0x1
+ 1344 06e8 1801     		.2byte	0x118
+ 1345 06ea 01       		.byte	0x1
+ 1346 06eb FE000000 		.4byte	0xfe
+ 1347 06ef BC000000 		.4byte	.LFB39
+ 1348 06f3 C8000000 		.4byte	.LFE39
+ 1349 06f7 02       		.byte	0x2
+ 1350 06f8 7D       		.byte	0x7d
+ 1351 06f9 00       		.sleb128 0
+ 1352 06fa 01       		.byte	0x1
+ 1353 06fb 11       		.uleb128 0x11
+ 1354 06fc 01       		.byte	0x1
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccHiRVaW.s 			page 30
+
+
+ 1355 06fd 8D010000 		.4byte	.LASF105
+ 1356 0701 01       		.byte	0x1
+ 1357 0702 0D01     		.2byte	0x10d
+ 1358 0704 01       		.byte	0x1
+ 1359 0705 AC000000 		.4byte	.LFB38
+ 1360 0709 BC000000 		.4byte	.LFE38
+ 1361 070d 02       		.byte	0x2
+ 1362 070e 7D       		.byte	0x7d
+ 1363 070f 00       		.sleb128 0
+ 1364 0710 01       		.byte	0x1
+ 1365 0711 12       		.uleb128 0x12
+ 1366 0712 01       		.byte	0x1
+ 1367 0713 36010000 		.4byte	.LASF107
+ 1368 0717 01       		.byte	0x1
+ 1369 0718 0301     		.2byte	0x103
+ 1370 071a 01       		.byte	0x1
+ 1371 071b F2000000 		.4byte	0xf2
+ 1372 071f A0000000 		.4byte	.LFB37
+ 1373 0723 AC000000 		.4byte	.LFE37
+ 1374 0727 02       		.byte	0x2
+ 1375 0728 7D       		.byte	0x7d
+ 1376 0729 00       		.sleb128 0
+ 1377 072a 01       		.byte	0x1
+ 1378 072b 13       		.uleb128 0x13
+ 1379 072c 01       		.byte	0x1
+ 1380 072d F2000000 		.4byte	.LASF125
+ 1381 0731 01       		.byte	0x1
+ 1382 0732 F1       		.byte	0xf1
+ 1383 0733 01       		.byte	0x1
+ 1384 0734 9C000000 		.4byte	0x9c
+ 1385 0738 84000000 		.4byte	.LFB36
+ 1386 073c A0000000 		.4byte	.LFE36
+ 1387 0740 00000000 		.4byte	.LLST7
+ 1388 0744 01       		.byte	0x1
+ 1389 0745 67070000 		.4byte	0x767
+ 1390 0749 14       		.uleb128 0x14
+ 1391 074a 70000000 		.4byte	.LASF108
+ 1392 074e 01       		.byte	0x1
+ 1393 074f F1       		.byte	0xf1
+ 1394 0750 9C000000 		.4byte	0x9c
+ 1395 0754 2C000000 		.4byte	.LLST8
+ 1396 0758 15       		.uleb128 0x15
+ 1397 0759 746D7000 		.ascii	"tmp\000"
+ 1398 075d 01       		.byte	0x1
+ 1399 075e F3       		.byte	0xf3
+ 1400 075f B7000000 		.4byte	0xb7
+ 1401 0763 02       		.byte	0x2
+ 1402 0764 91       		.byte	0x91
+ 1403 0765 7C       		.sleb128 -4
+ 1404 0766 00       		.byte	0
+ 1405 0767 16       		.uleb128 0x16
+ 1406 0768 01       		.byte	0x1
+ 1407 0769 02050000 		.4byte	.LASF110
+ 1408 076d 01       		.byte	0x1
+ 1409 076e DE       		.byte	0xde
+ 1410 076f 01       		.byte	0x1
+ 1411 0770 68000000 		.4byte	.LFB35
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccHiRVaW.s 			page 31
+
+
+ 1412 0774 84000000 		.4byte	.LFE35
+ 1413 0778 4D000000 		.4byte	.LLST5
+ 1414 077c 01       		.byte	0x1
+ 1415 077d AC070000 		.4byte	0x7ac
+ 1416 0781 14       		.uleb128 0x14
+ 1417 0782 70000000 		.4byte	.LASF108
+ 1418 0786 01       		.byte	0x1
+ 1419 0787 DE       		.byte	0xde
+ 1420 0788 9C000000 		.4byte	0x9c
+ 1421 078c 79000000 		.4byte	.LLST6
+ 1422 0790 17       		.uleb128 0x17
+ 1423 0791 B1050000 		.4byte	.LASF109
+ 1424 0795 01       		.byte	0x1
+ 1425 0796 DE       		.byte	0xde
+ 1426 0797 9C000000 		.4byte	0x9c
+ 1427 079b 01       		.byte	0x1
+ 1428 079c 51       		.byte	0x51
+ 1429 079d 15       		.uleb128 0x15
+ 1430 079e 746D7000 		.ascii	"tmp\000"
+ 1431 07a2 01       		.byte	0x1
+ 1432 07a3 E0       		.byte	0xe0
+ 1433 07a4 B7000000 		.4byte	0xb7
+ 1434 07a8 02       		.byte	0x2
+ 1435 07a9 91       		.byte	0x91
+ 1436 07aa 7C       		.sleb128 -4
+ 1437 07ab 00       		.byte	0
+ 1438 07ac 18       		.uleb128 0x18
+ 1439 07ad 01       		.byte	0x1
+ 1440 07ae DE010000 		.4byte	.LASF111
+ 1441 07b2 01       		.byte	0x1
+ 1442 07b3 C9       		.byte	0xc9
+ 1443 07b4 01       		.byte	0x1
+ 1444 07b5 50000000 		.4byte	.LFB34
+ 1445 07b9 68000000 		.4byte	.LFE34
+ 1446 07bd 02       		.byte	0x2
+ 1447 07be 7D       		.byte	0x7d
+ 1448 07bf 00       		.sleb128 0
+ 1449 07c0 01       		.byte	0x1
+ 1450 07c1 E4070000 		.4byte	0x7e4
+ 1451 07c5 14       		.uleb128 0x14
+ 1452 07c6 82000000 		.4byte	.LASF112
+ 1453 07ca 01       		.byte	0x1
+ 1454 07cb C9       		.byte	0xc9
+ 1455 07cc 91000000 		.4byte	0x91
+ 1456 07d0 9A000000 		.4byte	.LLST3
+ 1457 07d4 19       		.uleb128 0x19
+ 1458 07d5 48010000 		.4byte	.LASF113
+ 1459 07d9 01       		.byte	0x1
+ 1460 07da CB       		.byte	0xcb
+ 1461 07db 9C000000 		.4byte	0x9c
+ 1462 07df BB000000 		.4byte	.LLST4
+ 1463 07e3 00       		.byte	0
+ 1464 07e4 18       		.uleb128 0x18
+ 1465 07e5 01       		.byte	0x1
+ 1466 07e6 58010000 		.4byte	.LASF114
+ 1467 07ea 01       		.byte	0x1
+ 1468 07eb B4       		.byte	0xb4
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccHiRVaW.s 			page 32
+
+
+ 1469 07ec 01       		.byte	0x1
+ 1470 07ed 38000000 		.4byte	.LFB33
+ 1471 07f1 50000000 		.4byte	.LFE33
+ 1472 07f5 02       		.byte	0x2
+ 1473 07f6 7D       		.byte	0x7d
+ 1474 07f7 00       		.sleb128 0
+ 1475 07f8 01       		.byte	0x1
+ 1476 07f9 1C080000 		.4byte	0x81c
+ 1477 07fd 14       		.uleb128 0x14
+ 1478 07fe BC010000 		.4byte	.LASF115
+ 1479 0802 01       		.byte	0x1
+ 1480 0803 B4       		.byte	0xb4
+ 1481 0804 9C000000 		.4byte	0x9c
+ 1482 0808 F0000000 		.4byte	.LLST1
+ 1483 080c 19       		.uleb128 0x19
+ 1484 080d 48010000 		.4byte	.LASF113
+ 1485 0811 01       		.byte	0x1
+ 1486 0812 B6       		.byte	0xb6
+ 1487 0813 9C000000 		.4byte	0x9c
+ 1488 0817 11010000 		.4byte	.LLST2
+ 1489 081b 00       		.byte	0
+ 1490 081c 18       		.uleb128 0x18
+ 1491 081d 01       		.byte	0x1
+ 1492 081e 38040000 		.4byte	.LASF116
+ 1493 0822 01       		.byte	0x1
+ 1494 0823 A0       		.byte	0xa0
+ 1495 0824 01       		.byte	0x1
+ 1496 0825 2C000000 		.4byte	.LFB32
+ 1497 0829 38000000 		.4byte	.LFE32
+ 1498 082d 02       		.byte	0x2
+ 1499 082e 7D       		.byte	0x7d
+ 1500 082f 00       		.sleb128 0
+ 1501 0830 01       		.byte	0x1
+ 1502 0831 43080000 		.4byte	0x843
+ 1503 0835 17       		.uleb128 0x17
+ 1504 0836 6C010000 		.4byte	.LASF117
+ 1505 083a 01       		.byte	0x1
+ 1506 083b A0       		.byte	0xa0
+ 1507 083c 25010000 		.4byte	0x125
+ 1508 0840 01       		.byte	0x1
+ 1509 0841 50       		.byte	0x50
+ 1510 0842 00       		.byte	0
+ 1511 0843 18       		.uleb128 0x18
+ 1512 0844 01       		.byte	0x1
+ 1513 0845 0F030000 		.4byte	.LASF118
+ 1514 0849 01       		.byte	0x1
+ 1515 084a 93       		.byte	0x93
+ 1516 084b 01       		.byte	0x1
+ 1517 084c 20000000 		.4byte	.LFB31
+ 1518 0850 2C000000 		.4byte	.LFE31
+ 1519 0854 02       		.byte	0x2
+ 1520 0855 7D       		.byte	0x7d
+ 1521 0856 00       		.sleb128 0
+ 1522 0857 01       		.byte	0x1
+ 1523 0858 6A080000 		.4byte	0x86a
+ 1524 085c 17       		.uleb128 0x17
+ 1525 085d 6C010000 		.4byte	.LASF117
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccHiRVaW.s 			page 33
+
+
+ 1526 0861 01       		.byte	0x1
+ 1527 0862 93       		.byte	0x93
+ 1528 0863 25010000 		.4byte	0x125
+ 1529 0867 01       		.byte	0x1
+ 1530 0868 50       		.byte	0x50
+ 1531 0869 00       		.byte	0
+ 1532 086a 18       		.uleb128 0x18
+ 1533 086b 01       		.byte	0x1
+ 1534 086c A3010000 		.4byte	.LASF119
+ 1535 0870 01       		.byte	0x1
+ 1536 0871 86       		.byte	0x86
+ 1537 0872 01       		.byte	0x1
+ 1538 0873 14000000 		.4byte	.LFB30
+ 1539 0877 20000000 		.4byte	.LFE30
+ 1540 087b 02       		.byte	0x2
+ 1541 087c 7D       		.byte	0x7d
+ 1542 087d 00       		.sleb128 0
+ 1543 087e 01       		.byte	0x1
+ 1544 087f 91080000 		.4byte	0x891
+ 1545 0883 17       		.uleb128 0x17
+ 1546 0884 F9010000 		.4byte	.LASF120
+ 1547 0888 01       		.byte	0x1
+ 1548 0889 86       		.byte	0x86
+ 1549 088a 9C000000 		.4byte	0x9c
+ 1550 088e 01       		.byte	0x1
+ 1551 088f 50       		.byte	0x50
+ 1552 0890 00       		.byte	0
+ 1553 0891 16       		.uleb128 0x16
+ 1554 0892 01       		.byte	0x1
+ 1555 0893 E7000000 		.4byte	.LASF121
+ 1556 0897 01       		.byte	0x1
+ 1557 0898 78       		.byte	0x78
+ 1558 0899 01       		.byte	0x1
+ 1559 089a 00000000 		.4byte	.LFB29
+ 1560 089e 12000000 		.4byte	.LFE29
+ 1561 08a2 46010000 		.4byte	.LLST0
+ 1562 08a6 01       		.byte	0x1
+ 1563 08a7 CF080000 		.4byte	0x8cf
+ 1564 08ab 1A       		.uleb128 0x1a
+ 1565 08ac 08000000 		.4byte	.LVL0
+ 1566 08b0 CF080000 		.4byte	0x8cf
+ 1567 08b4 BE080000 		.4byte	0x8be
+ 1568 08b8 1B       		.uleb128 0x1b
+ 1569 08b9 01       		.byte	0x1
+ 1570 08ba 50       		.byte	0x50
+ 1571 08bb 01       		.byte	0x1
+ 1572 08bc 31       		.byte	0x31
+ 1573 08bd 00       		.byte	0
+ 1574 08be 1C       		.uleb128 0x1c
+ 1575 08bf 12000000 		.4byte	.LVL1
+ 1576 08c3 01       		.byte	0x1
+ 1577 08c4 CF080000 		.4byte	0x8cf
+ 1578 08c8 1B       		.uleb128 0x1b
+ 1579 08c9 01       		.byte	0x1
+ 1580 08ca 50       		.byte	0x50
+ 1581 08cb 01       		.byte	0x1
+ 1582 08cc 30       		.byte	0x30
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccHiRVaW.s 			page 34
+
+
+ 1583 08cd 00       		.byte	0
+ 1584 08ce 00       		.byte	0
+ 1585 08cf 1D       		.uleb128 0x1d
+ 1586 08d0 01       		.byte	0x1
+ 1587 08d1 01       		.byte	0x1
+ 1588 08d2 6D040000 		.4byte	.LASF126
+ 1589 08d6 6D040000 		.4byte	.LASF126
+ 1590 08da 07       		.byte	0x7
+ 1591 08db BE02     		.2byte	0x2be
+ 1592 08dd 00       		.byte	0
+ 1593              		.section	.debug_abbrev,"",%progbits
+ 1594              	.Ldebug_abbrev0:
+ 1595 0000 01       		.uleb128 0x1
+ 1596 0001 11       		.uleb128 0x11
+ 1597 0002 01       		.byte	0x1
+ 1598 0003 25       		.uleb128 0x25
+ 1599 0004 0E       		.uleb128 0xe
+ 1600 0005 13       		.uleb128 0x13
+ 1601 0006 0B       		.uleb128 0xb
+ 1602 0007 03       		.uleb128 0x3
+ 1603 0008 0E       		.uleb128 0xe
+ 1604 0009 1B       		.uleb128 0x1b
+ 1605 000a 0E       		.uleb128 0xe
+ 1606 000b 11       		.uleb128 0x11
+ 1607 000c 01       		.uleb128 0x1
+ 1608 000d 12       		.uleb128 0x12
+ 1609 000e 01       		.uleb128 0x1
+ 1610 000f 10       		.uleb128 0x10
+ 1611 0010 06       		.uleb128 0x6
+ 1612 0011 00       		.byte	0
+ 1613 0012 00       		.byte	0
+ 1614 0013 02       		.uleb128 0x2
+ 1615 0014 24       		.uleb128 0x24
+ 1616 0015 00       		.byte	0
+ 1617 0016 0B       		.uleb128 0xb
+ 1618 0017 0B       		.uleb128 0xb
+ 1619 0018 3E       		.uleb128 0x3e
+ 1620 0019 0B       		.uleb128 0xb
+ 1621 001a 03       		.uleb128 0x3
+ 1622 001b 0E       		.uleb128 0xe
+ 1623 001c 00       		.byte	0
+ 1624 001d 00       		.byte	0
+ 1625 001e 03       		.uleb128 0x3
+ 1626 001f 16       		.uleb128 0x16
+ 1627 0020 00       		.byte	0
+ 1628 0021 03       		.uleb128 0x3
+ 1629 0022 0E       		.uleb128 0xe
+ 1630 0023 3A       		.uleb128 0x3a
+ 1631 0024 0B       		.uleb128 0xb
+ 1632 0025 3B       		.uleb128 0x3b
+ 1633 0026 0B       		.uleb128 0xb
+ 1634 0027 49       		.uleb128 0x49
+ 1635 0028 13       		.uleb128 0x13
+ 1636 0029 00       		.byte	0
+ 1637 002a 00       		.byte	0
+ 1638 002b 04       		.uleb128 0x4
+ 1639 002c 24       		.uleb128 0x24
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccHiRVaW.s 			page 35
+
+
+ 1640 002d 00       		.byte	0
+ 1641 002e 0B       		.uleb128 0xb
+ 1642 002f 0B       		.uleb128 0xb
+ 1643 0030 3E       		.uleb128 0x3e
+ 1644 0031 0B       		.uleb128 0xb
+ 1645 0032 03       		.uleb128 0x3
+ 1646 0033 08       		.uleb128 0x8
+ 1647 0034 00       		.byte	0
+ 1648 0035 00       		.byte	0
+ 1649 0036 05       		.uleb128 0x5
+ 1650 0037 35       		.uleb128 0x35
+ 1651 0038 00       		.byte	0
+ 1652 0039 49       		.uleb128 0x49
+ 1653 003a 13       		.uleb128 0x13
+ 1654 003b 00       		.byte	0
+ 1655 003c 00       		.byte	0
+ 1656 003d 06       		.uleb128 0x6
+ 1657 003e 34       		.uleb128 0x34
+ 1658 003f 00       		.byte	0
+ 1659 0040 03       		.uleb128 0x3
+ 1660 0041 0E       		.uleb128 0xe
+ 1661 0042 3A       		.uleb128 0x3a
+ 1662 0043 0B       		.uleb128 0xb
+ 1663 0044 3B       		.uleb128 0x3b
+ 1664 0045 05       		.uleb128 0x5
+ 1665 0046 49       		.uleb128 0x49
+ 1666 0047 13       		.uleb128 0x13
+ 1667 0048 3F       		.uleb128 0x3f
+ 1668 0049 0C       		.uleb128 0xc
+ 1669 004a 3C       		.uleb128 0x3c
+ 1670 004b 0C       		.uleb128 0xc
+ 1671 004c 00       		.byte	0
+ 1672 004d 00       		.byte	0
+ 1673 004e 07       		.uleb128 0x7
+ 1674 004f 34       		.uleb128 0x34
+ 1675 0050 00       		.byte	0
+ 1676 0051 03       		.uleb128 0x3
+ 1677 0052 0E       		.uleb128 0xe
+ 1678 0053 3A       		.uleb128 0x3a
+ 1679 0054 0B       		.uleb128 0xb
+ 1680 0055 3B       		.uleb128 0x3b
+ 1681 0056 0B       		.uleb128 0xb
+ 1682 0057 49       		.uleb128 0x49
+ 1683 0058 13       		.uleb128 0x13
+ 1684 0059 3F       		.uleb128 0x3f
+ 1685 005a 0C       		.uleb128 0xc
+ 1686 005b 3C       		.uleb128 0x3c
+ 1687 005c 0C       		.uleb128 0xc
+ 1688 005d 00       		.byte	0
+ 1689 005e 00       		.byte	0
+ 1690 005f 08       		.uleb128 0x8
+ 1691 0060 04       		.uleb128 0x4
+ 1692 0061 01       		.byte	0x1
+ 1693 0062 3E       		.uleb128 0x3e
+ 1694 0063 0B       		.uleb128 0xb
+ 1695 0064 0B       		.uleb128 0xb
+ 1696 0065 0B       		.uleb128 0xb
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccHiRVaW.s 			page 36
+
+
+ 1697 0066 49       		.uleb128 0x49
+ 1698 0067 13       		.uleb128 0x13
+ 1699 0068 3A       		.uleb128 0x3a
+ 1700 0069 0B       		.uleb128 0xb
+ 1701 006a 3B       		.uleb128 0x3b
+ 1702 006b 05       		.uleb128 0x5
+ 1703 006c 01       		.uleb128 0x1
+ 1704 006d 13       		.uleb128 0x13
+ 1705 006e 00       		.byte	0
+ 1706 006f 00       		.byte	0
+ 1707 0070 09       		.uleb128 0x9
+ 1708 0071 28       		.uleb128 0x28
+ 1709 0072 00       		.byte	0
+ 1710 0073 03       		.uleb128 0x3
+ 1711 0074 0E       		.uleb128 0xe
+ 1712 0075 1C       		.uleb128 0x1c
+ 1713 0076 0B       		.uleb128 0xb
+ 1714 0077 00       		.byte	0
+ 1715 0078 00       		.byte	0
+ 1716 0079 0A       		.uleb128 0xa
+ 1717 007a 28       		.uleb128 0x28
+ 1718 007b 00       		.byte	0
+ 1719 007c 03       		.uleb128 0x3
+ 1720 007d 08       		.uleb128 0x8
+ 1721 007e 1C       		.uleb128 0x1c
+ 1722 007f 0B       		.uleb128 0xb
+ 1723 0080 00       		.byte	0
+ 1724 0081 00       		.byte	0
+ 1725 0082 0B       		.uleb128 0xb
+ 1726 0083 16       		.uleb128 0x16
+ 1727 0084 00       		.byte	0
+ 1728 0085 03       		.uleb128 0x3
+ 1729 0086 0E       		.uleb128 0xe
+ 1730 0087 3A       		.uleb128 0x3a
+ 1731 0088 0B       		.uleb128 0xb
+ 1732 0089 3B       		.uleb128 0x3b
+ 1733 008a 05       		.uleb128 0x5
+ 1734 008b 49       		.uleb128 0x49
+ 1735 008c 13       		.uleb128 0x13
+ 1736 008d 00       		.byte	0
+ 1737 008e 00       		.byte	0
+ 1738 008f 0C       		.uleb128 0xc
+ 1739 0090 13       		.uleb128 0x13
+ 1740 0091 01       		.byte	0x1
+ 1741 0092 0B       		.uleb128 0xb
+ 1742 0093 0B       		.uleb128 0xb
+ 1743 0094 3A       		.uleb128 0x3a
+ 1744 0095 0B       		.uleb128 0xb
+ 1745 0096 3B       		.uleb128 0x3b
+ 1746 0097 05       		.uleb128 0x5
+ 1747 0098 01       		.uleb128 0x1
+ 1748 0099 13       		.uleb128 0x13
+ 1749 009a 00       		.byte	0
+ 1750 009b 00       		.byte	0
+ 1751 009c 0D       		.uleb128 0xd
+ 1752 009d 0D       		.uleb128 0xd
+ 1753 009e 00       		.byte	0
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccHiRVaW.s 			page 37
+
+
+ 1754 009f 03       		.uleb128 0x3
+ 1755 00a0 0E       		.uleb128 0xe
+ 1756 00a1 3A       		.uleb128 0x3a
+ 1757 00a2 0B       		.uleb128 0xb
+ 1758 00a3 3B       		.uleb128 0x3b
+ 1759 00a4 05       		.uleb128 0x5
+ 1760 00a5 49       		.uleb128 0x49
+ 1761 00a6 13       		.uleb128 0x13
+ 1762 00a7 38       		.uleb128 0x38
+ 1763 00a8 0A       		.uleb128 0xa
+ 1764 00a9 00       		.byte	0
+ 1765 00aa 00       		.byte	0
+ 1766 00ab 0E       		.uleb128 0xe
+ 1767 00ac 0D       		.uleb128 0xd
+ 1768 00ad 00       		.byte	0
+ 1769 00ae 03       		.uleb128 0x3
+ 1770 00af 08       		.uleb128 0x8
+ 1771 00b0 3A       		.uleb128 0x3a
+ 1772 00b1 0B       		.uleb128 0xb
+ 1773 00b2 3B       		.uleb128 0x3b
+ 1774 00b3 05       		.uleb128 0x5
+ 1775 00b4 49       		.uleb128 0x49
+ 1776 00b5 13       		.uleb128 0x13
+ 1777 00b6 38       		.uleb128 0x38
+ 1778 00b7 0A       		.uleb128 0xa
+ 1779 00b8 00       		.byte	0
+ 1780 00b9 00       		.byte	0
+ 1781 00ba 0F       		.uleb128 0xf
+ 1782 00bb 01       		.uleb128 0x1
+ 1783 00bc 01       		.byte	0x1
+ 1784 00bd 49       		.uleb128 0x49
+ 1785 00be 13       		.uleb128 0x13
+ 1786 00bf 01       		.uleb128 0x1
+ 1787 00c0 13       		.uleb128 0x13
+ 1788 00c1 00       		.byte	0
+ 1789 00c2 00       		.byte	0
+ 1790 00c3 10       		.uleb128 0x10
+ 1791 00c4 21       		.uleb128 0x21
+ 1792 00c5 00       		.byte	0
+ 1793 00c6 49       		.uleb128 0x49
+ 1794 00c7 13       		.uleb128 0x13
+ 1795 00c8 2F       		.uleb128 0x2f
+ 1796 00c9 0B       		.uleb128 0xb
+ 1797 00ca 00       		.byte	0
+ 1798 00cb 00       		.byte	0
+ 1799 00cc 11       		.uleb128 0x11
+ 1800 00cd 2E       		.uleb128 0x2e
+ 1801 00ce 00       		.byte	0
+ 1802 00cf 3F       		.uleb128 0x3f
+ 1803 00d0 0C       		.uleb128 0xc
+ 1804 00d1 03       		.uleb128 0x3
+ 1805 00d2 0E       		.uleb128 0xe
+ 1806 00d3 3A       		.uleb128 0x3a
+ 1807 00d4 0B       		.uleb128 0xb
+ 1808 00d5 3B       		.uleb128 0x3b
+ 1809 00d6 05       		.uleb128 0x5
+ 1810 00d7 27       		.uleb128 0x27
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccHiRVaW.s 			page 38
+
+
+ 1811 00d8 0C       		.uleb128 0xc
+ 1812 00d9 11       		.uleb128 0x11
+ 1813 00da 01       		.uleb128 0x1
+ 1814 00db 12       		.uleb128 0x12
+ 1815 00dc 01       		.uleb128 0x1
+ 1816 00dd 40       		.uleb128 0x40
+ 1817 00de 0A       		.uleb128 0xa
+ 1818 00df 9742     		.uleb128 0x2117
+ 1819 00e1 0C       		.uleb128 0xc
+ 1820 00e2 00       		.byte	0
+ 1821 00e3 00       		.byte	0
+ 1822 00e4 12       		.uleb128 0x12
+ 1823 00e5 2E       		.uleb128 0x2e
+ 1824 00e6 00       		.byte	0
+ 1825 00e7 3F       		.uleb128 0x3f
+ 1826 00e8 0C       		.uleb128 0xc
+ 1827 00e9 03       		.uleb128 0x3
+ 1828 00ea 0E       		.uleb128 0xe
+ 1829 00eb 3A       		.uleb128 0x3a
+ 1830 00ec 0B       		.uleb128 0xb
+ 1831 00ed 3B       		.uleb128 0x3b
+ 1832 00ee 05       		.uleb128 0x5
+ 1833 00ef 27       		.uleb128 0x27
+ 1834 00f0 0C       		.uleb128 0xc
+ 1835 00f1 49       		.uleb128 0x49
+ 1836 00f2 13       		.uleb128 0x13
+ 1837 00f3 11       		.uleb128 0x11
+ 1838 00f4 01       		.uleb128 0x1
+ 1839 00f5 12       		.uleb128 0x12
+ 1840 00f6 01       		.uleb128 0x1
+ 1841 00f7 40       		.uleb128 0x40
+ 1842 00f8 0A       		.uleb128 0xa
+ 1843 00f9 9742     		.uleb128 0x2117
+ 1844 00fb 0C       		.uleb128 0xc
+ 1845 00fc 00       		.byte	0
+ 1846 00fd 00       		.byte	0
+ 1847 00fe 13       		.uleb128 0x13
+ 1848 00ff 2E       		.uleb128 0x2e
+ 1849 0100 01       		.byte	0x1
+ 1850 0101 3F       		.uleb128 0x3f
+ 1851 0102 0C       		.uleb128 0xc
+ 1852 0103 03       		.uleb128 0x3
+ 1853 0104 0E       		.uleb128 0xe
+ 1854 0105 3A       		.uleb128 0x3a
+ 1855 0106 0B       		.uleb128 0xb
+ 1856 0107 3B       		.uleb128 0x3b
+ 1857 0108 0B       		.uleb128 0xb
+ 1858 0109 27       		.uleb128 0x27
+ 1859 010a 0C       		.uleb128 0xc
+ 1860 010b 49       		.uleb128 0x49
+ 1861 010c 13       		.uleb128 0x13
+ 1862 010d 11       		.uleb128 0x11
+ 1863 010e 01       		.uleb128 0x1
+ 1864 010f 12       		.uleb128 0x12
+ 1865 0110 01       		.uleb128 0x1
+ 1866 0111 40       		.uleb128 0x40
+ 1867 0112 06       		.uleb128 0x6
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccHiRVaW.s 			page 39
+
+
+ 1868 0113 9742     		.uleb128 0x2117
+ 1869 0115 0C       		.uleb128 0xc
+ 1870 0116 01       		.uleb128 0x1
+ 1871 0117 13       		.uleb128 0x13
+ 1872 0118 00       		.byte	0
+ 1873 0119 00       		.byte	0
+ 1874 011a 14       		.uleb128 0x14
+ 1875 011b 05       		.uleb128 0x5
+ 1876 011c 00       		.byte	0
+ 1877 011d 03       		.uleb128 0x3
+ 1878 011e 0E       		.uleb128 0xe
+ 1879 011f 3A       		.uleb128 0x3a
+ 1880 0120 0B       		.uleb128 0xb
+ 1881 0121 3B       		.uleb128 0x3b
+ 1882 0122 0B       		.uleb128 0xb
+ 1883 0123 49       		.uleb128 0x49
+ 1884 0124 13       		.uleb128 0x13
+ 1885 0125 02       		.uleb128 0x2
+ 1886 0126 06       		.uleb128 0x6
+ 1887 0127 00       		.byte	0
+ 1888 0128 00       		.byte	0
+ 1889 0129 15       		.uleb128 0x15
+ 1890 012a 34       		.uleb128 0x34
+ 1891 012b 00       		.byte	0
+ 1892 012c 03       		.uleb128 0x3
+ 1893 012d 08       		.uleb128 0x8
+ 1894 012e 3A       		.uleb128 0x3a
+ 1895 012f 0B       		.uleb128 0xb
+ 1896 0130 3B       		.uleb128 0x3b
+ 1897 0131 0B       		.uleb128 0xb
+ 1898 0132 49       		.uleb128 0x49
+ 1899 0133 13       		.uleb128 0x13
+ 1900 0134 02       		.uleb128 0x2
+ 1901 0135 0A       		.uleb128 0xa
+ 1902 0136 00       		.byte	0
+ 1903 0137 00       		.byte	0
+ 1904 0138 16       		.uleb128 0x16
+ 1905 0139 2E       		.uleb128 0x2e
+ 1906 013a 01       		.byte	0x1
+ 1907 013b 3F       		.uleb128 0x3f
+ 1908 013c 0C       		.uleb128 0xc
+ 1909 013d 03       		.uleb128 0x3
+ 1910 013e 0E       		.uleb128 0xe
+ 1911 013f 3A       		.uleb128 0x3a
+ 1912 0140 0B       		.uleb128 0xb
+ 1913 0141 3B       		.uleb128 0x3b
+ 1914 0142 0B       		.uleb128 0xb
+ 1915 0143 27       		.uleb128 0x27
+ 1916 0144 0C       		.uleb128 0xc
+ 1917 0145 11       		.uleb128 0x11
+ 1918 0146 01       		.uleb128 0x1
+ 1919 0147 12       		.uleb128 0x12
+ 1920 0148 01       		.uleb128 0x1
+ 1921 0149 40       		.uleb128 0x40
+ 1922 014a 06       		.uleb128 0x6
+ 1923 014b 9742     		.uleb128 0x2117
+ 1924 014d 0C       		.uleb128 0xc
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccHiRVaW.s 			page 40
+
+
+ 1925 014e 01       		.uleb128 0x1
+ 1926 014f 13       		.uleb128 0x13
+ 1927 0150 00       		.byte	0
+ 1928 0151 00       		.byte	0
+ 1929 0152 17       		.uleb128 0x17
+ 1930 0153 05       		.uleb128 0x5
+ 1931 0154 00       		.byte	0
+ 1932 0155 03       		.uleb128 0x3
+ 1933 0156 0E       		.uleb128 0xe
+ 1934 0157 3A       		.uleb128 0x3a
+ 1935 0158 0B       		.uleb128 0xb
+ 1936 0159 3B       		.uleb128 0x3b
+ 1937 015a 0B       		.uleb128 0xb
+ 1938 015b 49       		.uleb128 0x49
+ 1939 015c 13       		.uleb128 0x13
+ 1940 015d 02       		.uleb128 0x2
+ 1941 015e 0A       		.uleb128 0xa
+ 1942 015f 00       		.byte	0
+ 1943 0160 00       		.byte	0
+ 1944 0161 18       		.uleb128 0x18
+ 1945 0162 2E       		.uleb128 0x2e
+ 1946 0163 01       		.byte	0x1
+ 1947 0164 3F       		.uleb128 0x3f
+ 1948 0165 0C       		.uleb128 0xc
+ 1949 0166 03       		.uleb128 0x3
+ 1950 0167 0E       		.uleb128 0xe
+ 1951 0168 3A       		.uleb128 0x3a
+ 1952 0169 0B       		.uleb128 0xb
+ 1953 016a 3B       		.uleb128 0x3b
+ 1954 016b 0B       		.uleb128 0xb
+ 1955 016c 27       		.uleb128 0x27
+ 1956 016d 0C       		.uleb128 0xc
+ 1957 016e 11       		.uleb128 0x11
+ 1958 016f 01       		.uleb128 0x1
+ 1959 0170 12       		.uleb128 0x12
+ 1960 0171 01       		.uleb128 0x1
+ 1961 0172 40       		.uleb128 0x40
+ 1962 0173 0A       		.uleb128 0xa
+ 1963 0174 9742     		.uleb128 0x2117
+ 1964 0176 0C       		.uleb128 0xc
+ 1965 0177 01       		.uleb128 0x1
+ 1966 0178 13       		.uleb128 0x13
+ 1967 0179 00       		.byte	0
+ 1968 017a 00       		.byte	0
+ 1969 017b 19       		.uleb128 0x19
+ 1970 017c 34       		.uleb128 0x34
+ 1971 017d 00       		.byte	0
+ 1972 017e 03       		.uleb128 0x3
+ 1973 017f 0E       		.uleb128 0xe
+ 1974 0180 3A       		.uleb128 0x3a
+ 1975 0181 0B       		.uleb128 0xb
+ 1976 0182 3B       		.uleb128 0x3b
+ 1977 0183 0B       		.uleb128 0xb
+ 1978 0184 49       		.uleb128 0x49
+ 1979 0185 13       		.uleb128 0x13
+ 1980 0186 02       		.uleb128 0x2
+ 1981 0187 06       		.uleb128 0x6
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccHiRVaW.s 			page 41
+
+
+ 1982 0188 00       		.byte	0
+ 1983 0189 00       		.byte	0
+ 1984 018a 1A       		.uleb128 0x1a
+ 1985 018b 898201   		.uleb128 0x4109
+ 1986 018e 01       		.byte	0x1
+ 1987 018f 11       		.uleb128 0x11
+ 1988 0190 01       		.uleb128 0x1
+ 1989 0191 31       		.uleb128 0x31
+ 1990 0192 13       		.uleb128 0x13
+ 1991 0193 01       		.uleb128 0x1
+ 1992 0194 13       		.uleb128 0x13
+ 1993 0195 00       		.byte	0
+ 1994 0196 00       		.byte	0
+ 1995 0197 1B       		.uleb128 0x1b
+ 1996 0198 8A8201   		.uleb128 0x410a
+ 1997 019b 00       		.byte	0
+ 1998 019c 02       		.uleb128 0x2
+ 1999 019d 0A       		.uleb128 0xa
+ 2000 019e 9142     		.uleb128 0x2111
+ 2001 01a0 0A       		.uleb128 0xa
+ 2002 01a1 00       		.byte	0
+ 2003 01a2 00       		.byte	0
+ 2004 01a3 1C       		.uleb128 0x1c
+ 2005 01a4 898201   		.uleb128 0x4109
+ 2006 01a7 01       		.byte	0x1
+ 2007 01a8 11       		.uleb128 0x11
+ 2008 01a9 01       		.uleb128 0x1
+ 2009 01aa 9542     		.uleb128 0x2115
+ 2010 01ac 0C       		.uleb128 0xc
+ 2011 01ad 31       		.uleb128 0x31
+ 2012 01ae 13       		.uleb128 0x13
+ 2013 01af 00       		.byte	0
+ 2014 01b0 00       		.byte	0
+ 2015 01b1 1D       		.uleb128 0x1d
+ 2016 01b2 2E       		.uleb128 0x2e
+ 2017 01b3 00       		.byte	0
+ 2018 01b4 3F       		.uleb128 0x3f
+ 2019 01b5 0C       		.uleb128 0xc
+ 2020 01b6 3C       		.uleb128 0x3c
+ 2021 01b7 0C       		.uleb128 0xc
+ 2022 01b8 8740     		.uleb128 0x2007
+ 2023 01ba 0E       		.uleb128 0xe
+ 2024 01bb 03       		.uleb128 0x3
+ 2025 01bc 0E       		.uleb128 0xe
+ 2026 01bd 3A       		.uleb128 0x3a
+ 2027 01be 0B       		.uleb128 0xb
+ 2028 01bf 3B       		.uleb128 0x3b
+ 2029 01c0 05       		.uleb128 0x5
+ 2030 01c1 00       		.byte	0
+ 2031 01c2 00       		.byte	0
+ 2032 01c3 00       		.byte	0
+ 2033              		.section	.debug_loc,"",%progbits
+ 2034              	.Ldebug_loc0:
+ 2035              	.LLST7:
+ 2036 0000 84000000 		.4byte	.LFB36-.Ltext0
+ 2037 0004 8A000000 		.4byte	.LCFI4-.Ltext0
+ 2038 0008 0200     		.2byte	0x2
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccHiRVaW.s 			page 42
+
+
+ 2039 000a 7D       		.byte	0x7d
+ 2040 000b 00       		.sleb128 0
+ 2041 000c 8A000000 		.4byte	.LCFI4-.Ltext0
+ 2042 0010 9A000000 		.4byte	.LCFI5-.Ltext0
+ 2043 0014 0200     		.2byte	0x2
+ 2044 0016 7D       		.byte	0x7d
+ 2045 0017 08       		.sleb128 8
+ 2046 0018 9A000000 		.4byte	.LCFI5-.Ltext0
+ 2047 001c A0000000 		.4byte	.LFE36-.Ltext0
+ 2048 0020 0200     		.2byte	0x2
+ 2049 0022 7D       		.byte	0x7d
+ 2050 0023 00       		.sleb128 0
+ 2051 0024 00000000 		.4byte	0
+ 2052 0028 00000000 		.4byte	0
+ 2053              	.LLST8:
+ 2054 002c 84000000 		.4byte	.LVL17-.Ltext0
+ 2055 0030 92000000 		.4byte	.LVL18-.Ltext0
+ 2056 0034 0100     		.2byte	0x1
+ 2057 0036 50       		.byte	0x50
+ 2058 0037 92000000 		.4byte	.LVL18-.Ltext0
+ 2059 003b A0000000 		.4byte	.LFE36-.Ltext0
+ 2060 003f 0400     		.2byte	0x4
+ 2061 0041 F3       		.byte	0xf3
+ 2062 0042 01       		.uleb128 0x1
+ 2063 0043 50       		.byte	0x50
+ 2064 0044 9F       		.byte	0x9f
+ 2065 0045 00000000 		.4byte	0
+ 2066 0049 00000000 		.4byte	0
+ 2067              	.LLST5:
+ 2068 004d 68000000 		.4byte	.LFB35-.Ltext0
+ 2069 0051 6E000000 		.4byte	.LCFI2-.Ltext0
+ 2070 0055 0200     		.2byte	0x2
+ 2071 0057 7D       		.byte	0x7d
+ 2072 0058 00       		.sleb128 0
+ 2073 0059 6E000000 		.4byte	.LCFI2-.Ltext0
+ 2074 005d 7E000000 		.4byte	.LCFI3-.Ltext0
+ 2075 0061 0200     		.2byte	0x2
+ 2076 0063 7D       		.byte	0x7d
+ 2077 0064 08       		.sleb128 8
+ 2078 0065 7E000000 		.4byte	.LCFI3-.Ltext0
+ 2079 0069 84000000 		.4byte	.LFE35-.Ltext0
+ 2080 006d 0200     		.2byte	0x2
+ 2081 006f 7D       		.byte	0x7d
+ 2082 0070 00       		.sleb128 0
+ 2083 0071 00000000 		.4byte	0
+ 2084 0075 00000000 		.4byte	0
+ 2085              	.LLST6:
+ 2086 0079 68000000 		.4byte	.LVL15-.Ltext0
+ 2087 007d 76000000 		.4byte	.LVL16-.Ltext0
+ 2088 0081 0100     		.2byte	0x1
+ 2089 0083 50       		.byte	0x50
+ 2090 0084 76000000 		.4byte	.LVL16-.Ltext0
+ 2091 0088 84000000 		.4byte	.LFE35-.Ltext0
+ 2092 008c 0400     		.2byte	0x4
+ 2093 008e F3       		.byte	0xf3
+ 2094 008f 01       		.uleb128 0x1
+ 2095 0090 50       		.byte	0x50
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccHiRVaW.s 			page 43
+
+
+ 2096 0091 9F       		.byte	0x9f
+ 2097 0092 00000000 		.4byte	0
+ 2098 0096 00000000 		.4byte	0
+ 2099              	.LLST3:
+ 2100 009a 50000000 		.4byte	.LVL10-.Ltext0
+ 2101 009e 5E000000 		.4byte	.LVL14-.Ltext0
+ 2102 00a2 0100     		.2byte	0x1
+ 2103 00a4 50       		.byte	0x50
+ 2104 00a5 5E000000 		.4byte	.LVL14-.Ltext0
+ 2105 00a9 68000000 		.4byte	.LFE34-.Ltext0
+ 2106 00ad 0400     		.2byte	0x4
+ 2107 00af F3       		.byte	0xf3
+ 2108 00b0 01       		.uleb128 0x1
+ 2109 00b1 50       		.byte	0x50
+ 2110 00b2 9F       		.byte	0x9f
+ 2111 00b3 00000000 		.4byte	0
+ 2112 00b7 00000000 		.4byte	0
+ 2113              	.LLST4:
+ 2114 00bb 50000000 		.4byte	.LVL10-.Ltext0
+ 2115 00bf 54000000 		.4byte	.LVL11-.Ltext0
+ 2116 00c3 0200     		.2byte	0x2
+ 2117 00c5 30       		.byte	0x30
+ 2118 00c6 9F       		.byte	0x9f
+ 2119 00c7 54000000 		.4byte	.LVL11-.Ltext0
+ 2120 00cb 58000000 		.4byte	.LVL12-.Ltext0
+ 2121 00cf 0100     		.2byte	0x1
+ 2122 00d1 53       		.byte	0x53
+ 2123 00d2 5C000000 		.4byte	.LVL13-.Ltext0
+ 2124 00d6 5E000000 		.4byte	.LVL14-.Ltext0
+ 2125 00da 0100     		.2byte	0x1
+ 2126 00dc 53       		.byte	0x53
+ 2127 00dd 5E000000 		.4byte	.LVL14-.Ltext0
+ 2128 00e1 68000000 		.4byte	.LFE34-.Ltext0
+ 2129 00e5 0100     		.2byte	0x1
+ 2130 00e7 50       		.byte	0x50
+ 2131 00e8 00000000 		.4byte	0
+ 2132 00ec 00000000 		.4byte	0
+ 2133              	.LLST1:
+ 2134 00f0 38000000 		.4byte	.LVL5-.Ltext0
+ 2135 00f4 46000000 		.4byte	.LVL9-.Ltext0
+ 2136 00f8 0100     		.2byte	0x1
+ 2137 00fa 50       		.byte	0x50
+ 2138 00fb 46000000 		.4byte	.LVL9-.Ltext0
+ 2139 00ff 50000000 		.4byte	.LFE33-.Ltext0
+ 2140 0103 0400     		.2byte	0x4
+ 2141 0105 F3       		.byte	0xf3
+ 2142 0106 01       		.uleb128 0x1
+ 2143 0107 50       		.byte	0x50
+ 2144 0108 9F       		.byte	0x9f
+ 2145 0109 00000000 		.4byte	0
+ 2146 010d 00000000 		.4byte	0
+ 2147              	.LLST2:
+ 2148 0111 38000000 		.4byte	.LVL5-.Ltext0
+ 2149 0115 3C000000 		.4byte	.LVL6-.Ltext0
+ 2150 0119 0200     		.2byte	0x2
+ 2151 011b 30       		.byte	0x30
+ 2152 011c 9F       		.byte	0x9f
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccHiRVaW.s 			page 44
+
+
+ 2153 011d 3C000000 		.4byte	.LVL6-.Ltext0
+ 2154 0121 40000000 		.4byte	.LVL7-.Ltext0
+ 2155 0125 0100     		.2byte	0x1
+ 2156 0127 53       		.byte	0x53
+ 2157 0128 44000000 		.4byte	.LVL8-.Ltext0
+ 2158 012c 46000000 		.4byte	.LVL9-.Ltext0
+ 2159 0130 0100     		.2byte	0x1
+ 2160 0132 53       		.byte	0x53
+ 2161 0133 46000000 		.4byte	.LVL9-.Ltext0
+ 2162 0137 50000000 		.4byte	.LFE33-.Ltext0
+ 2163 013b 0100     		.2byte	0x1
+ 2164 013d 50       		.byte	0x50
+ 2165 013e 00000000 		.4byte	0
+ 2166 0142 00000000 		.4byte	0
+ 2167              	.LLST0:
+ 2168 0146 00000000 		.4byte	.LFB29-.Ltext0
+ 2169 014a 02000000 		.4byte	.LCFI0-.Ltext0
+ 2170 014e 0200     		.2byte	0x2
+ 2171 0150 7D       		.byte	0x7d
+ 2172 0151 00       		.sleb128 0
+ 2173 0152 02000000 		.4byte	.LCFI0-.Ltext0
+ 2174 0156 0C000000 		.4byte	.LCFI1-.Ltext0
+ 2175 015a 0200     		.2byte	0x2
+ 2176 015c 7D       		.byte	0x7d
+ 2177 015d 08       		.sleb128 8
+ 2178 015e 0C000000 		.4byte	.LCFI1-.Ltext0
+ 2179 0162 12000000 		.4byte	.LFE29-.Ltext0
+ 2180 0166 0200     		.2byte	0x2
+ 2181 0168 7D       		.byte	0x7d
+ 2182 0169 00       		.sleb128 0
+ 2183 016a 00000000 		.4byte	0
+ 2184 016e 00000000 		.4byte	0
+ 2185              		.section	.debug_aranges,"",%progbits
+ 2186 0000 1C000000 		.4byte	0x1c
+ 2187 0004 0200     		.2byte	0x2
+ 2188 0006 00000000 		.4byte	.Ldebug_info0
+ 2189 000a 04       		.byte	0x4
+ 2190 000b 00       		.byte	0
+ 2191 000c 0000     		.2byte	0
+ 2192 000e 0000     		.2byte	0
+ 2193 0010 00000000 		.4byte	.Ltext0
+ 2194 0014 D8000000 		.4byte	.Letext0-.Ltext0
+ 2195 0018 00000000 		.4byte	0
+ 2196 001c 00000000 		.4byte	0
+ 2197              		.section	.debug_line,"",%progbits
+ 2198              	.Ldebug_line0:
+ 2199 0000 8C010000 		.section	.debug_str,"MS",%progbits,1
+ 2199      02002E01 
+ 2199      00000201 
+ 2199      FB0E0D00 
+ 2199      01010101 
+ 2200              	.LASF16:
+ 2201 0000 53797374 		.ascii	"SystemCoreClock\000"
+ 2201      656D436F 
+ 2201      7265436C 
+ 2201      6F636B00 
+ 2202              	.LASF103:
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccHiRVaW.s 			page 45
+
+
+ 2203 0010 424B505F 		.ascii	"BKP_TypeDef\000"
+ 2203      54797065 
+ 2203      44656600 
+ 2204              	.LASF92:
+ 2205 001c 52455345 		.ascii	"RESERVED40\000"
+ 2205      52564544 
+ 2205      343000
+ 2206              	.LASF94:
+ 2207 0027 52455345 		.ascii	"RESERVED41\000"
+ 2207      52564544 
+ 2207      343100
+ 2208              	.LASF96:
+ 2209 0032 52455345 		.ascii	"RESERVED42\000"
+ 2209      52564544 
+ 2209      343200
+ 2210              	.LASF98:
+ 2211 003d 52455345 		.ascii	"RESERVED43\000"
+ 2211      52564544 
+ 2211      343300
+ 2212              	.LASF100:
+ 2213 0048 52455345 		.ascii	"RESERVED44\000"
+ 2213      52564544 
+ 2213      343400
+ 2214              	.LASF11:
+ 2215 0053 756E7369 		.ascii	"unsigned int\000"
+ 2215      676E6564 
+ 2215      20696E74 
+ 2215      00
+ 2216              	.LASF22:
+ 2217 0060 46756E63 		.ascii	"FunctionalState\000"
+ 2217      74696F6E 
+ 2217      616C5374 
+ 2217      61746500 
+ 2218              	.LASF108:
+ 2219 0070 424B505F 		.ascii	"BKP_DR\000"
+ 2219      445200
+ 2220              	.LASF18:
+ 2221 0077 466C6167 		.ascii	"FlagStatus\000"
+ 2221      53746174 
+ 2221      757300
+ 2222              	.LASF112:
+ 2223 0082 43616C69 		.ascii	"CalibrationValue\000"
+ 2223      62726174 
+ 2223      696F6E56 
+ 2223      616C7565 
+ 2223      00
+ 2224              	.LASF14:
+ 2225 0093 75696E74 		.ascii	"uint32_t\000"
+ 2225      33325F74 
+ 2225      00
+ 2226              	.LASF124:
+ 2227 009c 473A5C55 		.ascii	"G:\\Users\\Jaxb\\Desktop\\KAKAOS-0.07  2019.2.21  f"
+ 2227      73657273 
+ 2227      5C4A6178 
+ 2227      625C4465 
+ 2227      736B746F 
+ 2228 00cb 6F722067 		.ascii	"or gcc\\Project\\RVMDK\243\250uv5\243\251\000"
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccHiRVaW.s 			page 46
+
+
+ 2228      63635C50 
+ 2228      726F6A65 
+ 2228      63745C52 
+ 2228      564D444B 
+ 2229              	.LASF121:
+ 2230 00e7 424B505F 		.ascii	"BKP_DeInit\000"
+ 2230      4465496E 
+ 2230      697400
+ 2231              	.LASF125:
+ 2232 00f2 424B505F 		.ascii	"BKP_ReadBackupRegister\000"
+ 2232      52656164 
+ 2232      4261636B 
+ 2232      75705265 
+ 2232      67697374 
+ 2233              	.LASF10:
+ 2234 0109 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 2234      206C6F6E 
+ 2234      6720756E 
+ 2234      7369676E 
+ 2234      65642069 
+ 2235              	.LASF4:
+ 2236 0120 5F5F7569 		.ascii	"__uint16_t\000"
+ 2236      6E743136 
+ 2236      5F7400
+ 2237              	.LASF42:
+ 2238 012b 52455345 		.ascii	"RESERVED15\000"
+ 2238      52564544 
+ 2238      313500
+ 2239              	.LASF107:
+ 2240 0136 424B505F 		.ascii	"BKP_GetFlagStatus\000"
+ 2240      47657446 
+ 2240      6C616753 
+ 2240      74617475 
+ 2240      7300
+ 2241              	.LASF113:
+ 2242 0148 746D7072 		.ascii	"tmpreg\000"
+ 2242      656700
+ 2243              	.LASF19:
+ 2244 014f 49545374 		.ascii	"ITStatus\000"
+ 2244      61747573 
+ 2244      00
+ 2245              	.LASF114:
+ 2246 0158 424B505F 		.ascii	"BKP_RTCOutputConfig\000"
+ 2246      5254434F 
+ 2246      75747075 
+ 2246      74436F6E 
+ 2246      66696700 
+ 2247              	.LASF117:
+ 2248 016c 4E657753 		.ascii	"NewState\000"
+ 2248      74617465 
+ 2248      00
+ 2249              	.LASF106:
+ 2250 0175 424B505F 		.ascii	"BKP_GetITStatus\000"
+ 2250      47657449 
+ 2250      54537461 
+ 2250      74757300 
+ 2251              	.LASF20:
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccHiRVaW.s 			page 47
+
+
+ 2252 0185 44495341 		.ascii	"DISABLE\000"
+ 2252      424C4500 
+ 2253              	.LASF105:
+ 2254 018d 424B505F 		.ascii	"BKP_ClearFlag\000"
+ 2254      436C6561 
+ 2254      72466C61 
+ 2254      6700
+ 2255              	.LASF12:
+ 2256 019b 75696E74 		.ascii	"uint8_t\000"
+ 2256      385F7400 
+ 2257              	.LASF119:
+ 2258 01a3 424B505F 		.ascii	"BKP_TamperPinLevelConfig\000"
+ 2258      54616D70 
+ 2258      65725069 
+ 2258      6E4C6576 
+ 2258      656C436F 
+ 2259              	.LASF115:
+ 2260 01bc 424B505F 		.ascii	"BKP_RTCOutputSource\000"
+ 2260      5254434F 
+ 2260      75747075 
+ 2260      74536F75 
+ 2260      72636500 
+ 2261              	.LASF9:
+ 2262 01d0 6C6F6E67 		.ascii	"long long int\000"
+ 2262      206C6F6E 
+ 2262      6720696E 
+ 2262      7400
+ 2263              	.LASF111:
+ 2264 01de 424B505F 		.ascii	"BKP_SetRTCCalibrationValue\000"
+ 2264      53657452 
+ 2264      54434361 
+ 2264      6C696272 
+ 2264      6174696F 
+ 2265              	.LASF120:
+ 2266 01f9 424B505F 		.ascii	"BKP_TamperPinLevel\000"
+ 2266      54616D70 
+ 2266      65725069 
+ 2266      6E4C6576 
+ 2266      656C00
+ 2267              	.LASF122:
+ 2268 020c 474E5520 		.ascii	"GNU C11 7.3.1 20180622 (release) [ARM/embedded-7-br"
+ 2268      43313120 
+ 2268      372E332E 
+ 2268      31203230 
+ 2268      31383036 
+ 2269 023f 616E6368 		.ascii	"anch revision 261907] -mcpu=cortex-m3 -mthumb -mapc"
+ 2269      20726576 
+ 2269      6973696F 
+ 2269      6E203236 
+ 2269      31393037 
+ 2270 0272 732D6672 		.ascii	"s-frame -mthumb-interwork -mcpu=cortex-m3 -mthumb -"
+ 2270      616D6520 
+ 2270      2D6D7468 
+ 2270      756D622D 
+ 2270      696E7465 
+ 2271 02a5 67647761 		.ascii	"gdwarf-2 -O2\000"
+ 2271      72662D32 
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccHiRVaW.s 			page 48
+
+
+ 2271      202D4F32 
+ 2271      00
+ 2272              	.LASF123:
+ 2273 02b2 2E2E2F2E 		.ascii	"../../source/src/FWlib/src/stm32f10x_bkp.c\000"
+ 2273      2E2F736F 
+ 2273      75726365 
+ 2273      2F737263 
+ 2273      2F46576C 
+ 2274              	.LASF33:
+ 2275 02dd 44523130 		.ascii	"DR10\000"
+ 2275      00
+ 2276              	.LASF39:
+ 2277 02e2 44523131 		.ascii	"DR11\000"
+ 2277      00
+ 2278              	.LASF41:
+ 2279 02e7 44523132 		.ascii	"DR12\000"
+ 2279      00
+ 2280              	.LASF43:
+ 2281 02ec 44523133 		.ascii	"DR13\000"
+ 2281      00
+ 2282              	.LASF45:
+ 2283 02f1 44523134 		.ascii	"DR14\000"
+ 2283      00
+ 2284              	.LASF47:
+ 2285 02f6 44523135 		.ascii	"DR15\000"
+ 2285      00
+ 2286              	.LASF49:
+ 2287 02fb 44523136 		.ascii	"DR16\000"
+ 2287      00
+ 2288              	.LASF51:
+ 2289 0300 44523137 		.ascii	"DR17\000"
+ 2289      00
+ 2290              	.LASF53:
+ 2291 0305 44523138 		.ascii	"DR18\000"
+ 2291      00
+ 2292              	.LASF55:
+ 2293 030a 44523139 		.ascii	"DR19\000"
+ 2293      00
+ 2294              	.LASF118:
+ 2295 030f 424B505F 		.ascii	"BKP_TamperPinCmd\000"
+ 2295      54616D70 
+ 2295      65725069 
+ 2295      6E436D64 
+ 2295      00
+ 2296              	.LASF13:
+ 2297 0320 75696E74 		.ascii	"uint16_t\000"
+ 2297      31365F74 
+ 2297      00
+ 2298              	.LASF57:
+ 2299 0329 44523230 		.ascii	"DR20\000"
+ 2299      00
+ 2300              	.LASF59:
+ 2301 032e 44523231 		.ascii	"DR21\000"
+ 2301      00
+ 2302              	.LASF61:
+ 2303 0333 44523232 		.ascii	"DR22\000"
+ 2303      00
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccHiRVaW.s 			page 49
+
+
+ 2304              	.LASF63:
+ 2305 0338 44523233 		.ascii	"DR23\000"
+ 2305      00
+ 2306              	.LASF65:
+ 2307 033d 44523234 		.ascii	"DR24\000"
+ 2307      00
+ 2308              	.LASF67:
+ 2309 0342 44523235 		.ascii	"DR25\000"
+ 2309      00
+ 2310              	.LASF69:
+ 2311 0347 44523236 		.ascii	"DR26\000"
+ 2311      00
+ 2312              	.LASF71:
+ 2313 034c 44523237 		.ascii	"DR27\000"
+ 2313      00
+ 2314              	.LASF73:
+ 2315 0351 44523238 		.ascii	"DR28\000"
+ 2315      00
+ 2316              	.LASF75:
+ 2317 0356 44523239 		.ascii	"DR29\000"
+ 2317      00
+ 2318              	.LASF102:
+ 2319 035b 52455345 		.ascii	"RESERVED45\000"
+ 2319      52564544 
+ 2319      343500
+ 2320              	.LASF23:
+ 2321 0366 52455345 		.ascii	"RESERVED0\000"
+ 2321      52564544 
+ 2321      3000
+ 2322              	.LASF24:
+ 2323 0370 52455345 		.ascii	"RESERVED1\000"
+ 2323      52564544 
+ 2323      3100
+ 2324              	.LASF25:
+ 2325 037a 52455345 		.ascii	"RESERVED2\000"
+ 2325      52564544 
+ 2325      3200
+ 2326              	.LASF26:
+ 2327 0384 52455345 		.ascii	"RESERVED3\000"
+ 2327      52564544 
+ 2327      3300
+ 2328              	.LASF27:
+ 2329 038e 52455345 		.ascii	"RESERVED4\000"
+ 2329      52564544 
+ 2329      3400
+ 2330              	.LASF28:
+ 2331 0398 52455345 		.ascii	"RESERVED5\000"
+ 2331      52564544 
+ 2331      3500
+ 2332              	.LASF29:
+ 2333 03a2 52455345 		.ascii	"RESERVED6\000"
+ 2333      52564544 
+ 2333      3600
+ 2334              	.LASF2:
+ 2335 03ac 73686F72 		.ascii	"short int\000"
+ 2335      7420696E 
+ 2335      7400
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccHiRVaW.s 			page 50
+
+
+ 2336              	.LASF31:
+ 2337 03b6 52455345 		.ascii	"RESERVED8\000"
+ 2337      52564544 
+ 2337      3800
+ 2338              	.LASF32:
+ 2339 03c0 52455345 		.ascii	"RESERVED9\000"
+ 2339      52564544 
+ 2339      3900
+ 2340              	.LASF6:
+ 2341 03ca 6C6F6E67 		.ascii	"long int\000"
+ 2341      20696E74 
+ 2341      00
+ 2342              	.LASF15:
+ 2343 03d3 49544D5F 		.ascii	"ITM_RxBuffer\000"
+ 2343      52784275 
+ 2343      66666572 
+ 2343      00
+ 2344              	.LASF17:
+ 2345 03e0 52455345 		.ascii	"RESET\000"
+ 2345      5400
+ 2346              	.LASF77:
+ 2347 03e6 44523330 		.ascii	"DR30\000"
+ 2347      00
+ 2348              	.LASF79:
+ 2349 03eb 44523331 		.ascii	"DR31\000"
+ 2349      00
+ 2350              	.LASF81:
+ 2351 03f0 44523332 		.ascii	"DR32\000"
+ 2351      00
+ 2352              	.LASF83:
+ 2353 03f5 44523333 		.ascii	"DR33\000"
+ 2353      00
+ 2354              	.LASF85:
+ 2355 03fa 44523334 		.ascii	"DR34\000"
+ 2355      00
+ 2356              	.LASF87:
+ 2357 03ff 44523335 		.ascii	"DR35\000"
+ 2357      00
+ 2358              	.LASF89:
+ 2359 0404 44523336 		.ascii	"DR36\000"
+ 2359      00
+ 2360              	.LASF91:
+ 2361 0409 44523337 		.ascii	"DR37\000"
+ 2361      00
+ 2362              	.LASF93:
+ 2363 040e 44523338 		.ascii	"DR38\000"
+ 2363      00
+ 2364              	.LASF95:
+ 2365 0413 44523339 		.ascii	"DR39\000"
+ 2365      00
+ 2366              	.LASF104:
+ 2367 0418 424B505F 		.ascii	"BKP_ClearITPendingBit\000"
+ 2367      436C6561 
+ 2367      72495450 
+ 2367      656E6469 
+ 2367      6E674269 
+ 2368              	.LASF3:
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccHiRVaW.s 			page 51
+
+
+ 2369 042e 5F5F7569 		.ascii	"__uint8_t\000"
+ 2369      6E74385F 
+ 2369      7400
+ 2370              	.LASF116:
+ 2371 0438 424B505F 		.ascii	"BKP_ITConfig\000"
+ 2371      4954436F 
+ 2371      6E666967 
+ 2371      00
+ 2372              	.LASF21:
+ 2373 0445 454E4142 		.ascii	"ENABLE\000"
+ 2373      4C4500
+ 2374              	.LASF97:
+ 2375 044c 44523430 		.ascii	"DR40\000"
+ 2375      00
+ 2376              	.LASF99:
+ 2377 0451 44523431 		.ascii	"DR41\000"
+ 2377      00
+ 2378              	.LASF101:
+ 2379 0456 44523432 		.ascii	"DR42\000"
+ 2379      00
+ 2380              	.LASF8:
+ 2381 045b 6C6F6E67 		.ascii	"long unsigned int\000"
+ 2381      20756E73 
+ 2381      69676E65 
+ 2381      6420696E 
+ 2381      7400
+ 2382              	.LASF126:
+ 2383 046d 5243435F 		.ascii	"RCC_BackupResetCmd\000"
+ 2383      4261636B 
+ 2383      75705265 
+ 2383      73657443 
+ 2383      6D6400
+ 2384              	.LASF1:
+ 2385 0480 756E7369 		.ascii	"unsigned char\000"
+ 2385      676E6564 
+ 2385      20636861 
+ 2385      7200
+ 2386              	.LASF7:
+ 2387 048e 5F5F7569 		.ascii	"__uint32_t\000"
+ 2387      6E743332 
+ 2387      5F7400
+ 2388              	.LASF34:
+ 2389 0499 52455345 		.ascii	"RESERVED10\000"
+ 2389      52564544 
+ 2389      313000
+ 2390              	.LASF36:
+ 2391 04a4 52455345 		.ascii	"RESERVED11\000"
+ 2391      52564544 
+ 2391      313100
+ 2392              	.LASF37:
+ 2393 04af 52455345 		.ascii	"RESERVED12\000"
+ 2393      52564544 
+ 2393      313200
+ 2394              	.LASF38:
+ 2395 04ba 52455345 		.ascii	"RESERVED13\000"
+ 2395      52564544 
+ 2395      313300
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccHiRVaW.s 			page 52
+
+
+ 2396              	.LASF40:
+ 2397 04c5 52455345 		.ascii	"RESERVED14\000"
+ 2397      52564544 
+ 2397      313400
+ 2398              	.LASF44:
+ 2399 04d0 52455345 		.ascii	"RESERVED16\000"
+ 2399      52564544 
+ 2399      313600
+ 2400              	.LASF46:
+ 2401 04db 52455345 		.ascii	"RESERVED17\000"
+ 2401      52564544 
+ 2401      313700
+ 2402              	.LASF48:
+ 2403 04e6 52455345 		.ascii	"RESERVED18\000"
+ 2403      52564544 
+ 2403      313800
+ 2404              	.LASF50:
+ 2405 04f1 52455345 		.ascii	"RESERVED19\000"
+ 2405      52564544 
+ 2405      313900
+ 2406              	.LASF35:
+ 2407 04fc 52544343 		.ascii	"RTCCR\000"
+ 2407      5200
+ 2408              	.LASF110:
+ 2409 0502 424B505F 		.ascii	"BKP_WriteBackupRegister\000"
+ 2409      57726974 
+ 2409      65426163 
+ 2409      6B757052 
+ 2409      65676973 
+ 2410              	.LASF0:
+ 2411 051a 7369676E 		.ascii	"signed char\000"
+ 2411      65642063 
+ 2411      68617200 
+ 2412              	.LASF5:
+ 2413 0526 73686F72 		.ascii	"short unsigned int\000"
+ 2413      7420756E 
+ 2413      7369676E 
+ 2413      65642069 
+ 2413      6E7400
+ 2414              	.LASF52:
+ 2415 0539 52455345 		.ascii	"RESERVED20\000"
+ 2415      52564544 
+ 2415      323000
+ 2416              	.LASF54:
+ 2417 0544 52455345 		.ascii	"RESERVED21\000"
+ 2417      52564544 
+ 2417      323100
+ 2418              	.LASF56:
+ 2419 054f 52455345 		.ascii	"RESERVED22\000"
+ 2419      52564544 
+ 2419      323200
+ 2420              	.LASF58:
+ 2421 055a 52455345 		.ascii	"RESERVED23\000"
+ 2421      52564544 
+ 2421      323300
+ 2422              	.LASF60:
+ 2423 0565 52455345 		.ascii	"RESERVED24\000"
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccHiRVaW.s 			page 53
+
+
+ 2423      52564544 
+ 2423      323400
+ 2424              	.LASF62:
+ 2425 0570 52455345 		.ascii	"RESERVED25\000"
+ 2425      52564544 
+ 2425      323500
+ 2426              	.LASF64:
+ 2427 057b 52455345 		.ascii	"RESERVED26\000"
+ 2427      52564544 
+ 2427      323600
+ 2428              	.LASF66:
+ 2429 0586 52455345 		.ascii	"RESERVED27\000"
+ 2429      52564544 
+ 2429      323700
+ 2430              	.LASF68:
+ 2431 0591 52455345 		.ascii	"RESERVED28\000"
+ 2431      52564544 
+ 2431      323800
+ 2432              	.LASF70:
+ 2433 059c 52455345 		.ascii	"RESERVED29\000"
+ 2433      52564544 
+ 2433      323900
+ 2434              	.LASF30:
+ 2435 05a7 52455345 		.ascii	"RESERVED7\000"
+ 2435      52564544 
+ 2435      3700
+ 2436              	.LASF109:
+ 2437 05b1 44617461 		.ascii	"Data\000"
+ 2437      00
+ 2438              	.LASF72:
+ 2439 05b6 52455345 		.ascii	"RESERVED30\000"
+ 2439      52564544 
+ 2439      333000
+ 2440              	.LASF74:
+ 2441 05c1 52455345 		.ascii	"RESERVED31\000"
+ 2441      52564544 
+ 2441      333100
+ 2442              	.LASF76:
+ 2443 05cc 52455345 		.ascii	"RESERVED32\000"
+ 2443      52564544 
+ 2443      333200
+ 2444              	.LASF78:
+ 2445 05d7 52455345 		.ascii	"RESERVED33\000"
+ 2445      52564544 
+ 2445      333300
+ 2446              	.LASF80:
+ 2447 05e2 52455345 		.ascii	"RESERVED34\000"
+ 2447      52564544 
+ 2447      333400
+ 2448              	.LASF82:
+ 2449 05ed 52455345 		.ascii	"RESERVED35\000"
+ 2449      52564544 
+ 2449      333500
+ 2450              	.LASF84:
+ 2451 05f8 52455345 		.ascii	"RESERVED36\000"
+ 2451      52564544 
+ 2451      333600
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccHiRVaW.s 			page 54
+
+
+ 2452              	.LASF86:
+ 2453 0603 52455345 		.ascii	"RESERVED37\000"
+ 2453      52564544 
+ 2453      333700
+ 2454              	.LASF88:
+ 2455 060e 52455345 		.ascii	"RESERVED38\000"
+ 2455      52564544 
+ 2455      333800
+ 2456              	.LASF90:
+ 2457 0619 52455345 		.ascii	"RESERVED39\000"
+ 2457      52564544 
+ 2457      333900
+ 2458              		.ident	"GCC: (GNU Tools for Arm Embedded Processors 7-2018-q2-update) 7.3.1 20180622 (release) [AR
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccHiRVaW.s 			page 55
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 stm32f10x_bkp.c
+G:\Users\Jaxb\AppData\Local\Temp\ccHiRVaW.s:15     .text:00000000 $t
+G:\Users\Jaxb\AppData\Local\Temp\ccHiRVaW.s:23     .text:00000000 BKP_DeInit
+G:\Users\Jaxb\AppData\Local\Temp\ccHiRVaW.s:60     .text:00000014 BKP_TamperPinLevelConfig
+G:\Users\Jaxb\AppData\Local\Temp\ccHiRVaW.s:76     .text:0000001c $d
+G:\Users\Jaxb\AppData\Local\Temp\ccHiRVaW.s:80     .text:00000020 $t
+G:\Users\Jaxb\AppData\Local\Temp\ccHiRVaW.s:88     .text:00000020 BKP_TamperPinCmd
+G:\Users\Jaxb\AppData\Local\Temp\ccHiRVaW.s:104    .text:00000028 $d
+G:\Users\Jaxb\AppData\Local\Temp\ccHiRVaW.s:108    .text:0000002c $t
+G:\Users\Jaxb\AppData\Local\Temp\ccHiRVaW.s:116    .text:0000002c BKP_ITConfig
+G:\Users\Jaxb\AppData\Local\Temp\ccHiRVaW.s:132    .text:00000034 $d
+G:\Users\Jaxb\AppData\Local\Temp\ccHiRVaW.s:136    .text:00000038 $t
+G:\Users\Jaxb\AppData\Local\Temp\ccHiRVaW.s:144    .text:00000038 BKP_RTCOutputConfig
+G:\Users\Jaxb\AppData\Local\Temp\ccHiRVaW.s:172    .text:0000004c $d
+G:\Users\Jaxb\AppData\Local\Temp\ccHiRVaW.s:176    .text:00000050 $t
+G:\Users\Jaxb\AppData\Local\Temp\ccHiRVaW.s:184    .text:00000050 BKP_SetRTCCalibrationValue
+G:\Users\Jaxb\AppData\Local\Temp\ccHiRVaW.s:212    .text:00000064 $d
+G:\Users\Jaxb\AppData\Local\Temp\ccHiRVaW.s:216    .text:00000068 $t
+G:\Users\Jaxb\AppData\Local\Temp\ccHiRVaW.s:224    .text:00000068 BKP_WriteBackupRegister
+G:\Users\Jaxb\AppData\Local\Temp\ccHiRVaW.s:261    .text:00000080 $d
+G:\Users\Jaxb\AppData\Local\Temp\ccHiRVaW.s:265    .text:00000084 $t
+G:\Users\Jaxb\AppData\Local\Temp\ccHiRVaW.s:273    .text:00000084 BKP_ReadBackupRegister
+G:\Users\Jaxb\AppData\Local\Temp\ccHiRVaW.s:310    .text:0000009c $d
+G:\Users\Jaxb\AppData\Local\Temp\ccHiRVaW.s:314    .text:000000a0 $t
+G:\Users\Jaxb\AppData\Local\Temp\ccHiRVaW.s:322    .text:000000a0 BKP_GetFlagStatus
+G:\Users\Jaxb\AppData\Local\Temp\ccHiRVaW.s:338    .text:000000a8 $d
+G:\Users\Jaxb\AppData\Local\Temp\ccHiRVaW.s:342    .text:000000ac $t
+G:\Users\Jaxb\AppData\Local\Temp\ccHiRVaW.s:350    .text:000000ac BKP_ClearFlag
+G:\Users\Jaxb\AppData\Local\Temp\ccHiRVaW.s:367    .text:000000b8 $d
+G:\Users\Jaxb\AppData\Local\Temp\ccHiRVaW.s:371    .text:000000bc $t
+G:\Users\Jaxb\AppData\Local\Temp\ccHiRVaW.s:379    .text:000000bc BKP_GetITStatus
+G:\Users\Jaxb\AppData\Local\Temp\ccHiRVaW.s:395    .text:000000c4 $d
+G:\Users\Jaxb\AppData\Local\Temp\ccHiRVaW.s:399    .text:000000c8 $t
+G:\Users\Jaxb\AppData\Local\Temp\ccHiRVaW.s:407    .text:000000c8 BKP_ClearITPendingBit
+G:\Users\Jaxb\AppData\Local\Temp\ccHiRVaW.s:424    .text:000000d4 $d
+
+UNDEFINED SYMBOLS
+RCC_BackupResetCmd

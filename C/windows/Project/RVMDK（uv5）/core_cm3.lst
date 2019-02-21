@@ -1,0 +1,3064 @@
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cccIH5Mc.s 			page 1
+
+
+   1              		.cpu cortex-m3
+   2              		.eabi_attribute 20, 1
+   3              		.eabi_attribute 21, 1
+   4              		.eabi_attribute 23, 3
+   5              		.eabi_attribute 24, 1
+   6              		.eabi_attribute 25, 1
+   7              		.eabi_attribute 26, 1
+   8              		.eabi_attribute 30, 2
+   9              		.eabi_attribute 34, 1
+  10              		.eabi_attribute 18, 4
+  11              		.file	"core_cm3.c"
+  12              		.text
+  13              	.Ltext0:
+  14              		.cfi_sections	.debug_frame
+  15              		.align	1
+  16              		.p2align 2,,3
+  17              		.global	__get_PSP
+  18              		.syntax unified
+  19              		.thumb
+  20              		.thumb_func
+  21              		.fpu softvfp
+  22              		.type	__get_PSP, %function
+  23              	__get_PSP:
+  24              	.LFB0:
+  25              		.file 1 "../../source/src/CMSIS/core_cm3.c"
+   1:../../source/src/CMSIS/core_cm3.c **** /**************************************************************************//**
+   2:../../source/src/CMSIS/core_cm3.c ****  * @file     core_cm3.c
+   3:../../source/src/CMSIS/core_cm3.c ****  * @brief    CMSIS Cortex-M3 Core Peripheral Access Layer Source File
+   4:../../source/src/CMSIS/core_cm3.c ****  * @version  V1.30
+   5:../../source/src/CMSIS/core_cm3.c ****  * @date     30. October 2009
+   6:../../source/src/CMSIS/core_cm3.c ****  *
+   7:../../source/src/CMSIS/core_cm3.c ****  * @note
+   8:../../source/src/CMSIS/core_cm3.c ****  * Copyright (C) 2009 ARM Limited. All rights reserved.
+   9:../../source/src/CMSIS/core_cm3.c ****  *
+  10:../../source/src/CMSIS/core_cm3.c ****  * @par
+  11:../../source/src/CMSIS/core_cm3.c ****  * ARM Limited (ARM) is supplying this software for use with Cortex-M 
+  12:../../source/src/CMSIS/core_cm3.c ****  * processor based microcontrollers.  This file can be freely distributed 
+  13:../../source/src/CMSIS/core_cm3.c ****  * within development tools that are supporting such ARM based processors. 
+  14:../../source/src/CMSIS/core_cm3.c ****  *
+  15:../../source/src/CMSIS/core_cm3.c ****  * @par
+  16:../../source/src/CMSIS/core_cm3.c ****  * THIS SOFTWARE IS PROVIDED "AS IS".  NO WARRANTIES, WHETHER EXPRESS, IMPLIED
+  17:../../source/src/CMSIS/core_cm3.c ****  * OR STATUTORY, INCLUDING, BUT NOT LIMITED TO, IMPLIED WARRANTIES OF
+  18:../../source/src/CMSIS/core_cm3.c ****  * MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE APPLY TO THIS SOFTWARE.
+  19:../../source/src/CMSIS/core_cm3.c ****  * ARM SHALL NOT, IN ANY CIRCUMSTANCES, BE LIABLE FOR SPECIAL, INCIDENTAL, OR
+  20:../../source/src/CMSIS/core_cm3.c ****  * CONSEQUENTIAL DAMAGES, FOR ANY REASON WHATSOEVER.
+  21:../../source/src/CMSIS/core_cm3.c ****  *
+  22:../../source/src/CMSIS/core_cm3.c ****  ******************************************************************************/
+  23:../../source/src/CMSIS/core_cm3.c **** 
+  24:../../source/src/CMSIS/core_cm3.c **** #include <stdint.h>
+  25:../../source/src/CMSIS/core_cm3.c **** 
+  26:../../source/src/CMSIS/core_cm3.c **** /* define compiler specific symbols */
+  27:../../source/src/CMSIS/core_cm3.c **** #if defined ( __CC_ARM   )
+  28:../../source/src/CMSIS/core_cm3.c ****   #define __ASM            __asm                                      /*!< asm keyword for ARM Comp
+  29:../../source/src/CMSIS/core_cm3.c ****   #define __INLINE         __inline                                   /*!< inline keyword for ARM C
+  30:../../source/src/CMSIS/core_cm3.c **** 
+  31:../../source/src/CMSIS/core_cm3.c **** #elif defined ( __ICCARM__ )
+  32:../../source/src/CMSIS/core_cm3.c ****   #define __ASM           __asm                                       /*!< asm keyword for IAR Comp
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cccIH5Mc.s 			page 2
+
+
+  33:../../source/src/CMSIS/core_cm3.c ****   #define __INLINE        inline                                      /*!< inline keyword for IAR C
+  34:../../source/src/CMSIS/core_cm3.c **** 
+  35:../../source/src/CMSIS/core_cm3.c **** #elif defined   (  __GNUC__  )
+  36:../../source/src/CMSIS/core_cm3.c ****   #define __ASM            __asm                                      /*!< asm keyword for GNU Comp
+  37:../../source/src/CMSIS/core_cm3.c ****   #define __INLINE         inline                                     /*!< inline keyword for GNU C
+  38:../../source/src/CMSIS/core_cm3.c **** 
+  39:../../source/src/CMSIS/core_cm3.c **** #elif defined   (  __TASKING__  )
+  40:../../source/src/CMSIS/core_cm3.c ****   #define __ASM            __asm                                      /*!< asm keyword for TASKING 
+  41:../../source/src/CMSIS/core_cm3.c ****   #define __INLINE         inline                                     /*!< inline keyword for TASKI
+  42:../../source/src/CMSIS/core_cm3.c **** 
+  43:../../source/src/CMSIS/core_cm3.c **** #endif
+  44:../../source/src/CMSIS/core_cm3.c **** 
+  45:../../source/src/CMSIS/core_cm3.c **** 
+  46:../../source/src/CMSIS/core_cm3.c **** /* ###################  Compiler specific Intrinsics  ########################### */
+  47:../../source/src/CMSIS/core_cm3.c **** 
+  48:../../source/src/CMSIS/core_cm3.c **** #if defined ( __CC_ARM   ) /*------------------RealView Compiler -----------------*/
+  49:../../source/src/CMSIS/core_cm3.c **** /* ARM armcc specific functions */
+  50:../../source/src/CMSIS/core_cm3.c **** 
+  51:../../source/src/CMSIS/core_cm3.c **** /**
+  52:../../source/src/CMSIS/core_cm3.c ****  * @brief  Return the Process Stack Pointer
+  53:../../source/src/CMSIS/core_cm3.c ****  *
+  54:../../source/src/CMSIS/core_cm3.c ****  * @return ProcessStackPointer
+  55:../../source/src/CMSIS/core_cm3.c ****  *
+  56:../../source/src/CMSIS/core_cm3.c ****  * Return the actual process stack pointer
+  57:../../source/src/CMSIS/core_cm3.c ****  */
+  58:../../source/src/CMSIS/core_cm3.c **** __ASM uint32_t __get_PSP(void)
+  59:../../source/src/CMSIS/core_cm3.c **** {
+  60:../../source/src/CMSIS/core_cm3.c ****   mrs r0, psp
+  61:../../source/src/CMSIS/core_cm3.c ****   bx lr
+  62:../../source/src/CMSIS/core_cm3.c **** }
+  63:../../source/src/CMSIS/core_cm3.c **** 
+  64:../../source/src/CMSIS/core_cm3.c **** /**
+  65:../../source/src/CMSIS/core_cm3.c ****  * @brief  Set the Process Stack Pointer
+  66:../../source/src/CMSIS/core_cm3.c ****  *
+  67:../../source/src/CMSIS/core_cm3.c ****  * @param  topOfProcStack  Process Stack Pointer
+  68:../../source/src/CMSIS/core_cm3.c ****  *
+  69:../../source/src/CMSIS/core_cm3.c ****  * Assign the value ProcessStackPointer to the MSP 
+  70:../../source/src/CMSIS/core_cm3.c ****  * (process stack pointer) Cortex processor register
+  71:../../source/src/CMSIS/core_cm3.c ****  */
+  72:../../source/src/CMSIS/core_cm3.c **** __ASM void __set_PSP(uint32_t topOfProcStack)
+  73:../../source/src/CMSIS/core_cm3.c **** {
+  74:../../source/src/CMSIS/core_cm3.c ****   msr psp, r0
+  75:../../source/src/CMSIS/core_cm3.c ****   bx lr
+  76:../../source/src/CMSIS/core_cm3.c **** }
+  77:../../source/src/CMSIS/core_cm3.c **** 
+  78:../../source/src/CMSIS/core_cm3.c **** /**
+  79:../../source/src/CMSIS/core_cm3.c ****  * @brief  Return the Main Stack Pointer
+  80:../../source/src/CMSIS/core_cm3.c ****  *
+  81:../../source/src/CMSIS/core_cm3.c ****  * @return Main Stack Pointer
+  82:../../source/src/CMSIS/core_cm3.c ****  *
+  83:../../source/src/CMSIS/core_cm3.c ****  * Return the current value of the MSP (main stack pointer)
+  84:../../source/src/CMSIS/core_cm3.c ****  * Cortex processor register
+  85:../../source/src/CMSIS/core_cm3.c ****  */
+  86:../../source/src/CMSIS/core_cm3.c **** __ASM uint32_t __get_MSP(void)
+  87:../../source/src/CMSIS/core_cm3.c **** {
+  88:../../source/src/CMSIS/core_cm3.c ****   mrs r0, msp
+  89:../../source/src/CMSIS/core_cm3.c ****   bx lr
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cccIH5Mc.s 			page 3
+
+
+  90:../../source/src/CMSIS/core_cm3.c **** }
+  91:../../source/src/CMSIS/core_cm3.c **** 
+  92:../../source/src/CMSIS/core_cm3.c **** /**
+  93:../../source/src/CMSIS/core_cm3.c ****  * @brief  Set the Main Stack Pointer
+  94:../../source/src/CMSIS/core_cm3.c ****  *
+  95:../../source/src/CMSIS/core_cm3.c ****  * @param  topOfMainStack  Main Stack Pointer
+  96:../../source/src/CMSIS/core_cm3.c ****  *
+  97:../../source/src/CMSIS/core_cm3.c ****  * Assign the value mainStackPointer to the MSP 
+  98:../../source/src/CMSIS/core_cm3.c ****  * (main stack pointer) Cortex processor register
+  99:../../source/src/CMSIS/core_cm3.c ****  */
+ 100:../../source/src/CMSIS/core_cm3.c **** __ASM void __set_MSP(uint32_t mainStackPointer)
+ 101:../../source/src/CMSIS/core_cm3.c **** {
+ 102:../../source/src/CMSIS/core_cm3.c ****   msr msp, r0
+ 103:../../source/src/CMSIS/core_cm3.c ****   bx lr
+ 104:../../source/src/CMSIS/core_cm3.c **** }
+ 105:../../source/src/CMSIS/core_cm3.c **** 
+ 106:../../source/src/CMSIS/core_cm3.c **** /**
+ 107:../../source/src/CMSIS/core_cm3.c ****  * @brief  Reverse byte order in unsigned short value
+ 108:../../source/src/CMSIS/core_cm3.c ****  *
+ 109:../../source/src/CMSIS/core_cm3.c ****  * @param   value  value to reverse
+ 110:../../source/src/CMSIS/core_cm3.c ****  * @return         reversed value
+ 111:../../source/src/CMSIS/core_cm3.c ****  *
+ 112:../../source/src/CMSIS/core_cm3.c ****  * Reverse byte order in unsigned short value
+ 113:../../source/src/CMSIS/core_cm3.c ****  */
+ 114:../../source/src/CMSIS/core_cm3.c **** __ASM uint32_t __REV16(uint16_t value)
+ 115:../../source/src/CMSIS/core_cm3.c **** {
+ 116:../../source/src/CMSIS/core_cm3.c ****   rev16 r0, r0
+ 117:../../source/src/CMSIS/core_cm3.c ****   bx lr
+ 118:../../source/src/CMSIS/core_cm3.c **** }
+ 119:../../source/src/CMSIS/core_cm3.c **** 
+ 120:../../source/src/CMSIS/core_cm3.c **** /**
+ 121:../../source/src/CMSIS/core_cm3.c ****  * @brief  Reverse byte order in signed short value with sign extension to integer
+ 122:../../source/src/CMSIS/core_cm3.c ****  *
+ 123:../../source/src/CMSIS/core_cm3.c ****  * @param   value  value to reverse
+ 124:../../source/src/CMSIS/core_cm3.c ****  * @return         reversed value
+ 125:../../source/src/CMSIS/core_cm3.c ****  *
+ 126:../../source/src/CMSIS/core_cm3.c ****  * Reverse byte order in signed short value with sign extension to integer
+ 127:../../source/src/CMSIS/core_cm3.c ****  */
+ 128:../../source/src/CMSIS/core_cm3.c **** __ASM int32_t __REVSH(int16_t value)
+ 129:../../source/src/CMSIS/core_cm3.c **** {
+ 130:../../source/src/CMSIS/core_cm3.c ****   revsh r0, r0
+ 131:../../source/src/CMSIS/core_cm3.c ****   bx lr
+ 132:../../source/src/CMSIS/core_cm3.c **** }
+ 133:../../source/src/CMSIS/core_cm3.c **** 
+ 134:../../source/src/CMSIS/core_cm3.c **** 
+ 135:../../source/src/CMSIS/core_cm3.c **** #if (__ARMCC_VERSION < 400000)
+ 136:../../source/src/CMSIS/core_cm3.c **** 
+ 137:../../source/src/CMSIS/core_cm3.c **** /**
+ 138:../../source/src/CMSIS/core_cm3.c ****  * @brief  Remove the exclusive lock created by ldrex
+ 139:../../source/src/CMSIS/core_cm3.c ****  *
+ 140:../../source/src/CMSIS/core_cm3.c ****  * Removes the exclusive lock which is created by ldrex.
+ 141:../../source/src/CMSIS/core_cm3.c ****  */
+ 142:../../source/src/CMSIS/core_cm3.c **** __ASM void __CLREX(void)
+ 143:../../source/src/CMSIS/core_cm3.c **** {
+ 144:../../source/src/CMSIS/core_cm3.c ****   clrex
+ 145:../../source/src/CMSIS/core_cm3.c **** }
+ 146:../../source/src/CMSIS/core_cm3.c **** 
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cccIH5Mc.s 			page 4
+
+
+ 147:../../source/src/CMSIS/core_cm3.c **** /**
+ 148:../../source/src/CMSIS/core_cm3.c ****  * @brief  Return the Base Priority value
+ 149:../../source/src/CMSIS/core_cm3.c ****  *
+ 150:../../source/src/CMSIS/core_cm3.c ****  * @return BasePriority
+ 151:../../source/src/CMSIS/core_cm3.c ****  *
+ 152:../../source/src/CMSIS/core_cm3.c ****  * Return the content of the base priority register
+ 153:../../source/src/CMSIS/core_cm3.c ****  */
+ 154:../../source/src/CMSIS/core_cm3.c **** __ASM uint32_t  __get_BASEPRI(void)
+ 155:../../source/src/CMSIS/core_cm3.c **** {
+ 156:../../source/src/CMSIS/core_cm3.c ****   mrs r0, basepri
+ 157:../../source/src/CMSIS/core_cm3.c ****   bx lr
+ 158:../../source/src/CMSIS/core_cm3.c **** }
+ 159:../../source/src/CMSIS/core_cm3.c **** 
+ 160:../../source/src/CMSIS/core_cm3.c **** /**
+ 161:../../source/src/CMSIS/core_cm3.c ****  * @brief  Set the Base Priority value
+ 162:../../source/src/CMSIS/core_cm3.c ****  *
+ 163:../../source/src/CMSIS/core_cm3.c ****  * @param  basePri  BasePriority
+ 164:../../source/src/CMSIS/core_cm3.c ****  *
+ 165:../../source/src/CMSIS/core_cm3.c ****  * Set the base priority register
+ 166:../../source/src/CMSIS/core_cm3.c ****  */
+ 167:../../source/src/CMSIS/core_cm3.c **** __ASM void __set_BASEPRI(uint32_t basePri)
+ 168:../../source/src/CMSIS/core_cm3.c **** {
+ 169:../../source/src/CMSIS/core_cm3.c ****   msr basepri, r0
+ 170:../../source/src/CMSIS/core_cm3.c ****   bx lr
+ 171:../../source/src/CMSIS/core_cm3.c **** }
+ 172:../../source/src/CMSIS/core_cm3.c **** 
+ 173:../../source/src/CMSIS/core_cm3.c **** /**
+ 174:../../source/src/CMSIS/core_cm3.c ****  * @brief  Return the Priority Mask value
+ 175:../../source/src/CMSIS/core_cm3.c ****  *
+ 176:../../source/src/CMSIS/core_cm3.c ****  * @return PriMask
+ 177:../../source/src/CMSIS/core_cm3.c ****  *
+ 178:../../source/src/CMSIS/core_cm3.c ****  * Return state of the priority mask bit from the priority mask register
+ 179:../../source/src/CMSIS/core_cm3.c ****  */
+ 180:../../source/src/CMSIS/core_cm3.c **** __ASM uint32_t __get_PRIMASK(void)
+ 181:../../source/src/CMSIS/core_cm3.c **** {
+ 182:../../source/src/CMSIS/core_cm3.c ****   mrs r0, primask
+ 183:../../source/src/CMSIS/core_cm3.c ****   bx lr
+ 184:../../source/src/CMSIS/core_cm3.c **** }
+ 185:../../source/src/CMSIS/core_cm3.c **** 
+ 186:../../source/src/CMSIS/core_cm3.c **** /**
+ 187:../../source/src/CMSIS/core_cm3.c ****  * @brief  Set the Priority Mask value
+ 188:../../source/src/CMSIS/core_cm3.c ****  *
+ 189:../../source/src/CMSIS/core_cm3.c ****  * @param  priMask  PriMask
+ 190:../../source/src/CMSIS/core_cm3.c ****  *
+ 191:../../source/src/CMSIS/core_cm3.c ****  * Set the priority mask bit in the priority mask register
+ 192:../../source/src/CMSIS/core_cm3.c ****  */
+ 193:../../source/src/CMSIS/core_cm3.c **** __ASM void __set_PRIMASK(uint32_t priMask)
+ 194:../../source/src/CMSIS/core_cm3.c **** {
+ 195:../../source/src/CMSIS/core_cm3.c ****   msr primask, r0
+ 196:../../source/src/CMSIS/core_cm3.c ****   bx lr
+ 197:../../source/src/CMSIS/core_cm3.c **** }
+ 198:../../source/src/CMSIS/core_cm3.c **** 
+ 199:../../source/src/CMSIS/core_cm3.c **** /**
+ 200:../../source/src/CMSIS/core_cm3.c ****  * @brief  Return the Fault Mask value
+ 201:../../source/src/CMSIS/core_cm3.c ****  *
+ 202:../../source/src/CMSIS/core_cm3.c ****  * @return FaultMask
+ 203:../../source/src/CMSIS/core_cm3.c ****  *
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cccIH5Mc.s 			page 5
+
+
+ 204:../../source/src/CMSIS/core_cm3.c ****  * Return the content of the fault mask register
+ 205:../../source/src/CMSIS/core_cm3.c ****  */
+ 206:../../source/src/CMSIS/core_cm3.c **** __ASM uint32_t  __get_FAULTMASK(void)
+ 207:../../source/src/CMSIS/core_cm3.c **** {
+ 208:../../source/src/CMSIS/core_cm3.c ****   mrs r0, faultmask
+ 209:../../source/src/CMSIS/core_cm3.c ****   bx lr
+ 210:../../source/src/CMSIS/core_cm3.c **** }
+ 211:../../source/src/CMSIS/core_cm3.c **** 
+ 212:../../source/src/CMSIS/core_cm3.c **** /**
+ 213:../../source/src/CMSIS/core_cm3.c ****  * @brief  Set the Fault Mask value
+ 214:../../source/src/CMSIS/core_cm3.c ****  *
+ 215:../../source/src/CMSIS/core_cm3.c ****  * @param  faultMask  faultMask value
+ 216:../../source/src/CMSIS/core_cm3.c ****  *
+ 217:../../source/src/CMSIS/core_cm3.c ****  * Set the fault mask register
+ 218:../../source/src/CMSIS/core_cm3.c ****  */
+ 219:../../source/src/CMSIS/core_cm3.c **** __ASM void __set_FAULTMASK(uint32_t faultMask)
+ 220:../../source/src/CMSIS/core_cm3.c **** {
+ 221:../../source/src/CMSIS/core_cm3.c ****   msr faultmask, r0
+ 222:../../source/src/CMSIS/core_cm3.c ****   bx lr
+ 223:../../source/src/CMSIS/core_cm3.c **** }
+ 224:../../source/src/CMSIS/core_cm3.c **** 
+ 225:../../source/src/CMSIS/core_cm3.c **** /**
+ 226:../../source/src/CMSIS/core_cm3.c ****  * @brief  Return the Control Register value
+ 227:../../source/src/CMSIS/core_cm3.c ****  * 
+ 228:../../source/src/CMSIS/core_cm3.c ****  * @return Control value
+ 229:../../source/src/CMSIS/core_cm3.c ****  *
+ 230:../../source/src/CMSIS/core_cm3.c ****  * Return the content of the control register
+ 231:../../source/src/CMSIS/core_cm3.c ****  */
+ 232:../../source/src/CMSIS/core_cm3.c **** __ASM uint32_t __get_CONTROL(void)
+ 233:../../source/src/CMSIS/core_cm3.c **** {
+ 234:../../source/src/CMSIS/core_cm3.c ****   mrs r0, control
+ 235:../../source/src/CMSIS/core_cm3.c ****   bx lr
+ 236:../../source/src/CMSIS/core_cm3.c **** }
+ 237:../../source/src/CMSIS/core_cm3.c **** 
+ 238:../../source/src/CMSIS/core_cm3.c **** /**
+ 239:../../source/src/CMSIS/core_cm3.c ****  * @brief  Set the Control Register value
+ 240:../../source/src/CMSIS/core_cm3.c ****  *
+ 241:../../source/src/CMSIS/core_cm3.c ****  * @param  control  Control value
+ 242:../../source/src/CMSIS/core_cm3.c ****  *
+ 243:../../source/src/CMSIS/core_cm3.c ****  * Set the control register
+ 244:../../source/src/CMSIS/core_cm3.c ****  */
+ 245:../../source/src/CMSIS/core_cm3.c **** __ASM void __set_CONTROL(uint32_t control)
+ 246:../../source/src/CMSIS/core_cm3.c **** {
+ 247:../../source/src/CMSIS/core_cm3.c ****   msr control, r0
+ 248:../../source/src/CMSIS/core_cm3.c ****   bx lr
+ 249:../../source/src/CMSIS/core_cm3.c **** }
+ 250:../../source/src/CMSIS/core_cm3.c **** 
+ 251:../../source/src/CMSIS/core_cm3.c **** #endif /* __ARMCC_VERSION  */ 
+ 252:../../source/src/CMSIS/core_cm3.c **** 
+ 253:../../source/src/CMSIS/core_cm3.c **** 
+ 254:../../source/src/CMSIS/core_cm3.c **** 
+ 255:../../source/src/CMSIS/core_cm3.c **** #elif (defined (__ICCARM__)) /*------------------ ICC Compiler -------------------*/
+ 256:../../source/src/CMSIS/core_cm3.c **** /* IAR iccarm specific functions */
+ 257:../../source/src/CMSIS/core_cm3.c **** #pragma diag_suppress=Pe940
+ 258:../../source/src/CMSIS/core_cm3.c **** 
+ 259:../../source/src/CMSIS/core_cm3.c **** /**
+ 260:../../source/src/CMSIS/core_cm3.c ****  * @brief  Return the Process Stack Pointer
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cccIH5Mc.s 			page 6
+
+
+ 261:../../source/src/CMSIS/core_cm3.c ****  *
+ 262:../../source/src/CMSIS/core_cm3.c ****  * @return ProcessStackPointer
+ 263:../../source/src/CMSIS/core_cm3.c ****  *
+ 264:../../source/src/CMSIS/core_cm3.c ****  * Return the actual process stack pointer
+ 265:../../source/src/CMSIS/core_cm3.c ****  */
+ 266:../../source/src/CMSIS/core_cm3.c **** uint32_t __get_PSP(void)
+ 267:../../source/src/CMSIS/core_cm3.c **** {
+ 268:../../source/src/CMSIS/core_cm3.c ****   __ASM("mrs r0, psp");
+ 269:../../source/src/CMSIS/core_cm3.c ****   __ASM("bx lr");
+ 270:../../source/src/CMSIS/core_cm3.c **** }
+ 271:../../source/src/CMSIS/core_cm3.c **** 
+ 272:../../source/src/CMSIS/core_cm3.c **** /**
+ 273:../../source/src/CMSIS/core_cm3.c ****  * @brief  Set the Process Stack Pointer
+ 274:../../source/src/CMSIS/core_cm3.c ****  *
+ 275:../../source/src/CMSIS/core_cm3.c ****  * @param  topOfProcStack  Process Stack Pointer
+ 276:../../source/src/CMSIS/core_cm3.c ****  *
+ 277:../../source/src/CMSIS/core_cm3.c ****  * Assign the value ProcessStackPointer to the MSP 
+ 278:../../source/src/CMSIS/core_cm3.c ****  * (process stack pointer) Cortex processor register
+ 279:../../source/src/CMSIS/core_cm3.c ****  */
+ 280:../../source/src/CMSIS/core_cm3.c **** void __set_PSP(uint32_t topOfProcStack)
+ 281:../../source/src/CMSIS/core_cm3.c **** {
+ 282:../../source/src/CMSIS/core_cm3.c ****   __ASM("msr psp, r0");
+ 283:../../source/src/CMSIS/core_cm3.c ****   __ASM("bx lr");
+ 284:../../source/src/CMSIS/core_cm3.c **** }
+ 285:../../source/src/CMSIS/core_cm3.c **** 
+ 286:../../source/src/CMSIS/core_cm3.c **** /**
+ 287:../../source/src/CMSIS/core_cm3.c ****  * @brief  Return the Main Stack Pointer
+ 288:../../source/src/CMSIS/core_cm3.c ****  *
+ 289:../../source/src/CMSIS/core_cm3.c ****  * @return Main Stack Pointer
+ 290:../../source/src/CMSIS/core_cm3.c ****  *
+ 291:../../source/src/CMSIS/core_cm3.c ****  * Return the current value of the MSP (main stack pointer)
+ 292:../../source/src/CMSIS/core_cm3.c ****  * Cortex processor register
+ 293:../../source/src/CMSIS/core_cm3.c ****  */
+ 294:../../source/src/CMSIS/core_cm3.c **** uint32_t __get_MSP(void)
+ 295:../../source/src/CMSIS/core_cm3.c **** {
+ 296:../../source/src/CMSIS/core_cm3.c ****   __ASM("mrs r0, msp");
+ 297:../../source/src/CMSIS/core_cm3.c ****   __ASM("bx lr");
+ 298:../../source/src/CMSIS/core_cm3.c **** }
+ 299:../../source/src/CMSIS/core_cm3.c **** 
+ 300:../../source/src/CMSIS/core_cm3.c **** /**
+ 301:../../source/src/CMSIS/core_cm3.c ****  * @brief  Set the Main Stack Pointer
+ 302:../../source/src/CMSIS/core_cm3.c ****  *
+ 303:../../source/src/CMSIS/core_cm3.c ****  * @param  topOfMainStack  Main Stack Pointer
+ 304:../../source/src/CMSIS/core_cm3.c ****  *
+ 305:../../source/src/CMSIS/core_cm3.c ****  * Assign the value mainStackPointer to the MSP 
+ 306:../../source/src/CMSIS/core_cm3.c ****  * (main stack pointer) Cortex processor register
+ 307:../../source/src/CMSIS/core_cm3.c ****  */
+ 308:../../source/src/CMSIS/core_cm3.c **** void __set_MSP(uint32_t topOfMainStack)
+ 309:../../source/src/CMSIS/core_cm3.c **** {
+ 310:../../source/src/CMSIS/core_cm3.c ****   __ASM("msr msp, r0");
+ 311:../../source/src/CMSIS/core_cm3.c ****   __ASM("bx lr");
+ 312:../../source/src/CMSIS/core_cm3.c **** }
+ 313:../../source/src/CMSIS/core_cm3.c **** 
+ 314:../../source/src/CMSIS/core_cm3.c **** /**
+ 315:../../source/src/CMSIS/core_cm3.c ****  * @brief  Reverse byte order in unsigned short value
+ 316:../../source/src/CMSIS/core_cm3.c ****  *
+ 317:../../source/src/CMSIS/core_cm3.c ****  * @param  value  value to reverse
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cccIH5Mc.s 			page 7
+
+
+ 318:../../source/src/CMSIS/core_cm3.c ****  * @return        reversed value
+ 319:../../source/src/CMSIS/core_cm3.c ****  *
+ 320:../../source/src/CMSIS/core_cm3.c ****  * Reverse byte order in unsigned short value
+ 321:../../source/src/CMSIS/core_cm3.c ****  */
+ 322:../../source/src/CMSIS/core_cm3.c **** uint32_t __REV16(uint16_t value)
+ 323:../../source/src/CMSIS/core_cm3.c **** {
+ 324:../../source/src/CMSIS/core_cm3.c ****   __ASM("rev16 r0, r0");
+ 325:../../source/src/CMSIS/core_cm3.c ****   __ASM("bx lr");
+ 326:../../source/src/CMSIS/core_cm3.c **** }
+ 327:../../source/src/CMSIS/core_cm3.c **** 
+ 328:../../source/src/CMSIS/core_cm3.c **** /**
+ 329:../../source/src/CMSIS/core_cm3.c ****  * @brief  Reverse bit order of value
+ 330:../../source/src/CMSIS/core_cm3.c ****  *
+ 331:../../source/src/CMSIS/core_cm3.c ****  * @param  value  value to reverse
+ 332:../../source/src/CMSIS/core_cm3.c ****  * @return        reversed value
+ 333:../../source/src/CMSIS/core_cm3.c ****  *
+ 334:../../source/src/CMSIS/core_cm3.c ****  * Reverse bit order of value
+ 335:../../source/src/CMSIS/core_cm3.c ****  */
+ 336:../../source/src/CMSIS/core_cm3.c **** uint32_t __RBIT(uint32_t value)
+ 337:../../source/src/CMSIS/core_cm3.c **** {
+ 338:../../source/src/CMSIS/core_cm3.c ****   __ASM("rbit r0, r0");
+ 339:../../source/src/CMSIS/core_cm3.c ****   __ASM("bx lr");
+ 340:../../source/src/CMSIS/core_cm3.c **** }
+ 341:../../source/src/CMSIS/core_cm3.c **** 
+ 342:../../source/src/CMSIS/core_cm3.c **** /**
+ 343:../../source/src/CMSIS/core_cm3.c ****  * @brief  LDR Exclusive (8 bit)
+ 344:../../source/src/CMSIS/core_cm3.c ****  *
+ 345:../../source/src/CMSIS/core_cm3.c ****  * @param  *addr  address pointer
+ 346:../../source/src/CMSIS/core_cm3.c ****  * @return        value of (*address)
+ 347:../../source/src/CMSIS/core_cm3.c ****  *
+ 348:../../source/src/CMSIS/core_cm3.c ****  * Exclusive LDR command for 8 bit values)
+ 349:../../source/src/CMSIS/core_cm3.c ****  */
+ 350:../../source/src/CMSIS/core_cm3.c **** uint8_t __LDREXB(uint8_t *addr)
+ 351:../../source/src/CMSIS/core_cm3.c **** {
+ 352:../../source/src/CMSIS/core_cm3.c ****   __ASM("ldrexb r0, [r0]");
+ 353:../../source/src/CMSIS/core_cm3.c ****   __ASM("bx lr"); 
+ 354:../../source/src/CMSIS/core_cm3.c **** }
+ 355:../../source/src/CMSIS/core_cm3.c **** 
+ 356:../../source/src/CMSIS/core_cm3.c **** /**
+ 357:../../source/src/CMSIS/core_cm3.c ****  * @brief  LDR Exclusive (16 bit)
+ 358:../../source/src/CMSIS/core_cm3.c ****  *
+ 359:../../source/src/CMSIS/core_cm3.c ****  * @param  *addr  address pointer
+ 360:../../source/src/CMSIS/core_cm3.c ****  * @return        value of (*address)
+ 361:../../source/src/CMSIS/core_cm3.c ****  *
+ 362:../../source/src/CMSIS/core_cm3.c ****  * Exclusive LDR command for 16 bit values
+ 363:../../source/src/CMSIS/core_cm3.c ****  */
+ 364:../../source/src/CMSIS/core_cm3.c **** uint16_t __LDREXH(uint16_t *addr)
+ 365:../../source/src/CMSIS/core_cm3.c **** {
+ 366:../../source/src/CMSIS/core_cm3.c ****   __ASM("ldrexh r0, [r0]");
+ 367:../../source/src/CMSIS/core_cm3.c ****   __ASM("bx lr");
+ 368:../../source/src/CMSIS/core_cm3.c **** }
+ 369:../../source/src/CMSIS/core_cm3.c **** 
+ 370:../../source/src/CMSIS/core_cm3.c **** /**
+ 371:../../source/src/CMSIS/core_cm3.c ****  * @brief  LDR Exclusive (32 bit)
+ 372:../../source/src/CMSIS/core_cm3.c ****  *
+ 373:../../source/src/CMSIS/core_cm3.c ****  * @param  *addr  address pointer
+ 374:../../source/src/CMSIS/core_cm3.c ****  * @return        value of (*address)
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cccIH5Mc.s 			page 8
+
+
+ 375:../../source/src/CMSIS/core_cm3.c ****  *
+ 376:../../source/src/CMSIS/core_cm3.c ****  * Exclusive LDR command for 32 bit values
+ 377:../../source/src/CMSIS/core_cm3.c ****  */
+ 378:../../source/src/CMSIS/core_cm3.c **** uint32_t __LDREXW(uint32_t *addr)
+ 379:../../source/src/CMSIS/core_cm3.c **** {
+ 380:../../source/src/CMSIS/core_cm3.c ****   __ASM("ldrex r0, [r0]");
+ 381:../../source/src/CMSIS/core_cm3.c ****   __ASM("bx lr");
+ 382:../../source/src/CMSIS/core_cm3.c **** }
+ 383:../../source/src/CMSIS/core_cm3.c **** 
+ 384:../../source/src/CMSIS/core_cm3.c **** /**
+ 385:../../source/src/CMSIS/core_cm3.c ****  * @brief  STR Exclusive (8 bit)
+ 386:../../source/src/CMSIS/core_cm3.c ****  *
+ 387:../../source/src/CMSIS/core_cm3.c ****  * @param  value  value to store
+ 388:../../source/src/CMSIS/core_cm3.c ****  * @param  *addr  address pointer
+ 389:../../source/src/CMSIS/core_cm3.c ****  * @return        successful / failed
+ 390:../../source/src/CMSIS/core_cm3.c ****  *
+ 391:../../source/src/CMSIS/core_cm3.c ****  * Exclusive STR command for 8 bit values
+ 392:../../source/src/CMSIS/core_cm3.c ****  */
+ 393:../../source/src/CMSIS/core_cm3.c **** uint32_t __STREXB(uint8_t value, uint8_t *addr)
+ 394:../../source/src/CMSIS/core_cm3.c **** {
+ 395:../../source/src/CMSIS/core_cm3.c ****   __ASM("strexb r0, r0, [r1]");
+ 396:../../source/src/CMSIS/core_cm3.c ****   __ASM("bx lr");
+ 397:../../source/src/CMSIS/core_cm3.c **** }
+ 398:../../source/src/CMSIS/core_cm3.c **** 
+ 399:../../source/src/CMSIS/core_cm3.c **** /**
+ 400:../../source/src/CMSIS/core_cm3.c ****  * @brief  STR Exclusive (16 bit)
+ 401:../../source/src/CMSIS/core_cm3.c ****  *
+ 402:../../source/src/CMSIS/core_cm3.c ****  * @param  value  value to store
+ 403:../../source/src/CMSIS/core_cm3.c ****  * @param  *addr  address pointer
+ 404:../../source/src/CMSIS/core_cm3.c ****  * @return        successful / failed
+ 405:../../source/src/CMSIS/core_cm3.c ****  *
+ 406:../../source/src/CMSIS/core_cm3.c ****  * Exclusive STR command for 16 bit values
+ 407:../../source/src/CMSIS/core_cm3.c ****  */
+ 408:../../source/src/CMSIS/core_cm3.c **** uint32_t __STREXH(uint16_t value, uint16_t *addr)
+ 409:../../source/src/CMSIS/core_cm3.c **** {
+ 410:../../source/src/CMSIS/core_cm3.c ****   __ASM("strexh r0, r0, [r1]");
+ 411:../../source/src/CMSIS/core_cm3.c ****   __ASM("bx lr");
+ 412:../../source/src/CMSIS/core_cm3.c **** }
+ 413:../../source/src/CMSIS/core_cm3.c **** 
+ 414:../../source/src/CMSIS/core_cm3.c **** /**
+ 415:../../source/src/CMSIS/core_cm3.c ****  * @brief  STR Exclusive (32 bit)
+ 416:../../source/src/CMSIS/core_cm3.c ****  *
+ 417:../../source/src/CMSIS/core_cm3.c ****  * @param  value  value to store
+ 418:../../source/src/CMSIS/core_cm3.c ****  * @param  *addr  address pointer
+ 419:../../source/src/CMSIS/core_cm3.c ****  * @return        successful / failed
+ 420:../../source/src/CMSIS/core_cm3.c ****  *
+ 421:../../source/src/CMSIS/core_cm3.c ****  * Exclusive STR command for 32 bit values
+ 422:../../source/src/CMSIS/core_cm3.c ****  */
+ 423:../../source/src/CMSIS/core_cm3.c **** uint32_t __STREXW(uint32_t value, uint32_t *addr)
+ 424:../../source/src/CMSIS/core_cm3.c **** {
+ 425:../../source/src/CMSIS/core_cm3.c ****   __ASM("strex r0, r0, [r1]");
+ 426:../../source/src/CMSIS/core_cm3.c ****   __ASM("bx lr");
+ 427:../../source/src/CMSIS/core_cm3.c **** }
+ 428:../../source/src/CMSIS/core_cm3.c **** 
+ 429:../../source/src/CMSIS/core_cm3.c **** #pragma diag_default=Pe940
+ 430:../../source/src/CMSIS/core_cm3.c **** 
+ 431:../../source/src/CMSIS/core_cm3.c **** 
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cccIH5Mc.s 			page 9
+
+
+ 432:../../source/src/CMSIS/core_cm3.c **** #elif (defined (__GNUC__)) /*------------------ GNU Compiler ---------------------*/
+ 433:../../source/src/CMSIS/core_cm3.c **** /* GNU gcc specific functions */
+ 434:../../source/src/CMSIS/core_cm3.c **** 
+ 435:../../source/src/CMSIS/core_cm3.c **** /**
+ 436:../../source/src/CMSIS/core_cm3.c ****  * @brief  Return the Process Stack Pointer
+ 437:../../source/src/CMSIS/core_cm3.c ****  *
+ 438:../../source/src/CMSIS/core_cm3.c ****  * @return ProcessStackPointer
+ 439:../../source/src/CMSIS/core_cm3.c ****  *
+ 440:../../source/src/CMSIS/core_cm3.c ****  * Return the actual process stack pointer
+ 441:../../source/src/CMSIS/core_cm3.c ****  */
+ 442:../../source/src/CMSIS/core_cm3.c **** uint32_t __get_PSP(void) __attribute__( ( naked ) );
+ 443:../../source/src/CMSIS/core_cm3.c **** uint32_t __get_PSP(void)
+ 444:../../source/src/CMSIS/core_cm3.c **** {
+  26              		.loc 1 444 0
+  27              		.cfi_startproc
+  28              		@ Naked Function: prologue and epilogue provided by programmer.
+  29              		@ args = 0, pretend = 0, frame = 0
+  30              		@ frame_needed = 0, uses_anonymous_args = 0
+  31              	.LVL0:
+ 445:../../source/src/CMSIS/core_cm3.c ****   uint32_t result=0;
+ 446:../../source/src/CMSIS/core_cm3.c **** 
+ 447:../../source/src/CMSIS/core_cm3.c ****   __ASM volatile ("MRS %0, psp\r\n\t" 
+  32              		.loc 1 447 0
+  33              		.syntax unified
+  34              	@ 447 "../../source/src/CMSIS/core_cm3.c" 1
+  35 0000 EFF30980 		MRS r0, psp
+  36 0004 0046     	
+  37 0006 7047     		MOV r0, r0 
+  38              	
+  39              		BX  lr     
+  40              	
+ 448:../../source/src/CMSIS/core_cm3.c ****                   "MOV r0, %0 \r\n\t"
+ 449:../../source/src/CMSIS/core_cm3.c ****                   "BX  lr     \r\n\t"  : "=r" (result) );
+ 450:../../source/src/CMSIS/core_cm3.c ****   return(result);
+ 451:../../source/src/CMSIS/core_cm3.c **** }
+  41              		
+  42              	@ 0 "" 2
+  43              	.LVL1:
+  44              		.loc 1 451 0
+  45              		.thumb
+  46              		.syntax unified
+  47              		.cfi_endproc
+  48              	.LFE0:
+  49              		.size	__get_PSP, .-__get_PSP
+  50              		.align	1
+  51              		.p2align 2,,3
+  52              		.global	__set_PSP
+  53              		.syntax unified
+  54              		.thumb
+  55              		.thumb_func
+  56              		.fpu softvfp
+ 452:../../source/src/CMSIS/core_cm3.c **** 
+ 453:../../source/src/CMSIS/core_cm3.c **** /**
+ 454:../../source/src/CMSIS/core_cm3.c ****  * @brief  Set the Process Stack Pointer
+ 455:../../source/src/CMSIS/core_cm3.c ****  *
+ 456:../../source/src/CMSIS/core_cm3.c ****  * @param  topOfProcStack  Process Stack Pointer
+ 457:../../source/src/CMSIS/core_cm3.c ****  *
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cccIH5Mc.s 			page 10
+
+
+ 458:../../source/src/CMSIS/core_cm3.c ****  * Assign the value ProcessStackPointer to the MSP 
+ 459:../../source/src/CMSIS/core_cm3.c ****  * (process stack pointer) Cortex processor register
+ 460:../../source/src/CMSIS/core_cm3.c ****  */
+ 461:../../source/src/CMSIS/core_cm3.c **** void __set_PSP(uint32_t topOfProcStack) __attribute__( ( naked ) );
+ 462:../../source/src/CMSIS/core_cm3.c **** void __set_PSP(uint32_t topOfProcStack)
+ 463:../../source/src/CMSIS/core_cm3.c **** {
+  57              		.type	__set_PSP, %function
+  58              	__set_PSP:
+  59              	.LFB1:
+  60              		.loc 1 463 0
+  61              		.cfi_startproc
+  62              		@ Naked Function: prologue and epilogue provided by programmer.
+ 464:../../source/src/CMSIS/core_cm3.c ****   __ASM volatile ("MSR psp, %0\r\n\t"
+  63              		@ args = 0, pretend = 0, frame = 0
+  64              		@ frame_needed = 0, uses_anonymous_args = 0
+  65              	.LVL2:
+  66 0008 80F30988 		.loc 1 464 0
+  67 000c 7047     		.syntax unified
+  68              	@ 464 "../../source/src/CMSIS/core_cm3.c" 1
+  69              		MSR psp, r0
+ 465:../../source/src/CMSIS/core_cm3.c ****                   "BX  lr     \r\n\t" : : "r" (topOfProcStack) );
+ 466:../../source/src/CMSIS/core_cm3.c **** }
+  70              	
+  71              		BX  lr     
+  72              	
+  73              		
+  74              	@ 0 "" 2
+  75              		.loc 1 466 0
+  76              		.thumb
+  77 000e 00BF     		.syntax unified
+  78              		.cfi_endproc
+  79              	.LFE1:
+  80              		.size	__set_PSP, .-__set_PSP
+  81              		.align	1
+  82              		.p2align 2,,3
+  83              		.global	__get_MSP
+  84              		.syntax unified
+  85              		.thumb
+ 467:../../source/src/CMSIS/core_cm3.c **** 
+ 468:../../source/src/CMSIS/core_cm3.c **** /**
+ 469:../../source/src/CMSIS/core_cm3.c ****  * @brief  Return the Main Stack Pointer
+ 470:../../source/src/CMSIS/core_cm3.c ****  *
+ 471:../../source/src/CMSIS/core_cm3.c ****  * @return Main Stack Pointer
+ 472:../../source/src/CMSIS/core_cm3.c ****  *
+ 473:../../source/src/CMSIS/core_cm3.c ****  * Return the current value of the MSP (main stack pointer)
+ 474:../../source/src/CMSIS/core_cm3.c ****  * Cortex processor register
+ 475:../../source/src/CMSIS/core_cm3.c ****  */
+ 476:../../source/src/CMSIS/core_cm3.c **** uint32_t __get_MSP(void) __attribute__( ( naked ) );
+ 477:../../source/src/CMSIS/core_cm3.c **** uint32_t __get_MSP(void)
+ 478:../../source/src/CMSIS/core_cm3.c **** {
+  86              		.thumb_func
+  87              		.fpu softvfp
+  88              		.type	__get_MSP, %function
+  89              	__get_MSP:
+  90              	.LFB2:
+  91              		.loc 1 478 0
+ 479:../../source/src/CMSIS/core_cm3.c ****   uint32_t result=0;
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cccIH5Mc.s 			page 11
+
+
+ 480:../../source/src/CMSIS/core_cm3.c **** 
+ 481:../../source/src/CMSIS/core_cm3.c ****   __ASM volatile ("MRS %0, msp\r\n\t" 
+  92              		.cfi_startproc
+  93              		@ Naked Function: prologue and epilogue provided by programmer.
+  94              		@ args = 0, pretend = 0, frame = 0
+  95 0010 EFF30880 		@ frame_needed = 0, uses_anonymous_args = 0
+  96 0014 0046     	.LVL3:
+  97 0016 7047     		.loc 1 481 0
+  98              		.syntax unified
+  99              	@ 481 "../../source/src/CMSIS/core_cm3.c" 1
+ 100              		MRS r0, msp
+ 482:../../source/src/CMSIS/core_cm3.c ****                   "MOV r0, %0 \r\n\t"
+ 483:../../source/src/CMSIS/core_cm3.c ****                   "BX  lr     \r\n\t"  : "=r" (result) );
+ 484:../../source/src/CMSIS/core_cm3.c ****   return(result);
+ 485:../../source/src/CMSIS/core_cm3.c **** }
+ 101              	
+ 102              		MOV r0, r0 
+ 103              	
+ 104              		BX  lr     
+ 105              	
+ 106              		
+ 107              	@ 0 "" 2
+ 108              	.LVL4:
+ 109              		.loc 1 485 0
+ 110              		.thumb
+ 111              		.syntax unified
+ 112              		.cfi_endproc
+ 113              	.LFE2:
+ 114              		.size	__get_MSP, .-__get_MSP
+ 115              		.align	1
+ 116              		.p2align 2,,3
+ 486:../../source/src/CMSIS/core_cm3.c **** 
+ 487:../../source/src/CMSIS/core_cm3.c **** /**
+ 488:../../source/src/CMSIS/core_cm3.c ****  * @brief  Set the Main Stack Pointer
+ 489:../../source/src/CMSIS/core_cm3.c ****  *
+ 490:../../source/src/CMSIS/core_cm3.c ****  * @param  topOfMainStack  Main Stack Pointer
+ 491:../../source/src/CMSIS/core_cm3.c ****  *
+ 492:../../source/src/CMSIS/core_cm3.c ****  * Assign the value mainStackPointer to the MSP 
+ 493:../../source/src/CMSIS/core_cm3.c ****  * (main stack pointer) Cortex processor register
+ 494:../../source/src/CMSIS/core_cm3.c ****  */
+ 495:../../source/src/CMSIS/core_cm3.c **** void __set_MSP(uint32_t topOfMainStack) __attribute__( ( naked ) );
+ 496:../../source/src/CMSIS/core_cm3.c **** void __set_MSP(uint32_t topOfMainStack)
+ 497:../../source/src/CMSIS/core_cm3.c **** {
+ 117              		.global	__set_MSP
+ 118              		.syntax unified
+ 119              		.thumb
+ 120              		.thumb_func
+ 121              		.fpu softvfp
+ 122              		.type	__set_MSP, %function
+ 498:../../source/src/CMSIS/core_cm3.c ****   __ASM volatile ("MSR msp, %0\r\n\t"
+ 123              	__set_MSP:
+ 124              	.LFB3:
+ 125              		.loc 1 497 0
+ 126 0018 80F30888 		.cfi_startproc
+ 127 001c 7047     		@ Naked Function: prologue and epilogue provided by programmer.
+ 128              		@ args = 0, pretend = 0, frame = 0
+ 129              		@ frame_needed = 0, uses_anonymous_args = 0
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cccIH5Mc.s 			page 12
+
+
+ 499:../../source/src/CMSIS/core_cm3.c ****                   "BX  lr     \r\n\t" : : "r" (topOfMainStack) );
+ 500:../../source/src/CMSIS/core_cm3.c **** }
+ 130              	.LVL5:
+ 131              		.loc 1 498 0
+ 132              		.syntax unified
+ 133              	@ 498 "../../source/src/CMSIS/core_cm3.c" 1
+ 134              		MSR msp, r0
+ 135              	
+ 136              		BX  lr     
+ 137 001e 00BF     	
+ 138              		
+ 139              	@ 0 "" 2
+ 140              		.loc 1 500 0
+ 141              		.thumb
+ 142              		.syntax unified
+ 143              		.cfi_endproc
+ 144              	.LFE3:
+ 145              		.size	__set_MSP, .-__set_MSP
+ 501:../../source/src/CMSIS/core_cm3.c **** 
+ 502:../../source/src/CMSIS/core_cm3.c **** /**
+ 503:../../source/src/CMSIS/core_cm3.c ****  * @brief  Return the Base Priority value
+ 504:../../source/src/CMSIS/core_cm3.c ****  *
+ 505:../../source/src/CMSIS/core_cm3.c ****  * @return BasePriority
+ 506:../../source/src/CMSIS/core_cm3.c ****  *
+ 507:../../source/src/CMSIS/core_cm3.c ****  * Return the content of the base priority register
+ 508:../../source/src/CMSIS/core_cm3.c ****  */
+ 509:../../source/src/CMSIS/core_cm3.c **** uint32_t __get_BASEPRI(void)
+ 510:../../source/src/CMSIS/core_cm3.c **** {
+ 146              		.align	1
+ 147              		.p2align 2,,3
+ 148              		.global	__get_BASEPRI
+ 149              		.syntax unified
+ 150              		.thumb
+ 151              		.thumb_func
+ 511:../../source/src/CMSIS/core_cm3.c ****   uint32_t result=0;
+ 512:../../source/src/CMSIS/core_cm3.c ****   
+ 513:../../source/src/CMSIS/core_cm3.c ****   __ASM volatile ("MRS %0, basepri_max" : "=r" (result) );
+ 152              		.fpu softvfp
+ 153              		.type	__get_BASEPRI, %function
+ 154              	__get_BASEPRI:
+ 155 0020 EFF31280 	.LFB4:
+ 156              		.loc 1 510 0
+ 157              		.cfi_startproc
+ 514:../../source/src/CMSIS/core_cm3.c ****   return(result);
+ 515:../../source/src/CMSIS/core_cm3.c **** }
+ 158              		@ args = 0, pretend = 0, frame = 0
+ 159              		@ frame_needed = 0, uses_anonymous_args = 0
+ 160              		@ link register save eliminated.
+ 161 0024 7047     	.LVL6:
+ 162              		.loc 1 513 0
+ 163              		.syntax unified
+ 164              	@ 513 "../../source/src/CMSIS/core_cm3.c" 1
+ 165              		MRS r0, basepri_max
+ 166 0026 00BF     	@ 0 "" 2
+ 167              	.LVL7:
+ 168              		.loc 1 515 0
+ 169              		.thumb
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cccIH5Mc.s 			page 13
+
+
+ 170              		.syntax unified
+ 171              		bx	lr
+ 172              		.cfi_endproc
+ 173              	.LFE4:
+ 174              		.size	__get_BASEPRI, .-__get_BASEPRI
+ 516:../../source/src/CMSIS/core_cm3.c **** 
+ 517:../../source/src/CMSIS/core_cm3.c **** /**
+ 518:../../source/src/CMSIS/core_cm3.c ****  * @brief  Set the Base Priority value
+ 519:../../source/src/CMSIS/core_cm3.c ****  *
+ 520:../../source/src/CMSIS/core_cm3.c ****  * @param  basePri  BasePriority
+ 521:../../source/src/CMSIS/core_cm3.c ****  *
+ 522:../../source/src/CMSIS/core_cm3.c ****  * Set the base priority register
+ 523:../../source/src/CMSIS/core_cm3.c ****  */
+ 524:../../source/src/CMSIS/core_cm3.c **** void __set_BASEPRI(uint32_t value)
+ 525:../../source/src/CMSIS/core_cm3.c **** {
+ 175              		.align	1
+ 176              		.p2align 2,,3
+ 177              		.global	__set_BASEPRI
+ 178              		.syntax unified
+ 179              		.thumb
+ 180              		.thumb_func
+ 526:../../source/src/CMSIS/core_cm3.c ****   __ASM volatile ("MSR basepri, %0" : : "r" (value) );
+ 181              		.fpu softvfp
+ 182              		.type	__set_BASEPRI, %function
+ 183              	__set_BASEPRI:
+ 184 0028 80F31188 	.LFB5:
+ 185              		.loc 1 525 0
+ 527:../../source/src/CMSIS/core_cm3.c **** }
+ 186              		.cfi_startproc
+ 187              		@ args = 0, pretend = 0, frame = 0
+ 188              		@ frame_needed = 0, uses_anonymous_args = 0
+ 189 002c 7047     		@ link register save eliminated.
+ 190              	.LVL8:
+ 191              		.loc 1 526 0
+ 192              		.syntax unified
+ 193              	@ 526 "../../source/src/CMSIS/core_cm3.c" 1
+ 194 002e 00BF     		MSR basepri, r0
+ 195              	@ 0 "" 2
+ 196              		.loc 1 527 0
+ 197              		.thumb
+ 198              		.syntax unified
+ 199              		bx	lr
+ 200              		.cfi_endproc
+ 201              	.LFE5:
+ 202              		.size	__set_BASEPRI, .-__set_BASEPRI
+ 528:../../source/src/CMSIS/core_cm3.c **** 
+ 529:../../source/src/CMSIS/core_cm3.c **** /**
+ 530:../../source/src/CMSIS/core_cm3.c ****  * @brief  Return the Priority Mask value
+ 531:../../source/src/CMSIS/core_cm3.c ****  *
+ 532:../../source/src/CMSIS/core_cm3.c ****  * @return PriMask
+ 533:../../source/src/CMSIS/core_cm3.c ****  *
+ 534:../../source/src/CMSIS/core_cm3.c ****  * Return state of the priority mask bit from the priority mask register
+ 535:../../source/src/CMSIS/core_cm3.c ****  */
+ 536:../../source/src/CMSIS/core_cm3.c **** uint32_t __get_PRIMASK(void)
+ 537:../../source/src/CMSIS/core_cm3.c **** {
+ 203              		.align	1
+ 204              		.p2align 2,,3
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cccIH5Mc.s 			page 14
+
+
+ 205              		.global	__get_PRIMASK
+ 206              		.syntax unified
+ 207              		.thumb
+ 208              		.thumb_func
+ 538:../../source/src/CMSIS/core_cm3.c ****   uint32_t result=0;
+ 539:../../source/src/CMSIS/core_cm3.c **** 
+ 540:../../source/src/CMSIS/core_cm3.c ****   __ASM volatile ("MRS %0, primask" : "=r" (result) );
+ 209              		.fpu softvfp
+ 210              		.type	__get_PRIMASK, %function
+ 211              	__get_PRIMASK:
+ 212 0030 EFF31080 	.LFB6:
+ 213              		.loc 1 537 0
+ 214              		.cfi_startproc
+ 541:../../source/src/CMSIS/core_cm3.c ****   return(result);
+ 542:../../source/src/CMSIS/core_cm3.c **** }
+ 215              		@ args = 0, pretend = 0, frame = 0
+ 216              		@ frame_needed = 0, uses_anonymous_args = 0
+ 217              		@ link register save eliminated.
+ 218 0034 7047     	.LVL9:
+ 219              		.loc 1 540 0
+ 220              		.syntax unified
+ 221              	@ 540 "../../source/src/CMSIS/core_cm3.c" 1
+ 222              		MRS r0, primask
+ 223 0036 00BF     	@ 0 "" 2
+ 224              	.LVL10:
+ 225              		.loc 1 542 0
+ 226              		.thumb
+ 227              		.syntax unified
+ 228              		bx	lr
+ 229              		.cfi_endproc
+ 230              	.LFE6:
+ 231              		.size	__get_PRIMASK, .-__get_PRIMASK
+ 543:../../source/src/CMSIS/core_cm3.c **** 
+ 544:../../source/src/CMSIS/core_cm3.c **** /**
+ 545:../../source/src/CMSIS/core_cm3.c ****  * @brief  Set the Priority Mask value
+ 546:../../source/src/CMSIS/core_cm3.c ****  *
+ 547:../../source/src/CMSIS/core_cm3.c ****  * @param  priMask  PriMask
+ 548:../../source/src/CMSIS/core_cm3.c ****  *
+ 549:../../source/src/CMSIS/core_cm3.c ****  * Set the priority mask bit in the priority mask register
+ 550:../../source/src/CMSIS/core_cm3.c ****  */
+ 551:../../source/src/CMSIS/core_cm3.c **** void __set_PRIMASK(uint32_t priMask)
+ 552:../../source/src/CMSIS/core_cm3.c **** {
+ 232              		.align	1
+ 233              		.p2align 2,,3
+ 234              		.global	__set_PRIMASK
+ 235              		.syntax unified
+ 236              		.thumb
+ 237              		.thumb_func
+ 553:../../source/src/CMSIS/core_cm3.c ****   __ASM volatile ("MSR primask, %0" : : "r" (priMask) );
+ 238              		.fpu softvfp
+ 239              		.type	__set_PRIMASK, %function
+ 240              	__set_PRIMASK:
+ 241 0038 80F31088 	.LFB7:
+ 242              		.loc 1 552 0
+ 554:../../source/src/CMSIS/core_cm3.c **** }
+ 243              		.cfi_startproc
+ 244              		@ args = 0, pretend = 0, frame = 0
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cccIH5Mc.s 			page 15
+
+
+ 245              		@ frame_needed = 0, uses_anonymous_args = 0
+ 246 003c 7047     		@ link register save eliminated.
+ 247              	.LVL11:
+ 248              		.loc 1 553 0
+ 249              		.syntax unified
+ 250              	@ 553 "../../source/src/CMSIS/core_cm3.c" 1
+ 251 003e 00BF     		MSR primask, r0
+ 252              	@ 0 "" 2
+ 253              		.loc 1 554 0
+ 254              		.thumb
+ 255              		.syntax unified
+ 256              		bx	lr
+ 257              		.cfi_endproc
+ 258              	.LFE7:
+ 259              		.size	__set_PRIMASK, .-__set_PRIMASK
+ 555:../../source/src/CMSIS/core_cm3.c **** 
+ 556:../../source/src/CMSIS/core_cm3.c **** /**
+ 557:../../source/src/CMSIS/core_cm3.c ****  * @brief  Return the Fault Mask value
+ 558:../../source/src/CMSIS/core_cm3.c ****  *
+ 559:../../source/src/CMSIS/core_cm3.c ****  * @return FaultMask
+ 560:../../source/src/CMSIS/core_cm3.c ****  *
+ 561:../../source/src/CMSIS/core_cm3.c ****  * Return the content of the fault mask register
+ 562:../../source/src/CMSIS/core_cm3.c ****  */
+ 563:../../source/src/CMSIS/core_cm3.c **** uint32_t __get_FAULTMASK(void)
+ 564:../../source/src/CMSIS/core_cm3.c **** {
+ 260              		.align	1
+ 261              		.p2align 2,,3
+ 262              		.global	__get_FAULTMASK
+ 263              		.syntax unified
+ 264              		.thumb
+ 265              		.thumb_func
+ 565:../../source/src/CMSIS/core_cm3.c ****   uint32_t result=0;
+ 566:../../source/src/CMSIS/core_cm3.c ****   
+ 567:../../source/src/CMSIS/core_cm3.c ****   __ASM volatile ("MRS %0, faultmask" : "=r" (result) );
+ 266              		.fpu softvfp
+ 267              		.type	__get_FAULTMASK, %function
+ 268              	__get_FAULTMASK:
+ 269 0040 EFF31380 	.LFB8:
+ 270              		.loc 1 564 0
+ 271              		.cfi_startproc
+ 568:../../source/src/CMSIS/core_cm3.c ****   return(result);
+ 569:../../source/src/CMSIS/core_cm3.c **** }
+ 272              		@ args = 0, pretend = 0, frame = 0
+ 273              		@ frame_needed = 0, uses_anonymous_args = 0
+ 274              		@ link register save eliminated.
+ 275 0044 7047     	.LVL12:
+ 276              		.loc 1 567 0
+ 277              		.syntax unified
+ 278              	@ 567 "../../source/src/CMSIS/core_cm3.c" 1
+ 279              		MRS r0, faultmask
+ 280 0046 00BF     	@ 0 "" 2
+ 281              	.LVL13:
+ 282              		.loc 1 569 0
+ 283              		.thumb
+ 284              		.syntax unified
+ 285              		bx	lr
+ 286              		.cfi_endproc
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cccIH5Mc.s 			page 16
+
+
+ 287              	.LFE8:
+ 288              		.size	__get_FAULTMASK, .-__get_FAULTMASK
+ 570:../../source/src/CMSIS/core_cm3.c **** 
+ 571:../../source/src/CMSIS/core_cm3.c **** /**
+ 572:../../source/src/CMSIS/core_cm3.c ****  * @brief  Set the Fault Mask value
+ 573:../../source/src/CMSIS/core_cm3.c ****  *
+ 574:../../source/src/CMSIS/core_cm3.c ****  * @param  faultMask  faultMask value
+ 575:../../source/src/CMSIS/core_cm3.c ****  *
+ 576:../../source/src/CMSIS/core_cm3.c ****  * Set the fault mask register
+ 577:../../source/src/CMSIS/core_cm3.c ****  */
+ 578:../../source/src/CMSIS/core_cm3.c **** void __set_FAULTMASK(uint32_t faultMask)
+ 579:../../source/src/CMSIS/core_cm3.c **** {
+ 289              		.align	1
+ 290              		.p2align 2,,3
+ 291              		.global	__set_FAULTMASK
+ 292              		.syntax unified
+ 293              		.thumb
+ 294              		.thumb_func
+ 580:../../source/src/CMSIS/core_cm3.c ****   __ASM volatile ("MSR faultmask, %0" : : "r" (faultMask) );
+ 295              		.fpu softvfp
+ 296              		.type	__set_FAULTMASK, %function
+ 297              	__set_FAULTMASK:
+ 298 0048 80F31388 	.LFB9:
+ 299              		.loc 1 579 0
+ 581:../../source/src/CMSIS/core_cm3.c **** }
+ 300              		.cfi_startproc
+ 301              		@ args = 0, pretend = 0, frame = 0
+ 302              		@ frame_needed = 0, uses_anonymous_args = 0
+ 303 004c 7047     		@ link register save eliminated.
+ 304              	.LVL14:
+ 305              		.loc 1 580 0
+ 306              		.syntax unified
+ 307              	@ 580 "../../source/src/CMSIS/core_cm3.c" 1
+ 308 004e 00BF     		MSR faultmask, r0
+ 309              	@ 0 "" 2
+ 310              		.loc 1 581 0
+ 311              		.thumb
+ 312              		.syntax unified
+ 313              		bx	lr
+ 314              		.cfi_endproc
+ 315              	.LFE9:
+ 316              		.size	__set_FAULTMASK, .-__set_FAULTMASK
+ 582:../../source/src/CMSIS/core_cm3.c **** 
+ 583:../../source/src/CMSIS/core_cm3.c **** /**
+ 584:../../source/src/CMSIS/core_cm3.c ****  * @brief  Return the Control Register value
+ 585:../../source/src/CMSIS/core_cm3.c **** * 
+ 586:../../source/src/CMSIS/core_cm3.c **** *  @return Control value
+ 587:../../source/src/CMSIS/core_cm3.c ****  *
+ 588:../../source/src/CMSIS/core_cm3.c ****  * Return the content of the control register
+ 589:../../source/src/CMSIS/core_cm3.c ****  */
+ 590:../../source/src/CMSIS/core_cm3.c **** uint32_t __get_CONTROL(void)
+ 591:../../source/src/CMSIS/core_cm3.c **** {
+ 317              		.align	1
+ 318              		.p2align 2,,3
+ 319              		.global	__get_CONTROL
+ 320              		.syntax unified
+ 321              		.thumb
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cccIH5Mc.s 			page 17
+
+
+ 322              		.thumb_func
+ 592:../../source/src/CMSIS/core_cm3.c ****   uint32_t result=0;
+ 593:../../source/src/CMSIS/core_cm3.c **** 
+ 594:../../source/src/CMSIS/core_cm3.c ****   __ASM volatile ("MRS %0, control" : "=r" (result) );
+ 323              		.fpu softvfp
+ 324              		.type	__get_CONTROL, %function
+ 325              	__get_CONTROL:
+ 326 0050 EFF31480 	.LFB10:
+ 327              		.loc 1 591 0
+ 328              		.cfi_startproc
+ 595:../../source/src/CMSIS/core_cm3.c ****   return(result);
+ 596:../../source/src/CMSIS/core_cm3.c **** }
+ 329              		@ args = 0, pretend = 0, frame = 0
+ 330              		@ frame_needed = 0, uses_anonymous_args = 0
+ 331              		@ link register save eliminated.
+ 332 0054 7047     	.LVL15:
+ 333              		.loc 1 594 0
+ 334              		.syntax unified
+ 335              	@ 594 "../../source/src/CMSIS/core_cm3.c" 1
+ 336              		MRS r0, control
+ 337 0056 00BF     	@ 0 "" 2
+ 338              	.LVL16:
+ 339              		.loc 1 596 0
+ 340              		.thumb
+ 341              		.syntax unified
+ 342              		bx	lr
+ 343              		.cfi_endproc
+ 344              	.LFE10:
+ 345              		.size	__get_CONTROL, .-__get_CONTROL
+ 597:../../source/src/CMSIS/core_cm3.c **** 
+ 598:../../source/src/CMSIS/core_cm3.c **** /**
+ 599:../../source/src/CMSIS/core_cm3.c ****  * @brief  Set the Control Register value
+ 600:../../source/src/CMSIS/core_cm3.c ****  *
+ 601:../../source/src/CMSIS/core_cm3.c ****  * @param  control  Control value
+ 602:../../source/src/CMSIS/core_cm3.c ****  *
+ 603:../../source/src/CMSIS/core_cm3.c ****  * Set the control register
+ 604:../../source/src/CMSIS/core_cm3.c ****  */
+ 605:../../source/src/CMSIS/core_cm3.c **** void __set_CONTROL(uint32_t control)
+ 606:../../source/src/CMSIS/core_cm3.c **** {
+ 346              		.align	1
+ 347              		.p2align 2,,3
+ 348              		.global	__set_CONTROL
+ 349              		.syntax unified
+ 350              		.thumb
+ 351              		.thumb_func
+ 607:../../source/src/CMSIS/core_cm3.c ****   __ASM volatile ("MSR control, %0" : : "r" (control) );
+ 352              		.fpu softvfp
+ 353              		.type	__set_CONTROL, %function
+ 354              	__set_CONTROL:
+ 355 0058 80F31488 	.LFB11:
+ 356              		.loc 1 606 0
+ 608:../../source/src/CMSIS/core_cm3.c **** }
+ 357              		.cfi_startproc
+ 358              		@ args = 0, pretend = 0, frame = 0
+ 359              		@ frame_needed = 0, uses_anonymous_args = 0
+ 360 005c 7047     		@ link register save eliminated.
+ 361              	.LVL17:
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cccIH5Mc.s 			page 18
+
+
+ 362              		.loc 1 607 0
+ 363              		.syntax unified
+ 364              	@ 607 "../../source/src/CMSIS/core_cm3.c" 1
+ 365 005e 00BF     		MSR control, r0
+ 366              	@ 0 "" 2
+ 367              		.loc 1 608 0
+ 368              		.thumb
+ 369              		.syntax unified
+ 370              		bx	lr
+ 371              		.cfi_endproc
+ 372              	.LFE11:
+ 373              		.size	__set_CONTROL, .-__set_CONTROL
+ 609:../../source/src/CMSIS/core_cm3.c **** 
+ 610:../../source/src/CMSIS/core_cm3.c **** 
+ 611:../../source/src/CMSIS/core_cm3.c **** /**
+ 612:../../source/src/CMSIS/core_cm3.c ****  * @brief  Reverse byte order in integer value
+ 613:../../source/src/CMSIS/core_cm3.c ****  *
+ 614:../../source/src/CMSIS/core_cm3.c ****  * @param  value  value to reverse
+ 615:../../source/src/CMSIS/core_cm3.c ****  * @return        reversed value
+ 616:../../source/src/CMSIS/core_cm3.c ****  *
+ 617:../../source/src/CMSIS/core_cm3.c ****  * Reverse byte order in integer value
+ 618:../../source/src/CMSIS/core_cm3.c ****  */
+ 619:../../source/src/CMSIS/core_cm3.c **** uint32_t __REV(uint32_t value)
+ 620:../../source/src/CMSIS/core_cm3.c **** {
+ 374              		.align	1
+ 375              		.p2align 2,,3
+ 376              		.global	__REV
+ 377              		.syntax unified
+ 378              		.thumb
+ 379              		.thumb_func
+ 621:../../source/src/CMSIS/core_cm3.c ****   uint32_t result=0;
+ 622:../../source/src/CMSIS/core_cm3.c ****   
+ 623:../../source/src/CMSIS/core_cm3.c ****   __ASM volatile ("rev %0, %1" : "=r" (result) : "r" (value) );
+ 380              		.fpu softvfp
+ 381              		.type	__REV, %function
+ 382              	__REV:
+ 383 0060 00BA     	.LFB12:
+ 384              		.loc 1 620 0
+ 385              		.cfi_startproc
+ 624:../../source/src/CMSIS/core_cm3.c ****   return(result);
+ 625:../../source/src/CMSIS/core_cm3.c **** }
+ 386              		@ args = 0, pretend = 0, frame = 0
+ 387              		@ frame_needed = 0, uses_anonymous_args = 0
+ 388              		@ link register save eliminated.
+ 389 0062 7047     	.LVL18:
+ 390              		.loc 1 623 0
+ 391              		.syntax unified
+ 392              	@ 623 "../../source/src/CMSIS/core_cm3.c" 1
+ 393              		rev r0, r0
+ 394              	@ 0 "" 2
+ 395              	.LVL19:
+ 396              		.loc 1 625 0
+ 397              		.thumb
+ 398              		.syntax unified
+ 399              		bx	lr
+ 400              		.cfi_endproc
+ 401              	.LFE12:
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cccIH5Mc.s 			page 19
+
+
+ 402              		.size	__REV, .-__REV
+ 626:../../source/src/CMSIS/core_cm3.c **** 
+ 627:../../source/src/CMSIS/core_cm3.c **** /**
+ 628:../../source/src/CMSIS/core_cm3.c ****  * @brief  Reverse byte order in unsigned short value
+ 629:../../source/src/CMSIS/core_cm3.c ****  *
+ 630:../../source/src/CMSIS/core_cm3.c ****  * @param  value  value to reverse
+ 631:../../source/src/CMSIS/core_cm3.c ****  * @return        reversed value
+ 632:../../source/src/CMSIS/core_cm3.c ****  *
+ 633:../../source/src/CMSIS/core_cm3.c ****  * Reverse byte order in unsigned short value
+ 634:../../source/src/CMSIS/core_cm3.c ****  */
+ 635:../../source/src/CMSIS/core_cm3.c **** uint32_t __REV16(uint16_t value)
+ 636:../../source/src/CMSIS/core_cm3.c **** {
+ 403              		.align	1
+ 404              		.p2align 2,,3
+ 405              		.global	__REV16
+ 406              		.syntax unified
+ 407              		.thumb
+ 408              		.thumb_func
+ 637:../../source/src/CMSIS/core_cm3.c ****   uint32_t result=0;
+ 638:../../source/src/CMSIS/core_cm3.c ****   
+ 639:../../source/src/CMSIS/core_cm3.c ****   __ASM volatile ("rev16 %0, %1" : "=r" (result) : "r" (value) );
+ 409              		.fpu softvfp
+ 410              		.type	__REV16, %function
+ 411              	__REV16:
+ 412 0064 40BA     	.LFB13:
+ 413              		.loc 1 636 0
+ 414              		.cfi_startproc
+ 640:../../source/src/CMSIS/core_cm3.c ****   return(result);
+ 641:../../source/src/CMSIS/core_cm3.c **** }
+ 415              		@ args = 0, pretend = 0, frame = 0
+ 416              		@ frame_needed = 0, uses_anonymous_args = 0
+ 417              		@ link register save eliminated.
+ 418 0066 7047     	.LVL20:
+ 419              		.loc 1 639 0
+ 420              		.syntax unified
+ 421              	@ 639 "../../source/src/CMSIS/core_cm3.c" 1
+ 422              		rev16 r0, r0
+ 423              	@ 0 "" 2
+ 424              	.LVL21:
+ 425              		.loc 1 641 0
+ 426              		.thumb
+ 427              		.syntax unified
+ 428              		bx	lr
+ 429              		.cfi_endproc
+ 430              	.LFE13:
+ 431              		.size	__REV16, .-__REV16
+ 642:../../source/src/CMSIS/core_cm3.c **** 
+ 643:../../source/src/CMSIS/core_cm3.c **** /**
+ 644:../../source/src/CMSIS/core_cm3.c ****  * @brief  Reverse byte order in signed short value with sign extension to integer
+ 645:../../source/src/CMSIS/core_cm3.c ****  *
+ 646:../../source/src/CMSIS/core_cm3.c ****  * @param  value  value to reverse
+ 647:../../source/src/CMSIS/core_cm3.c ****  * @return        reversed value
+ 648:../../source/src/CMSIS/core_cm3.c ****  *
+ 649:../../source/src/CMSIS/core_cm3.c ****  * Reverse byte order in signed short value with sign extension to integer
+ 650:../../source/src/CMSIS/core_cm3.c ****  */
+ 651:../../source/src/CMSIS/core_cm3.c **** int32_t __REVSH(int16_t value)
+ 652:../../source/src/CMSIS/core_cm3.c **** {
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cccIH5Mc.s 			page 20
+
+
+ 432              		.align	1
+ 433              		.p2align 2,,3
+ 434              		.global	__REVSH
+ 435              		.syntax unified
+ 436              		.thumb
+ 437              		.thumb_func
+ 653:../../source/src/CMSIS/core_cm3.c ****   uint32_t result=0;
+ 654:../../source/src/CMSIS/core_cm3.c ****   
+ 655:../../source/src/CMSIS/core_cm3.c ****   __ASM volatile ("revsh %0, %1" : "=r" (result) : "r" (value) );
+ 438              		.fpu softvfp
+ 439              		.type	__REVSH, %function
+ 440              	__REVSH:
+ 441 0068 C0BA     	.LFB14:
+ 442              		.loc 1 652 0
+ 443              		.cfi_startproc
+ 656:../../source/src/CMSIS/core_cm3.c ****   return(result);
+ 657:../../source/src/CMSIS/core_cm3.c **** }
+ 444              		@ args = 0, pretend = 0, frame = 0
+ 445              		@ frame_needed = 0, uses_anonymous_args = 0
+ 446              		@ link register save eliminated.
+ 447 006a 7047     	.LVL22:
+ 448              		.loc 1 655 0
+ 449              		.syntax unified
+ 450              	@ 655 "../../source/src/CMSIS/core_cm3.c" 1
+ 451              		revsh r0, r0
+ 452              	@ 0 "" 2
+ 453              	.LVL23:
+ 454              		.loc 1 657 0
+ 455              		.thumb
+ 456              		.syntax unified
+ 457              		bx	lr
+ 458              		.cfi_endproc
+ 459              	.LFE14:
+ 460              		.size	__REVSH, .-__REVSH
+ 658:../../source/src/CMSIS/core_cm3.c **** 
+ 659:../../source/src/CMSIS/core_cm3.c **** /**
+ 660:../../source/src/CMSIS/core_cm3.c ****  * @brief  Reverse bit order of value
+ 661:../../source/src/CMSIS/core_cm3.c ****  *
+ 662:../../source/src/CMSIS/core_cm3.c ****  * @param  value  value to reverse
+ 663:../../source/src/CMSIS/core_cm3.c ****  * @return        reversed value
+ 664:../../source/src/CMSIS/core_cm3.c ****  *
+ 665:../../source/src/CMSIS/core_cm3.c ****  * Reverse bit order of value
+ 666:../../source/src/CMSIS/core_cm3.c ****  */
+ 667:../../source/src/CMSIS/core_cm3.c **** uint32_t __RBIT(uint32_t value)
+ 668:../../source/src/CMSIS/core_cm3.c **** {
+ 461              		.align	1
+ 462              		.p2align 2,,3
+ 463              		.global	__RBIT
+ 464              		.syntax unified
+ 465              		.thumb
+ 466              		.thumb_func
+ 669:../../source/src/CMSIS/core_cm3.c ****   uint32_t result=0;
+ 670:../../source/src/CMSIS/core_cm3.c ****   
+ 671:../../source/src/CMSIS/core_cm3.c ****    __ASM volatile ("rbit %0, %1" : "=r" (result) : "r" (value) );
+ 467              		.fpu softvfp
+ 468              		.type	__RBIT, %function
+ 469              	__RBIT:
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cccIH5Mc.s 			page 21
+
+
+ 470 006c 90FAA0F0 	.LFB15:
+ 471              		.loc 1 668 0
+ 472              		.cfi_startproc
+ 672:../../source/src/CMSIS/core_cm3.c ****    return(result);
+ 673:../../source/src/CMSIS/core_cm3.c **** }
+ 473              		@ args = 0, pretend = 0, frame = 0
+ 474              		@ frame_needed = 0, uses_anonymous_args = 0
+ 475              		@ link register save eliminated.
+ 476 0070 7047     	.LVL24:
+ 477              		.loc 1 671 0
+ 478              		.syntax unified
+ 479              	@ 671 "../../source/src/CMSIS/core_cm3.c" 1
+ 480              		rbit r0, r0
+ 481 0072 00BF     	@ 0 "" 2
+ 482              	.LVL25:
+ 483              		.loc 1 673 0
+ 484              		.thumb
+ 485              		.syntax unified
+ 486              		bx	lr
+ 487              		.cfi_endproc
+ 488              	.LFE15:
+ 489              		.size	__RBIT, .-__RBIT
+ 674:../../source/src/CMSIS/core_cm3.c **** 
+ 675:../../source/src/CMSIS/core_cm3.c **** /**
+ 676:../../source/src/CMSIS/core_cm3.c ****  * @brief  LDR Exclusive (8 bit)
+ 677:../../source/src/CMSIS/core_cm3.c ****  *
+ 678:../../source/src/CMSIS/core_cm3.c ****  * @param  *addr  address pointer
+ 679:../../source/src/CMSIS/core_cm3.c ****  * @return        value of (*address)
+ 680:../../source/src/CMSIS/core_cm3.c ****  *
+ 681:../../source/src/CMSIS/core_cm3.c ****  * Exclusive LDR command for 8 bit value
+ 682:../../source/src/CMSIS/core_cm3.c ****  */
+ 683:../../source/src/CMSIS/core_cm3.c **** uint8_t __LDREXB(uint8_t *addr)
+ 684:../../source/src/CMSIS/core_cm3.c **** {
+ 490              		.align	1
+ 491              		.p2align 2,,3
+ 492              		.global	__LDREXB
+ 493              		.syntax unified
+ 494              		.thumb
+ 495              		.thumb_func
+ 685:../../source/src/CMSIS/core_cm3.c ****     uint8_t result=0;
+ 686:../../source/src/CMSIS/core_cm3.c ****   
+ 687:../../source/src/CMSIS/core_cm3.c ****    __ASM volatile ("ldrexb %0, [%1]" : "=r" (result) : "r" (addr) );
+ 496              		.fpu softvfp
+ 497              		.type	__LDREXB, %function
+ 498              	__LDREXB:
+ 499 0074 D0E84F0F 	.LFB16:
+ 500              		.loc 1 684 0
+ 501              		.cfi_startproc
+ 688:../../source/src/CMSIS/core_cm3.c ****    return(result);
+ 689:../../source/src/CMSIS/core_cm3.c **** }
+ 502              		@ args = 0, pretend = 0, frame = 0
+ 503              		@ frame_needed = 0, uses_anonymous_args = 0
+ 504              		@ link register save eliminated.
+ 505 0078 C0B2     	.LVL26:
+ 506 007a 7047     		.loc 1 687 0
+ 507              		.syntax unified
+ 508              	@ 687 "../../source/src/CMSIS/core_cm3.c" 1
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cccIH5Mc.s 			page 22
+
+
+ 509              		ldrexb r0, [r0]
+ 510              	@ 0 "" 2
+ 511              	.LVL27:
+ 512              		.loc 1 689 0
+ 513              		.thumb
+ 514              		.syntax unified
+ 515              		uxtb	r0, r0
+ 516              		bx	lr
+ 517              		.cfi_endproc
+ 518              	.LFE16:
+ 519              		.size	__LDREXB, .-__LDREXB
+ 690:../../source/src/CMSIS/core_cm3.c **** 
+ 691:../../source/src/CMSIS/core_cm3.c **** /**
+ 692:../../source/src/CMSIS/core_cm3.c ****  * @brief  LDR Exclusive (16 bit)
+ 693:../../source/src/CMSIS/core_cm3.c ****  *
+ 694:../../source/src/CMSIS/core_cm3.c ****  * @param  *addr  address pointer
+ 695:../../source/src/CMSIS/core_cm3.c ****  * @return        value of (*address)
+ 696:../../source/src/CMSIS/core_cm3.c ****  *
+ 697:../../source/src/CMSIS/core_cm3.c ****  * Exclusive LDR command for 16 bit values
+ 698:../../source/src/CMSIS/core_cm3.c ****  */
+ 699:../../source/src/CMSIS/core_cm3.c **** uint16_t __LDREXH(uint16_t *addr)
+ 700:../../source/src/CMSIS/core_cm3.c **** {
+ 520              		.align	1
+ 521              		.p2align 2,,3
+ 522              		.global	__LDREXH
+ 523              		.syntax unified
+ 524              		.thumb
+ 525              		.thumb_func
+ 701:../../source/src/CMSIS/core_cm3.c ****     uint16_t result=0;
+ 702:../../source/src/CMSIS/core_cm3.c ****   
+ 703:../../source/src/CMSIS/core_cm3.c ****    __ASM volatile ("ldrexh %0, [%1]" : "=r" (result) : "r" (addr) );
+ 526              		.fpu softvfp
+ 527              		.type	__LDREXH, %function
+ 528              	__LDREXH:
+ 529 007c D0E85F0F 	.LFB17:
+ 530              		.loc 1 700 0
+ 531              		.cfi_startproc
+ 704:../../source/src/CMSIS/core_cm3.c ****    return(result);
+ 705:../../source/src/CMSIS/core_cm3.c **** }
+ 532              		@ args = 0, pretend = 0, frame = 0
+ 533              		@ frame_needed = 0, uses_anonymous_args = 0
+ 534              		@ link register save eliminated.
+ 535 0080 80B2     	.LVL28:
+ 536 0082 7047     		.loc 1 703 0
+ 537              		.syntax unified
+ 538              	@ 703 "../../source/src/CMSIS/core_cm3.c" 1
+ 539              		ldrexh r0, [r0]
+ 540              	@ 0 "" 2
+ 541              	.LVL29:
+ 542              		.loc 1 705 0
+ 543              		.thumb
+ 544              		.syntax unified
+ 545              		uxth	r0, r0
+ 546              		bx	lr
+ 547              		.cfi_endproc
+ 548              	.LFE17:
+ 549              		.size	__LDREXH, .-__LDREXH
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cccIH5Mc.s 			page 23
+
+
+ 706:../../source/src/CMSIS/core_cm3.c **** 
+ 707:../../source/src/CMSIS/core_cm3.c **** /**
+ 708:../../source/src/CMSIS/core_cm3.c ****  * @brief  LDR Exclusive (32 bit)
+ 709:../../source/src/CMSIS/core_cm3.c ****  *
+ 710:../../source/src/CMSIS/core_cm3.c ****  * @param  *addr  address pointer
+ 711:../../source/src/CMSIS/core_cm3.c ****  * @return        value of (*address)
+ 712:../../source/src/CMSIS/core_cm3.c ****  *
+ 713:../../source/src/CMSIS/core_cm3.c ****  * Exclusive LDR command for 32 bit values
+ 714:../../source/src/CMSIS/core_cm3.c ****  */
+ 715:../../source/src/CMSIS/core_cm3.c **** uint32_t __LDREXW(uint32_t *addr)
+ 716:../../source/src/CMSIS/core_cm3.c **** {
+ 550              		.align	1
+ 551              		.p2align 2,,3
+ 552              		.global	__LDREXW
+ 553              		.syntax unified
+ 554              		.thumb
+ 555              		.thumb_func
+ 717:../../source/src/CMSIS/core_cm3.c ****     uint32_t result=0;
+ 718:../../source/src/CMSIS/core_cm3.c ****   
+ 719:../../source/src/CMSIS/core_cm3.c ****    __ASM volatile ("ldrex %0, [%1]" : "=r" (result) : "r" (addr) );
+ 556              		.fpu softvfp
+ 557              		.type	__LDREXW, %function
+ 558              	__LDREXW:
+ 559 0084 50E8000F 	.LFB18:
+ 560              		.loc 1 716 0
+ 561              		.cfi_startproc
+ 720:../../source/src/CMSIS/core_cm3.c ****    return(result);
+ 721:../../source/src/CMSIS/core_cm3.c **** }
+ 562              		@ args = 0, pretend = 0, frame = 0
+ 563              		@ frame_needed = 0, uses_anonymous_args = 0
+ 564              		@ link register save eliminated.
+ 565 0088 7047     	.LVL30:
+ 566              		.loc 1 719 0
+ 567              		.syntax unified
+ 568              	@ 719 "../../source/src/CMSIS/core_cm3.c" 1
+ 569              		ldrex r0, [r0]
+ 570 008a 00BF     	@ 0 "" 2
+ 571              	.LVL31:
+ 572              		.loc 1 721 0
+ 573              		.thumb
+ 574              		.syntax unified
+ 575              		bx	lr
+ 576              		.cfi_endproc
+ 577              	.LFE18:
+ 578              		.size	__LDREXW, .-__LDREXW
+ 722:../../source/src/CMSIS/core_cm3.c **** 
+ 723:../../source/src/CMSIS/core_cm3.c **** /**
+ 724:../../source/src/CMSIS/core_cm3.c ****  * @brief  STR Exclusive (8 bit)
+ 725:../../source/src/CMSIS/core_cm3.c ****  *
+ 726:../../source/src/CMSIS/core_cm3.c ****  * @param  value  value to store
+ 727:../../source/src/CMSIS/core_cm3.c ****  * @param  *addr  address pointer
+ 728:../../source/src/CMSIS/core_cm3.c ****  * @return        successful / failed
+ 729:../../source/src/CMSIS/core_cm3.c ****  *
+ 730:../../source/src/CMSIS/core_cm3.c ****  * Exclusive STR command for 8 bit values
+ 731:../../source/src/CMSIS/core_cm3.c ****  */
+ 732:../../source/src/CMSIS/core_cm3.c **** uint32_t __STREXB(uint8_t value, uint8_t *addr)
+ 733:../../source/src/CMSIS/core_cm3.c **** {
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cccIH5Mc.s 			page 24
+
+
+ 579              		.align	1
+ 580              		.p2align 2,,3
+ 581              		.global	__STREXB
+ 582              		.syntax unified
+ 583              		.thumb
+ 584              		.thumb_func
+ 734:../../source/src/CMSIS/core_cm3.c ****    uint32_t result=0;
+ 735:../../source/src/CMSIS/core_cm3.c ****   
+ 736:../../source/src/CMSIS/core_cm3.c ****    __ASM volatile ("strexb %0, %2, [%1]" : "=&r" (result) : "r" (addr), "r" (value) );
+ 585              		.fpu softvfp
+ 586              		.type	__STREXB, %function
+ 587              	__STREXB:
+ 588 008c C1E8430F 	.LFB19:
+ 589              		.loc 1 733 0
+ 590              		.cfi_startproc
+ 591              		@ args = 0, pretend = 0, frame = 0
+ 592              		@ frame_needed = 0, uses_anonymous_args = 0
+ 593 0090 1846     		@ link register save eliminated.
+ 594              	.LVL32:
+ 737:../../source/src/CMSIS/core_cm3.c ****    return(result);
+ 738:../../source/src/CMSIS/core_cm3.c **** }
+ 595              		.loc 1 736 0
+ 596 0092 7047     		.syntax unified
+ 597              	@ 736 "../../source/src/CMSIS/core_cm3.c" 1
+ 598              		strexb r3, r0, [r1]
+ 599              	@ 0 "" 2
+ 600              	.LVL33:
+ 601              		.thumb
+ 602              		.syntax unified
+ 603              		mov	r0, r3
+ 604              	.LVL34:
+ 605              		.loc 1 738 0
+ 606              		bx	lr
+ 607              		.cfi_endproc
+ 608              	.LFE19:
+ 609              		.size	__STREXB, .-__STREXB
+ 739:../../source/src/CMSIS/core_cm3.c **** 
+ 740:../../source/src/CMSIS/core_cm3.c **** /**
+ 741:../../source/src/CMSIS/core_cm3.c ****  * @brief  STR Exclusive (16 bit)
+ 742:../../source/src/CMSIS/core_cm3.c ****  *
+ 743:../../source/src/CMSIS/core_cm3.c ****  * @param  value  value to store
+ 744:../../source/src/CMSIS/core_cm3.c ****  * @param  *addr  address pointer
+ 745:../../source/src/CMSIS/core_cm3.c ****  * @return        successful / failed
+ 746:../../source/src/CMSIS/core_cm3.c ****  *
+ 747:../../source/src/CMSIS/core_cm3.c ****  * Exclusive STR command for 16 bit values
+ 748:../../source/src/CMSIS/core_cm3.c ****  */
+ 749:../../source/src/CMSIS/core_cm3.c **** uint32_t __STREXH(uint16_t value, uint16_t *addr)
+ 750:../../source/src/CMSIS/core_cm3.c **** {
+ 610              		.align	1
+ 611              		.p2align 2,,3
+ 612              		.global	__STREXH
+ 613              		.syntax unified
+ 614              		.thumb
+ 615              		.thumb_func
+ 751:../../source/src/CMSIS/core_cm3.c ****    uint32_t result=0;
+ 752:../../source/src/CMSIS/core_cm3.c ****   
+ 753:../../source/src/CMSIS/core_cm3.c ****    __ASM volatile ("strexh %0, %2, [%1]" : "=&r" (result) : "r" (addr), "r" (value) );
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cccIH5Mc.s 			page 25
+
+
+ 616              		.fpu softvfp
+ 617              		.type	__STREXH, %function
+ 618              	__STREXH:
+ 619 0094 C1E8530F 	.LFB20:
+ 620              		.loc 1 750 0
+ 621              		.cfi_startproc
+ 622              		@ args = 0, pretend = 0, frame = 0
+ 623              		@ frame_needed = 0, uses_anonymous_args = 0
+ 624 0098 1846     		@ link register save eliminated.
+ 625              	.LVL35:
+ 754:../../source/src/CMSIS/core_cm3.c ****    return(result);
+ 755:../../source/src/CMSIS/core_cm3.c **** }
+ 626              		.loc 1 753 0
+ 627 009a 7047     		.syntax unified
+ 628              	@ 753 "../../source/src/CMSIS/core_cm3.c" 1
+ 629              		strexh r3, r0, [r1]
+ 630              	@ 0 "" 2
+ 631              	.LVL36:
+ 632              		.thumb
+ 633              		.syntax unified
+ 634              		mov	r0, r3
+ 635              	.LVL37:
+ 636              		.loc 1 755 0
+ 637              		bx	lr
+ 638              		.cfi_endproc
+ 639              	.LFE20:
+ 640              		.size	__STREXH, .-__STREXH
+ 756:../../source/src/CMSIS/core_cm3.c **** 
+ 757:../../source/src/CMSIS/core_cm3.c **** /**
+ 758:../../source/src/CMSIS/core_cm3.c ****  * @brief  STR Exclusive (32 bit)
+ 759:../../source/src/CMSIS/core_cm3.c ****  *
+ 760:../../source/src/CMSIS/core_cm3.c ****  * @param  value  value to store
+ 761:../../source/src/CMSIS/core_cm3.c ****  * @param  *addr  address pointer
+ 762:../../source/src/CMSIS/core_cm3.c ****  * @return        successful / failed
+ 763:../../source/src/CMSIS/core_cm3.c ****  *
+ 764:../../source/src/CMSIS/core_cm3.c ****  * Exclusive STR command for 32 bit values
+ 765:../../source/src/CMSIS/core_cm3.c ****  */
+ 766:../../source/src/CMSIS/core_cm3.c **** uint32_t __STREXW(uint32_t value, uint32_t *addr)
+ 767:../../source/src/CMSIS/core_cm3.c **** {
+ 641              		.align	1
+ 642              		.p2align 2,,3
+ 643              		.global	__STREXW
+ 644              		.syntax unified
+ 645              		.thumb
+ 646              		.thumb_func
+ 768:../../source/src/CMSIS/core_cm3.c ****    uint32_t result=0;
+ 769:../../source/src/CMSIS/core_cm3.c ****   
+ 770:../../source/src/CMSIS/core_cm3.c ****    __ASM volatile ("strex %0, %2, [%1]" : "=r" (result) : "r" (addr), "r" (value) );
+ 647              		.fpu softvfp
+ 648              		.type	__STREXW, %function
+ 649              	__STREXW:
+ 650 009c 41E80000 	.LFB21:
+ 651              		.loc 1 767 0
+ 652              		.cfi_startproc
+ 771:../../source/src/CMSIS/core_cm3.c ****    return(result);
+ 772:../../source/src/CMSIS/core_cm3.c **** }
+ 653              		@ args = 0, pretend = 0, frame = 0
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cccIH5Mc.s 			page 26
+
+
+ 654              		@ frame_needed = 0, uses_anonymous_args = 0
+ 655              		@ link register save eliminated.
+ 656 00a0 7047     	.LVL38:
+ 657              		.loc 1 770 0
+ 658              		.syntax unified
+ 659              	@ 770 "../../source/src/CMSIS/core_cm3.c" 1
+ 660              		strex r0, r0, [r1]
+ 661              	@ 0 "" 2
+ 662              	.LVL39:
+ 663 00a2 00BF     		.loc 1 772 0
+ 664              		.thumb
+ 665 0000 98050000 		.syntax unified
+ 666 0004 0200     		bx	lr
+ 667 0006 00000000 		.cfi_endproc
+ 668 000a 04       	.LFE21:
+ 669 000b 01       		.size	__STREXW, .-__STREXW
+ 670 000c 06020000 	.Letext0:
+ 671 0010 0C       		.file 2 "f:\\arm\\gcc2018\\arm-none-eabi\\include\\machine\\_default_types.h"
+ 672 0011 23010000 		.file 3 "f:\\arm\\gcc2018\\arm-none-eabi\\include\\sys\\_stdint.h"
+ 673 0015 DA020000 		.section	.debug_info,"",%progbits
+ 674 0019 00000000 	.Ldebug_info0:
+ 675 001d 00000000 		.4byte	0x598
+ 676 0021 00000000 		.2byte	0x2
+ 677 0025 00000000 		.4byte	.Ldebug_abbrev0
+ 678 0029 02       		.byte	0x4
+ 679 002a 01       		.uleb128 0x1
+ 680 002b 06       		.4byte	.LASF49
+ 681 002c AC020000 		.byte	0xc
+ 682 0030 03       		.4byte	.LASF50
+ 683 0031 18000000 		.4byte	.LASF51
+ 684 0035 02       		.4byte	.Ldebug_ranges0+0
+ 685 0036 2B       		.4byte	0
+ 686 0037 3B000000 		.4byte	0
+ 687 003b 02       		.4byte	.Ldebug_line0
+ 688 003c 01       		.uleb128 0x2
+ 689 003d 08       		.byte	0x1
+ 690 003e 9B000000 		.byte	0x6
+ 691 0042 03       		.4byte	.LASF0
+ 692 0043 30000000 		.uleb128 0x3
+ 693 0047 02       		.4byte	.LASF2
+ 694 0048 37       		.byte	0x2
+ 695 0049 4D000000 		.byte	0x2b
+ 696 004d 02       		.4byte	0x3b
+ 697 004e 02       		.uleb128 0x2
+ 698 004f 05       		.byte	0x1
+ 699 0050 E1010000 		.byte	0x8
+ 700 0054 03       		.4byte	.LASF1
+ 701 0055 FC000000 		.uleb128 0x3
+ 702 0059 02       		.4byte	.LASF3
+ 703 005a 39       		.byte	0x2
+ 704 005b 5F000000 		.byte	0x37
+ 705 005f 02       		.4byte	0x4d
+ 706 0060 02       		.uleb128 0x2
+ 707 0061 07       		.byte	0x2
+ 708 0062 E1000000 		.byte	0x5
+ 709 0066 03       		.4byte	.LASF4
+ 710 0067 40000000 		.uleb128 0x3
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cccIH5Mc.s 			page 27
+
+
+ 711 006b 02       		.4byte	.LASF5
+ 712 006c 4D       		.byte	0x2
+ 713 006d 71000000 		.byte	0x39
+ 714 0071 02       		.4byte	0x5f
+ 715 0072 04       		.uleb128 0x2
+ 716 0073 05       		.byte	0x2
+ 717 0074 FD010000 		.byte	0x7
+ 718 0078 03       		.4byte	.LASF6
+ 719 0079 0F010000 		.uleb128 0x3
+ 720 007d 02       		.4byte	.LASF7
+ 721 007e 4F       		.byte	0x2
+ 722 007f 83000000 		.byte	0x4d
+ 723 0083 02       		.4byte	0x71
+ 724 0084 04       		.uleb128 0x2
+ 725 0085 07       		.byte	0x4
+ 726 0086 C7000000 		.byte	0x5
+ 727 008a 02       		.4byte	.LASF8
+ 728 008b 08       		.uleb128 0x3
+ 729 008c 05       		.4byte	.LASF9
+ 730 008d A0010000 		.byte	0x2
+ 731 0091 02       		.byte	0x4f
+ 732 0092 08       		.4byte	0x83
+ 733 0093 07       		.uleb128 0x2
+ 734 0094 52010000 		.byte	0x4
+ 735 0098 04       		.byte	0x7
+ 736 0099 04       		.4byte	.LASF10
+ 737 009a 05       		.uleb128 0x2
+ 738 009b 696E7400 		.byte	0x8
+ 739 009f 02       		.byte	0x5
+ 740 00a0 04       		.4byte	.LASF11
+ 741 00a1 07       		.uleb128 0x2
+ 742 00a2 45010000 		.byte	0x8
+ 743 00a6 03       		.byte	0x7
+ 744 00a7 69010000 		.4byte	.LASF12
+ 745 00ab 03       		.uleb128 0x4
+ 746 00ac 18       		.byte	0x4
+ 747 00ad 30000000 		.byte	0x5
+ 748 00b1 03       		.ascii	"int\000"
+ 749 00b2 82010000 		.uleb128 0x2
+ 750 00b6 03       		.byte	0x4
+ 751 00b7 20       		.byte	0x7
+ 752 00b8 42000000 		.4byte	.LASF13
+ 753 00bc 03       		.uleb128 0x3
+ 754 00bd EB010000 		.4byte	.LASF14
+ 755 00c1 03       		.byte	0x3
+ 756 00c2 24       		.byte	0x18
+ 757 00c3 54000000 		.4byte	0x30
+ 758 00c7 03       		.uleb128 0x3
+ 759 00c8 8A010000 		.4byte	.LASF15
+ 760 00cc 03       		.byte	0x3
+ 761 00cd 2C       		.byte	0x20
+ 762 00ce 66000000 		.4byte	0x42
+ 763 00d2 03       		.uleb128 0x3
+ 764 00d3 F4010000 		.4byte	.LASF16
+ 765 00d7 03       		.byte	0x3
+ 766 00d8 30       		.byte	0x24
+ 767 00d9 78000000 		.4byte	0x54
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cccIH5Mc.s 			page 28
+
+
+ 768 00dd 05       		.uleb128 0x3
+ 769 00de 01       		.4byte	.LASF17
+ 770 00df 4A000000 		.byte	0x3
+ 771 00e3 01       		.byte	0x2c
+ 772 00e4 FE02     		.4byte	0x66
+ 773 00e6 01       		.uleb128 0x3
+ 774 00e7 D2000000 		.4byte	.LASF18
+ 775 00eb 9C000000 		.byte	0x3
+ 776 00ef A2000000 		.byte	0x30
+ 777 00f3 02       		.4byte	0x78
+ 778 00f4 7D       		.uleb128 0x5
+ 779 00f5 00       		.byte	0x1
+ 780 00f6 01       		.4byte	.LASF21
+ 781 00f7 2A010000 		.byte	0x1
+ 782 00fb 06       		.2byte	0x2fe
+ 783 00fc 3A000000 		.byte	0x1
+ 784 0100 01       		.4byte	0xd2
+ 785 0101 FE02     		.4byte	.LFB21
+ 786 0103 D2000000 		.4byte	.LFE21
+ 787 0107 00000000 		.byte	0x2
+ 788 010b 07       		.byte	0x7d
+ 789 010c 8E000000 		.sleb128 0
+ 790 0110 01       		.byte	0x1
+ 791 0111 FE02     		.4byte	0x12a
+ 792 0113 2A010000 		.uleb128 0x6
+ 793 0117 01       		.4byte	.LASF19
+ 794 0118 51       		.byte	0x1
+ 795 0119 08       		.2byte	0x2fe
+ 796 011a 71010000 		.4byte	0xd2
+ 797 011e 01       		.4byte	.LLST24
+ 798 011f 0003     		.uleb128 0x7
+ 799 0121 D2000000 		.4byte	.LASF20
+ 800 0125 21000000 		.byte	0x1
+ 801 0129 00       		.2byte	0x2fe
+ 802 012a 09       		.4byte	0x12a
+ 803 012b 04       		.byte	0x1
+ 804 012c D2000000 		.byte	0x51
+ 805 0130 05       		.uleb128 0x8
+ 806 0131 01       		.4byte	.LASF23
+ 807 0132 00000000 		.byte	0x1
+ 808 0136 01       		.2byte	0x300
+ 809 0137 ED02     		.4byte	0xd2
+ 810 0139 01       		.4byte	.LLST25
+ 811 013a D2000000 		.byte	0
+ 812 013e 94000000 		.uleb128 0x9
+ 813 0142 9C000000 		.byte	0x4
+ 814 0146 02       		.4byte	0xd2
+ 815 0147 7D       		.uleb128 0x5
+ 816 0148 00       		.byte	0x1
+ 817 0149 01       		.4byte	.LASF22
+ 818 014a 7D010000 		.byte	0x1
+ 819 014e 06       		.2byte	0x2ed
+ 820 014f 3A000000 		.byte	0x1
+ 821 0153 01       		.4byte	0xd2
+ 822 0154 ED02     		.4byte	.LFB20
+ 823 0156 BC000000 		.4byte	.LFE20
+ 824 015a 40000000 		.byte	0x2
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cccIH5Mc.s 			page 29
+
+
+ 825 015e 07       		.byte	0x7d
+ 826 015f 8E000000 		.sleb128 0
+ 827 0163 01       		.byte	0x1
+ 828 0164 ED02     		.4byte	0x17d
+ 829 0166 7D010000 		.uleb128 0x6
+ 830 016a 01       		.4byte	.LASF19
+ 831 016b 51       		.byte	0x1
+ 832 016c 08       		.2byte	0x2ed
+ 833 016d 71010000 		.4byte	0xbc
+ 834 0171 01       		.4byte	.LLST22
+ 835 0172 EF02     		.uleb128 0x7
+ 836 0174 D2000000 		.4byte	.LASF20
+ 837 0178 61000000 		.byte	0x1
+ 838 017c 00       		.2byte	0x2ed
+ 839 017d 09       		.4byte	0x17d
+ 840 017e 04       		.byte	0x1
+ 841 017f BC000000 		.byte	0x51
+ 842 0183 05       		.uleb128 0x8
+ 843 0184 01       		.4byte	.LASF23
+ 844 0185 C1020000 		.byte	0x1
+ 845 0189 01       		.2byte	0x2ef
+ 846 018a DC02     		.4byte	0xd2
+ 847 018c 01       		.4byte	.LLST23
+ 848 018d D2000000 		.byte	0
+ 849 0191 8C000000 		.uleb128 0x9
+ 850 0195 94000000 		.byte	0x4
+ 851 0199 02       		.4byte	0xbc
+ 852 019a 7D       		.uleb128 0x5
+ 853 019b 00       		.byte	0x1
+ 854 019c 01       		.4byte	.LASF24
+ 855 019d D0010000 		.byte	0x1
+ 856 01a1 06       		.2byte	0x2dc
+ 857 01a2 3A000000 		.byte	0x1
+ 858 01a6 01       		.4byte	0xd2
+ 859 01a7 DC02     		.4byte	.LFB19
+ 860 01a9 A6000000 		.4byte	.LFE19
+ 861 01ad 80000000 		.byte	0x2
+ 862 01b1 07       		.byte	0x7d
+ 863 01b2 8E000000 		.sleb128 0
+ 864 01b6 01       		.byte	0x1
+ 865 01b7 DC02     		.4byte	0x1d0
+ 866 01b9 D0010000 		.uleb128 0x6
+ 867 01bd 01       		.4byte	.LASF19
+ 868 01be 51       		.byte	0x1
+ 869 01bf 08       		.2byte	0x2dc
+ 870 01c0 71010000 		.4byte	0xa6
+ 871 01c4 01       		.4byte	.LLST20
+ 872 01c5 DE02     		.uleb128 0x7
+ 873 01c7 D2000000 		.4byte	.LASF20
+ 874 01cb A1000000 		.byte	0x1
+ 875 01cf 00       		.2byte	0x2dc
+ 876 01d0 09       		.4byte	0x1d0
+ 877 01d1 04       		.byte	0x1
+ 878 01d2 A6000000 		.byte	0x51
+ 879 01d6 05       		.uleb128 0x8
+ 880 01d7 01       		.4byte	.LASF23
+ 881 01d8 1A010000 		.byte	0x1
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cccIH5Mc.s 			page 30
+
+
+ 882 01dc 01       		.2byte	0x2de
+ 883 01dd CB02     		.4byte	0xd2
+ 884 01df 01       		.4byte	.LLST21
+ 885 01e0 D2000000 		.byte	0
+ 886 01e4 84000000 		.uleb128 0x9
+ 887 01e8 8A000000 		.byte	0x4
+ 888 01ec 02       		.4byte	0xa6
+ 889 01ed 7D       		.uleb128 0x5
+ 890 01ee 00       		.byte	0x1
+ 891 01ef 01       		.4byte	.LASF25
+ 892 01f0 15020000 		.byte	0x1
+ 893 01f4 06       		.2byte	0x2cb
+ 894 01f5 8E000000 		.byte	0x1
+ 895 01f9 01       		.4byte	0xd2
+ 896 01fa CB02     		.4byte	.LFB18
+ 897 01fc 2A010000 		.4byte	.LFE18
+ 898 0200 C0000000 		.byte	0x2
+ 899 0204 08       		.byte	0x7d
+ 900 0205 71010000 		.sleb128 0
+ 901 0209 01       		.byte	0x1
+ 902 020a CD02     		.4byte	0x215
+ 903 020c D2000000 		.uleb128 0x6
+ 904 0210 E1000000 		.4byte	.LASF20
+ 905 0214 00       		.byte	0x1
+ 906 0215 05       		.2byte	0x2cb
+ 907 0216 01       		.4byte	0x12a
+ 908 0217 25030000 		.4byte	.LLST18
+ 909 021b 01       		.uleb128 0x8
+ 910 021c BB02     		.4byte	.LASF23
+ 911 021e 01       		.byte	0x1
+ 912 021f BC000000 		.2byte	0x2cd
+ 913 0223 7C000000 		.4byte	0xd2
+ 914 0227 84000000 		.4byte	.LLST19
+ 915 022b 02       		.byte	0
+ 916 022c 7D       		.uleb128 0x5
+ 917 022d 00       		.byte	0x1
+ 918 022e 01       		.4byte	.LASF26
+ 919 022f 54020000 		.byte	0x1
+ 920 0233 06       		.2byte	0x2bb
+ 921 0234 8E000000 		.byte	0x1
+ 922 0238 01       		.4byte	0xbc
+ 923 0239 BB02     		.4byte	.LFB17
+ 924 023b 7D010000 		.4byte	.LFE17
+ 925 023f 00010000 		.byte	0x2
+ 926 0243 08       		.byte	0x7d
+ 927 0244 71010000 		.sleb128 0
+ 928 0248 01       		.byte	0x1
+ 929 0249 BD02     		.4byte	0x254
+ 930 024b BC000000 		.uleb128 0x6
+ 931 024f 21010000 		.4byte	.LASF20
+ 932 0253 00       		.byte	0x1
+ 933 0254 05       		.2byte	0x2bb
+ 934 0255 01       		.4byte	0x17d
+ 935 0256 B8020000 		.4byte	.LLST16
+ 936 025a 01       		.uleb128 0x8
+ 937 025b AB02     		.4byte	.LASF23
+ 938 025d 01       		.byte	0x1
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cccIH5Mc.s 			page 31
+
+
+ 939 025e A6000000 		.2byte	0x2bd
+ 940 0262 74000000 		.4byte	0xbc
+ 941 0266 7C000000 		.4byte	.LLST17
+ 942 026a 02       		.byte	0
+ 943 026b 7D       		.uleb128 0x5
+ 944 026c 00       		.byte	0x1
+ 945 026d 01       		.4byte	.LASF27
+ 946 026e 93020000 		.byte	0x1
+ 947 0272 06       		.2byte	0x2ab
+ 948 0273 8E000000 		.byte	0x1
+ 949 0277 01       		.4byte	0xa6
+ 950 0278 AB02     		.4byte	.LFB16
+ 951 027a D0010000 		.4byte	.LFE16
+ 952 027e 40010000 		.byte	0x2
+ 953 0282 08       		.byte	0x7d
+ 954 0283 71010000 		.sleb128 0
+ 955 0287 01       		.byte	0x1
+ 956 0288 AD02     		.4byte	0x293
+ 957 028a A6000000 		.uleb128 0x6
+ 958 028e 61010000 		.4byte	.LASF20
+ 959 0292 00       		.byte	0x1
+ 960 0293 05       		.2byte	0x2ab
+ 961 0294 01       		.4byte	0x1d0
+ 962 0295 DA010000 		.4byte	.LLST14
+ 963 0299 01       		.uleb128 0x8
+ 964 029a 9B02     		.4byte	.LASF23
+ 965 029c 01       		.byte	0x1
+ 966 029d D2000000 		.2byte	0x2ad
+ 967 02a1 6C000000 		.4byte	0xa6
+ 968 02a5 72000000 		.4byte	.LLST15
+ 969 02a9 02       		.byte	0
+ 970 02aa 7D       		.uleb128 0x5
+ 971 02ab 00       		.byte	0x1
+ 972 02ac 01       		.4byte	.LASF28
+ 973 02ad D2020000 		.byte	0x1
+ 974 02b1 06       		.2byte	0x29b
+ 975 02b2 3A000000 		.byte	0x1
+ 976 02b6 01       		.4byte	0xd2
+ 977 02b7 9B02     		.4byte	.LFB15
+ 978 02b9 D2000000 		.4byte	.LFE15
+ 979 02bd 80010000 		.byte	0x2
+ 980 02c1 08       		.byte	0x7d
+ 981 02c2 71010000 		.sleb128 0
+ 982 02c6 01       		.byte	0x1
+ 983 02c7 9D02     		.4byte	0x2d2
+ 984 02c9 D2000000 		.uleb128 0x6
+ 985 02cd A1010000 		.4byte	.LASF19
+ 986 02d1 00       		.byte	0x1
+ 987 02d2 05       		.2byte	0x29b
+ 988 02d3 01       		.4byte	0xd2
+ 989 02d4 F4000000 		.4byte	.LLST12
+ 990 02d8 01       		.uleb128 0x8
+ 991 02d9 8B02     		.4byte	.LASF23
+ 992 02db 01       		.byte	0x1
+ 993 02dc C7000000 		.2byte	0x29d
+ 994 02e0 68000000 		.4byte	0xd2
+ 995 02e4 6C000000 		.4byte	.LLST13
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cccIH5Mc.s 			page 32
+
+
+ 996 02e8 02       		.byte	0
+ 997 02e9 7D       		.uleb128 0x5
+ 998 02ea 00       		.byte	0x1
+ 999 02eb 01       		.4byte	.LASF29
+ 1000 02ec 11030000 		.byte	0x1
+ 1001 02f0 06       		.2byte	0x28b
+ 1002 02f1 3A000000 		.byte	0x1
+ 1003 02f5 01       		.4byte	0xc7
+ 1004 02f6 8B02     		.4byte	.LFB14
+ 1005 02f8 B1000000 		.4byte	.LFE14
+ 1006 02fc C0010000 		.byte	0x2
+ 1007 0300 08       		.byte	0x7d
+ 1008 0301 71010000 		.sleb128 0
+ 1009 0305 01       		.byte	0x1
+ 1010 0306 8D02     		.4byte	0x311
+ 1011 0308 D2000000 		.uleb128 0x6
+ 1012 030c E1010000 		.4byte	.LASF19
+ 1013 0310 00       		.byte	0x1
+ 1014 0311 05       		.2byte	0x28b
+ 1015 0312 01       		.4byte	0xb1
+ 1016 0313 93000000 		.4byte	.LLST10
+ 1017 0317 01       		.uleb128 0x8
+ 1018 0318 7B02     		.4byte	.LASF23
+ 1019 031a 01       		.byte	0x1
+ 1020 031b D2000000 		.2byte	0x28d
+ 1021 031f 64000000 		.4byte	0xd2
+ 1022 0323 68000000 		.4byte	.LLST11
+ 1023 0327 02       		.byte	0
+ 1024 0328 7D       		.uleb128 0x5
+ 1025 0329 00       		.byte	0x1
+ 1026 032a 01       		.4byte	.LASF30
+ 1027 032b 50030000 		.byte	0x1
+ 1028 032f 06       		.2byte	0x27b
+ 1029 0330 3A000000 		.byte	0x1
+ 1030 0334 01       		.4byte	0xd2
+ 1031 0335 7B02     		.4byte	.LFB13
+ 1032 0337 BC000000 		.4byte	.LFE13
+ 1033 033b 00020000 		.byte	0x2
+ 1034 033f 08       		.byte	0x7d
+ 1035 0340 71010000 		.sleb128 0
+ 1036 0344 01       		.byte	0x1
+ 1037 0345 7D02     		.4byte	0x350
+ 1038 0347 D2000000 		.uleb128 0x6
+ 1039 034b 21020000 		.4byte	.LASF19
+ 1040 034f 00       		.byte	0x1
+ 1041 0350 05       		.2byte	0x27b
+ 1042 0351 01       		.4byte	0xbc
+ 1043 0352 BC010000 		.4byte	.LLST8
+ 1044 0356 01       		.uleb128 0x8
+ 1045 0357 6B02     		.4byte	.LASF23
+ 1046 0359 01       		.byte	0x1
+ 1047 035a D2000000 		.2byte	0x27d
+ 1048 035e 60000000 		.4byte	0xd2
+ 1049 0362 64000000 		.4byte	.LLST9
+ 1050 0366 02       		.byte	0
+ 1051 0367 7D       		.uleb128 0x5
+ 1052 0368 00       		.byte	0x1
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cccIH5Mc.s 			page 33
+
+
+ 1053 0369 01       		.4byte	.LASF31
+ 1054 036a 8F030000 		.byte	0x1
+ 1055 036e 06       		.2byte	0x26b
+ 1056 036f 3A000000 		.byte	0x1
+ 1057 0373 01       		.4byte	0xd2
+ 1058 0374 6B02     		.4byte	.LFB12
+ 1059 0376 D2000000 		.4byte	.LFE12
+ 1060 037a 40020000 		.byte	0x2
+ 1061 037e 08       		.byte	0x7d
+ 1062 037f 71010000 		.sleb128 0
+ 1063 0383 01       		.byte	0x1
+ 1064 0384 6D02     		.4byte	0x38f
+ 1065 0386 D2000000 		.uleb128 0x6
+ 1066 038a 61020000 		.4byte	.LASF19
+ 1067 038e 00       		.byte	0x1
+ 1068 038f 0A       		.2byte	0x26b
+ 1069 0390 01       		.4byte	0xd2
+ 1070 0391 22000000 		.4byte	.LLST6
+ 1071 0395 01       		.uleb128 0x8
+ 1072 0396 5D02     		.4byte	.LASF23
+ 1073 0398 01       		.byte	0x1
+ 1074 0399 58000000 		.2byte	0x26d
+ 1075 039d 5E000000 		.4byte	0xd2
+ 1076 03a1 02       		.4byte	.LLST7
+ 1077 03a2 7D       		.byte	0
+ 1078 03a3 00       		.uleb128 0xa
+ 1079 03a4 01       		.byte	0x1
+ 1080 03a5 B8030000 		.4byte	.LASF34
+ 1081 03a9 07       		.byte	0x1
+ 1082 03aa D9000000 		.2byte	0x25d
+ 1083 03ae 01       		.byte	0x1
+ 1084 03af 5D02     		.4byte	.LFB11
+ 1085 03b1 D2000000 		.4byte	.LFE11
+ 1086 03b5 01       		.byte	0x2
+ 1087 03b6 50       		.byte	0x7d
+ 1088 03b7 00       		.sleb128 0
+ 1089 03b8 05       		.byte	0x1
+ 1090 03b9 01       		.4byte	0x3b8
+ 1091 03ba CC010000 		.uleb128 0x7
+ 1092 03be 01       		.4byte	.LASF32
+ 1093 03bf 4E02     		.byte	0x1
+ 1094 03c1 01       		.2byte	0x25d
+ 1095 03c2 D2000000 		.4byte	0xd2
+ 1096 03c6 50000000 		.byte	0x1
+ 1097 03ca 56000000 		.byte	0x50
+ 1098 03ce 02       		.byte	0
+ 1099 03cf 7D       		.uleb128 0x5
+ 1100 03d0 00       		.byte	0x1
+ 1101 03d1 01       		.4byte	.LASF33
+ 1102 03d2 E7030000 		.byte	0x1
+ 1103 03d6 08       		.2byte	0x24e
+ 1104 03d7 71010000 		.byte	0x1
+ 1105 03db 01       		.4byte	0xd2
+ 1106 03dc 5002     		.4byte	.LFB10
+ 1107 03de D2000000 		.4byte	.LFE10
+ 1108 03e2 80020000 		.byte	0x2
+ 1109 03e6 00       		.byte	0x7d
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cccIH5Mc.s 			page 34
+
+
+ 1110 03e7 0A       		.sleb128 0
+ 1111 03e8 01       		.byte	0x1
+ 1112 03e9 B7000000 		.4byte	0x3e7
+ 1113 03ed 01       		.uleb128 0x8
+ 1114 03ee 4202     		.4byte	.LASF23
+ 1115 03f0 01       		.byte	0x1
+ 1116 03f1 48000000 		.2byte	0x250
+ 1117 03f5 4E000000 		.4byte	0xd2
+ 1118 03f9 02       		.4byte	.LLST5
+ 1119 03fa 7D       		.byte	0
+ 1120 03fb 00       		.uleb128 0xa
+ 1121 03fc 01       		.byte	0x1
+ 1122 03fd 10040000 		.4byte	.LASF35
+ 1123 0401 07       		.byte	0x1
+ 1124 0402 62000000 		.2byte	0x242
+ 1125 0406 01       		.byte	0x1
+ 1126 0407 4202     		.4byte	.LFB9
+ 1127 0409 D2000000 		.4byte	.LFE9
+ 1128 040d 01       		.byte	0x2
+ 1129 040e 50       		.byte	0x7d
+ 1130 040f 00       		.sleb128 0
+ 1131 0410 05       		.byte	0x1
+ 1132 0411 01       		.4byte	0x410
+ 1133 0412 CA020000 		.uleb128 0x7
+ 1134 0416 01       		.4byte	.LASF36
+ 1135 0417 3302     		.byte	0x1
+ 1136 0419 01       		.2byte	0x242
+ 1137 041a D2000000 		.4byte	0xd2
+ 1138 041e 40000000 		.byte	0x1
+ 1139 0422 46000000 		.byte	0x50
+ 1140 0426 02       		.byte	0
+ 1141 0427 7D       		.uleb128 0x5
+ 1142 0428 00       		.byte	0x1
+ 1143 0429 01       		.4byte	.LASF37
+ 1144 042a 3F040000 		.byte	0x1
+ 1145 042e 08       		.2byte	0x233
+ 1146 042f 71010000 		.byte	0x1
+ 1147 0433 01       		.4byte	0xd2
+ 1148 0434 3502     		.4byte	.LFB8
+ 1149 0436 D2000000 		.4byte	.LFE8
+ 1150 043a 9F020000 		.byte	0x2
+ 1151 043e 00       		.byte	0x7d
+ 1152 043f 0A       		.sleb128 0
+ 1153 0440 01       		.byte	0x1
+ 1154 0441 AE010000 		.4byte	0x43f
+ 1155 0445 01       		.uleb128 0x8
+ 1156 0446 2702     		.4byte	.LASF23
+ 1157 0448 01       		.byte	0x1
+ 1158 0449 38000000 		.2byte	0x235
+ 1159 044d 3E000000 		.4byte	0xd2
+ 1160 0451 02       		.4byte	.LLST4
+ 1161 0452 7D       		.byte	0
+ 1162 0453 00       		.uleb128 0xa
+ 1163 0454 01       		.byte	0x1
+ 1164 0455 68040000 		.4byte	.LASF38
+ 1165 0459 07       		.byte	0x1
+ 1166 045a 07010000 		.2byte	0x227
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cccIH5Mc.s 			page 35
+
+
+ 1167 045e 01       		.byte	0x1
+ 1168 045f 2702     		.4byte	.LFB7
+ 1169 0461 D2000000 		.4byte	.LFE7
+ 1170 0465 01       		.byte	0x2
+ 1171 0466 50       		.byte	0x7d
+ 1172 0467 00       		.sleb128 0
+ 1173 0468 05       		.byte	0x1
+ 1174 0469 01       		.4byte	0x468
+ 1175 046a A9000000 		.uleb128 0x7
+ 1176 046e 01       		.4byte	.LASF39
+ 1177 046f 1802     		.byte	0x1
+ 1178 0471 01       		.2byte	0x227
+ 1179 0472 D2000000 		.4byte	0xd2
+ 1180 0476 30000000 		.byte	0x1
+ 1181 047a 36000000 		.byte	0x50
+ 1182 047e 02       		.byte	0
+ 1183 047f 7D       		.uleb128 0x5
+ 1184 0480 00       		.byte	0x1
+ 1185 0481 01       		.4byte	.LASF40
+ 1186 0482 97040000 		.byte	0x1
+ 1187 0486 08       		.2byte	0x218
+ 1188 0487 71010000 		.byte	0x1
+ 1189 048b 01       		.4byte	0xd2
+ 1190 048c 1A02     		.4byte	.LFB6
+ 1191 048e D2000000 		.4byte	.LFE6
+ 1192 0492 BE020000 		.byte	0x2
+ 1193 0496 00       		.byte	0x7d
+ 1194 0497 0A       		.sleb128 0
+ 1195 0498 01       		.byte	0x1
+ 1196 0499 92010000 		.4byte	0x497
+ 1197 049d 01       		.uleb128 0x8
+ 1198 049e 0C02     		.4byte	.LASF23
+ 1199 04a0 01       		.byte	0x1
+ 1200 04a1 28000000 		.2byte	0x21a
+ 1201 04a5 2E000000 		.4byte	0xd2
+ 1202 04a9 02       		.4byte	.LLST3
+ 1203 04aa 7D       		.byte	0
+ 1204 04ab 00       		.uleb128 0xa
+ 1205 04ac 01       		.byte	0x1
+ 1206 04ad C0040000 		.4byte	.LASF41
+ 1207 04b1 07       		.byte	0x1
+ 1208 04b2 3A000000 		.2byte	0x20c
+ 1209 04b6 01       		.byte	0x1
+ 1210 04b7 0C02     		.4byte	.LFB5
+ 1211 04b9 D2000000 		.4byte	.LFE5
+ 1212 04bd 01       		.byte	0x2
+ 1213 04be 50       		.byte	0x7d
+ 1214 04bf 00       		.sleb128 0
+ 1215 04c0 05       		.byte	0x1
+ 1216 04c1 01       		.4byte	0x4c0
+ 1217 04c2 80000000 		.uleb128 0x7
+ 1218 04c6 01       		.4byte	.LASF19
+ 1219 04c7 FD01     		.byte	0x1
+ 1220 04c9 01       		.2byte	0x20c
+ 1221 04ca D2000000 		.4byte	0xd2
+ 1222 04ce 20000000 		.byte	0x1
+ 1223 04d2 26000000 		.byte	0x50
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cccIH5Mc.s 			page 36
+
+
+ 1224 04d6 02       		.byte	0
+ 1225 04d7 7D       		.uleb128 0x5
+ 1226 04d8 00       		.byte	0x1
+ 1227 04d9 01       		.4byte	.LASF42
+ 1228 04da EF040000 		.byte	0x1
+ 1229 04de 08       		.2byte	0x1fd
+ 1230 04df 71010000 		.byte	0x1
+ 1231 04e3 01       		.4byte	0xd2
+ 1232 04e4 FF01     		.4byte	.LFB4
+ 1233 04e6 D2000000 		.4byte	.LFE4
+ 1234 04ea DD020000 		.byte	0x2
+ 1235 04ee 00       		.byte	0x7d
+ 1236 04ef 0A       		.sleb128 0
+ 1237 04f0 01       		.byte	0x1
+ 1238 04f1 76000000 		.4byte	0x4ef
+ 1239 04f5 01       		.uleb128 0x8
+ 1240 04f6 F001     		.4byte	.LASF23
+ 1241 04f8 01       		.byte	0x1
+ 1242 04f9 18000000 		.2byte	0x1ff
+ 1243 04fd 1E000000 		.4byte	0xd2
+ 1244 0501 02       		.4byte	.LLST2
+ 1245 0502 7D       		.byte	0
+ 1246 0503 00       		.uleb128 0xa
+ 1247 0504 01       		.byte	0x1
+ 1248 0505 18050000 		.4byte	.LASF43
+ 1249 0509 07       		.byte	0x1
+ 1250 050a 09000000 		.2byte	0x1f0
+ 1251 050e 01       		.byte	0x1
+ 1252 050f F001     		.4byte	.LFB3
+ 1253 0511 D2000000 		.4byte	.LFE3
+ 1254 0515 01       		.byte	0x2
+ 1255 0516 50       		.byte	0x7d
+ 1256 0517 00       		.sleb128 0
+ 1257 0518 05       		.byte	0x1
+ 1258 0519 01       		.4byte	0x518
+ 1259 051a 6C000000 		.uleb128 0x7
+ 1260 051e 01       		.4byte	.LASF44
+ 1261 051f DD01     		.byte	0x1
+ 1262 0521 01       		.2byte	0x1f0
+ 1263 0522 D2000000 		.4byte	0xd2
+ 1264 0526 10000000 		.byte	0x1
+ 1265 052a 18000000 		.byte	0x50
+ 1266 052e 02       		.byte	0
+ 1267 052f 7D       		.uleb128 0x5
+ 1268 0530 00       		.byte	0x1
+ 1269 0531 01       		.4byte	.LASF45
+ 1270 0532 47050000 		.byte	0x1
+ 1271 0536 08       		.2byte	0x1dd
+ 1272 0537 71010000 		.byte	0x1
+ 1273 053b 01       		.4byte	0xd2
+ 1274 053c DF01     		.4byte	.LFB2
+ 1275 053e D2000000 		.4byte	.LFE2
+ 1276 0542 FC020000 		.byte	0x2
+ 1277 0546 00       		.byte	0x7d
+ 1278 0547 0A       		.sleb128 0
+ 1279 0548 01       		.byte	0x1
+ 1280 0549 C2010000 		.4byte	0x547
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cccIH5Mc.s 			page 37
+
+
+ 1281 054d 01       		.uleb128 0x8
+ 1282 054e CE01     		.4byte	.LASF23
+ 1283 0550 01       		.byte	0x1
+ 1284 0551 08000000 		.2byte	0x1df
+ 1285 0555 0E000000 		.4byte	0xd2
+ 1286 0559 02       		.4byte	.LLST1
+ 1287 055a 7D       		.byte	0
+ 1288 055b 00       		.uleb128 0xa
+ 1289 055c 01       		.byte	0x1
+ 1290 055d 70050000 		.4byte	.LASF46
+ 1291 0561 07       		.byte	0x1
+ 1292 0562 53000000 		.2byte	0x1ce
+ 1293 0566 01       		.byte	0x1
+ 1294 0567 CE01     		.4byte	.LFB1
+ 1295 0569 D2000000 		.4byte	.LFE1
+ 1296 056d 01       		.byte	0x2
+ 1297 056e 50       		.byte	0x7d
+ 1298 056f 00       		.sleb128 0
+ 1299 0570 0B       		.byte	0x1
+ 1300 0571 01       		.4byte	0x570
+ 1301 0572 78010000 		.uleb128 0x7
+ 1302 0576 01       		.4byte	.LASF47
+ 1303 0577 BB01     		.byte	0x1
+ 1304 0579 01       		.2byte	0x1ce
+ 1305 057a D2000000 		.4byte	0xd2
+ 1306 057e 00000000 		.byte	0x1
+ 1307 0582 08000000 		.byte	0x50
+ 1308 0586 02       		.byte	0
+ 1309 0587 7D       		.uleb128 0xb
+ 1310 0588 00       		.byte	0x1
+ 1311 0589 01       		.4byte	.LASF48
+ 1312 058a 08       		.byte	0x1
+ 1313 058b 71010000 		.2byte	0x1bb
+ 1314 058f 01       		.byte	0x1
+ 1315 0590 BD01     		.4byte	0xd2
+ 1316 0592 D2000000 		.4byte	.LFB0
+ 1317 0596 1B030000 		.4byte	.LFE0
+ 1318 059a 00       		.byte	0x2
+ 1319 059b 00       		.byte	0x7d
+ 1320              		.sleb128 0
+ 1321              		.byte	0x1
+ 1322 0000 01       		.uleb128 0x8
+ 1323 0001 11       		.4byte	.LASF23
+ 1324 0002 01       		.byte	0x1
+ 1325 0003 25       		.2byte	0x1bd
+ 1326 0004 0E       		.4byte	0xd2
+ 1327 0005 13       		.4byte	.LLST0
+ 1328 0006 0B       		.byte	0
+ 1329 0007 03       		.byte	0
+ 1330 0008 0E       		.section	.debug_abbrev,"",%progbits
+ 1331 0009 1B       	.Ldebug_abbrev0:
+ 1332 000a 0E       		.uleb128 0x1
+ 1333 000b 55       		.uleb128 0x11
+ 1334 000c 06       		.byte	0x1
+ 1335 000d 11       		.uleb128 0x25
+ 1336 000e 01       		.uleb128 0xe
+ 1337 000f 52       		.uleb128 0x13
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cccIH5Mc.s 			page 38
+
+
+ 1338 0010 01       		.uleb128 0xb
+ 1339 0011 10       		.uleb128 0x3
+ 1340 0012 06       		.uleb128 0xe
+ 1341 0013 00       		.uleb128 0x1b
+ 1342 0014 00       		.uleb128 0xe
+ 1343 0015 02       		.uleb128 0x55
+ 1344 0016 24       		.uleb128 0x6
+ 1345 0017 00       		.uleb128 0x11
+ 1346 0018 0B       		.uleb128 0x1
+ 1347 0019 0B       		.uleb128 0x52
+ 1348 001a 3E       		.uleb128 0x1
+ 1349 001b 0B       		.uleb128 0x10
+ 1350 001c 03       		.uleb128 0x6
+ 1351 001d 0E       		.byte	0
+ 1352 001e 00       		.byte	0
+ 1353 001f 00       		.uleb128 0x2
+ 1354 0020 03       		.uleb128 0x24
+ 1355 0021 16       		.byte	0
+ 1356 0022 00       		.uleb128 0xb
+ 1357 0023 03       		.uleb128 0xb
+ 1358 0024 0E       		.uleb128 0x3e
+ 1359 0025 3A       		.uleb128 0xb
+ 1360 0026 0B       		.uleb128 0x3
+ 1361 0027 3B       		.uleb128 0xe
+ 1362 0028 0B       		.byte	0
+ 1363 0029 49       		.byte	0
+ 1364 002a 13       		.uleb128 0x3
+ 1365 002b 00       		.uleb128 0x16
+ 1366 002c 00       		.byte	0
+ 1367 002d 04       		.uleb128 0x3
+ 1368 002e 24       		.uleb128 0xe
+ 1369 002f 00       		.uleb128 0x3a
+ 1370 0030 0B       		.uleb128 0xb
+ 1371 0031 0B       		.uleb128 0x3b
+ 1372 0032 3E       		.uleb128 0xb
+ 1373 0033 0B       		.uleb128 0x49
+ 1374 0034 03       		.uleb128 0x13
+ 1375 0035 08       		.byte	0
+ 1376 0036 00       		.byte	0
+ 1377 0037 00       		.uleb128 0x4
+ 1378 0038 05       		.uleb128 0x24
+ 1379 0039 2E       		.byte	0
+ 1380 003a 01       		.uleb128 0xb
+ 1381 003b 3F       		.uleb128 0xb
+ 1382 003c 0C       		.uleb128 0x3e
+ 1383 003d 03       		.uleb128 0xb
+ 1384 003e 0E       		.uleb128 0x3
+ 1385 003f 3A       		.uleb128 0x8
+ 1386 0040 0B       		.byte	0
+ 1387 0041 3B       		.byte	0
+ 1388 0042 05       		.uleb128 0x5
+ 1389 0043 27       		.uleb128 0x2e
+ 1390 0044 0C       		.byte	0x1
+ 1391 0045 49       		.uleb128 0x3f
+ 1392 0046 13       		.uleb128 0xc
+ 1393 0047 11       		.uleb128 0x3
+ 1394 0048 01       		.uleb128 0xe
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cccIH5Mc.s 			page 39
+
+
+ 1395 0049 12       		.uleb128 0x3a
+ 1396 004a 01       		.uleb128 0xb
+ 1397 004b 40       		.uleb128 0x3b
+ 1398 004c 0A       		.uleb128 0x5
+ 1399 004d 9742     		.uleb128 0x27
+ 1400 004f 0C       		.uleb128 0xc
+ 1401 0050 01       		.uleb128 0x49
+ 1402 0051 13       		.uleb128 0x13
+ 1403 0052 00       		.uleb128 0x11
+ 1404 0053 00       		.uleb128 0x1
+ 1405 0054 06       		.uleb128 0x12
+ 1406 0055 05       		.uleb128 0x1
+ 1407 0056 00       		.uleb128 0x40
+ 1408 0057 03       		.uleb128 0xa
+ 1409 0058 0E       		.uleb128 0x2117
+ 1410 0059 3A       		.uleb128 0xc
+ 1411 005a 0B       		.uleb128 0x1
+ 1412 005b 3B       		.uleb128 0x13
+ 1413 005c 05       		.byte	0
+ 1414 005d 49       		.byte	0
+ 1415 005e 13       		.uleb128 0x6
+ 1416 005f 02       		.uleb128 0x5
+ 1417 0060 06       		.byte	0
+ 1418 0061 00       		.uleb128 0x3
+ 1419 0062 00       		.uleb128 0xe
+ 1420 0063 07       		.uleb128 0x3a
+ 1421 0064 05       		.uleb128 0xb
+ 1422 0065 00       		.uleb128 0x3b
+ 1423 0066 03       		.uleb128 0x5
+ 1424 0067 0E       		.uleb128 0x49
+ 1425 0068 3A       		.uleb128 0x13
+ 1426 0069 0B       		.uleb128 0x2
+ 1427 006a 3B       		.uleb128 0x6
+ 1428 006b 05       		.byte	0
+ 1429 006c 49       		.byte	0
+ 1430 006d 13       		.uleb128 0x7
+ 1431 006e 02       		.uleb128 0x5
+ 1432 006f 0A       		.byte	0
+ 1433 0070 00       		.uleb128 0x3
+ 1434 0071 00       		.uleb128 0xe
+ 1435 0072 08       		.uleb128 0x3a
+ 1436 0073 34       		.uleb128 0xb
+ 1437 0074 00       		.uleb128 0x3b
+ 1438 0075 03       		.uleb128 0x5
+ 1439 0076 0E       		.uleb128 0x49
+ 1440 0077 3A       		.uleb128 0x13
+ 1441 0078 0B       		.uleb128 0x2
+ 1442 0079 3B       		.uleb128 0xa
+ 1443 007a 05       		.byte	0
+ 1444 007b 49       		.byte	0
+ 1445 007c 13       		.uleb128 0x8
+ 1446 007d 02       		.uleb128 0x34
+ 1447 007e 06       		.byte	0
+ 1448 007f 00       		.uleb128 0x3
+ 1449 0080 00       		.uleb128 0xe
+ 1450 0081 09       		.uleb128 0x3a
+ 1451 0082 0F       		.uleb128 0xb
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cccIH5Mc.s 			page 40
+
+
+ 1452 0083 00       		.uleb128 0x3b
+ 1453 0084 0B       		.uleb128 0x5
+ 1454 0085 0B       		.uleb128 0x49
+ 1455 0086 49       		.uleb128 0x13
+ 1456 0087 13       		.uleb128 0x2
+ 1457 0088 00       		.uleb128 0x6
+ 1458 0089 00       		.byte	0
+ 1459 008a 0A       		.byte	0
+ 1460 008b 2E       		.uleb128 0x9
+ 1461 008c 01       		.uleb128 0xf
+ 1462 008d 3F       		.byte	0
+ 1463 008e 0C       		.uleb128 0xb
+ 1464 008f 03       		.uleb128 0xb
+ 1465 0090 0E       		.uleb128 0x49
+ 1466 0091 3A       		.uleb128 0x13
+ 1467 0092 0B       		.byte	0
+ 1468 0093 3B       		.byte	0
+ 1469 0094 05       		.uleb128 0xa
+ 1470 0095 27       		.uleb128 0x2e
+ 1471 0096 0C       		.byte	0x1
+ 1472 0097 11       		.uleb128 0x3f
+ 1473 0098 01       		.uleb128 0xc
+ 1474 0099 12       		.uleb128 0x3
+ 1475 009a 01       		.uleb128 0xe
+ 1476 009b 40       		.uleb128 0x3a
+ 1477 009c 0A       		.uleb128 0xb
+ 1478 009d 9742     		.uleb128 0x3b
+ 1479 009f 0C       		.uleb128 0x5
+ 1480 00a0 01       		.uleb128 0x27
+ 1481 00a1 13       		.uleb128 0xc
+ 1482 00a2 00       		.uleb128 0x11
+ 1483 00a3 00       		.uleb128 0x1
+ 1484 00a4 0B       		.uleb128 0x12
+ 1485 00a5 2E       		.uleb128 0x1
+ 1486 00a6 01       		.uleb128 0x40
+ 1487 00a7 3F       		.uleb128 0xa
+ 1488 00a8 0C       		.uleb128 0x2117
+ 1489 00a9 03       		.uleb128 0xc
+ 1490 00aa 0E       		.uleb128 0x1
+ 1491 00ab 3A       		.uleb128 0x13
+ 1492 00ac 0B       		.byte	0
+ 1493 00ad 3B       		.byte	0
+ 1494 00ae 05       		.uleb128 0xb
+ 1495 00af 27       		.uleb128 0x2e
+ 1496 00b0 0C       		.byte	0x1
+ 1497 00b1 49       		.uleb128 0x3f
+ 1498 00b2 13       		.uleb128 0xc
+ 1499 00b3 11       		.uleb128 0x3
+ 1500 00b4 01       		.uleb128 0xe
+ 1501 00b5 12       		.uleb128 0x3a
+ 1502 00b6 01       		.uleb128 0xb
+ 1503 00b7 40       		.uleb128 0x3b
+ 1504 00b8 0A       		.uleb128 0x5
+ 1505 00b9 9742     		.uleb128 0x27
+ 1506 00bb 0C       		.uleb128 0xc
+ 1507 00bc 00       		.uleb128 0x49
+ 1508 00bd 00       		.uleb128 0x13
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cccIH5Mc.s 			page 41
+
+
+ 1509 00be 00       		.uleb128 0x11
+ 1510              		.uleb128 0x1
+ 1511              		.uleb128 0x12
+ 1512              		.uleb128 0x1
+ 1513 0000 9C000000 		.uleb128 0x40
+ 1514 0004 A0000000 		.uleb128 0xa
+ 1515 0008 0100     		.uleb128 0x2117
+ 1516 000a 50       		.uleb128 0xc
+ 1517 000b A0000000 		.byte	0
+ 1518 000f A2000000 		.byte	0
+ 1519 0013 0400     		.byte	0
+ 1520 0015 F3       		.section	.debug_loc,"",%progbits
+ 1521 0016 01       	.Ldebug_loc0:
+ 1522 0017 50       	.LLST24:
+ 1523 0018 9F       		.4byte	.LVL38
+ 1524 0019 00000000 		.4byte	.LVL39
+ 1525 001d 00000000 		.2byte	0x1
+ 1526              		.byte	0x50
+ 1527 0021 9C000000 		.4byte	.LVL39
+ 1528 0025 A0000000 		.4byte	.LFE21
+ 1529 0029 0200     		.2byte	0x4
+ 1530 002b 30       		.byte	0xf3
+ 1531 002c 9F       		.uleb128 0x1
+ 1532 002d A0000000 		.byte	0x50
+ 1533 0031 A2000000 		.byte	0x9f
+ 1534 0035 0100     		.4byte	0
+ 1535 0037 50       		.4byte	0
+ 1536 0038 00000000 	.LLST25:
+ 1537 003c 00000000 		.4byte	.LVL38
+ 1538              		.4byte	.LVL39
+ 1539 0040 94000000 		.2byte	0x2
+ 1540 0044 9A000000 		.byte	0x30
+ 1541 0048 0100     		.byte	0x9f
+ 1542 004a 50       		.4byte	.LVL39
+ 1543 004b 9A000000 		.4byte	.LFE21
+ 1544 004f 9C000000 		.2byte	0x1
+ 1545 0053 0400     		.byte	0x50
+ 1546 0055 F3       		.4byte	0
+ 1547 0056 01       		.4byte	0
+ 1548 0057 50       	.LLST22:
+ 1549 0058 9F       		.4byte	.LVL35
+ 1550 0059 00000000 		.4byte	.LVL37
+ 1551 005d 00000000 		.2byte	0x1
+ 1552              		.byte	0x50
+ 1553 0061 94000000 		.4byte	.LVL37
+ 1554 0065 98000000 		.4byte	.LFE20
+ 1555 0069 0200     		.2byte	0x4
+ 1556 006b 30       		.byte	0xf3
+ 1557 006c 9F       		.uleb128 0x1
+ 1558 006d 9A000000 		.byte	0x50
+ 1559 0071 9C000000 		.byte	0x9f
+ 1560 0075 0100     		.4byte	0
+ 1561 0077 50       		.4byte	0
+ 1562 0078 00000000 	.LLST23:
+ 1563 007c 00000000 		.4byte	.LVL35
+ 1564              		.4byte	.LVL36
+ 1565 0080 8C000000 		.2byte	0x2
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cccIH5Mc.s 			page 42
+
+
+ 1566 0084 92000000 		.byte	0x30
+ 1567 0088 0100     		.byte	0x9f
+ 1568 008a 50       		.4byte	.LVL37
+ 1569 008b 92000000 		.4byte	.LFE20
+ 1570 008f 94000000 		.2byte	0x1
+ 1571 0093 0400     		.byte	0x50
+ 1572 0095 F3       		.4byte	0
+ 1573 0096 01       		.4byte	0
+ 1574 0097 50       	.LLST20:
+ 1575 0098 9F       		.4byte	.LVL32
+ 1576 0099 00000000 		.4byte	.LVL34
+ 1577 009d 00000000 		.2byte	0x1
+ 1578              		.byte	0x50
+ 1579 00a1 8C000000 		.4byte	.LVL34
+ 1580 00a5 90000000 		.4byte	.LFE19
+ 1581 00a9 0200     		.2byte	0x4
+ 1582 00ab 30       		.byte	0xf3
+ 1583 00ac 9F       		.uleb128 0x1
+ 1584 00ad 92000000 		.byte	0x50
+ 1585 00b1 94000000 		.byte	0x9f
+ 1586 00b5 0100     		.4byte	0
+ 1587 00b7 50       		.4byte	0
+ 1588 00b8 00000000 	.LLST21:
+ 1589 00bc 00000000 		.4byte	.LVL32
+ 1590              		.4byte	.LVL33
+ 1591 00c0 84000000 		.2byte	0x2
+ 1592 00c4 88000000 		.byte	0x30
+ 1593 00c8 0100     		.byte	0x9f
+ 1594 00ca 50       		.4byte	.LVL34
+ 1595 00cb 88000000 		.4byte	.LFE19
+ 1596 00cf 8A000000 		.2byte	0x1
+ 1597 00d3 0400     		.byte	0x50
+ 1598 00d5 F3       		.4byte	0
+ 1599 00d6 01       		.4byte	0
+ 1600 00d7 50       	.LLST18:
+ 1601 00d8 9F       		.4byte	.LVL30
+ 1602 00d9 00000000 		.4byte	.LVL31
+ 1603 00dd 00000000 		.2byte	0x1
+ 1604              		.byte	0x50
+ 1605 00e1 84000000 		.4byte	.LVL31
+ 1606 00e5 88000000 		.4byte	.LFE18
+ 1607 00e9 0200     		.2byte	0x4
+ 1608 00eb 30       		.byte	0xf3
+ 1609 00ec 9F       		.uleb128 0x1
+ 1610 00ed 88000000 		.byte	0x50
+ 1611 00f1 8A000000 		.byte	0x9f
+ 1612 00f5 0100     		.4byte	0
+ 1613 00f7 50       		.4byte	0
+ 1614 00f8 00000000 	.LLST19:
+ 1615 00fc 00000000 		.4byte	.LVL30
+ 1616              		.4byte	.LVL31
+ 1617 0100 7C000000 		.2byte	0x2
+ 1618 0104 80000000 		.byte	0x30
+ 1619 0108 0100     		.byte	0x9f
+ 1620 010a 50       		.4byte	.LVL31
+ 1621 010b 80000000 		.4byte	.LFE18
+ 1622 010f 84000000 		.2byte	0x1
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cccIH5Mc.s 			page 43
+
+
+ 1623 0113 0400     		.byte	0x50
+ 1624 0115 F3       		.4byte	0
+ 1625 0116 01       		.4byte	0
+ 1626 0117 50       	.LLST16:
+ 1627 0118 9F       		.4byte	.LVL28
+ 1628 0119 00000000 		.4byte	.LVL29
+ 1629 011d 00000000 		.2byte	0x1
+ 1630              		.byte	0x50
+ 1631 0121 7C000000 		.4byte	.LVL29
+ 1632 0125 80000000 		.4byte	.LFE17
+ 1633 0129 0200     		.2byte	0x4
+ 1634 012b 30       		.byte	0xf3
+ 1635 012c 9F       		.uleb128 0x1
+ 1636 012d 80000000 		.byte	0x50
+ 1637 0131 84000000 		.byte	0x9f
+ 1638 0135 0100     		.4byte	0
+ 1639 0137 50       		.4byte	0
+ 1640 0138 00000000 	.LLST17:
+ 1641 013c 00000000 		.4byte	.LVL28
+ 1642              		.4byte	.LVL29
+ 1643 0140 74000000 		.2byte	0x2
+ 1644 0144 78000000 		.byte	0x30
+ 1645 0148 0100     		.byte	0x9f
+ 1646 014a 50       		.4byte	.LVL29
+ 1647 014b 78000000 		.4byte	.LFE17
+ 1648 014f 7C000000 		.2byte	0x1
+ 1649 0153 0400     		.byte	0x50
+ 1650 0155 F3       		.4byte	0
+ 1651 0156 01       		.4byte	0
+ 1652 0157 50       	.LLST14:
+ 1653 0158 9F       		.4byte	.LVL26
+ 1654 0159 00000000 		.4byte	.LVL27
+ 1655 015d 00000000 		.2byte	0x1
+ 1656              		.byte	0x50
+ 1657 0161 74000000 		.4byte	.LVL27
+ 1658 0165 78000000 		.4byte	.LFE16
+ 1659 0169 0200     		.2byte	0x4
+ 1660 016b 30       		.byte	0xf3
+ 1661 016c 9F       		.uleb128 0x1
+ 1662 016d 78000000 		.byte	0x50
+ 1663 0171 7C000000 		.byte	0x9f
+ 1664 0175 0100     		.4byte	0
+ 1665 0177 50       		.4byte	0
+ 1666 0178 00000000 	.LLST15:
+ 1667 017c 00000000 		.4byte	.LVL26
+ 1668              		.4byte	.LVL27
+ 1669 0180 6C000000 		.2byte	0x2
+ 1670 0184 70000000 		.byte	0x30
+ 1671 0188 0100     		.byte	0x9f
+ 1672 018a 50       		.4byte	.LVL27
+ 1673 018b 70000000 		.4byte	.LFE16
+ 1674 018f 72000000 		.2byte	0x1
+ 1675 0193 0400     		.byte	0x50
+ 1676 0195 F3       		.4byte	0
+ 1677 0196 01       		.4byte	0
+ 1678 0197 50       	.LLST12:
+ 1679 0198 9F       		.4byte	.LVL24
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cccIH5Mc.s 			page 44
+
+
+ 1680 0199 00000000 		.4byte	.LVL25
+ 1681 019d 00000000 		.2byte	0x1
+ 1682              		.byte	0x50
+ 1683 01a1 6C000000 		.4byte	.LVL25
+ 1684 01a5 70000000 		.4byte	.LFE15
+ 1685 01a9 0200     		.2byte	0x4
+ 1686 01ab 30       		.byte	0xf3
+ 1687 01ac 9F       		.uleb128 0x1
+ 1688 01ad 70000000 		.byte	0x50
+ 1689 01b1 72000000 		.byte	0x9f
+ 1690 01b5 0100     		.4byte	0
+ 1691 01b7 50       		.4byte	0
+ 1692 01b8 00000000 	.LLST13:
+ 1693 01bc 00000000 		.4byte	.LVL24
+ 1694              		.4byte	.LVL25
+ 1695 01c0 68000000 		.2byte	0x2
+ 1696 01c4 6A000000 		.byte	0x30
+ 1697 01c8 0100     		.byte	0x9f
+ 1698 01ca 50       		.4byte	.LVL25
+ 1699 01cb 6A000000 		.4byte	.LFE15
+ 1700 01cf 6C000000 		.2byte	0x1
+ 1701 01d3 0400     		.byte	0x50
+ 1702 01d5 F3       		.4byte	0
+ 1703 01d6 01       		.4byte	0
+ 1704 01d7 50       	.LLST10:
+ 1705 01d8 9F       		.4byte	.LVL22
+ 1706 01d9 00000000 		.4byte	.LVL23
+ 1707 01dd 00000000 		.2byte	0x1
+ 1708              		.byte	0x50
+ 1709 01e1 68000000 		.4byte	.LVL23
+ 1710 01e5 6A000000 		.4byte	.LFE14
+ 1711 01e9 0200     		.2byte	0x4
+ 1712 01eb 30       		.byte	0xf3
+ 1713 01ec 9F       		.uleb128 0x1
+ 1714 01ed 6A000000 		.byte	0x50
+ 1715 01f1 6C000000 		.byte	0x9f
+ 1716 01f5 0100     		.4byte	0
+ 1717 01f7 50       		.4byte	0
+ 1718 01f8 00000000 	.LLST11:
+ 1719 01fc 00000000 		.4byte	.LVL22
+ 1720              		.4byte	.LVL23
+ 1721 0200 64000000 		.2byte	0x2
+ 1722 0204 66000000 		.byte	0x30
+ 1723 0208 0100     		.byte	0x9f
+ 1724 020a 50       		.4byte	.LVL23
+ 1725 020b 66000000 		.4byte	.LFE14
+ 1726 020f 68000000 		.2byte	0x1
+ 1727 0213 0400     		.byte	0x50
+ 1728 0215 F3       		.4byte	0
+ 1729 0216 01       		.4byte	0
+ 1730 0217 50       	.LLST8:
+ 1731 0218 9F       		.4byte	.LVL20
+ 1732 0219 00000000 		.4byte	.LVL21
+ 1733 021d 00000000 		.2byte	0x1
+ 1734              		.byte	0x50
+ 1735 0221 64000000 		.4byte	.LVL21
+ 1736 0225 66000000 		.4byte	.LFE13
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cccIH5Mc.s 			page 45
+
+
+ 1737 0229 0200     		.2byte	0x4
+ 1738 022b 30       		.byte	0xf3
+ 1739 022c 9F       		.uleb128 0x1
+ 1740 022d 66000000 		.byte	0x50
+ 1741 0231 68000000 		.byte	0x9f
+ 1742 0235 0100     		.4byte	0
+ 1743 0237 50       		.4byte	0
+ 1744 0238 00000000 	.LLST9:
+ 1745 023c 00000000 		.4byte	.LVL20
+ 1746              		.4byte	.LVL21
+ 1747 0240 60000000 		.2byte	0x2
+ 1748 0244 62000000 		.byte	0x30
+ 1749 0248 0100     		.byte	0x9f
+ 1750 024a 50       		.4byte	.LVL21
+ 1751 024b 62000000 		.4byte	.LFE13
+ 1752 024f 64000000 		.2byte	0x1
+ 1753 0253 0400     		.byte	0x50
+ 1754 0255 F3       		.4byte	0
+ 1755 0256 01       		.4byte	0
+ 1756 0257 50       	.LLST6:
+ 1757 0258 9F       		.4byte	.LVL18
+ 1758 0259 00000000 		.4byte	.LVL19
+ 1759 025d 00000000 		.2byte	0x1
+ 1760              		.byte	0x50
+ 1761 0261 60000000 		.4byte	.LVL19
+ 1762 0265 62000000 		.4byte	.LFE12
+ 1763 0269 0200     		.2byte	0x4
+ 1764 026b 30       		.byte	0xf3
+ 1765 026c 9F       		.uleb128 0x1
+ 1766 026d 62000000 		.byte	0x50
+ 1767 0271 64000000 		.byte	0x9f
+ 1768 0275 0100     		.4byte	0
+ 1769 0277 50       		.4byte	0
+ 1770 0278 00000000 	.LLST7:
+ 1771 027c 00000000 		.4byte	.LVL18
+ 1772              		.4byte	.LVL19
+ 1773 0280 50000000 		.2byte	0x2
+ 1774 0284 54000000 		.byte	0x30
+ 1775 0288 0200     		.byte	0x9f
+ 1776 028a 30       		.4byte	.LVL19
+ 1777 028b 9F       		.4byte	.LFE12
+ 1778 028c 54000000 		.2byte	0x1
+ 1779 0290 56000000 		.byte	0x50
+ 1780 0294 0100     		.4byte	0
+ 1781 0296 50       		.4byte	0
+ 1782 0297 00000000 	.LLST5:
+ 1783 029b 00000000 		.4byte	.LVL15
+ 1784              		.4byte	.LVL16
+ 1785 029f 40000000 		.2byte	0x2
+ 1786 02a3 44000000 		.byte	0x30
+ 1787 02a7 0200     		.byte	0x9f
+ 1788 02a9 30       		.4byte	.LVL16
+ 1789 02aa 9F       		.4byte	.LFE10
+ 1790 02ab 44000000 		.2byte	0x1
+ 1791 02af 46000000 		.byte	0x50
+ 1792 02b3 0100     		.4byte	0
+ 1793 02b5 50       		.4byte	0
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cccIH5Mc.s 			page 46
+
+
+ 1794 02b6 00000000 	.LLST4:
+ 1795 02ba 00000000 		.4byte	.LVL12
+ 1796              		.4byte	.LVL13
+ 1797 02be 30000000 		.2byte	0x2
+ 1798 02c2 34000000 		.byte	0x30
+ 1799 02c6 0200     		.byte	0x9f
+ 1800 02c8 30       		.4byte	.LVL13
+ 1801 02c9 9F       		.4byte	.LFE8
+ 1802 02ca 34000000 		.2byte	0x1
+ 1803 02ce 36000000 		.byte	0x50
+ 1804 02d2 0100     		.4byte	0
+ 1805 02d4 50       		.4byte	0
+ 1806 02d5 00000000 	.LLST3:
+ 1807 02d9 00000000 		.4byte	.LVL9
+ 1808              		.4byte	.LVL10
+ 1809 02dd 20000000 		.2byte	0x2
+ 1810 02e1 24000000 		.byte	0x30
+ 1811 02e5 0200     		.byte	0x9f
+ 1812 02e7 30       		.4byte	.LVL10
+ 1813 02e8 9F       		.4byte	.LFE6
+ 1814 02e9 24000000 		.2byte	0x1
+ 1815 02ed 26000000 		.byte	0x50
+ 1816 02f1 0100     		.4byte	0
+ 1817 02f3 50       		.4byte	0
+ 1818 02f4 00000000 	.LLST2:
+ 1819 02f8 00000000 		.4byte	.LVL6
+ 1820              		.4byte	.LVL7
+ 1821 02fc 10000000 		.2byte	0x2
+ 1822 0300 18000000 		.byte	0x30
+ 1823 0304 0200     		.byte	0x9f
+ 1824 0306 30       		.4byte	.LVL7
+ 1825 0307 9F       		.4byte	.LFE4
+ 1826 0308 18000000 		.2byte	0x1
+ 1827 030c 18000000 		.byte	0x50
+ 1828 0310 0100     		.4byte	0
+ 1829 0312 50       		.4byte	0
+ 1830 0313 00000000 	.LLST1:
+ 1831 0317 00000000 		.4byte	.LVL3
+ 1832              		.4byte	.LVL4
+ 1833 031b 00000000 		.2byte	0x2
+ 1834 031f 08000000 		.byte	0x30
+ 1835 0323 0200     		.byte	0x9f
+ 1836 0325 30       		.4byte	.LVL4
+ 1837 0326 9F       		.4byte	.LFE2
+ 1838 0327 08000000 		.2byte	0x1
+ 1839 032b 08000000 		.byte	0x50
+ 1840 032f 0100     		.4byte	0
+ 1841 0331 50       		.4byte	0
+ 1842 0332 00000000 	.LLST0:
+ 1843 0336 00000000 		.4byte	.LVL0
+ 1844              		.4byte	.LVL1
+ 1845 0000 1C000000 		.2byte	0x2
+ 1846 0004 0200     		.byte	0x30
+ 1847 0006 00000000 		.byte	0x9f
+ 1848 000a 04       		.4byte	.LVL1
+ 1849 000b 00       		.4byte	.LFE0
+ 1850 000c 0000     		.2byte	0x1
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cccIH5Mc.s 			page 47
+
+
+ 1851 000e 0000     		.byte	0x50
+ 1852 0010 00000000 		.4byte	0
+ 1853 0014 A2000000 		.4byte	0
+ 1854 0018 00000000 		.section	.debug_aranges,"",%progbits
+ 1855 001c 00000000 		.4byte	0x1c
+ 1856              		.2byte	0x2
+ 1857              		.4byte	.Ldebug_info0
+ 1858 0000 00000000 		.byte	0x4
+ 1859 0004 A2000000 		.byte	0
+ 1860 0008 00000000 		.2byte	0
+ 1861 000c 00000000 		.2byte	0
+ 1862              		.4byte	.Ltext0
+ 1863              		.4byte	.Letext0-.Ltext0
+ 1864 0000 30010000 		.4byte	0
+ 1864      0200AF00 
+ 1864      00000201 
+ 1864      FB0E0D00 
+ 1864      01010101 
+ 1865              		.4byte	0
+ 1866 0000 5F5F5354 		.section	.debug_ranges,"",%progbits
+ 1866      52455848 
+ 1866      00
+ 1867              	.Ldebug_ranges0:
+ 1868 0009 746F704F 		.4byte	.Ltext0
+ 1868      664D6169 
+ 1868      6E537461 
+ 1868      636B00
+ 1869              		.4byte	.Letext0
+ 1870 0018 5F5F7569 		.4byte	0
+ 1870      6E74385F 
+ 1870      7400
+ 1871              		.4byte	0
+ 1872 0022 5F5F7365 		.section	.debug_line,"",%progbits
+ 1872      745F434F 
+ 1872      4E54524F 
+ 1872      4C00
+ 1873              	.Ldebug_line0:
+ 1874 0030 5F5F696E 		.section	.debug_str,"MS",%progbits,1
+ 1874      7431365F 
+ 1874      7400
+ 1875              	.LASF22:
+ 1876 003a 76616C75 		.ascii	"__STREXH\000"
+ 1876      6500
+ 1877              	.LASF44:
+ 1878 0040 5F5F696E 		.ascii	"topOfMainStack\000"
+ 1878      7433325F 
+ 1878      7400
+ 1879              	.LASF2:
+ 1880 004a 5F5F5354 		.ascii	"__uint8_t\000"
+ 1880      52455857 
+ 1880      00
+ 1881              	.LASF34:
+ 1882 0053 746F704F 		.ascii	"__set_CONTROL\000"
+ 1882      6650726F 
+ 1882      63537461 
+ 1882      636B00
+ 1883              	.LASF3:
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cccIH5Mc.s 			page 48
+
+
+ 1884 0062 6661756C 		.ascii	"__int16_t\000"
+ 1884      744D6173 
+ 1884      6B00
+ 1885              	.LASF19:
+ 1886 006c 5F5F6765 		.ascii	"value\000"
+ 1886      745F4D53 
+ 1886      5000
+ 1887              	.LASF7:
+ 1888 0076 5F5F7365 		.ascii	"__int32_t\000"
+ 1888      745F4D53 
+ 1888      5000
+ 1889              	.LASF21:
+ 1890 0080 5F5F6765 		.ascii	"__STREXW\000"
+ 1890      745F4241 
+ 1890      53455052 
+ 1890      4900
+ 1891              	.LASF47:
+ 1892 008e 61646472 		.ascii	"topOfProcStack\000"
+ 1892      00
+ 1893              	.LASF36:
+ 1894 0093 5F5F5245 		.ascii	"faultMask\000"
+ 1894      56313600 
+ 1895              	.LASF45:
+ 1896 009b 756E7369 		.ascii	"__get_MSP\000"
+ 1896      676E6564 
+ 1896      20636861 
+ 1896      7200
+ 1897              	.LASF43:
+ 1898 00a9 5F5F6765 		.ascii	"__set_MSP\000"
+ 1898      745F5052 
+ 1898      494D4153 
+ 1898      4B00
+ 1899              	.LASF42:
+ 1900 00b7 5F5F7365 		.ascii	"__get_BASEPRI\000"
+ 1900      745F4641 
+ 1900      554C544D 
+ 1900      41534B00 
+ 1901              	.LASF20:
+ 1902 00c7 6C6F6E67 		.ascii	"addr\000"
+ 1902      20756E73 
+ 1902      69676E65 
+ 1902      6420696E 
+ 1902      7400
+ 1903              	.LASF30:
+ 1904 00d9 636F6E74 		.ascii	"__REV16\000"
+ 1904      726F6C00 
+ 1905              	.LASF1:
+ 1906 00e1 73686F72 		.ascii	"unsigned char\000"
+ 1906      7420756E 
+ 1906      7369676E 
+ 1906      65642069 
+ 1906      6E7400
+ 1907              	.LASF40:
+ 1908 00f4 5F5F5245 		.ascii	"__get_PRIMASK\000"
+ 1908      56534800 
+ 1909              	.LASF35:
+ 1910 00fc 5F5F7569 		.ascii	"__set_FAULTMASK\000"
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cccIH5Mc.s 			page 49
+
+
+ 1910      6E743136 
+ 1910      5F7400
+ 1911              	.LASF10:
+ 1912 0107 7072694D 		.ascii	"long unsigned int\000"
+ 1912      61736B00 
+ 1913              	.LASF32:
+ 1914 010f 5F5F7569 		.ascii	"control\000"
+ 1914      6E743332 
+ 1914      5F7400
+ 1915              	.LASF6:
+ 1916 011a 5F5F4C44 		.ascii	"short unsigned int\000"
+ 1916      52455857 
+ 1916      00
+ 1917              	.LASF29:
+ 1918 0123 2E2E2F2E 		.ascii	"__REVSH\000"
+ 1918      2E2F736F 
+ 1918      75726365 
+ 1918      2F737263 
+ 1918      2F434D53 
+ 1919              	.LASF5:
+ 1920 0145 756E7369 		.ascii	"__uint16_t\000"
+ 1920      676E6564 
+ 1920      20696E74 
+ 1920      00
+ 1921              	.LASF39:
+ 1922 0152 6C6F6E67 		.ascii	"priMask\000"
+ 1922      206C6F6E 
+ 1922      6720756E 
+ 1922      7369676E 
+ 1922      65642069 
+ 1923              	.LASF9:
+ 1924 0169 75696E74 		.ascii	"__uint32_t\000"
+ 1924      385F7400 
+ 1925              	.LASF25:
+ 1926 0171 72657375 		.ascii	"__LDREXW\000"
+ 1926      6C7400
+ 1927              	.LASF50:
+ 1928 0178 5F5F6765 		.ascii	"../../source/src/CMSIS/core_cm3.c\000"
+ 1928      745F5053 
+ 1928      5000
+ 1929              	.LASF13:
+ 1930 0182 696E7431 		.ascii	"unsigned int\000"
+ 1930      365F7400 
+ 1931              	.LASF12:
+ 1932 018a 696E7433 		.ascii	"long long unsigned int\000"
+ 1932      325F7400 
+ 1933              	.LASF14:
+ 1934 0192 5F5F7365 		.ascii	"uint8_t\000"
+ 1934      745F4241 
+ 1934      53455052 
+ 1934      4900
+ 1935              	.LASF23:
+ 1936 01a0 6C6F6E67 		.ascii	"result\000"
+ 1936      206C6F6E 
+ 1936      6720696E 
+ 1936      7400
+ 1937              	.LASF48:
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cccIH5Mc.s 			page 50
+
+
+ 1938 01ae 5F5F7365 		.ascii	"__get_PSP\000"
+ 1938      745F5052 
+ 1938      494D4153 
+ 1938      4B00
+ 1939              	.LASF15:
+ 1940 01bc 5F5F5245 		.ascii	"int16_t\000"
+ 1940      5600
+ 1941              	.LASF17:
+ 1942 01c2 5F5F7365 		.ascii	"int32_t\000"
+ 1942      745F5053 
+ 1942      5000
+ 1943              	.LASF41:
+ 1944 01cc 5F5F6765 		.ascii	"__set_BASEPRI\000"
+ 1944      745F434F 
+ 1944      4E54524F 
+ 1944      4C00
+ 1945              	.LASF11:
+ 1946 01da 5F5F5242 		.ascii	"long long int\000"
+ 1946      495400
+ 1947              	.LASF38:
+ 1948 01e1 73686F72 		.ascii	"__set_PRIMASK\000"
+ 1948      7420696E 
+ 1948      7400
+ 1949              	.LASF31:
+ 1950 01eb 75696E74 		.ascii	"__REV\000"
+ 1950      31365F74 
+ 1950      00
+ 1951              	.LASF46:
+ 1952 01f4 75696E74 		.ascii	"__set_PSP\000"
+ 1952      33325F74 
+ 1952      00
+ 1953              	.LASF33:
+ 1954 01fd 6C6F6E67 		.ascii	"__get_CONTROL\000"
+ 1954      20696E74 
+ 1954      00
+ 1955              	.LASF28:
+ 1956 0206 474E5520 		.ascii	"__RBIT\000"
+ 1956      43313120 
+ 1956      372E332E 
+ 1956      31203230 
+ 1956      31383036 
+ 1957 0239 616E6368 	.LASF4:
+ 1957      20726576 
+ 1957      6973696F 
+ 1957      6E203236 
+ 1957      31393037 
+ 1958 026c 732D6672 		.ascii	"short int\000"
+ 1958      616D6520 
+ 1958      2D6D7468 
+ 1958      756D622D 
+ 1958      696E7465 
+ 1959 029f 67647761 	.LASF16:
+ 1959      72662D32 
+ 1959      202D4F32 
+ 1959      00
+ 1960              		.ascii	"uint16_t\000"
+ 1961 02ac 7369676E 	.LASF18:
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cccIH5Mc.s 			page 51
+
+
+ 1961      65642063 
+ 1961      68617200 
+ 1962              		.ascii	"uint32_t\000"
+ 1963 02b8 5F5F4C44 	.LASF8:
+ 1963      52455842 
+ 1963      00
+ 1964              		.ascii	"long int\000"
+ 1965 02c1 5F5F5354 	.LASF49:
+ 1965      52455842 
+ 1965      00
+ 1966              		.ascii	"GNU C11 7.3.1 20180622 (release) [ARM/embedded-7-br"
+ 1967 02ca 5F5F6765 		.ascii	"anch revision 261907] -mcpu=cortex-m3 -mthumb -mapc"
+ 1967      745F4641 
+ 1967      554C544D 
+ 1967      41534B00 
+ 1968              		.ascii	"s-frame -mthumb-interwork -mcpu=cortex-m3 -mthumb -"
+ 1969 02da 473A5C55 		.ascii	"gdwarf-2 -O2\000"
+ 1969      73657273 
+ 1969      5C4A6178 
+ 1969      625C4465 
+ 1969      736B746F 
+ 1970 0309 6F722067 	.LASF0:
+ 1970      63635C50 
+ 1970      726F6A65 
+ 1970      63745C52 
+ 1970      564D444B 
+ 1971              		.ascii	"signed char\000"
+ 1972 0325 5F5F4C44 	.LASF27:
+ 1972      52455848 
+ 1972      00
+ 1973              		.ascii	"__LDREXB\000"
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cccIH5Mc.s 			page 52
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 core_cm3.c
+G:\Users\Jaxb\AppData\Local\Temp\cccIH5Mc.s:15     .text:00000000 $t
+G:\Users\Jaxb\AppData\Local\Temp\cccIH5Mc.s:23     .text:00000000 __get_PSP
+G:\Users\Jaxb\AppData\Local\Temp\cccIH5Mc.s:55     .text:00000008 __set_PSP
+G:\Users\Jaxb\AppData\Local\Temp\cccIH5Mc.s:84     .text:00000010 __get_MSP
+G:\Users\Jaxb\AppData\Local\Temp\cccIH5Mc.s:115    .text:00000018 __set_MSP
+G:\Users\Jaxb\AppData\Local\Temp\cccIH5Mc.s:144    .text:00000020 __get_BASEPRI
+G:\Users\Jaxb\AppData\Local\Temp\cccIH5Mc.s:173    .text:00000028 __set_BASEPRI
+G:\Users\Jaxb\AppData\Local\Temp\cccIH5Mc.s:201    .text:00000030 __get_PRIMASK
+G:\Users\Jaxb\AppData\Local\Temp\cccIH5Mc.s:230    .text:00000038 __set_PRIMASK
+G:\Users\Jaxb\AppData\Local\Temp\cccIH5Mc.s:258    .text:00000040 __get_FAULTMASK
+G:\Users\Jaxb\AppData\Local\Temp\cccIH5Mc.s:287    .text:00000048 __set_FAULTMASK
+G:\Users\Jaxb\AppData\Local\Temp\cccIH5Mc.s:315    .text:00000050 __get_CONTROL
+G:\Users\Jaxb\AppData\Local\Temp\cccIH5Mc.s:344    .text:00000058 __set_CONTROL
+G:\Users\Jaxb\AppData\Local\Temp\cccIH5Mc.s:372    .text:00000060 __REV
+G:\Users\Jaxb\AppData\Local\Temp\cccIH5Mc.s:401    .text:00000064 __REV16
+G:\Users\Jaxb\AppData\Local\Temp\cccIH5Mc.s:430    .text:00000068 __REVSH
+G:\Users\Jaxb\AppData\Local\Temp\cccIH5Mc.s:459    .text:0000006c __RBIT
+G:\Users\Jaxb\AppData\Local\Temp\cccIH5Mc.s:488    .text:00000074 __LDREXB
+G:\Users\Jaxb\AppData\Local\Temp\cccIH5Mc.s:518    .text:0000007c __LDREXH
+G:\Users\Jaxb\AppData\Local\Temp\cccIH5Mc.s:548    .text:00000084 __LDREXW
+G:\Users\Jaxb\AppData\Local\Temp\cccIH5Mc.s:577    .text:0000008c __STREXB
+G:\Users\Jaxb\AppData\Local\Temp\cccIH5Mc.s:608    .text:00000094 __STREXH
+G:\Users\Jaxb\AppData\Local\Temp\cccIH5Mc.s:639    .text:0000009c __STREXW
+
+NO UNDEFINED SYMBOLS

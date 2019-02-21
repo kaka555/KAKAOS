@@ -1,0 +1,2279 @@
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZLTuri.s 			page 1
+
+
+   1              		.cpu cortex-m3
+   2              		.eabi_attribute 20, 1
+   3              		.eabi_attribute 21, 1
+   4              		.eabi_attribute 23, 3
+   5              		.eabi_attribute 24, 1
+   6              		.eabi_attribute 25, 1
+   7              		.eabi_attribute 26, 1
+   8              		.eabi_attribute 30, 2
+   9              		.eabi_attribute 34, 1
+  10              		.eabi_attribute 18, 4
+  11              		.file	"stm32f10x_exti.c"
+  12              		.text
+  13              	.Ltext0:
+  14              		.cfi_sections	.debug_frame
+  15              		.align	1
+  16              		.p2align 2,,3
+  17              		.global	EXTI_DeInit
+  18              		.syntax unified
+  19              		.thumb
+  20              		.thumb_func
+  21              		.fpu softvfp
+  22              		.type	EXTI_DeInit, %function
+  23              	EXTI_DeInit:
+  24              	.LFB29:
+  25              		.file 1 "../../source/src/FWlib/src/stm32f10x_exti.c"
+   1:../../source/src/FWlib/src/stm32f10x_exti.c **** /**
+   2:../../source/src/FWlib/src/stm32f10x_exti.c ****   ******************************************************************************
+   3:../../source/src/FWlib/src/stm32f10x_exti.c ****   * @file    stm32f10x_exti.c
+   4:../../source/src/FWlib/src/stm32f10x_exti.c ****   * @author  MCD Application Team
+   5:../../source/src/FWlib/src/stm32f10x_exti.c ****   * @version V3.5.0
+   6:../../source/src/FWlib/src/stm32f10x_exti.c ****   * @date    11-March-2011
+   7:../../source/src/FWlib/src/stm32f10x_exti.c ****   * @brief   This file provides all the EXTI firmware functions.
+   8:../../source/src/FWlib/src/stm32f10x_exti.c ****   ******************************************************************************
+   9:../../source/src/FWlib/src/stm32f10x_exti.c ****   * @attention
+  10:../../source/src/FWlib/src/stm32f10x_exti.c ****   *
+  11:../../source/src/FWlib/src/stm32f10x_exti.c ****   * THE PRESENT FIRMWARE WHICH IS FOR GUIDANCE ONLY AIMS AT PROVIDING CUSTOMERS
+  12:../../source/src/FWlib/src/stm32f10x_exti.c ****   * WITH CODING INFORMATION REGARDING THEIR PRODUCTS IN ORDER FOR THEM TO SAVE
+  13:../../source/src/FWlib/src/stm32f10x_exti.c ****   * TIME. AS A RESULT, STMICROELECTRONICS SHALL NOT BE HELD LIABLE FOR ANY
+  14:../../source/src/FWlib/src/stm32f10x_exti.c ****   * DIRECT, INDIRECT OR CONSEQUENTIAL DAMAGES WITH RESPECT TO ANY CLAIMS ARISING
+  15:../../source/src/FWlib/src/stm32f10x_exti.c ****   * FROM THE CONTENT OF SUCH FIRMWARE AND/OR THE USE MADE BY CUSTOMERS OF THE
+  16:../../source/src/FWlib/src/stm32f10x_exti.c ****   * CODING INFORMATION CONTAINED HEREIN IN CONNECTION WITH THEIR PRODUCTS.
+  17:../../source/src/FWlib/src/stm32f10x_exti.c ****   *
+  18:../../source/src/FWlib/src/stm32f10x_exti.c ****   * <h2><center>&copy; COPYRIGHT 2011 STMicroelectronics</center></h2>
+  19:../../source/src/FWlib/src/stm32f10x_exti.c ****   ******************************************************************************
+  20:../../source/src/FWlib/src/stm32f10x_exti.c ****   */
+  21:../../source/src/FWlib/src/stm32f10x_exti.c **** 
+  22:../../source/src/FWlib/src/stm32f10x_exti.c **** /* Includes ------------------------------------------------------------------*/
+  23:../../source/src/FWlib/src/stm32f10x_exti.c **** #include "stm32f10x_exti.h"
+  24:../../source/src/FWlib/src/stm32f10x_exti.c **** 
+  25:../../source/src/FWlib/src/stm32f10x_exti.c **** /** @addtogroup STM32F10x_StdPeriph_Driver
+  26:../../source/src/FWlib/src/stm32f10x_exti.c ****   * @{
+  27:../../source/src/FWlib/src/stm32f10x_exti.c ****   */
+  28:../../source/src/FWlib/src/stm32f10x_exti.c **** 
+  29:../../source/src/FWlib/src/stm32f10x_exti.c **** /** @defgroup EXTI 
+  30:../../source/src/FWlib/src/stm32f10x_exti.c ****   * @brief EXTI driver modules
+  31:../../source/src/FWlib/src/stm32f10x_exti.c ****   * @{
+  32:../../source/src/FWlib/src/stm32f10x_exti.c ****   */
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZLTuri.s 			page 2
+
+
+  33:../../source/src/FWlib/src/stm32f10x_exti.c **** 
+  34:../../source/src/FWlib/src/stm32f10x_exti.c **** /** @defgroup EXTI_Private_TypesDefinitions
+  35:../../source/src/FWlib/src/stm32f10x_exti.c ****   * @{
+  36:../../source/src/FWlib/src/stm32f10x_exti.c ****   */
+  37:../../source/src/FWlib/src/stm32f10x_exti.c **** 
+  38:../../source/src/FWlib/src/stm32f10x_exti.c **** /**
+  39:../../source/src/FWlib/src/stm32f10x_exti.c ****   * @}
+  40:../../source/src/FWlib/src/stm32f10x_exti.c ****   */
+  41:../../source/src/FWlib/src/stm32f10x_exti.c **** 
+  42:../../source/src/FWlib/src/stm32f10x_exti.c **** /** @defgroup EXTI_Private_Defines
+  43:../../source/src/FWlib/src/stm32f10x_exti.c ****   * @{
+  44:../../source/src/FWlib/src/stm32f10x_exti.c ****   */
+  45:../../source/src/FWlib/src/stm32f10x_exti.c **** 
+  46:../../source/src/FWlib/src/stm32f10x_exti.c **** #define EXTI_LINENONE    ((uint32_t)0x00000)  /* No interrupt selected */
+  47:../../source/src/FWlib/src/stm32f10x_exti.c **** 
+  48:../../source/src/FWlib/src/stm32f10x_exti.c **** /**
+  49:../../source/src/FWlib/src/stm32f10x_exti.c ****   * @}
+  50:../../source/src/FWlib/src/stm32f10x_exti.c ****   */
+  51:../../source/src/FWlib/src/stm32f10x_exti.c **** 
+  52:../../source/src/FWlib/src/stm32f10x_exti.c **** /** @defgroup EXTI_Private_Macros
+  53:../../source/src/FWlib/src/stm32f10x_exti.c ****   * @{
+  54:../../source/src/FWlib/src/stm32f10x_exti.c ****   */
+  55:../../source/src/FWlib/src/stm32f10x_exti.c **** 
+  56:../../source/src/FWlib/src/stm32f10x_exti.c **** /**
+  57:../../source/src/FWlib/src/stm32f10x_exti.c ****   * @}
+  58:../../source/src/FWlib/src/stm32f10x_exti.c ****   */
+  59:../../source/src/FWlib/src/stm32f10x_exti.c **** 
+  60:../../source/src/FWlib/src/stm32f10x_exti.c **** /** @defgroup EXTI_Private_Variables
+  61:../../source/src/FWlib/src/stm32f10x_exti.c ****   * @{
+  62:../../source/src/FWlib/src/stm32f10x_exti.c ****   */
+  63:../../source/src/FWlib/src/stm32f10x_exti.c **** 
+  64:../../source/src/FWlib/src/stm32f10x_exti.c **** /**
+  65:../../source/src/FWlib/src/stm32f10x_exti.c ****   * @}
+  66:../../source/src/FWlib/src/stm32f10x_exti.c ****   */
+  67:../../source/src/FWlib/src/stm32f10x_exti.c **** 
+  68:../../source/src/FWlib/src/stm32f10x_exti.c **** /** @defgroup EXTI_Private_FunctionPrototypes
+  69:../../source/src/FWlib/src/stm32f10x_exti.c ****   * @{
+  70:../../source/src/FWlib/src/stm32f10x_exti.c ****   */
+  71:../../source/src/FWlib/src/stm32f10x_exti.c **** 
+  72:../../source/src/FWlib/src/stm32f10x_exti.c **** /**
+  73:../../source/src/FWlib/src/stm32f10x_exti.c ****   * @}
+  74:../../source/src/FWlib/src/stm32f10x_exti.c ****   */
+  75:../../source/src/FWlib/src/stm32f10x_exti.c **** 
+  76:../../source/src/FWlib/src/stm32f10x_exti.c **** /** @defgroup EXTI_Private_Functions
+  77:../../source/src/FWlib/src/stm32f10x_exti.c ****   * @{
+  78:../../source/src/FWlib/src/stm32f10x_exti.c ****   */
+  79:../../source/src/FWlib/src/stm32f10x_exti.c **** 
+  80:../../source/src/FWlib/src/stm32f10x_exti.c **** /**
+  81:../../source/src/FWlib/src/stm32f10x_exti.c ****   * @brief  Deinitializes the EXTI peripheral registers to their default reset values.
+  82:../../source/src/FWlib/src/stm32f10x_exti.c ****   * @param  None
+  83:../../source/src/FWlib/src/stm32f10x_exti.c ****   * @retval None
+  84:../../source/src/FWlib/src/stm32f10x_exti.c ****   */
+  85:../../source/src/FWlib/src/stm32f10x_exti.c **** void EXTI_DeInit(void)
+  86:../../source/src/FWlib/src/stm32f10x_exti.c **** {
+  26              		.loc 1 86 0
+  27              		.cfi_startproc
+  28              		@ args = 0, pretend = 0, frame = 0
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZLTuri.s 			page 3
+
+
+  29              		@ frame_needed = 0, uses_anonymous_args = 0
+  30              		@ link register save eliminated.
+  87:../../source/src/FWlib/src/stm32f10x_exti.c ****   EXTI->IMR = 0x00000000;
+  31              		.loc 1 87 0
+  32 0000 0022     		movs	r2, #0
+  33 0002 044B     		ldr	r3, .L3
+  88:../../source/src/FWlib/src/stm32f10x_exti.c ****   EXTI->EMR = 0x00000000;
+  89:../../source/src/FWlib/src/stm32f10x_exti.c ****   EXTI->RTSR = 0x00000000; 
+  90:../../source/src/FWlib/src/stm32f10x_exti.c ****   EXTI->FTSR = 0x00000000; 
+  91:../../source/src/FWlib/src/stm32f10x_exti.c ****   EXTI->PR = 0x000FFFFF;
+  34              		.loc 1 91 0
+  35 0004 0449     		ldr	r1, .L3+4
+  87:../../source/src/FWlib/src/stm32f10x_exti.c ****   EXTI->IMR = 0x00000000;
+  36              		.loc 1 87 0
+  37 0006 1A60     		str	r2, [r3]
+  88:../../source/src/FWlib/src/stm32f10x_exti.c ****   EXTI->EMR = 0x00000000;
+  38              		.loc 1 88 0
+  39 0008 5A60     		str	r2, [r3, #4]
+  89:../../source/src/FWlib/src/stm32f10x_exti.c ****   EXTI->FTSR = 0x00000000; 
+  40              		.loc 1 89 0
+  41 000a 9A60     		str	r2, [r3, #8]
+  90:../../source/src/FWlib/src/stm32f10x_exti.c ****   EXTI->PR = 0x000FFFFF;
+  42              		.loc 1 90 0
+  43 000c DA60     		str	r2, [r3, #12]
+  44              		.loc 1 91 0
+  45 000e 5961     		str	r1, [r3, #20]
+  92:../../source/src/FWlib/src/stm32f10x_exti.c **** }
+  46              		.loc 1 92 0
+  47 0010 7047     		bx	lr
+  48              	.L4:
+  49 0012 00BF     		.align	2
+  50              	.L3:
+  51 0014 00040140 		.word	1073808384
+  52 0018 FFFF0F00 		.word	1048575
+  53              		.cfi_endproc
+  54              	.LFE29:
+  55              		.size	EXTI_DeInit, .-EXTI_DeInit
+  56              		.align	1
+  57              		.p2align 2,,3
+  58              		.global	EXTI_Init
+  59              		.syntax unified
+  60              		.thumb
+  61              		.thumb_func
+  62              		.fpu softvfp
+  63              		.type	EXTI_Init, %function
+  64              	EXTI_Init:
+  65              	.LFB30:
+  93:../../source/src/FWlib/src/stm32f10x_exti.c **** 
+  94:../../source/src/FWlib/src/stm32f10x_exti.c **** /**
+  95:../../source/src/FWlib/src/stm32f10x_exti.c ****   * @brief  Initializes the EXTI peripheral according to the specified
+  96:../../source/src/FWlib/src/stm32f10x_exti.c ****   *         parameters in the EXTI_InitStruct.
+  97:../../source/src/FWlib/src/stm32f10x_exti.c ****   * @param  EXTI_InitStruct: pointer to a EXTI_InitTypeDef structure
+  98:../../source/src/FWlib/src/stm32f10x_exti.c ****   *         that contains the configuration information for the EXTI peripheral.
+  99:../../source/src/FWlib/src/stm32f10x_exti.c ****   * @retval None
+ 100:../../source/src/FWlib/src/stm32f10x_exti.c ****   */
+ 101:../../source/src/FWlib/src/stm32f10x_exti.c **** void EXTI_Init(EXTI_InitTypeDef* EXTI_InitStruct)
+ 102:../../source/src/FWlib/src/stm32f10x_exti.c **** {
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZLTuri.s 			page 4
+
+
+  66              		.loc 1 102 0
+  67              		.cfi_startproc
+  68              		@ args = 0, pretend = 0, frame = 0
+  69              		@ frame_needed = 0, uses_anonymous_args = 0
+  70              		@ link register save eliminated.
+  71              	.LVL0:
+  72 001c 0379     		ldrb	r3, [r0, #4]	@ zero_extendqisi2
+  73 001e 70B4     		push	{r4, r5, r6}
+  74              	.LCFI0:
+  75              		.cfi_def_cfa_offset 12
+  76              		.cfi_offset 4, -12
+  77              		.cfi_offset 5, -8
+  78              		.cfi_offset 6, -4
+ 103:../../source/src/FWlib/src/stm32f10x_exti.c ****   uint32_t tmp = 0;
+ 104:../../source/src/FWlib/src/stm32f10x_exti.c **** 
+ 105:../../source/src/FWlib/src/stm32f10x_exti.c ****   /* Check the parameters */
+ 106:../../source/src/FWlib/src/stm32f10x_exti.c ****   assert_param(IS_EXTI_MODE(EXTI_InitStruct->EXTI_Mode));
+ 107:../../source/src/FWlib/src/stm32f10x_exti.c ****   assert_param(IS_EXTI_TRIGGER(EXTI_InitStruct->EXTI_Trigger));
+ 108:../../source/src/FWlib/src/stm32f10x_exti.c ****   assert_param(IS_EXTI_LINE(EXTI_InitStruct->EXTI_Line));  
+ 109:../../source/src/FWlib/src/stm32f10x_exti.c ****   assert_param(IS_FUNCTIONAL_STATE(EXTI_InitStruct->EXTI_LineCmd));
+ 110:../../source/src/FWlib/src/stm32f10x_exti.c **** 
+ 111:../../source/src/FWlib/src/stm32f10x_exti.c ****   tmp = (uint32_t)EXTI_BASE;
+ 112:../../source/src/FWlib/src/stm32f10x_exti.c ****      
+ 113:../../source/src/FWlib/src/stm32f10x_exti.c ****   if (EXTI_InitStruct->EXTI_LineCmd != DISABLE)
+  79              		.loc 1 113 0
+  80 0020 8279     		ldrb	r2, [r0, #6]	@ zero_extendqisi2
+  81 0022 0568     		ldr	r5, [r0]
+  82 0024 03F18043 		add	r3, r3, #1073741824
+  83 0028 03F58233 		add	r3, r3, #66560
+  84 002c EC43     		mvns	r4, r5
+  85 002e 1AB3     		cbz	r2, .L6
+ 114:../../source/src/FWlib/src/stm32f10x_exti.c ****   {
+ 115:../../source/src/FWlib/src/stm32f10x_exti.c ****     /* Clear EXTI line configuration */
+ 116:../../source/src/FWlib/src/stm32f10x_exti.c ****     EXTI->IMR &= ~EXTI_InitStruct->EXTI_Line;
+  86              		.loc 1 116 0
+  87 0030 184A     		ldr	r2, .L10
+ 117:../../source/src/FWlib/src/stm32f10x_exti.c ****     EXTI->EMR &= ~EXTI_InitStruct->EXTI_Line;
+ 118:../../source/src/FWlib/src/stm32f10x_exti.c ****     
+ 119:../../source/src/FWlib/src/stm32f10x_exti.c ****     tmp += EXTI_InitStruct->EXTI_Mode;
+ 120:../../source/src/FWlib/src/stm32f10x_exti.c **** 
+ 121:../../source/src/FWlib/src/stm32f10x_exti.c ****     *(__IO uint32_t *) tmp |= EXTI_InitStruct->EXTI_Line;
+ 122:../../source/src/FWlib/src/stm32f10x_exti.c **** 
+ 123:../../source/src/FWlib/src/stm32f10x_exti.c ****     /* Clear Rising Falling edge configuration */
+ 124:../../source/src/FWlib/src/stm32f10x_exti.c ****     EXTI->RTSR &= ~EXTI_InitStruct->EXTI_Line;
+ 125:../../source/src/FWlib/src/stm32f10x_exti.c ****     EXTI->FTSR &= ~EXTI_InitStruct->EXTI_Line;
+ 126:../../source/src/FWlib/src/stm32f10x_exti.c ****     
+ 127:../../source/src/FWlib/src/stm32f10x_exti.c ****     /* Select the trigger for the selected external interrupts */
+ 128:../../source/src/FWlib/src/stm32f10x_exti.c ****     if (EXTI_InitStruct->EXTI_Trigger == EXTI_Trigger_Rising_Falling)
+  88              		.loc 1 128 0
+  89 0032 4179     		ldrb	r1, [r0, #5]	@ zero_extendqisi2
+ 116:../../source/src/FWlib/src/stm32f10x_exti.c ****     EXTI->EMR &= ~EXTI_InitStruct->EXTI_Line;
+  90              		.loc 1 116 0
+  91 0034 1668     		ldr	r6, [r2]
+  92              		.loc 1 128 0
+  93 0036 1029     		cmp	r1, #16
+ 116:../../source/src/FWlib/src/stm32f10x_exti.c ****     EXTI->EMR &= ~EXTI_InitStruct->EXTI_Line;
+  94              		.loc 1 116 0
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZLTuri.s 			page 5
+
+
+  95 0038 06EA0406 		and	r6, r6, r4
+  96 003c 1660     		str	r6, [r2]
+ 117:../../source/src/FWlib/src/stm32f10x_exti.c ****     EXTI->EMR &= ~EXTI_InitStruct->EXTI_Line;
+  97              		.loc 1 117 0
+  98 003e 5668     		ldr	r6, [r2, #4]
+  99 0040 04EA0604 		and	r4, r4, r6
+ 100 0044 5460     		str	r4, [r2, #4]
+ 101              	.LVL1:
+ 121:../../source/src/FWlib/src/stm32f10x_exti.c **** 
+ 102              		.loc 1 121 0
+ 103 0046 1C68     		ldr	r4, [r3]
+ 104 0048 45EA0405 		orr	r5, r5, r4
+ 105 004c 1D60     		str	r5, [r3]
+ 124:../../source/src/FWlib/src/stm32f10x_exti.c ****     EXTI->FTSR &= ~EXTI_InitStruct->EXTI_Line;
+ 106              		.loc 1 124 0
+ 107 004e 0068     		ldr	r0, [r0]
+ 108              	.LVL2:
+ 109 0050 9468     		ldr	r4, [r2, #8]
+ 110 0052 6FEA0003 		mvn	r3, r0
+ 111 0056 04EA0304 		and	r4, r4, r3
+ 112 005a 9460     		str	r4, [r2, #8]
+ 125:../../source/src/FWlib/src/stm32f10x_exti.c ****     
+ 113              		.loc 1 125 0
+ 114 005c D468     		ldr	r4, [r2, #12]
+ 115 005e 03EA0403 		and	r3, r3, r4
+ 116 0062 D360     		str	r3, [r2, #12]
+ 117              		.loc 1 128 0
+ 118 0064 0DD0     		beq	.L9
+ 119              	.LVL3:
+ 129:../../source/src/FWlib/src/stm32f10x_exti.c ****     {
+ 130:../../source/src/FWlib/src/stm32f10x_exti.c ****       /* Rising Falling edge */
+ 131:../../source/src/FWlib/src/stm32f10x_exti.c ****       EXTI->RTSR |= EXTI_InitStruct->EXTI_Line;
+ 132:../../source/src/FWlib/src/stm32f10x_exti.c ****       EXTI->FTSR |= EXTI_InitStruct->EXTI_Line;
+ 133:../../source/src/FWlib/src/stm32f10x_exti.c ****     }
+ 134:../../source/src/FWlib/src/stm32f10x_exti.c ****     else
+ 135:../../source/src/FWlib/src/stm32f10x_exti.c ****     {
+ 136:../../source/src/FWlib/src/stm32f10x_exti.c ****       tmp = (uint32_t)EXTI_BASE;
+ 137:../../source/src/FWlib/src/stm32f10x_exti.c ****       tmp += EXTI_InitStruct->EXTI_Trigger;
+ 138:../../source/src/FWlib/src/stm32f10x_exti.c **** 
+ 139:../../source/src/FWlib/src/stm32f10x_exti.c ****       *(__IO uint32_t *) tmp |= EXTI_InitStruct->EXTI_Line;
+ 140:../../source/src/FWlib/src/stm32f10x_exti.c ****     }
+ 141:../../source/src/FWlib/src/stm32f10x_exti.c ****   }
+ 142:../../source/src/FWlib/src/stm32f10x_exti.c ****   else
+ 143:../../source/src/FWlib/src/stm32f10x_exti.c ****   {
+ 144:../../source/src/FWlib/src/stm32f10x_exti.c ****     tmp += EXTI_InitStruct->EXTI_Mode;
+ 145:../../source/src/FWlib/src/stm32f10x_exti.c **** 
+ 146:../../source/src/FWlib/src/stm32f10x_exti.c ****     /* Disable the selected external lines */
+ 147:../../source/src/FWlib/src/stm32f10x_exti.c ****     *(__IO uint32_t *) tmp &= ~EXTI_InitStruct->EXTI_Line;
+ 148:../../source/src/FWlib/src/stm32f10x_exti.c ****   }
+ 149:../../source/src/FWlib/src/stm32f10x_exti.c **** }
+ 120              		.loc 1 149 0
+ 121 0066 70BC     		pop	{r4, r5, r6}
+ 122              	.LCFI1:
+ 123              		.cfi_remember_state
+ 124              		.cfi_restore 6
+ 125              		.cfi_restore 5
+ 126              		.cfi_restore 4
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZLTuri.s 			page 6
+
+
+ 127              		.cfi_def_cfa_offset 0
+ 137:../../source/src/FWlib/src/stm32f10x_exti.c **** 
+ 128              		.loc 1 137 0
+ 129 0068 01F18043 		add	r3, r1, #1073741824
+ 130 006c 03F58233 		add	r3, r3, #66560
+ 139:../../source/src/FWlib/src/stm32f10x_exti.c ****     }
+ 131              		.loc 1 139 0
+ 132 0070 1A68     		ldr	r2, [r3]
+ 133 0072 1043     		orrs	r0, r0, r2
+ 134 0074 1860     		str	r0, [r3]
+ 135              		.loc 1 149 0
+ 136 0076 7047     		bx	lr
+ 137              	.LVL4:
+ 138              	.L6:
+ 139              	.LCFI2:
+ 140              		.cfi_restore_state
+ 147:../../source/src/FWlib/src/stm32f10x_exti.c ****   }
+ 141              		.loc 1 147 0
+ 142 0078 1A68     		ldr	r2, [r3]
+ 143 007a 1440     		ands	r4, r4, r2
+ 144 007c 1C60     		str	r4, [r3]
+ 145              		.loc 1 149 0
+ 146 007e 70BC     		pop	{r4, r5, r6}
+ 147              	.LCFI3:
+ 148              		.cfi_remember_state
+ 149              		.cfi_restore 6
+ 150              		.cfi_restore 5
+ 151              		.cfi_restore 4
+ 152              		.cfi_def_cfa_offset 0
+ 153 0080 7047     		bx	lr
+ 154              	.LVL5:
+ 155              	.L9:
+ 156              	.LCFI4:
+ 157              		.cfi_restore_state
+ 131:../../source/src/FWlib/src/stm32f10x_exti.c ****       EXTI->FTSR |= EXTI_InitStruct->EXTI_Line;
+ 158              		.loc 1 131 0
+ 159 0082 9368     		ldr	r3, [r2, #8]
+ 160              		.loc 1 149 0
+ 161 0084 70BC     		pop	{r4, r5, r6}
+ 162              	.LCFI5:
+ 163              		.cfi_restore 6
+ 164              		.cfi_restore 5
+ 165              		.cfi_restore 4
+ 166              		.cfi_def_cfa_offset 0
+ 131:../../source/src/FWlib/src/stm32f10x_exti.c ****       EXTI->FTSR |= EXTI_InitStruct->EXTI_Line;
+ 167              		.loc 1 131 0
+ 168 0086 0343     		orrs	r3, r3, r0
+ 169 0088 9360     		str	r3, [r2, #8]
+ 132:../../source/src/FWlib/src/stm32f10x_exti.c ****     }
+ 170              		.loc 1 132 0
+ 171 008a D368     		ldr	r3, [r2, #12]
+ 172 008c 1843     		orrs	r0, r0, r3
+ 173 008e D060     		str	r0, [r2, #12]
+ 174              		.loc 1 149 0
+ 175 0090 7047     		bx	lr
+ 176              	.L11:
+ 177 0092 00BF     		.align	2
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZLTuri.s 			page 7
+
+
+ 178              	.L10:
+ 179 0094 00040140 		.word	1073808384
+ 180              		.cfi_endproc
+ 181              	.LFE30:
+ 182              		.size	EXTI_Init, .-EXTI_Init
+ 183              		.align	1
+ 184              		.p2align 2,,3
+ 185              		.global	EXTI_StructInit
+ 186              		.syntax unified
+ 187              		.thumb
+ 188              		.thumb_func
+ 189              		.fpu softvfp
+ 190              		.type	EXTI_StructInit, %function
+ 191              	EXTI_StructInit:
+ 192              	.LFB31:
+ 150:../../source/src/FWlib/src/stm32f10x_exti.c **** 
+ 151:../../source/src/FWlib/src/stm32f10x_exti.c **** /**
+ 152:../../source/src/FWlib/src/stm32f10x_exti.c ****   * @brief  Fills each EXTI_InitStruct member with its reset value.
+ 153:../../source/src/FWlib/src/stm32f10x_exti.c ****   * @param  EXTI_InitStruct: pointer to a EXTI_InitTypeDef structure which will
+ 154:../../source/src/FWlib/src/stm32f10x_exti.c ****   *         be initialized.
+ 155:../../source/src/FWlib/src/stm32f10x_exti.c ****   * @retval None
+ 156:../../source/src/FWlib/src/stm32f10x_exti.c ****   */
+ 157:../../source/src/FWlib/src/stm32f10x_exti.c **** void EXTI_StructInit(EXTI_InitTypeDef* EXTI_InitStruct)
+ 158:../../source/src/FWlib/src/stm32f10x_exti.c **** {
+ 193              		.loc 1 158 0
+ 194              		.cfi_startproc
+ 195              		@ args = 0, pretend = 0, frame = 0
+ 196              		@ frame_needed = 0, uses_anonymous_args = 0
+ 197              		@ link register save eliminated.
+ 198              	.LVL6:
+ 159:../../source/src/FWlib/src/stm32f10x_exti.c ****   EXTI_InitStruct->EXTI_Line = EXTI_LINENONE;
+ 199              		.loc 1 159 0
+ 200 0098 0023     		movs	r3, #0
+ 160:../../source/src/FWlib/src/stm32f10x_exti.c ****   EXTI_InitStruct->EXTI_Mode = EXTI_Mode_Interrupt;
+ 161:../../source/src/FWlib/src/stm32f10x_exti.c ****   EXTI_InitStruct->EXTI_Trigger = EXTI_Trigger_Falling;
+ 201              		.loc 1 161 0
+ 202 009a 0C22     		movs	r2, #12
+ 159:../../source/src/FWlib/src/stm32f10x_exti.c ****   EXTI_InitStruct->EXTI_Line = EXTI_LINENONE;
+ 203              		.loc 1 159 0
+ 204 009c 0360     		str	r3, [r0]
+ 205              		.loc 1 161 0
+ 206 009e 4271     		strb	r2, [r0, #5]
+ 160:../../source/src/FWlib/src/stm32f10x_exti.c ****   EXTI_InitStruct->EXTI_Mode = EXTI_Mode_Interrupt;
+ 207              		.loc 1 160 0
+ 208 00a0 0371     		strb	r3, [r0, #4]
+ 162:../../source/src/FWlib/src/stm32f10x_exti.c ****   EXTI_InitStruct->EXTI_LineCmd = DISABLE;
+ 209              		.loc 1 162 0
+ 210 00a2 8371     		strb	r3, [r0, #6]
+ 163:../../source/src/FWlib/src/stm32f10x_exti.c **** }
+ 211              		.loc 1 163 0
+ 212 00a4 7047     		bx	lr
+ 213              		.cfi_endproc
+ 214              	.LFE31:
+ 215              		.size	EXTI_StructInit, .-EXTI_StructInit
+ 216              		.align	1
+ 217 00a6 00BF     		.p2align 2,,3
+ 218              		.global	EXTI_GenerateSWInterrupt
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZLTuri.s 			page 8
+
+
+ 219              		.syntax unified
+ 220              		.thumb
+ 221              		.thumb_func
+ 222              		.fpu softvfp
+ 223              		.type	EXTI_GenerateSWInterrupt, %function
+ 224              	EXTI_GenerateSWInterrupt:
+ 225              	.LFB32:
+ 164:../../source/src/FWlib/src/stm32f10x_exti.c **** 
+ 165:../../source/src/FWlib/src/stm32f10x_exti.c **** /**
+ 166:../../source/src/FWlib/src/stm32f10x_exti.c ****   * @brief  Generates a Software interrupt.
+ 167:../../source/src/FWlib/src/stm32f10x_exti.c ****   * @param  EXTI_Line: specifies the EXTI lines to be enabled or disabled.
+ 168:../../source/src/FWlib/src/stm32f10x_exti.c ****   *   This parameter can be any combination of EXTI_Linex where x can be (0..19).
+ 169:../../source/src/FWlib/src/stm32f10x_exti.c ****   * @retval None
+ 170:../../source/src/FWlib/src/stm32f10x_exti.c ****   */
+ 171:../../source/src/FWlib/src/stm32f10x_exti.c **** void EXTI_GenerateSWInterrupt(uint32_t EXTI_Line)
+ 172:../../source/src/FWlib/src/stm32f10x_exti.c **** {
+ 226              		.loc 1 172 0
+ 227              		.cfi_startproc
+ 228              		@ args = 0, pretend = 0, frame = 0
+ 229              		@ frame_needed = 0, uses_anonymous_args = 0
+ 230              		@ link register save eliminated.
+ 231              	.LVL7:
+ 173:../../source/src/FWlib/src/stm32f10x_exti.c ****   /* Check the parameters */
+ 174:../../source/src/FWlib/src/stm32f10x_exti.c ****   assert_param(IS_EXTI_LINE(EXTI_Line));
+ 175:../../source/src/FWlib/src/stm32f10x_exti.c ****   
+ 176:../../source/src/FWlib/src/stm32f10x_exti.c ****   EXTI->SWIER |= EXTI_Line;
+ 232              		.loc 1 176 0
+ 233 00a8 024A     		ldr	r2, .L14
+ 234 00aa 1369     		ldr	r3, [r2, #16]
+ 235 00ac 1843     		orrs	r0, r0, r3
+ 236              	.LVL8:
+ 237 00ae 1061     		str	r0, [r2, #16]
+ 177:../../source/src/FWlib/src/stm32f10x_exti.c **** }
+ 238              		.loc 1 177 0
+ 239 00b0 7047     		bx	lr
+ 240              	.L15:
+ 241 00b2 00BF     		.align	2
+ 242              	.L14:
+ 243 00b4 00040140 		.word	1073808384
+ 244              		.cfi_endproc
+ 245              	.LFE32:
+ 246              		.size	EXTI_GenerateSWInterrupt, .-EXTI_GenerateSWInterrupt
+ 247              		.align	1
+ 248              		.p2align 2,,3
+ 249              		.global	EXTI_GetFlagStatus
+ 250              		.syntax unified
+ 251              		.thumb
+ 252              		.thumb_func
+ 253              		.fpu softvfp
+ 254              		.type	EXTI_GetFlagStatus, %function
+ 255              	EXTI_GetFlagStatus:
+ 256              	.LFB33:
+ 178:../../source/src/FWlib/src/stm32f10x_exti.c **** 
+ 179:../../source/src/FWlib/src/stm32f10x_exti.c **** /**
+ 180:../../source/src/FWlib/src/stm32f10x_exti.c ****   * @brief  Checks whether the specified EXTI line flag is set or not.
+ 181:../../source/src/FWlib/src/stm32f10x_exti.c ****   * @param  EXTI_Line: specifies the EXTI line flag to check.
+ 182:../../source/src/FWlib/src/stm32f10x_exti.c ****   *   This parameter can be:
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZLTuri.s 			page 9
+
+
+ 183:../../source/src/FWlib/src/stm32f10x_exti.c ****   *     @arg EXTI_Linex: External interrupt line x where x(0..19)
+ 184:../../source/src/FWlib/src/stm32f10x_exti.c ****   * @retval The new state of EXTI_Line (SET or RESET).
+ 185:../../source/src/FWlib/src/stm32f10x_exti.c ****   */
+ 186:../../source/src/FWlib/src/stm32f10x_exti.c **** FlagStatus EXTI_GetFlagStatus(uint32_t EXTI_Line)
+ 187:../../source/src/FWlib/src/stm32f10x_exti.c **** {
+ 257              		.loc 1 187 0
+ 258              		.cfi_startproc
+ 259              		@ args = 0, pretend = 0, frame = 0
+ 260              		@ frame_needed = 0, uses_anonymous_args = 0
+ 261              		@ link register save eliminated.
+ 262              	.LVL9:
+ 188:../../source/src/FWlib/src/stm32f10x_exti.c ****   FlagStatus bitstatus = RESET;
+ 189:../../source/src/FWlib/src/stm32f10x_exti.c ****   /* Check the parameters */
+ 190:../../source/src/FWlib/src/stm32f10x_exti.c ****   assert_param(IS_GET_EXTI_LINE(EXTI_Line));
+ 191:../../source/src/FWlib/src/stm32f10x_exti.c ****   
+ 192:../../source/src/FWlib/src/stm32f10x_exti.c ****   if ((EXTI->PR & EXTI_Line) != (uint32_t)RESET)
+ 263              		.loc 1 192 0
+ 264 00b8 034B     		ldr	r3, .L17
+ 265 00ba 5B69     		ldr	r3, [r3, #20]
+ 266              	.LVL10:
+ 267 00bc 0342     		tst	r3, r0
+ 193:../../source/src/FWlib/src/stm32f10x_exti.c ****   {
+ 194:../../source/src/FWlib/src/stm32f10x_exti.c ****     bitstatus = SET;
+ 195:../../source/src/FWlib/src/stm32f10x_exti.c ****   }
+ 196:../../source/src/FWlib/src/stm32f10x_exti.c ****   else
+ 197:../../source/src/FWlib/src/stm32f10x_exti.c ****   {
+ 198:../../source/src/FWlib/src/stm32f10x_exti.c ****     bitstatus = RESET;
+ 199:../../source/src/FWlib/src/stm32f10x_exti.c ****   }
+ 200:../../source/src/FWlib/src/stm32f10x_exti.c ****   return bitstatus;
+ 201:../../source/src/FWlib/src/stm32f10x_exti.c **** }
+ 268              		.loc 1 201 0
+ 269 00be 14BF     		ite	ne
+ 270 00c0 0120     		movne	r0, #1
+ 271              	.LVL11:
+ 272 00c2 0020     		moveq	r0, #0
+ 273 00c4 7047     		bx	lr
+ 274              	.L18:
+ 275 00c6 00BF     		.align	2
+ 276              	.L17:
+ 277 00c8 00040140 		.word	1073808384
+ 278              		.cfi_endproc
+ 279              	.LFE33:
+ 280              		.size	EXTI_GetFlagStatus, .-EXTI_GetFlagStatus
+ 281              		.align	1
+ 282              		.p2align 2,,3
+ 283              		.global	EXTI_ClearFlag
+ 284              		.syntax unified
+ 285              		.thumb
+ 286              		.thumb_func
+ 287              		.fpu softvfp
+ 288              		.type	EXTI_ClearFlag, %function
+ 289              	EXTI_ClearFlag:
+ 290              	.LFB34:
+ 202:../../source/src/FWlib/src/stm32f10x_exti.c **** 
+ 203:../../source/src/FWlib/src/stm32f10x_exti.c **** /**
+ 204:../../source/src/FWlib/src/stm32f10x_exti.c ****   * @brief  Clears the EXTI's line pending flags.
+ 205:../../source/src/FWlib/src/stm32f10x_exti.c ****   * @param  EXTI_Line: specifies the EXTI lines flags to clear.
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZLTuri.s 			page 10
+
+
+ 206:../../source/src/FWlib/src/stm32f10x_exti.c ****   *   This parameter can be any combination of EXTI_Linex where x can be (0..19).
+ 207:../../source/src/FWlib/src/stm32f10x_exti.c ****   * @retval None
+ 208:../../source/src/FWlib/src/stm32f10x_exti.c ****   */
+ 209:../../source/src/FWlib/src/stm32f10x_exti.c **** void EXTI_ClearFlag(uint32_t EXTI_Line)
+ 210:../../source/src/FWlib/src/stm32f10x_exti.c **** {
+ 291              		.loc 1 210 0
+ 292              		.cfi_startproc
+ 293              		@ args = 0, pretend = 0, frame = 0
+ 294              		@ frame_needed = 0, uses_anonymous_args = 0
+ 295              		@ link register save eliminated.
+ 296              	.LVL12:
+ 211:../../source/src/FWlib/src/stm32f10x_exti.c ****   /* Check the parameters */
+ 212:../../source/src/FWlib/src/stm32f10x_exti.c ****   assert_param(IS_EXTI_LINE(EXTI_Line));
+ 213:../../source/src/FWlib/src/stm32f10x_exti.c ****   
+ 214:../../source/src/FWlib/src/stm32f10x_exti.c ****   EXTI->PR = EXTI_Line;
+ 297              		.loc 1 214 0
+ 298 00cc 014B     		ldr	r3, .L20
+ 299 00ce 5861     		str	r0, [r3, #20]
+ 215:../../source/src/FWlib/src/stm32f10x_exti.c **** }
+ 300              		.loc 1 215 0
+ 301 00d0 7047     		bx	lr
+ 302              	.L21:
+ 303 00d2 00BF     		.align	2
+ 304              	.L20:
+ 305 00d4 00040140 		.word	1073808384
+ 306              		.cfi_endproc
+ 307              	.LFE34:
+ 308              		.size	EXTI_ClearFlag, .-EXTI_ClearFlag
+ 309              		.align	1
+ 310              		.p2align 2,,3
+ 311              		.global	EXTI_GetITStatus
+ 312              		.syntax unified
+ 313              		.thumb
+ 314              		.thumb_func
+ 315              		.fpu softvfp
+ 316              		.type	EXTI_GetITStatus, %function
+ 317              	EXTI_GetITStatus:
+ 318              	.LFB35:
+ 216:../../source/src/FWlib/src/stm32f10x_exti.c **** 
+ 217:../../source/src/FWlib/src/stm32f10x_exti.c **** /**
+ 218:../../source/src/FWlib/src/stm32f10x_exti.c ****   * @brief  Checks whether the specified EXTI line is asserted or not.
+ 219:../../source/src/FWlib/src/stm32f10x_exti.c ****   * @param  EXTI_Line: specifies the EXTI line to check.
+ 220:../../source/src/FWlib/src/stm32f10x_exti.c ****   *   This parameter can be:
+ 221:../../source/src/FWlib/src/stm32f10x_exti.c ****   *     @arg EXTI_Linex: External interrupt line x where x(0..19)
+ 222:../../source/src/FWlib/src/stm32f10x_exti.c ****   * @retval The new state of EXTI_Line (SET or RESET).
+ 223:../../source/src/FWlib/src/stm32f10x_exti.c ****   */
+ 224:../../source/src/FWlib/src/stm32f10x_exti.c **** ITStatus EXTI_GetITStatus(uint32_t EXTI_Line)
+ 225:../../source/src/FWlib/src/stm32f10x_exti.c **** {
+ 319              		.loc 1 225 0
+ 320              		.cfi_startproc
+ 321              		@ args = 0, pretend = 0, frame = 0
+ 322              		@ frame_needed = 0, uses_anonymous_args = 0
+ 323              		@ link register save eliminated.
+ 324              	.LVL13:
+ 226:../../source/src/FWlib/src/stm32f10x_exti.c ****   ITStatus bitstatus = RESET;
+ 227:../../source/src/FWlib/src/stm32f10x_exti.c ****   uint32_t enablestatus = 0;
+ 228:../../source/src/FWlib/src/stm32f10x_exti.c ****   /* Check the parameters */
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZLTuri.s 			page 11
+
+
+ 229:../../source/src/FWlib/src/stm32f10x_exti.c ****   assert_param(IS_GET_EXTI_LINE(EXTI_Line));
+ 230:../../source/src/FWlib/src/stm32f10x_exti.c ****   
+ 231:../../source/src/FWlib/src/stm32f10x_exti.c ****   enablestatus =  EXTI->IMR & EXTI_Line;
+ 325              		.loc 1 231 0
+ 326 00d8 054B     		ldr	r3, .L25
+ 327 00da 1A68     		ldr	r2, [r3]
+ 328              	.LVL14:
+ 232:../../source/src/FWlib/src/stm32f10x_exti.c ****   if (((EXTI->PR & EXTI_Line) != (uint32_t)RESET) && (enablestatus != (uint32_t)RESET))
+ 329              		.loc 1 232 0
+ 330 00dc 5B69     		ldr	r3, [r3, #20]
+ 331 00de 0340     		ands	r3, r3, r0
+ 332 00e0 04D0     		beq	.L24
+ 333              		.loc 1 232 0 is_stmt 0 discriminator 1
+ 334 00e2 0242     		tst	r2, r0
+ 233:../../source/src/FWlib/src/stm32f10x_exti.c ****   {
+ 234:../../source/src/FWlib/src/stm32f10x_exti.c ****     bitstatus = SET;
+ 335              		.loc 1 234 0 is_stmt 1 discriminator 1
+ 336 00e4 14BF     		ite	ne
+ 337 00e6 0120     		movne	r0, #1
+ 338              	.LVL15:
+ 339 00e8 0020     		moveq	r0, #0
+ 340 00ea 7047     		bx	lr
+ 341              	.LVL16:
+ 342              	.L24:
+ 235:../../source/src/FWlib/src/stm32f10x_exti.c ****   }
+ 236:../../source/src/FWlib/src/stm32f10x_exti.c ****   else
+ 237:../../source/src/FWlib/src/stm32f10x_exti.c ****   {
+ 238:../../source/src/FWlib/src/stm32f10x_exti.c ****     bitstatus = RESET;
+ 343              		.loc 1 238 0
+ 344 00ec 1846     		mov	r0, r3
+ 345              	.LVL17:
+ 239:../../source/src/FWlib/src/stm32f10x_exti.c ****   }
+ 240:../../source/src/FWlib/src/stm32f10x_exti.c ****   return bitstatus;
+ 241:../../source/src/FWlib/src/stm32f10x_exti.c **** }
+ 346              		.loc 1 241 0
+ 347 00ee 7047     		bx	lr
+ 348              	.L26:
+ 349              		.align	2
+ 350              	.L25:
+ 351 00f0 00040140 		.word	1073808384
+ 352              		.cfi_endproc
+ 353              	.LFE35:
+ 354              		.size	EXTI_GetITStatus, .-EXTI_GetITStatus
+ 355              		.align	1
+ 356              		.p2align 2,,3
+ 357              		.global	EXTI_ClearITPendingBit
+ 358              		.syntax unified
+ 359              		.thumb
+ 360              		.thumb_func
+ 361              		.fpu softvfp
+ 362              		.type	EXTI_ClearITPendingBit, %function
+ 363              	EXTI_ClearITPendingBit:
+ 364              	.LFB38:
+ 365              		.cfi_startproc
+ 366              		@ args = 0, pretend = 0, frame = 0
+ 367              		@ frame_needed = 0, uses_anonymous_args = 0
+ 368              		@ link register save eliminated.
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZLTuri.s 			page 12
+
+
+ 369 00f4 014B     		ldr	r3, .L28
+ 370 00f6 5861     		str	r0, [r3, #20]
+ 371 00f8 7047     		bx	lr
+ 372              	.L29:
+ 373 00fa 00BF     		.align	2
+ 374              	.L28:
+ 375 00fc 00040140 		.word	1073808384
+ 376              		.cfi_endproc
+ 377              	.LFE38:
+ 378              		.size	EXTI_ClearITPendingBit, .-EXTI_ClearITPendingBit
+ 379              	.Letext0:
+ 380              		.file 2 "f:\\arm\\gcc2018\\arm-none-eabi\\include\\machine\\_default_types.h"
+ 381              		.file 3 "f:\\arm\\gcc2018\\arm-none-eabi\\include\\sys\\_stdint.h"
+ 382              		.file 4 "../../source/include/core_cm3.h"
+ 383              		.file 5 "../../source/include/system_stm32f10x.h"
+ 384              		.file 6 "../../source/include/stm32f10x.h"
+ 385              		.file 7 "../../source/src/FWlib/inc/stm32f10x_exti.h"
+ 386              		.section	.debug_info,"",%progbits
+ 387              	.Ldebug_info0:
+ 388 0000 7F030000 		.4byte	0x37f
+ 389 0004 0200     		.2byte	0x2
+ 390 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 391 000a 04       		.byte	0x4
+ 392 000b 01       		.uleb128 0x1
+ 393 000c 55020000 		.4byte	.LASF43
+ 394 0010 0C       		.byte	0xc
+ 395 0011 03030000 		.4byte	.LASF44
+ 396 0015 55030000 		.4byte	.LASF45
+ 397 0019 00000000 		.4byte	.Ltext0
+ 398 001d 00010000 		.4byte	.Letext0
+ 399 0021 00000000 		.4byte	.Ldebug_line0
+ 400 0025 02       		.uleb128 0x2
+ 401 0026 01       		.byte	0x1
+ 402 0027 06       		.byte	0x6
+ 403 0028 D2010000 		.4byte	.LASF0
+ 404 002c 02       		.uleb128 0x2
+ 405 002d 01       		.byte	0x1
+ 406 002e 08       		.byte	0x8
+ 407 002f E6000000 		.4byte	.LASF1
+ 408 0033 02       		.uleb128 0x2
+ 409 0034 02       		.byte	0x2
+ 410 0035 05       		.byte	0x5
+ 411 0036 39020000 		.4byte	.LASF2
+ 412 003a 02       		.uleb128 0x2
+ 413 003b 02       		.byte	0x2
+ 414 003c 07       		.byte	0x7
+ 415 003d 64000000 		.4byte	.LASF3
+ 416 0041 02       		.uleb128 0x2
+ 417 0042 04       		.byte	0x4
+ 418 0043 05       		.byte	0x5
+ 419 0044 4C020000 		.4byte	.LASF4
+ 420 0048 03       		.uleb128 0x3
+ 421 0049 56010000 		.4byte	.LASF9
+ 422 004d 02       		.byte	0x2
+ 423 004e 4F       		.byte	0x4f
+ 424 004f 53000000 		.4byte	0x53
+ 425 0053 02       		.uleb128 0x2
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZLTuri.s 			page 13
+
+
+ 426 0054 04       		.byte	0x4
+ 427 0055 07       		.byte	0x7
+ 428 0056 0E010000 		.4byte	.LASF5
+ 429 005a 02       		.uleb128 0x2
+ 430 005b 08       		.byte	0x8
+ 431 005c 05       		.byte	0x5
+ 432 005d F3010000 		.4byte	.LASF6
+ 433 0061 02       		.uleb128 0x2
+ 434 0062 08       		.byte	0x8
+ 435 0063 07       		.byte	0x7
+ 436 0064 BB010000 		.4byte	.LASF7
+ 437 0068 04       		.uleb128 0x4
+ 438 0069 04       		.byte	0x4
+ 439 006a 05       		.byte	0x5
+ 440 006b 696E7400 		.ascii	"int\000"
+ 441 006f 05       		.uleb128 0x5
+ 442 0070 68000000 		.4byte	0x68
+ 443 0074 02       		.uleb128 0x2
+ 444 0075 04       		.byte	0x4
+ 445 0076 07       		.byte	0x7
+ 446 0077 91010000 		.4byte	.LASF8
+ 447 007b 03       		.uleb128 0x3
+ 448 007c 43020000 		.4byte	.LASF10
+ 449 0080 03       		.byte	0x3
+ 450 0081 30       		.byte	0x30
+ 451 0082 48000000 		.4byte	0x48
+ 452 0086 05       		.uleb128 0x5
+ 453 0087 7B000000 		.4byte	0x7b
+ 454 008b 06       		.uleb128 0x6
+ 455 008c 44010000 		.4byte	.LASF11
+ 456 0090 04       		.byte	0x4
+ 457 0091 CE06     		.2byte	0x6ce
+ 458 0093 6F000000 		.4byte	0x6f
+ 459 0097 01       		.byte	0x1
+ 460 0098 01       		.byte	0x1
+ 461 0099 07       		.uleb128 0x7
+ 462 009a 01020000 		.4byte	.LASF12
+ 463 009e 05       		.byte	0x5
+ 464 009f 35       		.byte	0x35
+ 465 00a0 7B000000 		.4byte	0x7b
+ 466 00a4 01       		.byte	0x1
+ 467 00a5 01       		.byte	0x1
+ 468 00a6 08       		.uleb128 0x8
+ 469 00a7 07       		.byte	0x7
+ 470 00a8 01       		.byte	0x1
+ 471 00a9 2C000000 		.4byte	0x2c
+ 472 00ad 06       		.byte	0x6
+ 473 00ae 0702     		.2byte	0x207
+ 474 00b0 C1000000 		.4byte	0xc1
+ 475 00b4 09       		.uleb128 0x9
+ 476 00b5 20010000 		.4byte	.LASF13
+ 477 00b9 00       		.byte	0
+ 478 00ba 0A       		.uleb128 0xa
+ 479 00bb 53455400 		.ascii	"SET\000"
+ 480 00bf 01       		.byte	0x1
+ 481 00c0 00       		.byte	0
+ 482 00c1 0B       		.uleb128 0xb
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZLTuri.s 			page 14
+
+
+ 483 00c2 F4000000 		.4byte	.LASF14
+ 484 00c6 06       		.byte	0x6
+ 485 00c7 0702     		.2byte	0x207
+ 486 00c9 A6000000 		.4byte	0xa6
+ 487 00cd 0B       		.uleb128 0xb
+ 488 00ce 14000000 		.4byte	.LASF15
+ 489 00d2 06       		.byte	0x6
+ 490 00d3 0702     		.2byte	0x207
+ 491 00d5 A6000000 		.4byte	0xa6
+ 492 00d9 08       		.uleb128 0x8
+ 493 00da 07       		.byte	0x7
+ 494 00db 01       		.byte	0x1
+ 495 00dc 2C000000 		.4byte	0x2c
+ 496 00e0 06       		.byte	0x6
+ 497 00e1 0902     		.2byte	0x209
+ 498 00e3 F4000000 		.4byte	0xf4
+ 499 00e7 09       		.uleb128 0x9
+ 500 00e8 FB020000 		.4byte	.LASF16
+ 501 00ec 00       		.byte	0
+ 502 00ed 09       		.uleb128 0x9
+ 503 00ee DF000000 		.4byte	.LASF17
+ 504 00f2 01       		.byte	0x1
+ 505 00f3 00       		.byte	0
+ 506 00f4 0B       		.uleb128 0xb
+ 507 00f5 8B000000 		.4byte	.LASF18
+ 508 00f9 06       		.byte	0x6
+ 509 00fa 0902     		.2byte	0x209
+ 510 00fc D9000000 		.4byte	0xd9
+ 511 0100 0C       		.uleb128 0xc
+ 512 0101 18       		.byte	0x18
+ 513 0102 06       		.byte	0x6
+ 514 0103 7703     		.2byte	0x377
+ 515 0105 63010000 		.4byte	0x163
+ 516 0109 0D       		.uleb128 0xd
+ 517 010a 494D5200 		.ascii	"IMR\000"
+ 518 010e 06       		.byte	0x6
+ 519 010f 7903     		.2byte	0x379
+ 520 0111 86000000 		.4byte	0x86
+ 521 0115 02       		.byte	0x2
+ 522 0116 23       		.byte	0x23
+ 523 0117 00       		.uleb128 0
+ 524 0118 0D       		.uleb128 0xd
+ 525 0119 454D5200 		.ascii	"EMR\000"
+ 526 011d 06       		.byte	0x6
+ 527 011e 7A03     		.2byte	0x37a
+ 528 0120 86000000 		.4byte	0x86
+ 529 0124 02       		.byte	0x2
+ 530 0125 23       		.byte	0x23
+ 531 0126 04       		.uleb128 0x4
+ 532 0127 0E       		.uleb128 0xe
+ 533 0128 51010000 		.4byte	.LASF19
+ 534 012c 06       		.byte	0x6
+ 535 012d 7B03     		.2byte	0x37b
+ 536 012f 86000000 		.4byte	0x86
+ 537 0133 02       		.byte	0x2
+ 538 0134 23       		.byte	0x23
+ 539 0135 08       		.uleb128 0x8
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZLTuri.s 			page 15
+
+
+ 540 0136 0E       		.uleb128 0xe
+ 541 0137 A0030000 		.4byte	.LASF20
+ 542 013b 06       		.byte	0x6
+ 543 013c 7C03     		.2byte	0x37c
+ 544 013e 86000000 		.4byte	0x86
+ 545 0142 02       		.byte	0x2
+ 546 0143 23       		.byte	0x23
+ 547 0144 0C       		.uleb128 0xc
+ 548 0145 0E       		.uleb128 0xe
+ 549 0146 43030000 		.4byte	.LASF21
+ 550 014a 06       		.byte	0x6
+ 551 014b 7D03     		.2byte	0x37d
+ 552 014d 86000000 		.4byte	0x86
+ 553 0151 02       		.byte	0x2
+ 554 0152 23       		.byte	0x23
+ 555 0153 10       		.uleb128 0x10
+ 556 0154 0D       		.uleb128 0xd
+ 557 0155 505200   		.ascii	"PR\000"
+ 558 0158 06       		.byte	0x6
+ 559 0159 7E03     		.2byte	0x37e
+ 560 015b 86000000 		.4byte	0x86
+ 561 015f 02       		.byte	0x2
+ 562 0160 23       		.byte	0x23
+ 563 0161 14       		.uleb128 0x14
+ 564 0162 00       		.byte	0
+ 565 0163 0B       		.uleb128 0xb
+ 566 0164 37010000 		.4byte	.LASF22
+ 567 0168 06       		.byte	0x6
+ 568 0169 7F03     		.2byte	0x37f
+ 569 016b 00010000 		.4byte	0x100
+ 570 016f 0F       		.uleb128 0xf
+ 571 0170 07       		.byte	0x7
+ 572 0171 01       		.byte	0x1
+ 573 0172 2C000000 		.4byte	0x2c
+ 574 0176 07       		.byte	0x7
+ 575 0177 33       		.byte	0x33
+ 576 0178 89010000 		.4byte	0x189
+ 577 017c 09       		.uleb128 0x9
+ 578 017d 77000000 		.4byte	.LASF23
+ 579 0181 00       		.byte	0
+ 580 0182 09       		.uleb128 0x9
+ 581 0183 54000000 		.4byte	.LASF24
+ 582 0187 04       		.byte	0x4
+ 583 0188 00       		.byte	0
+ 584 0189 03       		.uleb128 0x3
+ 585 018a 26010000 		.4byte	.LASF25
+ 586 018e 07       		.byte	0x7
+ 587 018f 36       		.byte	0x36
+ 588 0190 6F010000 		.4byte	0x16f
+ 589 0194 0F       		.uleb128 0xf
+ 590 0195 07       		.byte	0x7
+ 591 0196 01       		.byte	0x1
+ 592 0197 2C000000 		.4byte	0x2c
+ 593 019b 07       		.byte	0x7
+ 594 019c 3F       		.byte	0x3f
+ 595 019d B4010000 		.4byte	0x1b4
+ 596 01a1 09       		.uleb128 0x9
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZLTuri.s 			page 16
+
+
+ 597 01a2 61010000 		.4byte	.LASF26
+ 598 01a6 08       		.byte	0x8
+ 599 01a7 09       		.uleb128 0x9
+ 600 01a8 DE010000 		.4byte	.LASF27
+ 601 01ac 0C       		.byte	0xc
+ 602 01ad 09       		.uleb128 0x9
+ 603 01ae 75010000 		.4byte	.LASF28
+ 604 01b2 10       		.byte	0x10
+ 605 01b3 00       		.byte	0
+ 606 01b4 03       		.uleb128 0x3
+ 607 01b5 2F030000 		.4byte	.LASF29
+ 608 01b9 07       		.byte	0x7
+ 609 01ba 43       		.byte	0x43
+ 610 01bb 94010000 		.4byte	0x194
+ 611 01bf 10       		.uleb128 0x10
+ 612 01c0 08       		.byte	0x8
+ 613 01c1 07       		.byte	0x7
+ 614 01c2 4C       		.byte	0x4c
+ 615 01c3 00020000 		.4byte	0x200
+ 616 01c7 11       		.uleb128 0x11
+ 617 01c8 00000000 		.4byte	.LASF30
+ 618 01cc 07       		.byte	0x7
+ 619 01cd 4E       		.byte	0x4e
+ 620 01ce 7B000000 		.4byte	0x7b
+ 621 01d2 02       		.byte	0x2
+ 622 01d3 23       		.byte	0x23
+ 623 01d4 00       		.uleb128 0
+ 624 01d5 11       		.uleb128 0x11
+ 625 01d6 0A000000 		.4byte	.LASF31
+ 626 01da 07       		.byte	0x7
+ 627 01db 51       		.byte	0x51
+ 628 01dc 89010000 		.4byte	0x189
+ 629 01e0 02       		.byte	0x2
+ 630 01e1 23       		.byte	0x23
+ 631 01e2 04       		.uleb128 0x4
+ 632 01e3 11       		.uleb128 0x11
+ 633 01e4 37000000 		.4byte	.LASF32
+ 634 01e8 07       		.byte	0x7
+ 635 01e9 54       		.byte	0x54
+ 636 01ea B4010000 		.4byte	0x1b4
+ 637 01ee 02       		.byte	0x2
+ 638 01ef 23       		.byte	0x23
+ 639 01f0 05       		.uleb128 0x5
+ 640 01f1 11       		.uleb128 0x11
+ 641 01f2 2A000000 		.4byte	.LASF33
+ 642 01f6 07       		.byte	0x7
+ 643 01f7 57       		.byte	0x57
+ 644 01f8 F4000000 		.4byte	0xf4
+ 645 01fc 02       		.byte	0x2
+ 646 01fd 23       		.byte	0x23
+ 647 01fe 06       		.uleb128 0x6
+ 648 01ff 00       		.byte	0
+ 649 0200 03       		.uleb128 0x3
+ 650 0201 BE000000 		.4byte	.LASF34
+ 651 0205 07       		.byte	0x7
+ 652 0206 59       		.byte	0x59
+ 653 0207 BF010000 		.4byte	0x1bf
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZLTuri.s 			page 17
+
+
+ 654 020b 12       		.uleb128 0x12
+ 655 020c 01       		.byte	0x1
+ 656 020d 22020000 		.4byte	.LASF46
+ 657 0211 01       		.byte	0x1
+ 658 0212 F9       		.byte	0xf9
+ 659 0213 01       		.byte	0x1
+ 660 0214 24020000 		.4byte	0x224
+ 661 0218 13       		.uleb128 0x13
+ 662 0219 00000000 		.4byte	.LASF30
+ 663 021d 01       		.byte	0x1
+ 664 021e F9       		.byte	0xf9
+ 665 021f 7B000000 		.4byte	0x7b
+ 666 0223 00       		.byte	0
+ 667 0224 14       		.uleb128 0x14
+ 668 0225 01       		.byte	0x1
+ 669 0226 11020000 		.4byte	.LASF37
+ 670 022a 01       		.byte	0x1
+ 671 022b E0       		.byte	0xe0
+ 672 022c 01       		.byte	0x1
+ 673 022d CD000000 		.4byte	0xcd
+ 674 0231 D8000000 		.4byte	.LFB35
+ 675 0235 F4000000 		.4byte	.LFE35
+ 676 0239 02       		.byte	0x2
+ 677 023a 7D       		.byte	0x7d
+ 678 023b 00       		.sleb128 0
+ 679 023c 01       		.byte	0x1
+ 680 023d 6F020000 		.4byte	0x26f
+ 681 0241 15       		.uleb128 0x15
+ 682 0242 00000000 		.4byte	.LASF30
+ 683 0246 01       		.byte	0x1
+ 684 0247 E0       		.byte	0xe0
+ 685 0248 7B000000 		.4byte	0x7b
+ 686 024c 00000000 		.4byte	.LLST6
+ 687 0250 16       		.uleb128 0x16
+ 688 0251 9B000000 		.4byte	.LASF35
+ 689 0255 01       		.byte	0x1
+ 690 0256 E2       		.byte	0xe2
+ 691 0257 CD000000 		.4byte	0xcd
+ 692 025b 3A000000 		.4byte	.LLST7
+ 693 025f 16       		.uleb128 0x16
+ 694 0260 1D000000 		.4byte	.LASF36
+ 695 0264 01       		.byte	0x1
+ 696 0265 E3       		.byte	0xe3
+ 697 0266 7B000000 		.4byte	0x7b
+ 698 026a 59000000 		.4byte	.LLST8
+ 699 026e 00       		.byte	0
+ 700 026f 17       		.uleb128 0x17
+ 701 0270 01       		.byte	0x1
+ 702 0271 FF000000 		.4byte	.LASF47
+ 703 0275 01       		.byte	0x1
+ 704 0276 D1       		.byte	0xd1
+ 705 0277 01       		.byte	0x1
+ 706 0278 01       		.byte	0x1
+ 707 0279 89020000 		.4byte	0x289
+ 708 027d 13       		.uleb128 0x13
+ 709 027e 00000000 		.4byte	.LASF30
+ 710 0282 01       		.byte	0x1
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZLTuri.s 			page 18
+
+
+ 711 0283 D1       		.byte	0xd1
+ 712 0284 7B000000 		.4byte	0x7b
+ 713 0288 00       		.byte	0
+ 714 0289 14       		.uleb128 0x14
+ 715 028a 01       		.byte	0x1
+ 716 028b A8010000 		.4byte	.LASF38
+ 717 028f 01       		.byte	0x1
+ 718 0290 BA       		.byte	0xba
+ 719 0291 01       		.byte	0x1
+ 720 0292 C1000000 		.4byte	0xc1
+ 721 0296 B8000000 		.4byte	.LFB33
+ 722 029a CC000000 		.4byte	.LFE33
+ 723 029e 02       		.byte	0x2
+ 724 029f 7D       		.byte	0x7d
+ 725 02a0 00       		.sleb128 0
+ 726 02a1 01       		.byte	0x1
+ 727 02a2 C5020000 		.4byte	0x2c5
+ 728 02a6 15       		.uleb128 0x15
+ 729 02a7 00000000 		.4byte	.LASF30
+ 730 02ab 01       		.byte	0x1
+ 731 02ac BA       		.byte	0xba
+ 732 02ad 7B000000 		.4byte	0x7b
+ 733 02b1 AF000000 		.4byte	.LLST4
+ 734 02b5 16       		.uleb128 0x16
+ 735 02b6 9B000000 		.4byte	.LASF35
+ 736 02ba 01       		.byte	0x1
+ 737 02bb BC       		.byte	0xbc
+ 738 02bc C1000000 		.4byte	0xc1
+ 739 02c0 D0000000 		.4byte	.LLST5
+ 740 02c4 00       		.byte	0
+ 741 02c5 18       		.uleb128 0x18
+ 742 02c6 01       		.byte	0x1
+ 743 02c7 A5000000 		.4byte	.LASF39
+ 744 02cb 01       		.byte	0x1
+ 745 02cc AB       		.byte	0xab
+ 746 02cd 01       		.byte	0x1
+ 747 02ce A8000000 		.4byte	.LFB32
+ 748 02d2 B8000000 		.4byte	.LFE32
+ 749 02d6 02       		.byte	0x2
+ 750 02d7 7D       		.byte	0x7d
+ 751 02d8 00       		.sleb128 0
+ 752 02d9 01       		.byte	0x1
+ 753 02da EE020000 		.4byte	0x2ee
+ 754 02de 15       		.uleb128 0x15
+ 755 02df 00000000 		.4byte	.LASF30
+ 756 02e3 01       		.byte	0x1
+ 757 02e4 AB       		.byte	0xab
+ 758 02e5 7B000000 		.4byte	0x7b
+ 759 02e9 09010000 		.4byte	.LLST3
+ 760 02ed 00       		.byte	0
+ 761 02ee 18       		.uleb128 0x18
+ 762 02ef 01       		.byte	0x1
+ 763 02f0 44000000 		.4byte	.LASF40
+ 764 02f4 01       		.byte	0x1
+ 765 02f5 9D       		.byte	0x9d
+ 766 02f6 01       		.byte	0x1
+ 767 02f7 98000000 		.4byte	.LFB31
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZLTuri.s 			page 19
+
+
+ 768 02fb A6000000 		.4byte	.LFE31
+ 769 02ff 02       		.byte	0x2
+ 770 0300 7D       		.byte	0x7d
+ 771 0301 00       		.sleb128 0
+ 772 0302 01       		.byte	0x1
+ 773 0303 15030000 		.4byte	0x315
+ 774 0307 19       		.uleb128 0x19
+ 775 0308 CF000000 		.4byte	.LASF41
+ 776 030c 01       		.byte	0x1
+ 777 030d 9D       		.byte	0x9d
+ 778 030e 15030000 		.4byte	0x315
+ 779 0312 01       		.byte	0x1
+ 780 0313 50       		.byte	0x50
+ 781 0314 00       		.byte	0
+ 782 0315 1A       		.uleb128 0x1a
+ 783 0316 04       		.byte	0x4
+ 784 0317 00020000 		.4byte	0x200
+ 785 031b 1B       		.uleb128 0x1b
+ 786 031c 01       		.byte	0x1
+ 787 031d 9E010000 		.4byte	.LASF42
+ 788 0321 01       		.byte	0x1
+ 789 0322 65       		.byte	0x65
+ 790 0323 01       		.byte	0x1
+ 791 0324 1C000000 		.4byte	.LFB30
+ 792 0328 98000000 		.4byte	.LFE30
+ 793 032c 2A010000 		.4byte	.LLST0
+ 794 0330 01       		.byte	0x1
+ 795 0331 54030000 		.4byte	0x354
+ 796 0335 15       		.uleb128 0x15
+ 797 0336 CF000000 		.4byte	.LASF41
+ 798 033a 01       		.byte	0x1
+ 799 033b 65       		.byte	0x65
+ 800 033c 15030000 		.4byte	0x315
+ 801 0340 86010000 		.4byte	.LLST1
+ 802 0344 1C       		.uleb128 0x1c
+ 803 0345 746D7000 		.ascii	"tmp\000"
+ 804 0349 01       		.byte	0x1
+ 805 034a 67       		.byte	0x67
+ 806 034b 7B000000 		.4byte	0x7b
+ 807 034f C0010000 		.4byte	.LLST2
+ 808 0353 00       		.byte	0
+ 809 0354 1D       		.uleb128 0x1d
+ 810 0355 01       		.byte	0x1
+ 811 0356 49030000 		.4byte	.LASF48
+ 812 035a 01       		.byte	0x1
+ 813 035b 55       		.byte	0x55
+ 814 035c 01       		.byte	0x1
+ 815 035d 00000000 		.4byte	.LFB29
+ 816 0361 1C000000 		.4byte	.LFE29
+ 817 0365 02       		.byte	0x2
+ 818 0366 7D       		.byte	0x7d
+ 819 0367 00       		.sleb128 0
+ 820 0368 01       		.byte	0x1
+ 821 0369 1E       		.uleb128 0x1e
+ 822 036a 6F020000 		.4byte	0x26f
+ 823 036e CC000000 		.4byte	.LFB34
+ 824 0372 D8000000 		.4byte	.LFE34
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZLTuri.s 			page 20
+
+
+ 825 0376 02       		.byte	0x2
+ 826 0377 7D       		.byte	0x7d
+ 827 0378 00       		.sleb128 0
+ 828 0379 01       		.byte	0x1
+ 829 037a 1F       		.uleb128 0x1f
+ 830 037b 7D020000 		.4byte	0x27d
+ 831 037f 01       		.byte	0x1
+ 832 0380 50       		.byte	0x50
+ 833 0381 00       		.byte	0
+ 834 0382 00       		.byte	0
+ 835              		.section	.debug_abbrev,"",%progbits
+ 836              	.Ldebug_abbrev0:
+ 837 0000 01       		.uleb128 0x1
+ 838 0001 11       		.uleb128 0x11
+ 839 0002 01       		.byte	0x1
+ 840 0003 25       		.uleb128 0x25
+ 841 0004 0E       		.uleb128 0xe
+ 842 0005 13       		.uleb128 0x13
+ 843 0006 0B       		.uleb128 0xb
+ 844 0007 03       		.uleb128 0x3
+ 845 0008 0E       		.uleb128 0xe
+ 846 0009 1B       		.uleb128 0x1b
+ 847 000a 0E       		.uleb128 0xe
+ 848 000b 11       		.uleb128 0x11
+ 849 000c 01       		.uleb128 0x1
+ 850 000d 12       		.uleb128 0x12
+ 851 000e 01       		.uleb128 0x1
+ 852 000f 10       		.uleb128 0x10
+ 853 0010 06       		.uleb128 0x6
+ 854 0011 00       		.byte	0
+ 855 0012 00       		.byte	0
+ 856 0013 02       		.uleb128 0x2
+ 857 0014 24       		.uleb128 0x24
+ 858 0015 00       		.byte	0
+ 859 0016 0B       		.uleb128 0xb
+ 860 0017 0B       		.uleb128 0xb
+ 861 0018 3E       		.uleb128 0x3e
+ 862 0019 0B       		.uleb128 0xb
+ 863 001a 03       		.uleb128 0x3
+ 864 001b 0E       		.uleb128 0xe
+ 865 001c 00       		.byte	0
+ 866 001d 00       		.byte	0
+ 867 001e 03       		.uleb128 0x3
+ 868 001f 16       		.uleb128 0x16
+ 869 0020 00       		.byte	0
+ 870 0021 03       		.uleb128 0x3
+ 871 0022 0E       		.uleb128 0xe
+ 872 0023 3A       		.uleb128 0x3a
+ 873 0024 0B       		.uleb128 0xb
+ 874 0025 3B       		.uleb128 0x3b
+ 875 0026 0B       		.uleb128 0xb
+ 876 0027 49       		.uleb128 0x49
+ 877 0028 13       		.uleb128 0x13
+ 878 0029 00       		.byte	0
+ 879 002a 00       		.byte	0
+ 880 002b 04       		.uleb128 0x4
+ 881 002c 24       		.uleb128 0x24
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZLTuri.s 			page 21
+
+
+ 882 002d 00       		.byte	0
+ 883 002e 0B       		.uleb128 0xb
+ 884 002f 0B       		.uleb128 0xb
+ 885 0030 3E       		.uleb128 0x3e
+ 886 0031 0B       		.uleb128 0xb
+ 887 0032 03       		.uleb128 0x3
+ 888 0033 08       		.uleb128 0x8
+ 889 0034 00       		.byte	0
+ 890 0035 00       		.byte	0
+ 891 0036 05       		.uleb128 0x5
+ 892 0037 35       		.uleb128 0x35
+ 893 0038 00       		.byte	0
+ 894 0039 49       		.uleb128 0x49
+ 895 003a 13       		.uleb128 0x13
+ 896 003b 00       		.byte	0
+ 897 003c 00       		.byte	0
+ 898 003d 06       		.uleb128 0x6
+ 899 003e 34       		.uleb128 0x34
+ 900 003f 00       		.byte	0
+ 901 0040 03       		.uleb128 0x3
+ 902 0041 0E       		.uleb128 0xe
+ 903 0042 3A       		.uleb128 0x3a
+ 904 0043 0B       		.uleb128 0xb
+ 905 0044 3B       		.uleb128 0x3b
+ 906 0045 05       		.uleb128 0x5
+ 907 0046 49       		.uleb128 0x49
+ 908 0047 13       		.uleb128 0x13
+ 909 0048 3F       		.uleb128 0x3f
+ 910 0049 0C       		.uleb128 0xc
+ 911 004a 3C       		.uleb128 0x3c
+ 912 004b 0C       		.uleb128 0xc
+ 913 004c 00       		.byte	0
+ 914 004d 00       		.byte	0
+ 915 004e 07       		.uleb128 0x7
+ 916 004f 34       		.uleb128 0x34
+ 917 0050 00       		.byte	0
+ 918 0051 03       		.uleb128 0x3
+ 919 0052 0E       		.uleb128 0xe
+ 920 0053 3A       		.uleb128 0x3a
+ 921 0054 0B       		.uleb128 0xb
+ 922 0055 3B       		.uleb128 0x3b
+ 923 0056 0B       		.uleb128 0xb
+ 924 0057 49       		.uleb128 0x49
+ 925 0058 13       		.uleb128 0x13
+ 926 0059 3F       		.uleb128 0x3f
+ 927 005a 0C       		.uleb128 0xc
+ 928 005b 3C       		.uleb128 0x3c
+ 929 005c 0C       		.uleb128 0xc
+ 930 005d 00       		.byte	0
+ 931 005e 00       		.byte	0
+ 932 005f 08       		.uleb128 0x8
+ 933 0060 04       		.uleb128 0x4
+ 934 0061 01       		.byte	0x1
+ 935 0062 3E       		.uleb128 0x3e
+ 936 0063 0B       		.uleb128 0xb
+ 937 0064 0B       		.uleb128 0xb
+ 938 0065 0B       		.uleb128 0xb
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZLTuri.s 			page 22
+
+
+ 939 0066 49       		.uleb128 0x49
+ 940 0067 13       		.uleb128 0x13
+ 941 0068 3A       		.uleb128 0x3a
+ 942 0069 0B       		.uleb128 0xb
+ 943 006a 3B       		.uleb128 0x3b
+ 944 006b 05       		.uleb128 0x5
+ 945 006c 01       		.uleb128 0x1
+ 946 006d 13       		.uleb128 0x13
+ 947 006e 00       		.byte	0
+ 948 006f 00       		.byte	0
+ 949 0070 09       		.uleb128 0x9
+ 950 0071 28       		.uleb128 0x28
+ 951 0072 00       		.byte	0
+ 952 0073 03       		.uleb128 0x3
+ 953 0074 0E       		.uleb128 0xe
+ 954 0075 1C       		.uleb128 0x1c
+ 955 0076 0B       		.uleb128 0xb
+ 956 0077 00       		.byte	0
+ 957 0078 00       		.byte	0
+ 958 0079 0A       		.uleb128 0xa
+ 959 007a 28       		.uleb128 0x28
+ 960 007b 00       		.byte	0
+ 961 007c 03       		.uleb128 0x3
+ 962 007d 08       		.uleb128 0x8
+ 963 007e 1C       		.uleb128 0x1c
+ 964 007f 0B       		.uleb128 0xb
+ 965 0080 00       		.byte	0
+ 966 0081 00       		.byte	0
+ 967 0082 0B       		.uleb128 0xb
+ 968 0083 16       		.uleb128 0x16
+ 969 0084 00       		.byte	0
+ 970 0085 03       		.uleb128 0x3
+ 971 0086 0E       		.uleb128 0xe
+ 972 0087 3A       		.uleb128 0x3a
+ 973 0088 0B       		.uleb128 0xb
+ 974 0089 3B       		.uleb128 0x3b
+ 975 008a 05       		.uleb128 0x5
+ 976 008b 49       		.uleb128 0x49
+ 977 008c 13       		.uleb128 0x13
+ 978 008d 00       		.byte	0
+ 979 008e 00       		.byte	0
+ 980 008f 0C       		.uleb128 0xc
+ 981 0090 13       		.uleb128 0x13
+ 982 0091 01       		.byte	0x1
+ 983 0092 0B       		.uleb128 0xb
+ 984 0093 0B       		.uleb128 0xb
+ 985 0094 3A       		.uleb128 0x3a
+ 986 0095 0B       		.uleb128 0xb
+ 987 0096 3B       		.uleb128 0x3b
+ 988 0097 05       		.uleb128 0x5
+ 989 0098 01       		.uleb128 0x1
+ 990 0099 13       		.uleb128 0x13
+ 991 009a 00       		.byte	0
+ 992 009b 00       		.byte	0
+ 993 009c 0D       		.uleb128 0xd
+ 994 009d 0D       		.uleb128 0xd
+ 995 009e 00       		.byte	0
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZLTuri.s 			page 23
+
+
+ 996 009f 03       		.uleb128 0x3
+ 997 00a0 08       		.uleb128 0x8
+ 998 00a1 3A       		.uleb128 0x3a
+ 999 00a2 0B       		.uleb128 0xb
+ 1000 00a3 3B       		.uleb128 0x3b
+ 1001 00a4 05       		.uleb128 0x5
+ 1002 00a5 49       		.uleb128 0x49
+ 1003 00a6 13       		.uleb128 0x13
+ 1004 00a7 38       		.uleb128 0x38
+ 1005 00a8 0A       		.uleb128 0xa
+ 1006 00a9 00       		.byte	0
+ 1007 00aa 00       		.byte	0
+ 1008 00ab 0E       		.uleb128 0xe
+ 1009 00ac 0D       		.uleb128 0xd
+ 1010 00ad 00       		.byte	0
+ 1011 00ae 03       		.uleb128 0x3
+ 1012 00af 0E       		.uleb128 0xe
+ 1013 00b0 3A       		.uleb128 0x3a
+ 1014 00b1 0B       		.uleb128 0xb
+ 1015 00b2 3B       		.uleb128 0x3b
+ 1016 00b3 05       		.uleb128 0x5
+ 1017 00b4 49       		.uleb128 0x49
+ 1018 00b5 13       		.uleb128 0x13
+ 1019 00b6 38       		.uleb128 0x38
+ 1020 00b7 0A       		.uleb128 0xa
+ 1021 00b8 00       		.byte	0
+ 1022 00b9 00       		.byte	0
+ 1023 00ba 0F       		.uleb128 0xf
+ 1024 00bb 04       		.uleb128 0x4
+ 1025 00bc 01       		.byte	0x1
+ 1026 00bd 3E       		.uleb128 0x3e
+ 1027 00be 0B       		.uleb128 0xb
+ 1028 00bf 0B       		.uleb128 0xb
+ 1029 00c0 0B       		.uleb128 0xb
+ 1030 00c1 49       		.uleb128 0x49
+ 1031 00c2 13       		.uleb128 0x13
+ 1032 00c3 3A       		.uleb128 0x3a
+ 1033 00c4 0B       		.uleb128 0xb
+ 1034 00c5 3B       		.uleb128 0x3b
+ 1035 00c6 0B       		.uleb128 0xb
+ 1036 00c7 01       		.uleb128 0x1
+ 1037 00c8 13       		.uleb128 0x13
+ 1038 00c9 00       		.byte	0
+ 1039 00ca 00       		.byte	0
+ 1040 00cb 10       		.uleb128 0x10
+ 1041 00cc 13       		.uleb128 0x13
+ 1042 00cd 01       		.byte	0x1
+ 1043 00ce 0B       		.uleb128 0xb
+ 1044 00cf 0B       		.uleb128 0xb
+ 1045 00d0 3A       		.uleb128 0x3a
+ 1046 00d1 0B       		.uleb128 0xb
+ 1047 00d2 3B       		.uleb128 0x3b
+ 1048 00d3 0B       		.uleb128 0xb
+ 1049 00d4 01       		.uleb128 0x1
+ 1050 00d5 13       		.uleb128 0x13
+ 1051 00d6 00       		.byte	0
+ 1052 00d7 00       		.byte	0
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZLTuri.s 			page 24
+
+
+ 1053 00d8 11       		.uleb128 0x11
+ 1054 00d9 0D       		.uleb128 0xd
+ 1055 00da 00       		.byte	0
+ 1056 00db 03       		.uleb128 0x3
+ 1057 00dc 0E       		.uleb128 0xe
+ 1058 00dd 3A       		.uleb128 0x3a
+ 1059 00de 0B       		.uleb128 0xb
+ 1060 00df 3B       		.uleb128 0x3b
+ 1061 00e0 0B       		.uleb128 0xb
+ 1062 00e1 49       		.uleb128 0x49
+ 1063 00e2 13       		.uleb128 0x13
+ 1064 00e3 38       		.uleb128 0x38
+ 1065 00e4 0A       		.uleb128 0xa
+ 1066 00e5 00       		.byte	0
+ 1067 00e6 00       		.byte	0
+ 1068 00e7 12       		.uleb128 0x12
+ 1069 00e8 2E       		.uleb128 0x2e
+ 1070 00e9 01       		.byte	0x1
+ 1071 00ea 3F       		.uleb128 0x3f
+ 1072 00eb 0C       		.uleb128 0xc
+ 1073 00ec 03       		.uleb128 0x3
+ 1074 00ed 0E       		.uleb128 0xe
+ 1075 00ee 3A       		.uleb128 0x3a
+ 1076 00ef 0B       		.uleb128 0xb
+ 1077 00f0 3B       		.uleb128 0x3b
+ 1078 00f1 0B       		.uleb128 0xb
+ 1079 00f2 27       		.uleb128 0x27
+ 1080 00f3 0C       		.uleb128 0xc
+ 1081 00f4 01       		.uleb128 0x1
+ 1082 00f5 13       		.uleb128 0x13
+ 1083 00f6 00       		.byte	0
+ 1084 00f7 00       		.byte	0
+ 1085 00f8 13       		.uleb128 0x13
+ 1086 00f9 05       		.uleb128 0x5
+ 1087 00fa 00       		.byte	0
+ 1088 00fb 03       		.uleb128 0x3
+ 1089 00fc 0E       		.uleb128 0xe
+ 1090 00fd 3A       		.uleb128 0x3a
+ 1091 00fe 0B       		.uleb128 0xb
+ 1092 00ff 3B       		.uleb128 0x3b
+ 1093 0100 0B       		.uleb128 0xb
+ 1094 0101 49       		.uleb128 0x49
+ 1095 0102 13       		.uleb128 0x13
+ 1096 0103 00       		.byte	0
+ 1097 0104 00       		.byte	0
+ 1098 0105 14       		.uleb128 0x14
+ 1099 0106 2E       		.uleb128 0x2e
+ 1100 0107 01       		.byte	0x1
+ 1101 0108 3F       		.uleb128 0x3f
+ 1102 0109 0C       		.uleb128 0xc
+ 1103 010a 03       		.uleb128 0x3
+ 1104 010b 0E       		.uleb128 0xe
+ 1105 010c 3A       		.uleb128 0x3a
+ 1106 010d 0B       		.uleb128 0xb
+ 1107 010e 3B       		.uleb128 0x3b
+ 1108 010f 0B       		.uleb128 0xb
+ 1109 0110 27       		.uleb128 0x27
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZLTuri.s 			page 25
+
+
+ 1110 0111 0C       		.uleb128 0xc
+ 1111 0112 49       		.uleb128 0x49
+ 1112 0113 13       		.uleb128 0x13
+ 1113 0114 11       		.uleb128 0x11
+ 1114 0115 01       		.uleb128 0x1
+ 1115 0116 12       		.uleb128 0x12
+ 1116 0117 01       		.uleb128 0x1
+ 1117 0118 40       		.uleb128 0x40
+ 1118 0119 0A       		.uleb128 0xa
+ 1119 011a 9742     		.uleb128 0x2117
+ 1120 011c 0C       		.uleb128 0xc
+ 1121 011d 01       		.uleb128 0x1
+ 1122 011e 13       		.uleb128 0x13
+ 1123 011f 00       		.byte	0
+ 1124 0120 00       		.byte	0
+ 1125 0121 15       		.uleb128 0x15
+ 1126 0122 05       		.uleb128 0x5
+ 1127 0123 00       		.byte	0
+ 1128 0124 03       		.uleb128 0x3
+ 1129 0125 0E       		.uleb128 0xe
+ 1130 0126 3A       		.uleb128 0x3a
+ 1131 0127 0B       		.uleb128 0xb
+ 1132 0128 3B       		.uleb128 0x3b
+ 1133 0129 0B       		.uleb128 0xb
+ 1134 012a 49       		.uleb128 0x49
+ 1135 012b 13       		.uleb128 0x13
+ 1136 012c 02       		.uleb128 0x2
+ 1137 012d 06       		.uleb128 0x6
+ 1138 012e 00       		.byte	0
+ 1139 012f 00       		.byte	0
+ 1140 0130 16       		.uleb128 0x16
+ 1141 0131 34       		.uleb128 0x34
+ 1142 0132 00       		.byte	0
+ 1143 0133 03       		.uleb128 0x3
+ 1144 0134 0E       		.uleb128 0xe
+ 1145 0135 3A       		.uleb128 0x3a
+ 1146 0136 0B       		.uleb128 0xb
+ 1147 0137 3B       		.uleb128 0x3b
+ 1148 0138 0B       		.uleb128 0xb
+ 1149 0139 49       		.uleb128 0x49
+ 1150 013a 13       		.uleb128 0x13
+ 1151 013b 02       		.uleb128 0x2
+ 1152 013c 06       		.uleb128 0x6
+ 1153 013d 00       		.byte	0
+ 1154 013e 00       		.byte	0
+ 1155 013f 17       		.uleb128 0x17
+ 1156 0140 2E       		.uleb128 0x2e
+ 1157 0141 01       		.byte	0x1
+ 1158 0142 3F       		.uleb128 0x3f
+ 1159 0143 0C       		.uleb128 0xc
+ 1160 0144 03       		.uleb128 0x3
+ 1161 0145 0E       		.uleb128 0xe
+ 1162 0146 3A       		.uleb128 0x3a
+ 1163 0147 0B       		.uleb128 0xb
+ 1164 0148 3B       		.uleb128 0x3b
+ 1165 0149 0B       		.uleb128 0xb
+ 1166 014a 27       		.uleb128 0x27
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZLTuri.s 			page 26
+
+
+ 1167 014b 0C       		.uleb128 0xc
+ 1168 014c 20       		.uleb128 0x20
+ 1169 014d 0B       		.uleb128 0xb
+ 1170 014e 01       		.uleb128 0x1
+ 1171 014f 13       		.uleb128 0x13
+ 1172 0150 00       		.byte	0
+ 1173 0151 00       		.byte	0
+ 1174 0152 18       		.uleb128 0x18
+ 1175 0153 2E       		.uleb128 0x2e
+ 1176 0154 01       		.byte	0x1
+ 1177 0155 3F       		.uleb128 0x3f
+ 1178 0156 0C       		.uleb128 0xc
+ 1179 0157 03       		.uleb128 0x3
+ 1180 0158 0E       		.uleb128 0xe
+ 1181 0159 3A       		.uleb128 0x3a
+ 1182 015a 0B       		.uleb128 0xb
+ 1183 015b 3B       		.uleb128 0x3b
+ 1184 015c 0B       		.uleb128 0xb
+ 1185 015d 27       		.uleb128 0x27
+ 1186 015e 0C       		.uleb128 0xc
+ 1187 015f 11       		.uleb128 0x11
+ 1188 0160 01       		.uleb128 0x1
+ 1189 0161 12       		.uleb128 0x12
+ 1190 0162 01       		.uleb128 0x1
+ 1191 0163 40       		.uleb128 0x40
+ 1192 0164 0A       		.uleb128 0xa
+ 1193 0165 9742     		.uleb128 0x2117
+ 1194 0167 0C       		.uleb128 0xc
+ 1195 0168 01       		.uleb128 0x1
+ 1196 0169 13       		.uleb128 0x13
+ 1197 016a 00       		.byte	0
+ 1198 016b 00       		.byte	0
+ 1199 016c 19       		.uleb128 0x19
+ 1200 016d 05       		.uleb128 0x5
+ 1201 016e 00       		.byte	0
+ 1202 016f 03       		.uleb128 0x3
+ 1203 0170 0E       		.uleb128 0xe
+ 1204 0171 3A       		.uleb128 0x3a
+ 1205 0172 0B       		.uleb128 0xb
+ 1206 0173 3B       		.uleb128 0x3b
+ 1207 0174 0B       		.uleb128 0xb
+ 1208 0175 49       		.uleb128 0x49
+ 1209 0176 13       		.uleb128 0x13
+ 1210 0177 02       		.uleb128 0x2
+ 1211 0178 0A       		.uleb128 0xa
+ 1212 0179 00       		.byte	0
+ 1213 017a 00       		.byte	0
+ 1214 017b 1A       		.uleb128 0x1a
+ 1215 017c 0F       		.uleb128 0xf
+ 1216 017d 00       		.byte	0
+ 1217 017e 0B       		.uleb128 0xb
+ 1218 017f 0B       		.uleb128 0xb
+ 1219 0180 49       		.uleb128 0x49
+ 1220 0181 13       		.uleb128 0x13
+ 1221 0182 00       		.byte	0
+ 1222 0183 00       		.byte	0
+ 1223 0184 1B       		.uleb128 0x1b
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZLTuri.s 			page 27
+
+
+ 1224 0185 2E       		.uleb128 0x2e
+ 1225 0186 01       		.byte	0x1
+ 1226 0187 3F       		.uleb128 0x3f
+ 1227 0188 0C       		.uleb128 0xc
+ 1228 0189 03       		.uleb128 0x3
+ 1229 018a 0E       		.uleb128 0xe
+ 1230 018b 3A       		.uleb128 0x3a
+ 1231 018c 0B       		.uleb128 0xb
+ 1232 018d 3B       		.uleb128 0x3b
+ 1233 018e 0B       		.uleb128 0xb
+ 1234 018f 27       		.uleb128 0x27
+ 1235 0190 0C       		.uleb128 0xc
+ 1236 0191 11       		.uleb128 0x11
+ 1237 0192 01       		.uleb128 0x1
+ 1238 0193 12       		.uleb128 0x12
+ 1239 0194 01       		.uleb128 0x1
+ 1240 0195 40       		.uleb128 0x40
+ 1241 0196 06       		.uleb128 0x6
+ 1242 0197 9742     		.uleb128 0x2117
+ 1243 0199 0C       		.uleb128 0xc
+ 1244 019a 01       		.uleb128 0x1
+ 1245 019b 13       		.uleb128 0x13
+ 1246 019c 00       		.byte	0
+ 1247 019d 00       		.byte	0
+ 1248 019e 1C       		.uleb128 0x1c
+ 1249 019f 34       		.uleb128 0x34
+ 1250 01a0 00       		.byte	0
+ 1251 01a1 03       		.uleb128 0x3
+ 1252 01a2 08       		.uleb128 0x8
+ 1253 01a3 3A       		.uleb128 0x3a
+ 1254 01a4 0B       		.uleb128 0xb
+ 1255 01a5 3B       		.uleb128 0x3b
+ 1256 01a6 0B       		.uleb128 0xb
+ 1257 01a7 49       		.uleb128 0x49
+ 1258 01a8 13       		.uleb128 0x13
+ 1259 01a9 02       		.uleb128 0x2
+ 1260 01aa 06       		.uleb128 0x6
+ 1261 01ab 00       		.byte	0
+ 1262 01ac 00       		.byte	0
+ 1263 01ad 1D       		.uleb128 0x1d
+ 1264 01ae 2E       		.uleb128 0x2e
+ 1265 01af 00       		.byte	0
+ 1266 01b0 3F       		.uleb128 0x3f
+ 1267 01b1 0C       		.uleb128 0xc
+ 1268 01b2 03       		.uleb128 0x3
+ 1269 01b3 0E       		.uleb128 0xe
+ 1270 01b4 3A       		.uleb128 0x3a
+ 1271 01b5 0B       		.uleb128 0xb
+ 1272 01b6 3B       		.uleb128 0x3b
+ 1273 01b7 0B       		.uleb128 0xb
+ 1274 01b8 27       		.uleb128 0x27
+ 1275 01b9 0C       		.uleb128 0xc
+ 1276 01ba 11       		.uleb128 0x11
+ 1277 01bb 01       		.uleb128 0x1
+ 1278 01bc 12       		.uleb128 0x12
+ 1279 01bd 01       		.uleb128 0x1
+ 1280 01be 40       		.uleb128 0x40
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZLTuri.s 			page 28
+
+
+ 1281 01bf 0A       		.uleb128 0xa
+ 1282 01c0 9742     		.uleb128 0x2117
+ 1283 01c2 0C       		.uleb128 0xc
+ 1284 01c3 00       		.byte	0
+ 1285 01c4 00       		.byte	0
+ 1286 01c5 1E       		.uleb128 0x1e
+ 1287 01c6 2E       		.uleb128 0x2e
+ 1288 01c7 01       		.byte	0x1
+ 1289 01c8 31       		.uleb128 0x31
+ 1290 01c9 13       		.uleb128 0x13
+ 1291 01ca 11       		.uleb128 0x11
+ 1292 01cb 01       		.uleb128 0x1
+ 1293 01cc 12       		.uleb128 0x12
+ 1294 01cd 01       		.uleb128 0x1
+ 1295 01ce 40       		.uleb128 0x40
+ 1296 01cf 0A       		.uleb128 0xa
+ 1297 01d0 9742     		.uleb128 0x2117
+ 1298 01d2 0C       		.uleb128 0xc
+ 1299 01d3 00       		.byte	0
+ 1300 01d4 00       		.byte	0
+ 1301 01d5 1F       		.uleb128 0x1f
+ 1302 01d6 05       		.uleb128 0x5
+ 1303 01d7 00       		.byte	0
+ 1304 01d8 31       		.uleb128 0x31
+ 1305 01d9 13       		.uleb128 0x13
+ 1306 01da 02       		.uleb128 0x2
+ 1307 01db 0A       		.uleb128 0xa
+ 1308 01dc 00       		.byte	0
+ 1309 01dd 00       		.byte	0
+ 1310 01de 00       		.byte	0
+ 1311              		.section	.debug_loc,"",%progbits
+ 1312              	.Ldebug_loc0:
+ 1313              	.LLST6:
+ 1314 0000 D8000000 		.4byte	.LVL13-.Ltext0
+ 1315 0004 E8000000 		.4byte	.LVL15-.Ltext0
+ 1316 0008 0100     		.2byte	0x1
+ 1317 000a 50       		.byte	0x50
+ 1318 000b E8000000 		.4byte	.LVL15-.Ltext0
+ 1319 000f EC000000 		.4byte	.LVL16-.Ltext0
+ 1320 0013 0400     		.2byte	0x4
+ 1321 0015 F3       		.byte	0xf3
+ 1322 0016 01       		.uleb128 0x1
+ 1323 0017 50       		.byte	0x50
+ 1324 0018 9F       		.byte	0x9f
+ 1325 0019 EC000000 		.4byte	.LVL16-.Ltext0
+ 1326 001d EE000000 		.4byte	.LVL17-.Ltext0
+ 1327 0021 0100     		.2byte	0x1
+ 1328 0023 50       		.byte	0x50
+ 1329 0024 EE000000 		.4byte	.LVL17-.Ltext0
+ 1330 0028 F4000000 		.4byte	.LFE35-.Ltext0
+ 1331 002c 0400     		.2byte	0x4
+ 1332 002e F3       		.byte	0xf3
+ 1333 002f 01       		.uleb128 0x1
+ 1334 0030 50       		.byte	0x50
+ 1335 0031 9F       		.byte	0x9f
+ 1336 0032 00000000 		.4byte	0
+ 1337 0036 00000000 		.4byte	0
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZLTuri.s 			page 29
+
+
+ 1338              	.LLST7:
+ 1339 003a D8000000 		.4byte	.LVL13-.Ltext0
+ 1340 003e EE000000 		.4byte	.LVL17-.Ltext0
+ 1341 0042 0200     		.2byte	0x2
+ 1342 0044 30       		.byte	0x30
+ 1343 0045 9F       		.byte	0x9f
+ 1344 0046 EE000000 		.4byte	.LVL17-.Ltext0
+ 1345 004a F4000000 		.4byte	.LFE35-.Ltext0
+ 1346 004e 0100     		.2byte	0x1
+ 1347 0050 50       		.byte	0x50
+ 1348 0051 00000000 		.4byte	0
+ 1349 0055 00000000 		.4byte	0
+ 1350              	.LLST8:
+ 1351 0059 D8000000 		.4byte	.LVL13-.Ltext0
+ 1352 005d DC000000 		.4byte	.LVL14-.Ltext0
+ 1353 0061 0200     		.2byte	0x2
+ 1354 0063 30       		.byte	0x30
+ 1355 0064 9F       		.byte	0x9f
+ 1356 0065 DC000000 		.4byte	.LVL14-.Ltext0
+ 1357 0069 E8000000 		.4byte	.LVL15-.Ltext0
+ 1358 006d 0600     		.2byte	0x6
+ 1359 006f 72       		.byte	0x72
+ 1360 0070 00       		.sleb128 0
+ 1361 0071 70       		.byte	0x70
+ 1362 0072 00       		.sleb128 0
+ 1363 0073 1A       		.byte	0x1a
+ 1364 0074 9F       		.byte	0x9f
+ 1365 0075 E8000000 		.4byte	.LVL15-.Ltext0
+ 1366 0079 EC000000 		.4byte	.LVL16-.Ltext0
+ 1367 007d 0700     		.2byte	0x7
+ 1368 007f 72       		.byte	0x72
+ 1369 0080 00       		.sleb128 0
+ 1370 0081 F3       		.byte	0xf3
+ 1371 0082 01       		.uleb128 0x1
+ 1372 0083 50       		.byte	0x50
+ 1373 0084 1A       		.byte	0x1a
+ 1374 0085 9F       		.byte	0x9f
+ 1375 0086 EC000000 		.4byte	.LVL16-.Ltext0
+ 1376 008a EE000000 		.4byte	.LVL17-.Ltext0
+ 1377 008e 0600     		.2byte	0x6
+ 1378 0090 72       		.byte	0x72
+ 1379 0091 00       		.sleb128 0
+ 1380 0092 70       		.byte	0x70
+ 1381 0093 00       		.sleb128 0
+ 1382 0094 1A       		.byte	0x1a
+ 1383 0095 9F       		.byte	0x9f
+ 1384 0096 EE000000 		.4byte	.LVL17-.Ltext0
+ 1385 009a F4000000 		.4byte	.LFE35-.Ltext0
+ 1386 009e 0700     		.2byte	0x7
+ 1387 00a0 72       		.byte	0x72
+ 1388 00a1 00       		.sleb128 0
+ 1389 00a2 F3       		.byte	0xf3
+ 1390 00a3 01       		.uleb128 0x1
+ 1391 00a4 50       		.byte	0x50
+ 1392 00a5 1A       		.byte	0x1a
+ 1393 00a6 9F       		.byte	0x9f
+ 1394 00a7 00000000 		.4byte	0
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZLTuri.s 			page 30
+
+
+ 1395 00ab 00000000 		.4byte	0
+ 1396              	.LLST4:
+ 1397 00af B8000000 		.4byte	.LVL9-.Ltext0
+ 1398 00b3 C2000000 		.4byte	.LVL11-.Ltext0
+ 1399 00b7 0100     		.2byte	0x1
+ 1400 00b9 50       		.byte	0x50
+ 1401 00ba C2000000 		.4byte	.LVL11-.Ltext0
+ 1402 00be CC000000 		.4byte	.LFE33-.Ltext0
+ 1403 00c2 0400     		.2byte	0x4
+ 1404 00c4 F3       		.byte	0xf3
+ 1405 00c5 01       		.uleb128 0x1
+ 1406 00c6 50       		.byte	0x50
+ 1407 00c7 9F       		.byte	0x9f
+ 1408 00c8 00000000 		.4byte	0
+ 1409 00cc 00000000 		.4byte	0
+ 1410              	.LLST5:
+ 1411 00d0 B8000000 		.4byte	.LVL9-.Ltext0
+ 1412 00d4 BC000000 		.4byte	.LVL10-.Ltext0
+ 1413 00d8 0200     		.2byte	0x2
+ 1414 00da 30       		.byte	0x30
+ 1415 00db 9F       		.byte	0x9f
+ 1416 00dc BC000000 		.4byte	.LVL10-.Ltext0
+ 1417 00e0 C2000000 		.4byte	.LVL11-.Ltext0
+ 1418 00e4 0800     		.2byte	0x8
+ 1419 00e6 73       		.byte	0x73
+ 1420 00e7 00       		.sleb128 0
+ 1421 00e8 70       		.byte	0x70
+ 1422 00e9 00       		.sleb128 0
+ 1423 00ea 1A       		.byte	0x1a
+ 1424 00eb 30       		.byte	0x30
+ 1425 00ec 2E       		.byte	0x2e
+ 1426 00ed 9F       		.byte	0x9f
+ 1427 00ee C2000000 		.4byte	.LVL11-.Ltext0
+ 1428 00f2 CC000000 		.4byte	.LFE33-.Ltext0
+ 1429 00f6 0900     		.2byte	0x9
+ 1430 00f8 73       		.byte	0x73
+ 1431 00f9 00       		.sleb128 0
+ 1432 00fa F3       		.byte	0xf3
+ 1433 00fb 01       		.uleb128 0x1
+ 1434 00fc 50       		.byte	0x50
+ 1435 00fd 1A       		.byte	0x1a
+ 1436 00fe 30       		.byte	0x30
+ 1437 00ff 2E       		.byte	0x2e
+ 1438 0100 9F       		.byte	0x9f
+ 1439 0101 00000000 		.4byte	0
+ 1440 0105 00000000 		.4byte	0
+ 1441              	.LLST3:
+ 1442 0109 A8000000 		.4byte	.LVL7-.Ltext0
+ 1443 010d AE000000 		.4byte	.LVL8-.Ltext0
+ 1444 0111 0100     		.2byte	0x1
+ 1445 0113 50       		.byte	0x50
+ 1446 0114 AE000000 		.4byte	.LVL8-.Ltext0
+ 1447 0118 B8000000 		.4byte	.LFE32-.Ltext0
+ 1448 011c 0400     		.2byte	0x4
+ 1449 011e F3       		.byte	0xf3
+ 1450 011f 01       		.uleb128 0x1
+ 1451 0120 50       		.byte	0x50
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZLTuri.s 			page 31
+
+
+ 1452 0121 9F       		.byte	0x9f
+ 1453 0122 00000000 		.4byte	0
+ 1454 0126 00000000 		.4byte	0
+ 1455              	.LLST0:
+ 1456 012a 1C000000 		.4byte	.LFB30-.Ltext0
+ 1457 012e 20000000 		.4byte	.LCFI0-.Ltext0
+ 1458 0132 0200     		.2byte	0x2
+ 1459 0134 7D       		.byte	0x7d
+ 1460 0135 00       		.sleb128 0
+ 1461 0136 20000000 		.4byte	.LCFI0-.Ltext0
+ 1462 013a 68000000 		.4byte	.LCFI1-.Ltext0
+ 1463 013e 0200     		.2byte	0x2
+ 1464 0140 7D       		.byte	0x7d
+ 1465 0141 0C       		.sleb128 12
+ 1466 0142 68000000 		.4byte	.LCFI1-.Ltext0
+ 1467 0146 78000000 		.4byte	.LCFI2-.Ltext0
+ 1468 014a 0200     		.2byte	0x2
+ 1469 014c 7D       		.byte	0x7d
+ 1470 014d 00       		.sleb128 0
+ 1471 014e 78000000 		.4byte	.LCFI2-.Ltext0
+ 1472 0152 80000000 		.4byte	.LCFI3-.Ltext0
+ 1473 0156 0200     		.2byte	0x2
+ 1474 0158 7D       		.byte	0x7d
+ 1475 0159 0C       		.sleb128 12
+ 1476 015a 80000000 		.4byte	.LCFI3-.Ltext0
+ 1477 015e 82000000 		.4byte	.LCFI4-.Ltext0
+ 1478 0162 0200     		.2byte	0x2
+ 1479 0164 7D       		.byte	0x7d
+ 1480 0165 00       		.sleb128 0
+ 1481 0166 82000000 		.4byte	.LCFI4-.Ltext0
+ 1482 016a 86000000 		.4byte	.LCFI5-.Ltext0
+ 1483 016e 0200     		.2byte	0x2
+ 1484 0170 7D       		.byte	0x7d
+ 1485 0171 0C       		.sleb128 12
+ 1486 0172 86000000 		.4byte	.LCFI5-.Ltext0
+ 1487 0176 98000000 		.4byte	.LFE30-.Ltext0
+ 1488 017a 0200     		.2byte	0x2
+ 1489 017c 7D       		.byte	0x7d
+ 1490 017d 00       		.sleb128 0
+ 1491 017e 00000000 		.4byte	0
+ 1492 0182 00000000 		.4byte	0
+ 1493              	.LLST1:
+ 1494 0186 1C000000 		.4byte	.LVL0-.Ltext0
+ 1495 018a 50000000 		.4byte	.LVL2-.Ltext0
+ 1496 018e 0100     		.2byte	0x1
+ 1497 0190 50       		.byte	0x50
+ 1498 0191 50000000 		.4byte	.LVL2-.Ltext0
+ 1499 0195 78000000 		.4byte	.LVL4-.Ltext0
+ 1500 0199 0400     		.2byte	0x4
+ 1501 019b F3       		.byte	0xf3
+ 1502 019c 01       		.uleb128 0x1
+ 1503 019d 50       		.byte	0x50
+ 1504 019e 9F       		.byte	0x9f
+ 1505 019f 78000000 		.4byte	.LVL4-.Ltext0
+ 1506 01a3 82000000 		.4byte	.LVL5-.Ltext0
+ 1507 01a7 0100     		.2byte	0x1
+ 1508 01a9 50       		.byte	0x50
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZLTuri.s 			page 32
+
+
+ 1509 01aa 82000000 		.4byte	.LVL5-.Ltext0
+ 1510 01ae 98000000 		.4byte	.LFE30-.Ltext0
+ 1511 01b2 0400     		.2byte	0x4
+ 1512 01b4 F3       		.byte	0xf3
+ 1513 01b5 01       		.uleb128 0x1
+ 1514 01b6 50       		.byte	0x50
+ 1515 01b7 9F       		.byte	0x9f
+ 1516 01b8 00000000 		.4byte	0
+ 1517 01bc 00000000 		.4byte	0
+ 1518              	.LLST2:
+ 1519 01c0 1C000000 		.4byte	.LVL0-.Ltext0
+ 1520 01c4 46000000 		.4byte	.LVL1-.Ltext0
+ 1521 01c8 0600     		.2byte	0x6
+ 1522 01ca 0C       		.byte	0xc
+ 1523 01cb 00040140 		.4byte	0x40010400
+ 1524 01cf 9F       		.byte	0x9f
+ 1525 01d0 46000000 		.4byte	.LVL1-.Ltext0
+ 1526 01d4 50000000 		.4byte	.LVL2-.Ltext0
+ 1527 01d8 0E00     		.2byte	0xe
+ 1528 01da 70       		.byte	0x70
+ 1529 01db 04       		.sleb128 4
+ 1530 01dc 94       		.byte	0x94
+ 1531 01dd 01       		.byte	0x1
+ 1532 01de 08       		.byte	0x8
+ 1533 01df FF       		.byte	0xff
+ 1534 01e0 1A       		.byte	0x1a
+ 1535 01e1 23       		.byte	0x23
+ 1536 01e2 80888480 		.uleb128 0x40010400
+ 1536      04
+ 1537 01e7 9F       		.byte	0x9f
+ 1538 01e8 50000000 		.4byte	.LVL2-.Ltext0
+ 1539 01ec 66000000 		.4byte	.LVL3-.Ltext0
+ 1540 01f0 1100     		.2byte	0x11
+ 1541 01f2 F3       		.byte	0xf3
+ 1542 01f3 01       		.uleb128 0x1
+ 1543 01f4 50       		.byte	0x50
+ 1544 01f5 23       		.byte	0x23
+ 1545 01f6 04       		.uleb128 0x4
+ 1546 01f7 94       		.byte	0x94
+ 1547 01f8 01       		.byte	0x1
+ 1548 01f9 08       		.byte	0x8
+ 1549 01fa FF       		.byte	0xff
+ 1550 01fb 1A       		.byte	0x1a
+ 1551 01fc 23       		.byte	0x23
+ 1552 01fd 80888480 		.uleb128 0x40010400
+ 1552      04
+ 1553 0202 9F       		.byte	0x9f
+ 1554 0203 66000000 		.4byte	.LVL3-.Ltext0
+ 1555 0207 78000000 		.4byte	.LVL4-.Ltext0
+ 1556 020b 0C00     		.2byte	0xc
+ 1557 020d 71       		.byte	0x71
+ 1558 020e 00       		.sleb128 0
+ 1559 020f 08       		.byte	0x8
+ 1560 0210 FF       		.byte	0xff
+ 1561 0211 1A       		.byte	0x1a
+ 1562 0212 23       		.byte	0x23
+ 1563 0213 80888480 		.uleb128 0x40010400
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZLTuri.s 			page 33
+
+
+ 1563      04
+ 1564 0218 9F       		.byte	0x9f
+ 1565 0219 78000000 		.4byte	.LVL4-.Ltext0
+ 1566 021d 82000000 		.4byte	.LVL5-.Ltext0
+ 1567 0221 0E00     		.2byte	0xe
+ 1568 0223 70       		.byte	0x70
+ 1569 0224 04       		.sleb128 4
+ 1570 0225 94       		.byte	0x94
+ 1571 0226 01       		.byte	0x1
+ 1572 0227 08       		.byte	0x8
+ 1573 0228 FF       		.byte	0xff
+ 1574 0229 1A       		.byte	0x1a
+ 1575 022a 23       		.byte	0x23
+ 1576 022b 80888480 		.uleb128 0x40010400
+ 1576      04
+ 1577 0230 9F       		.byte	0x9f
+ 1578 0231 82000000 		.4byte	.LVL5-.Ltext0
+ 1579 0235 98000000 		.4byte	.LFE30-.Ltext0
+ 1580 0239 1100     		.2byte	0x11
+ 1581 023b F3       		.byte	0xf3
+ 1582 023c 01       		.uleb128 0x1
+ 1583 023d 50       		.byte	0x50
+ 1584 023e 23       		.byte	0x23
+ 1585 023f 04       		.uleb128 0x4
+ 1586 0240 94       		.byte	0x94
+ 1587 0241 01       		.byte	0x1
+ 1588 0242 08       		.byte	0x8
+ 1589 0243 FF       		.byte	0xff
+ 1590 0244 1A       		.byte	0x1a
+ 1591 0245 23       		.byte	0x23
+ 1592 0246 80888480 		.uleb128 0x40010400
+ 1592      04
+ 1593 024b 9F       		.byte	0x9f
+ 1594 024c 00000000 		.4byte	0
+ 1595 0250 00000000 		.4byte	0
+ 1596              		.section	.debug_aranges,"",%progbits
+ 1597 0000 1C000000 		.4byte	0x1c
+ 1598 0004 0200     		.2byte	0x2
+ 1599 0006 00000000 		.4byte	.Ldebug_info0
+ 1600 000a 04       		.byte	0x4
+ 1601 000b 00       		.byte	0
+ 1602 000c 0000     		.2byte	0
+ 1603 000e 0000     		.2byte	0
+ 1604 0010 00000000 		.4byte	.Ltext0
+ 1605 0014 00010000 		.4byte	.Letext0-.Ltext0
+ 1606 0018 00000000 		.4byte	0
+ 1607 001c 00000000 		.4byte	0
+ 1608              		.section	.debug_line,"",%progbits
+ 1609              	.Ldebug_line0:
+ 1610 0000 AD010000 		.section	.debug_str,"MS",%progbits,1
+ 1610      02003001 
+ 1610      00000201 
+ 1610      FB0E0D00 
+ 1610      01010101 
+ 1611              	.LASF30:
+ 1612 0000 45585449 		.ascii	"EXTI_Line\000"
+ 1612      5F4C696E 
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZLTuri.s 			page 34
+
+
+ 1612      6500
+ 1613              	.LASF31:
+ 1614 000a 45585449 		.ascii	"EXTI_Mode\000"
+ 1614      5F4D6F64 
+ 1614      6500
+ 1615              	.LASF15:
+ 1616 0014 49545374 		.ascii	"ITStatus\000"
+ 1616      61747573 
+ 1616      00
+ 1617              	.LASF36:
+ 1618 001d 656E6162 		.ascii	"enablestatus\000"
+ 1618      6C657374 
+ 1618      61747573 
+ 1618      00
+ 1619              	.LASF33:
+ 1620 002a 45585449 		.ascii	"EXTI_LineCmd\000"
+ 1620      5F4C696E 
+ 1620      65436D64 
+ 1620      00
+ 1621              	.LASF32:
+ 1622 0037 45585449 		.ascii	"EXTI_Trigger\000"
+ 1622      5F547269 
+ 1622      67676572 
+ 1622      00
+ 1623              	.LASF40:
+ 1624 0044 45585449 		.ascii	"EXTI_StructInit\000"
+ 1624      5F537472 
+ 1624      75637449 
+ 1624      6E697400 
+ 1625              	.LASF24:
+ 1626 0054 45585449 		.ascii	"EXTI_Mode_Event\000"
+ 1626      5F4D6F64 
+ 1626      655F4576 
+ 1626      656E7400 
+ 1627              	.LASF3:
+ 1628 0064 73686F72 		.ascii	"short unsigned int\000"
+ 1628      7420756E 
+ 1628      7369676E 
+ 1628      65642069 
+ 1628      6E7400
+ 1629              	.LASF23:
+ 1630 0077 45585449 		.ascii	"EXTI_Mode_Interrupt\000"
+ 1630      5F4D6F64 
+ 1630      655F496E 
+ 1630      74657272 
+ 1630      75707400 
+ 1631              	.LASF18:
+ 1632 008b 46756E63 		.ascii	"FunctionalState\000"
+ 1632      74696F6E 
+ 1632      616C5374 
+ 1632      61746500 
+ 1633              	.LASF35:
+ 1634 009b 62697473 		.ascii	"bitstatus\000"
+ 1634      74617475 
+ 1634      7300
+ 1635              	.LASF39:
+ 1636 00a5 45585449 		.ascii	"EXTI_GenerateSWInterrupt\000"
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZLTuri.s 			page 35
+
+
+ 1636      5F47656E 
+ 1636      65726174 
+ 1636      65535749 
+ 1636      6E746572 
+ 1637              	.LASF34:
+ 1638 00be 45585449 		.ascii	"EXTI_InitTypeDef\000"
+ 1638      5F496E69 
+ 1638      74547970 
+ 1638      65446566 
+ 1638      00
+ 1639              	.LASF41:
+ 1640 00cf 45585449 		.ascii	"EXTI_InitStruct\000"
+ 1640      5F496E69 
+ 1640      74537472 
+ 1640      75637400 
+ 1641              	.LASF17:
+ 1642 00df 454E4142 		.ascii	"ENABLE\000"
+ 1642      4C4500
+ 1643              	.LASF1:
+ 1644 00e6 756E7369 		.ascii	"unsigned char\000"
+ 1644      676E6564 
+ 1644      20636861 
+ 1644      7200
+ 1645              	.LASF14:
+ 1646 00f4 466C6167 		.ascii	"FlagStatus\000"
+ 1646      53746174 
+ 1646      757300
+ 1647              	.LASF47:
+ 1648 00ff 45585449 		.ascii	"EXTI_ClearFlag\000"
+ 1648      5F436C65 
+ 1648      6172466C 
+ 1648      616700
+ 1649              	.LASF5:
+ 1650 010e 6C6F6E67 		.ascii	"long unsigned int\000"
+ 1650      20756E73 
+ 1650      69676E65 
+ 1650      6420696E 
+ 1650      7400
+ 1651              	.LASF13:
+ 1652 0120 52455345 		.ascii	"RESET\000"
+ 1652      5400
+ 1653              	.LASF25:
+ 1654 0126 45585449 		.ascii	"EXTIMode_TypeDef\000"
+ 1654      4D6F6465 
+ 1654      5F547970 
+ 1654      65446566 
+ 1654      00
+ 1655              	.LASF22:
+ 1656 0137 45585449 		.ascii	"EXTI_TypeDef\000"
+ 1656      5F547970 
+ 1656      65446566 
+ 1656      00
+ 1657              	.LASF11:
+ 1658 0144 49544D5F 		.ascii	"ITM_RxBuffer\000"
+ 1658      52784275 
+ 1658      66666572 
+ 1658      00
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZLTuri.s 			page 36
+
+
+ 1659              	.LASF19:
+ 1660 0151 52545352 		.ascii	"RTSR\000"
+ 1660      00
+ 1661              	.LASF9:
+ 1662 0156 5F5F7569 		.ascii	"__uint32_t\000"
+ 1662      6E743332 
+ 1662      5F7400
+ 1663              	.LASF26:
+ 1664 0161 45585449 		.ascii	"EXTI_Trigger_Rising\000"
+ 1664      5F547269 
+ 1664      67676572 
+ 1664      5F526973 
+ 1664      696E6700 
+ 1665              	.LASF28:
+ 1666 0175 45585449 		.ascii	"EXTI_Trigger_Rising_Falling\000"
+ 1666      5F547269 
+ 1666      67676572 
+ 1666      5F526973 
+ 1666      696E675F 
+ 1667              	.LASF8:
+ 1668 0191 756E7369 		.ascii	"unsigned int\000"
+ 1668      676E6564 
+ 1668      20696E74 
+ 1668      00
+ 1669              	.LASF42:
+ 1670 019e 45585449 		.ascii	"EXTI_Init\000"
+ 1670      5F496E69 
+ 1670      7400
+ 1671              	.LASF38:
+ 1672 01a8 45585449 		.ascii	"EXTI_GetFlagStatus\000"
+ 1672      5F476574 
+ 1672      466C6167 
+ 1672      53746174 
+ 1672      757300
+ 1673              	.LASF7:
+ 1674 01bb 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 1674      206C6F6E 
+ 1674      6720756E 
+ 1674      7369676E 
+ 1674      65642069 
+ 1675              	.LASF0:
+ 1676 01d2 7369676E 		.ascii	"signed char\000"
+ 1676      65642063 
+ 1676      68617200 
+ 1677              	.LASF27:
+ 1678 01de 45585449 		.ascii	"EXTI_Trigger_Falling\000"
+ 1678      5F547269 
+ 1678      67676572 
+ 1678      5F46616C 
+ 1678      6C696E67 
+ 1679              	.LASF6:
+ 1680 01f3 6C6F6E67 		.ascii	"long long int\000"
+ 1680      206C6F6E 
+ 1680      6720696E 
+ 1680      7400
+ 1681              	.LASF12:
+ 1682 0201 53797374 		.ascii	"SystemCoreClock\000"
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZLTuri.s 			page 37
+
+
+ 1682      656D436F 
+ 1682      7265436C 
+ 1682      6F636B00 
+ 1683              	.LASF37:
+ 1684 0211 45585449 		.ascii	"EXTI_GetITStatus\000"
+ 1684      5F476574 
+ 1684      49545374 
+ 1684      61747573 
+ 1684      00
+ 1685              	.LASF46:
+ 1686 0222 45585449 		.ascii	"EXTI_ClearITPendingBit\000"
+ 1686      5F436C65 
+ 1686      61724954 
+ 1686      50656E64 
+ 1686      696E6742 
+ 1687              	.LASF2:
+ 1688 0239 73686F72 		.ascii	"short int\000"
+ 1688      7420696E 
+ 1688      7400
+ 1689              	.LASF10:
+ 1690 0243 75696E74 		.ascii	"uint32_t\000"
+ 1690      33325F74 
+ 1690      00
+ 1691              	.LASF4:
+ 1692 024c 6C6F6E67 		.ascii	"long int\000"
+ 1692      20696E74 
+ 1692      00
+ 1693              	.LASF43:
+ 1694 0255 474E5520 		.ascii	"GNU C11 7.3.1 20180622 (release) [ARM/embedded-7-br"
+ 1694      43313120 
+ 1694      372E332E 
+ 1694      31203230 
+ 1694      31383036 
+ 1695 0288 616E6368 		.ascii	"anch revision 261907] -mcpu=cortex-m3 -mthumb -mapc"
+ 1695      20726576 
+ 1695      6973696F 
+ 1695      6E203236 
+ 1695      31393037 
+ 1696 02bb 732D6672 		.ascii	"s-frame -mthumb-interwork -mcpu=cortex-m3 -mthumb -"
+ 1696      616D6520 
+ 1696      2D6D7468 
+ 1696      756D622D 
+ 1696      696E7465 
+ 1697 02ee 67647761 		.ascii	"gdwarf-2 -O2\000"
+ 1697      72662D32 
+ 1697      202D4F32 
+ 1697      00
+ 1698              	.LASF16:
+ 1699 02fb 44495341 		.ascii	"DISABLE\000"
+ 1699      424C4500 
+ 1700              	.LASF44:
+ 1701 0303 2E2E2F2E 		.ascii	"../../source/src/FWlib/src/stm32f10x_exti.c\000"
+ 1701      2E2F736F 
+ 1701      75726365 
+ 1701      2F737263 
+ 1701      2F46576C 
+ 1702              	.LASF29:
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZLTuri.s 			page 38
+
+
+ 1703 032f 45585449 		.ascii	"EXTITrigger_TypeDef\000"
+ 1703      54726967 
+ 1703      6765725F 
+ 1703      54797065 
+ 1703      44656600 
+ 1704              	.LASF21:
+ 1705 0343 53574945 		.ascii	"SWIER\000"
+ 1705      5200
+ 1706              	.LASF48:
+ 1707 0349 45585449 		.ascii	"EXTI_DeInit\000"
+ 1707      5F446549 
+ 1707      6E697400 
+ 1708              	.LASF45:
+ 1709 0355 473A5C55 		.ascii	"G:\\Users\\Jaxb\\Desktop\\KAKAOS-0.07  2019.2.21  f"
+ 1709      73657273 
+ 1709      5C4A6178 
+ 1709      625C4465 
+ 1709      736B746F 
+ 1710 0384 6F722067 		.ascii	"or gcc\\Project\\RVMDK\243\250uv5\243\251\000"
+ 1710      63635C50 
+ 1710      726F6A65 
+ 1710      63745C52 
+ 1710      564D444B 
+ 1711              	.LASF20:
+ 1712 03a0 46545352 		.ascii	"FTSR\000"
+ 1712      00
+ 1713              		.ident	"GCC: (GNU Tools for Arm Embedded Processors 7-2018-q2-update) 7.3.1 20180622 (release) [AR
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZLTuri.s 			page 39
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 stm32f10x_exti.c
+G:\Users\Jaxb\AppData\Local\Temp\ccZLTuri.s:15     .text:00000000 $t
+G:\Users\Jaxb\AppData\Local\Temp\ccZLTuri.s:23     .text:00000000 EXTI_DeInit
+G:\Users\Jaxb\AppData\Local\Temp\ccZLTuri.s:51     .text:00000014 $d
+G:\Users\Jaxb\AppData\Local\Temp\ccZLTuri.s:56     .text:0000001c $t
+G:\Users\Jaxb\AppData\Local\Temp\ccZLTuri.s:64     .text:0000001c EXTI_Init
+G:\Users\Jaxb\AppData\Local\Temp\ccZLTuri.s:179    .text:00000094 $d
+G:\Users\Jaxb\AppData\Local\Temp\ccZLTuri.s:183    .text:00000098 $t
+G:\Users\Jaxb\AppData\Local\Temp\ccZLTuri.s:191    .text:00000098 EXTI_StructInit
+G:\Users\Jaxb\AppData\Local\Temp\ccZLTuri.s:224    .text:000000a8 EXTI_GenerateSWInterrupt
+G:\Users\Jaxb\AppData\Local\Temp\ccZLTuri.s:243    .text:000000b4 $d
+G:\Users\Jaxb\AppData\Local\Temp\ccZLTuri.s:247    .text:000000b8 $t
+G:\Users\Jaxb\AppData\Local\Temp\ccZLTuri.s:255    .text:000000b8 EXTI_GetFlagStatus
+G:\Users\Jaxb\AppData\Local\Temp\ccZLTuri.s:277    .text:000000c8 $d
+G:\Users\Jaxb\AppData\Local\Temp\ccZLTuri.s:281    .text:000000cc $t
+G:\Users\Jaxb\AppData\Local\Temp\ccZLTuri.s:289    .text:000000cc EXTI_ClearFlag
+G:\Users\Jaxb\AppData\Local\Temp\ccZLTuri.s:305    .text:000000d4 $d
+G:\Users\Jaxb\AppData\Local\Temp\ccZLTuri.s:309    .text:000000d8 $t
+G:\Users\Jaxb\AppData\Local\Temp\ccZLTuri.s:317    .text:000000d8 EXTI_GetITStatus
+G:\Users\Jaxb\AppData\Local\Temp\ccZLTuri.s:351    .text:000000f0 $d
+G:\Users\Jaxb\AppData\Local\Temp\ccZLTuri.s:355    .text:000000f4 $t
+G:\Users\Jaxb\AppData\Local\Temp\ccZLTuri.s:363    .text:000000f4 EXTI_ClearITPendingBit
+G:\Users\Jaxb\AppData\Local\Temp\ccZLTuri.s:375    .text:000000fc $d
+
+NO UNDEFINED SYMBOLS

@@ -1,0 +1,2933 @@
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccaakqsZ.s 			page 1
+
+
+   1              		.cpu cortex-m3
+   2              		.eabi_attribute 20, 1
+   3              		.eabi_attribute 21, 1
+   4              		.eabi_attribute 23, 3
+   5              		.eabi_attribute 24, 1
+   6              		.eabi_attribute 25, 1
+   7              		.eabi_attribute 26, 1
+   8              		.eabi_attribute 30, 2
+   9              		.eabi_attribute 34, 1
+  10              		.eabi_attribute 18, 4
+  11              		.file	"stm32f10x_dma.c"
+  12              		.text
+  13              	.Ltext0:
+  14              		.cfi_sections	.debug_frame
+  15              		.align	1
+  16              		.p2align 2,,3
+  17              		.global	DMA_DeInit
+  18              		.syntax unified
+  19              		.thumb
+  20              		.thumb_func
+  21              		.fpu softvfp
+  22              		.type	DMA_DeInit, %function
+  23              	DMA_DeInit:
+  24              	.LFB29:
+  25              		.file 1 "../../source/src/FWlib/src/stm32f10x_dma.c"
+   1:../../source/src/FWlib/src/stm32f10x_dma.c **** /**
+   2:../../source/src/FWlib/src/stm32f10x_dma.c ****   ******************************************************************************
+   3:../../source/src/FWlib/src/stm32f10x_dma.c ****   * @file    stm32f10x_dma.c
+   4:../../source/src/FWlib/src/stm32f10x_dma.c ****   * @author  MCD Application Team
+   5:../../source/src/FWlib/src/stm32f10x_dma.c ****   * @version V3.5.0
+   6:../../source/src/FWlib/src/stm32f10x_dma.c ****   * @date    11-March-2011
+   7:../../source/src/FWlib/src/stm32f10x_dma.c ****   * @brief   This file provides all the DMA firmware functions.
+   8:../../source/src/FWlib/src/stm32f10x_dma.c ****   ******************************************************************************
+   9:../../source/src/FWlib/src/stm32f10x_dma.c ****   * @attention
+  10:../../source/src/FWlib/src/stm32f10x_dma.c ****   *
+  11:../../source/src/FWlib/src/stm32f10x_dma.c ****   * THE PRESENT FIRMWARE WHICH IS FOR GUIDANCE ONLY AIMS AT PROVIDING CUSTOMERS
+  12:../../source/src/FWlib/src/stm32f10x_dma.c ****   * WITH CODING INFORMATION REGARDING THEIR PRODUCTS IN ORDER FOR THEM TO SAVE
+  13:../../source/src/FWlib/src/stm32f10x_dma.c ****   * TIME. AS A RESULT, STMICROELECTRONICS SHALL NOT BE HELD LIABLE FOR ANY
+  14:../../source/src/FWlib/src/stm32f10x_dma.c ****   * DIRECT, INDIRECT OR CONSEQUENTIAL DAMAGES WITH RESPECT TO ANY CLAIMS ARISING
+  15:../../source/src/FWlib/src/stm32f10x_dma.c ****   * FROM THE CONTENT OF SUCH FIRMWARE AND/OR THE USE MADE BY CUSTOMERS OF THE
+  16:../../source/src/FWlib/src/stm32f10x_dma.c ****   * CODING INFORMATION CONTAINED HEREIN IN CONNECTION WITH THEIR PRODUCTS.
+  17:../../source/src/FWlib/src/stm32f10x_dma.c ****   *
+  18:../../source/src/FWlib/src/stm32f10x_dma.c ****   * <h2><center>&copy; COPYRIGHT 2011 STMicroelectronics</center></h2>
+  19:../../source/src/FWlib/src/stm32f10x_dma.c ****   ******************************************************************************
+  20:../../source/src/FWlib/src/stm32f10x_dma.c ****   */
+  21:../../source/src/FWlib/src/stm32f10x_dma.c **** 
+  22:../../source/src/FWlib/src/stm32f10x_dma.c **** /* Includes ------------------------------------------------------------------*/
+  23:../../source/src/FWlib/src/stm32f10x_dma.c **** #include "stm32f10x_dma.h"
+  24:../../source/src/FWlib/src/stm32f10x_dma.c **** #include "stm32f10x_rcc.h"
+  25:../../source/src/FWlib/src/stm32f10x_dma.c **** 
+  26:../../source/src/FWlib/src/stm32f10x_dma.c **** /** @addtogroup STM32F10x_StdPeriph_Driver
+  27:../../source/src/FWlib/src/stm32f10x_dma.c ****   * @{
+  28:../../source/src/FWlib/src/stm32f10x_dma.c ****   */
+  29:../../source/src/FWlib/src/stm32f10x_dma.c **** 
+  30:../../source/src/FWlib/src/stm32f10x_dma.c **** /** @defgroup DMA 
+  31:../../source/src/FWlib/src/stm32f10x_dma.c ****   * @brief DMA driver modules
+  32:../../source/src/FWlib/src/stm32f10x_dma.c ****   * @{
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccaakqsZ.s 			page 2
+
+
+  33:../../source/src/FWlib/src/stm32f10x_dma.c ****   */ 
+  34:../../source/src/FWlib/src/stm32f10x_dma.c **** 
+  35:../../source/src/FWlib/src/stm32f10x_dma.c **** /** @defgroup DMA_Private_TypesDefinitions
+  36:../../source/src/FWlib/src/stm32f10x_dma.c ****   * @{
+  37:../../source/src/FWlib/src/stm32f10x_dma.c ****   */ 
+  38:../../source/src/FWlib/src/stm32f10x_dma.c **** /**
+  39:../../source/src/FWlib/src/stm32f10x_dma.c ****   * @}
+  40:../../source/src/FWlib/src/stm32f10x_dma.c ****   */
+  41:../../source/src/FWlib/src/stm32f10x_dma.c **** 
+  42:../../source/src/FWlib/src/stm32f10x_dma.c **** /** @defgroup DMA_Private_Defines
+  43:../../source/src/FWlib/src/stm32f10x_dma.c ****   * @{
+  44:../../source/src/FWlib/src/stm32f10x_dma.c ****   */
+  45:../../source/src/FWlib/src/stm32f10x_dma.c **** 
+  46:../../source/src/FWlib/src/stm32f10x_dma.c **** 
+  47:../../source/src/FWlib/src/stm32f10x_dma.c **** /* DMA1 Channelx interrupt pending bit masks */
+  48:../../source/src/FWlib/src/stm32f10x_dma.c **** #define DMA1_Channel1_IT_Mask    ((uint32_t)(DMA_ISR_GIF1 | DMA_ISR_TCIF1 | DMA_ISR_HTIF1 | DMA_ISR
+  49:../../source/src/FWlib/src/stm32f10x_dma.c **** #define DMA1_Channel2_IT_Mask    ((uint32_t)(DMA_ISR_GIF2 | DMA_ISR_TCIF2 | DMA_ISR_HTIF2 | DMA_ISR
+  50:../../source/src/FWlib/src/stm32f10x_dma.c **** #define DMA1_Channel3_IT_Mask    ((uint32_t)(DMA_ISR_GIF3 | DMA_ISR_TCIF3 | DMA_ISR_HTIF3 | DMA_ISR
+  51:../../source/src/FWlib/src/stm32f10x_dma.c **** #define DMA1_Channel4_IT_Mask    ((uint32_t)(DMA_ISR_GIF4 | DMA_ISR_TCIF4 | DMA_ISR_HTIF4 | DMA_ISR
+  52:../../source/src/FWlib/src/stm32f10x_dma.c **** #define DMA1_Channel5_IT_Mask    ((uint32_t)(DMA_ISR_GIF5 | DMA_ISR_TCIF5 | DMA_ISR_HTIF5 | DMA_ISR
+  53:../../source/src/FWlib/src/stm32f10x_dma.c **** #define DMA1_Channel6_IT_Mask    ((uint32_t)(DMA_ISR_GIF6 | DMA_ISR_TCIF6 | DMA_ISR_HTIF6 | DMA_ISR
+  54:../../source/src/FWlib/src/stm32f10x_dma.c **** #define DMA1_Channel7_IT_Mask    ((uint32_t)(DMA_ISR_GIF7 | DMA_ISR_TCIF7 | DMA_ISR_HTIF7 | DMA_ISR
+  55:../../source/src/FWlib/src/stm32f10x_dma.c **** 
+  56:../../source/src/FWlib/src/stm32f10x_dma.c **** /* DMA2 Channelx interrupt pending bit masks */
+  57:../../source/src/FWlib/src/stm32f10x_dma.c **** #define DMA2_Channel1_IT_Mask    ((uint32_t)(DMA_ISR_GIF1 | DMA_ISR_TCIF1 | DMA_ISR_HTIF1 | DMA_ISR
+  58:../../source/src/FWlib/src/stm32f10x_dma.c **** #define DMA2_Channel2_IT_Mask    ((uint32_t)(DMA_ISR_GIF2 | DMA_ISR_TCIF2 | DMA_ISR_HTIF2 | DMA_ISR
+  59:../../source/src/FWlib/src/stm32f10x_dma.c **** #define DMA2_Channel3_IT_Mask    ((uint32_t)(DMA_ISR_GIF3 | DMA_ISR_TCIF3 | DMA_ISR_HTIF3 | DMA_ISR
+  60:../../source/src/FWlib/src/stm32f10x_dma.c **** #define DMA2_Channel4_IT_Mask    ((uint32_t)(DMA_ISR_GIF4 | DMA_ISR_TCIF4 | DMA_ISR_HTIF4 | DMA_ISR
+  61:../../source/src/FWlib/src/stm32f10x_dma.c **** #define DMA2_Channel5_IT_Mask    ((uint32_t)(DMA_ISR_GIF5 | DMA_ISR_TCIF5 | DMA_ISR_HTIF5 | DMA_ISR
+  62:../../source/src/FWlib/src/stm32f10x_dma.c **** 
+  63:../../source/src/FWlib/src/stm32f10x_dma.c **** /* DMA2 FLAG mask */
+  64:../../source/src/FWlib/src/stm32f10x_dma.c **** #define FLAG_Mask                ((uint32_t)0x10000000)
+  65:../../source/src/FWlib/src/stm32f10x_dma.c **** 
+  66:../../source/src/FWlib/src/stm32f10x_dma.c **** /* DMA registers Masks */
+  67:../../source/src/FWlib/src/stm32f10x_dma.c **** #define CCR_CLEAR_Mask           ((uint32_t)0xFFFF800F)
+  68:../../source/src/FWlib/src/stm32f10x_dma.c **** 
+  69:../../source/src/FWlib/src/stm32f10x_dma.c **** /**
+  70:../../source/src/FWlib/src/stm32f10x_dma.c ****   * @}
+  71:../../source/src/FWlib/src/stm32f10x_dma.c ****   */
+  72:../../source/src/FWlib/src/stm32f10x_dma.c **** 
+  73:../../source/src/FWlib/src/stm32f10x_dma.c **** /** @defgroup DMA_Private_Macros
+  74:../../source/src/FWlib/src/stm32f10x_dma.c ****   * @{
+  75:../../source/src/FWlib/src/stm32f10x_dma.c ****   */
+  76:../../source/src/FWlib/src/stm32f10x_dma.c **** 
+  77:../../source/src/FWlib/src/stm32f10x_dma.c **** /**
+  78:../../source/src/FWlib/src/stm32f10x_dma.c ****   * @}
+  79:../../source/src/FWlib/src/stm32f10x_dma.c ****   */
+  80:../../source/src/FWlib/src/stm32f10x_dma.c **** 
+  81:../../source/src/FWlib/src/stm32f10x_dma.c **** /** @defgroup DMA_Private_Variables
+  82:../../source/src/FWlib/src/stm32f10x_dma.c ****   * @{
+  83:../../source/src/FWlib/src/stm32f10x_dma.c ****   */
+  84:../../source/src/FWlib/src/stm32f10x_dma.c **** 
+  85:../../source/src/FWlib/src/stm32f10x_dma.c **** /**
+  86:../../source/src/FWlib/src/stm32f10x_dma.c ****   * @}
+  87:../../source/src/FWlib/src/stm32f10x_dma.c ****   */
+  88:../../source/src/FWlib/src/stm32f10x_dma.c **** 
+  89:../../source/src/FWlib/src/stm32f10x_dma.c **** /** @defgroup DMA_Private_FunctionPrototypes
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccaakqsZ.s 			page 3
+
+
+  90:../../source/src/FWlib/src/stm32f10x_dma.c ****   * @{
+  91:../../source/src/FWlib/src/stm32f10x_dma.c ****   */
+  92:../../source/src/FWlib/src/stm32f10x_dma.c **** 
+  93:../../source/src/FWlib/src/stm32f10x_dma.c **** /**
+  94:../../source/src/FWlib/src/stm32f10x_dma.c ****   * @}
+  95:../../source/src/FWlib/src/stm32f10x_dma.c ****   */
+  96:../../source/src/FWlib/src/stm32f10x_dma.c **** 
+  97:../../source/src/FWlib/src/stm32f10x_dma.c **** /** @defgroup DMA_Private_Functions
+  98:../../source/src/FWlib/src/stm32f10x_dma.c ****   * @{
+  99:../../source/src/FWlib/src/stm32f10x_dma.c ****   */
+ 100:../../source/src/FWlib/src/stm32f10x_dma.c **** 
+ 101:../../source/src/FWlib/src/stm32f10x_dma.c **** /**
+ 102:../../source/src/FWlib/src/stm32f10x_dma.c ****   * @brief  Deinitializes the DMAy Channelx registers to their default reset
+ 103:../../source/src/FWlib/src/stm32f10x_dma.c ****   *         values.
+ 104:../../source/src/FWlib/src/stm32f10x_dma.c ****   * @param  DMAy_Channelx: where y can be 1 or 2 to select the DMA and
+ 105:../../source/src/FWlib/src/stm32f10x_dma.c ****   *   x can be 1 to 7 for DMA1 and 1 to 5 for DMA2 to select the DMA Channel.
+ 106:../../source/src/FWlib/src/stm32f10x_dma.c ****   * @retval None
+ 107:../../source/src/FWlib/src/stm32f10x_dma.c ****   */
+ 108:../../source/src/FWlib/src/stm32f10x_dma.c **** void DMA_DeInit(DMA_Channel_TypeDef* DMAy_Channelx)
+ 109:../../source/src/FWlib/src/stm32f10x_dma.c **** {
+  26              		.loc 1 109 0
+  27              		.cfi_startproc
+  28              		@ args = 0, pretend = 0, frame = 0
+  29              		@ frame_needed = 0, uses_anonymous_args = 0
+  30              		@ link register save eliminated.
+  31              	.LVL0:
+  32 0000 10B4     		push	{r4}
+  33              	.LCFI0:
+  34              		.cfi_def_cfa_offset 4
+  35              		.cfi_offset 4, -4
+ 110:../../source/src/FWlib/src/stm32f10x_dma.c ****   /* Check the parameters */
+ 111:../../source/src/FWlib/src/stm32f10x_dma.c ****   assert_param(IS_DMA_ALL_PERIPH(DMAy_Channelx));
+ 112:../../source/src/FWlib/src/stm32f10x_dma.c ****   
+ 113:../../source/src/FWlib/src/stm32f10x_dma.c ****   /* Disable the selected DMAy Channelx */
+ 114:../../source/src/FWlib/src/stm32f10x_dma.c ****   DMAy_Channelx->CCR &= (uint16_t)(~DMA_CCR1_EN);
+  36              		.loc 1 114 0
+  37 0002 4FF6FE74 		movw	r4, #65534
+ 115:../../source/src/FWlib/src/stm32f10x_dma.c ****   
+ 116:../../source/src/FWlib/src/stm32f10x_dma.c ****   /* Reset DMAy Channelx control register */
+ 117:../../source/src/FWlib/src/stm32f10x_dma.c ****   DMAy_Channelx->CCR  = 0;
+  38              		.loc 1 117 0
+  39 0006 0023     		movs	r3, #0
+ 114:../../source/src/FWlib/src/stm32f10x_dma.c ****   
+  40              		.loc 1 114 0
+  41 0008 0268     		ldr	r2, [r0]
+ 118:../../source/src/FWlib/src/stm32f10x_dma.c ****   
+ 119:../../source/src/FWlib/src/stm32f10x_dma.c ****   /* Reset DMAy Channelx remaining bytes register */
+ 120:../../source/src/FWlib/src/stm32f10x_dma.c ****   DMAy_Channelx->CNDTR = 0;
+ 121:../../source/src/FWlib/src/stm32f10x_dma.c ****   
+ 122:../../source/src/FWlib/src/stm32f10x_dma.c ****   /* Reset DMAy Channelx peripheral address register */
+ 123:../../source/src/FWlib/src/stm32f10x_dma.c ****   DMAy_Channelx->CPAR  = 0;
+ 124:../../source/src/FWlib/src/stm32f10x_dma.c ****   
+ 125:../../source/src/FWlib/src/stm32f10x_dma.c ****   /* Reset DMAy Channelx memory address register */
+ 126:../../source/src/FWlib/src/stm32f10x_dma.c ****   DMAy_Channelx->CMAR = 0;
+ 127:../../source/src/FWlib/src/stm32f10x_dma.c ****   
+ 128:../../source/src/FWlib/src/stm32f10x_dma.c ****   if (DMAy_Channelx == DMA1_Channel1)
+  42              		.loc 1 128 0
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccaakqsZ.s 			page 4
+
+
+  43 000a 3B49     		ldr	r1, .L26
+ 114:../../source/src/FWlib/src/stm32f10x_dma.c ****   
+  44              		.loc 1 114 0
+  45 000c 2240     		ands	r2, r2, r4
+  46              		.loc 1 128 0
+  47 000e 8842     		cmp	r0, r1
+ 114:../../source/src/FWlib/src/stm32f10x_dma.c ****   
+  48              		.loc 1 114 0
+  49 0010 0260     		str	r2, [r0]
+ 117:../../source/src/FWlib/src/stm32f10x_dma.c ****   
+  50              		.loc 1 117 0
+  51 0012 0360     		str	r3, [r0]
+ 120:../../source/src/FWlib/src/stm32f10x_dma.c ****   
+  52              		.loc 1 120 0
+  53 0014 4360     		str	r3, [r0, #4]
+ 123:../../source/src/FWlib/src/stm32f10x_dma.c ****   
+  54              		.loc 1 123 0
+  55 0016 8360     		str	r3, [r0, #8]
+ 126:../../source/src/FWlib/src/stm32f10x_dma.c ****   
+  56              		.loc 1 126 0
+  57 0018 C360     		str	r3, [r0, #12]
+  58              		.loc 1 128 0
+  59 001a 26D0     		beq	.L15
+ 129:../../source/src/FWlib/src/stm32f10x_dma.c ****   {
+ 130:../../source/src/FWlib/src/stm32f10x_dma.c ****     /* Reset interrupt pending bits for DMA1 Channel1 */
+ 131:../../source/src/FWlib/src/stm32f10x_dma.c ****     DMA1->IFCR |= DMA1_Channel1_IT_Mask;
+ 132:../../source/src/FWlib/src/stm32f10x_dma.c ****   }
+ 133:../../source/src/FWlib/src/stm32f10x_dma.c ****   else if (DMAy_Channelx == DMA1_Channel2)
+  60              		.loc 1 133 0
+  61 001c 374B     		ldr	r3, .L26+4
+  62 001e 9842     		cmp	r0, r3
+  63 0020 37D0     		beq	.L16
+ 134:../../source/src/FWlib/src/stm32f10x_dma.c ****   {
+ 135:../../source/src/FWlib/src/stm32f10x_dma.c ****     /* Reset interrupt pending bits for DMA1 Channel2 */
+ 136:../../source/src/FWlib/src/stm32f10x_dma.c ****     DMA1->IFCR |= DMA1_Channel2_IT_Mask;
+ 137:../../source/src/FWlib/src/stm32f10x_dma.c ****   }
+ 138:../../source/src/FWlib/src/stm32f10x_dma.c ****   else if (DMAy_Channelx == DMA1_Channel3)
+  64              		.loc 1 138 0
+  65 0022 374B     		ldr	r3, .L26+8
+  66 0024 9842     		cmp	r0, r3
+  67 0026 27D0     		beq	.L17
+ 139:../../source/src/FWlib/src/stm32f10x_dma.c ****   {
+ 140:../../source/src/FWlib/src/stm32f10x_dma.c ****     /* Reset interrupt pending bits for DMA1 Channel3 */
+ 141:../../source/src/FWlib/src/stm32f10x_dma.c ****     DMA1->IFCR |= DMA1_Channel3_IT_Mask;
+ 142:../../source/src/FWlib/src/stm32f10x_dma.c ****   }
+ 143:../../source/src/FWlib/src/stm32f10x_dma.c ****   else if (DMAy_Channelx == DMA1_Channel4)
+  68              		.loc 1 143 0
+  69 0028 364B     		ldr	r3, .L26+12
+  70 002a 9842     		cmp	r0, r3
+  71 002c 38D0     		beq	.L18
+ 144:../../source/src/FWlib/src/stm32f10x_dma.c ****   {
+ 145:../../source/src/FWlib/src/stm32f10x_dma.c ****     /* Reset interrupt pending bits for DMA1 Channel4 */
+ 146:../../source/src/FWlib/src/stm32f10x_dma.c ****     DMA1->IFCR |= DMA1_Channel4_IT_Mask;
+ 147:../../source/src/FWlib/src/stm32f10x_dma.c ****   }
+ 148:../../source/src/FWlib/src/stm32f10x_dma.c ****   else if (DMAy_Channelx == DMA1_Channel5)
+  72              		.loc 1 148 0
+  73 002e 364B     		ldr	r3, .L26+16
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccaakqsZ.s 			page 5
+
+
+  74 0030 9842     		cmp	r0, r3
+  75 0032 3CD0     		beq	.L19
+ 149:../../source/src/FWlib/src/stm32f10x_dma.c ****   {
+ 150:../../source/src/FWlib/src/stm32f10x_dma.c ****     /* Reset interrupt pending bits for DMA1 Channel5 */
+ 151:../../source/src/FWlib/src/stm32f10x_dma.c ****     DMA1->IFCR |= DMA1_Channel5_IT_Mask;
+ 152:../../source/src/FWlib/src/stm32f10x_dma.c ****   }
+ 153:../../source/src/FWlib/src/stm32f10x_dma.c ****   else if (DMAy_Channelx == DMA1_Channel6)
+  76              		.loc 1 153 0
+  77 0034 354B     		ldr	r3, .L26+20
+  78 0036 9842     		cmp	r0, r3
+  79 0038 25D0     		beq	.L20
+ 154:../../source/src/FWlib/src/stm32f10x_dma.c ****   {
+ 155:../../source/src/FWlib/src/stm32f10x_dma.c ****     /* Reset interrupt pending bits for DMA1 Channel6 */
+ 156:../../source/src/FWlib/src/stm32f10x_dma.c ****     DMA1->IFCR |= DMA1_Channel6_IT_Mask;
+ 157:../../source/src/FWlib/src/stm32f10x_dma.c ****   }
+ 158:../../source/src/FWlib/src/stm32f10x_dma.c ****   else if (DMAy_Channelx == DMA1_Channel7)
+  80              		.loc 1 158 0
+  81 003a 354B     		ldr	r3, .L26+24
+  82 003c 9842     		cmp	r0, r3
+  83 003e 42D0     		beq	.L21
+ 159:../../source/src/FWlib/src/stm32f10x_dma.c ****   {
+ 160:../../source/src/FWlib/src/stm32f10x_dma.c ****     /* Reset interrupt pending bits for DMA1 Channel7 */
+ 161:../../source/src/FWlib/src/stm32f10x_dma.c ****     DMA1->IFCR |= DMA1_Channel7_IT_Mask;
+ 162:../../source/src/FWlib/src/stm32f10x_dma.c ****   }
+ 163:../../source/src/FWlib/src/stm32f10x_dma.c ****   else if (DMAy_Channelx == DMA2_Channel1)
+  84              		.loc 1 163 0
+  85 0040 344B     		ldr	r3, .L26+28
+  86 0042 9842     		cmp	r0, r3
+  87 0044 45D0     		beq	.L22
+ 164:../../source/src/FWlib/src/stm32f10x_dma.c ****   {
+ 165:../../source/src/FWlib/src/stm32f10x_dma.c ****     /* Reset interrupt pending bits for DMA2 Channel1 */
+ 166:../../source/src/FWlib/src/stm32f10x_dma.c ****     DMA2->IFCR |= DMA2_Channel1_IT_Mask;
+ 167:../../source/src/FWlib/src/stm32f10x_dma.c ****   }
+ 168:../../source/src/FWlib/src/stm32f10x_dma.c ****   else if (DMAy_Channelx == DMA2_Channel2)
+  88              		.loc 1 168 0
+  89 0046 344B     		ldr	r3, .L26+32
+  90 0048 9842     		cmp	r0, r3
+  91 004a 48D0     		beq	.L23
+ 169:../../source/src/FWlib/src/stm32f10x_dma.c ****   {
+ 170:../../source/src/FWlib/src/stm32f10x_dma.c ****     /* Reset interrupt pending bits for DMA2 Channel2 */
+ 171:../../source/src/FWlib/src/stm32f10x_dma.c ****     DMA2->IFCR |= DMA2_Channel2_IT_Mask;
+ 172:../../source/src/FWlib/src/stm32f10x_dma.c ****   }
+ 173:../../source/src/FWlib/src/stm32f10x_dma.c ****   else if (DMAy_Channelx == DMA2_Channel3)
+  92              		.loc 1 173 0
+  93 004c 334B     		ldr	r3, .L26+36
+  94 004e 9842     		cmp	r0, r3
+  95 0050 33D0     		beq	.L24
+ 174:../../source/src/FWlib/src/stm32f10x_dma.c ****   {
+ 175:../../source/src/FWlib/src/stm32f10x_dma.c ****     /* Reset interrupt pending bits for DMA2 Channel3 */
+ 176:../../source/src/FWlib/src/stm32f10x_dma.c ****     DMA2->IFCR |= DMA2_Channel3_IT_Mask;
+ 177:../../source/src/FWlib/src/stm32f10x_dma.c ****   }
+ 178:../../source/src/FWlib/src/stm32f10x_dma.c ****   else if (DMAy_Channelx == DMA2_Channel4)
+  96              		.loc 1 178 0
+  97 0052 334B     		ldr	r3, .L26+40
+  98 0054 9842     		cmp	r0, r3
+  99 0056 48D0     		beq	.L25
+ 179:../../source/src/FWlib/src/stm32f10x_dma.c ****   {
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccaakqsZ.s 			page 6
+
+
+ 180:../../source/src/FWlib/src/stm32f10x_dma.c ****     /* Reset interrupt pending bits for DMA2 Channel4 */
+ 181:../../source/src/FWlib/src/stm32f10x_dma.c ****     DMA2->IFCR |= DMA2_Channel4_IT_Mask;
+ 182:../../source/src/FWlib/src/stm32f10x_dma.c ****   }
+ 183:../../source/src/FWlib/src/stm32f10x_dma.c ****   else
+ 184:../../source/src/FWlib/src/stm32f10x_dma.c ****   { 
+ 185:../../source/src/FWlib/src/stm32f10x_dma.c ****     if (DMAy_Channelx == DMA2_Channel5)
+ 100              		.loc 1 185 0
+ 101 0058 324B     		ldr	r3, .L26+44
+ 102 005a 9842     		cmp	r0, r3
+ 103 005c 0AD1     		bne	.L1
+ 186:../../source/src/FWlib/src/stm32f10x_dma.c ****     {
+ 187:../../source/src/FWlib/src/stm32f10x_dma.c ****       /* Reset interrupt pending bits for DMA2 Channel5 */
+ 188:../../source/src/FWlib/src/stm32f10x_dma.c ****       DMA2->IFCR |= DMA2_Channel5_IT_Mask;
+ 104              		.loc 1 188 0
+ 105 005e 324A     		ldr	r2, .L26+48
+ 106 0060 5368     		ldr	r3, [r2, #4]
+ 107 0062 43F47023 		orr	r3, r3, #983040
+ 108 0066 5360     		str	r3, [r2, #4]
+ 189:../../source/src/FWlib/src/stm32f10x_dma.c ****     }
+ 190:../../source/src/FWlib/src/stm32f10x_dma.c ****   }
+ 191:../../source/src/FWlib/src/stm32f10x_dma.c **** }
+ 109              		.loc 1 191 0
+ 110 0068 04E0     		b	.L1
+ 111              	.L15:
+ 131:../../source/src/FWlib/src/stm32f10x_dma.c ****   }
+ 112              		.loc 1 131 0
+ 113 006a 304A     		ldr	r2, .L26+52
+ 114 006c 5368     		ldr	r3, [r2, #4]
+ 115 006e 43F00F03 		orr	r3, r3, #15
+ 116 0072 5360     		str	r3, [r2, #4]
+ 117              	.L1:
+ 118              		.loc 1 191 0
+ 119 0074 10BC     		pop	{r4}
+ 120              	.LCFI1:
+ 121              		.cfi_remember_state
+ 122              		.cfi_restore 4
+ 123              		.cfi_def_cfa_offset 0
+ 124 0076 7047     		bx	lr
+ 125              	.L17:
+ 126              	.LCFI2:
+ 127              		.cfi_restore_state
+ 141:../../source/src/FWlib/src/stm32f10x_dma.c ****   }
+ 128              		.loc 1 141 0
+ 129 0078 2C4A     		ldr	r2, .L26+52
+ 130              		.loc 1 191 0
+ 131 007a 10BC     		pop	{r4}
+ 132              	.LCFI3:
+ 133              		.cfi_remember_state
+ 134              		.cfi_restore 4
+ 135              		.cfi_def_cfa_offset 0
+ 141:../../source/src/FWlib/src/stm32f10x_dma.c ****   }
+ 136              		.loc 1 141 0
+ 137 007c 5368     		ldr	r3, [r2, #4]
+ 138 007e 43F47063 		orr	r3, r3, #3840
+ 139 0082 5360     		str	r3, [r2, #4]
+ 140              		.loc 1 191 0
+ 141 0084 7047     		bx	lr
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccaakqsZ.s 			page 7
+
+
+ 142              	.L20:
+ 143              	.LCFI4:
+ 144              		.cfi_restore_state
+ 156:../../source/src/FWlib/src/stm32f10x_dma.c ****   }
+ 145              		.loc 1 156 0
+ 146 0086 294A     		ldr	r2, .L26+52
+ 147 0088 5368     		ldr	r3, [r2, #4]
+ 148 008a 43F47003 		orr	r3, r3, #15728640
+ 149 008e 5360     		str	r3, [r2, #4]
+ 150 0090 F0E7     		b	.L1
+ 151              	.L16:
+ 136:../../source/src/FWlib/src/stm32f10x_dma.c ****   }
+ 152              		.loc 1 136 0
+ 153 0092 264A     		ldr	r2, .L26+52
+ 154              		.loc 1 191 0
+ 155 0094 10BC     		pop	{r4}
+ 156              	.LCFI5:
+ 157              		.cfi_remember_state
+ 158              		.cfi_restore 4
+ 159              		.cfi_def_cfa_offset 0
+ 136:../../source/src/FWlib/src/stm32f10x_dma.c ****   }
+ 160              		.loc 1 136 0
+ 161 0096 5368     		ldr	r3, [r2, #4]
+ 162 0098 43F0F003 		orr	r3, r3, #240
+ 163 009c 5360     		str	r3, [r2, #4]
+ 164              		.loc 1 191 0
+ 165 009e 7047     		bx	lr
+ 166              	.L18:
+ 167              	.LCFI6:
+ 168              		.cfi_restore_state
+ 146:../../source/src/FWlib/src/stm32f10x_dma.c ****   }
+ 169              		.loc 1 146 0
+ 170 00a0 224A     		ldr	r2, .L26+52
+ 171              		.loc 1 191 0
+ 172 00a2 10BC     		pop	{r4}
+ 173              	.LCFI7:
+ 174              		.cfi_remember_state
+ 175              		.cfi_restore 4
+ 176              		.cfi_def_cfa_offset 0
+ 146:../../source/src/FWlib/src/stm32f10x_dma.c ****   }
+ 177              		.loc 1 146 0
+ 178 00a4 5368     		ldr	r3, [r2, #4]
+ 179 00a6 43F47043 		orr	r3, r3, #61440
+ 180 00aa 5360     		str	r3, [r2, #4]
+ 181              		.loc 1 191 0
+ 182 00ac 7047     		bx	lr
+ 183              	.L19:
+ 184              	.LCFI8:
+ 185              		.cfi_restore_state
+ 151:../../source/src/FWlib/src/stm32f10x_dma.c ****   }
+ 186              		.loc 1 151 0
+ 187 00ae 1F4A     		ldr	r2, .L26+52
+ 188 00b0 5368     		ldr	r3, [r2, #4]
+ 189 00b2 43F47023 		orr	r3, r3, #983040
+ 190 00b6 5360     		str	r3, [r2, #4]
+ 191 00b8 DCE7     		b	.L1
+ 192              	.L24:
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccaakqsZ.s 			page 8
+
+
+ 176:../../source/src/FWlib/src/stm32f10x_dma.c ****   }
+ 193              		.loc 1 176 0
+ 194 00ba 1B4A     		ldr	r2, .L26+48
+ 195 00bc 5368     		ldr	r3, [r2, #4]
+ 196 00be 43F47063 		orr	r3, r3, #3840
+ 197 00c2 5360     		str	r3, [r2, #4]
+ 198 00c4 D6E7     		b	.L1
+ 199              	.L21:
+ 161:../../source/src/FWlib/src/stm32f10x_dma.c ****   }
+ 200              		.loc 1 161 0
+ 201 00c6 194A     		ldr	r2, .L26+52
+ 202 00c8 5368     		ldr	r3, [r2, #4]
+ 203 00ca 43F07063 		orr	r3, r3, #251658240
+ 204 00ce 5360     		str	r3, [r2, #4]
+ 205 00d0 D0E7     		b	.L1
+ 206              	.L22:
+ 166:../../source/src/FWlib/src/stm32f10x_dma.c ****   }
+ 207              		.loc 1 166 0
+ 208 00d2 154A     		ldr	r2, .L26+48
+ 209 00d4 5368     		ldr	r3, [r2, #4]
+ 210 00d6 43F00F03 		orr	r3, r3, #15
+ 211 00da 5360     		str	r3, [r2, #4]
+ 212 00dc CAE7     		b	.L1
+ 213              	.L23:
+ 171:../../source/src/FWlib/src/stm32f10x_dma.c ****   }
+ 214              		.loc 1 171 0
+ 215 00de 124A     		ldr	r2, .L26+48
+ 216 00e0 5368     		ldr	r3, [r2, #4]
+ 217 00e2 43F0F003 		orr	r3, r3, #240
+ 218 00e6 5360     		str	r3, [r2, #4]
+ 219 00e8 C4E7     		b	.L1
+ 220              	.L25:
+ 181:../../source/src/FWlib/src/stm32f10x_dma.c ****   }
+ 221              		.loc 1 181 0
+ 222 00ea 0F4A     		ldr	r2, .L26+48
+ 223 00ec 5368     		ldr	r3, [r2, #4]
+ 224 00ee 43F47043 		orr	r3, r3, #61440
+ 225 00f2 5360     		str	r3, [r2, #4]
+ 226 00f4 BEE7     		b	.L1
+ 227              	.L27:
+ 228 00f6 00BF     		.align	2
+ 229              	.L26:
+ 230 00f8 08000240 		.word	1073872904
+ 231 00fc 1C000240 		.word	1073872924
+ 232 0100 30000240 		.word	1073872944
+ 233 0104 44000240 		.word	1073872964
+ 234 0108 58000240 		.word	1073872984
+ 235 010c 6C000240 		.word	1073873004
+ 236 0110 80000240 		.word	1073873024
+ 237 0114 08040240 		.word	1073873928
+ 238 0118 1C040240 		.word	1073873948
+ 239 011c 30040240 		.word	1073873968
+ 240 0120 44040240 		.word	1073873988
+ 241 0124 58040240 		.word	1073874008
+ 242 0128 00040240 		.word	1073873920
+ 243 012c 00000240 		.word	1073872896
+ 244              		.cfi_endproc
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccaakqsZ.s 			page 9
+
+
+ 245              	.LFE29:
+ 246              		.size	DMA_DeInit, .-DMA_DeInit
+ 247              		.align	1
+ 248              		.p2align 2,,3
+ 249              		.global	DMA_Init
+ 250              		.syntax unified
+ 251              		.thumb
+ 252              		.thumb_func
+ 253              		.fpu softvfp
+ 254              		.type	DMA_Init, %function
+ 255              	DMA_Init:
+ 256              	.LFB30:
+ 192:../../source/src/FWlib/src/stm32f10x_dma.c **** 
+ 193:../../source/src/FWlib/src/stm32f10x_dma.c **** /**
+ 194:../../source/src/FWlib/src/stm32f10x_dma.c ****   * @brief  Initializes the DMAy Channelx according to the specified
+ 195:../../source/src/FWlib/src/stm32f10x_dma.c ****   *         parameters in the DMA_InitStruct.
+ 196:../../source/src/FWlib/src/stm32f10x_dma.c ****   * @param  DMAy_Channelx: where y can be 1 or 2 to select the DMA and 
+ 197:../../source/src/FWlib/src/stm32f10x_dma.c ****   *   x can be 1 to 7 for DMA1 and 1 to 5 for DMA2 to select the DMA Channel.
+ 198:../../source/src/FWlib/src/stm32f10x_dma.c ****   * @param  DMA_InitStruct: pointer to a DMA_InitTypeDef structure that
+ 199:../../source/src/FWlib/src/stm32f10x_dma.c ****   *         contains the configuration information for the specified DMA Channel.
+ 200:../../source/src/FWlib/src/stm32f10x_dma.c ****   * @retval None
+ 201:../../source/src/FWlib/src/stm32f10x_dma.c ****   */
+ 202:../../source/src/FWlib/src/stm32f10x_dma.c **** void DMA_Init(DMA_Channel_TypeDef* DMAy_Channelx, DMA_InitTypeDef* DMA_InitStruct)
+ 203:../../source/src/FWlib/src/stm32f10x_dma.c **** {
+ 257              		.loc 1 203 0
+ 258              		.cfi_startproc
+ 259              		@ args = 0, pretend = 0, frame = 0
+ 260              		@ frame_needed = 0, uses_anonymous_args = 0
+ 261              		@ link register save eliminated.
+ 262              	.LVL1:
+ 204:../../source/src/FWlib/src/stm32f10x_dma.c ****   uint32_t tmpreg = 0;
+ 205:../../source/src/FWlib/src/stm32f10x_dma.c **** 
+ 206:../../source/src/FWlib/src/stm32f10x_dma.c ****   /* Check the parameters */
+ 207:../../source/src/FWlib/src/stm32f10x_dma.c ****   assert_param(IS_DMA_ALL_PERIPH(DMAy_Channelx));
+ 208:../../source/src/FWlib/src/stm32f10x_dma.c ****   assert_param(IS_DMA_DIR(DMA_InitStruct->DMA_DIR));
+ 209:../../source/src/FWlib/src/stm32f10x_dma.c ****   assert_param(IS_DMA_BUFFER_SIZE(DMA_InitStruct->DMA_BufferSize));
+ 210:../../source/src/FWlib/src/stm32f10x_dma.c ****   assert_param(IS_DMA_PERIPHERAL_INC_STATE(DMA_InitStruct->DMA_PeripheralInc));
+ 211:../../source/src/FWlib/src/stm32f10x_dma.c ****   assert_param(IS_DMA_MEMORY_INC_STATE(DMA_InitStruct->DMA_MemoryInc));   
+ 212:../../source/src/FWlib/src/stm32f10x_dma.c ****   assert_param(IS_DMA_PERIPHERAL_DATA_SIZE(DMA_InitStruct->DMA_PeripheralDataSize));
+ 213:../../source/src/FWlib/src/stm32f10x_dma.c ****   assert_param(IS_DMA_MEMORY_DATA_SIZE(DMA_InitStruct->DMA_MemoryDataSize));
+ 214:../../source/src/FWlib/src/stm32f10x_dma.c ****   assert_param(IS_DMA_MODE(DMA_InitStruct->DMA_Mode));
+ 215:../../source/src/FWlib/src/stm32f10x_dma.c ****   assert_param(IS_DMA_PRIORITY(DMA_InitStruct->DMA_Priority));
+ 216:../../source/src/FWlib/src/stm32f10x_dma.c ****   assert_param(IS_DMA_M2M_STATE(DMA_InitStruct->DMA_M2M));
+ 217:../../source/src/FWlib/src/stm32f10x_dma.c **** 
+ 218:../../source/src/FWlib/src/stm32f10x_dma.c **** /*--------------------------- DMAy Channelx CCR Configuration -----------------*/
+ 219:../../source/src/FWlib/src/stm32f10x_dma.c ****   /* Get the DMAy_Channelx CCR value */
+ 220:../../source/src/FWlib/src/stm32f10x_dma.c ****   tmpreg = DMAy_Channelx->CCR;
+ 221:../../source/src/FWlib/src/stm32f10x_dma.c ****   /* Clear MEM2MEM, PL, MSIZE, PSIZE, MINC, PINC, CIRC and DIR bits */
+ 222:../../source/src/FWlib/src/stm32f10x_dma.c ****   tmpreg &= CCR_CLEAR_Mask;
+ 223:../../source/src/FWlib/src/stm32f10x_dma.c ****   /* Configure DMAy Channelx: data transfer, data size, priority level and mode */
+ 224:../../source/src/FWlib/src/stm32f10x_dma.c ****   /* Set DIR bit according to DMA_DIR value */
+ 225:../../source/src/FWlib/src/stm32f10x_dma.c ****   /* Set CIRC bit according to DMA_Mode value */
+ 226:../../source/src/FWlib/src/stm32f10x_dma.c ****   /* Set PINC bit according to DMA_PeripheralInc value */
+ 227:../../source/src/FWlib/src/stm32f10x_dma.c ****   /* Set MINC bit according to DMA_MemoryInc value */
+ 228:../../source/src/FWlib/src/stm32f10x_dma.c ****   /* Set PSIZE bits according to DMA_PeripheralDataSize value */
+ 229:../../source/src/FWlib/src/stm32f10x_dma.c ****   /* Set MSIZE bits according to DMA_MemoryDataSize value */
+ 230:../../source/src/FWlib/src/stm32f10x_dma.c ****   /* Set PL bits according to DMA_Priority value */
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccaakqsZ.s 			page 10
+
+
+ 231:../../source/src/FWlib/src/stm32f10x_dma.c ****   /* Set the MEM2MEM bit according to DMA_M2M value */
+ 232:../../source/src/FWlib/src/stm32f10x_dma.c ****   tmpreg |= DMA_InitStruct->DMA_DIR | DMA_InitStruct->DMA_Mode |
+ 263              		.loc 1 232 0
+ 264 0130 8B68     		ldr	r3, [r1, #8]
+ 203:../../source/src/FWlib/src/stm32f10x_dma.c ****   uint32_t tmpreg = 0;
+ 265              		.loc 1 203 0
+ 266 0132 30B4     		push	{r4, r5}
+ 267              	.LCFI9:
+ 268              		.cfi_def_cfa_offset 8
+ 269              		.cfi_offset 4, -8
+ 270              		.cfi_offset 5, -4
+ 271              		.loc 1 232 0
+ 272 0134 0C6A     		ldr	r4, [r1, #32]
+ 273 0136 0A69     		ldr	r2, [r1, #16]
+ 274 0138 2343     		orrs	r3, r3, r4
+ 233:../../source/src/FWlib/src/stm32f10x_dma.c ****             DMA_InitStruct->DMA_PeripheralInc | DMA_InitStruct->DMA_MemoryInc |
+ 275              		.loc 1 233 0
+ 276 013a 4C69     		ldr	r4, [r1, #20]
+ 232:../../source/src/FWlib/src/stm32f10x_dma.c ****             DMA_InitStruct->DMA_PeripheralInc | DMA_InitStruct->DMA_MemoryInc |
+ 277              		.loc 1 232 0
+ 278 013c 1343     		orrs	r3, r3, r2
+ 279              		.loc 1 233 0
+ 280 013e 8A69     		ldr	r2, [r1, #24]
+ 281 0140 2343     		orrs	r3, r3, r4
+ 234:../../source/src/FWlib/src/stm32f10x_dma.c ****             DMA_InitStruct->DMA_PeripheralDataSize | DMA_InitStruct->DMA_MemoryDataSize |
+ 282              		.loc 1 234 0
+ 283 0142 CC69     		ldr	r4, [r1, #28]
+ 284 0144 4D6A     		ldr	r5, [r1, #36]
+ 233:../../source/src/FWlib/src/stm32f10x_dma.c ****             DMA_InitStruct->DMA_PeripheralInc | DMA_InitStruct->DMA_MemoryInc |
+ 285              		.loc 1 233 0
+ 286 0146 1343     		orrs	r3, r3, r2
+ 220:../../source/src/FWlib/src/stm32f10x_dma.c ****   /* Clear MEM2MEM, PL, MSIZE, PSIZE, MINC, PINC, CIRC and DIR bits */
+ 287              		.loc 1 220 0
+ 288 0148 0268     		ldr	r2, [r0]
+ 289              	.LVL2:
+ 290              		.loc 1 234 0
+ 291 014a 2343     		orrs	r3, r3, r4
+ 235:../../source/src/FWlib/src/stm32f10x_dma.c ****             DMA_InitStruct->DMA_Priority | DMA_InitStruct->DMA_M2M;
+ 292              		.loc 1 235 0
+ 293 014c 8C6A     		ldr	r4, [r1, #40]
+ 234:../../source/src/FWlib/src/stm32f10x_dma.c ****             DMA_InitStruct->DMA_PeripheralDataSize | DMA_InitStruct->DMA_MemoryDataSize |
+ 294              		.loc 1 234 0
+ 295 014e 2B43     		orrs	r3, r3, r5
+ 222:../../source/src/FWlib/src/stm32f10x_dma.c ****   /* Configure DMAy Channelx: data transfer, data size, priority level and mode */
+ 296              		.loc 1 222 0
+ 297 0150 22F4FF42 		bic	r2, r2, #32640
+ 298              	.LVL3:
+ 236:../../source/src/FWlib/src/stm32f10x_dma.c **** 
+ 237:../../source/src/FWlib/src/stm32f10x_dma.c ****   /* Write to DMAy Channelx CCR */
+ 238:../../source/src/FWlib/src/stm32f10x_dma.c ****   DMAy_Channelx->CCR = tmpreg;
+ 239:../../source/src/FWlib/src/stm32f10x_dma.c **** 
+ 240:../../source/src/FWlib/src/stm32f10x_dma.c **** /*--------------------------- DMAy Channelx CNDTR Configuration ---------------*/
+ 241:../../source/src/FWlib/src/stm32f10x_dma.c ****   /* Write to DMAy Channelx CNDTR */
+ 242:../../source/src/FWlib/src/stm32f10x_dma.c ****   DMAy_Channelx->CNDTR = DMA_InitStruct->DMA_BufferSize;
+ 299              		.loc 1 242 0
+ 300 0154 CD68     		ldr	r5, [r1, #12]
+ 235:../../source/src/FWlib/src/stm32f10x_dma.c **** 
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccaakqsZ.s 			page 11
+
+
+ 301              		.loc 1 235 0
+ 302 0156 2343     		orrs	r3, r3, r4
+ 222:../../source/src/FWlib/src/stm32f10x_dma.c ****   /* Configure DMAy Channelx: data transfer, data size, priority level and mode */
+ 303              		.loc 1 222 0
+ 304 0158 22F07002 		bic	r2, r2, #112
+ 305              	.LVL4:
+ 232:../../source/src/FWlib/src/stm32f10x_dma.c ****             DMA_InitStruct->DMA_PeripheralInc | DMA_InitStruct->DMA_MemoryInc |
+ 306              		.loc 1 232 0
+ 307 015c 1343     		orrs	r3, r3, r2
+ 308              	.LVL5:
+ 243:../../source/src/FWlib/src/stm32f10x_dma.c **** 
+ 244:../../source/src/FWlib/src/stm32f10x_dma.c **** /*--------------------------- DMAy Channelx CPAR Configuration ----------------*/
+ 245:../../source/src/FWlib/src/stm32f10x_dma.c ****   /* Write to DMAy Channelx CPAR */
+ 246:../../source/src/FWlib/src/stm32f10x_dma.c ****   DMAy_Channelx->CPAR = DMA_InitStruct->DMA_PeripheralBaseAddr;
+ 247:../../source/src/FWlib/src/stm32f10x_dma.c **** 
+ 248:../../source/src/FWlib/src/stm32f10x_dma.c **** /*--------------------------- DMAy Channelx CMAR Configuration ----------------*/
+ 249:../../source/src/FWlib/src/stm32f10x_dma.c ****   /* Write to DMAy Channelx CMAR */
+ 250:../../source/src/FWlib/src/stm32f10x_dma.c ****   DMAy_Channelx->CMAR = DMA_InitStruct->DMA_MemoryBaseAddr;
+ 309              		.loc 1 250 0
+ 310 015e D1E90041 		ldrd	r4, r1, [r1]
+ 311              	.LVL6:
+ 238:../../source/src/FWlib/src/stm32f10x_dma.c **** 
+ 312              		.loc 1 238 0
+ 313 0162 0360     		str	r3, [r0]
+ 242:../../source/src/FWlib/src/stm32f10x_dma.c **** 
+ 314              		.loc 1 242 0
+ 315 0164 4560     		str	r5, [r0, #4]
+ 246:../../source/src/FWlib/src/stm32f10x_dma.c **** 
+ 316              		.loc 1 246 0
+ 317 0166 8460     		str	r4, [r0, #8]
+ 318              		.loc 1 250 0
+ 319 0168 C160     		str	r1, [r0, #12]
+ 251:../../source/src/FWlib/src/stm32f10x_dma.c **** }
+ 320              		.loc 1 251 0
+ 321 016a 30BC     		pop	{r4, r5}
+ 322              	.LCFI10:
+ 323              		.cfi_restore 5
+ 324              		.cfi_restore 4
+ 325              		.cfi_def_cfa_offset 0
+ 326 016c 7047     		bx	lr
+ 327              		.cfi_endproc
+ 328              	.LFE30:
+ 329              		.size	DMA_Init, .-DMA_Init
+ 330              		.align	1
+ 331 016e 00BF     		.p2align 2,,3
+ 332              		.global	DMA_StructInit
+ 333              		.syntax unified
+ 334              		.thumb
+ 335              		.thumb_func
+ 336              		.fpu softvfp
+ 337              		.type	DMA_StructInit, %function
+ 338              	DMA_StructInit:
+ 339              	.LFB31:
+ 252:../../source/src/FWlib/src/stm32f10x_dma.c **** 
+ 253:../../source/src/FWlib/src/stm32f10x_dma.c **** /**
+ 254:../../source/src/FWlib/src/stm32f10x_dma.c ****   * @brief  Fills each DMA_InitStruct member with its default value.
+ 255:../../source/src/FWlib/src/stm32f10x_dma.c ****   * @param  DMA_InitStruct : pointer to a DMA_InitTypeDef structure which will
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccaakqsZ.s 			page 12
+
+
+ 256:../../source/src/FWlib/src/stm32f10x_dma.c ****   *         be initialized.
+ 257:../../source/src/FWlib/src/stm32f10x_dma.c ****   * @retval None
+ 258:../../source/src/FWlib/src/stm32f10x_dma.c ****   */
+ 259:../../source/src/FWlib/src/stm32f10x_dma.c **** void DMA_StructInit(DMA_InitTypeDef* DMA_InitStruct)
+ 260:../../source/src/FWlib/src/stm32f10x_dma.c **** {
+ 340              		.loc 1 260 0
+ 341              		.cfi_startproc
+ 342              		@ args = 0, pretend = 0, frame = 0
+ 343              		@ frame_needed = 0, uses_anonymous_args = 0
+ 344              		@ link register save eliminated.
+ 345              	.LVL7:
+ 261:../../source/src/FWlib/src/stm32f10x_dma.c **** /*-------------- Reset DMA init structure parameters values ------------------*/
+ 262:../../source/src/FWlib/src/stm32f10x_dma.c ****   /* Initialize the DMA_PeripheralBaseAddr member */
+ 263:../../source/src/FWlib/src/stm32f10x_dma.c ****   DMA_InitStruct->DMA_PeripheralBaseAddr = 0;
+ 346              		.loc 1 263 0
+ 347 0170 0023     		movs	r3, #0
+ 264:../../source/src/FWlib/src/stm32f10x_dma.c ****   /* Initialize the DMA_MemoryBaseAddr member */
+ 265:../../source/src/FWlib/src/stm32f10x_dma.c ****   DMA_InitStruct->DMA_MemoryBaseAddr = 0;
+ 348              		.loc 1 265 0
+ 349 0172 C0E90033 		strd	r3, r3, [r0]
+ 266:../../source/src/FWlib/src/stm32f10x_dma.c ****   /* Initialize the DMA_DIR member */
+ 267:../../source/src/FWlib/src/stm32f10x_dma.c ****   DMA_InitStruct->DMA_DIR = DMA_DIR_PeripheralSRC;
+ 268:../../source/src/FWlib/src/stm32f10x_dma.c ****   /* Initialize the DMA_BufferSize member */
+ 269:../../source/src/FWlib/src/stm32f10x_dma.c ****   DMA_InitStruct->DMA_BufferSize = 0;
+ 350              		.loc 1 269 0
+ 351 0176 C0E90233 		strd	r3, r3, [r0, #8]
+ 270:../../source/src/FWlib/src/stm32f10x_dma.c ****   /* Initialize the DMA_PeripheralInc member */
+ 271:../../source/src/FWlib/src/stm32f10x_dma.c ****   DMA_InitStruct->DMA_PeripheralInc = DMA_PeripheralInc_Disable;
+ 272:../../source/src/FWlib/src/stm32f10x_dma.c ****   /* Initialize the DMA_MemoryInc member */
+ 273:../../source/src/FWlib/src/stm32f10x_dma.c ****   DMA_InitStruct->DMA_MemoryInc = DMA_MemoryInc_Disable;
+ 352              		.loc 1 273 0
+ 353 017a C0E90433 		strd	r3, r3, [r0, #16]
+ 274:../../source/src/FWlib/src/stm32f10x_dma.c ****   /* Initialize the DMA_PeripheralDataSize member */
+ 275:../../source/src/FWlib/src/stm32f10x_dma.c ****   DMA_InitStruct->DMA_PeripheralDataSize = DMA_PeripheralDataSize_Byte;
+ 276:../../source/src/FWlib/src/stm32f10x_dma.c ****   /* Initialize the DMA_MemoryDataSize member */
+ 277:../../source/src/FWlib/src/stm32f10x_dma.c ****   DMA_InitStruct->DMA_MemoryDataSize = DMA_MemoryDataSize_Byte;
+ 354              		.loc 1 277 0
+ 355 017e C0E90633 		strd	r3, r3, [r0, #24]
+ 278:../../source/src/FWlib/src/stm32f10x_dma.c ****   /* Initialize the DMA_Mode member */
+ 279:../../source/src/FWlib/src/stm32f10x_dma.c ****   DMA_InitStruct->DMA_Mode = DMA_Mode_Normal;
+ 280:../../source/src/FWlib/src/stm32f10x_dma.c ****   /* Initialize the DMA_Priority member */
+ 281:../../source/src/FWlib/src/stm32f10x_dma.c ****   DMA_InitStruct->DMA_Priority = DMA_Priority_Low;
+ 356              		.loc 1 281 0
+ 357 0182 C0E90833 		strd	r3, r3, [r0, #32]
+ 282:../../source/src/FWlib/src/stm32f10x_dma.c ****   /* Initialize the DMA_M2M member */
+ 283:../../source/src/FWlib/src/stm32f10x_dma.c ****   DMA_InitStruct->DMA_M2M = DMA_M2M_Disable;
+ 358              		.loc 1 283 0
+ 359 0186 8362     		str	r3, [r0, #40]
+ 284:../../source/src/FWlib/src/stm32f10x_dma.c **** }
+ 360              		.loc 1 284 0
+ 361 0188 7047     		bx	lr
+ 362              		.cfi_endproc
+ 363              	.LFE31:
+ 364              		.size	DMA_StructInit, .-DMA_StructInit
+ 365              		.align	1
+ 366 018a 00BF     		.p2align 2,,3
+ 367              		.global	DMA_Cmd
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccaakqsZ.s 			page 13
+
+
+ 368              		.syntax unified
+ 369              		.thumb
+ 370              		.thumb_func
+ 371              		.fpu softvfp
+ 372              		.type	DMA_Cmd, %function
+ 373              	DMA_Cmd:
+ 374              	.LFB32:
+ 285:../../source/src/FWlib/src/stm32f10x_dma.c **** 
+ 286:../../source/src/FWlib/src/stm32f10x_dma.c **** /**
+ 287:../../source/src/FWlib/src/stm32f10x_dma.c ****   * @brief  Enables or disables the specified DMAy Channelx.
+ 288:../../source/src/FWlib/src/stm32f10x_dma.c ****   * @param  DMAy_Channelx: where y can be 1 or 2 to select the DMA and 
+ 289:../../source/src/FWlib/src/stm32f10x_dma.c ****   *   x can be 1 to 7 for DMA1 and 1 to 5 for DMA2 to select the DMA Channel.
+ 290:../../source/src/FWlib/src/stm32f10x_dma.c ****   * @param  NewState: new state of the DMAy Channelx. 
+ 291:../../source/src/FWlib/src/stm32f10x_dma.c ****   *   This parameter can be: ENABLE or DISABLE.
+ 292:../../source/src/FWlib/src/stm32f10x_dma.c ****   * @retval None
+ 293:../../source/src/FWlib/src/stm32f10x_dma.c ****   */
+ 294:../../source/src/FWlib/src/stm32f10x_dma.c **** void DMA_Cmd(DMA_Channel_TypeDef* DMAy_Channelx, FunctionalState NewState)
+ 295:../../source/src/FWlib/src/stm32f10x_dma.c **** {
+ 375              		.loc 1 295 0
+ 376              		.cfi_startproc
+ 377              		@ args = 0, pretend = 0, frame = 0
+ 378              		@ frame_needed = 0, uses_anonymous_args = 0
+ 379              		@ link register save eliminated.
+ 380              	.LVL8:
+ 296:../../source/src/FWlib/src/stm32f10x_dma.c ****   /* Check the parameters */
+ 297:../../source/src/FWlib/src/stm32f10x_dma.c ****   assert_param(IS_DMA_ALL_PERIPH(DMAy_Channelx));
+ 298:../../source/src/FWlib/src/stm32f10x_dma.c ****   assert_param(IS_FUNCTIONAL_STATE(NewState));
+ 299:../../source/src/FWlib/src/stm32f10x_dma.c **** 
+ 300:../../source/src/FWlib/src/stm32f10x_dma.c ****   if (NewState != DISABLE)
+ 381              		.loc 1 300 0
+ 382 018c 29B9     		cbnz	r1, .L33
+ 301:../../source/src/FWlib/src/stm32f10x_dma.c ****   {
+ 302:../../source/src/FWlib/src/stm32f10x_dma.c ****     /* Enable the selected DMAy Channelx */
+ 303:../../source/src/FWlib/src/stm32f10x_dma.c ****     DMAy_Channelx->CCR |= DMA_CCR1_EN;
+ 304:../../source/src/FWlib/src/stm32f10x_dma.c ****   }
+ 305:../../source/src/FWlib/src/stm32f10x_dma.c ****   else
+ 306:../../source/src/FWlib/src/stm32f10x_dma.c ****   {
+ 307:../../source/src/FWlib/src/stm32f10x_dma.c ****     /* Disable the selected DMAy Channelx */
+ 308:../../source/src/FWlib/src/stm32f10x_dma.c ****     DMAy_Channelx->CCR &= (uint16_t)(~DMA_CCR1_EN);
+ 383              		.loc 1 308 0
+ 384 018e 4FF6FE72 		movw	r2, #65534
+ 385 0192 0368     		ldr	r3, [r0]
+ 386 0194 1340     		ands	r3, r3, r2
+ 387 0196 0360     		str	r3, [r0]
+ 309:../../source/src/FWlib/src/stm32f10x_dma.c ****   }
+ 310:../../source/src/FWlib/src/stm32f10x_dma.c **** }
+ 388              		.loc 1 310 0
+ 389 0198 7047     		bx	lr
+ 390              	.L33:
+ 303:../../source/src/FWlib/src/stm32f10x_dma.c ****   }
+ 391              		.loc 1 303 0
+ 392 019a 0368     		ldr	r3, [r0]
+ 393 019c 43F00103 		orr	r3, r3, #1
+ 394 01a0 0360     		str	r3, [r0]
+ 395 01a2 7047     		bx	lr
+ 396              		.cfi_endproc
+ 397              	.LFE32:
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccaakqsZ.s 			page 14
+
+
+ 398              		.size	DMA_Cmd, .-DMA_Cmd
+ 399              		.align	1
+ 400              		.p2align 2,,3
+ 401              		.global	DMA_ITConfig
+ 402              		.syntax unified
+ 403              		.thumb
+ 404              		.thumb_func
+ 405              		.fpu softvfp
+ 406              		.type	DMA_ITConfig, %function
+ 407              	DMA_ITConfig:
+ 408              	.LFB33:
+ 311:../../source/src/FWlib/src/stm32f10x_dma.c **** 
+ 312:../../source/src/FWlib/src/stm32f10x_dma.c **** /**
+ 313:../../source/src/FWlib/src/stm32f10x_dma.c ****   * @brief  Enables or disables the specified DMAy Channelx interrupts.
+ 314:../../source/src/FWlib/src/stm32f10x_dma.c ****   * @param  DMAy_Channelx: where y can be 1 or 2 to select the DMA and 
+ 315:../../source/src/FWlib/src/stm32f10x_dma.c ****   *   x can be 1 to 7 for DMA1 and 1 to 5 for DMA2 to select the DMA Channel.
+ 316:../../source/src/FWlib/src/stm32f10x_dma.c ****   * @param  DMA_IT: specifies the DMA interrupts sources to be enabled
+ 317:../../source/src/FWlib/src/stm32f10x_dma.c ****   *   or disabled. 
+ 318:../../source/src/FWlib/src/stm32f10x_dma.c ****   *   This parameter can be any combination of the following values:
+ 319:../../source/src/FWlib/src/stm32f10x_dma.c ****   *     @arg DMA_IT_TC:  Transfer complete interrupt mask
+ 320:../../source/src/FWlib/src/stm32f10x_dma.c ****   *     @arg DMA_IT_HT:  Half transfer interrupt mask
+ 321:../../source/src/FWlib/src/stm32f10x_dma.c ****   *     @arg DMA_IT_TE:  Transfer error interrupt mask
+ 322:../../source/src/FWlib/src/stm32f10x_dma.c ****   * @param  NewState: new state of the specified DMA interrupts.
+ 323:../../source/src/FWlib/src/stm32f10x_dma.c ****   *   This parameter can be: ENABLE or DISABLE.
+ 324:../../source/src/FWlib/src/stm32f10x_dma.c ****   * @retval None
+ 325:../../source/src/FWlib/src/stm32f10x_dma.c ****   */
+ 326:../../source/src/FWlib/src/stm32f10x_dma.c **** void DMA_ITConfig(DMA_Channel_TypeDef* DMAy_Channelx, uint32_t DMA_IT, FunctionalState NewState)
+ 327:../../source/src/FWlib/src/stm32f10x_dma.c **** {
+ 409              		.loc 1 327 0
+ 410              		.cfi_startproc
+ 411              		@ args = 0, pretend = 0, frame = 0
+ 412              		@ frame_needed = 0, uses_anonymous_args = 0
+ 413              		@ link register save eliminated.
+ 414              	.LVL9:
+ 328:../../source/src/FWlib/src/stm32f10x_dma.c ****   /* Check the parameters */
+ 329:../../source/src/FWlib/src/stm32f10x_dma.c ****   assert_param(IS_DMA_ALL_PERIPH(DMAy_Channelx));
+ 330:../../source/src/FWlib/src/stm32f10x_dma.c ****   assert_param(IS_DMA_CONFIG_IT(DMA_IT));
+ 331:../../source/src/FWlib/src/stm32f10x_dma.c ****   assert_param(IS_FUNCTIONAL_STATE(NewState));
+ 332:../../source/src/FWlib/src/stm32f10x_dma.c ****   if (NewState != DISABLE)
+ 333:../../source/src/FWlib/src/stm32f10x_dma.c ****   {
+ 334:../../source/src/FWlib/src/stm32f10x_dma.c ****     /* Enable the selected DMA interrupts */
+ 335:../../source/src/FWlib/src/stm32f10x_dma.c ****     DMAy_Channelx->CCR |= DMA_IT;
+ 415              		.loc 1 335 0
+ 416 01a4 0368     		ldr	r3, [r0]
+ 332:../../source/src/FWlib/src/stm32f10x_dma.c ****   {
+ 417              		.loc 1 332 0
+ 418 01a6 1AB9     		cbnz	r2, .L37
+ 336:../../source/src/FWlib/src/stm32f10x_dma.c ****   }
+ 337:../../source/src/FWlib/src/stm32f10x_dma.c ****   else
+ 338:../../source/src/FWlib/src/stm32f10x_dma.c ****   {
+ 339:../../source/src/FWlib/src/stm32f10x_dma.c ****     /* Disable the selected DMA interrupts */
+ 340:../../source/src/FWlib/src/stm32f10x_dma.c ****     DMAy_Channelx->CCR &= ~DMA_IT;
+ 419              		.loc 1 340 0
+ 420 01a8 23EA0101 		bic	r1, r3, r1
+ 421              	.LVL10:
+ 422 01ac 0160     		str	r1, [r0]
+ 341:../../source/src/FWlib/src/stm32f10x_dma.c ****   }
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccaakqsZ.s 			page 15
+
+
+ 342:../../source/src/FWlib/src/stm32f10x_dma.c **** }
+ 423              		.loc 1 342 0
+ 424 01ae 7047     		bx	lr
+ 425              	.LVL11:
+ 426              	.L37:
+ 335:../../source/src/FWlib/src/stm32f10x_dma.c ****   }
+ 427              		.loc 1 335 0
+ 428 01b0 1943     		orrs	r1, r1, r3
+ 429              	.LVL12:
+ 430 01b2 0160     		str	r1, [r0]
+ 431 01b4 7047     		bx	lr
+ 432              		.cfi_endproc
+ 433              	.LFE33:
+ 434              		.size	DMA_ITConfig, .-DMA_ITConfig
+ 435              		.align	1
+ 436 01b6 00BF     		.p2align 2,,3
+ 437              		.global	DMA_SetCurrDataCounter
+ 438              		.syntax unified
+ 439              		.thumb
+ 440              		.thumb_func
+ 441              		.fpu softvfp
+ 442              		.type	DMA_SetCurrDataCounter, %function
+ 443              	DMA_SetCurrDataCounter:
+ 444              	.LFB34:
+ 343:../../source/src/FWlib/src/stm32f10x_dma.c **** 
+ 344:../../source/src/FWlib/src/stm32f10x_dma.c **** /**
+ 345:../../source/src/FWlib/src/stm32f10x_dma.c ****   * @brief  Sets the number of data units in the current DMAy Channelx transfer.
+ 346:../../source/src/FWlib/src/stm32f10x_dma.c ****   * @param  DMAy_Channelx: where y can be 1 or 2 to select the DMA and 
+ 347:../../source/src/FWlib/src/stm32f10x_dma.c ****   *         x can be 1 to 7 for DMA1 and 1 to 5 for DMA2 to select the DMA Channel.
+ 348:../../source/src/FWlib/src/stm32f10x_dma.c ****   * @param  DataNumber: The number of data units in the current DMAy Channelx
+ 349:../../source/src/FWlib/src/stm32f10x_dma.c ****   *         transfer.   
+ 350:../../source/src/FWlib/src/stm32f10x_dma.c ****   * @note   This function can only be used when the DMAy_Channelx is disabled.                 
+ 351:../../source/src/FWlib/src/stm32f10x_dma.c ****   * @retval None.
+ 352:../../source/src/FWlib/src/stm32f10x_dma.c ****   */
+ 353:../../source/src/FWlib/src/stm32f10x_dma.c **** void DMA_SetCurrDataCounter(DMA_Channel_TypeDef* DMAy_Channelx, uint16_t DataNumber)
+ 354:../../source/src/FWlib/src/stm32f10x_dma.c **** {
+ 445              		.loc 1 354 0
+ 446              		.cfi_startproc
+ 447              		@ args = 0, pretend = 0, frame = 0
+ 448              		@ frame_needed = 0, uses_anonymous_args = 0
+ 449              		@ link register save eliminated.
+ 450              	.LVL13:
+ 355:../../source/src/FWlib/src/stm32f10x_dma.c ****   /* Check the parameters */
+ 356:../../source/src/FWlib/src/stm32f10x_dma.c ****   assert_param(IS_DMA_ALL_PERIPH(DMAy_Channelx));
+ 357:../../source/src/FWlib/src/stm32f10x_dma.c ****   
+ 358:../../source/src/FWlib/src/stm32f10x_dma.c **** /*--------------------------- DMAy Channelx CNDTR Configuration ---------------*/
+ 359:../../source/src/FWlib/src/stm32f10x_dma.c ****   /* Write to DMAy Channelx CNDTR */
+ 360:../../source/src/FWlib/src/stm32f10x_dma.c ****   DMAy_Channelx->CNDTR = DataNumber;  
+ 451              		.loc 1 360 0
+ 452 01b8 4160     		str	r1, [r0, #4]
+ 361:../../source/src/FWlib/src/stm32f10x_dma.c **** }
+ 453              		.loc 1 361 0
+ 454 01ba 7047     		bx	lr
+ 455              		.cfi_endproc
+ 456              	.LFE34:
+ 457              		.size	DMA_SetCurrDataCounter, .-DMA_SetCurrDataCounter
+ 458              		.align	1
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccaakqsZ.s 			page 16
+
+
+ 459              		.p2align 2,,3
+ 460              		.global	DMA_GetCurrDataCounter
+ 461              		.syntax unified
+ 462              		.thumb
+ 463              		.thumb_func
+ 464              		.fpu softvfp
+ 465              		.type	DMA_GetCurrDataCounter, %function
+ 466              	DMA_GetCurrDataCounter:
+ 467              	.LFB35:
+ 362:../../source/src/FWlib/src/stm32f10x_dma.c **** 
+ 363:../../source/src/FWlib/src/stm32f10x_dma.c **** /**
+ 364:../../source/src/FWlib/src/stm32f10x_dma.c ****   * @brief  Returns the number of remaining data units in the current
+ 365:../../source/src/FWlib/src/stm32f10x_dma.c ****   *         DMAy Channelx transfer.
+ 366:../../source/src/FWlib/src/stm32f10x_dma.c ****   * @param  DMAy_Channelx: where y can be 1 or 2 to select the DMA and 
+ 367:../../source/src/FWlib/src/stm32f10x_dma.c ****   *   x can be 1 to 7 for DMA1 and 1 to 5 for DMA2 to select the DMA Channel.
+ 368:../../source/src/FWlib/src/stm32f10x_dma.c ****   * @retval The number of remaining data units in the current DMAy Channelx
+ 369:../../source/src/FWlib/src/stm32f10x_dma.c ****   *         transfer.
+ 370:../../source/src/FWlib/src/stm32f10x_dma.c ****   */
+ 371:../../source/src/FWlib/src/stm32f10x_dma.c **** uint16_t DMA_GetCurrDataCounter(DMA_Channel_TypeDef* DMAy_Channelx)
+ 372:../../source/src/FWlib/src/stm32f10x_dma.c **** {
+ 468              		.loc 1 372 0
+ 469              		.cfi_startproc
+ 470              		@ args = 0, pretend = 0, frame = 0
+ 471              		@ frame_needed = 0, uses_anonymous_args = 0
+ 472              		@ link register save eliminated.
+ 473              	.LVL14:
+ 373:../../source/src/FWlib/src/stm32f10x_dma.c ****   /* Check the parameters */
+ 374:../../source/src/FWlib/src/stm32f10x_dma.c ****   assert_param(IS_DMA_ALL_PERIPH(DMAy_Channelx));
+ 375:../../source/src/FWlib/src/stm32f10x_dma.c ****   /* Return the number of remaining data units for DMAy Channelx */
+ 376:../../source/src/FWlib/src/stm32f10x_dma.c ****   return ((uint16_t)(DMAy_Channelx->CNDTR));
+ 474              		.loc 1 376 0
+ 475 01bc 4068     		ldr	r0, [r0, #4]
+ 476              	.LVL15:
+ 377:../../source/src/FWlib/src/stm32f10x_dma.c **** }
+ 477              		.loc 1 377 0
+ 478 01be 80B2     		uxth	r0, r0
+ 479 01c0 7047     		bx	lr
+ 480              		.cfi_endproc
+ 481              	.LFE35:
+ 482              		.size	DMA_GetCurrDataCounter, .-DMA_GetCurrDataCounter
+ 483              		.align	1
+ 484 01c2 00BF     		.p2align 2,,3
+ 485              		.global	DMA_GetFlagStatus
+ 486              		.syntax unified
+ 487              		.thumb
+ 488              		.thumb_func
+ 489              		.fpu softvfp
+ 490              		.type	DMA_GetFlagStatus, %function
+ 491              	DMA_GetFlagStatus:
+ 492              	.LFB36:
+ 378:../../source/src/FWlib/src/stm32f10x_dma.c **** 
+ 379:../../source/src/FWlib/src/stm32f10x_dma.c **** /**
+ 380:../../source/src/FWlib/src/stm32f10x_dma.c ****   * @brief  Checks whether the specified DMAy Channelx flag is set or not.
+ 381:../../source/src/FWlib/src/stm32f10x_dma.c ****   * @param  DMAy_FLAG: specifies the flag to check.
+ 382:../../source/src/FWlib/src/stm32f10x_dma.c ****   *   This parameter can be one of the following values:
+ 383:../../source/src/FWlib/src/stm32f10x_dma.c ****   *     @arg DMA1_FLAG_GL1: DMA1 Channel1 global flag.
+ 384:../../source/src/FWlib/src/stm32f10x_dma.c ****   *     @arg DMA1_FLAG_TC1: DMA1 Channel1 transfer complete flag.
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccaakqsZ.s 			page 17
+
+
+ 385:../../source/src/FWlib/src/stm32f10x_dma.c ****   *     @arg DMA1_FLAG_HT1: DMA1 Channel1 half transfer flag.
+ 386:../../source/src/FWlib/src/stm32f10x_dma.c ****   *     @arg DMA1_FLAG_TE1: DMA1 Channel1 transfer error flag.
+ 387:../../source/src/FWlib/src/stm32f10x_dma.c ****   *     @arg DMA1_FLAG_GL2: DMA1 Channel2 global flag.
+ 388:../../source/src/FWlib/src/stm32f10x_dma.c ****   *     @arg DMA1_FLAG_TC2: DMA1 Channel2 transfer complete flag.
+ 389:../../source/src/FWlib/src/stm32f10x_dma.c ****   *     @arg DMA1_FLAG_HT2: DMA1 Channel2 half transfer flag.
+ 390:../../source/src/FWlib/src/stm32f10x_dma.c ****   *     @arg DMA1_FLAG_TE2: DMA1 Channel2 transfer error flag.
+ 391:../../source/src/FWlib/src/stm32f10x_dma.c ****   *     @arg DMA1_FLAG_GL3: DMA1 Channel3 global flag.
+ 392:../../source/src/FWlib/src/stm32f10x_dma.c ****   *     @arg DMA1_FLAG_TC3: DMA1 Channel3 transfer complete flag.
+ 393:../../source/src/FWlib/src/stm32f10x_dma.c ****   *     @arg DMA1_FLAG_HT3: DMA1 Channel3 half transfer flag.
+ 394:../../source/src/FWlib/src/stm32f10x_dma.c ****   *     @arg DMA1_FLAG_TE3: DMA1 Channel3 transfer error flag.
+ 395:../../source/src/FWlib/src/stm32f10x_dma.c ****   *     @arg DMA1_FLAG_GL4: DMA1 Channel4 global flag.
+ 396:../../source/src/FWlib/src/stm32f10x_dma.c ****   *     @arg DMA1_FLAG_TC4: DMA1 Channel4 transfer complete flag.
+ 397:../../source/src/FWlib/src/stm32f10x_dma.c ****   *     @arg DMA1_FLAG_HT4: DMA1 Channel4 half transfer flag.
+ 398:../../source/src/FWlib/src/stm32f10x_dma.c ****   *     @arg DMA1_FLAG_TE4: DMA1 Channel4 transfer error flag.
+ 399:../../source/src/FWlib/src/stm32f10x_dma.c ****   *     @arg DMA1_FLAG_GL5: DMA1 Channel5 global flag.
+ 400:../../source/src/FWlib/src/stm32f10x_dma.c ****   *     @arg DMA1_FLAG_TC5: DMA1 Channel5 transfer complete flag.
+ 401:../../source/src/FWlib/src/stm32f10x_dma.c ****   *     @arg DMA1_FLAG_HT5: DMA1 Channel5 half transfer flag.
+ 402:../../source/src/FWlib/src/stm32f10x_dma.c ****   *     @arg DMA1_FLAG_TE5: DMA1 Channel5 transfer error flag.
+ 403:../../source/src/FWlib/src/stm32f10x_dma.c ****   *     @arg DMA1_FLAG_GL6: DMA1 Channel6 global flag.
+ 404:../../source/src/FWlib/src/stm32f10x_dma.c ****   *     @arg DMA1_FLAG_TC6: DMA1 Channel6 transfer complete flag.
+ 405:../../source/src/FWlib/src/stm32f10x_dma.c ****   *     @arg DMA1_FLAG_HT6: DMA1 Channel6 half transfer flag.
+ 406:../../source/src/FWlib/src/stm32f10x_dma.c ****   *     @arg DMA1_FLAG_TE6: DMA1 Channel6 transfer error flag.
+ 407:../../source/src/FWlib/src/stm32f10x_dma.c ****   *     @arg DMA1_FLAG_GL7: DMA1 Channel7 global flag.
+ 408:../../source/src/FWlib/src/stm32f10x_dma.c ****   *     @arg DMA1_FLAG_TC7: DMA1 Channel7 transfer complete flag.
+ 409:../../source/src/FWlib/src/stm32f10x_dma.c ****   *     @arg DMA1_FLAG_HT7: DMA1 Channel7 half transfer flag.
+ 410:../../source/src/FWlib/src/stm32f10x_dma.c ****   *     @arg DMA1_FLAG_TE7: DMA1 Channel7 transfer error flag.
+ 411:../../source/src/FWlib/src/stm32f10x_dma.c ****   *     @arg DMA2_FLAG_GL1: DMA2 Channel1 global flag.
+ 412:../../source/src/FWlib/src/stm32f10x_dma.c ****   *     @arg DMA2_FLAG_TC1: DMA2 Channel1 transfer complete flag.
+ 413:../../source/src/FWlib/src/stm32f10x_dma.c ****   *     @arg DMA2_FLAG_HT1: DMA2 Channel1 half transfer flag.
+ 414:../../source/src/FWlib/src/stm32f10x_dma.c ****   *     @arg DMA2_FLAG_TE1: DMA2 Channel1 transfer error flag.
+ 415:../../source/src/FWlib/src/stm32f10x_dma.c ****   *     @arg DMA2_FLAG_GL2: DMA2 Channel2 global flag.
+ 416:../../source/src/FWlib/src/stm32f10x_dma.c ****   *     @arg DMA2_FLAG_TC2: DMA2 Channel2 transfer complete flag.
+ 417:../../source/src/FWlib/src/stm32f10x_dma.c ****   *     @arg DMA2_FLAG_HT2: DMA2 Channel2 half transfer flag.
+ 418:../../source/src/FWlib/src/stm32f10x_dma.c ****   *     @arg DMA2_FLAG_TE2: DMA2 Channel2 transfer error flag.
+ 419:../../source/src/FWlib/src/stm32f10x_dma.c ****   *     @arg DMA2_FLAG_GL3: DMA2 Channel3 global flag.
+ 420:../../source/src/FWlib/src/stm32f10x_dma.c ****   *     @arg DMA2_FLAG_TC3: DMA2 Channel3 transfer complete flag.
+ 421:../../source/src/FWlib/src/stm32f10x_dma.c ****   *     @arg DMA2_FLAG_HT3: DMA2 Channel3 half transfer flag.
+ 422:../../source/src/FWlib/src/stm32f10x_dma.c ****   *     @arg DMA2_FLAG_TE3: DMA2 Channel3 transfer error flag.
+ 423:../../source/src/FWlib/src/stm32f10x_dma.c ****   *     @arg DMA2_FLAG_GL4: DMA2 Channel4 global flag.
+ 424:../../source/src/FWlib/src/stm32f10x_dma.c ****   *     @arg DMA2_FLAG_TC4: DMA2 Channel4 transfer complete flag.
+ 425:../../source/src/FWlib/src/stm32f10x_dma.c ****   *     @arg DMA2_FLAG_HT4: DMA2 Channel4 half transfer flag.
+ 426:../../source/src/FWlib/src/stm32f10x_dma.c ****   *     @arg DMA2_FLAG_TE4: DMA2 Channel4 transfer error flag.
+ 427:../../source/src/FWlib/src/stm32f10x_dma.c ****   *     @arg DMA2_FLAG_GL5: DMA2 Channel5 global flag.
+ 428:../../source/src/FWlib/src/stm32f10x_dma.c ****   *     @arg DMA2_FLAG_TC5: DMA2 Channel5 transfer complete flag.
+ 429:../../source/src/FWlib/src/stm32f10x_dma.c ****   *     @arg DMA2_FLAG_HT5: DMA2 Channel5 half transfer flag.
+ 430:../../source/src/FWlib/src/stm32f10x_dma.c ****   *     @arg DMA2_FLAG_TE5: DMA2 Channel5 transfer error flag.
+ 431:../../source/src/FWlib/src/stm32f10x_dma.c ****   * @retval The new state of DMAy_FLAG (SET or RESET).
+ 432:../../source/src/FWlib/src/stm32f10x_dma.c ****   */
+ 433:../../source/src/FWlib/src/stm32f10x_dma.c **** FlagStatus DMA_GetFlagStatus(uint32_t DMAy_FLAG)
+ 434:../../source/src/FWlib/src/stm32f10x_dma.c **** {
+ 493              		.loc 1 434 0
+ 494              		.cfi_startproc
+ 495              		@ args = 0, pretend = 0, frame = 0
+ 496              		@ frame_needed = 0, uses_anonymous_args = 0
+ 497              		@ link register save eliminated.
+ 498              	.LVL16:
+ 435:../../source/src/FWlib/src/stm32f10x_dma.c ****   FlagStatus bitstatus = RESET;
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccaakqsZ.s 			page 18
+
+
+ 436:../../source/src/FWlib/src/stm32f10x_dma.c ****   uint32_t tmpreg = 0;
+ 437:../../source/src/FWlib/src/stm32f10x_dma.c ****   
+ 438:../../source/src/FWlib/src/stm32f10x_dma.c ****   /* Check the parameters */
+ 439:../../source/src/FWlib/src/stm32f10x_dma.c ****   assert_param(IS_DMA_GET_FLAG(DMAy_FLAG));
+ 440:../../source/src/FWlib/src/stm32f10x_dma.c **** 
+ 441:../../source/src/FWlib/src/stm32f10x_dma.c ****   /* Calculate the used DMAy */
+ 442:../../source/src/FWlib/src/stm32f10x_dma.c ****   if ((DMAy_FLAG & FLAG_Mask) != (uint32_t)RESET)
+ 499              		.loc 1 442 0
+ 500 01c4 C300     		lsls	r3, r0, #3
+ 443:../../source/src/FWlib/src/stm32f10x_dma.c ****   {
+ 444:../../source/src/FWlib/src/stm32f10x_dma.c ****     /* Get DMA2 ISR register value */
+ 445:../../source/src/FWlib/src/stm32f10x_dma.c ****     tmpreg = DMA2->ISR ;
+ 501              		.loc 1 445 0
+ 502 01c6 4CBF     		ite	mi
+ 503 01c8 034B     		ldrmi	r3, .L43
+ 446:../../source/src/FWlib/src/stm32f10x_dma.c ****   }
+ 447:../../source/src/FWlib/src/stm32f10x_dma.c ****   else
+ 448:../../source/src/FWlib/src/stm32f10x_dma.c ****   {
+ 449:../../source/src/FWlib/src/stm32f10x_dma.c ****     /* Get DMA1 ISR register value */
+ 450:../../source/src/FWlib/src/stm32f10x_dma.c ****     tmpreg = DMA1->ISR ;
+ 504              		.loc 1 450 0
+ 505 01ca 044B     		ldrpl	r3, .L43+4
+ 506 01cc 1B68     		ldr	r3, [r3]
+ 507              	.LVL17:
+ 451:../../source/src/FWlib/src/stm32f10x_dma.c ****   }
+ 452:../../source/src/FWlib/src/stm32f10x_dma.c **** 
+ 453:../../source/src/FWlib/src/stm32f10x_dma.c ****   /* Check the status of the specified DMAy flag */
+ 454:../../source/src/FWlib/src/stm32f10x_dma.c ****   if ((tmpreg & DMAy_FLAG) != (uint32_t)RESET)
+ 508              		.loc 1 454 0
+ 509 01ce 0342     		tst	r3, r0
+ 455:../../source/src/FWlib/src/stm32f10x_dma.c ****   {
+ 456:../../source/src/FWlib/src/stm32f10x_dma.c ****     /* DMAy_FLAG is set */
+ 457:../../source/src/FWlib/src/stm32f10x_dma.c ****     bitstatus = SET;
+ 458:../../source/src/FWlib/src/stm32f10x_dma.c ****   }
+ 459:../../source/src/FWlib/src/stm32f10x_dma.c ****   else
+ 460:../../source/src/FWlib/src/stm32f10x_dma.c ****   {
+ 461:../../source/src/FWlib/src/stm32f10x_dma.c ****     /* DMAy_FLAG is reset */
+ 462:../../source/src/FWlib/src/stm32f10x_dma.c ****     bitstatus = RESET;
+ 463:../../source/src/FWlib/src/stm32f10x_dma.c ****   }
+ 464:../../source/src/FWlib/src/stm32f10x_dma.c ****   
+ 465:../../source/src/FWlib/src/stm32f10x_dma.c ****   /* Return the DMAy_FLAG status */
+ 466:../../source/src/FWlib/src/stm32f10x_dma.c ****   return  bitstatus;
+ 467:../../source/src/FWlib/src/stm32f10x_dma.c **** }
+ 510              		.loc 1 467 0
+ 511 01d0 14BF     		ite	ne
+ 512 01d2 0120     		movne	r0, #1
+ 513              	.LVL18:
+ 514 01d4 0020     		moveq	r0, #0
+ 515 01d6 7047     		bx	lr
+ 516              	.L44:
+ 517              		.align	2
+ 518              	.L43:
+ 519 01d8 00040240 		.word	1073873920
+ 520 01dc 00000240 		.word	1073872896
+ 521              		.cfi_endproc
+ 522              	.LFE36:
+ 523              		.size	DMA_GetFlagStatus, .-DMA_GetFlagStatus
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccaakqsZ.s 			page 19
+
+
+ 524              		.align	1
+ 525              		.p2align 2,,3
+ 526              		.global	DMA_ClearFlag
+ 527              		.syntax unified
+ 528              		.thumb
+ 529              		.thumb_func
+ 530              		.fpu softvfp
+ 531              		.type	DMA_ClearFlag, %function
+ 532              	DMA_ClearFlag:
+ 533              	.LFB37:
+ 468:../../source/src/FWlib/src/stm32f10x_dma.c **** 
+ 469:../../source/src/FWlib/src/stm32f10x_dma.c **** /**
+ 470:../../source/src/FWlib/src/stm32f10x_dma.c ****   * @brief  Clears the DMAy Channelx's pending flags.
+ 471:../../source/src/FWlib/src/stm32f10x_dma.c ****   * @param  DMAy_FLAG: specifies the flag to clear.
+ 472:../../source/src/FWlib/src/stm32f10x_dma.c ****   *   This parameter can be any combination (for the same DMA) of the following values:
+ 473:../../source/src/FWlib/src/stm32f10x_dma.c ****   *     @arg DMA1_FLAG_GL1: DMA1 Channel1 global flag.
+ 474:../../source/src/FWlib/src/stm32f10x_dma.c ****   *     @arg DMA1_FLAG_TC1: DMA1 Channel1 transfer complete flag.
+ 475:../../source/src/FWlib/src/stm32f10x_dma.c ****   *     @arg DMA1_FLAG_HT1: DMA1 Channel1 half transfer flag.
+ 476:../../source/src/FWlib/src/stm32f10x_dma.c ****   *     @arg DMA1_FLAG_TE1: DMA1 Channel1 transfer error flag.
+ 477:../../source/src/FWlib/src/stm32f10x_dma.c ****   *     @arg DMA1_FLAG_GL2: DMA1 Channel2 global flag.
+ 478:../../source/src/FWlib/src/stm32f10x_dma.c ****   *     @arg DMA1_FLAG_TC2: DMA1 Channel2 transfer complete flag.
+ 479:../../source/src/FWlib/src/stm32f10x_dma.c ****   *     @arg DMA1_FLAG_HT2: DMA1 Channel2 half transfer flag.
+ 480:../../source/src/FWlib/src/stm32f10x_dma.c ****   *     @arg DMA1_FLAG_TE2: DMA1 Channel2 transfer error flag.
+ 481:../../source/src/FWlib/src/stm32f10x_dma.c ****   *     @arg DMA1_FLAG_GL3: DMA1 Channel3 global flag.
+ 482:../../source/src/FWlib/src/stm32f10x_dma.c ****   *     @arg DMA1_FLAG_TC3: DMA1 Channel3 transfer complete flag.
+ 483:../../source/src/FWlib/src/stm32f10x_dma.c ****   *     @arg DMA1_FLAG_HT3: DMA1 Channel3 half transfer flag.
+ 484:../../source/src/FWlib/src/stm32f10x_dma.c ****   *     @arg DMA1_FLAG_TE3: DMA1 Channel3 transfer error flag.
+ 485:../../source/src/FWlib/src/stm32f10x_dma.c ****   *     @arg DMA1_FLAG_GL4: DMA1 Channel4 global flag.
+ 486:../../source/src/FWlib/src/stm32f10x_dma.c ****   *     @arg DMA1_FLAG_TC4: DMA1 Channel4 transfer complete flag.
+ 487:../../source/src/FWlib/src/stm32f10x_dma.c ****   *     @arg DMA1_FLAG_HT4: DMA1 Channel4 half transfer flag.
+ 488:../../source/src/FWlib/src/stm32f10x_dma.c ****   *     @arg DMA1_FLAG_TE4: DMA1 Channel4 transfer error flag.
+ 489:../../source/src/FWlib/src/stm32f10x_dma.c ****   *     @arg DMA1_FLAG_GL5: DMA1 Channel5 global flag.
+ 490:../../source/src/FWlib/src/stm32f10x_dma.c ****   *     @arg DMA1_FLAG_TC5: DMA1 Channel5 transfer complete flag.
+ 491:../../source/src/FWlib/src/stm32f10x_dma.c ****   *     @arg DMA1_FLAG_HT5: DMA1 Channel5 half transfer flag.
+ 492:../../source/src/FWlib/src/stm32f10x_dma.c ****   *     @arg DMA1_FLAG_TE5: DMA1 Channel5 transfer error flag.
+ 493:../../source/src/FWlib/src/stm32f10x_dma.c ****   *     @arg DMA1_FLAG_GL6: DMA1 Channel6 global flag.
+ 494:../../source/src/FWlib/src/stm32f10x_dma.c ****   *     @arg DMA1_FLAG_TC6: DMA1 Channel6 transfer complete flag.
+ 495:../../source/src/FWlib/src/stm32f10x_dma.c ****   *     @arg DMA1_FLAG_HT6: DMA1 Channel6 half transfer flag.
+ 496:../../source/src/FWlib/src/stm32f10x_dma.c ****   *     @arg DMA1_FLAG_TE6: DMA1 Channel6 transfer error flag.
+ 497:../../source/src/FWlib/src/stm32f10x_dma.c ****   *     @arg DMA1_FLAG_GL7: DMA1 Channel7 global flag.
+ 498:../../source/src/FWlib/src/stm32f10x_dma.c ****   *     @arg DMA1_FLAG_TC7: DMA1 Channel7 transfer complete flag.
+ 499:../../source/src/FWlib/src/stm32f10x_dma.c ****   *     @arg DMA1_FLAG_HT7: DMA1 Channel7 half transfer flag.
+ 500:../../source/src/FWlib/src/stm32f10x_dma.c ****   *     @arg DMA1_FLAG_TE7: DMA1 Channel7 transfer error flag.
+ 501:../../source/src/FWlib/src/stm32f10x_dma.c ****   *     @arg DMA2_FLAG_GL1: DMA2 Channel1 global flag.
+ 502:../../source/src/FWlib/src/stm32f10x_dma.c ****   *     @arg DMA2_FLAG_TC1: DMA2 Channel1 transfer complete flag.
+ 503:../../source/src/FWlib/src/stm32f10x_dma.c ****   *     @arg DMA2_FLAG_HT1: DMA2 Channel1 half transfer flag.
+ 504:../../source/src/FWlib/src/stm32f10x_dma.c ****   *     @arg DMA2_FLAG_TE1: DMA2 Channel1 transfer error flag.
+ 505:../../source/src/FWlib/src/stm32f10x_dma.c ****   *     @arg DMA2_FLAG_GL2: DMA2 Channel2 global flag.
+ 506:../../source/src/FWlib/src/stm32f10x_dma.c ****   *     @arg DMA2_FLAG_TC2: DMA2 Channel2 transfer complete flag.
+ 507:../../source/src/FWlib/src/stm32f10x_dma.c ****   *     @arg DMA2_FLAG_HT2: DMA2 Channel2 half transfer flag.
+ 508:../../source/src/FWlib/src/stm32f10x_dma.c ****   *     @arg DMA2_FLAG_TE2: DMA2 Channel2 transfer error flag.
+ 509:../../source/src/FWlib/src/stm32f10x_dma.c ****   *     @arg DMA2_FLAG_GL3: DMA2 Channel3 global flag.
+ 510:../../source/src/FWlib/src/stm32f10x_dma.c ****   *     @arg DMA2_FLAG_TC3: DMA2 Channel3 transfer complete flag.
+ 511:../../source/src/FWlib/src/stm32f10x_dma.c ****   *     @arg DMA2_FLAG_HT3: DMA2 Channel3 half transfer flag.
+ 512:../../source/src/FWlib/src/stm32f10x_dma.c ****   *     @arg DMA2_FLAG_TE3: DMA2 Channel3 transfer error flag.
+ 513:../../source/src/FWlib/src/stm32f10x_dma.c ****   *     @arg DMA2_FLAG_GL4: DMA2 Channel4 global flag.
+ 514:../../source/src/FWlib/src/stm32f10x_dma.c ****   *     @arg DMA2_FLAG_TC4: DMA2 Channel4 transfer complete flag.
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccaakqsZ.s 			page 20
+
+
+ 515:../../source/src/FWlib/src/stm32f10x_dma.c ****   *     @arg DMA2_FLAG_HT4: DMA2 Channel4 half transfer flag.
+ 516:../../source/src/FWlib/src/stm32f10x_dma.c ****   *     @arg DMA2_FLAG_TE4: DMA2 Channel4 transfer error flag.
+ 517:../../source/src/FWlib/src/stm32f10x_dma.c ****   *     @arg DMA2_FLAG_GL5: DMA2 Channel5 global flag.
+ 518:../../source/src/FWlib/src/stm32f10x_dma.c ****   *     @arg DMA2_FLAG_TC5: DMA2 Channel5 transfer complete flag.
+ 519:../../source/src/FWlib/src/stm32f10x_dma.c ****   *     @arg DMA2_FLAG_HT5: DMA2 Channel5 half transfer flag.
+ 520:../../source/src/FWlib/src/stm32f10x_dma.c ****   *     @arg DMA2_FLAG_TE5: DMA2 Channel5 transfer error flag.
+ 521:../../source/src/FWlib/src/stm32f10x_dma.c ****   * @retval None
+ 522:../../source/src/FWlib/src/stm32f10x_dma.c ****   */
+ 523:../../source/src/FWlib/src/stm32f10x_dma.c **** void DMA_ClearFlag(uint32_t DMAy_FLAG)
+ 524:../../source/src/FWlib/src/stm32f10x_dma.c **** {
+ 534              		.loc 1 524 0
+ 535              		.cfi_startproc
+ 536              		@ args = 0, pretend = 0, frame = 0
+ 537              		@ frame_needed = 0, uses_anonymous_args = 0
+ 538              		@ link register save eliminated.
+ 539              	.LVL19:
+ 525:../../source/src/FWlib/src/stm32f10x_dma.c ****   /* Check the parameters */
+ 526:../../source/src/FWlib/src/stm32f10x_dma.c ****   assert_param(IS_DMA_CLEAR_FLAG(DMAy_FLAG));
+ 527:../../source/src/FWlib/src/stm32f10x_dma.c **** 
+ 528:../../source/src/FWlib/src/stm32f10x_dma.c ****   /* Calculate the used DMAy */
+ 529:../../source/src/FWlib/src/stm32f10x_dma.c ****   if ((DMAy_FLAG & FLAG_Mask) != (uint32_t)RESET)
+ 540              		.loc 1 529 0
+ 541 01e0 C300     		lsls	r3, r0, #3
+ 530:../../source/src/FWlib/src/stm32f10x_dma.c ****   {
+ 531:../../source/src/FWlib/src/stm32f10x_dma.c ****     /* Clear the selected DMAy flags */
+ 532:../../source/src/FWlib/src/stm32f10x_dma.c ****     DMA2->IFCR = DMAy_FLAG;
+ 542              		.loc 1 532 0
+ 543 01e2 4CBF     		ite	mi
+ 544 01e4 014B     		ldrmi	r3, .L48
+ 533:../../source/src/FWlib/src/stm32f10x_dma.c ****   }
+ 534:../../source/src/FWlib/src/stm32f10x_dma.c ****   else
+ 535:../../source/src/FWlib/src/stm32f10x_dma.c ****   {
+ 536:../../source/src/FWlib/src/stm32f10x_dma.c ****     /* Clear the selected DMAy flags */
+ 537:../../source/src/FWlib/src/stm32f10x_dma.c ****     DMA1->IFCR = DMAy_FLAG;
+ 545              		.loc 1 537 0
+ 546 01e6 024B     		ldrpl	r3, .L48+4
+ 547 01e8 5860     		str	r0, [r3, #4]
+ 538:../../source/src/FWlib/src/stm32f10x_dma.c ****   }
+ 539:../../source/src/FWlib/src/stm32f10x_dma.c **** }
+ 548              		.loc 1 539 0
+ 549 01ea 7047     		bx	lr
+ 550              	.L49:
+ 551              		.align	2
+ 552              	.L48:
+ 553 01ec 00040240 		.word	1073873920
+ 554 01f0 00000240 		.word	1073872896
+ 555              		.cfi_endproc
+ 556              	.LFE37:
+ 557              		.size	DMA_ClearFlag, .-DMA_ClearFlag
+ 558              		.align	1
+ 559              		.p2align 2,,3
+ 560              		.global	DMA_GetITStatus
+ 561              		.syntax unified
+ 562              		.thumb
+ 563              		.thumb_func
+ 564              		.fpu softvfp
+ 565              		.type	DMA_GetITStatus, %function
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccaakqsZ.s 			page 21
+
+
+ 566              	DMA_GetITStatus:
+ 567              	.LFB41:
+ 568              		.cfi_startproc
+ 569              		@ args = 0, pretend = 0, frame = 0
+ 570              		@ frame_needed = 0, uses_anonymous_args = 0
+ 571              		@ link register save eliminated.
+ 572 01f4 FFF7FEBF 		b	DMA_GetFlagStatus
+ 573              		.cfi_endproc
+ 574              	.LFE41:
+ 575              		.size	DMA_GetITStatus, .-DMA_GetITStatus
+ 576              		.align	1
+ 577              		.p2align 2,,3
+ 578              		.global	DMA_ClearITPendingBit
+ 579              		.syntax unified
+ 580              		.thumb
+ 581              		.thumb_func
+ 582              		.fpu softvfp
+ 583              		.type	DMA_ClearITPendingBit, %function
+ 584              	DMA_ClearITPendingBit:
+ 585              	.LFB43:
+ 586              		.cfi_startproc
+ 587              		@ args = 0, pretend = 0, frame = 0
+ 588              		@ frame_needed = 0, uses_anonymous_args = 0
+ 589              		@ link register save eliminated.
+ 590 01f8 FFF7FEBF 		b	DMA_ClearFlag
+ 591              		.cfi_endproc
+ 592              	.LFE43:
+ 593              		.size	DMA_ClearITPendingBit, .-DMA_ClearITPendingBit
+ 594              	.Letext0:
+ 595              		.file 2 "f:\\arm\\gcc2018\\arm-none-eabi\\include\\machine\\_default_types.h"
+ 596              		.file 3 "f:\\arm\\gcc2018\\arm-none-eabi\\include\\sys\\_stdint.h"
+ 597              		.file 4 "../../source/include/core_cm3.h"
+ 598              		.file 5 "../../source/include/system_stm32f10x.h"
+ 599              		.file 6 "../../source/include/stm32f10x.h"
+ 600              		.file 7 "../../source/src/FWlib/inc/stm32f10x_dma.h"
+ 601              		.section	.debug_info,"",%progbits
+ 602              	.Ldebug_info0:
+ 603 0000 94040000 		.4byte	0x494
+ 604 0004 0200     		.2byte	0x2
+ 605 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 606 000a 04       		.byte	0x4
+ 607 000b 01       		.uleb128 0x1
+ 608 000c 0D030000 		.4byte	.LASF56
+ 609 0010 0C       		.byte	0xc
+ 610 0011 11020000 		.4byte	.LASF57
+ 611 0015 86020000 		.4byte	.LASF58
+ 612 0019 00000000 		.4byte	.Ltext0
+ 613 001d FC010000 		.4byte	.Letext0
+ 614 0021 00000000 		.4byte	.Ldebug_line0
+ 615 0025 02       		.uleb128 0x2
+ 616 0026 01       		.byte	0x1
+ 617 0027 06       		.byte	0x6
+ 618 0028 A5000000 		.4byte	.LASF0
+ 619 002c 02       		.uleb128 0x2
+ 620 002d 01       		.byte	0x1
+ 621 002e 08       		.byte	0x8
+ 622 002f 5D010000 		.4byte	.LASF1
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccaakqsZ.s 			page 22
+
+
+ 623 0033 02       		.uleb128 0x2
+ 624 0034 02       		.byte	0x2
+ 625 0035 05       		.byte	0x5
+ 626 0036 55000000 		.4byte	.LASF2
+ 627 003a 03       		.uleb128 0x3
+ 628 003b 4A000000 		.4byte	.LASF5
+ 629 003f 02       		.byte	0x2
+ 630 0040 39       		.byte	0x39
+ 631 0041 45000000 		.4byte	0x45
+ 632 0045 02       		.uleb128 0x2
+ 633 0046 02       		.byte	0x2
+ 634 0047 07       		.byte	0x7
+ 635 0048 D6010000 		.4byte	.LASF3
+ 636 004c 02       		.uleb128 0x2
+ 637 004d 04       		.byte	0x4
+ 638 004e 05       		.byte	0x5
+ 639 004f F3000000 		.4byte	.LASF4
+ 640 0053 03       		.uleb128 0x3
+ 641 0054 3F000000 		.4byte	.LASF6
+ 642 0058 02       		.byte	0x2
+ 643 0059 4F       		.byte	0x4f
+ 644 005a 5E000000 		.4byte	0x5e
+ 645 005e 02       		.uleb128 0x2
+ 646 005f 04       		.byte	0x4
+ 647 0060 07       		.byte	0x7
+ 648 0061 74020000 		.4byte	.LASF7
+ 649 0065 02       		.uleb128 0x2
+ 650 0066 08       		.byte	0x8
+ 651 0067 05       		.byte	0x5
+ 652 0068 BF000000 		.4byte	.LASF8
+ 653 006c 02       		.uleb128 0x2
+ 654 006d 08       		.byte	0x8
+ 655 006e 07       		.byte	0x7
+ 656 006f 7A010000 		.4byte	.LASF9
+ 657 0073 04       		.uleb128 0x4
+ 658 0074 04       		.byte	0x4
+ 659 0075 05       		.byte	0x5
+ 660 0076 696E7400 		.ascii	"int\000"
+ 661 007a 05       		.uleb128 0x5
+ 662 007b 73000000 		.4byte	0x73
+ 663 007f 02       		.uleb128 0x2
+ 664 0080 04       		.byte	0x4
+ 665 0081 07       		.byte	0x7
+ 666 0082 A1010000 		.4byte	.LASF10
+ 667 0086 03       		.uleb128 0x3
+ 668 0087 BE010000 		.4byte	.LASF11
+ 669 008b 03       		.byte	0x3
+ 670 008c 24       		.byte	0x24
+ 671 008d 3A000000 		.4byte	0x3a
+ 672 0091 03       		.uleb128 0x3
+ 673 0092 98010000 		.4byte	.LASF12
+ 674 0096 03       		.byte	0x3
+ 675 0097 30       		.byte	0x30
+ 676 0098 53000000 		.4byte	0x53
+ 677 009c 05       		.uleb128 0x5
+ 678 009d 91000000 		.4byte	0x91
+ 679 00a1 06       		.uleb128 0x6
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccaakqsZ.s 			page 23
+
+
+ 680 00a2 D7030000 		.4byte	.LASF13
+ 681 00a6 04       		.byte	0x4
+ 682 00a7 CE06     		.2byte	0x6ce
+ 683 00a9 7A000000 		.4byte	0x7a
+ 684 00ad 01       		.byte	0x1
+ 685 00ae 01       		.byte	0x1
+ 686 00af 07       		.uleb128 0x7
+ 687 00b0 52020000 		.4byte	.LASF14
+ 688 00b4 05       		.byte	0x5
+ 689 00b5 35       		.byte	0x35
+ 690 00b6 91000000 		.4byte	0x91
+ 691 00ba 01       		.byte	0x1
+ 692 00bb 01       		.byte	0x1
+ 693 00bc 08       		.uleb128 0x8
+ 694 00bd 07       		.byte	0x7
+ 695 00be 01       		.byte	0x1
+ 696 00bf 2C000000 		.4byte	0x2c
+ 697 00c3 06       		.byte	0x6
+ 698 00c4 0702     		.2byte	0x207
+ 699 00c6 D7000000 		.4byte	0xd7
+ 700 00ca 09       		.uleb128 0x9
+ 701 00cb F1020000 		.4byte	.LASF15
+ 702 00cf 00       		.byte	0
+ 703 00d0 0A       		.uleb128 0xa
+ 704 00d1 53455400 		.ascii	"SET\000"
+ 705 00d5 01       		.byte	0x1
+ 706 00d6 00       		.byte	0
+ 707 00d7 0B       		.uleb128 0xb
+ 708 00d8 EE030000 		.4byte	.LASF16
+ 709 00dc 06       		.byte	0x6
+ 710 00dd 0702     		.2byte	0x207
+ 711 00df BC000000 		.4byte	0xbc
+ 712 00e3 0B       		.uleb128 0xb
+ 713 00e4 EA000000 		.4byte	.LASF17
+ 714 00e8 06       		.byte	0x6
+ 715 00e9 0702     		.2byte	0x207
+ 716 00eb BC000000 		.4byte	0xbc
+ 717 00ef 08       		.uleb128 0x8
+ 718 00f0 07       		.byte	0x7
+ 719 00f1 01       		.byte	0x1
+ 720 00f2 2C000000 		.4byte	0x2c
+ 721 00f6 06       		.byte	0x6
+ 722 00f7 0902     		.2byte	0x209
+ 723 00f9 0A010000 		.4byte	0x10a
+ 724 00fd 09       		.uleb128 0x9
+ 725 00fe 9D000000 		.4byte	.LASF18
+ 726 0102 00       		.byte	0
+ 727 0103 09       		.uleb128 0x9
+ 728 0104 F9030000 		.4byte	.LASF19
+ 729 0108 01       		.byte	0x1
+ 730 0109 00       		.byte	0
+ 731 010a 0B       		.uleb128 0xb
+ 732 010b D1020000 		.4byte	.LASF20
+ 733 010f 06       		.byte	0x6
+ 734 0110 0902     		.2byte	0x209
+ 735 0112 EF000000 		.4byte	0xef
+ 736 0116 0C       		.uleb128 0xc
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccaakqsZ.s 			page 24
+
+
+ 737 0117 10       		.byte	0x10
+ 738 0118 06       		.byte	0x6
+ 739 0119 1E03     		.2byte	0x31e
+ 740 011b 5C010000 		.4byte	0x15c
+ 741 011f 0D       		.uleb128 0xd
+ 742 0120 43435200 		.ascii	"CCR\000"
+ 743 0124 06       		.byte	0x6
+ 744 0125 2003     		.2byte	0x320
+ 745 0127 9C000000 		.4byte	0x9c
+ 746 012b 02       		.byte	0x2
+ 747 012c 23       		.byte	0x23
+ 748 012d 00       		.uleb128 0
+ 749 012e 0E       		.uleb128 0xe
+ 750 012f FD010000 		.4byte	.LASF21
+ 751 0133 06       		.byte	0x6
+ 752 0134 2103     		.2byte	0x321
+ 753 0136 9C000000 		.4byte	0x9c
+ 754 013a 02       		.byte	0x2
+ 755 013b 23       		.byte	0x23
+ 756 013c 04       		.uleb128 0x4
+ 757 013d 0E       		.uleb128 0xe
+ 758 013e 31010000 		.4byte	.LASF22
+ 759 0142 06       		.byte	0x6
+ 760 0143 2203     		.2byte	0x322
+ 761 0145 9C000000 		.4byte	0x9c
+ 762 0149 02       		.byte	0x2
+ 763 014a 23       		.byte	0x23
+ 764 014b 08       		.uleb128 0x8
+ 765 014c 0E       		.uleb128 0xe
+ 766 014d E1020000 		.4byte	.LASF23
+ 767 0151 06       		.byte	0x6
+ 768 0152 2303     		.2byte	0x323
+ 769 0154 9C000000 		.4byte	0x9c
+ 770 0158 02       		.byte	0x2
+ 771 0159 23       		.byte	0x23
+ 772 015a 0C       		.uleb128 0xc
+ 773 015b 00       		.byte	0
+ 774 015c 0B       		.uleb128 0xb
+ 775 015d E9010000 		.4byte	.LASF24
+ 776 0161 06       		.byte	0x6
+ 777 0162 2403     		.2byte	0x324
+ 778 0164 16010000 		.4byte	0x116
+ 779 0168 0C       		.uleb128 0xc
+ 780 0169 08       		.byte	0x8
+ 781 016a 06       		.byte	0x6
+ 782 016b 2603     		.2byte	0x326
+ 783 016d 90010000 		.4byte	0x190
+ 784 0171 0D       		.uleb128 0xd
+ 785 0172 49535200 		.ascii	"ISR\000"
+ 786 0176 06       		.byte	0x6
+ 787 0177 2803     		.2byte	0x328
+ 788 0179 9C000000 		.4byte	0x9c
+ 789 017d 02       		.byte	0x2
+ 790 017e 23       		.byte	0x23
+ 791 017f 00       		.uleb128 0
+ 792 0180 0E       		.uleb128 0xe
+ 793 0181 FF020000 		.4byte	.LASF25
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccaakqsZ.s 			page 25
+
+
+ 794 0185 06       		.byte	0x6
+ 795 0186 2903     		.2byte	0x329
+ 796 0188 9C000000 		.4byte	0x9c
+ 797 018c 02       		.byte	0x2
+ 798 018d 23       		.byte	0x23
+ 799 018e 04       		.uleb128 0x4
+ 800 018f 00       		.byte	0
+ 801 0190 0B       		.uleb128 0xb
+ 802 0191 5F000000 		.4byte	.LASF26
+ 803 0195 06       		.byte	0x6
+ 804 0196 2A03     		.2byte	0x32a
+ 805 0198 68010000 		.4byte	0x168
+ 806 019c 0F       		.uleb128 0xf
+ 807 019d 2C       		.byte	0x2c
+ 808 019e 07       		.byte	0x7
+ 809 019f 32       		.byte	0x32
+ 810 01a0 3F020000 		.4byte	0x23f
+ 811 01a4 10       		.uleb128 0x10
+ 812 01a5 86000000 		.4byte	.LASF27
+ 813 01a9 07       		.byte	0x7
+ 814 01aa 34       		.byte	0x34
+ 815 01ab 91000000 		.4byte	0x91
+ 816 01af 02       		.byte	0x2
+ 817 01b0 23       		.byte	0x23
+ 818 01b1 00       		.uleb128 0
+ 819 01b2 10       		.uleb128 0x10
+ 820 01b3 1D000000 		.4byte	.LASF28
+ 821 01b7 07       		.byte	0x7
+ 822 01b8 36       		.byte	0x36
+ 823 01b9 91000000 		.4byte	0x91
+ 824 01bd 02       		.byte	0x2
+ 825 01be 23       		.byte	0x23
+ 826 01bf 04       		.uleb128 0x4
+ 827 01c0 10       		.uleb128 0x10
+ 828 01c1 6B000000 		.4byte	.LASF29
+ 829 01c5 07       		.byte	0x7
+ 830 01c6 38       		.byte	0x38
+ 831 01c7 91000000 		.4byte	0x91
+ 832 01cb 02       		.byte	0x2
+ 833 01cc 23       		.byte	0x23
+ 834 01cd 08       		.uleb128 0x8
+ 835 01ce 10       		.uleb128 0x10
+ 836 01cf 6B010000 		.4byte	.LASF30
+ 837 01d3 07       		.byte	0x7
+ 838 01d4 3B       		.byte	0x3b
+ 839 01d5 91000000 		.4byte	0x91
+ 840 01d9 02       		.byte	0x2
+ 841 01da 23       		.byte	0x23
+ 842 01db 0C       		.uleb128 0xc
+ 843 01dc 10       		.uleb128 0x10
+ 844 01dd CD000000 		.4byte	.LASF31
+ 845 01e1 07       		.byte	0x7
+ 846 01e2 3F       		.byte	0x3f
+ 847 01e3 91000000 		.4byte	0x91
+ 848 01e7 02       		.byte	0x2
+ 849 01e8 23       		.byte	0x23
+ 850 01e9 10       		.uleb128 0x10
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccaakqsZ.s 			page 26
+
+
+ 851 01ea 10       		.uleb128 0x10
+ 852 01eb B1000000 		.4byte	.LASF32
+ 853 01ef 07       		.byte	0x7
+ 854 01f0 42       		.byte	0x42
+ 855 01f1 91000000 		.4byte	0x91
+ 856 01f5 02       		.byte	0x2
+ 857 01f6 23       		.byte	0x23
+ 858 01f7 14       		.uleb128 0x14
+ 859 01f8 10       		.uleb128 0x10
+ 860 01f9 36010000 		.4byte	.LASF33
+ 861 01fd 07       		.byte	0x7
+ 862 01fe 45       		.byte	0x45
+ 863 01ff 91000000 		.4byte	0x91
+ 864 0203 02       		.byte	0x2
+ 865 0204 23       		.byte	0x23
+ 866 0205 18       		.uleb128 0x18
+ 867 0206 10       		.uleb128 0x10
+ 868 0207 00040000 		.4byte	.LASF34
+ 869 020b 07       		.byte	0x7
+ 870 020c 48       		.byte	0x48
+ 871 020d 91000000 		.4byte	0x91
+ 872 0211 02       		.byte	0x2
+ 873 0212 23       		.byte	0x23
+ 874 0213 1C       		.uleb128 0x1c
+ 875 0214 10       		.uleb128 0x10
+ 876 0215 04030000 		.4byte	.LASF35
+ 877 0219 07       		.byte	0x7
+ 878 021a 4B       		.byte	0x4b
+ 879 021b 91000000 		.4byte	0x91
+ 880 021f 02       		.byte	0x2
+ 881 0220 23       		.byte	0x23
+ 882 0221 20       		.uleb128 0x20
+ 883 0222 10       		.uleb128 0x10
+ 884 0223 10000000 		.4byte	.LASF36
+ 885 0227 07       		.byte	0x7
+ 886 0228 50       		.byte	0x50
+ 887 0229 91000000 		.4byte	0x91
+ 888 022d 02       		.byte	0x2
+ 889 022e 23       		.byte	0x23
+ 890 022f 24       		.uleb128 0x24
+ 891 0230 10       		.uleb128 0x10
+ 892 0231 08000000 		.4byte	.LASF37
+ 893 0235 07       		.byte	0x7
+ 894 0236 53       		.byte	0x53
+ 895 0237 91000000 		.4byte	0x91
+ 896 023b 02       		.byte	0x2
+ 897 023c 23       		.byte	0x23
+ 898 023d 28       		.uleb128 0x28
+ 899 023e 00       		.byte	0
+ 900 023f 03       		.uleb128 0x3
+ 901 0240 4D010000 		.4byte	.LASF38
+ 902 0244 07       		.byte	0x7
+ 903 0245 55       		.byte	0x55
+ 904 0246 9C010000 		.4byte	0x19c
+ 905 024a 11       		.uleb128 0x11
+ 906 024b 01       		.byte	0x1
+ 907 024c 3C020000 		.4byte	.LASF59
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccaakqsZ.s 			page 27
+
+
+ 908 0250 01       		.byte	0x1
+ 909 0251 AC02     		.2byte	0x2ac
+ 910 0253 01       		.byte	0x1
+ 911 0254 65020000 		.4byte	0x265
+ 912 0258 12       		.uleb128 0x12
+ 913 0259 F7020000 		.4byte	.LASF39
+ 914 025d 01       		.byte	0x1
+ 915 025e AC02     		.2byte	0x2ac
+ 916 0260 91000000 		.4byte	0x91
+ 917 0264 00       		.byte	0
+ 918 0265 13       		.uleb128 0x13
+ 919 0266 01       		.byte	0x1
+ 920 0267 AE010000 		.4byte	.LASF60
+ 921 026b 01       		.byte	0x1
+ 922 026c 5302     		.2byte	0x253
+ 923 026e 01       		.byte	0x1
+ 924 026f E3000000 		.4byte	0xe3
+ 925 0273 9C020000 		.4byte	0x29c
+ 926 0277 12       		.uleb128 0x12
+ 927 0278 F7020000 		.4byte	.LASF39
+ 928 027c 01       		.byte	0x1
+ 929 027d 5302     		.2byte	0x253
+ 930 027f 91000000 		.4byte	0x91
+ 931 0283 14       		.uleb128 0x14
+ 932 0284 E4030000 		.4byte	.LASF40
+ 933 0288 01       		.byte	0x1
+ 934 0289 5502     		.2byte	0x255
+ 935 028b E3000000 		.4byte	0xe3
+ 936 028f 14       		.uleb128 0x14
+ 937 0290 2A010000 		.4byte	.LASF41
+ 938 0294 01       		.byte	0x1
+ 939 0295 5602     		.2byte	0x256
+ 940 0297 91000000 		.4byte	0x91
+ 941 029b 00       		.byte	0
+ 942 029c 15       		.uleb128 0x15
+ 943 029d 01       		.byte	0x1
+ 944 029e 05010000 		.4byte	.LASF46
+ 945 02a2 01       		.byte	0x1
+ 946 02a3 0B02     		.2byte	0x20b
+ 947 02a5 01       		.byte	0x1
+ 948 02a6 E0010000 		.4byte	.LFB37
+ 949 02aa F4010000 		.4byte	.LFE37
+ 950 02ae 02       		.byte	0x2
+ 951 02af 7D       		.byte	0x7d
+ 952 02b0 00       		.sleb128 0
+ 953 02b1 01       		.byte	0x1
+ 954 02b2 C5020000 		.4byte	0x2c5
+ 955 02b6 16       		.uleb128 0x16
+ 956 02b7 73000000 		.4byte	.LASF42
+ 957 02bb 01       		.byte	0x1
+ 958 02bc 0B02     		.2byte	0x20b
+ 959 02be 91000000 		.4byte	0x91
+ 960 02c2 01       		.byte	0x1
+ 961 02c3 50       		.byte	0x50
+ 962 02c4 00       		.byte	0
+ 963 02c5 17       		.uleb128 0x17
+ 964 02c6 01       		.byte	0x1
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccaakqsZ.s 			page 28
+
+
+ 965 02c7 62020000 		.4byte	.LASF43
+ 966 02cb 01       		.byte	0x1
+ 967 02cc B101     		.2byte	0x1b1
+ 968 02ce 01       		.byte	0x1
+ 969 02cf D7000000 		.4byte	0xd7
+ 970 02d3 C4010000 		.4byte	.LFB36
+ 971 02d7 E0010000 		.4byte	.LFE36
+ 972 02db 02       		.byte	0x2
+ 973 02dc 7D       		.byte	0x7d
+ 974 02dd 00       		.sleb128 0
+ 975 02de 01       		.byte	0x1
+ 976 02df 14030000 		.4byte	0x314
+ 977 02e3 18       		.uleb128 0x18
+ 978 02e4 73000000 		.4byte	.LASF42
+ 979 02e8 01       		.byte	0x1
+ 980 02e9 B101     		.2byte	0x1b1
+ 981 02eb 91000000 		.4byte	0x91
+ 982 02ef 00000000 		.4byte	.LLST6
+ 983 02f3 19       		.uleb128 0x19
+ 984 02f4 E4030000 		.4byte	.LASF40
+ 985 02f8 01       		.byte	0x1
+ 986 02f9 B301     		.2byte	0x1b3
+ 987 02fb D7000000 		.4byte	0xd7
+ 988 02ff 21000000 		.4byte	.LLST7
+ 989 0303 19       		.uleb128 0x19
+ 990 0304 2A010000 		.4byte	.LASF41
+ 991 0308 01       		.byte	0x1
+ 992 0309 B401     		.2byte	0x1b4
+ 993 030b 91000000 		.4byte	0x91
+ 994 030f 5A000000 		.4byte	.LLST8
+ 995 0313 00       		.byte	0
+ 996 0314 17       		.uleb128 0x17
+ 997 0315 01       		.byte	0x1
+ 998 0316 B3030000 		.4byte	.LASF44
+ 999 031a 01       		.byte	0x1
+ 1000 031b 7301     		.2byte	0x173
+ 1001 031d 01       		.byte	0x1
+ 1002 031e 86000000 		.4byte	0x86
+ 1003 0322 BC010000 		.4byte	.LFB35
+ 1004 0326 C2010000 		.4byte	.LFE35
+ 1005 032a 02       		.byte	0x2
+ 1006 032b 7D       		.byte	0x7d
+ 1007 032c 00       		.sleb128 0
+ 1008 032d 01       		.byte	0x1
+ 1009 032e 43030000 		.4byte	0x343
+ 1010 0332 18       		.uleb128 0x18
+ 1011 0333 03020000 		.4byte	.LASF45
+ 1012 0337 01       		.byte	0x1
+ 1013 0338 7301     		.2byte	0x173
+ 1014 033a 43030000 		.4byte	0x343
+ 1015 033e 79000000 		.4byte	.LLST5
+ 1016 0342 00       		.byte	0
+ 1017 0343 1A       		.uleb128 0x1a
+ 1018 0344 04       		.byte	0x4
+ 1019 0345 5C010000 		.4byte	0x15c
+ 1020 0349 15       		.uleb128 0x15
+ 1021 034a 01       		.byte	0x1
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccaakqsZ.s 			page 29
+
+
+ 1022 034b 13010000 		.4byte	.LASF47
+ 1023 034f 01       		.byte	0x1
+ 1024 0350 6101     		.2byte	0x161
+ 1025 0352 01       		.byte	0x1
+ 1026 0353 B8010000 		.4byte	.LFB34
+ 1027 0357 BC010000 		.4byte	.LFE34
+ 1028 035b 02       		.byte	0x2
+ 1029 035c 7D       		.byte	0x7d
+ 1030 035d 00       		.sleb128 0
+ 1031 035e 01       		.byte	0x1
+ 1032 035f 80030000 		.4byte	0x380
+ 1033 0363 16       		.uleb128 0x16
+ 1034 0364 03020000 		.4byte	.LASF45
+ 1035 0368 01       		.byte	0x1
+ 1036 0369 6101     		.2byte	0x161
+ 1037 036b 43030000 		.4byte	0x343
+ 1038 036f 01       		.byte	0x1
+ 1039 0370 50       		.byte	0x50
+ 1040 0371 16       		.uleb128 0x16
+ 1041 0372 DF000000 		.4byte	.LASF48
+ 1042 0376 01       		.byte	0x1
+ 1043 0377 6101     		.2byte	0x161
+ 1044 0379 86000000 		.4byte	0x86
+ 1045 037d 01       		.byte	0x1
+ 1046 037e 51       		.byte	0x51
+ 1047 037f 00       		.byte	0
+ 1048 0380 15       		.uleb128 0x15
+ 1049 0381 01       		.byte	0x1
+ 1050 0382 CA030000 		.4byte	.LASF49
+ 1051 0386 01       		.byte	0x1
+ 1052 0387 4601     		.2byte	0x146
+ 1053 0389 01       		.byte	0x1
+ 1054 038a A4010000 		.4byte	.LFB33
+ 1055 038e B6010000 		.4byte	.LFE33
+ 1056 0392 02       		.byte	0x2
+ 1057 0393 7D       		.byte	0x7d
+ 1058 0394 00       		.sleb128 0
+ 1059 0395 01       		.byte	0x1
+ 1060 0396 C7030000 		.4byte	0x3c7
+ 1061 039a 16       		.uleb128 0x16
+ 1062 039b 03020000 		.4byte	.LASF45
+ 1063 039f 01       		.byte	0x1
+ 1064 03a0 4601     		.2byte	0x146
+ 1065 03a2 43030000 		.4byte	0x343
+ 1066 03a6 01       		.byte	0x1
+ 1067 03a7 50       		.byte	0x50
+ 1068 03a8 18       		.uleb128 0x18
+ 1069 03a9 91010000 		.4byte	.LASF50
+ 1070 03ad 01       		.byte	0x1
+ 1071 03ae 4601     		.2byte	0x146
+ 1072 03b0 91000000 		.4byte	0x91
+ 1073 03b4 9A000000 		.4byte	.LLST4
+ 1074 03b8 16       		.uleb128 0x16
+ 1075 03b9 7D000000 		.4byte	.LASF51
+ 1076 03bd 01       		.byte	0x1
+ 1077 03be 4601     		.2byte	0x146
+ 1078 03c0 0A010000 		.4byte	0x10a
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccaakqsZ.s 			page 30
+
+
+ 1079 03c4 01       		.byte	0x1
+ 1080 03c5 52       		.byte	0x52
+ 1081 03c6 00       		.byte	0
+ 1082 03c7 15       		.uleb128 0x15
+ 1083 03c8 01       		.byte	0x1
+ 1084 03c9 00000000 		.4byte	.LASF52
+ 1085 03cd 01       		.byte	0x1
+ 1086 03ce 2601     		.2byte	0x126
+ 1087 03d0 01       		.byte	0x1
+ 1088 03d1 8C010000 		.4byte	.LFB32
+ 1089 03d5 A4010000 		.4byte	.LFE32
+ 1090 03d9 02       		.byte	0x2
+ 1091 03da 7D       		.byte	0x7d
+ 1092 03db 00       		.sleb128 0
+ 1093 03dc 01       		.byte	0x1
+ 1094 03dd FE030000 		.4byte	0x3fe
+ 1095 03e1 16       		.uleb128 0x16
+ 1096 03e2 03020000 		.4byte	.LASF45
+ 1097 03e6 01       		.byte	0x1
+ 1098 03e7 2601     		.2byte	0x126
+ 1099 03e9 43030000 		.4byte	0x343
+ 1100 03ed 01       		.byte	0x1
+ 1101 03ee 50       		.byte	0x50
+ 1102 03ef 16       		.uleb128 0x16
+ 1103 03f0 7D000000 		.4byte	.LASF51
+ 1104 03f4 01       		.byte	0x1
+ 1105 03f5 2601     		.2byte	0x126
+ 1106 03f7 0A010000 		.4byte	0x10a
+ 1107 03fb 01       		.byte	0x1
+ 1108 03fc 51       		.byte	0x51
+ 1109 03fd 00       		.byte	0
+ 1110 03fe 15       		.uleb128 0x15
+ 1111 03ff 01       		.byte	0x1
+ 1112 0400 30000000 		.4byte	.LASF53
+ 1113 0404 01       		.byte	0x1
+ 1114 0405 0301     		.2byte	0x103
+ 1115 0407 01       		.byte	0x1
+ 1116 0408 70010000 		.4byte	.LFB31
+ 1117 040c 8A010000 		.4byte	.LFE31
+ 1118 0410 02       		.byte	0x2
+ 1119 0411 7D       		.byte	0x7d
+ 1120 0412 00       		.sleb128 0
+ 1121 0413 01       		.byte	0x1
+ 1122 0414 27040000 		.4byte	0x427
+ 1123 0418 16       		.uleb128 0x16
+ 1124 0419 C7010000 		.4byte	.LASF54
+ 1125 041d 01       		.byte	0x1
+ 1126 041e 0301     		.2byte	0x103
+ 1127 0420 27040000 		.4byte	0x427
+ 1128 0424 01       		.byte	0x1
+ 1129 0425 50       		.byte	0x50
+ 1130 0426 00       		.byte	0
+ 1131 0427 1A       		.uleb128 0x1a
+ 1132 0428 04       		.byte	0x4
+ 1133 0429 3F020000 		.4byte	0x23f
+ 1134 042d 1B       		.uleb128 0x1b
+ 1135 042e 01       		.byte	0x1
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccaakqsZ.s 			page 31
+
+
+ 1136 042f FC000000 		.4byte	.LASF55
+ 1137 0433 01       		.byte	0x1
+ 1138 0434 CA       		.byte	0xca
+ 1139 0435 01       		.byte	0x1
+ 1140 0436 30010000 		.4byte	.LFB30
+ 1141 043a 6E010000 		.4byte	.LFE30
+ 1142 043e D4000000 		.4byte	.LLST1
+ 1143 0442 01       		.byte	0x1
+ 1144 0443 73040000 		.4byte	0x473
+ 1145 0447 1C       		.uleb128 0x1c
+ 1146 0448 03020000 		.4byte	.LASF45
+ 1147 044c 01       		.byte	0x1
+ 1148 044d CA       		.byte	0xca
+ 1149 044e 43030000 		.4byte	0x343
+ 1150 0452 01       		.byte	0x1
+ 1151 0453 50       		.byte	0x50
+ 1152 0454 1D       		.uleb128 0x1d
+ 1153 0455 C7010000 		.4byte	.LASF54
+ 1154 0459 01       		.byte	0x1
+ 1155 045a CA       		.byte	0xca
+ 1156 045b 27040000 		.4byte	0x427
+ 1157 045f 00010000 		.4byte	.LLST2
+ 1158 0463 1E       		.uleb128 0x1e
+ 1159 0464 2A010000 		.4byte	.LASF41
+ 1160 0468 01       		.byte	0x1
+ 1161 0469 CC       		.byte	0xcc
+ 1162 046a 91000000 		.4byte	0x91
+ 1163 046e 21010000 		.4byte	.LLST3
+ 1164 0472 00       		.byte	0
+ 1165 0473 1F       		.uleb128 0x1f
+ 1166 0474 01       		.byte	0x1
+ 1167 0475 E6020000 		.4byte	.LASF61
+ 1168 0479 01       		.byte	0x1
+ 1169 047a 6C       		.byte	0x6c
+ 1170 047b 01       		.byte	0x1
+ 1171 047c 00000000 		.4byte	.LFB29
+ 1172 0480 30010000 		.4byte	.LFE29
+ 1173 0484 56010000 		.4byte	.LLST0
+ 1174 0488 01       		.byte	0x1
+ 1175 0489 1C       		.uleb128 0x1c
+ 1176 048a 03020000 		.4byte	.LASF45
+ 1177 048e 01       		.byte	0x1
+ 1178 048f 6C       		.byte	0x6c
+ 1179 0490 43030000 		.4byte	0x343
+ 1180 0494 01       		.byte	0x1
+ 1181 0495 50       		.byte	0x50
+ 1182 0496 00       		.byte	0
+ 1183 0497 00       		.byte	0
+ 1184              		.section	.debug_abbrev,"",%progbits
+ 1185              	.Ldebug_abbrev0:
+ 1186 0000 01       		.uleb128 0x1
+ 1187 0001 11       		.uleb128 0x11
+ 1188 0002 01       		.byte	0x1
+ 1189 0003 25       		.uleb128 0x25
+ 1190 0004 0E       		.uleb128 0xe
+ 1191 0005 13       		.uleb128 0x13
+ 1192 0006 0B       		.uleb128 0xb
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccaakqsZ.s 			page 32
+
+
+ 1193 0007 03       		.uleb128 0x3
+ 1194 0008 0E       		.uleb128 0xe
+ 1195 0009 1B       		.uleb128 0x1b
+ 1196 000a 0E       		.uleb128 0xe
+ 1197 000b 11       		.uleb128 0x11
+ 1198 000c 01       		.uleb128 0x1
+ 1199 000d 12       		.uleb128 0x12
+ 1200 000e 01       		.uleb128 0x1
+ 1201 000f 10       		.uleb128 0x10
+ 1202 0010 06       		.uleb128 0x6
+ 1203 0011 00       		.byte	0
+ 1204 0012 00       		.byte	0
+ 1205 0013 02       		.uleb128 0x2
+ 1206 0014 24       		.uleb128 0x24
+ 1207 0015 00       		.byte	0
+ 1208 0016 0B       		.uleb128 0xb
+ 1209 0017 0B       		.uleb128 0xb
+ 1210 0018 3E       		.uleb128 0x3e
+ 1211 0019 0B       		.uleb128 0xb
+ 1212 001a 03       		.uleb128 0x3
+ 1213 001b 0E       		.uleb128 0xe
+ 1214 001c 00       		.byte	0
+ 1215 001d 00       		.byte	0
+ 1216 001e 03       		.uleb128 0x3
+ 1217 001f 16       		.uleb128 0x16
+ 1218 0020 00       		.byte	0
+ 1219 0021 03       		.uleb128 0x3
+ 1220 0022 0E       		.uleb128 0xe
+ 1221 0023 3A       		.uleb128 0x3a
+ 1222 0024 0B       		.uleb128 0xb
+ 1223 0025 3B       		.uleb128 0x3b
+ 1224 0026 0B       		.uleb128 0xb
+ 1225 0027 49       		.uleb128 0x49
+ 1226 0028 13       		.uleb128 0x13
+ 1227 0029 00       		.byte	0
+ 1228 002a 00       		.byte	0
+ 1229 002b 04       		.uleb128 0x4
+ 1230 002c 24       		.uleb128 0x24
+ 1231 002d 00       		.byte	0
+ 1232 002e 0B       		.uleb128 0xb
+ 1233 002f 0B       		.uleb128 0xb
+ 1234 0030 3E       		.uleb128 0x3e
+ 1235 0031 0B       		.uleb128 0xb
+ 1236 0032 03       		.uleb128 0x3
+ 1237 0033 08       		.uleb128 0x8
+ 1238 0034 00       		.byte	0
+ 1239 0035 00       		.byte	0
+ 1240 0036 05       		.uleb128 0x5
+ 1241 0037 35       		.uleb128 0x35
+ 1242 0038 00       		.byte	0
+ 1243 0039 49       		.uleb128 0x49
+ 1244 003a 13       		.uleb128 0x13
+ 1245 003b 00       		.byte	0
+ 1246 003c 00       		.byte	0
+ 1247 003d 06       		.uleb128 0x6
+ 1248 003e 34       		.uleb128 0x34
+ 1249 003f 00       		.byte	0
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccaakqsZ.s 			page 33
+
+
+ 1250 0040 03       		.uleb128 0x3
+ 1251 0041 0E       		.uleb128 0xe
+ 1252 0042 3A       		.uleb128 0x3a
+ 1253 0043 0B       		.uleb128 0xb
+ 1254 0044 3B       		.uleb128 0x3b
+ 1255 0045 05       		.uleb128 0x5
+ 1256 0046 49       		.uleb128 0x49
+ 1257 0047 13       		.uleb128 0x13
+ 1258 0048 3F       		.uleb128 0x3f
+ 1259 0049 0C       		.uleb128 0xc
+ 1260 004a 3C       		.uleb128 0x3c
+ 1261 004b 0C       		.uleb128 0xc
+ 1262 004c 00       		.byte	0
+ 1263 004d 00       		.byte	0
+ 1264 004e 07       		.uleb128 0x7
+ 1265 004f 34       		.uleb128 0x34
+ 1266 0050 00       		.byte	0
+ 1267 0051 03       		.uleb128 0x3
+ 1268 0052 0E       		.uleb128 0xe
+ 1269 0053 3A       		.uleb128 0x3a
+ 1270 0054 0B       		.uleb128 0xb
+ 1271 0055 3B       		.uleb128 0x3b
+ 1272 0056 0B       		.uleb128 0xb
+ 1273 0057 49       		.uleb128 0x49
+ 1274 0058 13       		.uleb128 0x13
+ 1275 0059 3F       		.uleb128 0x3f
+ 1276 005a 0C       		.uleb128 0xc
+ 1277 005b 3C       		.uleb128 0x3c
+ 1278 005c 0C       		.uleb128 0xc
+ 1279 005d 00       		.byte	0
+ 1280 005e 00       		.byte	0
+ 1281 005f 08       		.uleb128 0x8
+ 1282 0060 04       		.uleb128 0x4
+ 1283 0061 01       		.byte	0x1
+ 1284 0062 3E       		.uleb128 0x3e
+ 1285 0063 0B       		.uleb128 0xb
+ 1286 0064 0B       		.uleb128 0xb
+ 1287 0065 0B       		.uleb128 0xb
+ 1288 0066 49       		.uleb128 0x49
+ 1289 0067 13       		.uleb128 0x13
+ 1290 0068 3A       		.uleb128 0x3a
+ 1291 0069 0B       		.uleb128 0xb
+ 1292 006a 3B       		.uleb128 0x3b
+ 1293 006b 05       		.uleb128 0x5
+ 1294 006c 01       		.uleb128 0x1
+ 1295 006d 13       		.uleb128 0x13
+ 1296 006e 00       		.byte	0
+ 1297 006f 00       		.byte	0
+ 1298 0070 09       		.uleb128 0x9
+ 1299 0071 28       		.uleb128 0x28
+ 1300 0072 00       		.byte	0
+ 1301 0073 03       		.uleb128 0x3
+ 1302 0074 0E       		.uleb128 0xe
+ 1303 0075 1C       		.uleb128 0x1c
+ 1304 0076 0B       		.uleb128 0xb
+ 1305 0077 00       		.byte	0
+ 1306 0078 00       		.byte	0
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccaakqsZ.s 			page 34
+
+
+ 1307 0079 0A       		.uleb128 0xa
+ 1308 007a 28       		.uleb128 0x28
+ 1309 007b 00       		.byte	0
+ 1310 007c 03       		.uleb128 0x3
+ 1311 007d 08       		.uleb128 0x8
+ 1312 007e 1C       		.uleb128 0x1c
+ 1313 007f 0B       		.uleb128 0xb
+ 1314 0080 00       		.byte	0
+ 1315 0081 00       		.byte	0
+ 1316 0082 0B       		.uleb128 0xb
+ 1317 0083 16       		.uleb128 0x16
+ 1318 0084 00       		.byte	0
+ 1319 0085 03       		.uleb128 0x3
+ 1320 0086 0E       		.uleb128 0xe
+ 1321 0087 3A       		.uleb128 0x3a
+ 1322 0088 0B       		.uleb128 0xb
+ 1323 0089 3B       		.uleb128 0x3b
+ 1324 008a 05       		.uleb128 0x5
+ 1325 008b 49       		.uleb128 0x49
+ 1326 008c 13       		.uleb128 0x13
+ 1327 008d 00       		.byte	0
+ 1328 008e 00       		.byte	0
+ 1329 008f 0C       		.uleb128 0xc
+ 1330 0090 13       		.uleb128 0x13
+ 1331 0091 01       		.byte	0x1
+ 1332 0092 0B       		.uleb128 0xb
+ 1333 0093 0B       		.uleb128 0xb
+ 1334 0094 3A       		.uleb128 0x3a
+ 1335 0095 0B       		.uleb128 0xb
+ 1336 0096 3B       		.uleb128 0x3b
+ 1337 0097 05       		.uleb128 0x5
+ 1338 0098 01       		.uleb128 0x1
+ 1339 0099 13       		.uleb128 0x13
+ 1340 009a 00       		.byte	0
+ 1341 009b 00       		.byte	0
+ 1342 009c 0D       		.uleb128 0xd
+ 1343 009d 0D       		.uleb128 0xd
+ 1344 009e 00       		.byte	0
+ 1345 009f 03       		.uleb128 0x3
+ 1346 00a0 08       		.uleb128 0x8
+ 1347 00a1 3A       		.uleb128 0x3a
+ 1348 00a2 0B       		.uleb128 0xb
+ 1349 00a3 3B       		.uleb128 0x3b
+ 1350 00a4 05       		.uleb128 0x5
+ 1351 00a5 49       		.uleb128 0x49
+ 1352 00a6 13       		.uleb128 0x13
+ 1353 00a7 38       		.uleb128 0x38
+ 1354 00a8 0A       		.uleb128 0xa
+ 1355 00a9 00       		.byte	0
+ 1356 00aa 00       		.byte	0
+ 1357 00ab 0E       		.uleb128 0xe
+ 1358 00ac 0D       		.uleb128 0xd
+ 1359 00ad 00       		.byte	0
+ 1360 00ae 03       		.uleb128 0x3
+ 1361 00af 0E       		.uleb128 0xe
+ 1362 00b0 3A       		.uleb128 0x3a
+ 1363 00b1 0B       		.uleb128 0xb
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccaakqsZ.s 			page 35
+
+
+ 1364 00b2 3B       		.uleb128 0x3b
+ 1365 00b3 05       		.uleb128 0x5
+ 1366 00b4 49       		.uleb128 0x49
+ 1367 00b5 13       		.uleb128 0x13
+ 1368 00b6 38       		.uleb128 0x38
+ 1369 00b7 0A       		.uleb128 0xa
+ 1370 00b8 00       		.byte	0
+ 1371 00b9 00       		.byte	0
+ 1372 00ba 0F       		.uleb128 0xf
+ 1373 00bb 13       		.uleb128 0x13
+ 1374 00bc 01       		.byte	0x1
+ 1375 00bd 0B       		.uleb128 0xb
+ 1376 00be 0B       		.uleb128 0xb
+ 1377 00bf 3A       		.uleb128 0x3a
+ 1378 00c0 0B       		.uleb128 0xb
+ 1379 00c1 3B       		.uleb128 0x3b
+ 1380 00c2 0B       		.uleb128 0xb
+ 1381 00c3 01       		.uleb128 0x1
+ 1382 00c4 13       		.uleb128 0x13
+ 1383 00c5 00       		.byte	0
+ 1384 00c6 00       		.byte	0
+ 1385 00c7 10       		.uleb128 0x10
+ 1386 00c8 0D       		.uleb128 0xd
+ 1387 00c9 00       		.byte	0
+ 1388 00ca 03       		.uleb128 0x3
+ 1389 00cb 0E       		.uleb128 0xe
+ 1390 00cc 3A       		.uleb128 0x3a
+ 1391 00cd 0B       		.uleb128 0xb
+ 1392 00ce 3B       		.uleb128 0x3b
+ 1393 00cf 0B       		.uleb128 0xb
+ 1394 00d0 49       		.uleb128 0x49
+ 1395 00d1 13       		.uleb128 0x13
+ 1396 00d2 38       		.uleb128 0x38
+ 1397 00d3 0A       		.uleb128 0xa
+ 1398 00d4 00       		.byte	0
+ 1399 00d5 00       		.byte	0
+ 1400 00d6 11       		.uleb128 0x11
+ 1401 00d7 2E       		.uleb128 0x2e
+ 1402 00d8 01       		.byte	0x1
+ 1403 00d9 3F       		.uleb128 0x3f
+ 1404 00da 0C       		.uleb128 0xc
+ 1405 00db 03       		.uleb128 0x3
+ 1406 00dc 0E       		.uleb128 0xe
+ 1407 00dd 3A       		.uleb128 0x3a
+ 1408 00de 0B       		.uleb128 0xb
+ 1409 00df 3B       		.uleb128 0x3b
+ 1410 00e0 05       		.uleb128 0x5
+ 1411 00e1 27       		.uleb128 0x27
+ 1412 00e2 0C       		.uleb128 0xc
+ 1413 00e3 01       		.uleb128 0x1
+ 1414 00e4 13       		.uleb128 0x13
+ 1415 00e5 00       		.byte	0
+ 1416 00e6 00       		.byte	0
+ 1417 00e7 12       		.uleb128 0x12
+ 1418 00e8 05       		.uleb128 0x5
+ 1419 00e9 00       		.byte	0
+ 1420 00ea 03       		.uleb128 0x3
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccaakqsZ.s 			page 36
+
+
+ 1421 00eb 0E       		.uleb128 0xe
+ 1422 00ec 3A       		.uleb128 0x3a
+ 1423 00ed 0B       		.uleb128 0xb
+ 1424 00ee 3B       		.uleb128 0x3b
+ 1425 00ef 05       		.uleb128 0x5
+ 1426 00f0 49       		.uleb128 0x49
+ 1427 00f1 13       		.uleb128 0x13
+ 1428 00f2 00       		.byte	0
+ 1429 00f3 00       		.byte	0
+ 1430 00f4 13       		.uleb128 0x13
+ 1431 00f5 2E       		.uleb128 0x2e
+ 1432 00f6 01       		.byte	0x1
+ 1433 00f7 3F       		.uleb128 0x3f
+ 1434 00f8 0C       		.uleb128 0xc
+ 1435 00f9 03       		.uleb128 0x3
+ 1436 00fa 0E       		.uleb128 0xe
+ 1437 00fb 3A       		.uleb128 0x3a
+ 1438 00fc 0B       		.uleb128 0xb
+ 1439 00fd 3B       		.uleb128 0x3b
+ 1440 00fe 05       		.uleb128 0x5
+ 1441 00ff 27       		.uleb128 0x27
+ 1442 0100 0C       		.uleb128 0xc
+ 1443 0101 49       		.uleb128 0x49
+ 1444 0102 13       		.uleb128 0x13
+ 1445 0103 01       		.uleb128 0x1
+ 1446 0104 13       		.uleb128 0x13
+ 1447 0105 00       		.byte	0
+ 1448 0106 00       		.byte	0
+ 1449 0107 14       		.uleb128 0x14
+ 1450 0108 34       		.uleb128 0x34
+ 1451 0109 00       		.byte	0
+ 1452 010a 03       		.uleb128 0x3
+ 1453 010b 0E       		.uleb128 0xe
+ 1454 010c 3A       		.uleb128 0x3a
+ 1455 010d 0B       		.uleb128 0xb
+ 1456 010e 3B       		.uleb128 0x3b
+ 1457 010f 05       		.uleb128 0x5
+ 1458 0110 49       		.uleb128 0x49
+ 1459 0111 13       		.uleb128 0x13
+ 1460 0112 00       		.byte	0
+ 1461 0113 00       		.byte	0
+ 1462 0114 15       		.uleb128 0x15
+ 1463 0115 2E       		.uleb128 0x2e
+ 1464 0116 01       		.byte	0x1
+ 1465 0117 3F       		.uleb128 0x3f
+ 1466 0118 0C       		.uleb128 0xc
+ 1467 0119 03       		.uleb128 0x3
+ 1468 011a 0E       		.uleb128 0xe
+ 1469 011b 3A       		.uleb128 0x3a
+ 1470 011c 0B       		.uleb128 0xb
+ 1471 011d 3B       		.uleb128 0x3b
+ 1472 011e 05       		.uleb128 0x5
+ 1473 011f 27       		.uleb128 0x27
+ 1474 0120 0C       		.uleb128 0xc
+ 1475 0121 11       		.uleb128 0x11
+ 1476 0122 01       		.uleb128 0x1
+ 1477 0123 12       		.uleb128 0x12
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccaakqsZ.s 			page 37
+
+
+ 1478 0124 01       		.uleb128 0x1
+ 1479 0125 40       		.uleb128 0x40
+ 1480 0126 0A       		.uleb128 0xa
+ 1481 0127 9742     		.uleb128 0x2117
+ 1482 0129 0C       		.uleb128 0xc
+ 1483 012a 01       		.uleb128 0x1
+ 1484 012b 13       		.uleb128 0x13
+ 1485 012c 00       		.byte	0
+ 1486 012d 00       		.byte	0
+ 1487 012e 16       		.uleb128 0x16
+ 1488 012f 05       		.uleb128 0x5
+ 1489 0130 00       		.byte	0
+ 1490 0131 03       		.uleb128 0x3
+ 1491 0132 0E       		.uleb128 0xe
+ 1492 0133 3A       		.uleb128 0x3a
+ 1493 0134 0B       		.uleb128 0xb
+ 1494 0135 3B       		.uleb128 0x3b
+ 1495 0136 05       		.uleb128 0x5
+ 1496 0137 49       		.uleb128 0x49
+ 1497 0138 13       		.uleb128 0x13
+ 1498 0139 02       		.uleb128 0x2
+ 1499 013a 0A       		.uleb128 0xa
+ 1500 013b 00       		.byte	0
+ 1501 013c 00       		.byte	0
+ 1502 013d 17       		.uleb128 0x17
+ 1503 013e 2E       		.uleb128 0x2e
+ 1504 013f 01       		.byte	0x1
+ 1505 0140 3F       		.uleb128 0x3f
+ 1506 0141 0C       		.uleb128 0xc
+ 1507 0142 03       		.uleb128 0x3
+ 1508 0143 0E       		.uleb128 0xe
+ 1509 0144 3A       		.uleb128 0x3a
+ 1510 0145 0B       		.uleb128 0xb
+ 1511 0146 3B       		.uleb128 0x3b
+ 1512 0147 05       		.uleb128 0x5
+ 1513 0148 27       		.uleb128 0x27
+ 1514 0149 0C       		.uleb128 0xc
+ 1515 014a 49       		.uleb128 0x49
+ 1516 014b 13       		.uleb128 0x13
+ 1517 014c 11       		.uleb128 0x11
+ 1518 014d 01       		.uleb128 0x1
+ 1519 014e 12       		.uleb128 0x12
+ 1520 014f 01       		.uleb128 0x1
+ 1521 0150 40       		.uleb128 0x40
+ 1522 0151 0A       		.uleb128 0xa
+ 1523 0152 9742     		.uleb128 0x2117
+ 1524 0154 0C       		.uleb128 0xc
+ 1525 0155 01       		.uleb128 0x1
+ 1526 0156 13       		.uleb128 0x13
+ 1527 0157 00       		.byte	0
+ 1528 0158 00       		.byte	0
+ 1529 0159 18       		.uleb128 0x18
+ 1530 015a 05       		.uleb128 0x5
+ 1531 015b 00       		.byte	0
+ 1532 015c 03       		.uleb128 0x3
+ 1533 015d 0E       		.uleb128 0xe
+ 1534 015e 3A       		.uleb128 0x3a
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccaakqsZ.s 			page 38
+
+
+ 1535 015f 0B       		.uleb128 0xb
+ 1536 0160 3B       		.uleb128 0x3b
+ 1537 0161 05       		.uleb128 0x5
+ 1538 0162 49       		.uleb128 0x49
+ 1539 0163 13       		.uleb128 0x13
+ 1540 0164 02       		.uleb128 0x2
+ 1541 0165 06       		.uleb128 0x6
+ 1542 0166 00       		.byte	0
+ 1543 0167 00       		.byte	0
+ 1544 0168 19       		.uleb128 0x19
+ 1545 0169 34       		.uleb128 0x34
+ 1546 016a 00       		.byte	0
+ 1547 016b 03       		.uleb128 0x3
+ 1548 016c 0E       		.uleb128 0xe
+ 1549 016d 3A       		.uleb128 0x3a
+ 1550 016e 0B       		.uleb128 0xb
+ 1551 016f 3B       		.uleb128 0x3b
+ 1552 0170 05       		.uleb128 0x5
+ 1553 0171 49       		.uleb128 0x49
+ 1554 0172 13       		.uleb128 0x13
+ 1555 0173 02       		.uleb128 0x2
+ 1556 0174 06       		.uleb128 0x6
+ 1557 0175 00       		.byte	0
+ 1558 0176 00       		.byte	0
+ 1559 0177 1A       		.uleb128 0x1a
+ 1560 0178 0F       		.uleb128 0xf
+ 1561 0179 00       		.byte	0
+ 1562 017a 0B       		.uleb128 0xb
+ 1563 017b 0B       		.uleb128 0xb
+ 1564 017c 49       		.uleb128 0x49
+ 1565 017d 13       		.uleb128 0x13
+ 1566 017e 00       		.byte	0
+ 1567 017f 00       		.byte	0
+ 1568 0180 1B       		.uleb128 0x1b
+ 1569 0181 2E       		.uleb128 0x2e
+ 1570 0182 01       		.byte	0x1
+ 1571 0183 3F       		.uleb128 0x3f
+ 1572 0184 0C       		.uleb128 0xc
+ 1573 0185 03       		.uleb128 0x3
+ 1574 0186 0E       		.uleb128 0xe
+ 1575 0187 3A       		.uleb128 0x3a
+ 1576 0188 0B       		.uleb128 0xb
+ 1577 0189 3B       		.uleb128 0x3b
+ 1578 018a 0B       		.uleb128 0xb
+ 1579 018b 27       		.uleb128 0x27
+ 1580 018c 0C       		.uleb128 0xc
+ 1581 018d 11       		.uleb128 0x11
+ 1582 018e 01       		.uleb128 0x1
+ 1583 018f 12       		.uleb128 0x12
+ 1584 0190 01       		.uleb128 0x1
+ 1585 0191 40       		.uleb128 0x40
+ 1586 0192 06       		.uleb128 0x6
+ 1587 0193 9742     		.uleb128 0x2117
+ 1588 0195 0C       		.uleb128 0xc
+ 1589 0196 01       		.uleb128 0x1
+ 1590 0197 13       		.uleb128 0x13
+ 1591 0198 00       		.byte	0
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccaakqsZ.s 			page 39
+
+
+ 1592 0199 00       		.byte	0
+ 1593 019a 1C       		.uleb128 0x1c
+ 1594 019b 05       		.uleb128 0x5
+ 1595 019c 00       		.byte	0
+ 1596 019d 03       		.uleb128 0x3
+ 1597 019e 0E       		.uleb128 0xe
+ 1598 019f 3A       		.uleb128 0x3a
+ 1599 01a0 0B       		.uleb128 0xb
+ 1600 01a1 3B       		.uleb128 0x3b
+ 1601 01a2 0B       		.uleb128 0xb
+ 1602 01a3 49       		.uleb128 0x49
+ 1603 01a4 13       		.uleb128 0x13
+ 1604 01a5 02       		.uleb128 0x2
+ 1605 01a6 0A       		.uleb128 0xa
+ 1606 01a7 00       		.byte	0
+ 1607 01a8 00       		.byte	0
+ 1608 01a9 1D       		.uleb128 0x1d
+ 1609 01aa 05       		.uleb128 0x5
+ 1610 01ab 00       		.byte	0
+ 1611 01ac 03       		.uleb128 0x3
+ 1612 01ad 0E       		.uleb128 0xe
+ 1613 01ae 3A       		.uleb128 0x3a
+ 1614 01af 0B       		.uleb128 0xb
+ 1615 01b0 3B       		.uleb128 0x3b
+ 1616 01b1 0B       		.uleb128 0xb
+ 1617 01b2 49       		.uleb128 0x49
+ 1618 01b3 13       		.uleb128 0x13
+ 1619 01b4 02       		.uleb128 0x2
+ 1620 01b5 06       		.uleb128 0x6
+ 1621 01b6 00       		.byte	0
+ 1622 01b7 00       		.byte	0
+ 1623 01b8 1E       		.uleb128 0x1e
+ 1624 01b9 34       		.uleb128 0x34
+ 1625 01ba 00       		.byte	0
+ 1626 01bb 03       		.uleb128 0x3
+ 1627 01bc 0E       		.uleb128 0xe
+ 1628 01bd 3A       		.uleb128 0x3a
+ 1629 01be 0B       		.uleb128 0xb
+ 1630 01bf 3B       		.uleb128 0x3b
+ 1631 01c0 0B       		.uleb128 0xb
+ 1632 01c1 49       		.uleb128 0x49
+ 1633 01c2 13       		.uleb128 0x13
+ 1634 01c3 02       		.uleb128 0x2
+ 1635 01c4 06       		.uleb128 0x6
+ 1636 01c5 00       		.byte	0
+ 1637 01c6 00       		.byte	0
+ 1638 01c7 1F       		.uleb128 0x1f
+ 1639 01c8 2E       		.uleb128 0x2e
+ 1640 01c9 01       		.byte	0x1
+ 1641 01ca 3F       		.uleb128 0x3f
+ 1642 01cb 0C       		.uleb128 0xc
+ 1643 01cc 03       		.uleb128 0x3
+ 1644 01cd 0E       		.uleb128 0xe
+ 1645 01ce 3A       		.uleb128 0x3a
+ 1646 01cf 0B       		.uleb128 0xb
+ 1647 01d0 3B       		.uleb128 0x3b
+ 1648 01d1 0B       		.uleb128 0xb
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccaakqsZ.s 			page 40
+
+
+ 1649 01d2 27       		.uleb128 0x27
+ 1650 01d3 0C       		.uleb128 0xc
+ 1651 01d4 11       		.uleb128 0x11
+ 1652 01d5 01       		.uleb128 0x1
+ 1653 01d6 12       		.uleb128 0x12
+ 1654 01d7 01       		.uleb128 0x1
+ 1655 01d8 40       		.uleb128 0x40
+ 1656 01d9 06       		.uleb128 0x6
+ 1657 01da 9742     		.uleb128 0x2117
+ 1658 01dc 0C       		.uleb128 0xc
+ 1659 01dd 00       		.byte	0
+ 1660 01de 00       		.byte	0
+ 1661 01df 00       		.byte	0
+ 1662              		.section	.debug_loc,"",%progbits
+ 1663              	.Ldebug_loc0:
+ 1664              	.LLST6:
+ 1665 0000 C4010000 		.4byte	.LVL16-.Ltext0
+ 1666 0004 D4010000 		.4byte	.LVL18-.Ltext0
+ 1667 0008 0100     		.2byte	0x1
+ 1668 000a 50       		.byte	0x50
+ 1669 000b D4010000 		.4byte	.LVL18-.Ltext0
+ 1670 000f E0010000 		.4byte	.LFE36-.Ltext0
+ 1671 0013 0400     		.2byte	0x4
+ 1672 0015 F3       		.byte	0xf3
+ 1673 0016 01       		.uleb128 0x1
+ 1674 0017 50       		.byte	0x50
+ 1675 0018 9F       		.byte	0x9f
+ 1676 0019 00000000 		.4byte	0
+ 1677 001d 00000000 		.4byte	0
+ 1678              	.LLST7:
+ 1679 0021 C4010000 		.4byte	.LVL16-.Ltext0
+ 1680 0025 CE010000 		.4byte	.LVL17-.Ltext0
+ 1681 0029 0200     		.2byte	0x2
+ 1682 002b 30       		.byte	0x30
+ 1683 002c 9F       		.byte	0x9f
+ 1684 002d CE010000 		.4byte	.LVL17-.Ltext0
+ 1685 0031 D4010000 		.4byte	.LVL18-.Ltext0
+ 1686 0035 0800     		.2byte	0x8
+ 1687 0037 73       		.byte	0x73
+ 1688 0038 00       		.sleb128 0
+ 1689 0039 70       		.byte	0x70
+ 1690 003a 00       		.sleb128 0
+ 1691 003b 1A       		.byte	0x1a
+ 1692 003c 30       		.byte	0x30
+ 1693 003d 2E       		.byte	0x2e
+ 1694 003e 9F       		.byte	0x9f
+ 1695 003f D4010000 		.4byte	.LVL18-.Ltext0
+ 1696 0043 E0010000 		.4byte	.LFE36-.Ltext0
+ 1697 0047 0900     		.2byte	0x9
+ 1698 0049 73       		.byte	0x73
+ 1699 004a 00       		.sleb128 0
+ 1700 004b F3       		.byte	0xf3
+ 1701 004c 01       		.uleb128 0x1
+ 1702 004d 50       		.byte	0x50
+ 1703 004e 1A       		.byte	0x1a
+ 1704 004f 30       		.byte	0x30
+ 1705 0050 2E       		.byte	0x2e
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccaakqsZ.s 			page 41
+
+
+ 1706 0051 9F       		.byte	0x9f
+ 1707 0052 00000000 		.4byte	0
+ 1708 0056 00000000 		.4byte	0
+ 1709              	.LLST8:
+ 1710 005a C4010000 		.4byte	.LVL16-.Ltext0
+ 1711 005e CE010000 		.4byte	.LVL17-.Ltext0
+ 1712 0062 0200     		.2byte	0x2
+ 1713 0064 30       		.byte	0x30
+ 1714 0065 9F       		.byte	0x9f
+ 1715 0066 CE010000 		.4byte	.LVL17-.Ltext0
+ 1716 006a E0010000 		.4byte	.LFE36-.Ltext0
+ 1717 006e 0100     		.2byte	0x1
+ 1718 0070 53       		.byte	0x53
+ 1719 0071 00000000 		.4byte	0
+ 1720 0075 00000000 		.4byte	0
+ 1721              	.LLST5:
+ 1722 0079 BC010000 		.4byte	.LVL14-.Ltext0
+ 1723 007d BE010000 		.4byte	.LVL15-.Ltext0
+ 1724 0081 0100     		.2byte	0x1
+ 1725 0083 50       		.byte	0x50
+ 1726 0084 BE010000 		.4byte	.LVL15-.Ltext0
+ 1727 0088 C2010000 		.4byte	.LFE35-.Ltext0
+ 1728 008c 0400     		.2byte	0x4
+ 1729 008e F3       		.byte	0xf3
+ 1730 008f 01       		.uleb128 0x1
+ 1731 0090 50       		.byte	0x50
+ 1732 0091 9F       		.byte	0x9f
+ 1733 0092 00000000 		.4byte	0
+ 1734 0096 00000000 		.4byte	0
+ 1735              	.LLST4:
+ 1736 009a A4010000 		.4byte	.LVL9-.Ltext0
+ 1737 009e AC010000 		.4byte	.LVL10-.Ltext0
+ 1738 00a2 0100     		.2byte	0x1
+ 1739 00a4 51       		.byte	0x51
+ 1740 00a5 AC010000 		.4byte	.LVL10-.Ltext0
+ 1741 00a9 B0010000 		.4byte	.LVL11-.Ltext0
+ 1742 00ad 0400     		.2byte	0x4
+ 1743 00af F3       		.byte	0xf3
+ 1744 00b0 01       		.uleb128 0x1
+ 1745 00b1 51       		.byte	0x51
+ 1746 00b2 9F       		.byte	0x9f
+ 1747 00b3 B0010000 		.4byte	.LVL11-.Ltext0
+ 1748 00b7 B2010000 		.4byte	.LVL12-.Ltext0
+ 1749 00bb 0100     		.2byte	0x1
+ 1750 00bd 51       		.byte	0x51
+ 1751 00be B2010000 		.4byte	.LVL12-.Ltext0
+ 1752 00c2 B6010000 		.4byte	.LFE33-.Ltext0
+ 1753 00c6 0400     		.2byte	0x4
+ 1754 00c8 F3       		.byte	0xf3
+ 1755 00c9 01       		.uleb128 0x1
+ 1756 00ca 51       		.byte	0x51
+ 1757 00cb 9F       		.byte	0x9f
+ 1758 00cc 00000000 		.4byte	0
+ 1759 00d0 00000000 		.4byte	0
+ 1760              	.LLST1:
+ 1761 00d4 30010000 		.4byte	.LFB30-.Ltext0
+ 1762 00d8 34010000 		.4byte	.LCFI9-.Ltext0
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccaakqsZ.s 			page 42
+
+
+ 1763 00dc 0200     		.2byte	0x2
+ 1764 00de 7D       		.byte	0x7d
+ 1765 00df 00       		.sleb128 0
+ 1766 00e0 34010000 		.4byte	.LCFI9-.Ltext0
+ 1767 00e4 6C010000 		.4byte	.LCFI10-.Ltext0
+ 1768 00e8 0200     		.2byte	0x2
+ 1769 00ea 7D       		.byte	0x7d
+ 1770 00eb 08       		.sleb128 8
+ 1771 00ec 6C010000 		.4byte	.LCFI10-.Ltext0
+ 1772 00f0 6E010000 		.4byte	.LFE30-.Ltext0
+ 1773 00f4 0200     		.2byte	0x2
+ 1774 00f6 7D       		.byte	0x7d
+ 1775 00f7 00       		.sleb128 0
+ 1776 00f8 00000000 		.4byte	0
+ 1777 00fc 00000000 		.4byte	0
+ 1778              	.LLST2:
+ 1779 0100 30010000 		.4byte	.LVL1-.Ltext0
+ 1780 0104 62010000 		.4byte	.LVL6-.Ltext0
+ 1781 0108 0100     		.2byte	0x1
+ 1782 010a 51       		.byte	0x51
+ 1783 010b 62010000 		.4byte	.LVL6-.Ltext0
+ 1784 010f 6E010000 		.4byte	.LFE30-.Ltext0
+ 1785 0113 0400     		.2byte	0x4
+ 1786 0115 F3       		.byte	0xf3
+ 1787 0116 01       		.uleb128 0x1
+ 1788 0117 51       		.byte	0x51
+ 1789 0118 9F       		.byte	0x9f
+ 1790 0119 00000000 		.4byte	0
+ 1791 011d 00000000 		.4byte	0
+ 1792              	.LLST3:
+ 1793 0121 30010000 		.4byte	.LVL1-.Ltext0
+ 1794 0125 4A010000 		.4byte	.LVL2-.Ltext0
+ 1795 0129 0200     		.2byte	0x2
+ 1796 012b 30       		.byte	0x30
+ 1797 012c 9F       		.byte	0x9f
+ 1798 012d 4A010000 		.4byte	.LVL2-.Ltext0
+ 1799 0131 54010000 		.4byte	.LVL3-.Ltext0
+ 1800 0135 0100     		.2byte	0x1
+ 1801 0137 52       		.byte	0x52
+ 1802 0138 5C010000 		.4byte	.LVL4-.Ltext0
+ 1803 013c 5E010000 		.4byte	.LVL5-.Ltext0
+ 1804 0140 0100     		.2byte	0x1
+ 1805 0142 52       		.byte	0x52
+ 1806 0143 5E010000 		.4byte	.LVL5-.Ltext0
+ 1807 0147 6E010000 		.4byte	.LFE30-.Ltext0
+ 1808 014b 0100     		.2byte	0x1
+ 1809 014d 53       		.byte	0x53
+ 1810 014e 00000000 		.4byte	0
+ 1811 0152 00000000 		.4byte	0
+ 1812              	.LLST0:
+ 1813 0156 00000000 		.4byte	.LFB29-.Ltext0
+ 1814 015a 02000000 		.4byte	.LCFI0-.Ltext0
+ 1815 015e 0200     		.2byte	0x2
+ 1816 0160 7D       		.byte	0x7d
+ 1817 0161 00       		.sleb128 0
+ 1818 0162 02000000 		.4byte	.LCFI0-.Ltext0
+ 1819 0166 76000000 		.4byte	.LCFI1-.Ltext0
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccaakqsZ.s 			page 43
+
+
+ 1820 016a 0200     		.2byte	0x2
+ 1821 016c 7D       		.byte	0x7d
+ 1822 016d 04       		.sleb128 4
+ 1823 016e 76000000 		.4byte	.LCFI1-.Ltext0
+ 1824 0172 78000000 		.4byte	.LCFI2-.Ltext0
+ 1825 0176 0200     		.2byte	0x2
+ 1826 0178 7D       		.byte	0x7d
+ 1827 0179 00       		.sleb128 0
+ 1828 017a 78000000 		.4byte	.LCFI2-.Ltext0
+ 1829 017e 7C000000 		.4byte	.LCFI3-.Ltext0
+ 1830 0182 0200     		.2byte	0x2
+ 1831 0184 7D       		.byte	0x7d
+ 1832 0185 04       		.sleb128 4
+ 1833 0186 7C000000 		.4byte	.LCFI3-.Ltext0
+ 1834 018a 86000000 		.4byte	.LCFI4-.Ltext0
+ 1835 018e 0200     		.2byte	0x2
+ 1836 0190 7D       		.byte	0x7d
+ 1837 0191 00       		.sleb128 0
+ 1838 0192 86000000 		.4byte	.LCFI4-.Ltext0
+ 1839 0196 96000000 		.4byte	.LCFI5-.Ltext0
+ 1840 019a 0200     		.2byte	0x2
+ 1841 019c 7D       		.byte	0x7d
+ 1842 019d 04       		.sleb128 4
+ 1843 019e 96000000 		.4byte	.LCFI5-.Ltext0
+ 1844 01a2 A0000000 		.4byte	.LCFI6-.Ltext0
+ 1845 01a6 0200     		.2byte	0x2
+ 1846 01a8 7D       		.byte	0x7d
+ 1847 01a9 00       		.sleb128 0
+ 1848 01aa A0000000 		.4byte	.LCFI6-.Ltext0
+ 1849 01ae A4000000 		.4byte	.LCFI7-.Ltext0
+ 1850 01b2 0200     		.2byte	0x2
+ 1851 01b4 7D       		.byte	0x7d
+ 1852 01b5 04       		.sleb128 4
+ 1853 01b6 A4000000 		.4byte	.LCFI7-.Ltext0
+ 1854 01ba AE000000 		.4byte	.LCFI8-.Ltext0
+ 1855 01be 0200     		.2byte	0x2
+ 1856 01c0 7D       		.byte	0x7d
+ 1857 01c1 00       		.sleb128 0
+ 1858 01c2 AE000000 		.4byte	.LCFI8-.Ltext0
+ 1859 01c6 30010000 		.4byte	.LFE29-.Ltext0
+ 1860 01ca 0200     		.2byte	0x2
+ 1861 01cc 7D       		.byte	0x7d
+ 1862 01cd 04       		.sleb128 4
+ 1863 01ce 00000000 		.4byte	0
+ 1864 01d2 00000000 		.4byte	0
+ 1865              		.section	.debug_aranges,"",%progbits
+ 1866 0000 1C000000 		.4byte	0x1c
+ 1867 0004 0200     		.2byte	0x2
+ 1868 0006 00000000 		.4byte	.Ldebug_info0
+ 1869 000a 04       		.byte	0x4
+ 1870 000b 00       		.byte	0
+ 1871 000c 0000     		.2byte	0
+ 1872 000e 0000     		.2byte	0
+ 1873 0010 00000000 		.4byte	.Ltext0
+ 1874 0014 FC010000 		.4byte	.Letext0-.Ltext0
+ 1875 0018 00000000 		.4byte	0
+ 1876 001c 00000000 		.4byte	0
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccaakqsZ.s 			page 44
+
+
+ 1877              		.section	.debug_line,"",%progbits
+ 1878              	.Ldebug_line0:
+ 1879 0000 0D020000 		.section	.debug_str,"MS",%progbits,1
+ 1879      02002E01 
+ 1879      00000201 
+ 1879      FB0E0D00 
+ 1879      01010101 
+ 1880              	.LASF52:
+ 1881 0000 444D415F 		.ascii	"DMA_Cmd\000"
+ 1881      436D6400 
+ 1882              	.LASF37:
+ 1883 0008 444D415F 		.ascii	"DMA_M2M\000"
+ 1883      4D324D00 
+ 1884              	.LASF36:
+ 1885 0010 444D415F 		.ascii	"DMA_Priority\000"
+ 1885      5072696F 
+ 1885      72697479 
+ 1885      00
+ 1886              	.LASF28:
+ 1887 001d 444D415F 		.ascii	"DMA_MemoryBaseAddr\000"
+ 1887      4D656D6F 
+ 1887      72794261 
+ 1887      73654164 
+ 1887      647200
+ 1888              	.LASF53:
+ 1889 0030 444D415F 		.ascii	"DMA_StructInit\000"
+ 1889      53747275 
+ 1889      6374496E 
+ 1889      697400
+ 1890              	.LASF6:
+ 1891 003f 5F5F7569 		.ascii	"__uint32_t\000"
+ 1891      6E743332 
+ 1891      5F7400
+ 1892              	.LASF5:
+ 1893 004a 5F5F7569 		.ascii	"__uint16_t\000"
+ 1893      6E743136 
+ 1893      5F7400
+ 1894              	.LASF2:
+ 1895 0055 73686F72 		.ascii	"short int\000"
+ 1895      7420696E 
+ 1895      7400
+ 1896              	.LASF26:
+ 1897 005f 444D415F 		.ascii	"DMA_TypeDef\000"
+ 1897      54797065 
+ 1897      44656600 
+ 1898              	.LASF29:
+ 1899 006b 444D415F 		.ascii	"DMA_DIR\000"
+ 1899      44495200 
+ 1900              	.LASF42:
+ 1901 0073 444D4179 		.ascii	"DMAy_FLAG\000"
+ 1901      5F464C41 
+ 1901      4700
+ 1902              	.LASF51:
+ 1903 007d 4E657753 		.ascii	"NewState\000"
+ 1903      74617465 
+ 1903      00
+ 1904              	.LASF27:
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccaakqsZ.s 			page 45
+
+
+ 1905 0086 444D415F 		.ascii	"DMA_PeripheralBaseAddr\000"
+ 1905      50657269 
+ 1905      70686572 
+ 1905      616C4261 
+ 1905      73654164 
+ 1906              	.LASF18:
+ 1907 009d 44495341 		.ascii	"DISABLE\000"
+ 1907      424C4500 
+ 1908              	.LASF0:
+ 1909 00a5 7369676E 		.ascii	"signed char\000"
+ 1909      65642063 
+ 1909      68617200 
+ 1910              	.LASF32:
+ 1911 00b1 444D415F 		.ascii	"DMA_MemoryInc\000"
+ 1911      4D656D6F 
+ 1911      7279496E 
+ 1911      6300
+ 1912              	.LASF8:
+ 1913 00bf 6C6F6E67 		.ascii	"long long int\000"
+ 1913      206C6F6E 
+ 1913      6720696E 
+ 1913      7400
+ 1914              	.LASF31:
+ 1915 00cd 444D415F 		.ascii	"DMA_PeripheralInc\000"
+ 1915      50657269 
+ 1915      70686572 
+ 1915      616C496E 
+ 1915      6300
+ 1916              	.LASF48:
+ 1917 00df 44617461 		.ascii	"DataNumber\000"
+ 1917      4E756D62 
+ 1917      657200
+ 1918              	.LASF17:
+ 1919 00ea 49545374 		.ascii	"ITStatus\000"
+ 1919      61747573 
+ 1919      00
+ 1920              	.LASF4:
+ 1921 00f3 6C6F6E67 		.ascii	"long int\000"
+ 1921      20696E74 
+ 1921      00
+ 1922              	.LASF55:
+ 1923 00fc 444D415F 		.ascii	"DMA_Init\000"
+ 1923      496E6974 
+ 1923      00
+ 1924              	.LASF46:
+ 1925 0105 444D415F 		.ascii	"DMA_ClearFlag\000"
+ 1925      436C6561 
+ 1925      72466C61 
+ 1925      6700
+ 1926              	.LASF47:
+ 1927 0113 444D415F 		.ascii	"DMA_SetCurrDataCounter\000"
+ 1927      53657443 
+ 1927      75727244 
+ 1927      61746143 
+ 1927      6F756E74 
+ 1928              	.LASF41:
+ 1929 012a 746D7072 		.ascii	"tmpreg\000"
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccaakqsZ.s 			page 46
+
+
+ 1929      656700
+ 1930              	.LASF22:
+ 1931 0131 43504152 		.ascii	"CPAR\000"
+ 1931      00
+ 1932              	.LASF33:
+ 1933 0136 444D415F 		.ascii	"DMA_PeripheralDataSize\000"
+ 1933      50657269 
+ 1933      70686572 
+ 1933      616C4461 
+ 1933      74615369 
+ 1934              	.LASF38:
+ 1935 014d 444D415F 		.ascii	"DMA_InitTypeDef\000"
+ 1935      496E6974 
+ 1935      54797065 
+ 1935      44656600 
+ 1936              	.LASF1:
+ 1937 015d 756E7369 		.ascii	"unsigned char\000"
+ 1937      676E6564 
+ 1937      20636861 
+ 1937      7200
+ 1938              	.LASF30:
+ 1939 016b 444D415F 		.ascii	"DMA_BufferSize\000"
+ 1939      42756666 
+ 1939      65725369 
+ 1939      7A6500
+ 1940              	.LASF9:
+ 1941 017a 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 1941      206C6F6E 
+ 1941      6720756E 
+ 1941      7369676E 
+ 1941      65642069 
+ 1942              	.LASF50:
+ 1943 0191 444D415F 		.ascii	"DMA_IT\000"
+ 1943      495400
+ 1944              	.LASF12:
+ 1945 0198 75696E74 		.ascii	"uint32_t\000"
+ 1945      33325F74 
+ 1945      00
+ 1946              	.LASF10:
+ 1947 01a1 756E7369 		.ascii	"unsigned int\000"
+ 1947      676E6564 
+ 1947      20696E74 
+ 1947      00
+ 1948              	.LASF60:
+ 1949 01ae 444D415F 		.ascii	"DMA_GetITStatus\000"
+ 1949      47657449 
+ 1949      54537461 
+ 1949      74757300 
+ 1950              	.LASF11:
+ 1951 01be 75696E74 		.ascii	"uint16_t\000"
+ 1951      31365F74 
+ 1951      00
+ 1952              	.LASF54:
+ 1953 01c7 444D415F 		.ascii	"DMA_InitStruct\000"
+ 1953      496E6974 
+ 1953      53747275 
+ 1953      637400
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccaakqsZ.s 			page 47
+
+
+ 1954              	.LASF3:
+ 1955 01d6 73686F72 		.ascii	"short unsigned int\000"
+ 1955      7420756E 
+ 1955      7369676E 
+ 1955      65642069 
+ 1955      6E7400
+ 1956              	.LASF24:
+ 1957 01e9 444D415F 		.ascii	"DMA_Channel_TypeDef\000"
+ 1957      4368616E 
+ 1957      6E656C5F 
+ 1957      54797065 
+ 1957      44656600 
+ 1958              	.LASF21:
+ 1959 01fd 434E4454 		.ascii	"CNDTR\000"
+ 1959      5200
+ 1960              	.LASF45:
+ 1961 0203 444D4179 		.ascii	"DMAy_Channelx\000"
+ 1961      5F436861 
+ 1961      6E6E656C 
+ 1961      7800
+ 1962              	.LASF57:
+ 1963 0211 2E2E2F2E 		.ascii	"../../source/src/FWlib/src/stm32f10x_dma.c\000"
+ 1963      2E2F736F 
+ 1963      75726365 
+ 1963      2F737263 
+ 1963      2F46576C 
+ 1964              	.LASF59:
+ 1965 023c 444D415F 		.ascii	"DMA_ClearITPendingBit\000"
+ 1965      436C6561 
+ 1965      72495450 
+ 1965      656E6469 
+ 1965      6E674269 
+ 1966              	.LASF14:
+ 1967 0252 53797374 		.ascii	"SystemCoreClock\000"
+ 1967      656D436F 
+ 1967      7265436C 
+ 1967      6F636B00 
+ 1968              	.LASF43:
+ 1969 0262 444D415F 		.ascii	"DMA_GetFlagStatus\000"
+ 1969      47657446 
+ 1969      6C616753 
+ 1969      74617475 
+ 1969      7300
+ 1970              	.LASF7:
+ 1971 0274 6C6F6E67 		.ascii	"long unsigned int\000"
+ 1971      20756E73 
+ 1971      69676E65 
+ 1971      6420696E 
+ 1971      7400
+ 1972              	.LASF58:
+ 1973 0286 473A5C55 		.ascii	"G:\\Users\\Jaxb\\Desktop\\KAKAOS-0.07  2019.2.21  f"
+ 1973      73657273 
+ 1973      5C4A6178 
+ 1973      625C4465 
+ 1973      736B746F 
+ 1974 02b5 6F722067 		.ascii	"or gcc\\Project\\RVMDK\243\250uv5\243\251\000"
+ 1974      63635C50 
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccaakqsZ.s 			page 48
+
+
+ 1974      726F6A65 
+ 1974      63745C52 
+ 1974      564D444B 
+ 1975              	.LASF20:
+ 1976 02d1 46756E63 		.ascii	"FunctionalState\000"
+ 1976      74696F6E 
+ 1976      616C5374 
+ 1976      61746500 
+ 1977              	.LASF23:
+ 1978 02e1 434D4152 		.ascii	"CMAR\000"
+ 1978      00
+ 1979              	.LASF61:
+ 1980 02e6 444D415F 		.ascii	"DMA_DeInit\000"
+ 1980      4465496E 
+ 1980      697400
+ 1981              	.LASF15:
+ 1982 02f1 52455345 		.ascii	"RESET\000"
+ 1982      5400
+ 1983              	.LASF39:
+ 1984 02f7 444D4179 		.ascii	"DMAy_IT\000"
+ 1984      5F495400 
+ 1985              	.LASF25:
+ 1986 02ff 49464352 		.ascii	"IFCR\000"
+ 1986      00
+ 1987              	.LASF35:
+ 1988 0304 444D415F 		.ascii	"DMA_Mode\000"
+ 1988      4D6F6465 
+ 1988      00
+ 1989              	.LASF56:
+ 1990 030d 474E5520 		.ascii	"GNU C11 7.3.1 20180622 (release) [ARM/embedded-7-br"
+ 1990      43313120 
+ 1990      372E332E 
+ 1990      31203230 
+ 1990      31383036 
+ 1991 0340 616E6368 		.ascii	"anch revision 261907] -mcpu=cortex-m3 -mthumb -mapc"
+ 1991      20726576 
+ 1991      6973696F 
+ 1991      6E203236 
+ 1991      31393037 
+ 1992 0373 732D6672 		.ascii	"s-frame -mthumb-interwork -mcpu=cortex-m3 -mthumb -"
+ 1992      616D6520 
+ 1992      2D6D7468 
+ 1992      756D622D 
+ 1992      696E7465 
+ 1993 03a6 67647761 		.ascii	"gdwarf-2 -O2\000"
+ 1993      72662D32 
+ 1993      202D4F32 
+ 1993      00
+ 1994              	.LASF44:
+ 1995 03b3 444D415F 		.ascii	"DMA_GetCurrDataCounter\000"
+ 1995      47657443 
+ 1995      75727244 
+ 1995      61746143 
+ 1995      6F756E74 
+ 1996              	.LASF49:
+ 1997 03ca 444D415F 		.ascii	"DMA_ITConfig\000"
+ 1997      4954436F 
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccaakqsZ.s 			page 49
+
+
+ 1997      6E666967 
+ 1997      00
+ 1998              	.LASF13:
+ 1999 03d7 49544D5F 		.ascii	"ITM_RxBuffer\000"
+ 1999      52784275 
+ 1999      66666572 
+ 1999      00
+ 2000              	.LASF40:
+ 2001 03e4 62697473 		.ascii	"bitstatus\000"
+ 2001      74617475 
+ 2001      7300
+ 2002              	.LASF16:
+ 2003 03ee 466C6167 		.ascii	"FlagStatus\000"
+ 2003      53746174 
+ 2003      757300
+ 2004              	.LASF19:
+ 2005 03f9 454E4142 		.ascii	"ENABLE\000"
+ 2005      4C4500
+ 2006              	.LASF34:
+ 2007 0400 444D415F 		.ascii	"DMA_MemoryDataSize\000"
+ 2007      4D656D6F 
+ 2007      72794461 
+ 2007      74615369 
+ 2007      7A6500
+ 2008              		.ident	"GCC: (GNU Tools for Arm Embedded Processors 7-2018-q2-update) 7.3.1 20180622 (release) [AR
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccaakqsZ.s 			page 50
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 stm32f10x_dma.c
+G:\Users\Jaxb\AppData\Local\Temp\ccaakqsZ.s:15     .text:00000000 $t
+G:\Users\Jaxb\AppData\Local\Temp\ccaakqsZ.s:23     .text:00000000 DMA_DeInit
+G:\Users\Jaxb\AppData\Local\Temp\ccaakqsZ.s:230    .text:000000f8 $d
+G:\Users\Jaxb\AppData\Local\Temp\ccaakqsZ.s:247    .text:00000130 $t
+G:\Users\Jaxb\AppData\Local\Temp\ccaakqsZ.s:255    .text:00000130 DMA_Init
+G:\Users\Jaxb\AppData\Local\Temp\ccaakqsZ.s:338    .text:00000170 DMA_StructInit
+G:\Users\Jaxb\AppData\Local\Temp\ccaakqsZ.s:373    .text:0000018c DMA_Cmd
+G:\Users\Jaxb\AppData\Local\Temp\ccaakqsZ.s:407    .text:000001a4 DMA_ITConfig
+G:\Users\Jaxb\AppData\Local\Temp\ccaakqsZ.s:443    .text:000001b8 DMA_SetCurrDataCounter
+G:\Users\Jaxb\AppData\Local\Temp\ccaakqsZ.s:466    .text:000001bc DMA_GetCurrDataCounter
+G:\Users\Jaxb\AppData\Local\Temp\ccaakqsZ.s:491    .text:000001c4 DMA_GetFlagStatus
+G:\Users\Jaxb\AppData\Local\Temp\ccaakqsZ.s:519    .text:000001d8 $d
+G:\Users\Jaxb\AppData\Local\Temp\ccaakqsZ.s:524    .text:000001e0 $t
+G:\Users\Jaxb\AppData\Local\Temp\ccaakqsZ.s:532    .text:000001e0 DMA_ClearFlag
+G:\Users\Jaxb\AppData\Local\Temp\ccaakqsZ.s:553    .text:000001ec $d
+G:\Users\Jaxb\AppData\Local\Temp\ccaakqsZ.s:558    .text:000001f4 $t
+G:\Users\Jaxb\AppData\Local\Temp\ccaakqsZ.s:566    .text:000001f4 DMA_GetITStatus
+G:\Users\Jaxb\AppData\Local\Temp\ccaakqsZ.s:584    .text:000001f8 DMA_ClearITPendingBit
+
+NO UNDEFINED SYMBOLS
