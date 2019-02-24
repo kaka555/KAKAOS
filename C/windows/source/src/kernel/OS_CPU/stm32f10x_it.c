@@ -24,11 +24,10 @@
   */
 
 /* Includes ------------------------------------------------------------------*/
-#include "stm32f10x_it.h"
+//#include "stm32f10x_it.h"
 #include "bsp_usart.h"
-#include "myMicroLIB.h"
-#include "myassert.h"
-#include "TCB.h"
+#include <myMicroLIB.h>
+#include <TCB.h>
 /** @addtogroup STM32F10x_StdPeriph_Template
   * @{
   */
@@ -232,12 +231,10 @@ void SysTick_Handler(void)
 {
 }
 
-#include "shell.h"
-#include "os_cpu.h"
-#include "myMicroLIB.h"
-//extern MACB MACB_test;
-// 串口中断服务函数
-// 把接收到的数据存在一个数组缓冲区里面，当接收到的的值等于0XFF时，把值返回
+#include <shell.h>
+#include <os_cpu.h>
+#include <myMicroLIB.h>
+
 void DEBUG_USART_IRQHandler(void)
 {	
 #if CONFIG_SHELL_EN
@@ -252,18 +249,16 @@ void DEBUG_USART_IRQHandler(void)
 #endif
 }
 
-/**
-  * @brief  This function handles PPP interrupt request.
-  * @param  None
-  * @retval None
-  */
-/*void PPP_IRQHandler(void)
+#include <module.h>
+void USART2_IRQHandler(void)
 {
-}*/
-
-/**
-  * @}
-  */ 
+  SYS_ENTER_INTERRUPT();
+  if(USART_GetITStatus(USART2,USART_IT_RXNE)!=RESET)
+  {
+    put_in_module_buffer(USART_ReceiveData(USART2));      
+  }
+  SYS_EXIT_INTERRUPT();
+}
 
 
 /******************* (C) COPYRIGHT 2011 STMicroelectronics *****END OF FILE****/

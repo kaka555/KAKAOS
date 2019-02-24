@@ -31,7 +31,7 @@ void dis_page_alloc_record(void)
 	}
 }
 
-static int add_page_alloc_record(unsigned int level,void *ptr)
+int add_page_alloc_record(unsigned int level,void *ptr)
 {
 	struct page_alloc_record *recoed_ptr = (struct page_alloc_record *)ka_malloc(sizeof(struct page_alloc_record));
 	if(NULL == recoed_ptr)
@@ -149,6 +149,33 @@ static void *_case_alloc_buddy(unsigned int level)
 					continue ;
 				}
 				slab_ptr->end_ptr = (void *)((unsigned int)slab_ptr + 8 * PAGE_SIZE_BYTE);
+				break;
+			case 5 :
+				slab_ptr = (struct slab *)alloc_power5_page();
+				if(NULL == slab_ptr)
+				{
+					buddy_ptr = (struct buddy *)get_next_buddy_ptr_head(buddy_ptr);
+					continue ;
+				}
+				slab_ptr->end_ptr = (void *)((unsigned int)slab_ptr + 16 * PAGE_SIZE_BYTE);
+				break;
+			case 6 :
+				slab_ptr = (struct slab *)alloc_power6_page();
+				if(NULL == slab_ptr)
+				{
+					buddy_ptr = (struct buddy *)get_next_buddy_ptr_head(buddy_ptr);
+					continue ;
+				}
+				slab_ptr->end_ptr = (void *)((unsigned int)slab_ptr + 32 * PAGE_SIZE_BYTE);
+				break;
+			case 7 :
+				slab_ptr = (struct slab *)alloc_power7_page();
+				if(NULL == slab_ptr)
+				{
+					buddy_ptr = (struct buddy *)get_next_buddy_ptr_head(buddy_ptr);
+					continue ;
+				}
+				slab_ptr->end_ptr = (void *)((unsigned int)slab_ptr + 64 * PAGE_SIZE_BYTE);
 				break;
 			default :
 				ka_printf("too big! FATAL ERROR!\n");

@@ -69,7 +69,11 @@ SECTIONS
     *(.glue_7)         /* glue arm to thumb code */
     *(.glue_7t)        /* glue thumb to arm code */
 
-    KEEP (*(.init))
+    _rt_module_symtab_begin = .;
+	KEEP(*(.RTMSymTab))
+	_rt_module_symtab_end = .;
+	
+	KEEP (*(.init))
     KEEP (*(.fini))
 
     . = ALIGN(4);

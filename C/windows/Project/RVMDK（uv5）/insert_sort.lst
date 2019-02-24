@@ -1,4 +1,4 @@
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwNPxjY.s 			page 1
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cciAeu2d.s 			page 1
 
 
    1              		.cpu cortex-m3
@@ -25,16 +25,16 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwNPxjY.s 			page 1
   22              		.type	IL_init, %function
   23              	IL_init:
   24              	.LFB10:
-  25              		.file 1 "../../source/src/user/OS_LIB/insert_sort.c"
-   1:../../source/src/user/OS_LIB/insert_sort.c **** #include <insert_sort.h>
-   2:../../source/src/user/OS_LIB/insert_sort.c **** #include <double_linked_list.h>
-   3:../../source/src/user/OS_LIB/insert_sort.c **** #include <myassert.h>
-   4:../../source/src/user/OS_LIB/insert_sort.c **** 
-   5:../../source/src/user/OS_LIB/insert_sort.c **** #define TIME_FIRST_SMALLER_THAN_SECOND(first,second) ((INT64)(first)-(INT64)(second)<0)
-   6:../../source/src/user/OS_LIB/insert_sort.c **** #define TIME_FIRST_NOT_BIGGER_THAN_SECOND(first,second) ((INT64)(second)-(INT64)(first)>=0)
-   7:../../source/src/user/OS_LIB/insert_sort.c **** 
-   8:../../source/src/user/OS_LIB/insert_sort.c **** inline void IL_init(IL *IL_ptr,COMPARE_TYPE prio)
-   9:../../source/src/user/OS_LIB/insert_sort.c **** {
+  25              		.file 1 "../../source/src/kernel/OS_LIB/insert_sort.c"
+   1:../../source/src/kernel/OS_LIB/insert_sort.c **** #include <insert_sort.h>
+   2:../../source/src/kernel/OS_LIB/insert_sort.c **** #include <double_linked_list.h>
+   3:../../source/src/kernel/OS_LIB/insert_sort.c **** #include <myassert.h>
+   4:../../source/src/kernel/OS_LIB/insert_sort.c **** 
+   5:../../source/src/kernel/OS_LIB/insert_sort.c **** #define TIME_FIRST_SMALLER_THAN_SECOND(first,second) ((INT64)(first)-(INT64)(second)<0)
+   6:../../source/src/kernel/OS_LIB/insert_sort.c **** #define TIME_FIRST_NOT_BIGGER_THAN_SECOND(first,second) ((INT64)(second)-(INT64)(first)>=0)
+   7:../../source/src/kernel/OS_LIB/insert_sort.c **** 
+   8:../../source/src/kernel/OS_LIB/insert_sort.c **** inline void IL_init(IL *IL_ptr,COMPARE_TYPE prio)
+   9:../../source/src/kernel/OS_LIB/insert_sort.c **** {
   26              		.loc 1 9 0
   27              		.cfi_startproc
   28              		@ args = 0, pretend = 0, frame = 0
@@ -58,7 +58,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwNPxjY.s 			page 1
   12:../../source/include/os_lib/double_linked_list.h **** #define LIST_HEAD(name) \
   13:../../source/include/os_lib/double_linked_list.h ****     struct list_head name = LIST_HEAD_INIT(name)
   14:../../source/include/os_lib/double_linked_list.h **** 
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwNPxjY.s 			page 2
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cciAeu2d.s 			page 2
 
 
   15:../../source/include/os_lib/double_linked_list.h **** 
@@ -71,11 +71,11 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwNPxjY.s 			page 1
   37              	.LVL1:
   38              	.LBE36:
   39              	.LBE35:
-  10:../../source/src/user/OS_LIB/insert_sort.c **** 	INIT_LIST_HEAD(&IL_ptr->insert);
-  11:../../source/src/user/OS_LIB/insert_sort.c **** 	IL_ptr->prio = prio;
+  10:../../source/src/kernel/OS_LIB/insert_sort.c **** 	INIT_LIST_HEAD(&IL_ptr->insert);
+  11:../../source/src/kernel/OS_LIB/insert_sort.c **** 	IL_ptr->prio = prio;
   40              		.loc 1 11 0
   41 0004 8160     		str	r1, [r0, #8]
-  12:../../source/src/user/OS_LIB/insert_sort.c **** }
+  12:../../source/src/kernel/OS_LIB/insert_sort.c **** }
   42              		.loc 1 12 0
   43 0006 7047     		bx	lr
   44              		.cfi_endproc
@@ -91,9 +91,9 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwNPxjY.s 			page 1
   54              		.type	get_next_IL, %function
   55              	get_next_IL:
   56              	.LFB11:
-  13:../../source/src/user/OS_LIB/insert_sort.c **** 
-  14:../../source/src/user/OS_LIB/insert_sort.c **** IL *get_next_IL(IL *IL_ptr,struct list_head *head_ptr)
-  15:../../source/src/user/OS_LIB/insert_sort.c **** {
+  13:../../source/src/kernel/OS_LIB/insert_sort.c **** 
+  14:../../source/src/kernel/OS_LIB/insert_sort.c **** IL *get_next_IL(IL *IL_ptr,struct list_head *head_ptr)
+  15:../../source/src/kernel/OS_LIB/insert_sort.c **** {
   57              		.loc 1 15 0
   58              		.cfi_startproc
   59              		@ args = 0, pretend = 0, frame = 0
@@ -108,26 +108,26 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwNPxjY.s 			page 1
   68              		.cfi_offset 14, -4
   69              		.loc 1 15 0
   70 000a 0D46     		mov	r5, r1
-  16:../../source/src/user/OS_LIB/insert_sort.c **** 	ASSERT(NULL != IL_ptr);
+  16:../../source/src/kernel/OS_LIB/insert_sort.c **** 	ASSERT(NULL != IL_ptr);
   71              		.loc 1 16 0
   72 000c 0446     		mov	r4, r0
   73 000e 20B1     		cbz	r0, .L7
   74              	.LVL3:
-  17:../../source/src/user/OS_LIB/insert_sort.c **** 	struct list_head *list_buffer;
-  18:../../source/src/user/OS_LIB/insert_sort.c **** 	list_buffer = &IL_ptr->insert;
-  19:../../source/src/user/OS_LIB/insert_sort.c **** 	list_buffer = list_buffer->next;
+  17:../../source/src/kernel/OS_LIB/insert_sort.c **** 	struct list_head *list_buffer;
+  18:../../source/src/kernel/OS_LIB/insert_sort.c **** 	list_buffer = &IL_ptr->insert;
+  19:../../source/src/kernel/OS_LIB/insert_sort.c **** 	list_buffer = list_buffer->next;
   75              		.loc 1 19 0
   76 0010 2068     		ldr	r0, [r4]
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwNPxjY.s 			page 3
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cciAeu2d.s 			page 3
 
 
   77              	.LVL4:
-  20:../../source/src/user/OS_LIB/insert_sort.c **** 	if(list_buffer == head_ptr)
-  21:../../source/src/user/OS_LIB/insert_sort.c **** 	{
-  22:../../source/src/user/OS_LIB/insert_sort.c **** 		return NULL;
-  23:../../source/src/user/OS_LIB/insert_sort.c **** 	}
-  24:../../source/src/user/OS_LIB/insert_sort.c **** 	return (list_entry(list_buffer,IL,insert));
-  25:../../source/src/user/OS_LIB/insert_sort.c **** }
+  20:../../source/src/kernel/OS_LIB/insert_sort.c **** 	if(list_buffer == head_ptr)
+  21:../../source/src/kernel/OS_LIB/insert_sort.c **** 	{
+  22:../../source/src/kernel/OS_LIB/insert_sort.c **** 		return NULL;
+  23:../../source/src/kernel/OS_LIB/insert_sort.c **** 	}
+  24:../../source/src/kernel/OS_LIB/insert_sort.c **** 	return (list_entry(list_buffer,IL,insert));
+  25:../../source/src/kernel/OS_LIB/insert_sort.c **** }
   78              		.loc 1 25 0
   79 0012 A842     		cmp	r0, r5
   80 0014 08BF     		it	eq
@@ -136,7 +136,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwNPxjY.s 			page 1
   83 0018 38BD     		pop	{r3, r4, r5, pc}
   84              	.LVL6:
   85              	.L7:
-  16:../../source/src/user/OS_LIB/insert_sort.c **** 	struct list_head *list_buffer;
+  16:../../source/src/kernel/OS_LIB/insert_sort.c **** 	struct list_head *list_buffer;
   86              		.loc 1 16 0 discriminator 1
   87 001a 1021     		movs	r1, #16
   88              	.LVL7:
@@ -144,7 +144,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwNPxjY.s 			page 1
   90              	.LVL8:
   91 001e FFF7FEFF 		bl	_ASSERT
   92              	.LVL9:
-  19:../../source/src/user/OS_LIB/insert_sort.c **** 	if(list_buffer == head_ptr)
+  19:../../source/src/kernel/OS_LIB/insert_sort.c **** 	if(list_buffer == head_ptr)
   93              		.loc 1 19 0 discriminator 1
   94 0022 2068     		ldr	r0, [r4]
   95              	.LVL10:
@@ -172,16 +172,16 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwNPxjY.s 			page 1
  117              		.type	insert_chain, %function
  118              	insert_chain:
  119              	.LFB12:
-  26:../../source/src/user/OS_LIB/insert_sort.c **** 
-  27:../../source/src/user/OS_LIB/insert_sort.c **** void 
-  28:../../source/src/user/OS_LIB/insert_sort.c **** insert_chain(
-  29:../../source/src/user/OS_LIB/insert_sort.c **** struct list_head *head,
-  30:../../source/src/user/OS_LIB/insert_sort.c **** IL *insert_node
-  31:../../source/src/user/OS_LIB/insert_sort.c **** )
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwNPxjY.s 			page 4
+  26:../../source/src/kernel/OS_LIB/insert_sort.c **** 
+  27:../../source/src/kernel/OS_LIB/insert_sort.c **** void 
+  28:../../source/src/kernel/OS_LIB/insert_sort.c **** insert_chain(
+  29:../../source/src/kernel/OS_LIB/insert_sort.c **** struct list_head *head,
+  30:../../source/src/kernel/OS_LIB/insert_sort.c **** IL *insert_node
+  31:../../source/src/kernel/OS_LIB/insert_sort.c **** )
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cciAeu2d.s 			page 4
 
 
-  32:../../source/src/user/OS_LIB/insert_sort.c **** {
+  32:../../source/src/kernel/OS_LIB/insert_sort.c **** {
  120              		.loc 1 32 0
  121              		.cfi_startproc
  122              		@ args = 0, pretend = 0, frame = 0
@@ -198,12 +198,12 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwNPxjY.s 			page 1
  133              		.cfi_offset 14, -4
  134              		.loc 1 32 0
  135 0032 0D46     		mov	r5, r1
-  33:../../source/src/user/OS_LIB/insert_sort.c **** 	struct list_head *pos,*next;
-  34:../../source/src/user/OS_LIB/insert_sort.c ****   ASSERT(NULL != head);
+  33:../../source/src/kernel/OS_LIB/insert_sort.c **** 	struct list_head *pos,*next;
+  34:../../source/src/kernel/OS_LIB/insert_sort.c ****   ASSERT(NULL != head);
  136              		.loc 1 34 0
  137 0034 0446     		mov	r4, r0
  138 0036 28B3     		cbz	r0, .L18
-  35:../../source/src/user/OS_LIB/insert_sort.c ****   ASSERT(NULL != insert_node);
+  35:../../source/src/kernel/OS_LIB/insert_sort.c ****   ASSERT(NULL != insert_node);
  139              		.loc 1 35 0
  140 0038 55B3     		cbz	r5, .L19
  141              	.LVL14:
@@ -238,7 +238,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwNPxjY.s 			page 1
   45:../../source/include/os_lib/double_linked_list.h **** 
   46:../../source/include/os_lib/double_linked_list.h **** static inline void __list_del(struct list_head * prev, struct list_head * next)
   47:../../source/include/os_lib/double_linked_list.h **** {
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwNPxjY.s 			page 5
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cciAeu2d.s 			page 5
 
 
   48:../../source/include/os_lib/double_linked_list.h ****     next->prev = prev;
@@ -283,22 +283,22 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwNPxjY.s 			page 1
  147              	.LVL15:
  148              	.LBE38:
  149              	.LBE37:
-  36:../../source/src/user/OS_LIB/insert_sort.c **** 
-  37:../../source/src/user/OS_LIB/insert_sort.c **** 	if(list_empty(head))
+  36:../../source/src/kernel/OS_LIB/insert_sort.c **** 
+  37:../../source/src/kernel/OS_LIB/insert_sort.c **** 	if(list_empty(head))
  150              		.loc 1 37 0
  151 003c 9C42     		cmp	r4, r3
  152 003e 1CD0     		beq	.L20
  153              	.LVL16:
  154 0040 AE68     		ldr	r6, [r5, #8]
-  38:../../source/src/user/OS_LIB/insert_sort.c **** 	{
-  39:../../source/src/user/OS_LIB/insert_sort.c **** 		list_add(&insert_node->insert,head);
-  40:../../source/src/user/OS_LIB/insert_sort.c **** 		return;
-  41:../../source/src/user/OS_LIB/insert_sort.c **** 	}
-  42:../../source/src/user/OS_LIB/insert_sort.c **** 	
-  43:../../source/src/user/OS_LIB/insert_sort.c ****   COMPARE_TYPE prio = insert_node->prio;
-  44:../../source/src/user/OS_LIB/insert_sort.c **** 	IL *IL_ptr;
-  45:../../source/src/user/OS_LIB/insert_sort.c **** 	list_for_each_safe(pos,next,head)
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwNPxjY.s 			page 6
+  38:../../source/src/kernel/OS_LIB/insert_sort.c **** 	{
+  39:../../source/src/kernel/OS_LIB/insert_sort.c **** 		list_add(&insert_node->insert,head);
+  40:../../source/src/kernel/OS_LIB/insert_sort.c **** 		return;
+  41:../../source/src/kernel/OS_LIB/insert_sort.c **** 	}
+  42:../../source/src/kernel/OS_LIB/insert_sort.c **** 	
+  43:../../source/src/kernel/OS_LIB/insert_sort.c ****   COMPARE_TYPE prio = insert_node->prio;
+  44:../../source/src/kernel/OS_LIB/insert_sort.c **** 	IL *IL_ptr;
+  45:../../source/src/kernel/OS_LIB/insert_sort.c **** 	list_for_each_safe(pos,next,head)
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cciAeu2d.s 			page 6
 
 
  155              		.loc 1 45 0
@@ -311,10 +311,10 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwNPxjY.s 			page 1
  162 0048 0A46     		mov	r2, r1
  163              	.LVL19:
  164              	.L16:
-  46:../../source/src/user/OS_LIB/insert_sort.c **** 	{
-  47:../../source/src/user/OS_LIB/insert_sort.c **** 		IL_ptr = list_entry(pos,IL,insert);
-  48:../../source/src/user/OS_LIB/insert_sort.c **** 		//if(prio < IL_ptr->prio)
-  49:../../source/src/user/OS_LIB/insert_sort.c **** 		if(TIME_FIRST_SMALLER_THAN_SECOND(prio,IL_ptr->prio))
+  46:../../source/src/kernel/OS_LIB/insert_sort.c **** 	{
+  47:../../source/src/kernel/OS_LIB/insert_sort.c **** 		IL_ptr = list_entry(pos,IL,insert);
+  48:../../source/src/kernel/OS_LIB/insert_sort.c **** 		//if(prio < IL_ptr->prio)
+  49:../../source/src/kernel/OS_LIB/insert_sort.c **** 		if(TIME_FIRST_SMALLER_THAN_SECOND(prio,IL_ptr->prio))
  165              		.loc 1 49 0
  166 004a 9968     		ldr	r1, [r3, #8]
  167 004c 701A     		subs	r0, r6, r1
@@ -322,7 +322,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwNPxjY.s 			page 1
  169 0052 0028     		cmp	r0, #0
  170 0054 71F10001 		sbcs	r1, r1, #0
  171 0058 09DB     		blt	.L21
-  45:../../source/src/user/OS_LIB/insert_sort.c **** 	{
+  45:../../source/src/kernel/OS_LIB/insert_sort.c **** 	{
  172              		.loc 1 45 0 discriminator 2
  173 005a 9442     		cmp	r4, r2
  174 005c 1168     		ldr	r1, [r2]
@@ -353,18 +353,18 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwNPxjY.s 			page 1
  195              	.LBE41:
  196              	.LBE40:
  197              	.LBE39:
-  50:../../source/src/user/OS_LIB/insert_sort.c **** 		{
-  51:../../source/src/user/OS_LIB/insert_sort.c **** 			list_add_tail(&insert_node->insert,pos);
-  52:../../source/src/user/OS_LIB/insert_sort.c **** 			return ;
-  53:../../source/src/user/OS_LIB/insert_sort.c **** 		}
-  54:../../source/src/user/OS_LIB/insert_sort.c **** 
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwNPxjY.s 			page 7
+  50:../../source/src/kernel/OS_LIB/insert_sort.c **** 		{
+  51:../../source/src/kernel/OS_LIB/insert_sort.c **** 			list_add_tail(&insert_node->insert,pos);
+  52:../../source/src/kernel/OS_LIB/insert_sort.c **** 			return ;
+  53:../../source/src/kernel/OS_LIB/insert_sort.c **** 		}
+  54:../../source/src/kernel/OS_LIB/insert_sort.c **** 
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cciAeu2d.s 			page 7
 
 
-  55:../../source/src/user/OS_LIB/insert_sort.c **** 	}
-  56:../../source/src/user/OS_LIB/insert_sort.c **** 	list_add_tail(&insert_node->insert,head);
-  57:../../source/src/user/OS_LIB/insert_sort.c **** 	return ;
-  58:../../source/src/user/OS_LIB/insert_sort.c **** }
+  55:../../source/src/kernel/OS_LIB/insert_sort.c **** 	}
+  56:../../source/src/kernel/OS_LIB/insert_sort.c **** 	list_add_tail(&insert_node->insert,head);
+  57:../../source/src/kernel/OS_LIB/insert_sort.c **** 	return ;
+  58:../../source/src/kernel/OS_LIB/insert_sort.c **** }
  198              		.loc 1 58 0
  199 006c F8BD     		pop	{r3, r4, r5, r6, r7, pc}
  200              	.LVL25:
@@ -415,10 +415,10 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwNPxjY.s 			page 1
  238 0082 F8BD     		pop	{r3, r4, r5, r6, r7, pc}
  239              	.LVL30:
  240              	.L18:
-  34:../../source/src/user/OS_LIB/insert_sort.c ****   ASSERT(NULL != insert_node);
+  34:../../source/src/kernel/OS_LIB/insert_sort.c ****   ASSERT(NULL != insert_node);
  241              		.loc 1 34 0 discriminator 1
  242 0084 2221     		movs	r1, #34
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwNPxjY.s 			page 8
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cciAeu2d.s 			page 8
 
 
  243              	.LVL31:
@@ -426,7 +426,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwNPxjY.s 			page 1
  245              	.LVL32:
  246 0088 FFF7FEFF 		bl	_ASSERT
  247              	.LVL33:
-  35:../../source/src/user/OS_LIB/insert_sort.c **** 
+  35:../../source/src/kernel/OS_LIB/insert_sort.c **** 
  248              		.loc 1 35 0 discriminator 1
  249 008c 002D     		cmp	r5, #0
  250 008e D4D1     		bne	.L12
@@ -453,22 +453,22 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwNPxjY.s 			page 1
  271              		.type	find_in_chain, %function
  272              	find_in_chain:
  273              	.LFB13:
-  59:../../source/src/user/OS_LIB/insert_sort.c **** 
-  60:../../source/src/user/OS_LIB/insert_sort.c **** IL *find_in_chain(struct list_head *head,COMPARE_TYPE prio) // polymorphic
-  61:../../source/src/user/OS_LIB/insert_sort.c **** {
+  59:../../source/src/kernel/OS_LIB/insert_sort.c **** 
+  60:../../source/src/kernel/OS_LIB/insert_sort.c **** IL *find_in_chain(struct list_head *head,COMPARE_TYPE prio) // polymorphic
+  61:../../source/src/kernel/OS_LIB/insert_sort.c **** {
  274              		.loc 1 61 0
  275              		.cfi_startproc
  276              		@ args = 0, pretend = 0, frame = 0
  277              		@ frame_needed = 0, uses_anonymous_args = 0
  278              		@ link register save eliminated.
  279              	.LVL35:
-  62:../../source/src/user/OS_LIB/insert_sort.c **** 	struct list_head *pos, *next;
-  63:../../source/src/user/OS_LIB/insert_sort.c **** 	IL *IL_ptr;
-  64:../../source/src/user/OS_LIB/insert_sort.c **** 	list_for_each_safe(pos, next, head)
+  62:../../source/src/kernel/OS_LIB/insert_sort.c **** 	struct list_head *pos, *next;
+  63:../../source/src/kernel/OS_LIB/insert_sort.c **** 	IL *IL_ptr;
+  64:../../source/src/kernel/OS_LIB/insert_sort.c **** 	list_for_each_safe(pos, next, head)
  280              		.loc 1 64 0
  281 00a0 0268     		ldr	r2, [r0]
  282              	.LVL36:
-  61:../../source/src/user/OS_LIB/insert_sort.c **** 	struct list_head *pos, *next;
+  61:../../source/src/kernel/OS_LIB/insert_sort.c **** 	struct list_head *pos, *next;
  283              		.loc 1 61 0
  284 00a2 10B4     		push	{r4}
  285              	.LCFI2:
@@ -478,14 +478,14 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwNPxjY.s 			page 1
  289 00a4 9042     		cmp	r0, r2
  290 00a6 1368     		ldr	r3, [r2]
  291              	.LVL37:
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwNPxjY.s 			page 9
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cciAeu2d.s 			page 9
 
 
  292 00a8 0AD0     		beq	.L28
  293              	.LVL38:
-  65:../../source/src/user/OS_LIB/insert_sort.c **** 	{
-  66:../../source/src/user/OS_LIB/insert_sort.c ****       IL_ptr = list_entry(pos,IL,insert);
-  67:../../source/src/user/OS_LIB/insert_sort.c ****       if(prio == IL_ptr->prio)
+  65:../../source/src/kernel/OS_LIB/insert_sort.c **** 	{
+  66:../../source/src/kernel/OS_LIB/insert_sort.c ****       IL_ptr = list_entry(pos,IL,insert);
+  67:../../source/src/kernel/OS_LIB/insert_sort.c ****       if(prio == IL_ptr->prio)
  294              		.loc 1 67 0
  295 00aa 9468     		ldr	r4, [r2, #8]
  296 00ac A142     		cmp	r1, r4
@@ -496,12 +496,12 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwNPxjY.s 			page 1
  301 00b2 9C68     		ldr	r4, [r3, #8]
  302 00b4 8C42     		cmp	r4, r1
  303 00b6 04D0     		beq	.L24
-  64:../../source/src/user/OS_LIB/insert_sort.c **** 	{
+  64:../../source/src/kernel/OS_LIB/insert_sort.c **** 	{
  304              		.loc 1 64 0
  305 00b8 1346     		mov	r3, r2
  306              	.LVL40:
  307              	.L26:
-  64:../../source/src/user/OS_LIB/insert_sort.c **** 	{
+  64:../../source/src/kernel/OS_LIB/insert_sort.c **** 	{
  308              		.loc 1 64 0 is_stmt 0 discriminator 2
  309 00ba 9842     		cmp	r0, r3
  310 00bc 1A68     		ldr	r2, [r3]
@@ -509,15 +509,15 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwNPxjY.s 			page 1
  312 00be F8D1     		bne	.L27
  313              	.LVL42:
  314              	.L28:
-  68:../../source/src/user/OS_LIB/insert_sort.c ****       {
-  69:../../source/src/user/OS_LIB/insert_sort.c ****       	return IL_ptr;
-  70:../../source/src/user/OS_LIB/insert_sort.c ****       }
-  71:../../source/src/user/OS_LIB/insert_sort.c **** 	}
-  72:../../source/src/user/OS_LIB/insert_sort.c **** 	return NULL;
+  68:../../source/src/kernel/OS_LIB/insert_sort.c ****       {
+  69:../../source/src/kernel/OS_LIB/insert_sort.c ****       	return IL_ptr;
+  70:../../source/src/kernel/OS_LIB/insert_sort.c ****       }
+  71:../../source/src/kernel/OS_LIB/insert_sort.c **** 	}
+  72:../../source/src/kernel/OS_LIB/insert_sort.c **** 	return NULL;
  315              		.loc 1 72 0 is_stmt 1
  316 00c0 0023     		movs	r3, #0
  317              	.L24:
-  73:../../source/src/user/OS_LIB/insert_sort.c **** }
+  73:../../source/src/kernel/OS_LIB/insert_sort.c **** }
  318              		.loc 1 73 0
  319 00c2 1846     		mov	r0, r3
  320              	.LVL43:
@@ -531,14 +531,14 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwNPxjY.s 			page 1
  328              	.L30:
  329              	.LCFI4:
  330              		.cfi_restore_state
-  67:../../source/src/user/OS_LIB/insert_sort.c ****       {
+  67:../../source/src/kernel/OS_LIB/insert_sort.c ****       {
  331              		.loc 1 67 0
  332 00c8 1346     		mov	r3, r2
  333              	.LVL45:
  334 00ca FAE7     		b	.L24
  335              		.cfi_endproc
  336              	.LFE13:
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwNPxjY.s 			page 10
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cciAeu2d.s 			page 10
 
 
  337              		.size	find_in_chain, .-find_in_chain
@@ -552,9 +552,9 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwNPxjY.s 			page 1
  345              		.type	delete_from_chain, %function
  346              	delete_from_chain:
  347              	.LFB14:
-  74:../../source/src/user/OS_LIB/insert_sort.c **** 
-  75:../../source/src/user/OS_LIB/insert_sort.c **** IL *delete_from_chain(struct list_head *head,COMPARE_TYPE prio)
-  76:../../source/src/user/OS_LIB/insert_sort.c **** {
+  74:../../source/src/kernel/OS_LIB/insert_sort.c **** 
+  75:../../source/src/kernel/OS_LIB/insert_sort.c **** IL *delete_from_chain(struct list_head *head,COMPARE_TYPE prio)
+  76:../../source/src/kernel/OS_LIB/insert_sort.c **** {
  348              		.loc 1 76 0
  349              		.cfi_startproc
  350              		@ args = 0, pretend = 0, frame = 0
@@ -565,9 +565,9 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwNPxjY.s 			page 1
  355              	.LCFI5:
  356              		.cfi_def_cfa_offset 4
  357              		.cfi_offset 4, -4
-  77:../../source/src/user/OS_LIB/insert_sort.c **** 	struct list_head *pos, *next;
-  78:../../source/src/user/OS_LIB/insert_sort.c **** 	IL *IL_ptr;
-  79:../../source/src/user/OS_LIB/insert_sort.c **** 	list_for_each_safe(pos, next, head)
+  77:../../source/src/kernel/OS_LIB/insert_sort.c **** 	struct list_head *pos, *next;
+  78:../../source/src/kernel/OS_LIB/insert_sort.c **** 	IL *IL_ptr;
+  79:../../source/src/kernel/OS_LIB/insert_sort.c **** 	list_for_each_safe(pos, next, head)
  358              		.loc 1 79 0
  359 00ce 0468     		ldr	r4, [r0]
  360              	.LVL47:
@@ -576,9 +576,9 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwNPxjY.s 			page 1
  363              	.LVL48:
  364 00d4 0AD0     		beq	.L36
  365              	.LVL49:
-  80:../../source/src/user/OS_LIB/insert_sort.c **** 	{
-  81:../../source/src/user/OS_LIB/insert_sort.c ****       IL_ptr = list_entry(pos,IL,insert);
-  82:../../source/src/user/OS_LIB/insert_sort.c ****       if(prio == IL_ptr->prio)
+  80:../../source/src/kernel/OS_LIB/insert_sort.c **** 	{
+  81:../../source/src/kernel/OS_LIB/insert_sort.c ****       IL_ptr = list_entry(pos,IL,insert);
+  82:../../source/src/kernel/OS_LIB/insert_sort.c ****       if(prio == IL_ptr->prio)
  366              		.loc 1 82 0
  367 00d6 A268     		ldr	r2, [r4, #8]
  368 00d8 9142     		cmp	r1, r2
@@ -589,31 +589,31 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwNPxjY.s 			page 1
  373 00de 9C68     		ldr	r4, [r3, #8]
  374 00e0 8C42     		cmp	r4, r1
  375 00e2 09D0     		beq	.L33
-  79:../../source/src/user/OS_LIB/insert_sort.c **** 	{
+  79:../../source/src/kernel/OS_LIB/insert_sort.c **** 	{
  376              		.loc 1 79 0
  377 00e4 1346     		mov	r3, r2
  378              	.LVL51:
  379              	.L34:
-  79:../../source/src/user/OS_LIB/insert_sort.c **** 	{
+  79:../../source/src/kernel/OS_LIB/insert_sort.c **** 	{
  380              		.loc 1 79 0 is_stmt 0 discriminator 2
  381 00e6 9842     		cmp	r0, r3
  382 00e8 1A68     		ldr	r2, [r3]
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwNPxjY.s 			page 11
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cciAeu2d.s 			page 11
 
 
  383              	.LVL52:
  384 00ea F8D1     		bne	.L35
  385              	.LVL53:
  386              	.L36:
-  83:../../source/src/user/OS_LIB/insert_sort.c ****       {
-  84:../../source/src/user/OS_LIB/insert_sort.c ****       	list_del(pos);
-  85:../../source/src/user/OS_LIB/insert_sort.c ****       	return IL_ptr;
-  86:../../source/src/user/OS_LIB/insert_sort.c ****       }
-  87:../../source/src/user/OS_LIB/insert_sort.c **** 	}
-  88:../../source/src/user/OS_LIB/insert_sort.c **** 	return NULL;
+  83:../../source/src/kernel/OS_LIB/insert_sort.c ****       {
+  84:../../source/src/kernel/OS_LIB/insert_sort.c ****       	list_del(pos);
+  85:../../source/src/kernel/OS_LIB/insert_sort.c ****       	return IL_ptr;
+  86:../../source/src/kernel/OS_LIB/insert_sort.c ****       }
+  87:../../source/src/kernel/OS_LIB/insert_sort.c **** 	}
+  88:../../source/src/kernel/OS_LIB/insert_sort.c **** 	return NULL;
  387              		.loc 1 88 0 is_stmt 1
  388 00ec 0023     		movs	r3, #0
-  89:../../source/src/user/OS_LIB/insert_sort.c **** }
+  89:../../source/src/kernel/OS_LIB/insert_sort.c **** }
  389              		.loc 1 89 0
  390 00ee 10BC     		pop	{r4}
  391              	.LCFI6:
@@ -627,7 +627,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwNPxjY.s 			page 1
  399              	.L39:
  400              	.LCFI7:
  401              		.cfi_restore_state
-  82:../../source/src/user/OS_LIB/insert_sort.c ****       {
+  82:../../source/src/kernel/OS_LIB/insert_sort.c ****       {
  402              		.loc 1 82 0
  403 00f4 1A46     		mov	r2, r3
  404 00f6 2346     		mov	r3, r4
@@ -658,7 +658,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwNPxjY.s 			page 1
  427              		.loc 1 89 0
  428 00fe 10BC     		pop	{r4}
  429              	.LCFI8:
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwNPxjY.s 			page 12
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cciAeu2d.s 			page 12
 
 
  430              		.cfi_restore 4
@@ -690,35 +690,35 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwNPxjY.s 			page 1
  455              		.type	delete_first_in_chain, %function
  456              	delete_first_in_chain:
  457              	.LFB15:
-  90:../../source/src/user/OS_LIB/insert_sort.c **** 
-  91:../../source/src/user/OS_LIB/insert_sort.c **** IL *delete_first_in_chain(struct list_head *head)
-  92:../../source/src/user/OS_LIB/insert_sort.c **** {
+  90:../../source/src/kernel/OS_LIB/insert_sort.c **** 
+  91:../../source/src/kernel/OS_LIB/insert_sort.c **** IL *delete_first_in_chain(struct list_head *head)
+  92:../../source/src/kernel/OS_LIB/insert_sort.c **** {
  458              		.loc 1 92 0
  459              		.cfi_startproc
  460              		@ args = 0, pretend = 0, frame = 0
  461              		@ frame_needed = 0, uses_anonymous_args = 0
  462              		@ link register save eliminated.
  463              	.LVL60:
-  93:../../source/src/user/OS_LIB/insert_sort.c **** 	struct list_head *pos;
-  94:../../source/src/user/OS_LIB/insert_sort.c **** 	IL *IL_ptr;
-  95:../../source/src/user/OS_LIB/insert_sort.c **** 	//ASSERT(!list_empty(head));
-  96:../../source/src/user/OS_LIB/insert_sort.c **** 	pos = head->next;
+  93:../../source/src/kernel/OS_LIB/insert_sort.c **** 	struct list_head *pos;
+  94:../../source/src/kernel/OS_LIB/insert_sort.c **** 	IL *IL_ptr;
+  95:../../source/src/kernel/OS_LIB/insert_sort.c **** 	//ASSERT(!list_empty(head));
+  96:../../source/src/kernel/OS_LIB/insert_sort.c **** 	pos = head->next;
  464              		.loc 1 96 0
  465 0104 0368     		ldr	r3, [r0]
  466              	.LVL61:
-  97:../../source/src/user/OS_LIB/insert_sort.c **** 	if(pos == head)
+  97:../../source/src/kernel/OS_LIB/insert_sort.c **** 	if(pos == head)
  467              		.loc 1 97 0
  468 0106 9842     		cmp	r0, r3
  469              	.LVL62:
-  98:../../source/src/user/OS_LIB/insert_sort.c **** 	{
-  99:../../source/src/user/OS_LIB/insert_sort.c **** 		return NULL;
+  98:../../source/src/kernel/OS_LIB/insert_sort.c **** 	{
+  99:../../source/src/kernel/OS_LIB/insert_sort.c **** 		return NULL;
  470              		.loc 1 99 0
  471 0108 0CBF     		ite	eq
  472 010a 0023     		moveq	r3, #0
  473              	.LVL63:
  474              	.LBB60:
  475              	.LBB61:
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwNPxjY.s 			page 13
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cciAeu2d.s 			page 13
 
 
   55:../../source/include/os_lib/double_linked_list.h **** }
@@ -727,12 +727,12 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwNPxjY.s 			page 1
  478              	.LVL64:
  479              	.LBE61:
  480              	.LBE60:
- 100:../../source/src/user/OS_LIB/insert_sort.c **** 	}
- 101:../../source/src/user/OS_LIB/insert_sort.c **** 		
- 102:../../source/src/user/OS_LIB/insert_sort.c **** 	IL_ptr = list_entry(pos,IL,insert);
- 103:../../source/src/user/OS_LIB/insert_sort.c **** 	list_del(pos);
- 104:../../source/src/user/OS_LIB/insert_sort.c **** 	return IL_ptr;
- 105:../../source/src/user/OS_LIB/insert_sort.c **** }
+ 100:../../source/src/kernel/OS_LIB/insert_sort.c **** 	}
+ 101:../../source/src/kernel/OS_LIB/insert_sort.c **** 		
+ 102:../../source/src/kernel/OS_LIB/insert_sort.c **** 	IL_ptr = list_entry(pos,IL,insert);
+ 103:../../source/src/kernel/OS_LIB/insert_sort.c **** 	list_del(pos);
+ 104:../../source/src/kernel/OS_LIB/insert_sort.c **** 	return IL_ptr;
+ 105:../../source/src/kernel/OS_LIB/insert_sort.c **** }
  481              		.loc 1 105 0
  482 0110 1846     		mov	r0, r3
  483              	.LVL65:
@@ -767,25 +767,25 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwNPxjY.s 			page 1
  510              		.type	find_first_bigger_IL, %function
  511              	find_first_bigger_IL:
  512              	.LFB16:
- 106:../../source/src/user/OS_LIB/insert_sort.c **** 
- 107:../../source/src/user/OS_LIB/insert_sort.c **** IL *find_first_bigger_IL(struct list_head *head,unsigned int prio)// polymorphic
- 108:../../source/src/user/OS_LIB/insert_sort.c **** {
+ 106:../../source/src/kernel/OS_LIB/insert_sort.c **** 
+ 107:../../source/src/kernel/OS_LIB/insert_sort.c **** IL *find_first_bigger_IL(struct list_head *head,unsigned int prio)// polymorphic
+ 108:../../source/src/kernel/OS_LIB/insert_sort.c **** {
  513              		.loc 1 108 0
  514              		.cfi_startproc
  515              		@ args = 0, pretend = 0, frame = 0
  516              		@ frame_needed = 0, uses_anonymous_args = 0
  517              		@ link register save eliminated.
  518              	.LVL67:
- 109:../../source/src/user/OS_LIB/insert_sort.c **** 	struct list_head *pos, *next;
- 110:../../source/src/user/OS_LIB/insert_sort.c **** 	IL *IL_ptr;
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwNPxjY.s 			page 14
+ 109:../../source/src/kernel/OS_LIB/insert_sort.c **** 	struct list_head *pos, *next;
+ 110:../../source/src/kernel/OS_LIB/insert_sort.c **** 	IL *IL_ptr;
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cciAeu2d.s 			page 14
 
 
- 111:../../source/src/user/OS_LIB/insert_sort.c **** 	list_for_each_safe(pos, next, head)
+ 111:../../source/src/kernel/OS_LIB/insert_sort.c **** 	list_for_each_safe(pos, next, head)
  519              		.loc 1 111 0
  520 011c 0268     		ldr	r2, [r0]
  521              	.LVL68:
- 108:../../source/src/user/OS_LIB/insert_sort.c **** 	struct list_head *pos, *next;
+ 108:../../source/src/kernel/OS_LIB/insert_sort.c **** 	struct list_head *pos, *next;
  522              		.loc 1 108 0
  523 011e 10B4     		push	{r4}
  524              	.LCFI9:
@@ -797,9 +797,9 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwNPxjY.s 			page 1
  530              	.LVL69:
  531 0124 0AD0     		beq	.L47
  532              	.LVL70:
- 112:../../source/src/user/OS_LIB/insert_sort.c **** 	{
- 113:../../source/src/user/OS_LIB/insert_sort.c ****       IL_ptr = list_entry(pos,IL,insert);
- 114:../../source/src/user/OS_LIB/insert_sort.c ****       if(prio <= IL_ptr->prio)
+ 112:../../source/src/kernel/OS_LIB/insert_sort.c **** 	{
+ 113:../../source/src/kernel/OS_LIB/insert_sort.c ****       IL_ptr = list_entry(pos,IL,insert);
+ 114:../../source/src/kernel/OS_LIB/insert_sort.c ****       if(prio <= IL_ptr->prio)
  533              		.loc 1 114 0
  534 0126 9468     		ldr	r4, [r2, #8]
  535 0128 A142     		cmp	r1, r4
@@ -810,12 +810,12 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwNPxjY.s 			page 1
  540 012e 9C68     		ldr	r4, [r3, #8]
  541 0130 8C42     		cmp	r4, r1
  542 0132 04D2     		bcs	.L43
- 111:../../source/src/user/OS_LIB/insert_sort.c **** 	{
+ 111:../../source/src/kernel/OS_LIB/insert_sort.c **** 	{
  543              		.loc 1 111 0
  544 0134 1346     		mov	r3, r2
  545              	.LVL72:
  546              	.L45:
- 111:../../source/src/user/OS_LIB/insert_sort.c **** 	{
+ 111:../../source/src/kernel/OS_LIB/insert_sort.c **** 	{
  547              		.loc 1 111 0 is_stmt 0 discriminator 2
  548 0136 9842     		cmp	r0, r3
  549 0138 1A68     		ldr	r2, [r3]
@@ -823,22 +823,22 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwNPxjY.s 			page 1
  551 013a F8D1     		bne	.L46
  552              	.LVL74:
  553              	.L47:
- 115:../../source/src/user/OS_LIB/insert_sort.c ****       {
- 116:../../source/src/user/OS_LIB/insert_sort.c ****       	return IL_ptr;
- 117:../../source/src/user/OS_LIB/insert_sort.c ****       }
- 118:../../source/src/user/OS_LIB/insert_sort.c **** 	}
- 119:../../source/src/user/OS_LIB/insert_sort.c **** 	return NULL;
+ 115:../../source/src/kernel/OS_LIB/insert_sort.c ****       {
+ 116:../../source/src/kernel/OS_LIB/insert_sort.c ****       	return IL_ptr;
+ 117:../../source/src/kernel/OS_LIB/insert_sort.c ****       }
+ 118:../../source/src/kernel/OS_LIB/insert_sort.c **** 	}
+ 119:../../source/src/kernel/OS_LIB/insert_sort.c **** 	return NULL;
  554              		.loc 1 119 0 is_stmt 1
  555 013c 0023     		movs	r3, #0
  556              	.L43:
- 120:../../source/src/user/OS_LIB/insert_sort.c **** }
+ 120:../../source/src/kernel/OS_LIB/insert_sort.c **** }
  557              		.loc 1 120 0
  558 013e 1846     		mov	r0, r3
  559              	.LVL75:
  560 0140 10BC     		pop	{r4}
  561              	.LCFI10:
  562              		.cfi_remember_state
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwNPxjY.s 			page 15
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cciAeu2d.s 			page 15
 
 
  563              		.cfi_restore 4
@@ -848,7 +848,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwNPxjY.s 			page 1
  567              	.L49:
  568              	.LCFI11:
  569              		.cfi_restore_state
- 114:../../source/src/user/OS_LIB/insert_sort.c ****       {
+ 114:../../source/src/kernel/OS_LIB/insert_sort.c ****       {
  570              		.loc 1 114 0
  571 0144 1346     		mov	r3, r2
  572              	.LVL77:
@@ -859,11 +859,11 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwNPxjY.s 			page 1
  577              		.section	.rodata.str1.4,"aMS",%progbits,1
  578              		.align	2
  579              	.LC0:
- 580 0000 2E2E2F2E 		.ascii	"../../source/src/user/OS_LIB/insert_sort.c\000"
+ 580 0000 2E2E2F2E 		.ascii	"../../source/src/kernel/OS_LIB/insert_sort.c\000"
  580      2E2F736F 
  580      75726365 
  580      2F737263 
- 580      2F757365 
+ 580      2F6B6572 
  581              		.text
  582              	.Letext0:
  583              		.file 3 "../../source/include/os_cpu/kakaosstdint.h"
@@ -876,29 +876,29 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwNPxjY.s 			page 1
  590 0006 00000000 		.4byte	.Ldebug_abbrev0
  591 000a 04       		.byte	0x4
  592 000b 01       		.uleb128 0x1
- 593 000c C2010000 		.4byte	.LASF38
+ 593 000c A0010000 		.4byte	.LASF38
  594 0010 0C       		.byte	0xc
- 595 0011 0A000000 		.4byte	.LASF39
- 596 0015 8A020000 		.4byte	.LASF40
+ 595 0011 8D020000 		.4byte	.LASF39
+ 596 0015 5F020000 		.4byte	.LASF40
  597 0019 00000000 		.4byte	.Ltext0
  598 001d 48010000 		.4byte	.Letext0
  599 0021 00000000 		.4byte	.Ldebug_line0
  600 0025 02       		.uleb128 0x2
  601 0026 01       		.byte	0x1
  602 0027 06       		.byte	0x6
- 603 0028 70020000 		.4byte	.LASF0
+ 603 0028 4E020000 		.4byte	.LASF0
  604 002c 02       		.uleb128 0x2
  605 002d 02       		.byte	0x2
  606 002e 05       		.byte	0x5
- 607 002f 91010000 		.4byte	.LASF1
+ 607 002f 6F010000 		.4byte	.LASF1
  608 0033 03       		.uleb128 0x3
  609 0034 04       		.byte	0x4
  610 0035 05       		.byte	0x5
  611 0036 696E7400 		.ascii	"int\000"
  612 003a 04       		.uleb128 0x4
- 613 003b 94000000 		.4byte	.LASF5
+ 613 003b 79000000 		.4byte	.LASF5
  614 003f 03       		.byte	0x3
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwNPxjY.s 			page 16
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cciAeu2d.s 			page 16
 
 
  615 0040 08       		.byte	0x8
@@ -906,41 +906,41 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwNPxjY.s 			page 1
  617 0045 02       		.uleb128 0x2
  618 0046 08       		.byte	0x8
  619 0047 05       		.byte	0x5
- 620 0048 6F010000 		.4byte	.LASF2
+ 620 0048 4D010000 		.4byte	.LASF2
  621 004c 02       		.uleb128 0x2
  622 004d 01       		.byte	0x1
  623 004e 08       		.byte	0x8
- 624 004f A6000000 		.4byte	.LASF3
+ 624 004f 8B000000 		.4byte	.LASF3
  625 0053 02       		.uleb128 0x2
  626 0054 02       		.byte	0x2
  627 0055 07       		.byte	0x7
- 628 0056 D2000000 		.4byte	.LASF4
+ 628 0056 B0000000 		.4byte	.LASF4
  629 005a 04       		.uleb128 0x4
- 630 005b 7D010000 		.4byte	.LASF6
+ 630 005b 5B010000 		.4byte	.LASF6
  631 005f 03       		.byte	0x3
  632 0060 0C       		.byte	0xc
  633 0061 65000000 		.4byte	0x65
  634 0065 02       		.uleb128 0x2
  635 0066 04       		.byte	0x4
  636 0067 07       		.byte	0x7
- 637 0068 0B010000 		.4byte	.LASF7
+ 637 0068 E9000000 		.4byte	.LASF7
  638 006c 02       		.uleb128 0x2
  639 006d 08       		.byte	0x8
  640 006e 07       		.byte	0x7
- 641 006f 2A010000 		.4byte	.LASF8
+ 641 006f 08010000 		.4byte	.LASF8
  642 0073 04       		.uleb128 0x4
- 643 0074 E5000000 		.4byte	.LASF9
+ 643 0074 0A000000 		.4byte	.LASF9
  644 0078 03       		.byte	0x3
  645 0079 23       		.byte	0x23
  646 007a 65000000 		.4byte	0x65
  647 007e 05       		.uleb128 0x5
- 648 007f 65010000 		.4byte	.LASF13
+ 648 007f 43010000 		.4byte	.LASF13
  649 0083 08       		.byte	0x8
  650 0084 02       		.byte	0x2
  651 0085 04       		.byte	0x4
  652 0086 A7000000 		.4byte	0xa7
  653 008a 06       		.uleb128 0x6
- 654 008b 35000000 		.4byte	.LASF10
+ 654 008b 11000000 		.4byte	.LASF10
  655 008f 02       		.byte	0x2
  656 0090 05       		.byte	0x5
  657 0091 AC000000 		.4byte	0xac
@@ -948,7 +948,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwNPxjY.s 			page 1
  659 0096 23       		.byte	0x23
  660 0097 00       		.uleb128 0
  661 0098 06       		.uleb128 0x6
- 662 0099 7C020000 		.4byte	.LASF11
+ 662 0099 5A020000 		.4byte	.LASF11
  663 009d 02       		.byte	0x2
  664 009e 05       		.byte	0x5
  665 009f AC000000 		.4byte	0xac
@@ -958,25 +958,25 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwNPxjY.s 			page 1
  669 00a6 00       		.byte	0
  670 00a7 07       		.uleb128 0x7
  671 00a8 7E000000 		.4byte	0x7e
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwNPxjY.s 			page 17
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cciAeu2d.s 			page 17
 
 
  672 00ac 08       		.uleb128 0x8
  673 00ad 04       		.byte	0x4
  674 00ae 7E000000 		.4byte	0x7e
  675 00b2 04       		.uleb128 0x4
- 676 00b3 87000000 		.4byte	.LASF12
+ 676 00b3 6C000000 		.4byte	.LASF12
  677 00b7 04       		.byte	0x4
  678 00b8 07       		.byte	0x7
  679 00b9 5A000000 		.4byte	0x5a
  680 00bd 05       		.uleb128 0x5
- 681 00be 9B010000 		.4byte	.LASF14
+ 681 00be 79010000 		.4byte	.LASF14
  682 00c2 0C       		.byte	0xc
  683 00c3 04       		.byte	0x4
  684 00c4 09       		.byte	0x9
  685 00c5 E6000000 		.4byte	0xe6
  686 00c9 06       		.uleb128 0x6
- 687 00ca 41010000 		.4byte	.LASF15
+ 687 00ca 1F010000 		.4byte	.LASF15
  688 00ce 04       		.byte	0x4
  689 00cf 0A       		.byte	0xa
  690 00d0 7E000000 		.4byte	0x7e
@@ -999,7 +999,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwNPxjY.s 			page 1
  707 00ec BD000000 		.4byte	0xbd
  708 00f0 0A       		.uleb128 0xa
  709 00f1 01       		.byte	0x1
- 710 00f2 50010000 		.4byte	.LASF19
+ 710 00f2 2E010000 		.4byte	.LASF19
  711 00f6 01       		.byte	0x1
  712 00f7 6B       		.byte	0x6b
  713 00f8 01       		.byte	0x1
@@ -1010,7 +1010,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwNPxjY.s 			page 1
  718 0109 01       		.byte	0x1
  719 010a 65010000 		.4byte	0x165
  720 010e 0B       		.uleb128 0xb
- 721 010f 06010000 		.4byte	.LASF17
+ 721 010f E4000000 		.4byte	.LASF17
  722 0113 01       		.byte	0x1
  723 0114 6B       		.byte	0x6b
  724 0115 AC000000 		.4byte	0xac
@@ -1018,7 +1018,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwNPxjY.s 			page 1
  726 011d 0C       		.uleb128 0xc
  727 011e 05000000 		.4byte	.LASF16
  728 0122 01       		.byte	0x1
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwNPxjY.s 			page 18
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cciAeu2d.s 			page 18
 
 
  729 0123 6B       		.byte	0x6b
@@ -1032,20 +1032,20 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwNPxjY.s 			page 1
  737 0131 AC000000 		.4byte	0xac
  738 0135 64000000 		.4byte	.LLST50
  739 0139 0E       		.uleb128 0xe
- 740 013a 35000000 		.4byte	.LASF10
+ 740 013a 11000000 		.4byte	.LASF10
  741 013e 01       		.byte	0x1
  742 013f 6D       		.byte	0x6d
  743 0140 AC000000 		.4byte	0xac
  744 0144 8D000000 		.4byte	.LLST51
  745 0148 0E       		.uleb128 0xe
- 746 0149 B2010000 		.4byte	.LASF18
+ 746 0149 90010000 		.4byte	.LASF18
  747 014d 01       		.byte	0x1
  748 014e 6E       		.byte	0x6e
  749 014f 65010000 		.4byte	0x165
  750 0153 D8000000 		.4byte	.LLST52
  751 0157 0F       		.uleb128 0xf
  752 0158 10       		.uleb128 0x10
- 753 0159 CB000000 		.4byte	.LASF21
+ 753 0159 C3000000 		.4byte	.LASF21
  754 015d 01       		.byte	0x1
  755 015e 71       		.byte	0x71
  756 015f 6B010000 		.4byte	0x16b
@@ -1059,7 +1059,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwNPxjY.s 			page 1
  764 016d A7000000 		.4byte	0xa7
  765 0171 11       		.uleb128 0x11
  766 0172 01       		.byte	0x1
- 767 0173 51000000 		.4byte	.LASF20
+ 767 0173 36000000 		.4byte	.LASF20
  768 0177 01       		.byte	0x1
  769 0178 5B       		.byte	0x5b
  770 0179 01       		.byte	0x1
@@ -1072,13 +1072,13 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwNPxjY.s 			page 1
  777 0189 01       		.byte	0x1
  778 018a 08020000 		.4byte	0x208
  779 018e 0B       		.uleb128 0xb
- 780 018f 06010000 		.4byte	.LASF17
+ 780 018f E4000000 		.4byte	.LASF17
  781 0193 01       		.byte	0x1
  782 0194 5B       		.byte	0x5b
  783 0195 AC000000 		.4byte	0xac
  784 0199 02010000 		.4byte	.LLST42
  785 019d 0D       		.uleb128 0xd
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwNPxjY.s 			page 19
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cciAeu2d.s 			page 19
 
 
  786 019e 706F7300 		.ascii	"pos\000"
@@ -1087,7 +1087,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwNPxjY.s 			page 1
  789 01a4 AC000000 		.4byte	0xac
  790 01a8 23010000 		.4byte	.LLST43
  791 01ac 0E       		.uleb128 0xe
- 792 01ad B2010000 		.4byte	.LASF18
+ 792 01ad 90010000 		.4byte	.LASF18
  793 01b1 01       		.byte	0x1
  794 01b2 5E       		.byte	0x5e
  795 01b3 65010000 		.4byte	0x165
@@ -1095,7 +1095,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwNPxjY.s 			page 1
  797 01bb 12       		.uleb128 0x12
  798 01bc CC010000 		.4byte	0x1cc
  799 01c0 10       		.uleb128 0x10
- 800 01c1 CB000000 		.4byte	.LASF21
+ 800 01c1 C3000000 		.4byte	.LASF21
  801 01c5 01       		.byte	0x1
  802 01c6 66       		.byte	0x66
  803 01c7 6B010000 		.4byte	0x16b
@@ -1126,7 +1126,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwNPxjY.s 			page 1
  828 0207 00       		.byte	0
  829 0208 0A       		.uleb128 0xa
  830 0209 01       		.byte	0x1
- 831 020a 18010000 		.4byte	.LASF22
+ 831 020a F6000000 		.4byte	.LASF22
  832 020e 01       		.byte	0x1
  833 020f 4B       		.byte	0x4b
  834 0210 01       		.byte	0x1
@@ -1137,8 +1137,8 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwNPxjY.s 			page 1
  839 0221 01       		.byte	0x1
  840 0222 BE020000 		.4byte	0x2be
  841 0226 0B       		.uleb128 0xb
- 842 0227 06010000 		.4byte	.LASF17
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwNPxjY.s 			page 20
+ 842 0227 E4000000 		.4byte	.LASF17
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cciAeu2d.s 			page 20
 
 
  843 022b 01       		.byte	0x1
@@ -1158,13 +1158,13 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwNPxjY.s 			page 1
  857 024b AC000000 		.4byte	0xac
  858 024f 6C020000 		.4byte	.LLST36
  859 0253 0E       		.uleb128 0xe
- 860 0254 35000000 		.4byte	.LASF10
+ 860 0254 11000000 		.4byte	.LASF10
  861 0258 01       		.byte	0x1
  862 0259 4D       		.byte	0x4d
  863 025a AC000000 		.4byte	0xac
  864 025e 97020000 		.4byte	.LLST37
  865 0262 0E       		.uleb128 0xe
- 866 0263 B2010000 		.4byte	.LASF18
+ 866 0263 90010000 		.4byte	.LASF18
  867 0267 01       		.byte	0x1
  868 0268 4E       		.byte	0x4e
  869 0269 65010000 		.4byte	0x165
@@ -1172,7 +1172,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwNPxjY.s 			page 1
  871 0271 12       		.uleb128 0x12
  872 0272 82020000 		.4byte	0x282
  873 0276 10       		.uleb128 0x10
- 874 0277 CB000000 		.4byte	.LASF21
+ 874 0277 C3000000 		.4byte	.LASF21
  875 027b 01       		.byte	0x1
  876 027c 51       		.byte	0x51
  877 027d 6B010000 		.4byte	0x16b
@@ -1198,7 +1198,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwNPxjY.s 			page 1
  897 02b2 14       		.uleb128 0x14
  898 02b3 04060000 		.4byte	0x604
  899 02b7 35030000 		.4byte	.LLST41
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwNPxjY.s 			page 21
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cciAeu2d.s 			page 21
 
 
  900 02bb 00       		.byte	0
@@ -1206,7 +1206,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwNPxjY.s 			page 1
  902 02bd 00       		.byte	0
  903 02be 0A       		.uleb128 0xa
  904 02bf 01       		.byte	0x1
- 905 02c0 79000000 		.4byte	.LASF23
+ 905 02c0 5E000000 		.4byte	.LASF23
  906 02c4 01       		.byte	0x1
  907 02c5 3C       		.byte	0x3c
  908 02c6 01       		.byte	0x1
@@ -1217,7 +1217,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwNPxjY.s 			page 1
  913 02d7 01       		.byte	0x1
  914 02d8 33030000 		.4byte	0x333
  915 02dc 0B       		.uleb128 0xb
- 916 02dd 06010000 		.4byte	.LASF17
+ 916 02dd E4000000 		.4byte	.LASF17
  917 02e1 01       		.byte	0x1
  918 02e2 3C       		.byte	0x3c
  919 02e3 AC000000 		.4byte	0xac
@@ -1236,20 +1236,20 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwNPxjY.s 			page 1
  932 02ff AC000000 		.4byte	0xac
  933 0303 AC030000 		.4byte	.LLST30
  934 0307 0E       		.uleb128 0xe
- 935 0308 35000000 		.4byte	.LASF10
+ 935 0308 11000000 		.4byte	.LASF10
  936 030c 01       		.byte	0x1
  937 030d 3E       		.byte	0x3e
  938 030e AC000000 		.4byte	0xac
  939 0312 D5030000 		.4byte	.LLST31
  940 0316 0E       		.uleb128 0xe
- 941 0317 B2010000 		.4byte	.LASF18
+ 941 0317 90010000 		.4byte	.LASF18
  942 031b 01       		.byte	0x1
  943 031c 3F       		.byte	0x3f
  944 031d 65010000 		.4byte	0x165
  945 0321 20040000 		.4byte	.LLST32
  946 0325 0F       		.uleb128 0xf
  947 0326 10       		.uleb128 0x10
- 948 0327 CB000000 		.4byte	.LASF21
+ 948 0327 C3000000 		.4byte	.LASF21
  949 032b 01       		.byte	0x1
  950 032c 42       		.byte	0x42
  951 032d 6B010000 		.4byte	0x16b
@@ -1257,8 +1257,8 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwNPxjY.s 			page 1
  953 0332 00       		.byte	0
  954 0333 16       		.uleb128 0x16
  955 0334 01       		.byte	0x1
- 956 0335 84010000 		.4byte	.LASF28
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwNPxjY.s 			page 22
+ 956 0335 62010000 		.4byte	.LASF28
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cciAeu2d.s 			page 22
 
 
  957 0339 01       		.byte	0x1
@@ -1270,13 +1270,13 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwNPxjY.s 			page 1
  963 0348 01       		.byte	0x1
  964 0349 FF040000 		.4byte	0x4ff
  965 034d 0B       		.uleb128 0xb
- 966 034e 06010000 		.4byte	.LASF17
+ 966 034e E4000000 		.4byte	.LASF17
  967 0352 01       		.byte	0x1
  968 0353 1D       		.byte	0x1d
  969 0354 AC000000 		.4byte	0xac
  970 0358 6A040000 		.4byte	.LLST6
  971 035c 0B       		.uleb128 0xb
- 972 035d 9A000000 		.4byte	.LASF24
+ 972 035d 7F000000 		.4byte	.LASF24
  973 0361 01       		.byte	0x1
  974 0362 1E       		.byte	0x1e
  975 0363 65010000 		.4byte	0x165
@@ -1288,7 +1288,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwNPxjY.s 			page 1
  981 0372 AC000000 		.4byte	0xac
  982 0376 D2040000 		.4byte	.LLST8
  983 037a 0E       		.uleb128 0xe
- 984 037b 35000000 		.4byte	.LASF10
+ 984 037b 11000000 		.4byte	.LASF10
  985 037f 01       		.byte	0x1
  986 0380 21       		.byte	0x21
  987 0381 AC000000 		.4byte	0xac
@@ -1300,7 +1300,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwNPxjY.s 			page 1
  993 0390 B2000000 		.4byte	0xb2
  994 0394 2F050000 		.4byte	.LLST10
  995 0398 0E       		.uleb128 0xe
- 996 0399 B2010000 		.4byte	.LASF18
+ 996 0399 90010000 		.4byte	.LASF18
  997 039d 01       		.byte	0x1
  998 039e 2C       		.byte	0x2c
  999 039f 65010000 		.4byte	0x165
@@ -1308,7 +1308,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwNPxjY.s 			page 1
  1001 03a7 12       		.uleb128 0x12
  1002 03a8 B8030000 		.4byte	0x3b8
  1003 03ac 10       		.uleb128 0x10
- 1004 03ad CB000000 		.4byte	.LASF21
+ 1004 03ad C3000000 		.4byte	.LASF21
  1005 03b1 01       		.byte	0x1
  1006 03b2 2F       		.byte	0x2f
  1007 03b3 6B010000 		.4byte	0x16b
@@ -1318,7 +1318,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwNPxjY.s 			page 1
  1011 03bd 3A000000 		.4byte	.LBB37
  1012 03c1 3C000000 		.4byte	.LBE37
  1013 03c5 01       		.byte	0x1
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwNPxjY.s 			page 23
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cciAeu2d.s 			page 23
 
 
  1014 03c6 25       		.byte	0x25
@@ -1378,7 +1378,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwNPxjY.s 			page 1
  1068 0459 2A       		.byte	0x2a
  1069 045a 14       		.uleb128 0x14
  1070 045b 86060000 		.4byte	0x686
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwNPxjY.s 			page 24
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cciAeu2d.s 			page 24
 
 
  1071 045f 04060000 		.4byte	.LLST20
@@ -1438,7 +1438,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwNPxjY.s 			page 1
  1125 04e3 22       		.byte	0x22
  1126 04e4 00       		.byte	0
  1127 04e5 1A       		.uleb128 0x1a
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwNPxjY.s 			page 25
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cciAeu2d.s 			page 25
 
 
  1128 04e6 98000000 		.4byte	.LVL34
@@ -1459,7 +1459,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwNPxjY.s 			page 1
  1143 04fe 00       		.byte	0
  1144 04ff 0A       		.uleb128 0xa
  1145 0500 01       		.byte	0x1
- 1146 0501 3A000000 		.4byte	.LASF25
+ 1146 0501 16000000 		.4byte	.LASF25
  1147 0505 01       		.byte	0x1
  1148 0506 0E       		.byte	0xe
  1149 0507 01       		.byte	0x1
@@ -1470,19 +1470,19 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwNPxjY.s 			page 1
  1154 0518 01       		.byte	0x1
  1155 0519 74050000 		.4byte	0x574
  1156 051d 0B       		.uleb128 0xb
- 1157 051e B2010000 		.4byte	.LASF18
+ 1157 051e 90010000 		.4byte	.LASF18
  1158 0522 01       		.byte	0x1
  1159 0523 0E       		.byte	0xe
  1160 0524 65010000 		.4byte	0x165
  1161 0528 A9060000 		.4byte	.LLST2
  1162 052c 0B       		.uleb128 0xb
- 1163 052d B9010000 		.4byte	.LASF26
+ 1163 052d 97010000 		.4byte	.LASF26
  1164 0531 01       		.byte	0x1
  1165 0532 0E       		.byte	0xe
  1166 0533 AC000000 		.4byte	0xac
  1167 0537 EB060000 		.4byte	.LLST3
  1168 053b 0E       		.uleb128 0xe
- 1169 053c 67000000 		.4byte	.LASF27
+ 1169 053c 4C000000 		.4byte	.LASF27
  1170 0540 01       		.byte	0x1
  1171 0541 11       		.byte	0x11
  1172 0542 AC000000 		.4byte	0xac
@@ -1490,7 +1490,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwNPxjY.s 			page 1
  1174 054a 12       		.uleb128 0x12
  1175 054b 5B050000 		.4byte	0x55b
  1176 054f 10       		.uleb128 0x10
- 1177 0550 CB000000 		.4byte	.LASF21
+ 1177 0550 C3000000 		.4byte	.LASF21
  1178 0554 01       		.byte	0x1
  1179 0555 18       		.byte	0x18
  1180 0556 6B010000 		.4byte	0x16b
@@ -1498,7 +1498,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwNPxjY.s 			page 1
  1182 055b 1A       		.uleb128 0x1a
  1183 055c 22000000 		.4byte	.LVL9
  1184 0560 AB060000 		.4byte	0x6ab
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwNPxjY.s 			page 26
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cciAeu2d.s 			page 26
 
 
  1185 0564 19       		.uleb128 0x19
@@ -1516,7 +1516,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwNPxjY.s 			page 1
  1197 0573 00       		.byte	0
  1198 0574 1B       		.uleb128 0x1b
  1199 0575 01       		.byte	0x1
- 1200 0576 48010000 		.4byte	.LASF29
+ 1200 0576 26010000 		.4byte	.LASF29
  1201 057a 01       		.byte	0x1
  1202 057b 08       		.byte	0x8
  1203 057c 01       		.byte	0x1
@@ -1528,7 +1528,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwNPxjY.s 			page 1
  1209 0588 01       		.byte	0x1
  1210 0589 C1050000 		.4byte	0x5c1
  1211 058d 0C       		.uleb128 0xc
- 1212 058e B2010000 		.4byte	.LASF18
+ 1212 058e 90010000 		.4byte	.LASF18
  1213 0592 01       		.byte	0x1
  1214 0593 08       		.byte	0x8
  1215 0594 65010000 		.4byte	0x165
@@ -1553,55 +1553,55 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwNPxjY.s 			page 1
  1234 05bf 00       		.byte	0
  1235 05c0 00       		.byte	0
  1236 05c1 1C       		.uleb128 0x1c
- 1237 05c2 46000000 		.4byte	.LASF41
+ 1237 05c2 2B000000 		.4byte	.LASF41
  1238 05c6 02       		.byte	0x2
  1239 05c7 52       		.byte	0x52
  1240 05c8 01       		.byte	0x1
  1241 05c9 33000000 		.4byte	0x33
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwNPxjY.s 			page 27
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cciAeu2d.s 			page 27
 
 
  1242 05cd 03       		.byte	0x3
  1243 05ce DE050000 		.4byte	0x5de
  1244 05d2 1D       		.uleb128 0x1d
- 1245 05d3 06010000 		.4byte	.LASF17
+ 1245 05d3 E4000000 		.4byte	.LASF17
  1246 05d7 02       		.byte	0x2
  1247 05d8 52       		.byte	0x52
  1248 05d9 6B010000 		.4byte	0x16b
  1249 05dd 00       		.byte	0
  1250 05de 1E       		.uleb128 0x1e
- 1251 05df 81020000 		.4byte	.LASF31
+ 1251 05df 22000000 		.4byte	.LASF31
  1252 05e3 02       		.byte	0x2
  1253 05e4 35       		.byte	0x35
  1254 05e5 01       		.byte	0x1
  1255 05e6 03       		.byte	0x3
  1256 05e7 F7050000 		.4byte	0x5f7
  1257 05eb 1D       		.uleb128 0x1d
- 1258 05ec 73000000 		.4byte	.LASF30
+ 1258 05ec 58000000 		.4byte	.LASF30
  1259 05f0 02       		.byte	0x2
  1260 05f1 35       		.byte	0x35
  1261 05f2 AC000000 		.4byte	0xac
  1262 05f6 00       		.byte	0
  1263 05f7 1E       		.uleb128 0x1e
- 1264 05f8 EC000000 		.4byte	.LASF32
+ 1264 05f8 CA000000 		.4byte	.LASF32
  1265 05fc 02       		.byte	0x2
  1266 05fd 2E       		.byte	0x2e
  1267 05fe 01       		.byte	0x1
  1268 05ff 03       		.byte	0x3
  1269 0600 1B060000 		.4byte	0x61b
  1270 0604 1D       		.uleb128 0x1d
- 1271 0605 7C020000 		.4byte	.LASF11
+ 1271 0605 5A020000 		.4byte	.LASF11
  1272 0609 02       		.byte	0x2
  1273 060a 2E       		.byte	0x2e
  1274 060b AC000000 		.4byte	0xac
  1275 060f 1D       		.uleb128 0x1d
- 1276 0610 35000000 		.4byte	.LASF10
+ 1276 0610 11000000 		.4byte	.LASF10
  1277 0614 02       		.byte	0x2
  1278 0615 2E       		.byte	0x2e
  1279 0616 AC000000 		.4byte	0xac
  1280 061a 00       		.byte	0
  1281 061b 1E       		.uleb128 0x1e
- 1282 061c B4000000 		.4byte	.LASF33
+ 1282 061c 99000000 		.4byte	.LASF33
  1283 0620 02       		.byte	0x2
  1284 0621 28       		.byte	0x28
  1285 0622 01       		.byte	0x1
@@ -1613,16 +1613,16 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwNPxjY.s 			page 1
  1291 062e 28       		.byte	0x28
  1292 062f AC000000 		.4byte	0xac
  1293 0633 1D       		.uleb128 0x1d
- 1294 0634 06010000 		.4byte	.LASF17
+ 1294 0634 E4000000 		.4byte	.LASF17
  1295 0638 02       		.byte	0x2
  1296 0639 28       		.byte	0x28
  1297 063a AC000000 		.4byte	0xac
  1298 063e 00       		.byte	0
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwNPxjY.s 			page 28
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cciAeu2d.s 			page 28
 
 
  1299 063f 1E       		.uleb128 0x1e
- 1300 0640 C2000000 		.4byte	.LASF34
+ 1300 0640 A7000000 		.4byte	.LASF34
  1301 0644 02       		.byte	0x2
  1302 0645 22       		.byte	0x22
  1303 0646 01       		.byte	0x1
@@ -1634,13 +1634,13 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwNPxjY.s 			page 1
  1309 0652 22       		.byte	0x22
  1310 0653 AC000000 		.4byte	0xac
  1311 0657 1D       		.uleb128 0x1d
- 1312 0658 06010000 		.4byte	.LASF17
+ 1312 0658 E4000000 		.4byte	.LASF17
  1313 065c 02       		.byte	0x2
  1314 065d 22       		.byte	0x22
  1315 065e AC000000 		.4byte	0xac
  1316 0662 00       		.byte	0
  1317 0663 1E       		.uleb128 0x1e
- 1318 0664 A7010000 		.4byte	.LASF35
+ 1318 0664 85010000 		.4byte	.LASF35
  1319 0668 02       		.byte	0x2
  1320 0669 17       		.byte	0x17
  1321 066a 01       		.byte	0x1
@@ -1652,18 +1652,18 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwNPxjY.s 			page 1
  1327 0676 17       		.byte	0x17
  1328 0677 AC000000 		.4byte	0xac
  1329 067b 1D       		.uleb128 0x1d
- 1330 067c 7C020000 		.4byte	.LASF11
+ 1330 067c 5A020000 		.4byte	.LASF11
  1331 0680 02       		.byte	0x2
  1332 0681 18       		.byte	0x18
  1333 0682 AC000000 		.4byte	0xac
  1334 0686 1D       		.uleb128 0x1d
- 1335 0687 35000000 		.4byte	.LASF10
+ 1335 0687 11000000 		.4byte	.LASF10
  1336 068b 02       		.byte	0x2
  1337 068c 19       		.byte	0x19
  1338 068d AC000000 		.4byte	0xac
  1339 0691 00       		.byte	0
  1340 0692 1E       		.uleb128 0x1e
- 1341 0693 F7000000 		.4byte	.LASF36
+ 1341 0693 D5000000 		.4byte	.LASF36
  1342 0697 02       		.byte	0x2
  1343 0698 10       		.byte	0x10
  1344 0699 01       		.byte	0x1
@@ -1678,11 +1678,11 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwNPxjY.s 			page 1
  1353 06ab 20       		.uleb128 0x20
  1354 06ac 01       		.byte	0x1
  1355 06ad 01       		.byte	0x1
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwNPxjY.s 			page 29
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cciAeu2d.s 			page 29
 
 
- 1356 06ae 68020000 		.4byte	.LASF42
- 1357 06b2 68020000 		.4byte	.LASF42
+ 1356 06ae 46020000 		.4byte	.LASF42
+ 1357 06b2 46020000 		.4byte	.LASF42
  1358 06b6 05       		.byte	0x5
  1359 06b7 06       		.byte	0x6
  1360 06b8 00       		.byte	0
@@ -1738,7 +1738,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwNPxjY.s 			page 1
  1410 002f 0B       		.uleb128 0xb
  1411 0030 3B       		.uleb128 0x3b
  1412 0031 0B       		.uleb128 0xb
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwNPxjY.s 			page 30
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cciAeu2d.s 			page 30
 
 
  1413 0032 49       		.uleb128 0x49
@@ -1798,7 +1798,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwNPxjY.s 			page 1
  1467 0068 08       		.uleb128 0x8
  1468 0069 3A       		.uleb128 0x3a
  1469 006a 0B       		.uleb128 0xb
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwNPxjY.s 			page 31
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cciAeu2d.s 			page 31
 
 
  1470 006b 3B       		.uleb128 0x3b
@@ -1858,7 +1858,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwNPxjY.s 			page 1
  1524 00a2 0B       		.uleb128 0xb
  1525 00a3 3B       		.uleb128 0x3b
  1526 00a4 0B       		.uleb128 0xb
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwNPxjY.s 			page 32
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cciAeu2d.s 			page 32
 
 
  1527 00a5 49       		.uleb128 0x49
@@ -1918,7 +1918,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwNPxjY.s 			page 1
  1581 00db 11       		.uleb128 0x11
  1582 00dc 2E       		.uleb128 0x2e
  1583 00dd 01       		.byte	0x1
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwNPxjY.s 			page 33
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cciAeu2d.s 			page 33
 
 
  1584 00de 3F       		.uleb128 0x3f
@@ -1978,7 +1978,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwNPxjY.s 			page 1
  1638 0115 00       		.byte	0
  1639 0116 15       		.uleb128 0x15
  1640 0117 1D       		.uleb128 0x1d
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwNPxjY.s 			page 34
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cciAeu2d.s 			page 34
 
 
  1641 0118 01       		.byte	0x1
@@ -2038,7 +2038,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwNPxjY.s 			page 1
  1695 014f 00       		.byte	0
  1696 0150 18       		.uleb128 0x18
  1697 0151 898201   		.uleb128 0x4109
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwNPxjY.s 			page 35
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cciAeu2d.s 			page 35
 
 
  1698 0154 01       		.byte	0x1
@@ -2098,7 +2098,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwNPxjY.s 			page 1
  1752 0190 01       		.byte	0x1
  1753 0191 03       		.uleb128 0x3
  1754 0192 0E       		.uleb128 0xe
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwNPxjY.s 			page 36
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cciAeu2d.s 			page 36
 
 
  1755 0193 3A       		.uleb128 0x3a
@@ -2158,7 +2158,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwNPxjY.s 			page 1
  1809 01c9 13       		.uleb128 0x13
  1810 01ca 00       		.byte	0
  1811 01cb 00       		.byte	0
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwNPxjY.s 			page 37
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cciAeu2d.s 			page 37
 
 
  1812 01cc 20       		.uleb128 0x20
@@ -2218,7 +2218,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwNPxjY.s 			page 1
  1866 0050 9F       		.byte	0x9f
  1867 0051 44010000 		.4byte	.LVL76-.Ltext0
  1868 0055 48010000 		.4byte	.LFE16-.Ltext0
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwNPxjY.s 			page 38
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cciAeu2d.s 			page 38
 
 
  1869 0059 0100     		.2byte	0x1
@@ -2278,7 +2278,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwNPxjY.s 			page 1
  1923 00eb 0200     		.2byte	0x2
  1924 00ed 70       		.byte	0x70
  1925 00ee 00       		.sleb128 0
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwNPxjY.s 			page 39
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cciAeu2d.s 			page 39
 
 
  1926 00ef 44010000 		.4byte	.LVL76-.Ltext0
@@ -2338,7 +2338,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwNPxjY.s 			page 1
  1980 0173 00000000 		.4byte	0
  1981 0177 00000000 		.4byte	0
  1982              	.LLST45:
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwNPxjY.s 			page 40
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cciAeu2d.s 			page 40
 
 
  1983 017b 08010000 		.4byte	.LVL62-.Ltext0
@@ -2398,7 +2398,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwNPxjY.s 			page 1
  2037 0205 0200     		.2byte	0x2
  2038 0207 7D       		.byte	0x7d
  2039 0208 00       		.sleb128 0
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwNPxjY.s 			page 41
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cciAeu2d.s 			page 41
 
 
  2040 0209 00000000 		.4byte	0
@@ -2458,7 +2458,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwNPxjY.s 			page 1
  2094 028d 70       		.byte	0x70
  2095 028e 00       		.sleb128 0
  2096 028f 00000000 		.4byte	0
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwNPxjY.s 			page 42
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cciAeu2d.s 			page 42
 
 
  2097 0293 00000000 		.4byte	0
@@ -2518,7 +2518,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwNPxjY.s 			page 1
  2151              	.LLST40:
  2152 0321 FA000000 		.4byte	.LVL57-.Ltext0
  2153 0325 02010000 		.4byte	.LVL59-.Ltext0
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwNPxjY.s 			page 43
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cciAeu2d.s 			page 43
 
 
  2154 0329 0200     		.2byte	0x2
@@ -2578,7 +2578,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwNPxjY.s 			page 1
  2208 03ac A2000000 		.4byte	.LVL36-.Ltext0
  2209 03b0 B2000000 		.4byte	.LVL39-.Ltext0
  2210 03b4 0100     		.2byte	0x1
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwNPxjY.s 			page 44
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cciAeu2d.s 			page 44
 
 
  2211 03b6 52       		.byte	0x52
@@ -2638,7 +2638,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwNPxjY.s 			page 1
  2265 0446 00000000 		.4byte	0
  2266              	.LLST5:
  2267 044a 30000000 		.4byte	.LFB12-.Ltext0
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwNPxjY.s 			page 45
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cciAeu2d.s 			page 45
 
 
  2268 044e 32000000 		.4byte	.LCFI1-.Ltext0
@@ -2698,7 +2698,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwNPxjY.s 			page 1
  2322 04dd 48000000 		.4byte	.LVL18-.Ltext0
  2323 04e1 70000000 		.4byte	.LVL26-.Ltext0
  2324 04e5 0100     		.2byte	0x1
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwNPxjY.s 			page 46
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cciAeu2d.s 			page 46
 
 
  2325 04e7 52       		.byte	0x52
@@ -2758,7 +2758,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwNPxjY.s 			page 1
  2379 0577 00000000 		.4byte	0
  2380 057b 00000000 		.4byte	0
  2381              	.LLST13:
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwNPxjY.s 			page 47
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cciAeu2d.s 			page 47
 
 
  2382 057f 62000000 		.4byte	.LVL22-.Ltext0
@@ -2818,7 +2818,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwNPxjY.s 			page 1
  2436 0613 00000000 		.4byte	0
  2437              	.LLST21:
  2438 0617 70000000 		.4byte	.LVL26-.Ltext0
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwNPxjY.s 			page 48
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cciAeu2d.s 			page 48
 
 
  2439 061b 78000000 		.4byte	.LVL27-.Ltext0
@@ -2878,7 +2878,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwNPxjY.s 			page 1
  2493 06a9 08000000 		.4byte	.LVL2-.Ltext0
  2494 06ad 12000000 		.4byte	.LVL4-.Ltext0
  2495 06b1 0100     		.2byte	0x1
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwNPxjY.s 			page 49
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cciAeu2d.s 			page 49
 
 
  2496 06b3 50       		.byte	0x50
@@ -2938,7 +2938,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwNPxjY.s 			page 1
  2550 0739 24000000 		.4byte	.LVL10-.Ltext0
  2551 073d 2A000000 		.4byte	.LVL11-.Ltext0
  2552 0741 0100     		.2byte	0x1
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwNPxjY.s 			page 50
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cciAeu2d.s 			page 50
 
 
  2553 0743 50       		.byte	0x50
@@ -2998,11 +2998,11 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwNPxjY.s 			page 1
  2607 004c 00000000 		.4byte	0
  2608              		.section	.debug_line,"",%progbits
  2609              	.Ldebug_line0:
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwNPxjY.s 			page 51
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cciAeu2d.s 			page 51
 
 
- 2610 0000 B0010000 		.section	.debug_str,"MS",%progbits,1
- 2610      0200C200 
+ 2610 0000 B2010000 		.section	.debug_str,"MS",%progbits,1
+ 2610      0200C400 
  2610      00000201 
  2610      FB0E0D00 
  2610      01010101 
@@ -3012,229 +3012,226 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwNPxjY.s 			page 1
  2613              	.LASF16:
  2614 0005 7072696F 		.ascii	"prio\000"
  2614      00
- 2615              	.LASF39:
- 2616 000a 2E2E2F2E 		.ascii	"../../source/src/user/OS_LIB/insert_sort.c\000"
- 2616      2E2F736F 
- 2616      75726365 
- 2616      2F737263 
- 2616      2F757365 
+ 2615              	.LASF9:
+ 2616 000a 73697A65 		.ascii	"size_t\000"
+ 2616      5F7400
  2617              	.LASF10:
- 2618 0035 6E657874 		.ascii	"next\000"
+ 2618 0011 6E657874 		.ascii	"next\000"
  2618      00
  2619              	.LASF25:
- 2620 003a 6765745F 		.ascii	"get_next_IL\000"
+ 2620 0016 6765745F 		.ascii	"get_next_IL\000"
  2620      6E657874 
  2620      5F494C00 
- 2621              	.LASF41:
- 2622 0046 6C697374 		.ascii	"list_empty\000"
- 2622      5F656D70 
- 2622      747900
- 2623              	.LASF20:
- 2624 0051 64656C65 		.ascii	"delete_first_in_chain\000"
- 2624      74655F66 
- 2624      69727374 
- 2624      5F696E5F 
- 2624      63686169 
- 2625              	.LASF27:
- 2626 0067 6C697374 		.ascii	"list_buffer\000"
- 2626      5F627566 
- 2626      66657200 
- 2627              	.LASF30:
- 2628 0073 656E7472 		.ascii	"entry\000"
- 2628      7900
- 2629              	.LASF23:
- 2630 0079 66696E64 		.ascii	"find_in_chain\000"
- 2630      5F696E5F 
- 2630      63686169 
- 2630      6E00
- 2631              	.LASF12:
- 2632 0087 434F4D50 		.ascii	"COMPARE_TYPE\000"
- 2632      4152455F 
- 2632      54595045 
- 2632      00
- 2633              	.LASF5:
- 2634 0094 494E5436 		.ascii	"INT64\000"
- 2634      3400
- 2635              	.LASF24:
- 2636 009a 696E7365 		.ascii	"insert_node\000"
- 2636      72745F6E 
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwNPxjY.s 			page 52
+ 2621              	.LASF31:
+ 2622 0022 6C697374 		.ascii	"list_del\000"
+ 2622      5F64656C 
+ 2622      00
+ 2623              	.LASF41:
+ 2624 002b 6C697374 		.ascii	"list_empty\000"
+ 2624      5F656D70 
+ 2624      747900
+ 2625              	.LASF20:
+ 2626 0036 64656C65 		.ascii	"delete_first_in_chain\000"
+ 2626      74655F66 
+ 2626      69727374 
+ 2626      5F696E5F 
+ 2626      63686169 
+ 2627              	.LASF27:
+ 2628 004c 6C697374 		.ascii	"list_buffer\000"
+ 2628      5F627566 
+ 2628      66657200 
+ 2629              	.LASF30:
+ 2630 0058 656E7472 		.ascii	"entry\000"
+ 2630      7900
+ 2631              	.LASF23:
+ 2632 005e 66696E64 		.ascii	"find_in_chain\000"
+ 2632      5F696E5F 
+ 2632      63686169 
+ 2632      6E00
+ 2633              	.LASF12:
+ 2634 006c 434F4D50 		.ascii	"COMPARE_TYPE\000"
+ 2634      4152455F 
+ 2634      54595045 
+ 2634      00
+ 2635              	.LASF5:
+ 2636 0079 494E5436 		.ascii	"INT64\000"
+ 2636      3400
+ 2637              	.LASF24:
+ 2638 007f 696E7365 		.ascii	"insert_node\000"
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cciAeu2d.s 			page 52
 
 
- 2636      6F646500 
- 2637              	.LASF3:
- 2638 00a6 756E7369 		.ascii	"unsigned char\000"
- 2638      676E6564 
- 2638      20636861 
- 2638      7200
- 2639              	.LASF33:
- 2640 00b4 6C697374 		.ascii	"list_add_tail\000"
- 2640      5F616464 
- 2640      5F746169 
- 2640      6C00
- 2641              	.LASF34:
- 2642 00c2 6C697374 		.ascii	"list_add\000"
+ 2638      72745F6E 
+ 2638      6F646500 
+ 2639              	.LASF3:
+ 2640 008b 756E7369 		.ascii	"unsigned char\000"
+ 2640      676E6564 
+ 2640      20636861 
+ 2640      7200
+ 2641              	.LASF33:
+ 2642 0099 6C697374 		.ascii	"list_add_tail\000"
  2642      5F616464 
- 2642      00
- 2643              	.LASF21:
- 2644 00cb 5F5F6D70 		.ascii	"__mptr\000"
- 2644      747200
+ 2642      5F746169 
+ 2642      6C00
+ 2643              	.LASF34:
+ 2644 00a7 6C697374 		.ascii	"list_add\000"
+ 2644      5F616464 
+ 2644      00
  2645              	.LASF4:
- 2646 00d2 73686F72 		.ascii	"short unsigned int\000"
+ 2646 00b0 73686F72 		.ascii	"short unsigned int\000"
  2646      7420756E 
  2646      7369676E 
  2646      65642069 
  2646      6E7400
- 2647              	.LASF9:
- 2648 00e5 73697A65 		.ascii	"size_t\000"
- 2648      5F7400
+ 2647              	.LASF21:
+ 2648 00c3 5F5F6D70 		.ascii	"__mptr\000"
+ 2648      747200
  2649              	.LASF32:
- 2650 00ec 5F5F6C69 		.ascii	"__list_del\000"
+ 2650 00ca 5F5F6C69 		.ascii	"__list_del\000"
  2650      73745F64 
  2650      656C00
  2651              	.LASF36:
- 2652 00f7 494E4954 		.ascii	"INIT_LIST_HEAD\000"
+ 2652 00d5 494E4954 		.ascii	"INIT_LIST_HEAD\000"
  2652      5F4C4953 
  2652      545F4845 
  2652      414400
  2653              	.LASF17:
- 2654 0106 68656164 		.ascii	"head\000"
+ 2654 00e4 68656164 		.ascii	"head\000"
  2654      00
  2655              	.LASF7:
- 2656 010b 756E7369 		.ascii	"unsigned int\000"
+ 2656 00e9 756E7369 		.ascii	"unsigned int\000"
  2656      676E6564 
  2656      20696E74 
  2656      00
  2657              	.LASF22:
- 2658 0118 64656C65 		.ascii	"delete_from_chain\000"
+ 2658 00f6 64656C65 		.ascii	"delete_from_chain\000"
  2658      74655F66 
  2658      726F6D5F 
  2658      63686169 
  2658      6E00
  2659              	.LASF8:
- 2660 012a 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 2660 0108 6C6F6E67 		.ascii	"long long unsigned int\000"
  2660      206C6F6E 
  2660      6720756E 
  2660      7369676E 
  2660      65642069 
  2661              	.LASF15:
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwNPxjY.s 			page 53
-
-
- 2662 0141 696E7365 		.ascii	"insert\000"
+ 2662 011f 696E7365 		.ascii	"insert\000"
  2662      727400
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cciAeu2d.s 			page 53
+
+
  2663              	.LASF29:
- 2664 0148 494C5F69 		.ascii	"IL_init\000"
+ 2664 0126 494C5F69 		.ascii	"IL_init\000"
  2664      6E697400 
  2665              	.LASF19:
- 2666 0150 66696E64 		.ascii	"find_first_bigger_IL\000"
+ 2666 012e 66696E64 		.ascii	"find_first_bigger_IL\000"
  2666      5F666972 
  2666      73745F62 
  2666      69676765 
  2666      725F494C 
  2667              	.LASF13:
- 2668 0165 6C697374 		.ascii	"list_head\000"
+ 2668 0143 6C697374 		.ascii	"list_head\000"
  2668      5F686561 
  2668      6400
  2669              	.LASF2:
- 2670 016f 6C6F6E67 		.ascii	"long long int\000"
+ 2670 014d 6C6F6E67 		.ascii	"long long int\000"
  2670      206C6F6E 
  2670      6720696E 
  2670      7400
  2671              	.LASF6:
- 2672 017d 55494E54 		.ascii	"UINT32\000"
+ 2672 015b 55494E54 		.ascii	"UINT32\000"
  2672      333200
  2673              	.LASF28:
- 2674 0184 696E7365 		.ascii	"insert_chain\000"
+ 2674 0162 696E7365 		.ascii	"insert_chain\000"
  2674      72745F63 
  2674      6861696E 
  2674      00
  2675              	.LASF1:
- 2676 0191 73686F72 		.ascii	"short int\000"
+ 2676 016f 73686F72 		.ascii	"short int\000"
  2676      7420696E 
  2676      7400
  2677              	.LASF14:
- 2678 019b 696E7365 		.ascii	"insert_list\000"
+ 2678 0179 696E7365 		.ascii	"insert_list\000"
  2678      72745F6C 
  2678      69737400 
  2679              	.LASF35:
- 2680 01a7 5F5F6C69 		.ascii	"__list_add\000"
+ 2680 0185 5F5F6C69 		.ascii	"__list_add\000"
  2680      73745F61 
  2680      646400
  2681              	.LASF18:
- 2682 01b2 494C5F70 		.ascii	"IL_ptr\000"
+ 2682 0190 494C5F70 		.ascii	"IL_ptr\000"
  2682      747200
  2683              	.LASF26:
- 2684 01b9 68656164 		.ascii	"head_ptr\000"
+ 2684 0197 68656164 		.ascii	"head_ptr\000"
  2684      5F707472 
  2684      00
  2685              	.LASF38:
- 2686 01c2 474E5520 		.ascii	"GNU C11 7.3.1 20180622 (release) [ARM/embedded-7-br"
+ 2686 01a0 474E5520 		.ascii	"GNU C11 7.3.1 20180622 (release) [ARM/embedded-7-br"
  2686      43313120 
  2686      372E332E 
  2686      31203230 
  2686      31383036 
- 2687 01f5 616E6368 		.ascii	"anch revision 261907] -mcpu=cortex-m3 -mthumb -mapc"
+ 2687 01d3 616E6368 		.ascii	"anch revision 261907] -mcpu=cortex-m3 -mthumb -mapc"
  2687      20726576 
  2687      6973696F 
  2687      6E203236 
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwNPxjY.s 			page 54
-
-
  2687      31393037 
- 2688 0228 732D6672 		.ascii	"s-frame -mthumb-interwork -mcpu=cortex-m3 -mthumb -"
+ 2688 0206 732D6672 		.ascii	"s-frame -mthumb-interwork -mcpu=cortex-m3 -mthumb -"
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cciAeu2d.s 			page 54
+
+
  2688      616D6520 
  2688      2D6D7468 
  2688      756D622D 
  2688      696E7465 
- 2689 025b 67647761 		.ascii	"gdwarf-2 -O2\000"
+ 2689 0239 67647761 		.ascii	"gdwarf-2 -O2\000"
  2689      72662D32 
  2689      202D4F32 
  2689      00
  2690              	.LASF42:
- 2691 0268 5F415353 		.ascii	"_ASSERT\000"
+ 2691 0246 5F415353 		.ascii	"_ASSERT\000"
  2691      45525400 
  2692              	.LASF0:
- 2693 0270 7369676E 		.ascii	"signed char\000"
+ 2693 024e 7369676E 		.ascii	"signed char\000"
  2693      65642063 
  2693      68617200 
  2694              	.LASF11:
- 2695 027c 70726576 		.ascii	"prev\000"
+ 2695 025a 70726576 		.ascii	"prev\000"
  2695      00
- 2696              	.LASF31:
- 2697 0281 6C697374 		.ascii	"list_del\000"
- 2697      5F64656C 
- 2697      00
- 2698              	.LASF40:
- 2699 028a 473A5C55 		.ascii	"G:\\Users\\Jaxb\\Desktop\\KAKAOS-0.07  2019.2.21  f"
- 2699      73657273 
- 2699      5C4A6178 
- 2699      625C4465 
- 2699      736B746F 
- 2700 02b9 6F722067 		.ascii	"or gcc\\Project\\RVMDK\243\250uv5\243\251\000"
- 2700      63635C50 
- 2700      726F6A65 
- 2700      63745C52 
- 2700      564D444B 
+ 2696              	.LASF40:
+ 2697 025f 463A5C6B 		.ascii	"F:\\kaka\\KAKAOS\\C\\windows\\Project\\RVMDK\243\250"
+ 2697      616B615C 
+ 2697      4B414B41 
+ 2697      4F535C43 
+ 2697      5C77696E 
+ 2698 0287 757635A3 		.ascii	"uv5\243\251\000"
+ 2698      A900
+ 2699              	.LASF39:
+ 2700 028d 2E2E2F2E 		.ascii	"../../source/src/kernel/OS_LIB/insert_sort.c\000"
+ 2700      2E2F736F 
+ 2700      75726365 
+ 2700      2F737263 
+ 2700      2F6B6572 
  2701              		.ident	"GCC: (GNU Tools for Arm Embedded Processors 7-2018-q2-update) 7.3.1 20180622 (release) [AR
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwNPxjY.s 			page 55
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cciAeu2d.s 			page 55
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 insert_sort.c
-G:\Users\Jaxb\AppData\Local\Temp\ccwNPxjY.s:15     .text:00000000 $t
-G:\Users\Jaxb\AppData\Local\Temp\ccwNPxjY.s:23     .text:00000000 IL_init
-G:\Users\Jaxb\AppData\Local\Temp\ccwNPxjY.s:55     .text:00000008 get_next_IL
-G:\Users\Jaxb\AppData\Local\Temp\ccwNPxjY.s:106    .text:0000002c $d
-G:\Users\Jaxb\AppData\Local\Temp\ccwNPxjY.s:110    .text:00000030 $t
-G:\Users\Jaxb\AppData\Local\Temp\ccwNPxjY.s:118    .text:00000030 insert_chain
-G:\Users\Jaxb\AppData\Local\Temp\ccwNPxjY.s:260    .text:0000009c $d
-G:\Users\Jaxb\AppData\Local\Temp\ccwNPxjY.s:264    .text:000000a0 $t
-G:\Users\Jaxb\AppData\Local\Temp\ccwNPxjY.s:272    .text:000000a0 find_in_chain
-G:\Users\Jaxb\AppData\Local\Temp\ccwNPxjY.s:346    .text:000000cc delete_from_chain
-G:\Users\Jaxb\AppData\Local\Temp\ccwNPxjY.s:456    .text:00000104 delete_first_in_chain
-G:\Users\Jaxb\AppData\Local\Temp\ccwNPxjY.s:511    .text:0000011c find_first_bigger_IL
-G:\Users\Jaxb\AppData\Local\Temp\ccwNPxjY.s:578    .rodata.str1.4:00000000 $d
+G:\Users\Jaxb\AppData\Local\Temp\cciAeu2d.s:15     .text:00000000 $t
+G:\Users\Jaxb\AppData\Local\Temp\cciAeu2d.s:23     .text:00000000 IL_init
+G:\Users\Jaxb\AppData\Local\Temp\cciAeu2d.s:55     .text:00000008 get_next_IL
+G:\Users\Jaxb\AppData\Local\Temp\cciAeu2d.s:106    .text:0000002c $d
+G:\Users\Jaxb\AppData\Local\Temp\cciAeu2d.s:110    .text:00000030 $t
+G:\Users\Jaxb\AppData\Local\Temp\cciAeu2d.s:118    .text:00000030 insert_chain
+G:\Users\Jaxb\AppData\Local\Temp\cciAeu2d.s:260    .text:0000009c $d
+G:\Users\Jaxb\AppData\Local\Temp\cciAeu2d.s:264    .text:000000a0 $t
+G:\Users\Jaxb\AppData\Local\Temp\cciAeu2d.s:272    .text:000000a0 find_in_chain
+G:\Users\Jaxb\AppData\Local\Temp\cciAeu2d.s:346    .text:000000cc delete_from_chain
+G:\Users\Jaxb\AppData\Local\Temp\cciAeu2d.s:456    .text:00000104 delete_first_in_chain
+G:\Users\Jaxb\AppData\Local\Temp\cciAeu2d.s:511    .text:0000011c find_first_bigger_IL
+G:\Users\Jaxb\AppData\Local\Temp\cciAeu2d.s:578    .rodata.str1.4:00000000 $d
 
 UNDEFINED SYMBOLS
 _ASSERT

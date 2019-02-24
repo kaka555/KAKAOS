@@ -233,8 +233,6 @@ int ka_printf(const char *str,...)
 	                    }
 	                    res += count;//返回值长度增加​   
 	                    r_val = val; 
-						ka_putchar('0');
-	                    ka_putchar('x');
 	                    while(count)   
 	                    {   
 	                        ch = r_val / ka_pow(16, count - 1);   
@@ -276,8 +274,6 @@ int ka_printf(const char *str,...)
 	                    }
 	                    res += count;//返回值长度增加​   
 	                    r_val = val;
-	                    ka_putchar('0');
-	                    ka_putchar('x');
 	                    buffer = 8-count;
 	                    while(buffer--)
 	                    {

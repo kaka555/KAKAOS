@@ -32,7 +32,6 @@ init_MCB(
 #if CONFIG_PARA_CHECK
 	if(NULL == MCB_ptr)
 	{
-		OS_ERROR_MESSAGE_DISPLAY(dasdasfasdas);
 		OS_ERROR_PARA_MESSAGE_DISPLAY(init_MCB,MCB_ptr);
 		return -ERROR_NULL_INPUT_PTR;
 	}

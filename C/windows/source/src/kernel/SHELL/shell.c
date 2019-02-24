@@ -10,18 +10,92 @@
 #include <buddy.h>
 #include <os_ready.h>
 #include <os_TCB_list.h>
+#include <os_cpu.h>
 
 #if CONFIG_SHELL_EN
 
 static MCB MCB_for_shell;
 
-static char *argv[ARGV_SIZE];
-static char *argv_reserve[ARGV_SIZE];
+static struct shell_buffer main_shell_buffer;
+static char main_buffer[BUFFER_SIZE];
+static char main_buffer_reserve[BUFFER_SIZE];
 
-static char buffer[BUFFER_SIZE];
-static char buffer_reserve[BUFFER_SIZE];
-static unsigned int index = 0;
-static unsigned int index_reserve = 0;
+static struct shell_buffer *using_shell_buffer_ptr = NULL;
+
+static inline void clear_input_buffer(void)
+{
+	using_shell_buffer_ptr->index = 0;
+	using_shell_buffer_ptr->buffer[0] = '\0';
+}
+
+void shell_buffer_wait_str(const char *str_ptr) // thread will going to sleep
+{
+	ASSERT(NULL != str_ptr);
+#if CONFIG_PARA_CHECK	
+	if(NULL == str_ptr)
+	{
+		OS_ERROR_PARA_MESSAGE_DISPLAY(shell_buffer_wait_str,str_ptr);
+		return ;
+	}
+#endif
+#if CONFIG_ASSERT_DEBUG
+	int error;
+#endif
+	while(1)
+	{
+#if CONFIG_ASSERT_DEBUG
+		error = p(&MCB_for_shell,MCB_FLAG_WAIT,0);
+#else
+		p(&MCB_for_shell,MCB_FLAG_WAIT,0);
+#endif
+		ASSERT(FUN_EXECUTE_SUCCESSFULLY == error);
+		if(0 == ka_strncmp(using_shell_buffer_ptr->buffer,str_ptr,ka_strlen(str_ptr)))
+		{
+			return ;
+		}
+		ka_printf("wrong input\n");
+		clear_input_buffer();
+	}
+}
+
+struct shell_buffer *change_shell_buffer(struct shell_buffer *shell_buffer_ptr)
+{
+	ASSERT(NULL != shell_buffer_ptr);
+#if CONFIG_PARA_CHECK
+	if(NULL == shell_buffer_ptr)
+	{
+		OS_ERROR_PARA_MESSAGE_DISPLAY(change_shell_buffer,shell_buffer_ptr);
+		return NULL;
+	}
+#endif
+	CPU_SR_ALLOC();
+	CPU_CRITICAL_ENTER();
+	struct shell_buffer *buffer = using_shell_buffer_ptr;
+	using_shell_buffer_ptr = shell_buffer_ptr;
+	CPU_CRITICAL_EXIT();
+	return buffer;
+}
+
+int __init_shell_buffer(struct shell_buffer *shell_buffer_ptr,
+	char *buffer_ptr,
+	char *buffer_reserve_ptr) // if buffer_reserve_ptr is NULL,means no reserve buffer
+{
+	ASSERT((shell_buffer_ptr != NULL) 	&& 
+			(shell_buffer_ptr != NULL));
+#if CONFIG_PARA_CHECK
+	if((NULL == shell_buffer_ptr) 	|| 
+		(NULL == shell_buffer_ptr))
+	{
+		OS_ERROR_PARA_MESSAGE_DISPLAY(__init_shell_buffer,three_shell_buffer);
+		return -ERROR_NULL_INPUT_PTR;
+	}
+#endif
+	shell_buffer_ptr->buffer 			= buffer_ptr;
+	shell_buffer_ptr->buffer_reserve 	= buffer_reserve_ptr;
+	shell_buffer_ptr->index 			= 0;
+	shell_buffer_ptr->index_reserve 	= 0;
+	return FUN_EXECUTE_SUCCESSFULLY;
+}
 
 void put_in_shell_buffer(char c)  // deal with input layer
 {
@@ -35,7 +109,7 @@ void put_in_shell_buffer(char c)  // deal with input layer
 			('+' == c)))
 	{
 		ka_printf("\nerror input\n");
-		ka_printf("%s",buffer);
+		ka_printf("%s",using_shell_buffer_ptr->buffer);
 		return ;
 	}
 	if(IS_UPPER(c)) 
@@ -44,34 +118,34 @@ void put_in_shell_buffer(char c)  // deal with input layer
 	}
 	if(0x08 == c) // backspace key
 	{
-		if(index>0)
+		if(using_shell_buffer_ptr->index>0)
 		{
-			--index;
+			--(using_shell_buffer_ptr->index);
 			ka_printf(" \b");
 		}
 		else
 		{
-			ASSERT(0 == index);
+			ASSERT(0 == using_shell_buffer_ptr->index);
 			ka_putchar('\a');
 		}
 		return ;
 	}
-	if(index < BUFFER_SIZE*0.8)
+	if(using_shell_buffer_ptr->index < BUFFER_SIZE*0.8)
 	{
-		buffer[index++] = c;
-		buffer[index] = '\0';
+		using_shell_buffer_ptr->buffer[(using_shell_buffer_ptr->index)++] = c;
+		using_shell_buffer_ptr->buffer[using_shell_buffer_ptr->index] = '\0';
 	}
 	else
 	{
 		ka_printf("\ntoo long,invalid input,clear buffer...\n");
-		index = 0;
+		using_shell_buffer_ptr->index = 0;
 		return ;
 	}
-	if((0x0d == c) || (0x0a == c))
+	if(0x0d == c)
 	{
 #if DEBUG_SHELL
-		buffer[index-1] = '\0';
-		ka_printf("%s\n",buffer);
+		using_shell_buffer_ptr->buffer[using_shell_buffer_ptr->index-1] = '\0';
+		ka_printf("%s\n",using_shell_buffer_ptr->buffer);
 #endif
 		v(&MCB_for_shell);
 	}
@@ -83,15 +157,24 @@ static void redo(int argc, char const *argv[])
 {
 	(void)argc;
 	(void)argv;
-	unsigned int i;
-	ASSERT(index_reserve < BUFFER_SIZE);
-	ka_printf("redo command: ");
-	for(i=0;i<index_reserve;++i)
+	if(using_shell_buffer_ptr->buffer_reserve)
 	{
-		ka_puts((const char *)argv_reserve[i]);
+		unsigned int i;
+		ASSERT(using_shell_buffer_ptr->index_reserve < BUFFER_SIZE);
+		ka_printf("redo command: ");
+		for(i=0;i<using_shell_buffer_ptr->index_reserve;++i)
+		{
+			ka_puts((const char *)(using_shell_buffer_ptr->argv_reserve)[i]);
+		}
+		ka_putchar('\n');
+		match_and_execute_command(using_shell_buffer_ptr->index_reserve,
+			(const char **)(using_shell_buffer_ptr->argv_reserve),
+			get_command_processer(ka_strlen((using_shell_buffer_ptr->argv_reserve)[0])));
 	}
-	ka_putchar('\n');
-	match_and_execute_command(index_reserve,(const char **)argv_reserve,get_command_processer(ka_strlen(argv_reserve[0])));
+	else
+	{
+		ka_printf("no reserved buffer,command not saved\n");
+	}
 }
 
 
@@ -199,6 +282,10 @@ static struct command resident_command_6[] =
 	{
 		.command_name = "reboot",
 		.f = shell_reboot,
+	},
+	{
+		.command_name = "module",
+		.f = shell_module,
 	}
 };
 static struct command resident_command_7[] = 
@@ -274,10 +361,14 @@ static void shell_init(void)
 	init_MCB(&MCB_for_shell,0,MCB_TYPE_FLAG_BINARY);
 #endif
 	ASSERT(FUN_EXECUTE_SUCCESSFULLY == error);
-	index = 0;
-	index_reserve = 0;
+#if CONFIG_ASSERT_DEBUG
+	error = __init_shell_buffer(&main_shell_buffer,main_buffer,main_buffer_reserve);
+#else
+	__init_shell_buffer(&main_shell_buffer,main_buffer,main_buffer_reserve);
+#endif
+	ASSERT(FUN_EXECUTE_SUCCESSFULLY == error);
+	using_shell_buffer_ptr = &main_shell_buffer;
 }
-
 
 //public
 static int process(char *buffer_ptr)
@@ -293,7 +384,7 @@ static int process(char *buffer_ptr)
 	{
 		return 0;
 	}
-	argv[num++] = ptr;
+	using_shell_buffer_ptr->argv[num++] = ptr;
 	while((0x0d != *ptr) && (0x0a != *ptr))
 	{
 		if(' ' != *ptr)
@@ -311,7 +402,7 @@ static int process(char *buffer_ptr)
 			}
 			if((0x0d != *ptr) && (0x0a != *ptr))
 			{
-				argv[num++] = ptr;
+				using_shell_buffer_ptr->argv[num++] = ptr;
 				if(ARGV_SIZE+1 == num)
 				{
 					ka_printf("too many argument\n");
@@ -322,7 +413,9 @@ static int process(char *buffer_ptr)
 	}
 	*ptr = '\0';
 		
-	result = match_and_execute_command(num,(const char **)argv,get_command_processer(ka_strlen(argv[0])));
+	result = match_and_execute_command(num,
+		(const char **)(using_shell_buffer_ptr->argv),
+		get_command_processer(ka_strlen(using_shell_buffer_ptr->argv[0])));
     if(result == 1)
     {
     	return 0;
@@ -354,21 +447,22 @@ void shell(void *para)
 		p(&MCB_for_shell,MCB_FLAG_WAIT,0);
 #endif
 		ASSERT(FUN_EXECUTE_SUCCESSFULLY == error);
-		result = process(buffer);
-		if(0 != result)
+		result = process(using_shell_buffer_ptr->buffer);
+		if(0 != result && using_shell_buffer_ptr->buffer_reserve)
 		{
-			ka_memcpy(buffer_reserve,buffer,index);
-			ka_memcpy(argv_reserve,argv,result*sizeof(char *));
+			ka_memcpy(using_shell_buffer_ptr->buffer_reserve,
+				using_shell_buffer_ptr->buffer,
+				using_shell_buffer_ptr->index);
+			ka_memcpy(using_shell_buffer_ptr->argv_reserve,using_shell_buffer_ptr->argv,result*sizeof(char *));
 			unsigned int i;
-			unsigned int buf = (unsigned int)buffer_reserve - (unsigned int)buffer;
+			unsigned int buf = (unsigned int)(using_shell_buffer_ptr->buffer_reserve) - (unsigned int)(using_shell_buffer_ptr->buffer);
 			for(i=0;i<result;++i)
 			{
-				argv_reserve[i] += buf;
+				using_shell_buffer_ptr->argv_reserve[i] += buf;
 			}
-			index_reserve = result;
+			using_shell_buffer_ptr->index_reserve = result;
 		}
-		index = 0;
-		buffer[0] = '\0';
+		clear_input_buffer();
 		ka_printf("%s","kaka_os>>");
 	}
 		

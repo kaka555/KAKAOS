@@ -35,6 +35,8 @@ void shell_TCB_check(int argc, char const *argv[]);
 
 void shell_reboot(int argc, char const *argv[]);
 
+void shell_module(int argc, char const *argv[]);
+
 #if CONFIG_POWER_MANAGEMENT
 void shell_sleep(int argc, char const *argv[]);
 void shell_shutdown(int argc, char const *argv[]);

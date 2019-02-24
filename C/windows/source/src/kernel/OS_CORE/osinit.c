@@ -85,7 +85,7 @@ void task_start(void)
 		while(1);
 	}
 #if CONFIG_SHELL_EN
-	if(0 != task_init_ready(&TCB_shell,500,0,3,"shell",shell,NULL))
+	if(0 != task_init_ready(&TCB_shell,1000,0,3,"shell",shell,NULL))
 	{
 		ka_printf("os_init_fail...stop booting...\n");
 		while(1);
@@ -272,6 +272,15 @@ void _case_slab_free_buddy(void *ptr,void *end_ptr)
 					break;
 				case 4 :
 					return_power4_page(ptr);
+					break;
+				case 5 :
+					return_power5_page(ptr);
+					break;
+				case 6 :
+					return_power6_page(ptr);
+					break;
+				case 7 :
+					return_power7_page(ptr);
 					break;
 				default :
 					ka_printf("error level! FATAL ERROR!\n");

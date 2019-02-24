@@ -32,6 +32,13 @@ static const struct device device_array[] = {
 		.u.normal.init_fun = FSMC_SRAM_Init,
 	},
 
+	{
+		.head.dev_name = "USART2",
+		.head.dev_info = NULL,
+		.head.type = DEV_NORMAL,
+		.u.normal.init_fun = USART2_Config,
+	},
+
 	{	
 		.head.dev_name = "first mem",
 		.head.dev_info = NULL,

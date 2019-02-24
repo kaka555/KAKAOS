@@ -9,7 +9,6 @@
 #define DEBUG_SHELL 0  
 
 #define ARRAY_SIZE 	10
-#define ARGV_SIZE	10	
 
 struct command{
 	const char *command_name;

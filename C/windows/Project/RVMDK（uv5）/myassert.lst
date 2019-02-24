@@ -1,4 +1,4 @@
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccITU5uk.s 			page 1
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccqdBVpJ.s 			page 1
 
 
    1              		.cpu cortex-m3
@@ -25,13 +25,13 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccITU5uk.s 			page 1
   22              		.type	my_abort, %function
   23              	my_abort:
   24              	.LFB0:
-  25              		.file 1 "../../source/src/user/OS_LIB/myassert.c"
-   1:../../source/src/user/OS_LIB/myassert.c **** #include <myassert.h>
-   2:../../source/src/user/OS_LIB/myassert.c **** #include <myMicroLIB.h>
-   3:../../source/src/user/OS_LIB/myassert.c **** 
-   4:../../source/src/user/OS_LIB/myassert.c **** extern void HardFault_Handler(void);
-   5:../../source/src/user/OS_LIB/myassert.c **** void my_abort(void)
-   6:../../source/src/user/OS_LIB/myassert.c **** {
+  25              		.file 1 "../../source/src/kernel/OS_LIB/myassert.c"
+   1:../../source/src/kernel/OS_LIB/myassert.c **** #include <myassert.h>
+   2:../../source/src/kernel/OS_LIB/myassert.c **** #include <myMicroLIB.h>
+   3:../../source/src/kernel/OS_LIB/myassert.c **** 
+   4:../../source/src/kernel/OS_LIB/myassert.c **** extern void HardFault_Handler(void);
+   5:../../source/src/kernel/OS_LIB/myassert.c **** void my_abort(void)
+   6:../../source/src/kernel/OS_LIB/myassert.c **** {
   26              		.loc 1 6 0
   27              		.cfi_startproc
   28              		@ Volatile: function does not return.
@@ -42,7 +42,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccITU5uk.s 			page 1
   33              		.cfi_def_cfa_offset 8
   34              		.cfi_offset 3, -8
   35              		.cfi_offset 14, -4
-   7:../../source/src/user/OS_LIB/myassert.c **** 	ka_printf("os stop\n");
+   7:../../source/src/kernel/OS_LIB/myassert.c **** 	ka_printf("os stop\n");
   36              		.loc 1 7 0
   37 0002 0248     		ldr	r0, .L4
   38 0004 FFF7FEFF 		bl	ka_printf
@@ -58,7 +58,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccITU5uk.s 			page 1
   48              		.size	my_abort, .-my_abort
   49              		.align	1
   50              		.p2align 2,,3
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccITU5uk.s 			page 2
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccqdBVpJ.s 			page 2
 
 
   51              		.global	_ASSERT
@@ -69,22 +69,22 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccITU5uk.s 			page 1
   56              		.type	_ASSERT, %function
   57              	_ASSERT:
   58              	.LFB1:
-   8:../../source/src/user/OS_LIB/myassert.c **** 	while(1);
-   9:../../source/src/user/OS_LIB/myassert.c **** }
-  10:../../source/src/user/OS_LIB/myassert.c **** 	
-  11:../../source/src/user/OS_LIB/myassert.c **** 
-  12:../../source/src/user/OS_LIB/myassert.c **** void _ASSERT(char* strFile,unsigned uLine)
-  13:../../source/src/user/OS_LIB/myassert.c **** {
+   8:../../source/src/kernel/OS_LIB/myassert.c **** 	while(1);
+   9:../../source/src/kernel/OS_LIB/myassert.c **** }
+  10:../../source/src/kernel/OS_LIB/myassert.c **** 	
+  11:../../source/src/kernel/OS_LIB/myassert.c **** 
+  12:../../source/src/kernel/OS_LIB/myassert.c **** void _ASSERT(char* strFile,unsigned uLine)
+  13:../../source/src/kernel/OS_LIB/myassert.c **** {
   59              		.loc 1 13 0
   60              		.cfi_startproc
   61              		@ Volatile: function does not return.
   62              		@ args = 0, pretend = 0, frame = 0
   63              		@ frame_needed = 0, uses_anonymous_args = 0
   64              	.LVL1:
-  14:../../source/src/user/OS_LIB/myassert.c **** 	ka_printf("\nAssertion failed: %s,line %u\r\n",strFile,uLine);
+  14:../../source/src/kernel/OS_LIB/myassert.c **** 	ka_printf("\nAssertion failed: %s,line %u\r\n",strFile,uLine);
   65              		.loc 1 14 0
   66 0010 0A46     		mov	r2, r1
-  13:../../source/src/user/OS_LIB/myassert.c **** 	ka_printf("\nAssertion failed: %s,line %u\r\n",strFile,uLine);
+  13:../../source/src/kernel/OS_LIB/myassert.c **** 	ka_printf("\nAssertion failed: %s,line %u\r\n",strFile,uLine);
   67              		.loc 1 13 0
   68 0012 08B5     		push	{r3, lr}
   69              	.LCFI1:
@@ -98,7 +98,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccITU5uk.s 			page 1
   77              	.LVL3:
   78 0018 FFF7FEFF 		bl	ka_printf
   79              	.LVL4:
-  15:../../source/src/user/OS_LIB/myassert.c **** 	my_abort();
+  15:../../source/src/kernel/OS_LIB/myassert.c **** 	my_abort();
   80              		.loc 1 15 0
   81 001c FFF7FEFF 		bl	my_abort
   82              	.LVL5:
@@ -118,7 +118,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccITU5uk.s 			page 1
   94 0009 000000   		.space	3
   95              	.LC1:
   96 000c 0A417373 		.ascii	"\012Assertion failed: %s,line %u\015\012\000"
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccITU5uk.s 			page 3
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccqdBVpJ.s 			page 3
 
 
   96      65727469 
@@ -137,14 +137,14 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccITU5uk.s 			page 1
  106 000b 01       		.uleb128 0x1
  107 000c 00000000 		.4byte	.LASF6
  108 0010 0C       		.byte	0xc
- 109 0011 C1000000 		.4byte	.LASF7
- 110 0015 FB000000 		.4byte	.LASF8
+ 109 0011 CB000000 		.4byte	.LASF7
+ 110 0015 FD000000 		.4byte	.LASF8
  111 0019 00000000 		.4byte	.Ltext0
  112 001d 24000000 		.4byte	.Letext0
  113 0021 00000000 		.4byte	.Ldebug_line0
  114 0025 02       		.uleb128 0x2
  115 0026 01       		.byte	0x1
- 116 0027 F3000000 		.4byte	.LASF4
+ 116 0027 F5000000 		.4byte	.LASF4
  117 002b 01       		.byte	0x1
  118 002c 0C       		.byte	0xc
  119 002d 01       		.byte	0x1
@@ -178,7 +178,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccITU5uk.s 			page 1
  147 0073 05       		.uleb128 0x5
  148 0074 01       		.byte	0x1
  149 0075 51       		.byte	0x51
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccITU5uk.s 			page 4
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccqdBVpJ.s 			page 4
 
 
  150 0076 03       		.byte	0x3
@@ -203,14 +203,14 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccITU5uk.s 			page 1
  169 0092 08       		.uleb128 0x8
  170 0093 01       		.byte	0x1
  171 0094 08       		.byte	0x8
- 172 0095 46010000 		.4byte	.LASF2
+ 172 0095 2B010000 		.4byte	.LASF2
  173 0099 08       		.uleb128 0x8
  174 009a 04       		.byte	0x4
  175 009b 07       		.byte	0x7
  176 009c AE000000 		.4byte	.LASF3
  177 00a0 02       		.uleb128 0x2
  178 00a1 01       		.byte	0x1
- 179 00a2 4B010000 		.4byte	.LASF5
+ 179 00a2 30010000 		.4byte	.LASF5
  180 00a6 01       		.byte	0x1
  181 00a7 05       		.byte	0x5
  182 00a8 01       		.byte	0x1
@@ -233,12 +233,12 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccITU5uk.s 			page 1
  199 00ce 0A       		.uleb128 0xa
  200 00cf 01       		.byte	0x1
  201 00d0 01       		.byte	0x1
- 202 00d1 E9000000 		.4byte	.LASF9
- 203 00d5 E9000000 		.4byte	.LASF9
+ 202 00d1 C1000000 		.4byte	.LASF9
+ 203 00d5 C1000000 		.4byte	.LASF9
  204 00d9 02       		.byte	0x2
  205 00da 0C       		.byte	0xc
  206 00db 00       		.byte	0
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccITU5uk.s 			page 5
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccqdBVpJ.s 			page 5
 
 
  207              		.section	.debug_abbrev,"",%progbits
@@ -298,7 +298,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccITU5uk.s 			page 1
  261 0035 0B       		.uleb128 0xb
  262 0036 49       		.uleb128 0x49
  263 0037 13       		.uleb128 0x13
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccITU5uk.s 			page 6
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccqdBVpJ.s 			page 6
 
 
  264 0038 02       		.uleb128 0x2
@@ -358,7 +358,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccITU5uk.s 			page 1
  318 0075 898201   		.uleb128 0x4109
  319 0078 01       		.byte	0x1
  320 0079 11       		.uleb128 0x11
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccITU5uk.s 			page 7
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccqdBVpJ.s 			page 7
 
 
  321 007a 01       		.uleb128 0x1
@@ -418,7 +418,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccITU5uk.s 			page 1
  375 0044 00000000 		.4byte	0
  376 0048 00000000 		.4byte	0
  377              	.LLST3:
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccITU5uk.s 			page 8
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccqdBVpJ.s 			page 8
 
 
  378 004c 10000000 		.4byte	.LVL1-.Ltext0
@@ -465,8 +465,8 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccITU5uk.s 			page 1
  419 001c 00000000 		.4byte	0
  420              		.section	.debug_line,"",%progbits
  421              	.Ldebug_line0:
- 422 0000 83000000 		.section	.debug_str,"MS",%progbits,1
- 422      02006A00 
+ 422 0000 85000000 		.section	.debug_str,"MS",%progbits,1
+ 422      02006C00 
  422      00000201 
  422      FB0E0D00 
  422      01010101 
@@ -478,7 +478,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccITU5uk.s 			page 1
  424      31383036 
  425 0033 616E6368 		.ascii	"anch revision 261907] -mcpu=cortex-m3 -mthumb -mapc"
  425      20726576 
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccITU5uk.s 			page 9
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccqdBVpJ.s 			page 9
 
 
  425      6973696F 
@@ -504,50 +504,47 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccITU5uk.s 			page 1
  432              	.LASF1:
  433 00bb 754C696E 		.ascii	"uLine\000"
  433      6500
- 434              	.LASF7:
- 435 00c1 2E2E2F2E 		.ascii	"../../source/src/user/OS_LIB/myassert.c\000"
- 435      2E2F736F 
- 435      75726365 
- 435      2F737263 
- 435      2F757365 
- 436              	.LASF9:
- 437 00e9 6B615F70 		.ascii	"ka_printf\000"
- 437      72696E74 
- 437      6600
+ 434              	.LASF9:
+ 435 00c1 6B615F70 		.ascii	"ka_printf\000"
+ 435      72696E74 
+ 435      6600
+ 436              	.LASF7:
+ 437 00cb 2E2E2F2E 		.ascii	"../../source/src/kernel/OS_LIB/myassert.c\000"
+ 437      2E2F736F 
+ 437      75726365 
+ 437      2F737263 
+ 437      2F6B6572 
  438              	.LASF4:
- 439 00f3 5F415353 		.ascii	"_ASSERT\000"
+ 439 00f5 5F415353 		.ascii	"_ASSERT\000"
  439      45525400 
  440              	.LASF8:
- 441 00fb 473A5C55 		.ascii	"G:\\Users\\Jaxb\\Desktop\\KAKAOS-0.07  2019.2.21  f"
- 441      73657273 
- 441      5C4A6178 
- 441      625C4465 
- 441      736B746F 
- 442 012a 6F722067 		.ascii	"or gcc\\Project\\RVMDK\243\250uv5\243\251\000"
- 442      63635C50 
- 442      726F6A65 
- 442      63745C52 
- 442      564D444B 
+ 441 00fd 463A5C6B 		.ascii	"F:\\kaka\\KAKAOS\\C\\windows\\Project\\RVMDK\243\250"
+ 441      616B615C 
+ 441      4B414B41 
+ 441      4F535C43 
+ 441      5C77696E 
+ 442 0125 757635A3 		.ascii	"uv5\243\251\000"
+ 442      A900
  443              	.LASF2:
- 444 0146 63686172 		.ascii	"char\000"
+ 444 012b 63686172 		.ascii	"char\000"
  444      00
  445              	.LASF5:
- 446 014b 6D795F61 		.ascii	"my_abort\000"
+ 446 0130 6D795F61 		.ascii	"my_abort\000"
  446      626F7274 
  446      00
  447              		.ident	"GCC: (GNU Tools for Arm Embedded Processors 7-2018-q2-update) 7.3.1 20180622 (release) [AR
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccITU5uk.s 			page 10
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccqdBVpJ.s 			page 10
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 myassert.c
-G:\Users\Jaxb\AppData\Local\Temp\ccITU5uk.s:15     .text:00000000 $t
-G:\Users\Jaxb\AppData\Local\Temp\ccITU5uk.s:23     .text:00000000 my_abort
-G:\Users\Jaxb\AppData\Local\Temp\ccITU5uk.s:45     .text:0000000c $d
-G:\Users\Jaxb\AppData\Local\Temp\ccITU5uk.s:49     .text:00000010 $t
-G:\Users\Jaxb\AppData\Local\Temp\ccITU5uk.s:57     .text:00000010 _ASSERT
-G:\Users\Jaxb\AppData\Local\Temp\ccITU5uk.s:86     .text:00000020 $d
-G:\Users\Jaxb\AppData\Local\Temp\ccITU5uk.s:91     .rodata.str1.4:00000000 $d
+G:\Users\Jaxb\AppData\Local\Temp\ccqdBVpJ.s:15     .text:00000000 $t
+G:\Users\Jaxb\AppData\Local\Temp\ccqdBVpJ.s:23     .text:00000000 my_abort
+G:\Users\Jaxb\AppData\Local\Temp\ccqdBVpJ.s:45     .text:0000000c $d
+G:\Users\Jaxb\AppData\Local\Temp\ccqdBVpJ.s:49     .text:00000010 $t
+G:\Users\Jaxb\AppData\Local\Temp\ccqdBVpJ.s:57     .text:00000010 _ASSERT
+G:\Users\Jaxb\AppData\Local\Temp\ccqdBVpJ.s:86     .text:00000020 $d
+G:\Users\Jaxb\AppData\Local\Temp\ccqdBVpJ.s:91     .rodata.str1.4:00000000 $d
 
 UNDEFINED SYMBOLS
 ka_printf
