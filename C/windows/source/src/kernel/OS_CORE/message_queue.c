@@ -5,6 +5,7 @@
 #include <os_time.h>
 #include <os_delay.h>
 #include <os_suspend.h>
+#include <export.h>
 
 extern TCB * OSTCBCurPtr;
 
@@ -56,6 +57,7 @@ int msg_init(MQB *MQB_ptr,char *name,unsigned int max_message_num)
 	CPU_CRITICAL_EXIT();
 	return FUN_EXECUTE_SUCCESSFULLY;
 }
+EXPORT_SYMBOL(msg_init);
 
 int msg_send(MQB *MQB_ptr,struct message *message_ptr,MSG_FLAG flag,unsigned int time)
 {
@@ -145,6 +147,7 @@ int msg_send(MQB *MQB_ptr,struct message *message_ptr,MSG_FLAG flag,unsigned int
 	CPU_CRITICAL_EXIT();
 	return FUN_EXECUTE_SUCCESSFULLY;
 }
+EXPORT_SYMBOL(msg_send);
 
 int msg_receive(MQB *MQB_ptr,struct message **message_ptr,MSG_FLAG flag,unsigned int time)
 {
@@ -243,6 +246,7 @@ int msg_receive(MQB *MQB_ptr,struct message **message_ptr,MSG_FLAG flag,unsigned
 	CPU_CRITICAL_EXIT();
 	return FUN_EXECUTE_SUCCESSFULLY;
 }
+EXPORT_SYMBOL(msg_receive);
 
 int msg_del(MQB *MQB_ptr)
 {
@@ -289,6 +293,7 @@ int msg_del(MQB *MQB_ptr)
 	}
 	return FUN_EXECUTE_SUCCESSFULLY;
 }
+EXPORT_SYMBOL(msg_del);
 
 int message_init(struct message *message_ptr,unsigned int message_size,void *data)
 {
@@ -306,3 +311,4 @@ int message_init(struct message *message_ptr,unsigned int message_size,void *dat
 	message_ptr->tick = get_tick();
 	return FUN_EXECUTE_SUCCESSFULLY;
 }
+EXPORT_SYMBOL(message_init);

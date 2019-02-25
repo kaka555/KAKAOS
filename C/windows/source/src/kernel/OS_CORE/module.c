@@ -22,27 +22,8 @@
 
 typedef long                       rt_err_t;       /**< Type for error number */
 
-
-extern unsigned long _rt_module_symtab_begin;
-extern unsigned long _rt_module_symtab_end;
-
 static char *module_buffer = NULL;
 static unsigned int num = 0;
-
-UINT32 dlmodule_symbol_find(const char *sym_str)
-{
-    /* find in kernel symbol table */
-    struct rt_module_symtab *index;
-
-    for (index = (struct rt_module_symtab *)&_rt_module_symtab_begin;
-            index != (struct rt_module_symtab *)&_rt_module_symtab_end; index ++)
-    {
-        if (ka_strcmp(index->name, sym_str) == 0)
-            return (UINT32)index->addr;
-    }
-
-    return 0;
-}
 
 int dlmodule_relocate(struct rt_dlmodule *module, Elf32_Rel *rel, Elf32_Addr sym_val)
 {
@@ -287,7 +268,7 @@ rt_err_t dlmodule_load_shared_object(struct rt_dlmodule* module, void *module_pt
 
                 ka_printf("relocate symbol: %s", strtab + sym->st_name);
                 /* need to resolve symbol in kernel symbol table */
-                addr = dlmodule_symbol_find((const char *)(strtab + sym->st_name));
+                addr = get_export_function_addr((const char *)(strtab + sym->st_name));
                 if (addr == 0)
                 {
                     ka_printf("Module: can't find %s in kernel symbol table", strtab + sym->st_name);
@@ -485,6 +466,8 @@ rt_err_t dlmodule_load_relocated_object(struct rt_dlmodule* module, void *module
         /* relocate every items */
         for (i = 0; i < nr_reloc; i ++)
         {
+            ka_printf("relocate items round %d\n",i);
+
             Elf32_Sym *sym = &symtab[ELF32_R_SYM(rel->r_info)];
 
             ka_printf("relocate symbol: %s\n", strtab + sym->st_name);
@@ -546,7 +529,7 @@ rt_err_t dlmodule_load_relocated_object(struct rt_dlmodule* module, void *module
                     ka_printf("relocate symbol: %s\n", strtab + sym->st_name);
 
                     /* need to resolve symbol in kernel symbol table */
-                    addr = dlmodule_symbol_find((const char *)(strtab + sym->st_name));
+                    addr = get_export_function_addr((const char *)(strtab + sym->st_name));
                     if (addr != (Elf32_Addr)NULL)
                     {
                         dlmodule_relocate(module, rel, addr);

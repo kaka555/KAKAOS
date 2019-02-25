@@ -1,19 +1,21 @@
 #ifndef _EXPORT_H
 #define _EXPORT_H
+#include <kakaosstdint.h>
 
-struct rt_module_symtab
+struct ka_module_symtab
 {
 	void       *addr;
 	const char *name;
 };
 
-#define RTM_EXPORT(symbol)                                            \
+#define EXPORT_SYMBOL(symbol)                                            \
 const char __rtmsym_##symbol##_name[] __attribute__((section(".rodata.name"))) = #symbol; \
-const struct rt_module_symtab __rtmsym_##symbol __attribute__((section(".RTMSymTab")))= \
+const struct ka_module_symtab __rtmsym_##symbol __attribute__((section(".RTMSymTab")))= \
 {                                                                     \
     (void *)&symbol,                                                  \
     __rtmsym_##symbol##_name                                          \
-};
+}
 
+UINT32 get_export_function_addr(const char *fun_name);
 
 #endif

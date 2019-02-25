@@ -3,6 +3,7 @@
 #include <myassert.h>
 #include <os_cpu.h>
 #include <os_suspend.h>
+#include <export.h>
 
 extern volatile TCB * OSTCBCurPtr;
 
@@ -44,6 +45,7 @@ int mutex_init(MUTEX *MUTEX_ptr)
 	CPU_CRITICAL_EXIT();
 	return FUN_EXECUTE_SUCCESSFULLY;
 }
+EXPORT_SYMBOL(mutex_init);
 
 int mutex_lock(MUTEX *MUTEX_ptr)
 {
@@ -102,6 +104,7 @@ int mutex_lock(MUTEX *MUTEX_ptr)
 	}
 	return FUN_EXECUTE_SUCCESSFULLY;
 }
+EXPORT_SYMBOL(mutex_lock);
 
 int mutex_try_lock(MUTEX *MUTEX_ptr)
 {
@@ -129,6 +132,7 @@ int mutex_try_lock(MUTEX *MUTEX_ptr)
 		return -ERROR_MUTEX_LOCK_FAIL;
 	}
 }
+EXPORT_SYMBOL(mutex_try_lock);
 
 int mutex_unlock(MUTEX *MUTEX_ptr)
 {
@@ -175,6 +179,7 @@ int mutex_unlock(MUTEX *MUTEX_ptr)
 		return FUN_EXECUTE_SUCCESSFULLY;
 	}
 }
+EXPORT_SYMBOL(mutex_unlock);
 
 int mutex_del(MUTEX *MUTEX_ptr)
 {
@@ -198,3 +203,4 @@ int mutex_del(MUTEX *MUTEX_ptr)
 	}
 	return FUN_EXECUTE_SUCCESSFULLY;
 }
+EXPORT_SYMBOL(mutex_del);

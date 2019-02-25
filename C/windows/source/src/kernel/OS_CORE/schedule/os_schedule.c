@@ -9,6 +9,7 @@
 #include <osinit.h>
 #include <myMicroLIB.h>
 #include <os_time.h>
+#include <export.h>
 
 extern volatile TCB *OSTCBCurPtr;
 extern volatile TCB *OSTCBHighRdyPtr;
@@ -37,6 +38,7 @@ void schedule(void)
 	CPU_CRITICAL_EXIT();
 	return ;
 }
+EXPORT_SYMBOL(schedule);
 
 #if PRECISE_TIME_DELAY
 void delay_ms(unsigned int ms)
@@ -89,6 +91,7 @@ int sys_delay(unsigned int delay_ticks_num,TASK_STATE state)
 	CPU_CRITICAL_EXIT();
 	return (unsigned int)(OSTCBCurPtr->delay_reach_time - get_tick());
 }
+EXPORT_SYMBOL(sys_delay);
 
 int sys_suspend(TASK_STATE state)
 {
@@ -122,6 +125,7 @@ int sys_suspend(TASK_STATE state)
 	CPU_CRITICAL_EXIT();
 	return FUN_EXECUTE_SUCCESSFULLY;
 }
+EXPORT_SYMBOL(sys_suspend);
 
 int _must_check task_creat_ready(
 	unsigned int stack_size,
@@ -158,6 +162,7 @@ int _must_check task_creat_ready(
 	CPU_CRITICAL_EXIT();
 	return FUN_EXECUTE_SUCCESSFULLY;
 }
+EXPORT_SYMBOL(task_creat_ready);
 
 int _must_check task_init_ready(
 	TCB *TCB_ptr,
@@ -191,18 +196,19 @@ int _must_check task_init_ready(
 	CPU_CRITICAL_EXIT();
 	return FUN_EXECUTE_SUCCESSFULLY;
 }
+EXPORT_SYMBOL(task_init_ready);
 
-inline void sys_schedule_lock(void)
+void sys_schedule_lock(void)
 {
 	++g_schedule_lock;
 }
 
-inline void sys_schedule_unlock(void)
+void sys_schedule_unlock(void)
 {
 	--g_schedule_lock;
 }
 
-inline int sys_schedule_islock(void)
+int sys_schedule_islock(void)
 {
 	return (0 != g_schedule_lock);
 }

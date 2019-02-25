@@ -1,4 +1,4 @@
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 1
 
 
    1              		.cpu cortex-m3
@@ -58,7 +58,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
   31:../../source/src/kernel/OS_LIB/buddy.c **** {
   32:../../source/src/kernel/OS_LIB/buddy.c **** 	current_used_buddy_ptr = os_buddy_ptr_head;
   33:../../source/src/kernel/OS_LIB/buddy.c **** 	return (const struct buddy *)os_buddy_ptr_head;
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 2
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 2
 
 
   34:../../source/src/kernel/OS_LIB/buddy.c **** }
@@ -118,7 +118,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
   72:../../source/src/kernel/OS_LIB/buddy.c **** 	ASSERT((level>=1)&&(level<=current_used_buddy_ptr->info.max_level));
   41              		.loc 1 72 0
   42 0006 0446     		mov	r4, r0
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 3
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 3
 
 
   43 0008 2B4D     		ldr	r5, .L21
@@ -178,7 +178,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
   88              	.LBB45:
   63:../../source/src/kernel/OS_LIB/buddy.c **** 	current_used_buddy_ptr->order_link_flag[buffer] = NOTHING;
   89              		.loc 1 63 0
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 4
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 4
 
 
   90 003a A3F808C0 		strh	ip, [r3, #8]	@ movhi
@@ -238,7 +238,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  134              		.loc 1 82 0
  135 007c BDE8F081 		pop	{r4, r5, r6, r7, r8, pc}
  136              	.LVL7:
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 5
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 5
 
 
  137              	.L2:
@@ -298,7 +298,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  186              		.p2align 2,,3
  187              		.syntax unified
  188              		.thumb
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 6
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 6
 
 
  189              		.thumb_func
@@ -358,7 +358,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  132:../../source/src/kernel/OS_LIB/buddy.c **** 				_add_to_order_array(i,page_num); // insert into chain order_array[level]
  133:../../source/src/kernel/OS_LIB/buddy.c **** 				break ;
  134:../../source/src/kernel/OS_LIB/buddy.c **** 			}
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 7
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 7
 
 
  135:../../source/src/kernel/OS_LIB/buddy.c **** 		}
@@ -418,7 +418,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  151:../../source/src/kernel/OS_LIB/buddy.c **** 	current_used_buddy_ptr->flag[(current_used_buddy_ptr->level_flag_base[level-1]+index)/(sizeof(Flag
  232              		.loc 1 151 0 is_stmt 1
  233 00e6 4FF00042 		mov	r2, #-2147483648
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 8
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 8
 
 
  234 00ea 3068     		ldr	r0, [r6]
@@ -478,7 +478,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  156:../../source/src/kernel/OS_LIB/buddy.c **** 	ASSERT(buffer<=current_used_buddy_ptr->info.page_num-1);
  157:../../source/src/kernel/OS_LIB/buddy.c **** 	ASSERT(NOTHING == current_used_buddy_ptr->order_link_flag[buffer]);
  158:../../source/src/kernel/OS_LIB/buddy.c **** 	current_used_buddy_ptr->order_link_flag[buffer] = current_used_buddy_ptr->order_link_first;
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 9
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 9
 
 
  159:../../source/src/kernel/OS_LIB/buddy.c **** 	current_used_buddy_ptr->order_link_first = buffer; //change list's head
@@ -538,7 +538,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  213:../../source/src/kernel/OS_LIB/buddy.c **** |	order_array[MAX_LEVEL]		|	|
  214:../../source/src/kernel/OS_LIB/buddy.c **** |-------------------------------|	|
  215:../../source/src/kernel/OS_LIB/buddy.c **** |		room					|	|
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 10
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 10
 
 
  216:../../source/src/kernel/OS_LIB/buddy.c **** |		for 					|	|
@@ -598,7 +598,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  270:../../source/src/kernel/OS_LIB/buddy.c **** 	buddy_ptr->next = NULL;
  271:../../source/src/kernel/OS_LIB/buddy.c **** 	buddy_ptr->info.prio = dev_mem_para_ptr->prio;
  272:../../source/src/kernel/OS_LIB/buddy.c **** //init the data
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 11
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 11
 
 
  273:../../source/src/kernel/OS_LIB/buddy.c **** 	for(i=0;i<buddy_ptr->info.flag_array_num;++i)
@@ -658,7 +658,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  285              		@ frame_needed = 0, uses_anonymous_args = 0
  286              	.LVL27:
  287 0128 2DE9F041 		push	{r4, r5, r6, r7, r8, lr}
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 12
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 12
 
 
  288              	.LCFI2:
@@ -718,7 +718,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  344:../../source/src/kernel/OS_LIB/buddy.c **** 		_add_to_order_array(level,buffer+sizeof_level(level)); // add the second half of the block to pre
  345:../../source/src/kernel/OS_LIB/buddy.c **** 	}
  346:../../source/src/kernel/OS_LIB/buddy.c **** 	_deal_with_flag_alloc(level,buffer); // XOR the corresponding bit
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 13
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 13
 
 
  347:../../source/src/kernel/OS_LIB/buddy.c **** 	return buffer;
@@ -778,7 +778,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  366 018a 586A     		ldr	r0, [r3, #36]
  367              	.LBE53:
  368              	.LBE52:
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 14
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 14
 
 
  329:../../source/src/kernel/OS_LIB/buddy.c **** 		current_used_buddy_ptr->order_array[level-1] = current_used_buddy_ptr->link_body[index].next;
@@ -838,7 +838,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  414              	.LBE55:
  415              	.LBE58:
  416              	.LBE51:
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 15
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 15
 
 
  346:../../source/src/kernel/OS_LIB/buddy.c **** 	return buffer;
@@ -898,7 +898,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  361:../../source/src/kernel/OS_LIB/buddy.c **** 		return _add_of_num(num);
  362:../../source/src/kernel/OS_LIB/buddy.c **** 	}
  363:../../source/src/kernel/OS_LIB/buddy.c **** 	CPU_CRITICAL_EXIT();
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 16
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 16
 
 
  364:../../source/src/kernel/OS_LIB/buddy.c **** 	return NULL;
@@ -958,7 +958,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  418:../../source/src/kernel/OS_LIB/buddy.c **** 	CPU_CRITICAL_ENTER();
  419:../../source/src/kernel/OS_LIB/buddy.c **** 	Page_Num_Type num = _alloc_page(5);
  420:../../source/src/kernel/OS_LIB/buddy.c **** 	if(NOTHING != num)
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 17
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 17
 
 
  421:../../source/src/kernel/OS_LIB/buddy.c **** 	{
@@ -1018,7 +1018,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  475:../../source/src/kernel/OS_LIB/buddy.c **** 	CPU_CRITICAL_EXIT();
  476:../../source/src/kernel/OS_LIB/buddy.c **** 	return NULL;
  477:../../source/src/kernel/OS_LIB/buddy.c **** }
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 18
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 18
 
 
  478:../../source/src/kernel/OS_LIB/buddy.c **** 
@@ -1078,7 +1078,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  532:../../source/src/kernel/OS_LIB/buddy.c **** }
  533:../../source/src/kernel/OS_LIB/buddy.c **** 
  534:../../source/src/kernel/OS_LIB/buddy.c **** static inline int _check_flag(unsigned int level,Page_Num_Type page_num) 
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 19
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 19
 
 
  535:../../source/src/kernel/OS_LIB/buddy.c **** {
@@ -1138,7 +1138,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  470              		.cfi_offset 9, -16
  471              		.cfi_offset 10, -12
  472              		.cfi_offset 11, -8
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 20
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 20
 
 
  473              		.cfi_offset 14, -4
@@ -1198,7 +1198,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  518              		.loc 1 165 0
  519 0234 0A44     		add	r2, r2, r1
  520 0236 9542     		cmp	r5, r2
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 21
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 21
 
 
  521 0238 04D3     		bcc	.L58
@@ -1258,7 +1258,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  567 0270 00F2CA80 		bhi	.L137
  100:../../source/src/kernel/OS_LIB/buddy.c **** 	for(i=level;i<=current_used_buddy_ptr->info.max_level;++i)
  568              		.loc 1 100 0
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 22
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 22
 
 
  569 0274 002D     		cmp	r5, #0
@@ -1318,7 +1318,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  617              	.L66:
  618              	.LVL58:
   88:../../source/src/kernel/OS_LIB/buddy.c **** 		return (page_num - sizeof_level(level));
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 23
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 23
 
 
  619              		.loc 1 88 0
@@ -1378,7 +1378,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  665              		.loc 1 539 0
  666 0316 0190     		str	r0, [sp, #4]
  667 0318 2144     		add	r1, r1, r4
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 24
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 24
 
 
  668              	.LVL62:
@@ -1438,7 +1438,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  713              	.LVL68:
  714              	.L74:
  715              	.LBB98:
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 25
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 25
 
 
  716              	.LBB99:
@@ -1498,7 +1498,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  764 03b2 31F824B0 		ldrh	fp, [r1, r4, lsl #2]
  765 03b6 A246     		mov	r10, r4
  766 03b8 BB45     		cmp	fp, r7
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 26
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 26
 
 
  767 03ba 5BD0     		beq	.L145
@@ -1558,7 +1558,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  812 03f6 B9F1000F 		cmp	r9, #0
  813 03fa 7FF449AF 		bne	.L61
  814              	.LVL80:
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 27
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 27
 
 
  815              	.L138:
@@ -1618,7 +1618,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  862 0436 A842     		cmp	r0, r5
  863 0438 7FF6EBAE 		bls	.L146
  864 043c EEE6     		b	.L55
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 28
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 28
 
 
  865              	.LVL89:
@@ -1678,7 +1678,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  915              	.LBB122:
  132:../../source/src/kernel/OS_LIB/buddy.c **** 				break ;
  916              		.loc 1 132 0
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 29
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 29
 
 
  917 0468 CAE5     		b	_add_to_order_array
@@ -1738,7 +1738,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  964 0488 4FEA4A0B 		lsl	fp, r10, #1
  965 048c 31F81A00 		ldrh	r0, [r1, r10, lsl #1]
  966 0490 5944     		add	r1, r1, fp
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 30
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 30
 
 
  967 0492 A842     		cmp	r0, r5
@@ -1798,7 +1798,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  1015              	.LVL105:
  1016              	.LBB111:
  1017              	.LBB109:
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 31
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 31
 
 
  156:../../source/src/kernel/OS_LIB/buddy.c **** 	ASSERT(NOTHING == current_used_buddy_ptr->order_link_flag[buffer]);
@@ -1858,7 +1858,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  1068              	.LBB110:
  156:../../source/src/kernel/OS_LIB/buddy.c **** 	ASSERT(NOTHING == current_used_buddy_ptr->order_link_flag[buffer]);
  1069              		.loc 1 156 0
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 32
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 32
 
 
  1070 0518 9C21     		movs	r1, #156
@@ -1918,7 +1918,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  1118              		.loc 1 131 0
  1119 0552 8321     		movs	r1, #131
  1120 0554 0148     		ldr	r0, .L151
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 33
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 33
 
 
  1121 0556 FFF7FEFF 		bl	_ASSERT
@@ -1978,7 +1978,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  1171              		.loc 1 37 0
  1172              		.cfi_startproc
  1173              		@ args = 0, pretend = 0, frame = 0
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 34
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 34
 
 
  1174              		@ frame_needed = 0, uses_anonymous_args = 0
@@ -2038,7 +2038,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  1220              		.cfi_offset 14, -4
   50:../../source/src/kernel/OS_LIB/buddy.c **** 	unsigned int buffer = current_used_buddy_ptr->current_page_num;
  1221              		.loc 1 50 0
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 35
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 35
 
 
  1222 0582 FFF7FEFF 		bl	CPU_SR_Save
@@ -2098,7 +2098,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  1270              	.LVL128:
  1271 05ae 38BF     		it	cc
  1272 05b0 0020     		movcc	r0, #0
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 36
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 36
 
 
  1273 05b2 7047     		bx	lr
@@ -2158,7 +2158,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  1320              	.LVL132:
  224:../../source/src/kernel/OS_LIB/buddy.c **** 	unsigned int size;
  1321              		.loc 1 224 0
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 37
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 37
 
 
  1322 05cc 0646     		mov	r6, r0
@@ -2218,7 +2218,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  224:../../source/src/kernel/OS_LIB/buddy.c **** 	unsigned int size;
  1361              		.loc 1 224 0
  1362 05f8 82B0     		sub	sp, sp, #8
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 38
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 38
 
 
  1363              	.LCFI12:
@@ -2278,7 +2278,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  1402              		.loc 1 271 0
  1403 0624 3168     		ldr	r1, [r6]
  269:../../source/src/kernel/OS_LIB/buddy.c **** 	buddy_ptr->next = NULL;
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 39
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 39
 
 
  1404              		.loc 1 269 0
@@ -2338,7 +2338,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  1444 0650 2281     		strh	r2, [r4, #8]	@ movhi
  1445              	.LVL145:
  278:../../source/src/kernel/OS_LIB/buddy.c **** 		buddy_ptr->order_link_flag[i] = i+1;
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 40
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 40
 
 
  1446              		.loc 1 278 0
@@ -2398,7 +2398,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  1491              		.loc 1 286 0
  1492 0694 0023     		movs	r3, #0
  287:../../source/src/kernel/OS_LIB/buddy.c **** 		buddy_ptr->level_flag_base[i] = buddy_ptr->level_flag_base[i-1] + buffer;
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 41
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 41
 
 
  1493              		.loc 1 287 0
@@ -2458,7 +2458,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  1538 06d6 1644     		add	r6, r6, r2
  1539              	.LVL160:
  295:../../source/src/kernel/OS_LIB/buddy.c **** 	if(size % PAGE_SIZE_BYTE)
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 42
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 42
 
 
  1540              		.loc 1 295 0
@@ -2518,7 +2518,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  1583              	.L183:
  314:../../source/src/kernel/OS_LIB/buddy.c **** final_step:
  1584              		.loc 1 314 0 discriminator 1
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 43
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 43
 
 
  1585 070a 4FF49D71 		mov	r1, #314
@@ -2578,7 +2578,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  196:../../source/src/kernel/OS_LIB/buddy.c **** 	}
  1632              		.loc 1 196 0
  1633 0738 5463     		str	r4, [r2, #52]
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 44
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 44
 
 
  1634              	.LVL170:
@@ -2638,7 +2638,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  318:../../source/src/kernel/OS_LIB/buddy.c **** 
  1681              		.loc 1 318 0
  1682 0760 02B0     		add	sp, sp, #8
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 45
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 45
 
 
  1683              	.LCFI17:
@@ -2698,7 +2698,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  354:../../source/src/kernel/OS_LIB/buddy.c **** 	Page_Num_Type num = _alloc_page(1);
  1734              		.loc 1 354 0
  1735 078a FFF7FEFF 		bl	CPU_SR_Save
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 46
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 46
 
 
  1736              	.LVL179:
@@ -2758,7 +2758,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  1779 07ba 3046     		mov	r0, r6
  1780              	.LVL188:
  1781 07bc FFF7FEFF 		bl	CPU_SR_Restore
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 47
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 47
 
 
  1782              	.LVL189:
@@ -2818,7 +2818,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  371:../../source/src/kernel/OS_LIB/buddy.c **** 	if(NOTHING != num)
  1830              		.loc 1 371 0
  1831 07dc 0446     		mov	r4, r0
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 48
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 48
 
 
  1832              	.LVL196:
@@ -2878,7 +2878,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  1876              	.LFE20:
  1877              		.size	alloc_power2_page, .-alloc_power2_page
  1878              		.align	1
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 49
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 49
 
 
  1879              		.p2align 2,,3
@@ -2938,7 +2938,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  1924 0824 2A68     		ldr	r2, [r5]
  1925 0826 D369     		ldr	r3, [r2, #28]
  1926 0828 043B     		subs	r3, r3, #4
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 50
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 50
 
 
  1927 082a D361     		str	r3, [r2, #28]
@@ -2998,7 +2998,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  1974              		@ frame_needed = 0, uses_anonymous_args = 0
  1975              	.LVL217:
  1976 0848 70B5     		push	{r4, r5, r6, lr}
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 51
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 51
 
 
  1977              	.LCFI22:
@@ -3058,7 +3058,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  2021              	.LBE147:
  2022              	.LBE146:
  413:../../source/src/kernel/OS_LIB/buddy.c **** 
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 52
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 52
 
 
  2023              		.loc 1 413 0
@@ -3118,7 +3118,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  2071              		.loc 1 419 0
  2072 0890 0520     		movs	r0, #5
  2073              	.LVL233:
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 53
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 53
 
 
  2074 0892 FFF749FC 		bl	_alloc_page
@@ -3178,7 +3178,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  429:../../source/src/kernel/OS_LIB/buddy.c **** 
  2117              		.loc 1 429 0
  2118 08c2 70BD     		pop	{r4, r5, r6, pc}
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 54
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 54
 
 
  2119              	.LVL242:
@@ -3238,7 +3238,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  439:../../source/src/kernel/OS_LIB/buddy.c **** 		CPU_CRITICAL_EXIT();
  2167              		.loc 1 439 0
  2168 08e0 084D     		ldr	r5, .L247
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 55
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 55
 
 
  440:../../source/src/kernel/OS_LIB/buddy.c **** 		return _add_of_num(num);
@@ -3298,7 +3298,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  2215              		.thumb_func
  2216              		.fpu softvfp
  2217              		.type	alloc_power7_page, %function
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 56
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 56
 
 
  2218              	alloc_power7_page:
@@ -3358,7 +3358,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  2262              	.LVL263:
  2263              	.LBB152:
  2264              	.LBB153:
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 57
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 57
 
 
  142:../../source/src/kernel/OS_LIB/buddy.c **** }
@@ -3418,7 +3418,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  2313              		.cfi_offset 6, -8
  2314              		.cfi_offset 14, -4
  466:../../source/src/kernel/OS_LIB/buddy.c **** 	Page_Num_Type num = _alloc_page(8);
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 58
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 58
 
 
  2315              		.loc 1 466 0
@@ -3478,7 +3478,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  475:../../source/src/kernel/OS_LIB/buddy.c **** 	return NULL;
  2359              		.loc 1 475 0
  2360 097a 3046     		mov	r0, r6
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 59
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 59
 
 
  2361              	.LVL279:
@@ -3538,7 +3538,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  2409 0996 4FF6FF73 		movw	r3, #65535
  2410 099a 9842     		cmp	r0, r3
  483:../../source/src/kernel/OS_LIB/buddy.c **** 	if(NOTHING != num)
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 60
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 60
 
 
  2411              		.loc 1 483 0
@@ -3598,7 +3598,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  2455 09c8 00000000 		.word	.LANCHOR0
  2456              		.cfi_endproc
  2457              	.LFE27:
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 61
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 61
 
 
  2458              		.size	alloc_power9_page, .-alloc_power9_page
@@ -3658,7 +3658,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  503:../../source/src/kernel/OS_LIB/buddy.c **** 		CPU_CRITICAL_EXIT();
  2504              		.loc 1 503 0
  2505 09e8 2A68     		ldr	r2, [r5]
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 62
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 62
 
 
  2506 09ea D369     		ldr	r3, [r2, #28]
@@ -3718,7 +3718,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  592:../../source/src/kernel/OS_LIB/buddy.c **** {
  2552              		.loc 1 592 0
  2553              		.cfi_startproc
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 63
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 63
 
 
  2554              		@ args = 0, pretend = 0, frame = 0
@@ -3778,7 +3778,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  598:../../source/src/kernel/OS_LIB/buddy.c **** 	CPU_CRITICAL_EXIT();
  2598              		.loc 1 598 0
  2599 0a32 FFF7FEBF 		b	CPU_SR_Restore
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 64
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 64
 
 
  2600              	.LVL314:
@@ -3838,7 +3838,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  2644              	.LVL318:
  606:../../source/src/kernel/OS_LIB/buddy.c **** 	_return_page(ptr,2);
  2645              		.loc 1 606 0
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 65
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 65
 
 
  2646 0a4c 1A68     		ldr	r2, [r3]
@@ -3898,7 +3898,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  2694              		.cfi_offset 5, -8
  2695              		.cfi_offset 14, -4
  2696              		.loc 1 612 0
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 66
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 66
 
 
  2697 0a6a 0546     		mov	r5, r0
@@ -3958,7 +3958,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  2741              		.p2align 2,,3
  2742              		.global	return_power4_page
  2743              		.syntax unified
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 67
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 67
 
 
  2744              		.thumb
@@ -4018,7 +4018,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  629:../../source/src/kernel/OS_LIB/buddy.c **** }
  2787              		.loc 1 629 0
  2788 0ab2 BDE83840 		pop	{r3, r4, r5, lr}
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 68
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 68
 
 
  2789              	.LCFI36:
@@ -4078,7 +4078,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  2835              		.loc 1 636 0
  2836 0aca 074B     		ldr	r3, .L282
  637:../../source/src/kernel/OS_LIB/buddy.c **** 	_return_page(ptr,5);
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 69
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 69
 
 
  2837              		.loc 1 637 0
@@ -4138,7 +4138,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  2883              		.cfi_startproc
  2884              		@ args = 0, pretend = 0, frame = 0
  2885              		@ frame_needed = 0, uses_anonymous_args = 0
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 70
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 70
 
 
  2886              	.LVL343:
@@ -4198,7 +4198,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  2930              	.LVL349:
  2931              	.L286:
  2932 0b12 00BF     		.align	2
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 71
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 71
 
 
  2933              	.L285:
@@ -4258,7 +4258,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  2977 0b2a D369     		ldr	r3, [r2, #28]
  2978 0b2c 4033     		adds	r3, r3, #64
  2979 0b2e D361     		str	r3, [r2, #28]
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 72
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 72
 
 
  2980              		.loc 1 657 0
@@ -4318,7 +4318,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  663:../../source/src/kernel/OS_LIB/buddy.c **** 	CPU_SR_ALLOC();
  664:../../source/src/kernel/OS_LIB/buddy.c **** 	CPU_CRITICAL_ENTER();
  3028              		.loc 1 664 0
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 73
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 73
 
 
  3029 0b48 FFF7FEFF 		bl	CPU_SR_Save
@@ -4378,7 +4378,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  3075              		.thumb_func
  3076              		.fpu softvfp
  3077              		.type	return_power9_page, %function
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 74
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 74
 
 
  3078              	return_power9_page:
@@ -4438,7 +4438,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  3120              		.cfi_restore 14
  3121              		.cfi_restore 5
  3122              		.cfi_restore 4
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 75
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 75
 
 
  3123              		.cfi_restore 3
@@ -4498,7 +4498,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  3168 0ba8 2846     		mov	r0, r5
  3169              	.LVL374:
  686:../../source/src/kernel/OS_LIB/buddy.c **** 	_return_page(ptr,10);
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 76
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 76
 
 
  3170              		.loc 1 686 0
@@ -4558,7 +4558,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  698:../../source/src/kernel/OS_LIB/buddy.c **** 	//int page_num = (0x00000001<<(level-1))<<offset -1;
  699:../../source/src/kernel/OS_LIB/buddy.c **** 	unsigned int page_num = sizeof_level(level)*2*offset;
  700:../../source/src/kernel/OS_LIB/buddy.c **** 	if(NOTHING == current_used_buddy_ptr->order_array[level-1])
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 77
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 77
 
 
  701:../../source/src/kernel/OS_LIB/buddy.c **** 	{
@@ -4618,7 +4618,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  755:../../source/src/kernel/OS_LIB/buddy.c **** 	struct order_link buffer;
  756:../../source/src/kernel/OS_LIB/buddy.c **** 	unsigned int offset;
  757:../../source/src/kernel/OS_LIB/buddy.c **** 	for(i=0;i<current_used_buddy_ptr->info.max_level;++i) //each level
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 78
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 78
 
 
  758:../../source/src/kernel/OS_LIB/buddy.c **** 	{
@@ -4678,7 +4678,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  812:../../source/src/kernel/OS_LIB/buddy.c **** 					{
  813:../../source/src/kernel/OS_LIB/buddy.c **** 						PRINTF("level %d,page_num %d error\n",i+1,num);
  814:../../source/src/kernel/OS_LIB/buddy.c **** 						return -1;
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 79
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 79
 
 
  815:../../source/src/kernel/OS_LIB/buddy.c **** 					}
@@ -4738,7 +4738,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  3227              		.cfi_offset 11, -8
  3228              		.cfi_offset 14, -4
  3229              	.LBB177:
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 80
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 80
 
 
  3230              	.LBB178:
@@ -4798,7 +4798,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
   50:../../source/src/kernel/OS_LIB/buddy.c **** 	unsigned int buffer = current_used_buddy_ptr->current_page_num;
  3269              		.loc 1 50 0
  3270 0bfa FFF7FEFF 		bl	CPU_SR_Save
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 81
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 81
 
 
  3271              	.LVL383:
@@ -4858,7 +4858,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  872:../../source/src/kernel/OS_LIB/buddy.c **** 		PRINTF("=====================================================\n");
  3315              		.loc 1 872 0
  3316 0c40 B248     		ldr	r0, .L400+4
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 82
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 82
 
 
  3317 0c42 FFF7FEFF 		bl	ka_printf
@@ -4918,7 +4918,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  3358              		.loc 1 883 0
  3359 0c84 0026     		movs	r6, #0
  3360 0c86 3546     		mov	r5, r6
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 83
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 83
 
 
  881:../../source/src/kernel/OS_LIB/buddy.c **** 		PRINTF("each level's infomation :\n");
@@ -4978,7 +4978,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  3393 0cb6 1369     		ldr	r3, [r2, #16]
  3394 0cb8 9B5B     		ldrh	r3, [r3, r6]
  3395 0cba 4B45     		cmp	r3, r9
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 84
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 84
 
 
  3396 0cbc 00F0A080 		beq	.L392
@@ -5038,7 +5038,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  3438              	.LVL411:
  906:../../source/src/kernel/OS_LIB/buddy.c **** 	//=========================================================================
  907:../../source/src/kernel/OS_LIB/buddy.c **** 	//start check the buddy info
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 85
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 85
 
 
  908:../../source/src/kernel/OS_LIB/buddy.c **** 		PRINTF("\nnow going to check the buddy info.......\n");
@@ -5098,7 +5098,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  3485 0d3c 8048     		ldr	r0, .L400+56
  3486 0d3e FFF7FEFF 		bl	ka_printf
  3487              	.LVL417:
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 86
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 86
 
 
  846:../../source/src/kernel/OS_LIB/buddy.c **** 
@@ -5158,7 +5158,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  3535              	.LVL422:
  775:../../source/src/kernel/OS_LIB/buddy.c **** 				}
  3536              		.loc 1 775 0
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 87
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 87
 
 
  3537 0da8 A400     		lsls	r4, r4, #2
@@ -5218,7 +5218,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  3579              	.LVL429:
  3580              	.LBB221:
  3581              	.LBB222:
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 88
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 88
 
 
   38:../../source/src/kernel/OS_LIB/buddy.c **** 	{
@@ -5278,7 +5278,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  831:../../source/src/kernel/OS_LIB/buddy.c **** 			{
  3631              		.loc 1 831 0
  3632 0e16 1AF1FF3A 		adds	r10, r10, #-1
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 89
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 89
 
 
  3633              	.LVL437:
@@ -5338,7 +5338,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  3681              		.loc 1 747 0
  3682 0e60 436A     		ldr	r3, [r0, #36]
  3683 0e62 023B     		subs	r3, r3, #2
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 90
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 90
 
 
  3684 0e64 4B45     		cmp	r3, r9
@@ -5398,7 +5398,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  3730              		.loc 1 699 0
  3731 0ea6 04FB02F4 		mul	r4, r4, r2
  3732              	.LVL450:
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 91
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 91
 
 
  700:../../source/src/kernel/OS_LIB/buddy.c **** 	{
@@ -5458,7 +5458,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  709:../../source/src/kernel/OS_LIB/buddy.c **** 			if(2 < num)
  3776              		.loc 1 709 0
  3777 0eea 0EF1010E 		add	lr, lr, #1
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 92
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 92
 
 
  3778              	.LVL456:
@@ -5518,7 +5518,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  3829              	.L398:
  3830              	.LBB227:
  3831              	.LBB219:
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 93
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 93
 
 
  3832              	.LBB214:
@@ -5578,7 +5578,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  3879 0f9e FFF7FEFF 		bl	_ASSERT
  3880              	.LVL467:
  3881 0fa2 DDE90223 		ldrd	r2, r3, [sp, #8]
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 94
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 94
 
 
  3882 0fa6 DBF80000 		ldr	r0, [fp]
@@ -5638,7 +5638,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  3932 0ff6 8C42     		cmp	r4, r1
  3933 0ff8 7FF47CAF 		bne	.L322
  3934 0ffc 0BE7     		b	.L312
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 95
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 95
 
 
  3935              	.LVL476:
@@ -5698,7 +5698,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  3981              		.loc 1 920 0
  3982 103a 1248     		ldr	r0, .L402+8
  3983 103c FFF7FEFF 		bl	ka_printf
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 96
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 96
 
 
  3984              	.LVL480:
@@ -5758,7 +5758,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  4033              	.LBE211:
  4034              	.LBE217:
  4035              	.LBE220:
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 97
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 97
 
 
  4036              	.LBE229:
@@ -5818,7 +5818,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  4076      75206D65 
  4076      6D6F7279 
  4076      203A200A 
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 98
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 98
 
 
  4076      00
@@ -5878,7 +5878,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  4101              	.LC12:
  4102 015c 65616368 		.ascii	"each level's infomation :\012\000"
  4102      206C6576 
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 99
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 99
 
 
  4102      656C2773 
@@ -5938,7 +5938,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  4127      65642E4E 
  4127      6F746869 
  4127      6E672077 
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 100
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 100
 
 
  4128 0271 000000   		.space	3
@@ -5998,7 +5998,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  4164 0011 E6060000 		.4byte	.LASF109
  4165 0015 F2010000 		.4byte	.LASF110
  4166 0019 00000000 		.4byte	.Ltext0
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 101
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 101
 
 
  4167 001d 88100000 		.4byte	.Letext0
@@ -6058,7 +6058,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  4221 0086 65000000 		.4byte	0x65
  4222 008a 02       		.byte	0x2
  4223 008b 23       		.byte	0x23
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 102
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 102
 
 
  4224 008c 00       		.uleb128 0
@@ -6118,7 +6118,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  4278 00ee 04       		.byte	0x4
  4279 00ef 12       		.byte	0x12
  4280 00f0 C3000000 		.4byte	0xc3
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 103
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 103
 
 
  4281 00f4 04       		.uleb128 0x4
@@ -6178,7 +6178,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  4335 015a BA040000 		.4byte	.LASF22
  4336 015e 04       		.byte	0x4
  4337 015f 1E       		.byte	0x1e
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 104
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 104
 
 
  4338 0160 65000000 		.4byte	0x65
@@ -6238,7 +6238,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  4392 01c0 FF000000 		.4byte	0xff
  4393 01c4 02       		.byte	0x2
  4394 01c5 23       		.byte	0x23
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 105
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 105
 
 
  4395 01c6 08       		.uleb128 0x8
@@ -6298,7 +6298,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  4449 0226 02       		.byte	0x2
  4450 0227 23       		.byte	0x23
  4451 0228 34       		.uleb128 0x34
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 106
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 106
 
 
  4452 0229 06       		.uleb128 0x6
@@ -6358,7 +6358,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  4506 0295 00000000 		.4byte	current_used_buddy_ptr
  4507 0299 0F       		.uleb128 0xf
  4508 029a D6060000 		.4byte	.LASF111
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 107
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 107
 
 
  4509 029e 01       		.byte	0x1
@@ -6418,7 +6418,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  4563 0322 CC0B0000 		.4byte	.LBB177
  4564 0326 68010000 		.4byte	.Ldebug_ranges0+0x168
  4565 032a 01       		.byte	0x1
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 108
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 108
 
 
  4566 032b 5B03     		.2byte	0x35b
@@ -6478,7 +6478,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  4620 03bc 1B       		.uleb128 0x1b
  4621 03bd 03080000 		.4byte	0x803
  4622 03c1 E6010000 		.4byte	.LLST128
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 109
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 109
 
 
  4623 03c5 1B       		.uleb128 0x1b
@@ -6538,7 +6538,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  4677 044b 50       		.byte	0x50
  4678 044c 05       		.byte	0x5
  4679 044d 03       		.byte	0x3
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 110
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 110
 
 
  4680 044e 00000000 		.4byte	.LC0
@@ -6598,7 +6598,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  4734 04c0 03       		.byte	0x3
  4735 04c1 00000000 		.4byte	.LC0
  4736 04c5 20       		.uleb128 0x20
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 111
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 111
 
 
  4737 04c6 01       		.byte	0x1
@@ -6658,7 +6658,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  4791 0531 20       		.uleb128 0x20
  4792 0532 01       		.byte	0x1
  4793 0533 50       		.byte	0x50
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 112
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 112
 
 
  4794 0534 05       		.byte	0x5
@@ -6718,7 +6718,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  4848 05a0 01       		.byte	0x1
  4849 05a1 9603     		.2byte	0x396
  4850 05a3 B1050000 		.4byte	0x5b1
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 113
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 113
 
 
  4851 05a7 1D       		.uleb128 0x1d
@@ -6778,7 +6778,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  4905 0613 20       		.uleb128 0x20
  4906 0614 01       		.byte	0x1
  4907 0615 51       		.byte	0x51
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 114
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 114
 
 
  4908 0616 02       		.byte	0x2
@@ -6838,7 +6838,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  4962 0685 50       		.byte	0x50
  4963 0686 02       		.byte	0x2
  4964 0687 77       		.byte	0x77
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 115
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 115
 
 
  4965 0688 00       		.sleb128 0
@@ -6898,7 +6898,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  5019 06e8 01       		.byte	0x1
  5020 06e9 50       		.byte	0x50
  5021 06ea 02       		.byte	0x2
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 116
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 116
 
 
  5022 06eb 77       		.byte	0x77
@@ -6958,7 +6958,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  5076 074e E00D0000 		.4byte	.LVL428
  5077 0752 BD1E0000 		.4byte	0x1ebd
  5078 0756 64070000 		.4byte	0x764
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 117
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 117
 
 
  5079 075a 20       		.uleb128 0x20
@@ -7018,7 +7018,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  5133 07c6 CA1E0000 		.4byte	0x1eca
  5134 07ca 21       		.uleb128 0x21
  5135 07cb 7A100000 		.4byte	.LVL487
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 118
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 118
 
 
  5136 07cf B01E0000 		.4byte	0x1eb0
@@ -7078,7 +7078,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  5190 0834 67080000 		.4byte	0x867
  5191 0838 24       		.uleb128 0x24
  5192 0839 6900     		.ascii	"i\000"
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 119
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 119
 
 
  5193 083b 01       		.byte	0x1
@@ -7138,7 +7138,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  5247 08b5 01       		.byte	0x1
  5248 08b6 F7080000 		.4byte	0x8f7
  5249 08ba 27       		.uleb128 0x27
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 120
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 120
 
 
  5250 08bb B4040000 		.4byte	.LASF44
@@ -7198,7 +7198,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  5304 0944 54090000 		.4byte	0x954
  5305 0948 20       		.uleb128 0x20
  5306 0949 01       		.byte	0x1
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 121
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 121
 
 
  5307 094a 50       		.byte	0x50
@@ -7258,7 +7258,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  5361 09b9 01       		.byte	0x1
  5362 09ba 39       		.byte	0x39
  5363 09bb 00       		.byte	0
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 122
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 122
 
 
  5364 09bc 22       		.uleb128 0x22
@@ -7318,7 +7318,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  5418 0a31 10050000 		.4byte	.LASF57
  5419 0a35 01       		.byte	0x1
  5420 0a36 8B02     		.2byte	0x28b
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 123
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 123
 
 
  5421 0a38 01       		.byte	0x1
@@ -7378,7 +7378,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  5475 0ab3 70747200 		.ascii	"ptr\000"
  5476 0ab7 01       		.byte	0x1
  5477 0ab8 8102     		.2byte	0x281
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 124
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 124
 
 
  5478 0aba AF000000 		.4byte	0xaf
@@ -7438,7 +7438,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  5532 0b36 EC070000 		.4byte	.LLST105
  5533 0b3a 18       		.uleb128 0x18
  5534 0b3b C80A0000 		.4byte	.LVL337
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 125
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 125
 
 
  5535 0b3f 961E0000 		.4byte	0x1e96
@@ -7498,7 +7498,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  5589 0bba 50       		.byte	0x50
  5590 0bbb 02       		.byte	0x2
  5591 0bbc 75       		.byte	0x75
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 126
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 126
 
 
  5592 0bbd 00       		.sleb128 0
@@ -7558,7 +7558,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  5646 0c2c 22       		.uleb128 0x22
  5647 0c2d 8E0A0000 		.4byte	.LVL328
  5648 0c31 01       		.byte	0x1
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 127
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 127
 
 
  5649 0c32 A31E0000 		.4byte	0x1ea3
@@ -7618,7 +7618,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  5703 0ca8 01       		.byte	0x1
  5704 0ca9 100A0000 		.4byte	.LFB34
  5705 0cad 3C0A0000 		.4byte	.LFE34
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 128
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 128
 
 
  5706 0cb1 C8090000 		.4byte	.LLST91
@@ -7678,7 +7678,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  5760 0d2d BD0A0000 		.4byte	.LLST15
  5761 0d31 11       		.uleb128 0x11
  5762 0d32 B4040000 		.4byte	.LASF44
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 129
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 129
 
 
  5763 0d36 01       		.byte	0x1
@@ -7738,7 +7738,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  5817 0dcb 98000000 		.4byte	.Ldebug_ranges0+0x98
  5818 0dcf 01       		.byte	0x1
  5819 0dd0 73       		.byte	0x73
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 130
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 130
 
 
  5820 0dd1 F30D0000 		.4byte	0xdf3
@@ -7798,7 +7798,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  5874 0e49 51       		.byte	0x51
  5875 0e4a 02       		.byte	0x2
  5876 0e4b 08       		.byte	0x8
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 131
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 131
 
 
  5877 0e4c 57       		.byte	0x57
@@ -7858,7 +7858,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  5931 0ebd 00       		.byte	0
  5932 0ebe 00       		.byte	0
  5933 0ebf 00       		.byte	0
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 132
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 132
 
 
  5934 0ec0 2A       		.uleb128 0x2a
@@ -7918,7 +7918,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  5988 0f42 05       		.byte	0x5
  5989 0f43 03       		.byte	0x3
  5990 0f44 00000000 		.4byte	.LC0
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 133
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 133
 
 
  5991 0f48 20       		.uleb128 0x20
@@ -7978,7 +7978,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  6045 0fa9 BE0F0000 		.4byte	0xfbe
  6046 0fad 20       		.uleb128 0x20
  6047 0fae 01       		.byte	0x1
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 134
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 134
 
 
  6048 0faf 50       		.byte	0x50
@@ -8038,7 +8038,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  6102 100c 20       		.uleb128 0x20
  6103 100d 01       		.byte	0x1
  6104 100e 51       		.byte	0x51
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 135
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 135
 
 
  6105 100f 03       		.byte	0x3
@@ -8098,7 +8098,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  6159 107f 20       		.uleb128 0x20
  6160 1080 01       		.byte	0x1
  6161 1081 51       		.byte	0x51
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 136
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 136
 
 
  6162 1082 02       		.byte	0x2
@@ -8158,7 +8158,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  6216 10d9 00       		.byte	0
  6217 10da 1F       		.uleb128 0x1f
  6218 10db 52040000 		.4byte	.LVL93
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 137
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 137
 
 
  6219 10df B01E0000 		.4byte	0x1eb0
@@ -8218,7 +8218,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  6273 1139 1F       		.uleb128 0x1f
  6274 113a 26020000 		.4byte	.LVL47
  6275 113e B01E0000 		.4byte	0x1eb0
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 138
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 138
 
 
  6276 1142 57110000 		.4byte	0x1157
@@ -8278,7 +8278,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  6330 119b 05       		.byte	0x5
  6331 119c 03       		.byte	0x3
  6332 119d 00000000 		.4byte	.LC0
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 139
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 139
 
 
  6333 11a1 20       		.uleb128 0x20
@@ -8338,7 +8338,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  6387 1213 26       		.uleb128 0x26
  6388 1214 A5000000 		.4byte	.LASF67
  6389 1218 01       		.byte	0x1
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 140
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 140
 
 
  6390 1219 1A02     		.2byte	0x21a
@@ -8398,7 +8398,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  6444 1296 81050000 		.4byte	.LASF54
  6445 129a 01       		.byte	0x1
  6446 129b F101     		.2byte	0x1f1
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 141
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 141
 
 
  6447 129d 6C020000 		.4byte	0x26c
@@ -8458,7 +8458,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  6501 1314 2E       		.uleb128 0x2e
  6502 1315 01       		.byte	0x1
  6503 1316 C2010000 		.4byte	.LASF71
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 142
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 142
 
 
  6504 131a 01       		.byte	0x1
@@ -8518,7 +8518,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  6558 139f 00       		.sleb128 0
  6559 13a0 00       		.byte	0
  6560 13a1 21       		.uleb128 0x21
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 143
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 143
 
 
  6561 13a2 C2090000 		.4byte	.LVL293
@@ -8578,7 +8578,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  6615 1427 50       		.byte	0x50
  6616 1428 01       		.byte	0x1
  6617 1429 38       		.byte	0x38
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 144
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 144
 
 
  6618 142a 00       		.byte	0
@@ -8638,7 +8638,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  6672 14a3 1D       		.uleb128 0x1d
  6673 14a4 091C0000 		.4byte	0x1c09
  6674 14a8 BC100000 		.4byte	.LLST78
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 145
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 145
 
 
  6675 14ac 00       		.byte	0
@@ -8698,7 +8698,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  6729 151d 12       		.uleb128 0x12
  6730 151e 6E756D00 		.ascii	"num\000"
  6731 1522 01       		.byte	0x1
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 146
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 146
 
 
  6732 1523 B301     		.2byte	0x1b3
@@ -8758,7 +8758,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  6786 1595 01       		.byte	0x1
  6787 1596 AF000000 		.4byte	0xaf
  6788 159a 88080000 		.4byte	.LFB23
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 147
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 147
 
 
  6789 159e C8080000 		.4byte	.LFE23
@@ -8818,7 +8818,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  6843 1622 20       		.uleb128 0x20
  6844 1623 01       		.byte	0x1
  6845 1624 50       		.byte	0x50
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 148
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 148
 
 
  6846 1625 02       		.byte	0x2
@@ -8878,7 +8878,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  6900 16a4 70080000 		.4byte	.LVL224
  6901 16a8 A31E0000 		.4byte	0x1ea3
  6902 16ac B7160000 		.4byte	0x16b7
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 149
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 149
 
 
  6903 16b0 20       		.uleb128 0x20
@@ -8938,7 +8938,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  6957 1726 0E080000 		.4byte	.LVL205
  6958 172a 961E0000 		.4byte	0x1e96
  6959 172e 1F       		.uleb128 0x1f
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 150
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 150
 
 
  6960 172f 16080000 		.4byte	.LVL208
@@ -8998,7 +8998,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  7014 17a1 05130000 		.4byte	.LLST57
  7015 17a5 15       		.uleb128 0x15
  7016 17a6 F81B0000 		.4byte	0x1bf8
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 151
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 151
 
 
  7017 17aa F0070000 		.4byte	.LBB142
@@ -9058,7 +9058,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  7071 181e 01       		.byte	0x1
  7072 181f A2180000 		.4byte	0x18a2
  7073 1823 13       		.uleb128 0x13
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 152
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 152
 
 
  7074 1824 81050000 		.4byte	.LASF54
@@ -9118,7 +9118,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  7128 189f 00       		.sleb128 0
  7129 18a0 00       		.byte	0
  7130 18a1 00       		.byte	0
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 153
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 153
 
 
  7131 18a2 2F       		.uleb128 0x2f
@@ -9178,7 +9178,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  7185 192b 02       		.byte	0x2
  7186 192c 08       		.byte	0x8
  7187 192d 9D       		.byte	0x9d
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 154
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 154
 
 
  7188 192e 00       		.byte	0
@@ -9238,7 +9238,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  7242 198c 02       		.byte	0x2
  7243 198d 75       		.byte	0x75
  7244 198e 00       		.sleb128 0
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 155
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 155
 
 
  7245 198f 20       		.uleb128 0x20
@@ -9298,7 +9298,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  7299 19ed 01       		.byte	0x1
  7300 19ee E2       		.byte	0xe2
  7301 19ef 65000000 		.4byte	0x65
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 156
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 156
 
 
  7302 19f3 6D150000 		.4byte	.LLST45
@@ -9358,7 +9358,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  7356 1a80 9F160000 		.4byte	.LLST50
  7357 1a84 00       		.byte	0
  7358 1a85 00       		.byte	0
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 157
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 157
 
 
  7359 1a86 1F       		.uleb128 0x1f
@@ -9418,7 +9418,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  7413 1aec 0A       		.byte	0xa
  7414 1aed 3A01     		.2byte	0x13a
  7415 1aef 00       		.byte	0
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 158
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 158
 
 
  7416 1af0 1F       		.uleb128 0x1f
@@ -9478,7 +9478,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  7470 1b4d 33000000 		.4byte	0x33
  7471 1b51 01       		.byte	0x1
  7472 1b52 621B0000 		.4byte	0x1b62
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 159
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 159
 
 
  7473 1b56 3C       		.uleb128 0x3c
@@ -9538,7 +9538,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  7527 1bd1 05       		.byte	0x5
  7528 1bd2 03       		.byte	0x3
  7529 1bd3 00000000 		.4byte	.LC0
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 160
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 160
 
 
  7530 1bd7 20       		.uleb128 0x20
@@ -9598,7 +9598,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  7584 1c34 FF000000 		.4byte	0xff
  7585 1c38 3F       		.uleb128 0x3f
  7586 1c39 6900     		.ascii	"i\000"
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 161
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 161
 
 
  7587 1c3b 01       		.byte	0x1
@@ -9658,7 +9658,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  7641 1cb3 48000000 		.4byte	0x48
  7642 1cb7 7E180000 		.4byte	.LLST3
  7643 1cbb 3A       		.uleb128 0x3a
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 162
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 162
 
 
  7644 1cbc 3B010000 		.4byte	.LASF95
@@ -9718,7 +9718,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  7698 1d28 B01E0000 		.4byte	0x1eb0
  7699 1d2c 401D0000 		.4byte	0x1d40
  7700 1d30 20       		.uleb128 0x20
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 163
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 163
 
 
  7701 1d31 01       		.byte	0x1
@@ -9778,7 +9778,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  7755 1d88 3A       		.uleb128 0x3a
  7756 1d89 6C040000 		.4byte	.LASF42
  7757 1d8d 01       		.byte	0x1
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 164
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 164
 
 
  7758 1d8e 3A       		.byte	0x3a
@@ -9838,7 +9838,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  7812 1df7 65000000 		.4byte	0x65
  7813 1dfb 03       		.byte	0x3
  7814 1dfc 0C1E0000 		.4byte	0x1e0c
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 165
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 165
 
 
  7815 1e00 39       		.uleb128 0x39
@@ -9898,7 +9898,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  7869 1e87 01       		.byte	0x1
  7870 1e88 961E0000 		.4byte	0x1e96
  7871 1e8c 1D       		.uleb128 0x1d
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 166
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 166
 
 
  7872 1e8d 561B0000 		.4byte	0x1b56
@@ -9958,7 +9958,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  7926              	.Ldebug_abbrev0:
  7927 0000 01       		.uleb128 0x1
  7928 0001 11       		.uleb128 0x11
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 167
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 167
 
 
  7929 0002 01       		.byte	0x1
@@ -10018,7 +10018,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  7983 0038 01       		.byte	0x1
  7984 0039 03       		.uleb128 0x3
  7985 003a 0E       		.uleb128 0xe
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 168
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 168
 
 
  7986 003b 0B       		.uleb128 0xb
@@ -10078,7 +10078,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  8040 0071 0B       		.uleb128 0xb
  8041 0072 3B       		.uleb128 0x3b
  8042 0073 0B       		.uleb128 0xb
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 169
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 169
 
 
  8043 0074 01       		.uleb128 0x1
@@ -10138,7 +10138,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  8097 00aa 00       		.byte	0
  8098 00ab 03       		.uleb128 0x3
  8099 00ac 0E       		.uleb128 0xe
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 170
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 170
 
 
  8100 00ad 3A       		.uleb128 0x3a
@@ -10198,7 +10198,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  8154 00e4 00       		.byte	0
  8155 00e5 03       		.uleb128 0x3
  8156 00e6 08       		.uleb128 0x8
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 171
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 171
 
 
  8157 00e7 3A       		.uleb128 0x3a
@@ -10258,7 +10258,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  8211 011d 13       		.uleb128 0x13
  8212 011e 00       		.byte	0
  8213 011f 00       		.byte	0
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 172
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 172
 
 
  8214 0120 16       		.uleb128 0x16
@@ -10318,7 +10318,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  8268 0158 02       		.uleb128 0x2
  8269 0159 06       		.uleb128 0x6
  8270 015a 00       		.byte	0
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 173
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 173
 
 
  8271 015b 00       		.byte	0
@@ -10378,7 +10378,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  8325 0198 13       		.uleb128 0x13
  8326 0199 00       		.byte	0
  8327 019a 00       		.byte	0
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 174
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 174
 
 
  8328 019b 22       		.uleb128 0x22
@@ -10438,7 +10438,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  8382 01d4 0B       		.uleb128 0xb
  8383 01d5 3B       		.uleb128 0x3b
  8384 01d6 05       		.uleb128 0x5
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 175
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 175
 
 
  8385 01d7 49       		.uleb128 0x49
@@ -10498,7 +10498,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  8439 020e 00       		.byte	0
  8440 020f 2A       		.uleb128 0x2a
  8441 0210 1D       		.uleb128 0x1d
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 176
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 176
 
 
  8442 0211 01       		.byte	0x1
@@ -10558,7 +10558,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  8496 0247 3A       		.uleb128 0x3a
  8497 0248 0B       		.uleb128 0xb
  8498 0249 3B       		.uleb128 0x3b
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 177
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 177
 
 
  8499 024a 05       		.uleb128 0x5
@@ -10618,7 +10618,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  8553 0282 13       		.uleb128 0x13
  8554 0283 00       		.byte	0
  8555 0284 00       		.byte	0
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 178
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 178
 
 
  8556 0285 30       		.uleb128 0x30
@@ -10678,7 +10678,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  8610 02bc 3A       		.uleb128 0x3a
  8611 02bd 0B       		.uleb128 0xb
  8612 02be 3B       		.uleb128 0x3b
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 179
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 179
 
 
  8613 02bf 0B       		.uleb128 0xb
@@ -10738,7 +10738,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  8667 02f5 13       		.uleb128 0x13
  8668 02f6 55       		.uleb128 0x55
  8669 02f7 06       		.uleb128 0x6
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 180
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 180
 
 
  8670 02f8 00       		.byte	0
@@ -10798,7 +10798,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  8724 032e 3B       		.uleb128 0x3b
  8725 032f 0B       		.uleb128 0xb
  8726 0330 27       		.uleb128 0x27
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 181
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 181
 
 
  8727 0331 0C       		.uleb128 0xc
@@ -10858,7 +10858,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  8781 0368 27       		.uleb128 0x27
  8782 0369 0C       		.uleb128 0xc
  8783 036a 49       		.uleb128 0x49
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 182
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 182
 
 
  8784 036b 13       		.uleb128 0x13
@@ -10918,7 +10918,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  8838 03a2 42       		.uleb128 0x42
  8839 03a3 2E       		.uleb128 0x2e
  8840 03a4 01       		.byte	0x1
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 183
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 183
 
 
  8841 03a5 31       		.uleb128 0x31
@@ -10978,7 +10978,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  8895 0008 0200     		.2byte	0x2
  8896 000a 7D       		.byte	0x7d
  8897 000b 00       		.sleb128 0
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 184
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 184
 
 
  8898 000c CC0B0000 		.4byte	.LCFI49-.Ltext0
@@ -11038,7 +11038,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  8952 0090 E60B0000 		.4byte	.LVL379-.Ltext0
  8953 0094 0100     		.2byte	0x1
  8954 0096 51       		.byte	0x51
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 185
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 185
 
 
  8955 0097 E60B0000 		.4byte	.LVL379-.Ltext0
@@ -11098,7 +11098,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  9009 0118 9F       		.byte	0x9f
  9010 0119 00000000 		.4byte	0
  9011 011d 00000000 		.4byte	0
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 186
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 186
 
 
  9012              	.LLST125:
@@ -11158,7 +11158,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  9066 0185 54       		.byte	0x54
  9067 0186 93       		.byte	0x93
  9068 0187 02       		.uleb128 0x2
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 187
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 187
 
 
  9069 0188 DE0C0000 		.4byte	.LVL407-.Ltext0
@@ -11218,7 +11218,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  9123 0206 0100     		.2byte	0x1
  9124 0208 52       		.byte	0x52
  9125 0209 080E0000 		.4byte	.LVL435-.Ltext0
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 188
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 188
 
 
  9126 020d 160E0000 		.4byte	.LVL436-.Ltext0
@@ -11278,7 +11278,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  9180 027d 7A       		.byte	0x7a
  9181 027e 00       		.sleb128 0
  9182 027f 1C       		.byte	0x1c
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 189
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 189
 
 
  9183 0280 9F       		.byte	0x9f
@@ -11338,7 +11338,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  9237              	.LLST132:
  9238 0305 AA0E0000 		.4byte	.LVL450-.Ltext0
  9239 0309 F40E0000 		.4byte	.LVL457-.Ltext0
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 190
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 190
 
 
  9240 030d 0100     		.2byte	0x1
@@ -11398,7 +11398,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  9294 037a 02       		.uleb128 0x2
  9295 037b 53       		.byte	0x53
  9296 037c 93       		.byte	0x93
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 191
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 191
 
 
  9297 037d 02       		.uleb128 0x2
@@ -11458,7 +11458,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  9351 03f8 480D0000 		.4byte	.LVL418-.Ltext0
  9352 03fc 680D0000 		.4byte	.LVL419-.Ltext0
  9353 0400 0200     		.2byte	0x2
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 192
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 192
 
 
  9354 0402 30       		.byte	0x30
@@ -11518,7 +11518,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  9408 045a 1200     		.2byte	0x12
  9409 045c 7E       		.byte	0x7e
  9410 045d 7E       		.sleb128 -2
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 193
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 193
 
 
  9411 045e 94       		.byte	0x94
@@ -11578,7 +11578,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  9465 04b2 93       		.byte	0x93
  9466 04b3 02       		.uleb128 0x2
  9467 04b4 54       		.byte	0x54
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 194
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 194
 
 
  9468 04b5 93       		.byte	0x93
@@ -11638,7 +11638,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  9522 0537 A60B0000 		.4byte	.LVL373-.Ltext0
  9523 053b AA0B0000 		.4byte	.LVL374-.Ltext0
  9524 053f 0100     		.2byte	0x1
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 195
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 195
 
 
  9525 0541 50       		.byte	0x50
@@ -11698,7 +11698,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  9579 05c8 7E0B0000 		.4byte	.LVL367-.Ltext0
  9580 05cc 0100     		.2byte	0x1
  9581 05ce 50       		.byte	0x50
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 196
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 196
 
 
  9582 05cf 7E0B0000 		.4byte	.LVL367-.Ltext0
@@ -11758,7 +11758,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  9636 0659 0100     		.2byte	0x1
  9637 065b 50       		.byte	0x50
  9638 065c 520B0000 		.4byte	.LVL360-.Ltext0
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 197
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 197
 
 
  9639 0660 660B0000 		.4byte	.LVL362-.Ltext0
@@ -11818,7 +11818,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  9693 06e8 50       		.byte	0x50
  9694 06e9 260B0000 		.4byte	.LVL353-.Ltext0
  9695 06ed 3A0B0000 		.4byte	.LVL355-.Ltext0
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 198
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 198
 
 
  9696 06f1 0100     		.2byte	0x1
@@ -11878,7 +11878,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  9750 0776 FA0A0000 		.4byte	.LVL346-.Ltext0
  9751 077a 0E0B0000 		.4byte	.LVL348-.Ltext0
  9752 077e 0100     		.2byte	0x1
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 199
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 199
 
 
  9753 0780 54       		.byte	0x54
@@ -11938,7 +11938,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  9807 0807 E20A0000 		.4byte	.LVL341-.Ltext0
  9808 080b 0100     		.2byte	0x1
  9809 080d 54       		.byte	0x54
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 200
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 200
 
 
  9810 080e E20A0000 		.4byte	.LVL341-.Ltext0
@@ -11998,7 +11998,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  9864 0898 0100     		.2byte	0x1
  9865 089a 54       		.byte	0x54
  9866 089b B60A0000 		.4byte	.LVL334-.Ltext0
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 201
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 201
 
 
  9867 089f B90A0000 		.4byte	.LVL335-1-.Ltext0
@@ -12058,7 +12058,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  9921 0927 54       		.byte	0x54
  9922 0928 8A0A0000 		.4byte	.LVL327-.Ltext0
  9923 092c 8D0A0000 		.4byte	.LVL328-1-.Ltext0
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 202
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 202
 
 
  9924 0930 0100     		.2byte	0x1
@@ -12118,7 +12118,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  9978 09b5 5E0A0000 		.4byte	.LVL320-.Ltext0
  9979 09b9 610A0000 		.4byte	.LVL321-1-.Ltext0
  9980 09bd 0100     		.2byte	0x1
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 203
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 203
 
 
  9981 09bf 50       		.byte	0x50
@@ -12178,7 +12178,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  10035 0a46 350A0000 		.4byte	.LVL314-1-.Ltext0
  10036 0a4a 0100     		.2byte	0x1
  10037 0a4c 50       		.byte	0x50
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 204
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 204
 
 
  10038 0a4d 00000000 		.4byte	0
@@ -12238,7 +12238,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  10092 0ad3 52020000 		.4byte	.LVL51-.Ltext0
  10093 0ad7 26040000 		.4byte	.LVL86-.Ltext0
  10094 0adb 0400     		.2byte	0x4
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 205
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 205
 
 
  10095 0add F3       		.byte	0xf3
@@ -12298,7 +12298,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  10149 0b5d 0400     		.2byte	0x4
  10150 0b5f F3       		.byte	0xf3
  10151 0b60 01       		.uleb128 0x1
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 206
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 206
 
 
  10152 0b61 51       		.byte	0x51
@@ -12358,7 +12358,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  10206 0be8 00000000 		.4byte	0
  10207              	.LLST20:
  10208 0bec 5C020000 		.4byte	.LVL53-.Ltext0
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 207
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 207
 
 
  10209 0bf0 90020000 		.4byte	.LVL55-.Ltext0
@@ -12418,7 +12418,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  10263 0c6e 59       		.byte	0x59
  10264 0c6f 14040000 		.4byte	.LVL84-.Ltext0
  10265 0c73 20040000 		.4byte	.LVL85-.Ltext0
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 208
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 208
 
 
  10266 0c77 0100     		.2byte	0x1
@@ -12478,7 +12478,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  10320 0cfe 3C030000 		.4byte	.LVL64-.Ltext0
  10321 0d02 44030000 		.4byte	.LVL65-.Ltext0
  10322 0d06 0100     		.2byte	0x1
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 209
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 209
 
 
  10323 0d08 51       		.byte	0x51
@@ -12538,7 +12538,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  10377 0d92 1A030000 		.4byte	.LVL62-.Ltext0
  10378 0d96 0100     		.2byte	0x1
  10379 0d98 51       		.byte	0x51
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 210
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 210
 
 
  10380 0d99 00000000 		.4byte	0
@@ -12598,7 +12598,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  10434 0e1c 06       		.byte	0x6
  10435 0e1d 7D       		.byte	0x7d
  10436 0e1e 00       		.sleb128 0
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 211
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 211
 
 
  10437 0e1f 06       		.byte	0x6
@@ -12658,7 +12658,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  10491 0e9f 34050000 		.4byte	.LVL114-.Ltext0
  10492 0ea3 52050000 		.4byte	.LVL118-.Ltext0
  10493 0ea7 0100     		.2byte	0x1
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 212
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 212
 
 
  10494 0ea9 57       		.byte	0x57
@@ -12718,7 +12718,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  10548 0f37 50       		.byte	0x50
  10549 0f38 000A0000 		.4byte	.LVL304-.Ltext0
  10550 0f3c 020A0000 		.4byte	.LVL305-.Ltext0
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 213
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 213
 
 
  10551 0f40 0100     		.2byte	0x1
@@ -12778,7 +12778,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  10605 0fce 0100     		.2byte	0x1
  10606 0fd0 54       		.byte	0x54
  10607 0fd1 00000000 		.4byte	0
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 214
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 214
 
 
  10608 0fd5 00000000 		.4byte	0
@@ -12838,7 +12838,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  10662 1060 0A090000 		.4byte	.LCFI25-.Ltext0
  10663 1064 48090000 		.4byte	.LFE25-.Ltext0
  10664 1068 0200     		.2byte	0x2
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 215
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 215
 
 
  10665 106a 7D       		.byte	0x7d
@@ -12898,7 +12898,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  10719 10f7 0200     		.2byte	0x2
  10720 10f9 30       		.byte	0x30
  10721 10fa 9F       		.byte	0x9f
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 216
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 216
 
 
  10722 10fb D0080000 		.4byte	.LVL245-.Ltext0
@@ -12958,7 +12958,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  10776 118b 56       		.byte	0x56
  10777 118c 00000000 		.4byte	0
  10778 1190 00000000 		.4byte	0
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 217
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 217
 
 
  10779              	.LLST69:
@@ -13018,7 +13018,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  10833 1222 0100     		.2byte	0x1
  10834 1224 50       		.byte	0x50
  10835 1225 00000000 		.4byte	0
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 218
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 218
 
 
  10836 1229 00000000 		.4byte	0
@@ -13078,7 +13078,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  10890 12b7 00000000 		.4byte	0
  10891              	.LLST55:
  10892 12bb C8070000 		.4byte	.LFB20-.Ltext0
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 219
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 219
 
 
  10893 12bf CA070000 		.4byte	.LCFI20-.Ltext0
@@ -13138,7 +13138,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  10947 134c 7D       		.byte	0x7d
  10948 134d 10       		.sleb128 16
  10949 134e 00000000 		.4byte	0
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 220
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 220
 
 
  10950 1352 00000000 		.4byte	0
@@ -13198,7 +13198,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  11004 13e0 5C010000 		.4byte	.LVL29-.Ltext0
  11005 13e4 0100     		.2byte	0x1
  11006 13e6 55       		.byte	0x55
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 221
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 221
 
 
  11007 13e7 5C010000 		.4byte	.LVL29-.Ltext0
@@ -13258,7 +13258,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  11061 1477 FA050000 		.4byte	.LCFI12-.Ltext0
  11062 147b 26070000 		.4byte	.LCFI13-.Ltext0
  11063 147f 0200     		.2byte	0x2
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 222
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 222
 
 
  11064 1481 7D       		.byte	0x7d
@@ -13318,7 +13318,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  11118 1502 6C070000 		.4byte	.LVL177-.Ltext0
  11119 1506 88070000 		.4byte	.LFE17-.Ltext0
  11120 150a 0400     		.2byte	0x4
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 223
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 223
 
 
  11121 150c F3       		.byte	0xf3
@@ -13378,7 +13378,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  11175 1598 0100     		.2byte	0x1
  11176 159a 52       		.byte	0x52
  11177 159b 64060000 		.4byte	.LVL147-.Ltext0
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 224
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 224
 
 
  11178 159f 6C060000 		.4byte	.LVL148-.Ltext0
@@ -13438,7 +13438,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  11232              	.LLST47:
  11233 162a C0050000 		.4byte	.LVL131-.Ltext0
  11234 162e DE050000 		.4byte	.LVL137-.Ltext0
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 225
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 225
 
 
  11235 1632 0200     		.2byte	0x2
@@ -13498,7 +13498,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  11289 16a9 52       		.byte	0x52
  11290 16aa 5C070000 		.4byte	.LVL175-.Ltext0
  11291 16ae 66070000 		.4byte	.LVL176-.Ltext0
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 226
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 226
 
 
  11292 16b2 0100     		.2byte	0x1
@@ -13558,7 +13558,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  11345 173a 51       		.byte	0x51
  11346 173b D2000000 		.4byte	.LVL18-.Ltext0
  11347 173f 14010000 		.4byte	.LVL23-.Ltext0
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 227
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 227
 
 
  11348 1743 0400     		.2byte	0x4
@@ -13618,7 +13618,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  11401              	.LLST0:
  11402 17b2 00000000 		.4byte	.LFB9-.Ltext0
  11403 17b6 04000000 		.4byte	.LCFI0-.Ltext0
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 228
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 228
 
 
  11404 17ba 0200     		.2byte	0x2
@@ -13678,7 +13678,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  11455              	.LLST2:
  11456 1844 00000000 		.4byte	.LVL0-.Ltext0
  11457 1848 16000000 		.4byte	.LVL1-.Ltext0
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 229
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 229
 
 
  11458 184c 0100     		.2byte	0x1
@@ -13738,7 +13738,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  11512              	.LLST38:
  11513 18d0 80050000 		.4byte	.LFB7-.Ltext0
  11514 18d4 82050000 		.4byte	.LCFI10-.Ltext0
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 230
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 230
 
 
  11515 18d8 0200     		.2byte	0x2
@@ -13798,7 +13798,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  11569 195d 50       		.byte	0x50
  11570 195e 9F       		.byte	0x9f
  11571 195f 00000000 		.4byte	0
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 231
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 231
 
 
  11572 1963 00000000 		.4byte	0
@@ -13858,7 +13858,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  11626 009c 88020000 		.4byte	.LBE89-.Ltext0
  11627 00a0 36030000 		.4byte	.LBB97-.Ltext0
  11628 00a4 4E030000 		.4byte	.LBE97-.Ltext0
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 232
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 232
 
 
  11629 00a8 00000000 		.4byte	0
@@ -13918,7 +13918,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  11683 0180 060D0000 		.4byte	.LBB185-.Ltext0
  11684 0184 DA0D0000 		.4byte	.LBE185-.Ltext0
  11685 0188 080E0000 		.4byte	.LBB226-.Ltext0
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 233
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 233
 
 
  11686 018c FE0E0000 		.4byte	.LBE226-.Ltext0
@@ -13978,7 +13978,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  11740 0264 000E0000 		.4byte	.LBE225-.Ltext0
  11741 0268 32100000 		.4byte	.LBB228-.Ltext0
  11742 026c 3A100000 		.4byte	.LBE228-.Ltext0
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 234
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 234
 
 
  11743 0270 00000000 		.4byte	0
@@ -14038,7 +14038,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  11765      5F626F64 
  11765      7900
  11766              	.LASF99:
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 235
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 235
 
 
  11767 008d 6765745F 		.ascii	"get_next_buddy_ptr_head\000"
@@ -14098,7 +14098,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  11787      5F6C696E 
  11787      6B00
  11788              	.LASF95:
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 236
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 236
 
 
  11789 013b 6F726465 		.ascii	"order_link_ptr\000"
@@ -14158,7 +14158,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  11811      657000
  11812              	.LASF15:
  11813 01df 50616765 		.ascii	"Page_Num_Type\000"
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 237
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 237
 
 
  11813      5F4E756D 
@@ -14218,7 +14218,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  11836      5F706167 
  11836      6500
  11837              	.LASF13:
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 238
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 238
 
 
  11838 0293 62756464 		.ascii	"buddy_space_struct\000"
@@ -14278,7 +14278,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  11860      6C696E6B 
  11860      5F626F64 
  11860      7900
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 239
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 239
 
 
  11861              	.LASF21:
@@ -14338,7 +14338,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  11882 03e5 62756464 		.ascii	"buddy_struct_size\000"
  11882      795F7374 
  11882      72756374 
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 240
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 240
 
 
  11882      5F73697A 
@@ -14398,7 +14398,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  11907              	.LASF56:
  11908 0486 72657475 		.ascii	"return_power8_page\000"
  11908      726E5F70 
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 241
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 241
 
 
  11908      6F776572 
@@ -14458,7 +14458,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  11933              	.LASF35:
  11934 0523 62756464 		.ascii	"buddy_space_start_ptr\000"
  11934      795F7370 
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 242
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 242
 
 
  11934      6163655F 
@@ -14518,7 +14518,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  11952              	.LASF75:
  11953 0646 616C6C6F 		.ascii	"alloc_power5_page\000"
  11953      635F706F 
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 243
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 243
 
 
  11953      77657235 
@@ -14578,7 +14578,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  11977      75726365 
  11977      2F737263 
  11977      2F6B6572 
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 244
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 244
 
 
  11978              	.LASF94:
@@ -14589,112 +14589,112 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 1
  11981      6F635F70 
  11981      61676500 
  11982              		.ident	"GCC: (GNU Tools for Arm Embedded Processors 7-2018-q2-update) 7.3.1 20180622 (release) [AR
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 245
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 245
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 buddy.c
-G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s:15     .text:00000000 $t
-G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s:22     .text:00000000 _add_to_order_array
-G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s:180    .text:000000b8 $d
-G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s:185    .text:000000c0 $t
-G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s:192    .text:000000c0 _deal_with_flag_alloc
-G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s:268    .text:00000120 $d
-G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s:273    .text:00000128 $t
-G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s:280    .text:00000128 _alloc_page
-G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s:440    .text:000001e4 $d
-G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s:448    .text:000001ec $t
-G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s:455    .text:000001ec _return_page
-G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s:1086   .text:0000052c $d
-G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s:1095   .text:00000534 $t
-G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s:1127   .text:0000055c $d
-G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s:1133   .text:00000560 $t
-G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s:1141   .text:00000560 get_os_buddy_ptr_head
-G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s:1157   .text:00000568 $d
-G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s:1161   .text:0000056c $t
-G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s:1169   .text:0000056c get_next_buddy_ptr_head
-G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s:1197   .text:0000057c $d
-G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s:1201   .text:00000580 $t
-G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s:1209   .text:00000580 get_current_buddy_space
-G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s:1239   .text:00000594 $d
-G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s:1243   .text:00000598 $t
-G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s:1251   .text:00000598 in_buddy_range
-G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s:1284   .text:000005bc $d
-G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s:1288   .text:000005c0 $t
-G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s:1296   .text:000005c0 buddy_init
-G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s:1704   .text:00000774 $d
-G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s:1712   .text:00000788 $t
-G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s:1720   .text:00000788 alloc_power1_page
-G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s:1791   .text:000007c4 $d
-G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s:1795   .text:000007c8 $t
-G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s:1803   .text:000007c8 alloc_power2_page
-G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s:1874   .text:00000804 $d
-G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s:1878   .text:00000808 $t
-G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s:1886   .text:00000808 alloc_power3_page
-G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s:1957   .text:00000844 $d
-G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s:1961   .text:00000848 $t
-G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s:1969   .text:00000848 alloc_power4_page
-G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s:2040   .text:00000884 $d
-G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s:2044   .text:00000888 $t
-G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s:2052   .text:00000888 alloc_power5_page
-G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s:2123   .text:000008c4 $d
-G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s:2127   .text:000008c8 $t
-G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s:2135   .text:000008c8 alloc_power6_page
-G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s:2206   .text:00000904 $d
-G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s:2210   .text:00000908 $t
-G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s:2218   .text:00000908 alloc_power7_page
-G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s:2289   .text:00000944 $d
-G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s:2293   .text:00000948 $t
-G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s:2301   .text:00000948 alloc_power8_page
-G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s:2372   .text:00000984 $d
-G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s:2376   .text:00000988 $t
-G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s:2384   .text:00000988 alloc_power9_page
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s 			page 246
+G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s:15     .text:00000000 $t
+G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s:22     .text:00000000 _add_to_order_array
+G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s:180    .text:000000b8 $d
+G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s:185    .text:000000c0 $t
+G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s:192    .text:000000c0 _deal_with_flag_alloc
+G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s:268    .text:00000120 $d
+G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s:273    .text:00000128 $t
+G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s:280    .text:00000128 _alloc_page
+G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s:440    .text:000001e4 $d
+G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s:448    .text:000001ec $t
+G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s:455    .text:000001ec _return_page
+G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s:1086   .text:0000052c $d
+G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s:1095   .text:00000534 $t
+G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s:1127   .text:0000055c $d
+G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s:1133   .text:00000560 $t
+G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s:1141   .text:00000560 get_os_buddy_ptr_head
+G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s:1157   .text:00000568 $d
+G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s:1161   .text:0000056c $t
+G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s:1169   .text:0000056c get_next_buddy_ptr_head
+G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s:1197   .text:0000057c $d
+G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s:1201   .text:00000580 $t
+G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s:1209   .text:00000580 get_current_buddy_space
+G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s:1239   .text:00000594 $d
+G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s:1243   .text:00000598 $t
+G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s:1251   .text:00000598 in_buddy_range
+G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s:1284   .text:000005bc $d
+G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s:1288   .text:000005c0 $t
+G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s:1296   .text:000005c0 buddy_init
+G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s:1704   .text:00000774 $d
+G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s:1712   .text:00000788 $t
+G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s:1720   .text:00000788 alloc_power1_page
+G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s:1791   .text:000007c4 $d
+G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s:1795   .text:000007c8 $t
+G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s:1803   .text:000007c8 alloc_power2_page
+G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s:1874   .text:00000804 $d
+G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s:1878   .text:00000808 $t
+G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s:1886   .text:00000808 alloc_power3_page
+G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s:1957   .text:00000844 $d
+G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s:1961   .text:00000848 $t
+G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s:1969   .text:00000848 alloc_power4_page
+G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s:2040   .text:00000884 $d
+G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s:2044   .text:00000888 $t
+G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s:2052   .text:00000888 alloc_power5_page
+G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s:2123   .text:000008c4 $d
+G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s:2127   .text:000008c8 $t
+G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s:2135   .text:000008c8 alloc_power6_page
+G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s:2206   .text:00000904 $d
+G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s:2210   .text:00000908 $t
+G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s:2218   .text:00000908 alloc_power7_page
+G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s:2289   .text:00000944 $d
+G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s:2293   .text:00000948 $t
+G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s:2301   .text:00000948 alloc_power8_page
+G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s:2372   .text:00000984 $d
+G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s:2376   .text:00000988 $t
+G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s:2384   .text:00000988 alloc_power9_page
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s 			page 246
 
 
-G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s:2455   .text:000009c8 $d
-G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s:2459   .text:000009cc $t
-G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s:2467   .text:000009cc alloc_power10_page
-G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s:2538   .text:00000a0c $d
-G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s:2542   .text:00000a10 $t
-G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s:2550   .text:00000a10 return_power1_page
-G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s:2604   .text:00000a38 $d
-G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s:2608   .text:00000a3c $t
-G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s:2616   .text:00000a3c return_power2_page
-G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s:2670   .text:00000a64 $d
-G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s:2674   .text:00000a68 $t
-G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s:2682   .text:00000a68 return_power3_page
-G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s:2736   .text:00000a90 $d
-G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s:2740   .text:00000a94 $t
-G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s:2748   .text:00000a94 return_power4_page
-G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s:2802   .text:00000abc $d
-G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s:2806   .text:00000ac0 $t
-G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s:2814   .text:00000ac0 return_power5_page
-G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s:2868   .text:00000ae8 $d
-G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s:2872   .text:00000aec $t
-G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s:2880   .text:00000aec return_power6_page
-G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s:2934   .text:00000b14 $d
-G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s:2938   .text:00000b18 $t
-G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s:2946   .text:00000b18 return_power7_page
-G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s:3000   .text:00000b40 $d
-G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s:3004   .text:00000b44 $t
-G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s:3012   .text:00000b44 return_power8_page
-G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s:3066   .text:00000b6c $d
-G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s:3070   .text:00000b70 $t
-G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s:3078   .text:00000b70 return_power9_page
-G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s:3132   .text:00000b98 $d
-G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s:3136   .text:00000b9c $t
-G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s:3144   .text:00000b9c return_power10_page
-G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s:3198   .text:00000bc4 $d
-G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s:3202   .text:00000bc8 $t
-G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s:3210   .text:00000bc8 shell_buddy_debug
-G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s:3804   .text:00000f08 $d
-G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s:3836   .text:00000f68 $t
-G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s:4048   .text:0000107c $d
-G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s:4055   .bss:00000000 $d
-G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s:4059   .bss:00000000 current_used_buddy_ptr
-G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s:4063   .bss:00000004 os_buddy_ptr_head
-G:\Users\Jaxb\AppData\Local\Temp\ccZ2DAUG.s:4066   .rodata.str1.4:00000000 $d
+G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s:2455   .text:000009c8 $d
+G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s:2459   .text:000009cc $t
+G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s:2467   .text:000009cc alloc_power10_page
+G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s:2538   .text:00000a0c $d
+G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s:2542   .text:00000a10 $t
+G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s:2550   .text:00000a10 return_power1_page
+G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s:2604   .text:00000a38 $d
+G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s:2608   .text:00000a3c $t
+G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s:2616   .text:00000a3c return_power2_page
+G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s:2670   .text:00000a64 $d
+G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s:2674   .text:00000a68 $t
+G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s:2682   .text:00000a68 return_power3_page
+G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s:2736   .text:00000a90 $d
+G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s:2740   .text:00000a94 $t
+G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s:2748   .text:00000a94 return_power4_page
+G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s:2802   .text:00000abc $d
+G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s:2806   .text:00000ac0 $t
+G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s:2814   .text:00000ac0 return_power5_page
+G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s:2868   .text:00000ae8 $d
+G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s:2872   .text:00000aec $t
+G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s:2880   .text:00000aec return_power6_page
+G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s:2934   .text:00000b14 $d
+G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s:2938   .text:00000b18 $t
+G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s:2946   .text:00000b18 return_power7_page
+G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s:3000   .text:00000b40 $d
+G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s:3004   .text:00000b44 $t
+G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s:3012   .text:00000b44 return_power8_page
+G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s:3066   .text:00000b6c $d
+G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s:3070   .text:00000b70 $t
+G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s:3078   .text:00000b70 return_power9_page
+G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s:3132   .text:00000b98 $d
+G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s:3136   .text:00000b9c $t
+G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s:3144   .text:00000b9c return_power10_page
+G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s:3198   .text:00000bc4 $d
+G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s:3202   .text:00000bc8 $t
+G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s:3210   .text:00000bc8 shell_buddy_debug
+G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s:3804   .text:00000f08 $d
+G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s:3836   .text:00000f68 $t
+G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s:4048   .text:0000107c $d
+G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s:4055   .bss:00000000 $d
+G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s:4059   .bss:00000000 current_used_buddy_ptr
+G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s:4063   .bss:00000004 os_buddy_ptr_head
+G:\Users\Jaxb\AppData\Local\Temp\cc6LmWoi.s:4066   .rodata.str1.4:00000000 $d
 
 UNDEFINED SYMBOLS
 _ASSERT

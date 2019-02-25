@@ -186,10 +186,9 @@ void shell_module(int argc, char const *argv[])
 
 	change_shell_buffer(sys_shell_buffer_ptr);
 
-	ka_printf("now module going to be executed\n");
+	ka_printf("execute module\n");
 	dlmodule_exec();
 	clear_module_buffer();
-	ka_printf("end\n");
 	return ;
 out1:
 	ka_free(shell_buf_ptr);
