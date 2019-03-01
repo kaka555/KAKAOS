@@ -12,8 +12,8 @@ struct ka_module_symtab
 const char __rtmsym_##symbol##_name[] __attribute__((section(".rodata.name"))) = #symbol; \
 const struct ka_module_symtab __rtmsym_##symbol __attribute__((section(".RTMSymTab")))= \
 {                                                                     \
-    (void *)&symbol,                                                  \
-    __rtmsym_##symbol##_name                                          \
+    .addr = (void *)&symbol,                                                  \
+    .name = __rtmsym_##symbol##_name,                                         \
 }
 
 UINT32 get_export_function_addr(const char *fun_name);

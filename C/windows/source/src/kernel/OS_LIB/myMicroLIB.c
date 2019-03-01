@@ -4,6 +4,7 @@
 #include <myassert.h>
 #include <kakaosstdint.h>
 #include <os_cpu.h>
+#include <export.h>
 
 unsigned long ka_pow(int x,unsigned int y)
 {
@@ -311,8 +312,8 @@ int ka_printf(const char *str,...)
 	}
 	va_end(ap);  
     return res;	
-
 }
+EXPORT_SYMBOL(ka_printf);
 
 int ka_strncmp(const char * str1, const char * str2, int num)
 {

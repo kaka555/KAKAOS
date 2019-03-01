@@ -28,7 +28,7 @@ TCB TCB_count_init;
 #endif
 
 UINT64 idle_num = 0;
-UINT64 count_max_num = 0;//used for counting cpu used rate
+unsigned int  count_max_num = 0;//used for counting cpu used rate
 #if PRECISE_TIME_DELAY
 	UINT64 num_pre_tick = 0;//used for precise timing
 	TCB TCB_precise_timing;
@@ -141,7 +141,7 @@ static void count_init(void *para)
 	idle_num = 0;
 	
 #if CONFIG_DEBUG_COUNT_INIT
-	ka_printf("succeed to get count_max_num = %l \n",count_max_num);
+	ka_printf("succeed to get count_max_num = %u\n",count_max_num);
 #endif
 
 	SYS_ENTER_CRITICAL();

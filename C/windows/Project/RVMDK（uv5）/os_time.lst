@@ -1,4 +1,4 @@
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc28WVH2.s 			page 1
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccHo9Q91.s 			page 1
 
 
    1              		.cpu cortex-m3
@@ -8,24 +8,32 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc28WVH2.s 			page 1
    5              		.eabi_attribute 24, 1
    6              		.eabi_attribute 25, 1
    7              		.eabi_attribute 26, 1
-   8              		.eabi_attribute 30, 2
+   8              		.eabi_attribute 30, 6
    9              		.eabi_attribute 34, 1
   10              		.eabi_attribute 18, 4
   11              		.file	"os_time.c"
   12              		.text
   13              	.Ltext0:
   14              		.cfi_sections	.debug_frame
-  15              		.align	1
-  16              		.p2align 2,,3
-  17              		.global	__init_system_time
-  18              		.syntax unified
-  19              		.thumb
-  20              		.thumb_func
-  21              		.fpu softvfp
-  22              		.type	__init_system_time, %function
-  23              	__init_system_time:
-  24              	.LFB1:
-  25              		.file 1 "../../source/src/kernel/OS_CORE/os_time.c"
+  15              		.global	g_time_tick_count
+  16              		.bss
+  17              		.align	3
+  18              		.type	g_time_tick_count, %object
+  19              		.size	g_time_tick_count, 8
+  20              	g_time_tick_count:
+  21 0000 00000000 		.space	8
+  21      00000000 
+  22              		.text
+  23              		.align	1
+  24              		.global	get_tick
+  25              		.syntax unified
+  26              		.thumb
+  27              		.thumb_func
+  28              		.fpu softvfp
+  29              		.type	get_tick, %function
+  30              	get_tick:
+  31              	.LFB0:
+  32              		.file 1 "../../source/src/kernel/OS_CORE/os_time.c"
    1:../../source/src/kernel/OS_CORE/os_time.c **** #include <os_time.h>
    2:../../source/src/kernel/OS_CORE/os_time.c **** #include <os_cpu.h>
    3:../../source/src/kernel/OS_CORE/os_time.c **** #include <myMicroLIB.h>
@@ -38,13 +46,118 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc28WVH2.s 			page 1
   10:../../source/src/kernel/OS_CORE/os_time.c **** UINT64 
   11:../../source/src/kernel/OS_CORE/os_time.c **** get_tick(void)
   12:../../source/src/kernel/OS_CORE/os_time.c **** {
+  33              		.loc 1 12 0
+  34              		.cfi_startproc
+  35              		@ args = 0, pretend = 0, frame = 16
+  36              		@ frame_needed = 1, uses_anonymous_args = 0
+  37 0000 90B5     		push	{r4, r7, lr}
+  38              	.LCFI0:
+  39              		.cfi_def_cfa_offset 12
+  40              		.cfi_offset 4, -12
+  41              		.cfi_offset 7, -8
+  42              		.cfi_offset 14, -4
+  43 0002 85B0     		sub	sp, sp, #20
+  44              	.LCFI1:
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccHo9Q91.s 			page 2
+
+
+  45              		.cfi_def_cfa_offset 32
+  46 0004 00AF     		add	r7, sp, #0
+  47              	.LCFI2:
+  48              		.cfi_def_cfa_register 7
   13:../../source/src/kernel/OS_CORE/os_time.c **** 	UINT64 num;
   14:../../source/src/kernel/OS_CORE/os_time.c **** 	CPU_SR_ALLOC();
+  49              		.loc 1 14 0
+  50 0006 0023     		movs	r3, #0
+  51 0008 FB60     		str	r3, [r7, #12]
   15:../../source/src/kernel/OS_CORE/os_time.c **** 	CPU_CRITICAL_ENTER();
+  52              		.loc 1 15 0
+  53 000a FFF7FEFF 		bl	CPU_SR_Save
+  54 000e F860     		str	r0, [r7, #12]
   16:../../source/src/kernel/OS_CORE/os_time.c **** 	num = g_time_tick_count;
+  55              		.loc 1 16 0
+  56 0010 064B     		ldr	r3, .L3
+  57 0012 18CB     		ldmia	r3, {r3-r4}
+  58 0014 C7E90034 		strd	r3, [r7]
   17:../../source/src/kernel/OS_CORE/os_time.c **** 	CPU_CRITICAL_EXIT();
+  59              		.loc 1 17 0
+  60 0018 F868     		ldr	r0, [r7, #12]
+  61 001a FFF7FEFF 		bl	CPU_SR_Restore
   18:../../source/src/kernel/OS_CORE/os_time.c **** 	return num;
+  62              		.loc 1 18 0
+  63 001e D7E90034 		ldrd	r3, [r7]
   19:../../source/src/kernel/OS_CORE/os_time.c **** }
+  64              		.loc 1 19 0
+  65 0022 1846     		mov	r0, r3
+  66 0024 2146     		mov	r1, r4
+  67 0026 1437     		adds	r7, r7, #20
+  68              	.LCFI3:
+  69              		.cfi_def_cfa_offset 12
+  70 0028 BD46     		mov	sp, r7
+  71              	.LCFI4:
+  72              		.cfi_def_cfa_register 13
+  73              		@ sp needed
+  74 002a 90BD     		pop	{r4, r7, pc}
+  75              	.L4:
+  76              		.align	2
+  77              	.L3:
+  78 002c 00000000 		.word	g_time_tick_count
+  79              		.cfi_endproc
+  80              	.LFE0:
+  81              		.size	get_tick, .-get_tick
+  82              		.global	__rtmsym_get_tick_name
+  83              		.section	.rodata.name,"a",%progbits
+  84              		.align	2
+  85              		.type	__rtmsym_get_tick_name, %object
+  86              		.size	__rtmsym_get_tick_name, 9
+  87              	__rtmsym_get_tick_name:
+  88 0000 6765745F 		.ascii	"get_tick\000"
+  88      7469636B 
+  88      00
+  89              		.global	__rtmsym_get_tick
+  90              		.section	.RTMSymTab,"a",%progbits
+  91              		.align	2
+  92              		.type	__rtmsym_get_tick, %object
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccHo9Q91.s 			page 3
+
+
+  93              		.size	__rtmsym_get_tick, 8
+  94              	__rtmsym_get_tick:
+  95 0000 00000000 		.word	get_tick
+  96 0004 00000000 		.word	__rtmsym_get_tick_name
+  97              		.bss
+  98              		.align	2
+  99              	sys_time:
+ 100 0008 00000000 		.space	8
+ 100      00000000 
+ 101              		.size	sys_time, 8
+ 102              		.section	.rodata
+ 103              		.align	2
+ 104              		.type	month_date_table, %object
+ 105              		.size	month_date_table, 12
+ 106              	month_date_table:
+ 107 0000 1F       		.byte	31
+ 108 0001 1C       		.byte	28
+ 109 0002 1F       		.byte	31
+ 110 0003 1E       		.byte	30
+ 111 0004 1F       		.byte	31
+ 112 0005 1E       		.byte	30
+ 113 0006 1F       		.byte	31
+ 114 0007 1F       		.byte	31
+ 115 0008 1E       		.byte	30
+ 116 0009 1F       		.byte	31
+ 117 000a 1E       		.byte	30
+ 118 000b 1F       		.byte	31
+ 119              		.text
+ 120              		.align	1
+ 121              		.global	__init_system_time
+ 122              		.syntax unified
+ 123              		.thumb
+ 124              		.thumb_func
+ 125              		.fpu softvfp
+ 126              		.type	__init_system_time, %function
+ 127              	__init_system_time:
+ 128              	.LFB1:
   20:../../source/src/kernel/OS_CORE/os_time.c **** EXPORT_SYMBOL(get_tick);
   21:../../source/src/kernel/OS_CORE/os_time.c **** 
   22:../../source/src/kernel/OS_CORE/os_time.c **** #if CONFIG_TIME_EN
@@ -58,9 +171,6 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc28WVH2.s 			page 1
   30:../../source/src/kernel/OS_CORE/os_time.c **** 	30, //April
   31:../../source/src/kernel/OS_CORE/os_time.c **** 	31, //May
   32:../../source/src/kernel/OS_CORE/os_time.c **** 	30, //June
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc28WVH2.s 			page 2
-
-
   33:../../source/src/kernel/OS_CORE/os_time.c **** 	31, //July
   34:../../source/src/kernel/OS_CORE/os_time.c **** 	31, //August
   35:../../source/src/kernel/OS_CORE/os_time.c **** 	30, //September
@@ -68,103 +178,111 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc28WVH2.s 			page 1
   37:../../source/src/kernel/OS_CORE/os_time.c **** 	30, //November
   38:../../source/src/kernel/OS_CORE/os_time.c **** 	31  //December
   39:../../source/src/kernel/OS_CORE/os_time.c **** };
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccHo9Q91.s 			page 4
+
+
   40:../../source/src/kernel/OS_CORE/os_time.c **** 
   41:../../source/src/kernel/OS_CORE/os_time.c **** void 
   42:../../source/src/kernel/OS_CORE/os_time.c **** __init_system_time(void)
   43:../../source/src/kernel/OS_CORE/os_time.c **** {
-  26              		.loc 1 43 0
-  27              		.cfi_startproc
-  28              		@ args = 0, pretend = 0, frame = 0
-  29              		@ frame_needed = 0, uses_anonymous_args = 0
-  30              		@ link register save eliminated.
+ 129              		.loc 1 43 0
+ 130              		.cfi_startproc
+ 131              		@ args = 0, pretend = 0, frame = 0
+ 132              		@ frame_needed = 1, uses_anonymous_args = 0
+ 133              		@ link register save eliminated.
+ 134 0030 80B4     		push	{r7}
+ 135              	.LCFI5:
+ 136              		.cfi_def_cfa_offset 4
+ 137              		.cfi_offset 7, -4
+ 138 0032 00AF     		add	r7, sp, #0
+ 139              	.LCFI6:
+ 140              		.cfi_def_cfa_register 7
   44:../../source/src/kernel/OS_CORE/os_time.c **** 	sys_time.date    =  OS_DATE;
+ 141              		.loc 1 44 0
+ 142 0034 0C4B     		ldr	r3, .L6
+ 143 0036 0522     		movs	r2, #5
+ 144 0038 DA70     		strb	r2, [r3, #3]
   45:../../source/src/kernel/OS_CORE/os_time.c **** 	sys_time.hour    =  OS_HOUR;
+ 145              		.loc 1 45 0
+ 146 003a 0B4B     		ldr	r3, .L6
+ 147 003c 0B22     		movs	r2, #11
+ 148 003e 9A70     		strb	r2, [r3, #2]
   46:../../source/src/kernel/OS_CORE/os_time.c **** 	sys_time.minute  = 	OS_MINUTE;
+ 149              		.loc 1 46 0
+ 150 0040 094B     		ldr	r3, .L6
+ 151 0042 1622     		movs	r2, #22
+ 152 0044 5A70     		strb	r2, [r3, #1]
   47:../../source/src/kernel/OS_CORE/os_time.c **** 	sys_time.month   =  OS_MONTH;
+ 153              		.loc 1 47 0
+ 154 0046 084B     		ldr	r3, .L6
+ 155 0048 0A22     		movs	r2, #10
+ 156 004a 1A71     		strb	r2, [r3, #4]
   48:../../source/src/kernel/OS_CORE/os_time.c **** 	sys_time.second  = 	OS_SECOND;
-  31              		.loc 1 48 0
-  32 0000 024B     		ldr	r3, .L3
-  44:../../source/src/kernel/OS_CORE/os_time.c **** 	sys_time.date    =  OS_DATE;
-  33              		.loc 1 44 0
-  34 0002 0349     		ldr	r1, .L3+4
-  35 0004 034A     		ldr	r2, .L3+8
-  36 0006 C3E90012 		strd	r1, r2, [r3]
+ 157              		.loc 1 48 0
+ 158 004c 064B     		ldr	r3, .L6
+ 159 004e 0022     		movs	r2, #0
+ 160 0050 1A70     		strb	r2, [r3]
   49:../../source/src/kernel/OS_CORE/os_time.c **** 	sys_time.year    =  OS_YEAR;
+ 161              		.loc 1 49 0
+ 162 0052 054B     		ldr	r3, .L6
+ 163 0054 40F2E272 		movw	r2, #2018
+ 164 0058 DA80     		strh	r2, [r3, #6]	@ movhi
   50:../../source/src/kernel/OS_CORE/os_time.c **** 	sys_time.day     =  OS_DAY;
+ 165              		.loc 1 50 0
+ 166 005a 034B     		ldr	r3, .L6
+ 167 005c 0522     		movs	r2, #5
+ 168 005e 5A71     		strb	r2, [r3, #5]
   51:../../source/src/kernel/OS_CORE/os_time.c **** }
-  37              		.loc 1 51 0
-  38 000a 7047     		bx	lr
-  39              	.L4:
-  40              		.align	2
-  41              	.L3:
-  42 000c 00000000 		.word	.LANCHOR0
-  43 0010 00160B05 		.word	84612608
-  44 0014 0A05E207 		.word	132252938
-  45              		.cfi_endproc
-  46              	.LFE1:
-  47              		.size	__init_system_time, .-__init_system_time
-  48              		.align	1
-  49              		.p2align 2,,3
-  50              		.global	get_tick
-  51              		.syntax unified
-  52              		.thumb
-  53              		.thumb_func
-  54              		.fpu softvfp
-  55              		.type	get_tick, %function
-  56              	get_tick:
-  57              	.LFB0:
-  12:../../source/src/kernel/OS_CORE/os_time.c **** 	UINT64 num;
-  58              		.loc 1 12 0
-  59              		.cfi_startproc
-  60              		@ args = 0, pretend = 0, frame = 0
-  61              		@ frame_needed = 0, uses_anonymous_args = 0
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc28WVH2.s 			page 3
+ 169              		.loc 1 51 0
+ 170 0060 00BF     		nop
+ 171 0062 BD46     		mov	sp, r7
+ 172              	.LCFI7:
+ 173              		.cfi_def_cfa_register 13
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccHo9Q91.s 			page 5
 
 
-  62              	.LVL0:
-  63 0018 38B5     		push	{r3, r4, r5, lr}
-  64              	.LCFI0:
-  65              		.cfi_def_cfa_offset 16
-  66              		.cfi_offset 3, -16
-  67              		.cfi_offset 4, -12
-  68              		.cfi_offset 5, -8
-  69              		.cfi_offset 14, -4
-  15:../../source/src/kernel/OS_CORE/os_time.c **** 	num = g_time_tick_count;
-  70              		.loc 1 15 0
-  71 001a FFF7FEFF 		bl	CPU_SR_Save
-  72              	.LVL1:
-  16:../../source/src/kernel/OS_CORE/os_time.c **** 	CPU_CRITICAL_EXIT();
-  73              		.loc 1 16 0
-  74 001e 044B     		ldr	r3, .L6
-  75 0020 D3E90245 		ldrd	r4, [r3, #8]
-  76              	.LVL2:
-  17:../../source/src/kernel/OS_CORE/os_time.c **** 	return num;
-  77              		.loc 1 17 0
-  78 0024 FFF7FEFF 		bl	CPU_SR_Restore
-  79              	.LVL3:
-  19:../../source/src/kernel/OS_CORE/os_time.c **** EXPORT_SYMBOL(get_tick);
-  80              		.loc 1 19 0
-  81 0028 2046     		mov	r0, r4
-  82 002a 2946     		mov	r1, r5
-  83 002c 38BD     		pop	{r3, r4, r5, pc}
-  84              	.LVL4:
-  85              	.L7:
-  86 002e 00BF     		.align	2
-  87              	.L6:
-  88 0030 00000000 		.word	.LANCHOR0
-  89              		.cfi_endproc
-  90              	.LFE0:
-  91              		.size	get_tick, .-get_tick
-  92              		.align	1
-  93              		.p2align 2,,3
-  94              		.global	system_time_display
-  95              		.syntax unified
-  96              		.thumb
-  97              		.thumb_func
-  98              		.fpu softvfp
-  99              		.type	system_time_display, %function
- 100              	system_time_display:
- 101              	.LFB3:
+ 174              		@ sp needed
+ 175 0064 80BC     		pop	{r7}
+ 176              	.LCFI8:
+ 177              		.cfi_restore 7
+ 178              		.cfi_def_cfa_offset 0
+ 179 0066 7047     		bx	lr
+ 180              	.L7:
+ 181              		.align	2
+ 182              	.L6:
+ 183 0068 08000000 		.word	sys_time
+ 184              		.cfi_endproc
+ 185              	.LFE1:
+ 186              		.size	__init_system_time, .-__init_system_time
+ 187              		.global	__rtmsym___init_system_time_name
+ 188              		.section	.rodata.name
+ 189 0009 000000   		.align	2
+ 190              		.type	__rtmsym___init_system_time_name, %object
+ 191              		.size	__rtmsym___init_system_time_name, 19
+ 192              	__rtmsym___init_system_time_name:
+ 193 000c 5F5F696E 		.ascii	"__init_system_time\000"
+ 193      69745F73 
+ 193      79737465 
+ 193      6D5F7469 
+ 193      6D6500
+ 194              		.global	__rtmsym___init_system_time
+ 195              		.section	.RTMSymTab
+ 196              		.align	2
+ 197              		.type	__rtmsym___init_system_time, %object
+ 198              		.size	__rtmsym___init_system_time, 8
+ 199              	__rtmsym___init_system_time:
+ 200 0008 00000000 		.word	__init_system_time
+ 201 000c 00000000 		.word	__rtmsym___init_system_time_name
+ 202              		.text
+ 203              		.align	1
+ 204              		.global	system_time_increase
+ 205              		.syntax unified
+ 206              		.thumb
+ 207              		.thumb_func
+ 208              		.fpu softvfp
+ 209              		.type	system_time_increase, %function
+ 210              	system_time_increase:
+ 211              	.LFB2:
   52:../../source/src/kernel/OS_CORE/os_time.c **** EXPORT_SYMBOL(__init_system_time);
   53:../../source/src/kernel/OS_CORE/os_time.c **** 
   54:../../source/src/kernel/OS_CORE/os_time.c **** 
@@ -177,2018 +295,1738 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc28WVH2.s 			page 1
   61:../../source/src/kernel/OS_CORE/os_time.c **** void 
   62:../../source/src/kernel/OS_CORE/os_time.c **** system_time_increase(void)
   63:../../source/src/kernel/OS_CORE/os_time.c **** {
+ 212              		.loc 1 63 0
+ 213              		.cfi_startproc
+ 214              		@ args = 0, pretend = 0, frame = 0
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccHo9Q91.s 			page 6
+
+
+ 215              		@ frame_needed = 1, uses_anonymous_args = 0
+ 216              		@ link register save eliminated.
+ 217 006c 80B4     		push	{r7}
+ 218              	.LCFI9:
+ 219              		.cfi_def_cfa_offset 4
+ 220              		.cfi_offset 7, -4
+ 221 006e 00AF     		add	r7, sp, #0
+ 222              	.LCFI10:
+ 223              		.cfi_def_cfa_register 7
   64:../../source/src/kernel/OS_CORE/os_time.c **** 	++sys_time.second;
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc28WVH2.s 			page 4
-
-
+ 224              		.loc 1 64 0
+ 225 0070 2E4B     		ldr	r3, .L12
+ 226 0072 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 227 0074 0133     		adds	r3, r3, #1
+ 228 0076 DAB2     		uxtb	r2, r3
+ 229 0078 2C4B     		ldr	r3, .L12
+ 230 007a 1A70     		strb	r2, [r3]
   65:../../source/src/kernel/OS_CORE/os_time.c **** 	if(60 == sys_time.second)
+ 231              		.loc 1 65 0
+ 232 007c 2B4B     		ldr	r3, .L12
+ 233 007e 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 234 0080 3C2B     		cmp	r3, #60
+ 235 0082 4ED1     		bne	.L11
   66:../../source/src/kernel/OS_CORE/os_time.c **** 	{
   67:../../source/src/kernel/OS_CORE/os_time.c **** 		sys_time.second = 0;
+ 236              		.loc 1 67 0
+ 237 0084 294B     		ldr	r3, .L12
+ 238 0086 0022     		movs	r2, #0
+ 239 0088 1A70     		strb	r2, [r3]
   68:../../source/src/kernel/OS_CORE/os_time.c **** 		++sys_time.minute;
+ 240              		.loc 1 68 0
+ 241 008a 284B     		ldr	r3, .L12
+ 242 008c 5B78     		ldrb	r3, [r3, #1]	@ zero_extendqisi2
+ 243 008e 0133     		adds	r3, r3, #1
+ 244 0090 DAB2     		uxtb	r2, r3
+ 245 0092 264B     		ldr	r3, .L12
+ 246 0094 5A70     		strb	r2, [r3, #1]
   69:../../source/src/kernel/OS_CORE/os_time.c **** 		if(60 == sys_time.minute)
+ 247              		.loc 1 69 0
+ 248 0096 254B     		ldr	r3, .L12
+ 249 0098 5B78     		ldrb	r3, [r3, #1]	@ zero_extendqisi2
+ 250 009a 3C2B     		cmp	r3, #60
+ 251 009c 41D1     		bne	.L11
   70:../../source/src/kernel/OS_CORE/os_time.c **** 		{
   71:../../source/src/kernel/OS_CORE/os_time.c **** 			sys_time.minute = 0;
+ 252              		.loc 1 71 0
+ 253 009e 234B     		ldr	r3, .L12
+ 254 00a0 0022     		movs	r2, #0
+ 255 00a2 5A70     		strb	r2, [r3, #1]
   72:../../source/src/kernel/OS_CORE/os_time.c **** 		  	++sys_time.hour;
+ 256              		.loc 1 72 0
+ 257 00a4 214B     		ldr	r3, .L12
+ 258 00a6 9B78     		ldrb	r3, [r3, #2]	@ zero_extendqisi2
+ 259 00a8 0133     		adds	r3, r3, #1
+ 260 00aa DAB2     		uxtb	r2, r3
+ 261 00ac 1F4B     		ldr	r3, .L12
+ 262 00ae 9A70     		strb	r2, [r3, #2]
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccHo9Q91.s 			page 7
+
+
   73:../../source/src/kernel/OS_CORE/os_time.c **** 			if(24 == sys_time.hour)
+ 263              		.loc 1 73 0
+ 264 00b0 1E4B     		ldr	r3, .L12
+ 265 00b2 9B78     		ldrb	r3, [r3, #2]	@ zero_extendqisi2
+ 266 00b4 182B     		cmp	r3, #24
+ 267 00b6 34D1     		bne	.L11
   74:../../source/src/kernel/OS_CORE/os_time.c **** 			{
   75:../../source/src/kernel/OS_CORE/os_time.c **** 				sys_time.hour = 0;
+ 268              		.loc 1 75 0
+ 269 00b8 1C4B     		ldr	r3, .L12
+ 270 00ba 0022     		movs	r2, #0
+ 271 00bc 9A70     		strb	r2, [r3, #2]
   76:../../source/src/kernel/OS_CORE/os_time.c **** 				++sys_time.date;
+ 272              		.loc 1 76 0
+ 273 00be 1B4B     		ldr	r3, .L12
+ 274 00c0 DB78     		ldrb	r3, [r3, #3]	@ zero_extendqisi2
+ 275 00c2 0133     		adds	r3, r3, #1
+ 276 00c4 DAB2     		uxtb	r2, r3
+ 277 00c6 194B     		ldr	r3, .L12
+ 278 00c8 DA70     		strb	r2, [r3, #3]
   77:../../source/src/kernel/OS_CORE/os_time.c **** 				++sys_time.day;
+ 279              		.loc 1 77 0
+ 280 00ca 184B     		ldr	r3, .L12
+ 281 00cc 5B79     		ldrb	r3, [r3, #5]	@ zero_extendqisi2
+ 282 00ce 0133     		adds	r3, r3, #1
+ 283 00d0 DAB2     		uxtb	r2, r3
+ 284 00d2 164B     		ldr	r3, .L12
+ 285 00d4 5A71     		strb	r2, [r3, #5]
   78:../../source/src/kernel/OS_CORE/os_time.c **** 				if(month_date_table[sys_time.month-1] < sys_time.date)
+ 286              		.loc 1 78 0
+ 287 00d6 154B     		ldr	r3, .L12
+ 288 00d8 1B79     		ldrb	r3, [r3, #4]	@ zero_extendqisi2
+ 289 00da 013B     		subs	r3, r3, #1
+ 290 00dc 144A     		ldr	r2, .L12+4
+ 291 00de D25C     		ldrb	r2, [r2, r3]	@ zero_extendqisi2
+ 292 00e0 124B     		ldr	r3, .L12
+ 293 00e2 DB78     		ldrb	r3, [r3, #3]	@ zero_extendqisi2
+ 294 00e4 9A42     		cmp	r2, r3
+ 295 00e6 15D2     		bcs	.L10
   79:../../source/src/kernel/OS_CORE/os_time.c **** 				{
   80:../../source/src/kernel/OS_CORE/os_time.c **** 					sys_time.date = 1;
+ 296              		.loc 1 80 0
+ 297 00e8 104B     		ldr	r3, .L12
+ 298 00ea 0122     		movs	r2, #1
+ 299 00ec DA70     		strb	r2, [r3, #3]
   81:../../source/src/kernel/OS_CORE/os_time.c **** 					++sys_time.month;
+ 300              		.loc 1 81 0
+ 301 00ee 0F4B     		ldr	r3, .L12
+ 302 00f0 1B79     		ldrb	r3, [r3, #4]	@ zero_extendqisi2
+ 303 00f2 0133     		adds	r3, r3, #1
+ 304 00f4 DAB2     		uxtb	r2, r3
+ 305 00f6 0D4B     		ldr	r3, .L12
+ 306 00f8 1A71     		strb	r2, [r3, #4]
   82:../../source/src/kernel/OS_CORE/os_time.c **** 					if(sys_time.month == 13)
+ 307              		.loc 1 82 0
+ 308 00fa 0C4B     		ldr	r3, .L12
+ 309 00fc 1B79     		ldrb	r3, [r3, #4]	@ zero_extendqisi2
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccHo9Q91.s 			page 8
+
+
+ 310 00fe 0D2B     		cmp	r3, #13
+ 311 0100 08D1     		bne	.L10
   83:../../source/src/kernel/OS_CORE/os_time.c **** 					{
   84:../../source/src/kernel/OS_CORE/os_time.c **** 						sys_time.month = 1;
+ 312              		.loc 1 84 0
+ 313 0102 0A4B     		ldr	r3, .L12
+ 314 0104 0122     		movs	r2, #1
+ 315 0106 1A71     		strb	r2, [r3, #4]
   85:../../source/src/kernel/OS_CORE/os_time.c **** 						++sys_time.year;
+ 316              		.loc 1 85 0
+ 317 0108 084B     		ldr	r3, .L12
+ 318 010a DB88     		ldrh	r3, [r3, #6]
+ 319 010c 0133     		adds	r3, r3, #1
+ 320 010e 9AB2     		uxth	r2, r3
+ 321 0110 064B     		ldr	r3, .L12
+ 322 0112 DA80     		strh	r2, [r3, #6]	@ movhi
+ 323              	.L10:
   86:../../source/src/kernel/OS_CORE/os_time.c **** 					}
   87:../../source/src/kernel/OS_CORE/os_time.c **** 				}
   88:../../source/src/kernel/OS_CORE/os_time.c **** 				if(8 == sys_time.day)
+ 324              		.loc 1 88 0
+ 325 0114 054B     		ldr	r3, .L12
+ 326 0116 5B79     		ldrb	r3, [r3, #5]	@ zero_extendqisi2
+ 327 0118 082B     		cmp	r3, #8
+ 328 011a 02D1     		bne	.L11
   89:../../source/src/kernel/OS_CORE/os_time.c **** 				{
   90:../../source/src/kernel/OS_CORE/os_time.c **** 					sys_time.day = 1;
+ 329              		.loc 1 90 0
+ 330 011c 034B     		ldr	r3, .L12
+ 331 011e 0122     		movs	r2, #1
+ 332 0120 5A71     		strb	r2, [r3, #5]
+ 333              	.L11:
   91:../../source/src/kernel/OS_CORE/os_time.c **** 				}
   92:../../source/src/kernel/OS_CORE/os_time.c **** 			}
   93:../../source/src/kernel/OS_CORE/os_time.c **** 		}
   94:../../source/src/kernel/OS_CORE/os_time.c **** 	}
   95:../../source/src/kernel/OS_CORE/os_time.c **** }
+ 334              		.loc 1 95 0
+ 335 0122 00BF     		nop
+ 336 0124 BD46     		mov	sp, r7
+ 337              	.LCFI11:
+ 338              		.cfi_def_cfa_register 13
+ 339              		@ sp needed
+ 340 0126 80BC     		pop	{r7}
+ 341              	.LCFI12:
+ 342              		.cfi_restore 7
+ 343              		.cfi_def_cfa_offset 0
+ 344 0128 7047     		bx	lr
+ 345              	.L13:
+ 346 012a 00BF     		.align	2
+ 347              	.L12:
+ 348 012c 08000000 		.word	sys_time
+ 349 0130 00000000 		.word	month_date_table
+ 350              		.cfi_endproc
+ 351              	.LFE2:
+ 352              		.size	system_time_increase, .-system_time_increase
+ 353              		.section	.rodata
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccHo9Q91.s 			page 9
+
+
+ 354              		.align	2
+ 355              	.LC0:
+ 356 000c 2564E5B9 		.ascii	"%d\345\271\264%d\346\234\210%d\346\227\245--%d\346\227"
+ 356      B42564E6 
+ 356      9C882564 
+ 356      E697A52D 
+ 356      2D2564E6 
+ 357 0021 B62564E5 		.ascii	"\266%d\345\210\206%d\347\247\222--\346\230\237\346\234"
+ 357      88862564 
+ 357      E7A7922D 
+ 357      2DE6989F 
+ 357      E69C
+ 358 0033 9F25640D 		.ascii	"\237%d\015\012\000"
+ 358      0A00
+ 359              		.text
+ 360              		.align	1
+ 361              		.global	system_time_display
+ 362              		.syntax unified
+ 363              		.thumb
+ 364              		.thumb_func
+ 365              		.fpu softvfp
+ 366              		.type	system_time_display, %function
+ 367              	system_time_display:
+ 368              	.LFB3:
   96:../../source/src/kernel/OS_CORE/os_time.c **** 
   97:../../source/src/kernel/OS_CORE/os_time.c **** void 
   98:../../source/src/kernel/OS_CORE/os_time.c **** system_time_display(void)
   99:../../source/src/kernel/OS_CORE/os_time.c **** {
- 102              		.loc 1 99 0
- 103              		.cfi_startproc
- 104              		@ args = 0, pretend = 0, frame = 0
- 105              		@ frame_needed = 0, uses_anonymous_args = 0
- 106              	.LVL5:
- 107 0034 F0B5     		push	{r4, r5, r6, r7, lr}
- 108              	.LCFI1:
- 109              		.cfi_def_cfa_offset 20
- 110              		.cfi_offset 4, -20
- 111              		.cfi_offset 5, -16
- 112              		.cfi_offset 6, -12
- 113              		.cfi_offset 7, -8
- 114              		.cfi_offset 14, -4
- 115 0036 85B0     		sub	sp, sp, #20
- 116              	.LCFI2:
- 117              		.cfi_def_cfa_offset 40
+ 369              		.loc 1 99 0
+ 370              		.cfi_startproc
+ 371              		@ args = 0, pretend = 0, frame = 8
+ 372              		@ frame_needed = 1, uses_anonymous_args = 0
+ 373 0134 F0B5     		push	{r4, r5, r6, r7, lr}
+ 374              	.LCFI13:
+ 375              		.cfi_def_cfa_offset 20
+ 376              		.cfi_offset 4, -20
+ 377              		.cfi_offset 5, -16
+ 378              		.cfi_offset 6, -12
+ 379              		.cfi_offset 7, -8
+ 380              		.cfi_offset 14, -4
+ 381 0136 87B0     		sub	sp, sp, #28
+ 382              	.LCFI14:
+ 383              		.cfi_def_cfa_offset 48
+ 384 0138 04AF     		add	r7, sp, #16
+ 385              	.LCFI15:
+ 386              		.cfi_def_cfa 7, 32
  100:../../source/src/kernel/OS_CORE/os_time.c **** 	CPU_SR_ALLOC();
+ 387              		.loc 1 100 0
+ 388 013a 0023     		movs	r3, #0
+ 389 013c 7B60     		str	r3, [r7, #4]
  101:../../source/src/kernel/OS_CORE/os_time.c **** 	CPU_CRITICAL_ENTER();
- 118              		.loc 1 101 0
- 119 0038 FFF7FEFF 		bl	CPU_SR_Save
- 120              	.LVL6:
- 121 003c 0546     		mov	r5, r0
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc28WVH2.s 			page 5
-
-
- 122              	.LVL7:
+ 390              		.loc 1 101 0
+ 391 013e FFF7FEFF 		bl	CPU_SR_Save
+ 392 0142 7860     		str	r0, [r7, #4]
  102:../../source/src/kernel/OS_CORE/os_time.c **** 	ka_printf("%d年%d月%d日--%d时%d分%d秒--星期%d\r\n",sys_time.year,
+ 393              		.loc 1 102 0
+ 394 0144 124B     		ldr	r3, .L15
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccHo9Q91.s 			page 10
+
+
+ 395 0146 DB88     		ldrh	r3, [r3, #6]
+ 396 0148 1C46     		mov	r4, r3
  103:../../source/src/kernel/OS_CORE/os_time.c **** 	sys_time.month,sys_time.date,sys_time.hour,sys_time.minute,sys_time.second,sys_time.day);
- 123              		.loc 1 103 0
- 124 003e 0A4C     		ldr	r4, .L9
+ 397              		.loc 1 103 0
+ 398 014a 114B     		ldr	r3, .L15
+ 399 014c 1B79     		ldrb	r3, [r3, #4]	@ zero_extendqisi2
  102:../../source/src/kernel/OS_CORE/os_time.c **** 	ka_printf("%d年%d月%d日--%d时%d分%d秒--星期%d\r\n",sys_time.year,
- 125              		.loc 1 102 0
- 126 0040 0A48     		ldr	r0, .L9+4
- 127              	.LVL8:
- 128 0042 6779     		ldrb	r7, [r4, #5]	@ zero_extendqisi2
- 129 0044 2678     		ldrb	r6, [r4]	@ zero_extendqisi2
- 130 0046 E378     		ldrb	r3, [r4, #3]	@ zero_extendqisi2
- 131 0048 2279     		ldrb	r2, [r4, #4]	@ zero_extendqisi2
- 132 004a E188     		ldrh	r1, [r4, #6]
- 133 004c CDE90267 		strd	r6, r7, [sp, #8]
- 134 0050 6678     		ldrb	r6, [r4, #1]	@ zero_extendqisi2
- 135 0052 A478     		ldrb	r4, [r4, #2]	@ zero_extendqisi2
- 136 0054 CDE90046 		strd	r4, r6, [sp]
- 137 0058 FFF7FEFF 		bl	ka_printf
- 138              	.LVL9:
+ 400              		.loc 1 102 0
+ 401 014e 1D46     		mov	r5, r3
+ 402              		.loc 1 103 0
+ 403 0150 0F4B     		ldr	r3, .L15
+ 404 0152 DB78     		ldrb	r3, [r3, #3]	@ zero_extendqisi2
+ 102:../../source/src/kernel/OS_CORE/os_time.c **** 	ka_printf("%d年%d月%d日--%d时%d分%d秒--星期%d\r\n",sys_time.year,
+ 405              		.loc 1 102 0
+ 406 0154 1E46     		mov	r6, r3
+ 407              		.loc 1 103 0
+ 408 0156 0E4B     		ldr	r3, .L15
+ 409 0158 9B78     		ldrb	r3, [r3, #2]	@ zero_extendqisi2
+ 102:../../source/src/kernel/OS_CORE/os_time.c **** 	ka_printf("%d年%d月%d日--%d时%d分%d秒--星期%d\r\n",sys_time.year,
+ 410              		.loc 1 102 0
+ 411 015a 1A46     		mov	r2, r3
+ 412              		.loc 1 103 0
+ 413 015c 0C4B     		ldr	r3, .L15
+ 414 015e 5B78     		ldrb	r3, [r3, #1]	@ zero_extendqisi2
+ 102:../../source/src/kernel/OS_CORE/os_time.c **** 	ka_printf("%d年%d月%d日--%d时%d分%d秒--星期%d\r\n",sys_time.year,
+ 415              		.loc 1 102 0
+ 416 0160 1946     		mov	r1, r3
+ 417              		.loc 1 103 0
+ 418 0162 0B4B     		ldr	r3, .L15
+ 419 0164 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 102:../../source/src/kernel/OS_CORE/os_time.c **** 	ka_printf("%d年%d月%d日--%d时%d分%d秒--星期%d\r\n",sys_time.year,
+ 420              		.loc 1 102 0
+ 421 0166 1846     		mov	r0, r3
+ 422              		.loc 1 103 0
+ 423 0168 094B     		ldr	r3, .L15
+ 424 016a 5B79     		ldrb	r3, [r3, #5]	@ zero_extendqisi2
+ 102:../../source/src/kernel/OS_CORE/os_time.c **** 	ka_printf("%d年%d月%d日--%d时%d分%d秒--星期%d\r\n",sys_time.year,
+ 425              		.loc 1 102 0
+ 426 016c 0393     		str	r3, [sp, #12]
+ 427 016e 0290     		str	r0, [sp, #8]
+ 428 0170 0191     		str	r1, [sp, #4]
+ 429 0172 0092     		str	r2, [sp]
+ 430 0174 3346     		mov	r3, r6
+ 431 0176 2A46     		mov	r2, r5
+ 432 0178 2146     		mov	r1, r4
+ 433 017a 0648     		ldr	r0, .L15+4
+ 434 017c FFF7FEFF 		bl	ka_printf
  104:../../source/src/kernel/OS_CORE/os_time.c **** 	CPU_CRITICAL_EXIT();
- 139              		.loc 1 104 0
- 140 005c 2846     		mov	r0, r5
+ 435              		.loc 1 104 0
+ 436 0180 7868     		ldr	r0, [r7, #4]
+ 437 0182 FFF7FEFF 		bl	CPU_SR_Restore
  105:../../source/src/kernel/OS_CORE/os_time.c **** }
- 141              		.loc 1 105 0
- 142 005e 05B0     		add	sp, sp, #20
- 143              	.LCFI3:
- 144              		.cfi_def_cfa_offset 20
- 145              		@ sp needed
- 146 0060 BDE8F040 		pop	{r4, r5, r6, r7, lr}
- 147              	.LCFI4:
- 148              		.cfi_restore 14
- 149              		.cfi_restore 7
- 150              		.cfi_restore 6
- 151              		.cfi_restore 5
- 152              		.cfi_restore 4
- 153              		.cfi_def_cfa_offset 0
- 154              	.LVL10:
- 104:../../source/src/kernel/OS_CORE/os_time.c **** 	CPU_CRITICAL_EXIT();
- 155              		.loc 1 104 0
- 156 0064 FFF7FEBF 		b	CPU_SR_Restore
- 157              	.LVL11:
- 158              	.L10:
- 159              		.align	2
- 160              	.L9:
- 161 0068 00000000 		.word	.LANCHOR0
- 162 006c 00000000 		.word	.LC0
- 163              		.cfi_endproc
- 164              	.LFE3:
- 165              		.size	system_time_display, .-system_time_display
- 166              		.align	1
- 167              		.p2align 2,,3
- 168              		.global	set_time
- 169              		.syntax unified
- 170              		.thumb
- 171              		.thumb_func
- 172              		.fpu softvfp
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc28WVH2.s 			page 6
+ 438              		.loc 1 105 0
+ 439 0186 00BF     		nop
+ 440 0188 0C37     		adds	r7, r7, #12
+ 441              	.LCFI16:
+ 442              		.cfi_def_cfa_offset 20
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccHo9Q91.s 			page 11
 
 
- 173              		.type	set_time, %function
- 174              	set_time:
- 175              	.LFB4:
+ 443 018a BD46     		mov	sp, r7
+ 444              	.LCFI17:
+ 445              		.cfi_def_cfa_register 13
+ 446              		@ sp needed
+ 447 018c F0BD     		pop	{r4, r5, r6, r7, pc}
+ 448              	.L16:
+ 449 018e 00BF     		.align	2
+ 450              	.L15:
+ 451 0190 08000000 		.word	sys_time
+ 452 0194 0C000000 		.word	.LC0
+ 453              		.cfi_endproc
+ 454              	.LFE3:
+ 455              		.size	system_time_display, .-system_time_display
+ 456              		.global	__rtmsym_system_time_display_name
+ 457              		.section	.rodata.name
+ 458 001f 00       		.align	2
+ 459              		.type	__rtmsym_system_time_display_name, %object
+ 460              		.size	__rtmsym_system_time_display_name, 20
+ 461              	__rtmsym_system_time_display_name:
+ 462 0020 73797374 		.ascii	"system_time_display\000"
+ 462      656D5F74 
+ 462      696D655F 
+ 462      64697370 
+ 462      6C617900 
+ 463              		.global	__rtmsym_system_time_display
+ 464              		.section	.RTMSymTab
+ 465              		.align	2
+ 466              		.type	__rtmsym_system_time_display, %object
+ 467              		.size	__rtmsym_system_time_display, 8
+ 468              	__rtmsym_system_time_display:
+ 469 0010 00000000 		.word	system_time_display
+ 470 0014 00000000 		.word	__rtmsym_system_time_display_name
+ 471              		.section	.rodata
+ 472 0039 000000   		.align	2
+ 473              	.LC1:
+ 474 003c 2E2E2F2E 		.ascii	"../../source/src/kernel/OS_CORE/os_time.c\000"
+ 474      2E2F736F 
+ 474      75726365 
+ 474      2F737263 
+ 474      2F6B6572 
+ 475 0066 0000     		.align	2
+ 476              	.LC2:
+ 477 0068 6572726F 		.ascii	"error fun name : set_time\012error para : time_ptr\012"
+ 477      72206675 
+ 477      6E206E61 
+ 477      6D65203A 
+ 477      20736574 
+ 478 0098 00       		.ascii	"\000"
+ 479              		.text
+ 480              		.align	1
+ 481              		.global	set_time
+ 482              		.syntax unified
+ 483              		.thumb
+ 484              		.thumb_func
+ 485              		.fpu softvfp
+ 486              		.type	set_time, %function
+ 487              	set_time:
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccHo9Q91.s 			page 12
+
+
+ 488              	.LFB4:
  106:../../source/src/kernel/OS_CORE/os_time.c **** EXPORT_SYMBOL(system_time_display);
  107:../../source/src/kernel/OS_CORE/os_time.c **** 
  108:../../source/src/kernel/OS_CORE/os_time.c **** int set_time(struct time *time_ptr)
  109:../../source/src/kernel/OS_CORE/os_time.c **** {
- 176              		.loc 1 109 0
- 177              		.cfi_startproc
- 178              		@ args = 0, pretend = 0, frame = 0
- 179              		@ frame_needed = 0, uses_anonymous_args = 0
- 180              	.LVL12:
- 181 0070 70B5     		push	{r4, r5, r6, lr}
- 182              	.LCFI5:
- 183              		.cfi_def_cfa_offset 16
- 184              		.cfi_offset 4, -16
- 185              		.cfi_offset 5, -12
- 186              		.cfi_offset 6, -8
- 187              		.cfi_offset 14, -4
+ 489              		.loc 1 109 0
+ 490              		.cfi_startproc
+ 491              		@ args = 0, pretend = 0, frame = 16
+ 492              		@ frame_needed = 1, uses_anonymous_args = 0
+ 493 0198 80B5     		push	{r7, lr}
+ 494              	.LCFI18:
+ 495              		.cfi_def_cfa_offset 8
+ 496              		.cfi_offset 7, -8
+ 497              		.cfi_offset 14, -4
+ 498 019a 84B0     		sub	sp, sp, #16
+ 499              	.LCFI19:
+ 500              		.cfi_def_cfa_offset 24
+ 501 019c 00AF     		add	r7, sp, #0
+ 502              	.LCFI20:
+ 503              		.cfi_def_cfa_register 7
+ 504 019e 7860     		str	r0, [r7, #4]
  110:../../source/src/kernel/OS_CORE/os_time.c **** 	ASSERT(NULL != time_ptr);
- 188              		.loc 1 110 0
- 189 0072 0446     		mov	r4, r0
- 190 0074 A0B1     		cbz	r0, .L14
- 191              	.LVL13:
+ 505              		.loc 1 110 0
+ 506 01a0 7B68     		ldr	r3, [r7, #4]
+ 507 01a2 002B     		cmp	r3, #0
+ 508 01a4 03D1     		bne	.L18
+ 509              		.loc 1 110 0 is_stmt 0 discriminator 1
+ 510 01a6 6E21     		movs	r1, #110
+ 511 01a8 1A48     		ldr	r0, .L21
+ 512 01aa FFF7FEFF 		bl	_ASSERT
+ 513              	.L18:
  111:../../source/src/kernel/OS_CORE/os_time.c **** #if CONFIG_PARA_CHECK
  112:../../source/src/kernel/OS_CORE/os_time.c **** 	if(NULL == time_ptr)
+ 514              		.loc 1 112 0 is_stmt 1
+ 515 01ae 7B68     		ldr	r3, [r7, #4]
+ 516 01b0 002B     		cmp	r3, #0
+ 517 01b2 05D1     		bne	.L19
  113:../../source/src/kernel/OS_CORE/os_time.c **** 	{
  114:../../source/src/kernel/OS_CORE/os_time.c **** 		OS_ERROR_PARA_MESSAGE_DISPLAY(set_time,time_ptr);
+ 518              		.loc 1 114 0
+ 519 01b4 1848     		ldr	r0, .L21+4
+ 520 01b6 FFF7FEFF 		bl	ka_printf
  115:../../source/src/kernel/OS_CORE/os_time.c **** 		return -ERROR_NULL_INPUT_PTR;
+ 521              		.loc 1 115 0
+ 522 01ba 6FF0FE03 		mvn	r3, #254
+ 523 01be 24E0     		b	.L20
+ 524              	.L19:
  116:../../source/src/kernel/OS_CORE/os_time.c **** 	}
  117:../../source/src/kernel/OS_CORE/os_time.c **** #endif
  118:../../source/src/kernel/OS_CORE/os_time.c **** 	CPU_SR_ALLOC();
+ 525              		.loc 1 118 0
+ 526 01c0 0023     		movs	r3, #0
+ 527 01c2 FB60     		str	r3, [r7, #12]
  119:../../source/src/kernel/OS_CORE/os_time.c **** 	CPU_CRITICAL_ENTER();
- 192              		.loc 1 119 0
- 193 0076 FFF7FEFF 		bl	CPU_SR_Save
- 194              	.LVL14:
+ 528              		.loc 1 119 0
+ 529 01c4 FFF7FEFF 		bl	CPU_SR_Save
+ 530 01c8 F860     		str	r0, [r7, #12]
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccHo9Q91.s 			page 13
+
+
  120:../../source/src/kernel/OS_CORE/os_time.c **** 	sys_time.date    =   time_ptr->date;
- 195              		.loc 1 120 0
- 196 007a 0E4B     		ldr	r3, .L15
- 197 007c E578     		ldrb	r5, [r4, #3]	@ zero_extendqisi2
+ 531              		.loc 1 120 0
+ 532 01ca 7B68     		ldr	r3, [r7, #4]
+ 533 01cc DA78     		ldrb	r2, [r3, #3]	@ zero_extendqisi2
+ 534 01ce 134B     		ldr	r3, .L21+8
+ 535 01d0 DA70     		strb	r2, [r3, #3]
  121:../../source/src/kernel/OS_CORE/os_time.c **** 	sys_time.hour    =   time_ptr->hour;
- 198              		.loc 1 121 0
- 199 007e A178     		ldrb	r1, [r4, #2]	@ zero_extendqisi2
+ 536              		.loc 1 121 0
+ 537 01d2 7B68     		ldr	r3, [r7, #4]
+ 538 01d4 9A78     		ldrb	r2, [r3, #2]	@ zero_extendqisi2
+ 539 01d6 114B     		ldr	r3, .L21+8
+ 540 01d8 9A70     		strb	r2, [r3, #2]
  122:../../source/src/kernel/OS_CORE/os_time.c **** 	sys_time.minute  = 	 time_ptr->minute;
- 200              		.loc 1 122 0
- 201 0080 6278     		ldrb	r2, [r4, #1]	@ zero_extendqisi2
- 120:../../source/src/kernel/OS_CORE/os_time.c **** 	sys_time.date    =   time_ptr->date;
- 202              		.loc 1 120 0
- 203 0082 DD70     		strb	r5, [r3, #3]
+ 541              		.loc 1 122 0
+ 542 01da 7B68     		ldr	r3, [r7, #4]
+ 543 01dc 5A78     		ldrb	r2, [r3, #1]	@ zero_extendqisi2
+ 544 01de 0F4B     		ldr	r3, .L21+8
+ 545 01e0 5A70     		strb	r2, [r3, #1]
  123:../../source/src/kernel/OS_CORE/os_time.c **** 	sys_time.month   =   time_ptr->month;
- 204              		.loc 1 123 0
- 205 0084 2679     		ldrb	r6, [r4, #4]	@ zero_extendqisi2
- 121:../../source/src/kernel/OS_CORE/os_time.c **** 	sys_time.hour    =   time_ptr->hour;
- 206              		.loc 1 121 0
- 207 0086 9970     		strb	r1, [r3, #2]
+ 546              		.loc 1 123 0
+ 547 01e2 7B68     		ldr	r3, [r7, #4]
+ 548 01e4 1A79     		ldrb	r2, [r3, #4]	@ zero_extendqisi2
+ 549 01e6 0D4B     		ldr	r3, .L21+8
+ 550 01e8 1A71     		strb	r2, [r3, #4]
  124:../../source/src/kernel/OS_CORE/os_time.c **** 	sys_time.second  =   time_ptr->second;
- 208              		.loc 1 124 0
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc28WVH2.s 			page 7
-
-
- 209 0088 2578     		ldrb	r5, [r4]	@ zero_extendqisi2
- 122:../../source/src/kernel/OS_CORE/os_time.c **** 	sys_time.minute  = 	 time_ptr->minute;
- 210              		.loc 1 122 0
- 211 008a 5A70     		strb	r2, [r3, #1]
+ 551              		.loc 1 124 0
+ 552 01ea 7B68     		ldr	r3, [r7, #4]
+ 553 01ec 1A78     		ldrb	r2, [r3]	@ zero_extendqisi2
+ 554 01ee 0B4B     		ldr	r3, .L21+8
+ 555 01f0 1A70     		strb	r2, [r3]
  125:../../source/src/kernel/OS_CORE/os_time.c **** 	sys_time.year    =   time_ptr->year;
- 212              		.loc 1 125 0
- 213 008c E188     		ldrh	r1, [r4, #6]
+ 556              		.loc 1 125 0
+ 557 01f2 7B68     		ldr	r3, [r7, #4]
+ 558 01f4 DA88     		ldrh	r2, [r3, #6]
+ 559 01f6 094B     		ldr	r3, .L21+8
+ 560 01f8 DA80     		strh	r2, [r3, #6]	@ movhi
  126:../../source/src/kernel/OS_CORE/os_time.c **** 	sys_time.day     =   time_ptr->day;
- 214              		.loc 1 126 0
- 215 008e 6279     		ldrb	r2, [r4, #5]	@ zero_extendqisi2
- 123:../../source/src/kernel/OS_CORE/os_time.c **** 	sys_time.second  =   time_ptr->second;
- 216              		.loc 1 123 0
- 217 0090 1E71     		strb	r6, [r3, #4]
- 124:../../source/src/kernel/OS_CORE/os_time.c **** 	sys_time.year    =   time_ptr->year;
- 218              		.loc 1 124 0
- 219 0092 1D70     		strb	r5, [r3]
- 125:../../source/src/kernel/OS_CORE/os_time.c **** 	sys_time.day     =   time_ptr->day;
- 220              		.loc 1 125 0
- 221 0094 D980     		strh	r1, [r3, #6]	@ movhi
- 222              		.loc 1 126 0
- 223 0096 5A71     		strb	r2, [r3, #5]
+ 561              		.loc 1 126 0
+ 562 01fa 7B68     		ldr	r3, [r7, #4]
+ 563 01fc 5A79     		ldrb	r2, [r3, #5]	@ zero_extendqisi2
+ 564 01fe 074B     		ldr	r3, .L21+8
+ 565 0200 5A71     		strb	r2, [r3, #5]
  127:../../source/src/kernel/OS_CORE/os_time.c **** 	CPU_CRITICAL_EXIT();
- 224              		.loc 1 127 0
- 225 0098 FFF7FEFF 		bl	CPU_SR_Restore
- 226              	.LVL15:
+ 566              		.loc 1 127 0
+ 567 0202 F868     		ldr	r0, [r7, #12]
+ 568 0204 FFF7FEFF 		bl	CPU_SR_Restore
  128:../../source/src/kernel/OS_CORE/os_time.c **** 	return FUN_EXECUTE_SUCCESSFULLY;
- 227              		.loc 1 128 0
- 228 009c 0020     		movs	r0, #0
+ 569              		.loc 1 128 0
+ 570 0208 0023     		movs	r3, #0
+ 571              	.L20:
  129:../../source/src/kernel/OS_CORE/os_time.c **** }
- 229              		.loc 1 129 0
- 230 009e 70BD     		pop	{r4, r5, r6, pc}
- 231              	.LVL16:
- 232              	.L14:
- 110:../../source/src/kernel/OS_CORE/os_time.c **** #if CONFIG_PARA_CHECK
- 233              		.loc 1 110 0 discriminator 1
- 234 00a0 6E21     		movs	r1, #110
- 235 00a2 0548     		ldr	r0, .L15+4
- 236              	.LVL17:
- 237 00a4 FFF7FEFF 		bl	_ASSERT
- 238              	.LVL18:
- 114:../../source/src/kernel/OS_CORE/os_time.c **** 		return -ERROR_NULL_INPUT_PTR;
- 239              		.loc 1 114 0 discriminator 1
- 240 00a8 0448     		ldr	r0, .L15+8
- 241 00aa FFF7FEFF 		bl	ka_printf
- 242              	.LVL19:
- 115:../../source/src/kernel/OS_CORE/os_time.c **** 	}
- 243              		.loc 1 115 0 discriminator 1
- 244 00ae 6FF0FE00 		mvn	r0, #254
- 245              		.loc 1 129 0 discriminator 1
- 246 00b2 70BD     		pop	{r4, r5, r6, pc}
- 247              	.LVL20:
- 248              	.L16:
- 249              		.align	2
- 250              	.L15:
- 251 00b4 00000000 		.word	.LANCHOR0
- 252 00b8 30000000 		.word	.LC1
- 253 00bc 5C000000 		.word	.LC2
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc28WVH2.s 			page 8
+ 572              		.loc 1 129 0
+ 573 020a 1846     		mov	r0, r3
+ 574 020c 1037     		adds	r7, r7, #16
+ 575              	.LCFI21:
+ 576              		.cfi_def_cfa_offset 8
+ 577 020e BD46     		mov	sp, r7
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccHo9Q91.s 			page 14
 
 
- 254              		.cfi_endproc
- 255              	.LFE4:
- 256              		.size	set_time, .-set_time
- 257              		.align	1
- 258              		.p2align 2,,3
- 259              		.global	system_time_increase
- 260              		.syntax unified
- 261              		.thumb
- 262              		.thumb_func
- 263              		.fpu softvfp
- 264              		.type	system_time_increase, %function
- 265              	system_time_increase:
- 266              	.LFB2:
-  63:../../source/src/kernel/OS_CORE/os_time.c **** 	++sys_time.second;
- 267              		.loc 1 63 0
- 268              		.cfi_startproc
- 269              		@ args = 0, pretend = 0, frame = 0
- 270              		@ frame_needed = 0, uses_anonymous_args = 0
- 271              		@ link register save eliminated.
- 272 00c0 30B4     		push	{r4, r5}
- 273              	.LCFI6:
- 274              		.cfi_def_cfa_offset 8
- 275              		.cfi_offset 4, -8
- 276              		.cfi_offset 5, -4
-  64:../../source/src/kernel/OS_CORE/os_time.c **** 	if(60 == sys_time.second)
- 277              		.loc 1 64 0
- 278 00c2 1E4A     		ldr	r2, .L27
- 279 00c4 1378     		ldrb	r3, [r2]	@ zero_extendqisi2
- 280 00c6 0133     		adds	r3, r3, #1
- 281 00c8 DBB2     		uxtb	r3, r3
-  65:../../source/src/kernel/OS_CORE/os_time.c **** 	{
- 282              		.loc 1 65 0
- 283 00ca 3C2B     		cmp	r3, #60
- 284 00cc 02D0     		beq	.L18
-  64:../../source/src/kernel/OS_CORE/os_time.c **** 	if(60 == sys_time.second)
- 285              		.loc 1 64 0
- 286 00ce 1370     		strb	r3, [r2]
- 287              	.L17:
-  95:../../source/src/kernel/OS_CORE/os_time.c **** 
- 288              		.loc 1 95 0
- 289 00d0 30BC     		pop	{r4, r5}
- 290              	.LCFI7:
- 291              		.cfi_remember_state
- 292              		.cfi_restore 5
- 293              		.cfi_restore 4
- 294              		.cfi_def_cfa_offset 0
- 295 00d2 7047     		bx	lr
- 296              	.L18:
- 297              	.LCFI8:
- 298              		.cfi_restore_state
-  67:../../source/src/kernel/OS_CORE/os_time.c **** 		++sys_time.minute;
- 299              		.loc 1 67 0
- 300 00d4 0021     		movs	r1, #0
-  68:../../source/src/kernel/OS_CORE/os_time.c **** 		if(60 == sys_time.minute)
- 301              		.loc 1 68 0
- 302 00d6 5378     		ldrb	r3, [r2, #1]	@ zero_extendqisi2
-  67:../../source/src/kernel/OS_CORE/os_time.c **** 		++sys_time.minute;
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc28WVH2.s 			page 9
+ 578              	.LCFI22:
+ 579              		.cfi_def_cfa_register 13
+ 580              		@ sp needed
+ 581 0210 80BD     		pop	{r7, pc}
+ 582              	.L22:
+ 583 0212 00BF     		.align	2
+ 584              	.L21:
+ 585 0214 3C000000 		.word	.LC1
+ 586 0218 68000000 		.word	.LC2
+ 587 021c 08000000 		.word	sys_time
+ 588              		.cfi_endproc
+ 589              	.LFE4:
+ 590              		.size	set_time, .-set_time
+ 591              		.global	__rtmsym_set_time_name
+ 592              		.section	.rodata.name
+ 593              		.align	2
+ 594              		.type	__rtmsym_set_time_name, %object
+ 595              		.size	__rtmsym_set_time_name, 9
+ 596              	__rtmsym_set_time_name:
+ 597 0034 7365745F 		.ascii	"set_time\000"
+ 597      74696D65 
+ 597      00
+ 598              		.global	__rtmsym_set_time
+ 599              		.section	.RTMSymTab
+ 600              		.align	2
+ 601              		.type	__rtmsym_set_time, %object
+ 602              		.size	__rtmsym_set_time, 8
+ 603              	__rtmsym_set_time:
+ 604 0018 00000000 		.word	set_time
+ 605 001c 00000000 		.word	__rtmsym_set_time_name
+ 606              		.text
+ 607              	.Letext0:
+ 608              		.file 2 "../../source/include/os_cpu/kakaosstdint.h"
+ 609              		.file 3 "../../source/include/os_core/os_time.h"
+ 610              		.file 4 "../../source/include/os_cpu/os_cpu_stm32.h"
+ 611              		.file 5 "../../source/include/os_core/export.h"
+ 612              		.section	.debug_info,"",%progbits
+ 613              	.Ldebug_info0:
+ 614 0000 31030000 		.4byte	0x331
+ 615 0004 0200     		.2byte	0x2
+ 616 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 617 000a 04       		.byte	0x4
+ 618 000b 01       		.uleb128 0x1
+ 619 000c 1A020000 		.4byte	.LASF39
+ 620 0010 0C       		.byte	0xc
+ 621 0011 C1000000 		.4byte	.LASF40
+ 622 0015 E3020000 		.4byte	.LASF41
+ 623 0019 00000000 		.4byte	.Ltext0
+ 624 001d 20020000 		.4byte	.Letext0
+ 625 0021 00000000 		.4byte	.Ldebug_line0
+ 626 0025 02       		.uleb128 0x2
+ 627 0026 01       		.byte	0x1
+ 628 0027 06       		.byte	0x6
+ 629 0028 C5020000 		.4byte	.LASF0
+ 630 002c 02       		.uleb128 0x2
+ 631 002d 02       		.byte	0x2
+ 632 002e 05       		.byte	0x5
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccHo9Q91.s 			page 15
 
 
- 303              		.loc 1 67 0
- 304 00d8 1170     		strb	r1, [r2]
-  68:../../source/src/kernel/OS_CORE/os_time.c **** 		if(60 == sys_time.minute)
- 305              		.loc 1 68 0
- 306 00da 0133     		adds	r3, r3, #1
- 307 00dc DBB2     		uxtb	r3, r3
-  69:../../source/src/kernel/OS_CORE/os_time.c **** 		{
- 308              		.loc 1 69 0
- 309 00de 3C2B     		cmp	r3, #60
- 310 00e0 02D0     		beq	.L20
-  68:../../source/src/kernel/OS_CORE/os_time.c **** 		if(60 == sys_time.minute)
- 311              		.loc 1 68 0
- 312 00e2 5370     		strb	r3, [r2, #1]
-  95:../../source/src/kernel/OS_CORE/os_time.c **** 
- 313              		.loc 1 95 0
- 314 00e4 30BC     		pop	{r4, r5}
- 315              	.LCFI9:
- 316              		.cfi_remember_state
- 317              		.cfi_restore 5
- 318              		.cfi_restore 4
- 319              		.cfi_def_cfa_offset 0
- 320 00e6 7047     		bx	lr
- 321              	.L20:
- 322              	.LCFI10:
- 323              		.cfi_restore_state
-  72:../../source/src/kernel/OS_CORE/os_time.c **** 			if(24 == sys_time.hour)
- 324              		.loc 1 72 0
- 325 00e8 9378     		ldrb	r3, [r2, #2]	@ zero_extendqisi2
-  71:../../source/src/kernel/OS_CORE/os_time.c **** 		  	++sys_time.hour;
- 326              		.loc 1 71 0
- 327 00ea 5170     		strb	r1, [r2, #1]
-  72:../../source/src/kernel/OS_CORE/os_time.c **** 			if(24 == sys_time.hour)
- 328              		.loc 1 72 0
- 329 00ec 0133     		adds	r3, r3, #1
- 330 00ee DBB2     		uxtb	r3, r3
-  73:../../source/src/kernel/OS_CORE/os_time.c **** 			{
- 331              		.loc 1 73 0
- 332 00f0 182B     		cmp	r3, #24
- 333 00f2 01D0     		beq	.L22
-  72:../../source/src/kernel/OS_CORE/os_time.c **** 			if(24 == sys_time.hour)
- 334              		.loc 1 72 0
- 335 00f4 9370     		strb	r3, [r2, #2]
- 336 00f6 EBE7     		b	.L17
- 337              	.L22:
-  78:../../source/src/kernel/OS_CORE/os_time.c **** 				{
- 338              		.loc 1 78 0
- 339 00f8 1479     		ldrb	r4, [r2, #4]	@ zero_extendqisi2
- 340 00fa 114D     		ldr	r5, .L27+4
-  76:../../source/src/kernel/OS_CORE/os_time.c **** 				++sys_time.day;
- 341              		.loc 1 76 0
- 342 00fc D078     		ldrb	r0, [r2, #3]	@ zero_extendqisi2
-  77:../../source/src/kernel/OS_CORE/os_time.c **** 				if(month_date_table[sys_time.month-1] < sys_time.date)
- 343              		.loc 1 77 0
- 344 00fe 5379     		ldrb	r3, [r2, #5]	@ zero_extendqisi2
-  78:../../source/src/kernel/OS_CORE/os_time.c **** 				{
- 345              		.loc 1 78 0
- 346 0100 2544     		add	r5, r5, r4
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc28WVH2.s 			page 10
+ 633 002f DA010000 		.4byte	.LASF1
+ 634 0033 03       		.uleb128 0x3
+ 635 0034 04       		.byte	0x4
+ 636 0035 05       		.byte	0x5
+ 637 0036 696E7400 		.ascii	"int\000"
+ 638 003a 02       		.uleb128 0x2
+ 639 003b 08       		.byte	0x8
+ 640 003c 05       		.byte	0x5
+ 641 003d 93010000 		.4byte	.LASF2
+ 642 0041 04       		.uleb128 0x4
+ 643 0042 3E000000 		.4byte	.LASF4
+ 644 0046 02       		.byte	0x2
+ 645 0047 0A       		.byte	0xa
+ 646 0048 51000000 		.4byte	0x51
+ 647 004c 05       		.uleb128 0x5
+ 648 004d 41000000 		.4byte	0x41
+ 649 0051 02       		.uleb128 0x2
+ 650 0052 01       		.byte	0x1
+ 651 0053 08       		.byte	0x8
+ 652 0054 85000000 		.4byte	.LASF3
+ 653 0058 04       		.uleb128 0x4
+ 654 0059 A1010000 		.4byte	.LASF5
+ 655 005d 02       		.byte	0x2
+ 656 005e 0B       		.byte	0xb
+ 657 005f 63000000 		.4byte	0x63
+ 658 0063 02       		.uleb128 0x2
+ 659 0064 02       		.byte	0x2
+ 660 0065 07       		.byte	0x7
+ 661 0066 9A000000 		.4byte	.LASF6
+ 662 006a 02       		.uleb128 0x2
+ 663 006b 04       		.byte	0x4
+ 664 006c 07       		.byte	0x7
+ 665 006d 25010000 		.4byte	.LASF7
+ 666 0071 04       		.uleb128 0x4
+ 667 0072 93000000 		.4byte	.LASF8
+ 668 0076 02       		.byte	0x2
+ 669 0077 0D       		.byte	0xd
+ 670 0078 81000000 		.4byte	0x81
+ 671 007c 06       		.uleb128 0x6
+ 672 007d 71000000 		.4byte	0x71
+ 673 0081 02       		.uleb128 0x2
+ 674 0082 08       		.byte	0x8
+ 675 0083 07       		.byte	0x7
+ 676 0084 32010000 		.4byte	.LASF9
+ 677 0088 07       		.uleb128 0x7
+ 678 0089 6B010000 		.4byte	.LASF18
+ 679 008d 08       		.byte	0x8
+ 680 008e 03       		.byte	0x3
+ 681 008f 13       		.byte	0x13
+ 682 0090 F7000000 		.4byte	0xf7
+ 683 0094 08       		.uleb128 0x8
+ 684 0095 EB000000 		.4byte	.LASF10
+ 685 0099 03       		.byte	0x3
+ 686 009a 14       		.byte	0x14
+ 687 009b 41000000 		.4byte	0x41
+ 688 009f 02       		.byte	0x2
+ 689 00a0 23       		.byte	0x23
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccHo9Q91.s 			page 16
 
 
-  76:../../source/src/kernel/OS_CORE/os_time.c **** 				++sys_time.day;
- 347              		.loc 1 76 0
- 348 0102 0130     		adds	r0, r0, #1
-  78:../../source/src/kernel/OS_CORE/os_time.c **** 				{
- 349              		.loc 1 78 0
- 350 0104 15F8015C 		ldrb	r5, [r5, #-1]	@ zero_extendqisi2
-  76:../../source/src/kernel/OS_CORE/os_time.c **** 				++sys_time.day;
- 351              		.loc 1 76 0
- 352 0108 C0B2     		uxtb	r0, r0
-  77:../../source/src/kernel/OS_CORE/os_time.c **** 				if(month_date_table[sys_time.month-1] < sys_time.date)
- 353              		.loc 1 77 0
- 354 010a 0133     		adds	r3, r3, #1
- 355 010c DBB2     		uxtb	r3, r3
-  78:../../source/src/kernel/OS_CORE/os_time.c **** 				{
- 356              		.loc 1 78 0
- 357 010e 8542     		cmp	r5, r0
-  75:../../source/src/kernel/OS_CORE/os_time.c **** 				++sys_time.date;
- 358              		.loc 1 75 0
- 359 0110 9170     		strb	r1, [r2, #2]
-  76:../../source/src/kernel/OS_CORE/os_time.c **** 				++sys_time.day;
- 360              		.loc 1 76 0
- 361 0112 D070     		strb	r0, [r2, #3]
-  77:../../source/src/kernel/OS_CORE/os_time.c **** 				if(month_date_table[sys_time.month-1] < sys_time.date)
- 362              		.loc 1 77 0
- 363 0114 5371     		strb	r3, [r2, #5]
-  78:../../source/src/kernel/OS_CORE/os_time.c **** 				{
- 364              		.loc 1 78 0
- 365 0116 06D2     		bcs	.L24
-  80:../../source/src/kernel/OS_CORE/os_time.c **** 					++sys_time.month;
- 366              		.loc 1 80 0
- 367 0118 0121     		movs	r1, #1
-  81:../../source/src/kernel/OS_CORE/os_time.c **** 					if(sys_time.month == 13)
- 368              		.loc 1 81 0
- 369 011a 0C44     		add	r4, r4, r1
- 370 011c E4B2     		uxtb	r4, r4
-  82:../../source/src/kernel/OS_CORE/os_time.c **** 					{
- 371              		.loc 1 82 0
- 372 011e 0D2C     		cmp	r4, #13
-  80:../../source/src/kernel/OS_CORE/os_time.c **** 					++sys_time.month;
- 373              		.loc 1 80 0
- 374 0120 D170     		strb	r1, [r2, #3]
-  82:../../source/src/kernel/OS_CORE/os_time.c **** 					{
- 375              		.loc 1 82 0
- 376 0122 05D0     		beq	.L25
-  81:../../source/src/kernel/OS_CORE/os_time.c **** 					if(sys_time.month == 13)
- 377              		.loc 1 81 0
- 378 0124 1471     		strb	r4, [r2, #4]
- 379              	.L24:
-  88:../../source/src/kernel/OS_CORE/os_time.c **** 				{
- 380              		.loc 1 88 0
- 381 0126 082B     		cmp	r3, #8
-  90:../../source/src/kernel/OS_CORE/os_time.c **** 				}
- 382              		.loc 1 90 0
- 383 0128 04BF     		itt	eq
- 384 012a 0123     		moveq	r3, #1
- 385 012c 5371     		strbeq	r3, [r2, #5]
-  95:../../source/src/kernel/OS_CORE/os_time.c **** 
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc28WVH2.s 			page 11
+ 690 00a1 00       		.uleb128 0
+ 691 00a2 08       		.uleb128 0x8
+ 692 00a3 49000000 		.4byte	.LASF11
+ 693 00a7 03       		.byte	0x3
+ 694 00a8 15       		.byte	0x15
+ 695 00a9 41000000 		.4byte	0x41
+ 696 00ad 02       		.byte	0x2
+ 697 00ae 23       		.byte	0x23
+ 698 00af 01       		.uleb128 0x1
+ 699 00b0 08       		.uleb128 0x8
+ 700 00b1 66010000 		.4byte	.LASF12
+ 701 00b5 03       		.byte	0x3
+ 702 00b6 16       		.byte	0x16
+ 703 00b7 41000000 		.4byte	0x41
+ 704 00bb 02       		.byte	0x2
+ 705 00bc 23       		.byte	0x23
+ 706 00bd 02       		.uleb128 0x2
+ 707 00be 08       		.uleb128 0x8
+ 708 00bf 6B000000 		.4byte	.LASF13
+ 709 00c3 03       		.byte	0x3
+ 710 00c4 17       		.byte	0x17
+ 711 00c5 41000000 		.4byte	0x41
+ 712 00c9 02       		.byte	0x2
+ 713 00ca 23       		.byte	0x23
+ 714 00cb 03       		.uleb128 0x3
+ 715 00cc 08       		.uleb128 0x8
+ 716 00cd 50000000 		.4byte	.LASF14
+ 717 00d1 03       		.byte	0x3
+ 718 00d2 18       		.byte	0x18
+ 719 00d3 41000000 		.4byte	0x41
+ 720 00d7 02       		.byte	0x2
+ 721 00d8 23       		.byte	0x23
+ 722 00d9 04       		.uleb128 0x4
+ 723 00da 09       		.uleb128 0x9
+ 724 00db 64617900 		.ascii	"day\000"
+ 725 00df 03       		.byte	0x3
+ 726 00e0 19       		.byte	0x19
+ 727 00e1 41000000 		.4byte	0x41
+ 728 00e5 02       		.byte	0x2
+ 729 00e6 23       		.byte	0x23
+ 730 00e7 05       		.uleb128 0x5
+ 731 00e8 08       		.uleb128 0x8
+ 732 00e9 44000000 		.4byte	.LASF15
+ 733 00ed 03       		.byte	0x3
+ 734 00ee 1A       		.byte	0x1a
+ 735 00ef 58000000 		.4byte	0x58
+ 736 00f3 02       		.byte	0x2
+ 737 00f4 23       		.byte	0x23
+ 738 00f5 06       		.uleb128 0x6
+ 739 00f6 00       		.byte	0
+ 740 00f7 04       		.uleb128 0x4
+ 741 00f8 CF010000 		.4byte	.LASF16
+ 742 00fc 04       		.byte	0x4
+ 743 00fd 04       		.byte	0x4
+ 744 00fe 6A000000 		.4byte	0x6a
+ 745 0102 04       		.uleb128 0x4
+ 746 0103 7E000000 		.4byte	.LASF17
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccHo9Q91.s 			page 17
 
 
- 386              		.loc 1 95 0
- 387 012e CFE7     		b	.L17
- 388              	.L25:
-  85:../../source/src/kernel/OS_CORE/os_time.c **** 					}
- 389              		.loc 1 85 0
- 390 0130 D088     		ldrh	r0, [r2, #6]
-  84:../../source/src/kernel/OS_CORE/os_time.c **** 						++sys_time.year;
- 391              		.loc 1 84 0
- 392 0132 1171     		strb	r1, [r2, #4]
-  85:../../source/src/kernel/OS_CORE/os_time.c **** 					}
- 393              		.loc 1 85 0
- 394 0134 411C     		adds	r1, r0, #1
- 395 0136 D180     		strh	r1, [r2, #6]	@ movhi
- 396 0138 F5E7     		b	.L24
- 397              	.L28:
- 398 013a 00BF     		.align	2
- 399              	.L27:
- 400 013c 00000000 		.word	.LANCHOR0
- 401 0140 00000000 		.word	.LANCHOR1
- 402              		.cfi_endproc
- 403              	.LFE2:
- 404              		.size	system_time_increase, .-system_time_increase
- 405              		.global	__rtmsym_set_time
- 406              		.global	__rtmsym_set_time_name
- 407              		.global	__rtmsym_system_time_display
- 408              		.global	__rtmsym_system_time_display_name
- 409              		.global	__rtmsym___init_system_time
- 410              		.global	__rtmsym___init_system_time_name
- 411              		.global	__rtmsym_get_tick
- 412              		.global	__rtmsym_get_tick_name
- 413              		.global	g_time_tick_count
- 414              		.section	.rodata
- 415              		.align	2
- 416              		.set	.LANCHOR1,. + 0
- 417              		.type	month_date_table, %object
- 418              		.size	month_date_table, 12
- 419              	month_date_table:
- 420 0000 1F       		.byte	31
- 421 0001 1C       		.byte	28
- 422 0002 1F       		.byte	31
- 423 0003 1E       		.byte	30
- 424 0004 1F       		.byte	31
- 425 0005 1E       		.byte	30
- 426 0006 1F       		.byte	31
- 427 0007 1F       		.byte	31
- 428 0008 1E       		.byte	30
- 429 0009 1F       		.byte	31
- 430 000a 1E       		.byte	30
- 431 000b 1F       		.byte	31
- 432              		.bss
- 433              		.align	3
- 434              		.set	.LANCHOR0,. + 0
- 435              		.type	sys_time, %object
- 436              		.size	sys_time, 8
- 437              	sys_time:
- 438 0000 00000000 		.space	8
- 438      00000000 
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc28WVH2.s 			page 12
+ 747 0107 04       		.byte	0x4
+ 748 0108 06       		.byte	0x6
+ 749 0109 F7000000 		.4byte	0xf7
+ 750 010d 07       		.uleb128 0x7
+ 751 010e 70010000 		.4byte	.LASF19
+ 752 0112 08       		.byte	0x8
+ 753 0113 05       		.byte	0x5
+ 754 0114 05       		.byte	0x5
+ 755 0115 36010000 		.4byte	0x136
+ 756 0119 08       		.uleb128 0x8
+ 757 011a 70000000 		.4byte	.LASF20
+ 758 011e 05       		.byte	0x5
+ 759 011f 07       		.byte	0x7
+ 760 0120 3B010000 		.4byte	0x13b
+ 761 0124 02       		.byte	0x2
+ 762 0125 23       		.byte	0x23
+ 763 0126 00       		.uleb128 0
+ 764 0127 08       		.uleb128 0x8
+ 765 0128 A8010000 		.4byte	.LASF21
+ 766 012c 05       		.byte	0x5
+ 767 012d 08       		.byte	0x8
+ 768 012e 3D010000 		.4byte	0x13d
+ 769 0132 02       		.byte	0x2
+ 770 0133 23       		.byte	0x23
+ 771 0134 04       		.uleb128 0x4
+ 772 0135 00       		.byte	0
+ 773 0136 05       		.uleb128 0x5
+ 774 0137 0D010000 		.4byte	0x10d
+ 775 013b 0A       		.uleb128 0xa
+ 776 013c 04       		.byte	0x4
+ 777 013d 0B       		.uleb128 0xb
+ 778 013e 04       		.byte	0x4
+ 779 013f 4A010000 		.4byte	0x14a
+ 780 0143 02       		.uleb128 0x2
+ 781 0144 01       		.byte	0x1
+ 782 0145 08       		.byte	0x8
+ 783 0146 C0020000 		.4byte	.LASF22
+ 784 014a 05       		.uleb128 0x5
+ 785 014b 43010000 		.4byte	0x143
+ 786 014f 0C       		.uleb128 0xc
+ 787 0150 13010000 		.4byte	.LASF23
+ 788 0154 01       		.byte	0x1
+ 789 0155 08       		.byte	0x8
+ 790 0156 7C000000 		.4byte	0x7c
+ 791 015a 01       		.byte	0x1
+ 792 015b 05       		.byte	0x5
+ 793 015c 03       		.byte	0x3
+ 794 015d 00000000 		.4byte	g_time_tick_count
+ 795 0161 0D       		.uleb128 0xd
+ 796 0162 4A010000 		.4byte	0x14a
+ 797 0166 71010000 		.4byte	0x171
+ 798 016a 0E       		.uleb128 0xe
+ 799 016b 6A000000 		.4byte	0x6a
+ 800 016f 08       		.byte	0x8
+ 801 0170 00       		.byte	0
+ 802 0171 05       		.uleb128 0x5
+ 803 0172 61010000 		.4byte	0x161
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccHo9Q91.s 			page 18
 
 
- 439              		.type	g_time_tick_count, %object
- 440              		.size	g_time_tick_count, 8
- 441              	g_time_tick_count:
- 442 0008 00000000 		.space	8
- 442      00000000 
- 443              		.section	.RTMSymTab,"a",%progbits
- 444              		.align	2
- 445              		.type	__rtmsym_set_time, %object
- 446              		.size	__rtmsym_set_time, 8
- 447              	__rtmsym_set_time:
- 448 0000 00000000 		.word	set_time
- 449 0004 00000000 		.word	__rtmsym_set_time_name
- 450              		.type	__rtmsym_system_time_display, %object
- 451              		.size	__rtmsym_system_time_display, 8
- 452              	__rtmsym_system_time_display:
- 453 0008 00000000 		.word	system_time_display
- 454 000c 00000000 		.word	__rtmsym_system_time_display_name
- 455              		.type	__rtmsym___init_system_time, %object
- 456              		.size	__rtmsym___init_system_time, 8
- 457              	__rtmsym___init_system_time:
- 458 0010 00000000 		.word	__init_system_time
- 459 0014 00000000 		.word	__rtmsym___init_system_time_name
- 460              		.type	__rtmsym_get_tick, %object
- 461              		.size	__rtmsym_get_tick, 8
- 462              	__rtmsym_get_tick:
- 463 0018 00000000 		.word	get_tick
- 464 001c 00000000 		.word	__rtmsym_get_tick_name
- 465              		.section	.rodata.name,"a",%progbits
- 466              		.align	2
- 467              		.type	__rtmsym_set_time_name, %object
- 468              		.size	__rtmsym_set_time_name, 9
- 469              	__rtmsym_set_time_name:
- 470 0000 7365745F 		.ascii	"set_time\000"
- 470      74696D65 
- 470      00
- 471 0009 000000   		.space	3
- 472              		.type	__rtmsym_system_time_display_name, %object
- 473              		.size	__rtmsym_system_time_display_name, 20
- 474              	__rtmsym_system_time_display_name:
- 475 000c 73797374 		.ascii	"system_time_display\000"
- 475      656D5F74 
- 475      696D655F 
- 475      64697370 
- 475      6C617900 
- 476              		.type	__rtmsym___init_system_time_name, %object
- 477              		.size	__rtmsym___init_system_time_name, 19
- 478              	__rtmsym___init_system_time_name:
- 479 0020 5F5F696E 		.ascii	"__init_system_time\000"
- 479      69745F73 
- 479      79737465 
- 479      6D5F7469 
- 479      6D6500
- 480 0033 00       		.space	1
- 481              		.type	__rtmsym_get_tick_name, %object
- 482              		.size	__rtmsym_get_tick_name, 9
- 483              	__rtmsym_get_tick_name:
- 484 0034 6765745F 		.ascii	"get_tick\000"
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc28WVH2.s 			page 13
+ 804 0176 0C       		.uleb128 0xc
+ 805 0177 17000000 		.4byte	.LASF24
+ 806 017b 01       		.byte	0x1
+ 807 017c 14       		.byte	0x14
+ 808 017d 71010000 		.4byte	0x171
+ 809 0181 01       		.byte	0x1
+ 810 0182 05       		.byte	0x5
+ 811 0183 03       		.byte	0x3
+ 812 0184 00000000 		.4byte	__rtmsym_get_tick_name
+ 813 0188 0C       		.uleb128 0xc
+ 814 0189 81010000 		.4byte	.LASF25
+ 815 018d 01       		.byte	0x1
+ 816 018e 14       		.byte	0x14
+ 817 018f 36010000 		.4byte	0x136
+ 818 0193 01       		.byte	0x1
+ 819 0194 05       		.byte	0x5
+ 820 0195 03       		.byte	0x3
+ 821 0196 00000000 		.4byte	__rtmsym_get_tick
+ 822 019a 0F       		.uleb128 0xf
+ 823 019b 75000000 		.4byte	.LASF26
+ 824 019f 01       		.byte	0x1
+ 825 01a0 18       		.byte	0x18
+ 826 01a1 88000000 		.4byte	0x88
+ 827 01a5 05       		.byte	0x5
+ 828 01a6 03       		.byte	0x3
+ 829 01a7 08000000 		.4byte	sys_time
+ 830 01ab 0D       		.uleb128 0xd
+ 831 01ac 4C000000 		.4byte	0x4c
+ 832 01b0 BB010000 		.4byte	0x1bb
+ 833 01b4 0E       		.uleb128 0xe
+ 834 01b5 6A000000 		.4byte	0x6a
+ 835 01b9 0B       		.byte	0xb
+ 836 01ba 00       		.byte	0
+ 837 01bb 05       		.uleb128 0x5
+ 838 01bc AB010000 		.4byte	0x1ab
+ 839 01c0 0F       		.uleb128 0xf
+ 840 01c1 E4010000 		.4byte	.LASF27
+ 841 01c5 01       		.byte	0x1
+ 842 01c6 1A       		.byte	0x1a
+ 843 01c7 BB010000 		.4byte	0x1bb
+ 844 01cb 05       		.byte	0x5
+ 845 01cc 03       		.byte	0x3
+ 846 01cd 00000000 		.4byte	month_date_table
+ 847 01d1 0D       		.uleb128 0xd
+ 848 01d2 4A010000 		.4byte	0x14a
+ 849 01d6 E1010000 		.4byte	0x1e1
+ 850 01da 0E       		.uleb128 0xe
+ 851 01db 6A000000 		.4byte	0x6a
+ 852 01df 12       		.byte	0x12
+ 853 01e0 00       		.byte	0
+ 854 01e1 05       		.uleb128 0x5
+ 855 01e2 D1010000 		.4byte	0x1d1
+ 856 01e6 0C       		.uleb128 0xc
+ 857 01e7 F2000000 		.4byte	.LASF28
+ 858 01eb 01       		.byte	0x1
+ 859 01ec 34       		.byte	0x34
+ 860 01ed E1010000 		.4byte	0x1e1
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccHo9Q91.s 			page 19
 
 
- 484      7469636B 
- 484      00
- 485              		.section	.rodata.str1.4,"aMS",%progbits,1
- 486              		.align	2
- 487              	.LC0:
- 488 0000 2564E5B9 		.ascii	"%d\345\271\264%d\346\234\210%d\346\227\245--%d\346\227"
- 488      B42564E6 
- 488      9C882564 
- 488      E697A52D 
- 488      2D2564E6 
- 489 0015 B62564E5 		.ascii	"\266%d\345\210\206%d\347\247\222--\346\230\237\346\234"
- 489      88862564 
- 489      E7A7922D 
- 489      2DE6989F 
- 489      E69C
- 490 0027 9F25640D 		.ascii	"\237%d\015\012\000"
- 490      0A00
- 491 002d 000000   		.space	3
- 492              	.LC1:
- 493 0030 2E2E2F2E 		.ascii	"../../source/src/kernel/OS_CORE/os_time.c\000"
- 493      2E2F736F 
- 493      75726365 
- 493      2F737263 
- 493      2F6B6572 
- 494 005a 0000     		.space	2
- 495              	.LC2:
- 496 005c 6572726F 		.ascii	"error fun name : set_time\012error para : time_ptr\012"
- 496      72206675 
- 496      6E206E61 
- 496      6D65203A 
- 496      20736574 
- 497 008c 00       		.ascii	"\000"
- 498              		.text
- 499              	.Letext0:
- 500              		.file 2 "../../source/include/os_cpu/kakaosstdint.h"
- 501              		.file 3 "../../source/include/os_core/os_time.h"
- 502              		.file 4 "../../source/include/os_cpu/os_cpu_stm32.h"
- 503              		.file 5 "../../source/include/os_core/export.h"
- 504              		.file 6 "../../source/include/os_lib/myassert.h"
- 505              		.file 7 "../../source/include/os_lib/myMicroLIB.h"
- 506              		.section	.debug_info,"",%progbits
- 507              	.Ldebug_info0:
- 508 0000 00040000 		.4byte	0x400
- 509 0004 0200     		.2byte	0x2
- 510 0006 00000000 		.4byte	.Ldebug_abbrev0
- 511 000a 04       		.byte	0x4
- 512 000b 01       		.uleb128 0x1
- 513 000c 3A020000 		.4byte	.LASF43
- 514 0010 0C       		.byte	0xc
- 515 0011 DC000000 		.4byte	.LASF44
- 516 0015 10030000 		.4byte	.LASF45
- 517 0019 00000000 		.4byte	.Ltext0
- 518 001d 44010000 		.4byte	.Letext0
- 519 0021 00000000 		.4byte	.Ldebug_line0
- 520 0025 02       		.uleb128 0x2
- 521 0026 01       		.byte	0x1
- 522 0027 06       		.byte	0x6
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc28WVH2.s 			page 14
+ 861 01f1 01       		.byte	0x1
+ 862 01f2 05       		.byte	0x5
+ 863 01f3 03       		.byte	0x3
+ 864 01f4 00000000 		.4byte	__rtmsym___init_system_time_name
+ 865 01f8 0C       		.uleb128 0xc
+ 866 01f9 11030000 		.4byte	.LASF29
+ 867 01fd 01       		.byte	0x1
+ 868 01fe 34       		.byte	0x34
+ 869 01ff 36010000 		.4byte	0x136
+ 870 0203 01       		.byte	0x1
+ 871 0204 05       		.byte	0x5
+ 872 0205 03       		.byte	0x3
+ 873 0206 00000000 		.4byte	__rtmsym___init_system_time
+ 874 020a 0D       		.uleb128 0xd
+ 875 020b 4A010000 		.4byte	0x14a
+ 876 020f 1A020000 		.4byte	0x21a
+ 877 0213 0E       		.uleb128 0xe
+ 878 0214 6A000000 		.4byte	0x6a
+ 879 0218 13       		.byte	0x13
+ 880 0219 00       		.byte	0
+ 881 021a 05       		.uleb128 0x5
+ 882 021b 0A020000 		.4byte	0x20a
+ 883 021f 0C       		.uleb128 0xc
+ 884 0220 AD010000 		.4byte	.LASF30
+ 885 0224 01       		.byte	0x1
+ 886 0225 6A       		.byte	0x6a
+ 887 0226 1A020000 		.4byte	0x21a
+ 888 022a 01       		.byte	0x1
+ 889 022b 05       		.byte	0x5
+ 890 022c 03       		.byte	0x3
+ 891 022d 00000000 		.4byte	__rtmsym_system_time_display_name
+ 892 0231 0C       		.uleb128 0xc
+ 893 0232 49010000 		.4byte	.LASF31
+ 894 0236 01       		.byte	0x1
+ 895 0237 6A       		.byte	0x6a
+ 896 0238 36010000 		.4byte	0x136
+ 897 023c 01       		.byte	0x1
+ 898 023d 05       		.byte	0x5
+ 899 023e 03       		.byte	0x3
+ 900 023f 00000000 		.4byte	__rtmsym_system_time_display
+ 901 0243 0C       		.uleb128 0xc
+ 902 0244 00000000 		.4byte	.LASF32
+ 903 0248 01       		.byte	0x1
+ 904 0249 82       		.byte	0x82
+ 905 024a 71010000 		.4byte	0x171
+ 906 024e 01       		.byte	0x1
+ 907 024f 05       		.byte	0x5
+ 908 0250 03       		.byte	0x3
+ 909 0251 00000000 		.4byte	__rtmsym_set_time_name
+ 910 0255 0C       		.uleb128 0xc
+ 911 0256 08020000 		.4byte	.LASF33
+ 912 025a 01       		.byte	0x1
+ 913 025b 82       		.byte	0x82
+ 914 025c 36010000 		.4byte	0x136
+ 915 0260 01       		.byte	0x1
+ 916 0261 05       		.byte	0x5
+ 917 0262 03       		.byte	0x3
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccHo9Q91.s 			page 20
 
 
- 523 0028 E8020000 		.4byte	.LASF0
- 524 002c 02       		.uleb128 0x2
- 525 002d 02       		.byte	0x2
- 526 002e 05       		.byte	0x5
- 527 002f F5010000 		.4byte	.LASF1
- 528 0033 03       		.uleb128 0x3
- 529 0034 04       		.byte	0x4
- 530 0035 05       		.byte	0x5
- 531 0036 696E7400 		.ascii	"int\000"
- 532 003a 02       		.uleb128 0x2
- 533 003b 08       		.byte	0x8
- 534 003c 05       		.byte	0x5
- 535 003d AE010000 		.4byte	.LASF2
- 536 0041 04       		.uleb128 0x4
- 537 0042 4D000000 		.4byte	.LASF4
- 538 0046 02       		.byte	0x2
- 539 0047 0A       		.byte	0xa
- 540 0048 51000000 		.4byte	0x51
- 541 004c 05       		.uleb128 0x5
- 542 004d 41000000 		.4byte	0x41
- 543 0051 02       		.uleb128 0x2
- 544 0052 01       		.byte	0x1
- 545 0053 08       		.byte	0x8
- 546 0054 A0000000 		.4byte	.LASF3
- 547 0058 04       		.uleb128 0x4
- 548 0059 BC010000 		.4byte	.LASF5
- 549 005d 02       		.byte	0x2
- 550 005e 0B       		.byte	0xb
- 551 005f 63000000 		.4byte	0x63
- 552 0063 02       		.uleb128 0x2
- 553 0064 02       		.byte	0x2
- 554 0065 07       		.byte	0x7
- 555 0066 B5000000 		.4byte	.LASF6
- 556 006a 02       		.uleb128 0x2
- 557 006b 04       		.byte	0x4
- 558 006c 07       		.byte	0x7
- 559 006d 40010000 		.4byte	.LASF7
- 560 0071 04       		.uleb128 0x4
- 561 0072 AE000000 		.4byte	.LASF8
- 562 0076 02       		.byte	0x2
- 563 0077 0D       		.byte	0xd
- 564 0078 81000000 		.4byte	0x81
- 565 007c 06       		.uleb128 0x6
- 566 007d 71000000 		.4byte	0x71
- 567 0081 02       		.uleb128 0x2
- 568 0082 08       		.byte	0x8
- 569 0083 07       		.byte	0x7
- 570 0084 4D010000 		.4byte	.LASF9
- 571 0088 07       		.uleb128 0x7
- 572 0089 86010000 		.4byte	.LASF18
- 573 008d 08       		.byte	0x8
- 574 008e 03       		.byte	0x3
- 575 008f 13       		.byte	0x13
- 576 0090 F7000000 		.4byte	0xf7
- 577 0094 08       		.uleb128 0x8
- 578 0095 06010000 		.4byte	.LASF10
- 579 0099 03       		.byte	0x3
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc28WVH2.s 			page 15
+ 918 0263 00000000 		.4byte	__rtmsym_set_time
+ 919 0267 10       		.uleb128 0x10
+ 920 0268 01       		.byte	0x1
+ 921 0269 DA020000 		.4byte	.LASF42
+ 922 026d 01       		.byte	0x1
+ 923 026e 6C       		.byte	0x6c
+ 924 026f 01       		.byte	0x1
+ 925 0270 33000000 		.4byte	0x33
+ 926 0274 98010000 		.4byte	.LFB4
+ 927 0278 20020000 		.4byte	.LFE4
+ 928 027c 00000000 		.4byte	.LLST4
+ 929 0280 01       		.byte	0x1
+ 930 0281 A2020000 		.4byte	0x2a2
+ 931 0285 11       		.uleb128 0x11
+ 932 0286 2E000000 		.4byte	.LASF43
+ 933 028a 01       		.byte	0x1
+ 934 028b 6C       		.byte	0x6c
+ 935 028c A2020000 		.4byte	0x2a2
+ 936 0290 02       		.byte	0x2
+ 937 0291 91       		.byte	0x91
+ 938 0292 6C       		.sleb128 -20
+ 939 0293 0F       		.uleb128 0xf
+ 940 0294 37000000 		.4byte	.LASF34
+ 941 0298 01       		.byte	0x1
+ 942 0299 76       		.byte	0x76
+ 943 029a 02010000 		.4byte	0x102
+ 944 029e 02       		.byte	0x2
+ 945 029f 91       		.byte	0x91
+ 946 02a0 74       		.sleb128 -12
+ 947 02a1 00       		.byte	0
+ 948 02a2 0B       		.uleb128 0xb
+ 949 02a3 04       		.byte	0x4
+ 950 02a4 88000000 		.4byte	0x88
+ 951 02a8 12       		.uleb128 0x12
+ 952 02a9 01       		.byte	0x1
+ 953 02aa AD000000 		.4byte	.LASF37
+ 954 02ae 01       		.byte	0x1
+ 955 02af 62       		.byte	0x62
+ 956 02b0 01       		.byte	0x1
+ 957 02b1 34010000 		.4byte	.LFB3
+ 958 02b5 98010000 		.4byte	.LFE3
+ 959 02b9 50000000 		.4byte	.LLST3
+ 960 02bd 01       		.byte	0x1
+ 961 02be D1020000 		.4byte	0x2d1
+ 962 02c2 0F       		.uleb128 0xf
+ 963 02c3 37000000 		.4byte	.LASF34
+ 964 02c7 01       		.byte	0x1
+ 965 02c8 64       		.byte	0x64
+ 966 02c9 02010000 		.4byte	0x102
+ 967 02cd 02       		.byte	0x2
+ 968 02ce 91       		.byte	0x91
+ 969 02cf 64       		.sleb128 -28
+ 970 02d0 00       		.byte	0
+ 971 02d1 13       		.uleb128 0x13
+ 972 02d2 01       		.byte	0x1
+ 973 02d3 56000000 		.4byte	.LASF35
+ 974 02d7 01       		.byte	0x1
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccHo9Q91.s 			page 21
 
 
- 580 009a 14       		.byte	0x14
- 581 009b 41000000 		.4byte	0x41
- 582 009f 02       		.byte	0x2
- 583 00a0 23       		.byte	0x23
- 584 00a1 00       		.uleb128 0
- 585 00a2 08       		.uleb128 0x8
- 586 00a3 58000000 		.4byte	.LASF11
- 587 00a7 03       		.byte	0x3
- 588 00a8 15       		.byte	0x15
- 589 00a9 41000000 		.4byte	0x41
- 590 00ad 02       		.byte	0x2
- 591 00ae 23       		.byte	0x23
- 592 00af 01       		.uleb128 0x1
- 593 00b0 08       		.uleb128 0x8
- 594 00b1 81010000 		.4byte	.LASF12
- 595 00b5 03       		.byte	0x3
- 596 00b6 16       		.byte	0x16
- 597 00b7 41000000 		.4byte	0x41
- 598 00bb 02       		.byte	0x2
- 599 00bc 23       		.byte	0x23
- 600 00bd 02       		.uleb128 0x2
- 601 00be 08       		.uleb128 0x8
- 602 00bf 86000000 		.4byte	.LASF13
- 603 00c3 03       		.byte	0x3
- 604 00c4 17       		.byte	0x17
- 605 00c5 41000000 		.4byte	0x41
- 606 00c9 02       		.byte	0x2
- 607 00ca 23       		.byte	0x23
- 608 00cb 03       		.uleb128 0x3
- 609 00cc 08       		.uleb128 0x8
- 610 00cd 5F000000 		.4byte	.LASF14
- 611 00d1 03       		.byte	0x3
- 612 00d2 18       		.byte	0x18
- 613 00d3 41000000 		.4byte	0x41
- 614 00d7 02       		.byte	0x2
- 615 00d8 23       		.byte	0x23
- 616 00d9 04       		.uleb128 0x4
- 617 00da 09       		.uleb128 0x9
- 618 00db 64617900 		.ascii	"day\000"
- 619 00df 03       		.byte	0x3
- 620 00e0 19       		.byte	0x19
- 621 00e1 41000000 		.4byte	0x41
- 622 00e5 02       		.byte	0x2
- 623 00e6 23       		.byte	0x23
- 624 00e7 05       		.uleb128 0x5
- 625 00e8 08       		.uleb128 0x8
- 626 00e9 53000000 		.4byte	.LASF15
- 627 00ed 03       		.byte	0x3
- 628 00ee 1A       		.byte	0x1a
- 629 00ef 58000000 		.4byte	0x58
- 630 00f3 02       		.byte	0x2
- 631 00f4 23       		.byte	0x23
- 632 00f5 06       		.uleb128 0x6
- 633 00f6 00       		.byte	0
- 634 00f7 04       		.uleb128 0x4
- 635 00f8 EA010000 		.4byte	.LASF16
- 636 00fc 04       		.byte	0x4
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc28WVH2.s 			page 16
+ 975 02d8 3E       		.byte	0x3e
+ 976 02d9 01       		.byte	0x1
+ 977 02da 6C000000 		.4byte	.LFB2
+ 978 02de 34010000 		.4byte	.LFE2
+ 979 02e2 A0000000 		.4byte	.LLST2
+ 980 02e6 01       		.byte	0x1
+ 981 02e7 13       		.uleb128 0x13
+ 982 02e8 01       		.byte	0x1
+ 983 02e9 F5010000 		.4byte	.LASF36
+ 984 02ed 01       		.byte	0x1
+ 985 02ee 2A       		.byte	0x2a
+ 986 02ef 01       		.byte	0x1
+ 987 02f0 30000000 		.4byte	.LFB1
+ 988 02f4 6C000000 		.4byte	.LFE1
+ 989 02f8 E4000000 		.4byte	.LLST1
+ 990 02fc 01       		.byte	0x1
+ 991 02fd 14       		.uleb128 0x14
+ 992 02fe 01       		.byte	0x1
+ 993 02ff D1020000 		.4byte	.LASF38
+ 994 0303 01       		.byte	0x1
+ 995 0304 0B       		.byte	0xb
+ 996 0305 01       		.byte	0x1
+ 997 0306 71000000 		.4byte	0x71
+ 998 030a 00000000 		.4byte	.LFB0
+ 999 030e 30000000 		.4byte	.LFE0
+ 1000 0312 28010000 		.4byte	.LLST0
+ 1001 0316 01       		.byte	0x1
+ 1002 0317 15       		.uleb128 0x15
+ 1003 0318 6E756D00 		.ascii	"num\000"
+ 1004 031c 01       		.byte	0x1
+ 1005 031d 0D       		.byte	0xd
+ 1006 031e 71000000 		.4byte	0x71
+ 1007 0322 02       		.byte	0x2
+ 1008 0323 91       		.byte	0x91
+ 1009 0324 60       		.sleb128 -32
+ 1010 0325 0F       		.uleb128 0xf
+ 1011 0326 37000000 		.4byte	.LASF34
+ 1012 032a 01       		.byte	0x1
+ 1013 032b 0E       		.byte	0xe
+ 1014 032c 02010000 		.4byte	0x102
+ 1015 0330 02       		.byte	0x2
+ 1016 0331 91       		.byte	0x91
+ 1017 0332 6C       		.sleb128 -20
+ 1018 0333 00       		.byte	0
+ 1019 0334 00       		.byte	0
+ 1020              		.section	.debug_abbrev,"",%progbits
+ 1021              	.Ldebug_abbrev0:
+ 1022 0000 01       		.uleb128 0x1
+ 1023 0001 11       		.uleb128 0x11
+ 1024 0002 01       		.byte	0x1
+ 1025 0003 25       		.uleb128 0x25
+ 1026 0004 0E       		.uleb128 0xe
+ 1027 0005 13       		.uleb128 0x13
+ 1028 0006 0B       		.uleb128 0xb
+ 1029 0007 03       		.uleb128 0x3
+ 1030 0008 0E       		.uleb128 0xe
+ 1031 0009 1B       		.uleb128 0x1b
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccHo9Q91.s 			page 22
 
 
- 637 00fd 04       		.byte	0x4
- 638 00fe 6A000000 		.4byte	0x6a
- 639 0102 04       		.uleb128 0x4
- 640 0103 99000000 		.4byte	.LASF17
- 641 0107 04       		.byte	0x4
- 642 0108 06       		.byte	0x6
- 643 0109 F7000000 		.4byte	0xf7
- 644 010d 07       		.uleb128 0x7
- 645 010e 8B010000 		.4byte	.LASF19
- 646 0112 08       		.byte	0x8
- 647 0113 05       		.byte	0x5
- 648 0114 05       		.byte	0x5
- 649 0115 36010000 		.4byte	0x136
- 650 0119 08       		.uleb128 0x8
- 651 011a 8B000000 		.4byte	.LASF20
- 652 011e 05       		.byte	0x5
- 653 011f 07       		.byte	0x7
- 654 0120 3B010000 		.4byte	0x13b
- 655 0124 02       		.byte	0x2
- 656 0125 23       		.byte	0x23
- 657 0126 00       		.uleb128 0
- 658 0127 08       		.uleb128 0x8
- 659 0128 C3010000 		.4byte	.LASF21
- 660 012c 05       		.byte	0x5
- 661 012d 08       		.byte	0x8
- 662 012e 3D010000 		.4byte	0x13d
- 663 0132 02       		.byte	0x2
- 664 0133 23       		.byte	0x23
- 665 0134 04       		.uleb128 0x4
- 666 0135 00       		.byte	0
- 667 0136 05       		.uleb128 0x5
- 668 0137 0D010000 		.4byte	0x10d
- 669 013b 0A       		.uleb128 0xa
- 670 013c 04       		.byte	0x4
- 671 013d 0B       		.uleb128 0xb
- 672 013e 04       		.byte	0x4
- 673 013f 4A010000 		.4byte	0x14a
- 674 0143 02       		.uleb128 0x2
- 675 0144 01       		.byte	0x1
- 676 0145 08       		.byte	0x8
- 677 0146 35020000 		.4byte	.LASF22
- 678 014a 05       		.uleb128 0x5
- 679 014b 43010000 		.4byte	0x143
- 680 014f 0C       		.uleb128 0xc
- 681 0150 2E010000 		.4byte	.LASF23
- 682 0154 01       		.byte	0x1
- 683 0155 08       		.byte	0x8
- 684 0156 7C000000 		.4byte	0x7c
- 685 015a 01       		.byte	0x1
- 686 015b 05       		.byte	0x5
- 687 015c 03       		.byte	0x3
- 688 015d 00000000 		.4byte	g_time_tick_count
- 689 0161 0D       		.uleb128 0xd
- 690 0162 4A010000 		.4byte	0x14a
- 691 0166 71010000 		.4byte	0x171
- 692 016a 0E       		.uleb128 0xe
- 693 016b 6A000000 		.4byte	0x6a
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc28WVH2.s 			page 17
+ 1032 000a 0E       		.uleb128 0xe
+ 1033 000b 11       		.uleb128 0x11
+ 1034 000c 01       		.uleb128 0x1
+ 1035 000d 12       		.uleb128 0x12
+ 1036 000e 01       		.uleb128 0x1
+ 1037 000f 10       		.uleb128 0x10
+ 1038 0010 06       		.uleb128 0x6
+ 1039 0011 00       		.byte	0
+ 1040 0012 00       		.byte	0
+ 1041 0013 02       		.uleb128 0x2
+ 1042 0014 24       		.uleb128 0x24
+ 1043 0015 00       		.byte	0
+ 1044 0016 0B       		.uleb128 0xb
+ 1045 0017 0B       		.uleb128 0xb
+ 1046 0018 3E       		.uleb128 0x3e
+ 1047 0019 0B       		.uleb128 0xb
+ 1048 001a 03       		.uleb128 0x3
+ 1049 001b 0E       		.uleb128 0xe
+ 1050 001c 00       		.byte	0
+ 1051 001d 00       		.byte	0
+ 1052 001e 03       		.uleb128 0x3
+ 1053 001f 24       		.uleb128 0x24
+ 1054 0020 00       		.byte	0
+ 1055 0021 0B       		.uleb128 0xb
+ 1056 0022 0B       		.uleb128 0xb
+ 1057 0023 3E       		.uleb128 0x3e
+ 1058 0024 0B       		.uleb128 0xb
+ 1059 0025 03       		.uleb128 0x3
+ 1060 0026 08       		.uleb128 0x8
+ 1061 0027 00       		.byte	0
+ 1062 0028 00       		.byte	0
+ 1063 0029 04       		.uleb128 0x4
+ 1064 002a 16       		.uleb128 0x16
+ 1065 002b 00       		.byte	0
+ 1066 002c 03       		.uleb128 0x3
+ 1067 002d 0E       		.uleb128 0xe
+ 1068 002e 3A       		.uleb128 0x3a
+ 1069 002f 0B       		.uleb128 0xb
+ 1070 0030 3B       		.uleb128 0x3b
+ 1071 0031 0B       		.uleb128 0xb
+ 1072 0032 49       		.uleb128 0x49
+ 1073 0033 13       		.uleb128 0x13
+ 1074 0034 00       		.byte	0
+ 1075 0035 00       		.byte	0
+ 1076 0036 05       		.uleb128 0x5
+ 1077 0037 26       		.uleb128 0x26
+ 1078 0038 00       		.byte	0
+ 1079 0039 49       		.uleb128 0x49
+ 1080 003a 13       		.uleb128 0x13
+ 1081 003b 00       		.byte	0
+ 1082 003c 00       		.byte	0
+ 1083 003d 06       		.uleb128 0x6
+ 1084 003e 35       		.uleb128 0x35
+ 1085 003f 00       		.byte	0
+ 1086 0040 49       		.uleb128 0x49
+ 1087 0041 13       		.uleb128 0x13
+ 1088 0042 00       		.byte	0
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccHo9Q91.s 			page 23
 
 
- 694 016f 08       		.byte	0x8
- 695 0170 00       		.byte	0
- 696 0171 05       		.uleb128 0x5
- 697 0172 61010000 		.4byte	0x161
- 698 0176 0C       		.uleb128 0xc
- 699 0177 26000000 		.4byte	.LASF24
- 700 017b 01       		.byte	0x1
- 701 017c 14       		.byte	0x14
- 702 017d 71010000 		.4byte	0x171
- 703 0181 01       		.byte	0x1
- 704 0182 05       		.byte	0x5
- 705 0183 03       		.byte	0x3
- 706 0184 00000000 		.4byte	__rtmsym_get_tick_name
- 707 0188 0C       		.uleb128 0xc
- 708 0189 9C010000 		.4byte	.LASF25
- 709 018d 01       		.byte	0x1
- 710 018e 14       		.byte	0x14
- 711 018f 36010000 		.4byte	0x136
- 712 0193 01       		.byte	0x1
- 713 0194 05       		.byte	0x5
- 714 0195 03       		.byte	0x3
- 715 0196 00000000 		.4byte	__rtmsym_get_tick
- 716 019a 0F       		.uleb128 0xf
- 717 019b 90000000 		.4byte	.LASF26
- 718 019f 01       		.byte	0x1
- 719 01a0 18       		.byte	0x18
- 720 01a1 88000000 		.4byte	0x88
- 721 01a5 05       		.byte	0x5
- 722 01a6 03       		.byte	0x3
- 723 01a7 00000000 		.4byte	sys_time
- 724 01ab 0D       		.uleb128 0xd
- 725 01ac 4C000000 		.4byte	0x4c
- 726 01b0 BB010000 		.4byte	0x1bb
- 727 01b4 0E       		.uleb128 0xe
- 728 01b5 6A000000 		.4byte	0x6a
- 729 01b9 0B       		.byte	0xb
- 730 01ba 00       		.byte	0
- 731 01bb 05       		.uleb128 0x5
- 732 01bc AB010000 		.4byte	0x1ab
- 733 01c0 0F       		.uleb128 0xf
- 734 01c1 FF010000 		.4byte	.LASF27
- 735 01c5 01       		.byte	0x1
- 736 01c6 1A       		.byte	0x1a
- 737 01c7 BB010000 		.4byte	0x1bb
- 738 01cb 05       		.byte	0x5
- 739 01cc 03       		.byte	0x3
- 740 01cd 00000000 		.4byte	month_date_table
- 741 01d1 0D       		.uleb128 0xd
- 742 01d2 4A010000 		.4byte	0x14a
- 743 01d6 E1010000 		.4byte	0x1e1
- 744 01da 0E       		.uleb128 0xe
- 745 01db 6A000000 		.4byte	0x6a
- 746 01df 12       		.byte	0x12
- 747 01e0 00       		.byte	0
- 748 01e1 05       		.uleb128 0x5
- 749 01e2 D1010000 		.4byte	0x1d1
- 750 01e6 0C       		.uleb128 0xc
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc28WVH2.s 			page 18
+ 1089 0043 00       		.byte	0
+ 1090 0044 07       		.uleb128 0x7
+ 1091 0045 13       		.uleb128 0x13
+ 1092 0046 01       		.byte	0x1
+ 1093 0047 03       		.uleb128 0x3
+ 1094 0048 0E       		.uleb128 0xe
+ 1095 0049 0B       		.uleb128 0xb
+ 1096 004a 0B       		.uleb128 0xb
+ 1097 004b 3A       		.uleb128 0x3a
+ 1098 004c 0B       		.uleb128 0xb
+ 1099 004d 3B       		.uleb128 0x3b
+ 1100 004e 0B       		.uleb128 0xb
+ 1101 004f 01       		.uleb128 0x1
+ 1102 0050 13       		.uleb128 0x13
+ 1103 0051 00       		.byte	0
+ 1104 0052 00       		.byte	0
+ 1105 0053 08       		.uleb128 0x8
+ 1106 0054 0D       		.uleb128 0xd
+ 1107 0055 00       		.byte	0
+ 1108 0056 03       		.uleb128 0x3
+ 1109 0057 0E       		.uleb128 0xe
+ 1110 0058 3A       		.uleb128 0x3a
+ 1111 0059 0B       		.uleb128 0xb
+ 1112 005a 3B       		.uleb128 0x3b
+ 1113 005b 0B       		.uleb128 0xb
+ 1114 005c 49       		.uleb128 0x49
+ 1115 005d 13       		.uleb128 0x13
+ 1116 005e 38       		.uleb128 0x38
+ 1117 005f 0A       		.uleb128 0xa
+ 1118 0060 00       		.byte	0
+ 1119 0061 00       		.byte	0
+ 1120 0062 09       		.uleb128 0x9
+ 1121 0063 0D       		.uleb128 0xd
+ 1122 0064 00       		.byte	0
+ 1123 0065 03       		.uleb128 0x3
+ 1124 0066 08       		.uleb128 0x8
+ 1125 0067 3A       		.uleb128 0x3a
+ 1126 0068 0B       		.uleb128 0xb
+ 1127 0069 3B       		.uleb128 0x3b
+ 1128 006a 0B       		.uleb128 0xb
+ 1129 006b 49       		.uleb128 0x49
+ 1130 006c 13       		.uleb128 0x13
+ 1131 006d 38       		.uleb128 0x38
+ 1132 006e 0A       		.uleb128 0xa
+ 1133 006f 00       		.byte	0
+ 1134 0070 00       		.byte	0
+ 1135 0071 0A       		.uleb128 0xa
+ 1136 0072 0F       		.uleb128 0xf
+ 1137 0073 00       		.byte	0
+ 1138 0074 0B       		.uleb128 0xb
+ 1139 0075 0B       		.uleb128 0xb
+ 1140 0076 00       		.byte	0
+ 1141 0077 00       		.byte	0
+ 1142 0078 0B       		.uleb128 0xb
+ 1143 0079 0F       		.uleb128 0xf
+ 1144 007a 00       		.byte	0
+ 1145 007b 0B       		.uleb128 0xb
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccHo9Q91.s 			page 24
 
 
- 751 01e7 0D010000 		.4byte	.LASF28
- 752 01eb 01       		.byte	0x1
- 753 01ec 34       		.byte	0x34
- 754 01ed E1010000 		.4byte	0x1e1
- 755 01f1 01       		.byte	0x1
- 756 01f2 05       		.byte	0x5
- 757 01f3 03       		.byte	0x3
- 758 01f4 00000000 		.4byte	__rtmsym___init_system_time_name
- 759 01f8 0C       		.uleb128 0xc
- 760 01f9 3E030000 		.4byte	.LASF29
- 761 01fd 01       		.byte	0x1
- 762 01fe 34       		.byte	0x34
- 763 01ff 36010000 		.4byte	0x136
- 764 0203 01       		.byte	0x1
- 765 0204 05       		.byte	0x5
- 766 0205 03       		.byte	0x3
- 767 0206 00000000 		.4byte	__rtmsym___init_system_time
- 768 020a 0D       		.uleb128 0xd
- 769 020b 4A010000 		.4byte	0x14a
- 770 020f 1A020000 		.4byte	0x21a
- 771 0213 0E       		.uleb128 0xe
- 772 0214 6A000000 		.4byte	0x6a
- 773 0218 13       		.byte	0x13
- 774 0219 00       		.byte	0
- 775 021a 05       		.uleb128 0x5
- 776 021b 0A020000 		.4byte	0x20a
- 777 021f 0C       		.uleb128 0xc
- 778 0220 C8010000 		.4byte	.LASF30
- 779 0224 01       		.byte	0x1
- 780 0225 6A       		.byte	0x6a
- 781 0226 1A020000 		.4byte	0x21a
- 782 022a 01       		.byte	0x1
- 783 022b 05       		.byte	0x5
- 784 022c 03       		.byte	0x3
- 785 022d 00000000 		.4byte	__rtmsym_system_time_display_name
- 786 0231 0C       		.uleb128 0xc
- 787 0232 64010000 		.4byte	.LASF31
- 788 0236 01       		.byte	0x1
- 789 0237 6A       		.byte	0x6a
- 790 0238 36010000 		.4byte	0x136
- 791 023c 01       		.byte	0x1
- 792 023d 05       		.byte	0x5
- 793 023e 03       		.byte	0x3
- 794 023f 00000000 		.4byte	__rtmsym_system_time_display
- 795 0243 0C       		.uleb128 0xc
- 796 0244 00000000 		.4byte	.LASF32
- 797 0248 01       		.byte	0x1
- 798 0249 82       		.byte	0x82
- 799 024a 71010000 		.4byte	0x171
- 800 024e 01       		.byte	0x1
- 801 024f 05       		.byte	0x5
- 802 0250 03       		.byte	0x3
- 803 0251 00000000 		.4byte	__rtmsym_set_time_name
- 804 0255 0C       		.uleb128 0xc
- 805 0256 23020000 		.4byte	.LASF33
- 806 025a 01       		.byte	0x1
- 807 025b 82       		.byte	0x82
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc28WVH2.s 			page 19
+ 1146 007c 0B       		.uleb128 0xb
+ 1147 007d 49       		.uleb128 0x49
+ 1148 007e 13       		.uleb128 0x13
+ 1149 007f 00       		.byte	0
+ 1150 0080 00       		.byte	0
+ 1151 0081 0C       		.uleb128 0xc
+ 1152 0082 34       		.uleb128 0x34
+ 1153 0083 00       		.byte	0
+ 1154 0084 03       		.uleb128 0x3
+ 1155 0085 0E       		.uleb128 0xe
+ 1156 0086 3A       		.uleb128 0x3a
+ 1157 0087 0B       		.uleb128 0xb
+ 1158 0088 3B       		.uleb128 0x3b
+ 1159 0089 0B       		.uleb128 0xb
+ 1160 008a 49       		.uleb128 0x49
+ 1161 008b 13       		.uleb128 0x13
+ 1162 008c 3F       		.uleb128 0x3f
+ 1163 008d 0C       		.uleb128 0xc
+ 1164 008e 02       		.uleb128 0x2
+ 1165 008f 0A       		.uleb128 0xa
+ 1166 0090 00       		.byte	0
+ 1167 0091 00       		.byte	0
+ 1168 0092 0D       		.uleb128 0xd
+ 1169 0093 01       		.uleb128 0x1
+ 1170 0094 01       		.byte	0x1
+ 1171 0095 49       		.uleb128 0x49
+ 1172 0096 13       		.uleb128 0x13
+ 1173 0097 01       		.uleb128 0x1
+ 1174 0098 13       		.uleb128 0x13
+ 1175 0099 00       		.byte	0
+ 1176 009a 00       		.byte	0
+ 1177 009b 0E       		.uleb128 0xe
+ 1178 009c 21       		.uleb128 0x21
+ 1179 009d 00       		.byte	0
+ 1180 009e 49       		.uleb128 0x49
+ 1181 009f 13       		.uleb128 0x13
+ 1182 00a0 2F       		.uleb128 0x2f
+ 1183 00a1 0B       		.uleb128 0xb
+ 1184 00a2 00       		.byte	0
+ 1185 00a3 00       		.byte	0
+ 1186 00a4 0F       		.uleb128 0xf
+ 1187 00a5 34       		.uleb128 0x34
+ 1188 00a6 00       		.byte	0
+ 1189 00a7 03       		.uleb128 0x3
+ 1190 00a8 0E       		.uleb128 0xe
+ 1191 00a9 3A       		.uleb128 0x3a
+ 1192 00aa 0B       		.uleb128 0xb
+ 1193 00ab 3B       		.uleb128 0x3b
+ 1194 00ac 0B       		.uleb128 0xb
+ 1195 00ad 49       		.uleb128 0x49
+ 1196 00ae 13       		.uleb128 0x13
+ 1197 00af 02       		.uleb128 0x2
+ 1198 00b0 0A       		.uleb128 0xa
+ 1199 00b1 00       		.byte	0
+ 1200 00b2 00       		.byte	0
+ 1201 00b3 10       		.uleb128 0x10
+ 1202 00b4 2E       		.uleb128 0x2e
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccHo9Q91.s 			page 25
 
 
- 808 025c 36010000 		.4byte	0x136
- 809 0260 01       		.byte	0x1
- 810 0261 05       		.byte	0x5
- 811 0262 03       		.byte	0x3
- 812 0263 00000000 		.4byte	__rtmsym_set_time
- 813 0267 10       		.uleb128 0x10
- 814 0268 01       		.byte	0x1
- 815 0269 07030000 		.4byte	.LASF37
- 816 026d 01       		.byte	0x1
- 817 026e 6C       		.byte	0x6c
- 818 026f 01       		.byte	0x1
- 819 0270 33000000 		.4byte	0x33
- 820 0274 70000000 		.4byte	.LFB4
- 821 0278 C0000000 		.4byte	.LFE4
- 822 027c 00000000 		.4byte	.LLST5
- 823 0280 01       		.byte	0x1
- 824 0281 E6020000 		.4byte	0x2e6
- 825 0285 11       		.uleb128 0x11
- 826 0286 3D000000 		.4byte	.LASF46
- 827 028a 01       		.byte	0x1
- 828 028b 6C       		.byte	0x6c
- 829 028c E6020000 		.4byte	0x2e6
- 830 0290 20000000 		.4byte	.LLST6
- 831 0294 12       		.uleb128 0x12
- 832 0295 46000000 		.4byte	.LASF34
- 833 0299 01       		.byte	0x1
- 834 029a 76       		.byte	0x76
- 835 029b 02010000 		.4byte	0x102
- 836 029f 62000000 		.4byte	.LLST7
- 837 02a3 13       		.uleb128 0x13
- 838 02a4 7A000000 		.4byte	.LVL14
- 839 02a8 CF030000 		.4byte	0x3cf
- 840 02ac 13       		.uleb128 0x13
- 841 02ad 9C000000 		.4byte	.LVL15
- 842 02b1 DC030000 		.4byte	0x3dc
- 843 02b5 14       		.uleb128 0x14
- 844 02b6 A8000000 		.4byte	.LVL18
- 845 02ba E9030000 		.4byte	0x3e9
- 846 02be D2020000 		.4byte	0x2d2
- 847 02c2 15       		.uleb128 0x15
- 848 02c3 01       		.byte	0x1
- 849 02c4 50       		.byte	0x50
- 850 02c5 05       		.byte	0x5
- 851 02c6 03       		.byte	0x3
- 852 02c7 30000000 		.4byte	.LC1
- 853 02cb 15       		.uleb128 0x15
- 854 02cc 01       		.byte	0x1
- 855 02cd 51       		.byte	0x51
- 856 02ce 02       		.byte	0x2
- 857 02cf 08       		.byte	0x8
- 858 02d0 6E       		.byte	0x6e
- 859 02d1 00       		.byte	0
- 860 02d2 16       		.uleb128 0x16
- 861 02d3 AE000000 		.4byte	.LVL19
- 862 02d7 F6030000 		.4byte	0x3f6
- 863 02db 15       		.uleb128 0x15
- 864 02dc 01       		.byte	0x1
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc28WVH2.s 			page 20
+ 1203 00b5 01       		.byte	0x1
+ 1204 00b6 3F       		.uleb128 0x3f
+ 1205 00b7 0C       		.uleb128 0xc
+ 1206 00b8 03       		.uleb128 0x3
+ 1207 00b9 0E       		.uleb128 0xe
+ 1208 00ba 3A       		.uleb128 0x3a
+ 1209 00bb 0B       		.uleb128 0xb
+ 1210 00bc 3B       		.uleb128 0x3b
+ 1211 00bd 0B       		.uleb128 0xb
+ 1212 00be 27       		.uleb128 0x27
+ 1213 00bf 0C       		.uleb128 0xc
+ 1214 00c0 49       		.uleb128 0x49
+ 1215 00c1 13       		.uleb128 0x13
+ 1216 00c2 11       		.uleb128 0x11
+ 1217 00c3 01       		.uleb128 0x1
+ 1218 00c4 12       		.uleb128 0x12
+ 1219 00c5 01       		.uleb128 0x1
+ 1220 00c6 40       		.uleb128 0x40
+ 1221 00c7 06       		.uleb128 0x6
+ 1222 00c8 9642     		.uleb128 0x2116
+ 1223 00ca 0C       		.uleb128 0xc
+ 1224 00cb 01       		.uleb128 0x1
+ 1225 00cc 13       		.uleb128 0x13
+ 1226 00cd 00       		.byte	0
+ 1227 00ce 00       		.byte	0
+ 1228 00cf 11       		.uleb128 0x11
+ 1229 00d0 05       		.uleb128 0x5
+ 1230 00d1 00       		.byte	0
+ 1231 00d2 03       		.uleb128 0x3
+ 1232 00d3 0E       		.uleb128 0xe
+ 1233 00d4 3A       		.uleb128 0x3a
+ 1234 00d5 0B       		.uleb128 0xb
+ 1235 00d6 3B       		.uleb128 0x3b
+ 1236 00d7 0B       		.uleb128 0xb
+ 1237 00d8 49       		.uleb128 0x49
+ 1238 00d9 13       		.uleb128 0x13
+ 1239 00da 02       		.uleb128 0x2
+ 1240 00db 0A       		.uleb128 0xa
+ 1241 00dc 00       		.byte	0
+ 1242 00dd 00       		.byte	0
+ 1243 00de 12       		.uleb128 0x12
+ 1244 00df 2E       		.uleb128 0x2e
+ 1245 00e0 01       		.byte	0x1
+ 1246 00e1 3F       		.uleb128 0x3f
+ 1247 00e2 0C       		.uleb128 0xc
+ 1248 00e3 03       		.uleb128 0x3
+ 1249 00e4 0E       		.uleb128 0xe
+ 1250 00e5 3A       		.uleb128 0x3a
+ 1251 00e6 0B       		.uleb128 0xb
+ 1252 00e7 3B       		.uleb128 0x3b
+ 1253 00e8 0B       		.uleb128 0xb
+ 1254 00e9 27       		.uleb128 0x27
+ 1255 00ea 0C       		.uleb128 0xc
+ 1256 00eb 11       		.uleb128 0x11
+ 1257 00ec 01       		.uleb128 0x1
+ 1258 00ed 12       		.uleb128 0x12
+ 1259 00ee 01       		.uleb128 0x1
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccHo9Q91.s 			page 26
 
 
- 865 02dd 50       		.byte	0x50
- 866 02de 05       		.byte	0x5
- 867 02df 03       		.byte	0x3
- 868 02e0 5C000000 		.4byte	.LC2
- 869 02e4 00       		.byte	0
- 870 02e5 00       		.byte	0
- 871 02e6 0B       		.uleb128 0xb
- 872 02e7 04       		.byte	0x4
- 873 02e8 88000000 		.4byte	0x88
- 874 02ec 17       		.uleb128 0x17
- 875 02ed 01       		.byte	0x1
- 876 02ee C8000000 		.4byte	.LASF47
- 877 02f2 01       		.byte	0x1
- 878 02f3 62       		.byte	0x62
- 879 02f4 01       		.byte	0x1
- 880 02f5 34000000 		.4byte	.LFB3
- 881 02f9 70000000 		.4byte	.LFE3
- 882 02fd 81000000 		.4byte	.LLST3
- 883 0301 01       		.byte	0x1
- 884 0302 55030000 		.4byte	0x355
- 885 0306 12       		.uleb128 0x12
- 886 0307 46000000 		.4byte	.LASF34
- 887 030b 01       		.byte	0x1
- 888 030c 64       		.byte	0x64
- 889 030d 02010000 		.4byte	0x102
- 890 0311 C5000000 		.4byte	.LLST4
- 891 0315 13       		.uleb128 0x13
- 892 0316 3C000000 		.4byte	.LVL6
- 893 031a CF030000 		.4byte	0x3cf
- 894 031e 14       		.uleb128 0x14
- 895 031f 5C000000 		.4byte	.LVL9
- 896 0323 F6030000 		.4byte	0x3f6
- 897 0327 4A030000 		.4byte	0x34a
- 898 032b 15       		.uleb128 0x15
- 899 032c 01       		.byte	0x1
- 900 032d 50       		.byte	0x50
- 901 032e 05       		.byte	0x5
- 902 032f 03       		.byte	0x3
- 903 0330 00000000 		.4byte	.LC0
- 904 0334 15       		.uleb128 0x15
- 905 0335 02       		.byte	0x2
- 906 0336 7D       		.byte	0x7d
- 907 0337 00       		.sleb128 0
- 908 0338 02       		.byte	0x2
- 909 0339 74       		.byte	0x74
- 910 033a 00       		.sleb128 0
- 911 033b 15       		.uleb128 0x15
- 912 033c 02       		.byte	0x2
- 913 033d 7D       		.byte	0x7d
- 914 033e 04       		.sleb128 4
- 915 033f 02       		.byte	0x2
- 916 0340 76       		.byte	0x76
- 917 0341 00       		.sleb128 0
- 918 0342 15       		.uleb128 0x15
- 919 0343 02       		.byte	0x2
- 920 0344 7D       		.byte	0x7d
- 921 0345 0C       		.sleb128 12
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc28WVH2.s 			page 21
+ 1260 00ef 40       		.uleb128 0x40
+ 1261 00f0 06       		.uleb128 0x6
+ 1262 00f1 9642     		.uleb128 0x2116
+ 1263 00f3 0C       		.uleb128 0xc
+ 1264 00f4 01       		.uleb128 0x1
+ 1265 00f5 13       		.uleb128 0x13
+ 1266 00f6 00       		.byte	0
+ 1267 00f7 00       		.byte	0
+ 1268 00f8 13       		.uleb128 0x13
+ 1269 00f9 2E       		.uleb128 0x2e
+ 1270 00fa 00       		.byte	0
+ 1271 00fb 3F       		.uleb128 0x3f
+ 1272 00fc 0C       		.uleb128 0xc
+ 1273 00fd 03       		.uleb128 0x3
+ 1274 00fe 0E       		.uleb128 0xe
+ 1275 00ff 3A       		.uleb128 0x3a
+ 1276 0100 0B       		.uleb128 0xb
+ 1277 0101 3B       		.uleb128 0x3b
+ 1278 0102 0B       		.uleb128 0xb
+ 1279 0103 27       		.uleb128 0x27
+ 1280 0104 0C       		.uleb128 0xc
+ 1281 0105 11       		.uleb128 0x11
+ 1282 0106 01       		.uleb128 0x1
+ 1283 0107 12       		.uleb128 0x12
+ 1284 0108 01       		.uleb128 0x1
+ 1285 0109 40       		.uleb128 0x40
+ 1286 010a 06       		.uleb128 0x6
+ 1287 010b 9742     		.uleb128 0x2117
+ 1288 010d 0C       		.uleb128 0xc
+ 1289 010e 00       		.byte	0
+ 1290 010f 00       		.byte	0
+ 1291 0110 14       		.uleb128 0x14
+ 1292 0111 2E       		.uleb128 0x2e
+ 1293 0112 01       		.byte	0x1
+ 1294 0113 3F       		.uleb128 0x3f
+ 1295 0114 0C       		.uleb128 0xc
+ 1296 0115 03       		.uleb128 0x3
+ 1297 0116 0E       		.uleb128 0xe
+ 1298 0117 3A       		.uleb128 0x3a
+ 1299 0118 0B       		.uleb128 0xb
+ 1300 0119 3B       		.uleb128 0x3b
+ 1301 011a 0B       		.uleb128 0xb
+ 1302 011b 27       		.uleb128 0x27
+ 1303 011c 0C       		.uleb128 0xc
+ 1304 011d 49       		.uleb128 0x49
+ 1305 011e 13       		.uleb128 0x13
+ 1306 011f 11       		.uleb128 0x11
+ 1307 0120 01       		.uleb128 0x1
+ 1308 0121 12       		.uleb128 0x12
+ 1309 0122 01       		.uleb128 0x1
+ 1310 0123 40       		.uleb128 0x40
+ 1311 0124 06       		.uleb128 0x6
+ 1312 0125 9642     		.uleb128 0x2116
+ 1313 0127 0C       		.uleb128 0xc
+ 1314 0128 00       		.byte	0
+ 1315 0129 00       		.byte	0
+ 1316 012a 15       		.uleb128 0x15
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccHo9Q91.s 			page 27
 
 
- 922 0346 02       		.byte	0x2
- 923 0347 77       		.byte	0x77
- 924 0348 00       		.sleb128 0
- 925 0349 00       		.byte	0
- 926 034a 18       		.uleb128 0x18
- 927 034b 68000000 		.4byte	.LVL11
- 928 034f 01       		.byte	0x1
- 929 0350 DC030000 		.4byte	0x3dc
- 930 0354 00       		.byte	0
- 931 0355 19       		.uleb128 0x19
- 932 0356 01       		.byte	0x1
- 933 0357 65000000 		.4byte	.LASF35
- 934 035b 01       		.byte	0x1
- 935 035c 3E       		.byte	0x3e
- 936 035d 01       		.byte	0x1
- 937 035e C0000000 		.4byte	.LFB2
- 938 0362 44010000 		.4byte	.LFE2
- 939 0366 FA000000 		.4byte	.LLST8
- 940 036a 01       		.byte	0x1
- 941 036b 1A       		.uleb128 0x1a
- 942 036c 01       		.byte	0x1
- 943 036d 10020000 		.4byte	.LASF36
- 944 0371 01       		.byte	0x1
- 945 0372 2A       		.byte	0x2a
- 946 0373 01       		.byte	0x1
- 947 0374 00000000 		.4byte	.LFB1
- 948 0378 18000000 		.4byte	.LFE1
- 949 037c 02       		.byte	0x2
- 950 037d 7D       		.byte	0x7d
- 951 037e 00       		.sleb128 0
- 952 037f 01       		.byte	0x1
- 953 0380 10       		.uleb128 0x10
- 954 0381 01       		.byte	0x1
- 955 0382 FE020000 		.4byte	.LASF38
- 956 0386 01       		.byte	0x1
- 957 0387 0B       		.byte	0xb
- 958 0388 01       		.byte	0x1
- 959 0389 71000000 		.4byte	0x71
- 960 038d 18000000 		.4byte	.LFB0
- 961 0391 34000000 		.4byte	.LFE0
- 962 0395 4A010000 		.4byte	.LLST0
- 963 0399 01       		.byte	0x1
- 964 039a CF030000 		.4byte	0x3cf
- 965 039e 1B       		.uleb128 0x1b
- 966 039f 6E756D00 		.ascii	"num\000"
- 967 03a3 01       		.byte	0x1
- 968 03a4 0D       		.byte	0xd
- 969 03a5 71000000 		.4byte	0x71
- 970 03a9 6A010000 		.4byte	.LLST1
- 971 03ad 12       		.uleb128 0x12
- 972 03ae 46000000 		.4byte	.LASF34
- 973 03b2 01       		.byte	0x1
- 974 03b3 0E       		.byte	0xe
- 975 03b4 02010000 		.4byte	0x102
- 976 03b8 82010000 		.4byte	.LLST2
- 977 03bc 13       		.uleb128 0x13
- 978 03bd 1E000000 		.4byte	.LVL1
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc28WVH2.s 			page 22
+ 1317 012b 34       		.uleb128 0x34
+ 1318 012c 00       		.byte	0
+ 1319 012d 03       		.uleb128 0x3
+ 1320 012e 08       		.uleb128 0x8
+ 1321 012f 3A       		.uleb128 0x3a
+ 1322 0130 0B       		.uleb128 0xb
+ 1323 0131 3B       		.uleb128 0x3b
+ 1324 0132 0B       		.uleb128 0xb
+ 1325 0133 49       		.uleb128 0x49
+ 1326 0134 13       		.uleb128 0x13
+ 1327 0135 02       		.uleb128 0x2
+ 1328 0136 0A       		.uleb128 0xa
+ 1329 0137 00       		.byte	0
+ 1330 0138 00       		.byte	0
+ 1331 0139 00       		.byte	0
+ 1332              		.section	.debug_loc,"",%progbits
+ 1333              	.Ldebug_loc0:
+ 1334              	.LLST4:
+ 1335 0000 98010000 		.4byte	.LFB4-.Ltext0
+ 1336 0004 9A010000 		.4byte	.LCFI18-.Ltext0
+ 1337 0008 0200     		.2byte	0x2
+ 1338 000a 7D       		.byte	0x7d
+ 1339 000b 00       		.sleb128 0
+ 1340 000c 9A010000 		.4byte	.LCFI18-.Ltext0
+ 1341 0010 9C010000 		.4byte	.LCFI19-.Ltext0
+ 1342 0014 0200     		.2byte	0x2
+ 1343 0016 7D       		.byte	0x7d
+ 1344 0017 08       		.sleb128 8
+ 1345 0018 9C010000 		.4byte	.LCFI19-.Ltext0
+ 1346 001c 9E010000 		.4byte	.LCFI20-.Ltext0
+ 1347 0020 0200     		.2byte	0x2
+ 1348 0022 7D       		.byte	0x7d
+ 1349 0023 18       		.sleb128 24
+ 1350 0024 9E010000 		.4byte	.LCFI20-.Ltext0
+ 1351 0028 0E020000 		.4byte	.LCFI21-.Ltext0
+ 1352 002c 0200     		.2byte	0x2
+ 1353 002e 77       		.byte	0x77
+ 1354 002f 18       		.sleb128 24
+ 1355 0030 0E020000 		.4byte	.LCFI21-.Ltext0
+ 1356 0034 10020000 		.4byte	.LCFI22-.Ltext0
+ 1357 0038 0200     		.2byte	0x2
+ 1358 003a 77       		.byte	0x77
+ 1359 003b 08       		.sleb128 8
+ 1360 003c 10020000 		.4byte	.LCFI22-.Ltext0
+ 1361 0040 20020000 		.4byte	.LFE4-.Ltext0
+ 1362 0044 0200     		.2byte	0x2
+ 1363 0046 7D       		.byte	0x7d
+ 1364 0047 08       		.sleb128 8
+ 1365 0048 00000000 		.4byte	0
+ 1366 004c 00000000 		.4byte	0
+ 1367              	.LLST3:
+ 1368 0050 34010000 		.4byte	.LFB3-.Ltext0
+ 1369 0054 36010000 		.4byte	.LCFI13-.Ltext0
+ 1370 0058 0200     		.2byte	0x2
+ 1371 005a 7D       		.byte	0x7d
+ 1372 005b 00       		.sleb128 0
+ 1373 005c 36010000 		.4byte	.LCFI13-.Ltext0
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccHo9Q91.s 			page 28
 
 
- 979 03c1 CF030000 		.4byte	0x3cf
- 980 03c5 13       		.uleb128 0x13
- 981 03c6 28000000 		.4byte	.LVL3
- 982 03ca DC030000 		.4byte	0x3dc
- 983 03ce 00       		.byte	0
- 984 03cf 1C       		.uleb128 0x1c
- 985 03d0 01       		.byte	0x1
- 986 03d1 01       		.byte	0x1
- 987 03d2 7A000000 		.4byte	.LASF39
- 988 03d6 7A000000 		.4byte	.LASF39
- 989 03da 04       		.byte	0x4
- 990 03db 35       		.byte	0x35
- 991 03dc 1C       		.uleb128 0x1c
- 992 03dd 01       		.byte	0x1
- 993 03de 01       		.byte	0x1
- 994 03df 17000000 		.4byte	.LASF40
- 995 03e3 17000000 		.4byte	.LASF40
- 996 03e7 04       		.byte	0x4
- 997 03e8 36       		.byte	0x36
- 998 03e9 1C       		.uleb128 0x1c
- 999 03ea 01       		.byte	0x1
- 1000 03eb 01       		.byte	0x1
- 1001 03ec E0020000 		.4byte	.LASF41
- 1002 03f0 E0020000 		.4byte	.LASF41
- 1003 03f4 06       		.byte	0x6
- 1004 03f5 06       		.byte	0x6
- 1005 03f6 1C       		.uleb128 0x1c
- 1006 03f7 01       		.byte	0x1
- 1007 03f8 01       		.byte	0x1
- 1008 03f9 F4020000 		.4byte	.LASF42
- 1009 03fd F4020000 		.4byte	.LASF42
- 1010 0401 07       		.byte	0x7
- 1011 0402 0C       		.byte	0xc
- 1012 0403 00       		.byte	0
- 1013              		.section	.debug_abbrev,"",%progbits
- 1014              	.Ldebug_abbrev0:
- 1015 0000 01       		.uleb128 0x1
- 1016 0001 11       		.uleb128 0x11
- 1017 0002 01       		.byte	0x1
- 1018 0003 25       		.uleb128 0x25
- 1019 0004 0E       		.uleb128 0xe
- 1020 0005 13       		.uleb128 0x13
- 1021 0006 0B       		.uleb128 0xb
- 1022 0007 03       		.uleb128 0x3
- 1023 0008 0E       		.uleb128 0xe
- 1024 0009 1B       		.uleb128 0x1b
- 1025 000a 0E       		.uleb128 0xe
- 1026 000b 11       		.uleb128 0x11
- 1027 000c 01       		.uleb128 0x1
- 1028 000d 12       		.uleb128 0x12
- 1029 000e 01       		.uleb128 0x1
- 1030 000f 10       		.uleb128 0x10
- 1031 0010 06       		.uleb128 0x6
- 1032 0011 00       		.byte	0
- 1033 0012 00       		.byte	0
- 1034 0013 02       		.uleb128 0x2
- 1035 0014 24       		.uleb128 0x24
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc28WVH2.s 			page 23
+ 1374 0060 38010000 		.4byte	.LCFI14-.Ltext0
+ 1375 0064 0200     		.2byte	0x2
+ 1376 0066 7D       		.byte	0x7d
+ 1377 0067 14       		.sleb128 20
+ 1378 0068 38010000 		.4byte	.LCFI14-.Ltext0
+ 1379 006c 3A010000 		.4byte	.LCFI15-.Ltext0
+ 1380 0070 0200     		.2byte	0x2
+ 1381 0072 7D       		.byte	0x7d
+ 1382 0073 30       		.sleb128 48
+ 1383 0074 3A010000 		.4byte	.LCFI15-.Ltext0
+ 1384 0078 8A010000 		.4byte	.LCFI16-.Ltext0
+ 1385 007c 0200     		.2byte	0x2
+ 1386 007e 77       		.byte	0x77
+ 1387 007f 20       		.sleb128 32
+ 1388 0080 8A010000 		.4byte	.LCFI16-.Ltext0
+ 1389 0084 8C010000 		.4byte	.LCFI17-.Ltext0
+ 1390 0088 0200     		.2byte	0x2
+ 1391 008a 77       		.byte	0x77
+ 1392 008b 14       		.sleb128 20
+ 1393 008c 8C010000 		.4byte	.LCFI17-.Ltext0
+ 1394 0090 98010000 		.4byte	.LFE3-.Ltext0
+ 1395 0094 0200     		.2byte	0x2
+ 1396 0096 7D       		.byte	0x7d
+ 1397 0097 14       		.sleb128 20
+ 1398 0098 00000000 		.4byte	0
+ 1399 009c 00000000 		.4byte	0
+ 1400              	.LLST2:
+ 1401 00a0 6C000000 		.4byte	.LFB2-.Ltext0
+ 1402 00a4 6E000000 		.4byte	.LCFI9-.Ltext0
+ 1403 00a8 0200     		.2byte	0x2
+ 1404 00aa 7D       		.byte	0x7d
+ 1405 00ab 00       		.sleb128 0
+ 1406 00ac 6E000000 		.4byte	.LCFI9-.Ltext0
+ 1407 00b0 70000000 		.4byte	.LCFI10-.Ltext0
+ 1408 00b4 0200     		.2byte	0x2
+ 1409 00b6 7D       		.byte	0x7d
+ 1410 00b7 04       		.sleb128 4
+ 1411 00b8 70000000 		.4byte	.LCFI10-.Ltext0
+ 1412 00bc 26010000 		.4byte	.LCFI11-.Ltext0
+ 1413 00c0 0200     		.2byte	0x2
+ 1414 00c2 77       		.byte	0x77
+ 1415 00c3 04       		.sleb128 4
+ 1416 00c4 26010000 		.4byte	.LCFI11-.Ltext0
+ 1417 00c8 28010000 		.4byte	.LCFI12-.Ltext0
+ 1418 00cc 0200     		.2byte	0x2
+ 1419 00ce 7D       		.byte	0x7d
+ 1420 00cf 04       		.sleb128 4
+ 1421 00d0 28010000 		.4byte	.LCFI12-.Ltext0
+ 1422 00d4 34010000 		.4byte	.LFE2-.Ltext0
+ 1423 00d8 0200     		.2byte	0x2
+ 1424 00da 7D       		.byte	0x7d
+ 1425 00db 00       		.sleb128 0
+ 1426 00dc 00000000 		.4byte	0
+ 1427 00e0 00000000 		.4byte	0
+ 1428              	.LLST1:
+ 1429 00e4 30000000 		.4byte	.LFB1-.Ltext0
+ 1430 00e8 32000000 		.4byte	.LCFI5-.Ltext0
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccHo9Q91.s 			page 29
 
 
- 1036 0015 00       		.byte	0
- 1037 0016 0B       		.uleb128 0xb
- 1038 0017 0B       		.uleb128 0xb
- 1039 0018 3E       		.uleb128 0x3e
- 1040 0019 0B       		.uleb128 0xb
- 1041 001a 03       		.uleb128 0x3
- 1042 001b 0E       		.uleb128 0xe
- 1043 001c 00       		.byte	0
- 1044 001d 00       		.byte	0
- 1045 001e 03       		.uleb128 0x3
- 1046 001f 24       		.uleb128 0x24
- 1047 0020 00       		.byte	0
- 1048 0021 0B       		.uleb128 0xb
- 1049 0022 0B       		.uleb128 0xb
- 1050 0023 3E       		.uleb128 0x3e
- 1051 0024 0B       		.uleb128 0xb
- 1052 0025 03       		.uleb128 0x3
- 1053 0026 08       		.uleb128 0x8
- 1054 0027 00       		.byte	0
- 1055 0028 00       		.byte	0
- 1056 0029 04       		.uleb128 0x4
- 1057 002a 16       		.uleb128 0x16
- 1058 002b 00       		.byte	0
- 1059 002c 03       		.uleb128 0x3
- 1060 002d 0E       		.uleb128 0xe
- 1061 002e 3A       		.uleb128 0x3a
- 1062 002f 0B       		.uleb128 0xb
- 1063 0030 3B       		.uleb128 0x3b
- 1064 0031 0B       		.uleb128 0xb
- 1065 0032 49       		.uleb128 0x49
- 1066 0033 13       		.uleb128 0x13
- 1067 0034 00       		.byte	0
- 1068 0035 00       		.byte	0
- 1069 0036 05       		.uleb128 0x5
- 1070 0037 26       		.uleb128 0x26
- 1071 0038 00       		.byte	0
- 1072 0039 49       		.uleb128 0x49
- 1073 003a 13       		.uleb128 0x13
- 1074 003b 00       		.byte	0
- 1075 003c 00       		.byte	0
- 1076 003d 06       		.uleb128 0x6
- 1077 003e 35       		.uleb128 0x35
- 1078 003f 00       		.byte	0
- 1079 0040 49       		.uleb128 0x49
- 1080 0041 13       		.uleb128 0x13
- 1081 0042 00       		.byte	0
- 1082 0043 00       		.byte	0
- 1083 0044 07       		.uleb128 0x7
- 1084 0045 13       		.uleb128 0x13
- 1085 0046 01       		.byte	0x1
- 1086 0047 03       		.uleb128 0x3
- 1087 0048 0E       		.uleb128 0xe
- 1088 0049 0B       		.uleb128 0xb
- 1089 004a 0B       		.uleb128 0xb
- 1090 004b 3A       		.uleb128 0x3a
- 1091 004c 0B       		.uleb128 0xb
- 1092 004d 3B       		.uleb128 0x3b
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc28WVH2.s 			page 24
+ 1431 00ec 0200     		.2byte	0x2
+ 1432 00ee 7D       		.byte	0x7d
+ 1433 00ef 00       		.sleb128 0
+ 1434 00f0 32000000 		.4byte	.LCFI5-.Ltext0
+ 1435 00f4 34000000 		.4byte	.LCFI6-.Ltext0
+ 1436 00f8 0200     		.2byte	0x2
+ 1437 00fa 7D       		.byte	0x7d
+ 1438 00fb 04       		.sleb128 4
+ 1439 00fc 34000000 		.4byte	.LCFI6-.Ltext0
+ 1440 0100 64000000 		.4byte	.LCFI7-.Ltext0
+ 1441 0104 0200     		.2byte	0x2
+ 1442 0106 77       		.byte	0x77
+ 1443 0107 04       		.sleb128 4
+ 1444 0108 64000000 		.4byte	.LCFI7-.Ltext0
+ 1445 010c 66000000 		.4byte	.LCFI8-.Ltext0
+ 1446 0110 0200     		.2byte	0x2
+ 1447 0112 7D       		.byte	0x7d
+ 1448 0113 04       		.sleb128 4
+ 1449 0114 66000000 		.4byte	.LCFI8-.Ltext0
+ 1450 0118 6C000000 		.4byte	.LFE1-.Ltext0
+ 1451 011c 0200     		.2byte	0x2
+ 1452 011e 7D       		.byte	0x7d
+ 1453 011f 00       		.sleb128 0
+ 1454 0120 00000000 		.4byte	0
+ 1455 0124 00000000 		.4byte	0
+ 1456              	.LLST0:
+ 1457 0128 00000000 		.4byte	.LFB0-.Ltext0
+ 1458 012c 02000000 		.4byte	.LCFI0-.Ltext0
+ 1459 0130 0200     		.2byte	0x2
+ 1460 0132 7D       		.byte	0x7d
+ 1461 0133 00       		.sleb128 0
+ 1462 0134 02000000 		.4byte	.LCFI0-.Ltext0
+ 1463 0138 04000000 		.4byte	.LCFI1-.Ltext0
+ 1464 013c 0200     		.2byte	0x2
+ 1465 013e 7D       		.byte	0x7d
+ 1466 013f 0C       		.sleb128 12
+ 1467 0140 04000000 		.4byte	.LCFI1-.Ltext0
+ 1468 0144 06000000 		.4byte	.LCFI2-.Ltext0
+ 1469 0148 0200     		.2byte	0x2
+ 1470 014a 7D       		.byte	0x7d
+ 1471 014b 20       		.sleb128 32
+ 1472 014c 06000000 		.4byte	.LCFI2-.Ltext0
+ 1473 0150 28000000 		.4byte	.LCFI3-.Ltext0
+ 1474 0154 0200     		.2byte	0x2
+ 1475 0156 77       		.byte	0x77
+ 1476 0157 20       		.sleb128 32
+ 1477 0158 28000000 		.4byte	.LCFI3-.Ltext0
+ 1478 015c 2A000000 		.4byte	.LCFI4-.Ltext0
+ 1479 0160 0200     		.2byte	0x2
+ 1480 0162 77       		.byte	0x77
+ 1481 0163 0C       		.sleb128 12
+ 1482 0164 2A000000 		.4byte	.LCFI4-.Ltext0
+ 1483 0168 30000000 		.4byte	.LFE0-.Ltext0
+ 1484 016c 0200     		.2byte	0x2
+ 1485 016e 7D       		.byte	0x7d
+ 1486 016f 0C       		.sleb128 12
+ 1487 0170 00000000 		.4byte	0
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccHo9Q91.s 			page 30
 
 
- 1093 004e 0B       		.uleb128 0xb
- 1094 004f 01       		.uleb128 0x1
- 1095 0050 13       		.uleb128 0x13
- 1096 0051 00       		.byte	0
- 1097 0052 00       		.byte	0
- 1098 0053 08       		.uleb128 0x8
- 1099 0054 0D       		.uleb128 0xd
- 1100 0055 00       		.byte	0
- 1101 0056 03       		.uleb128 0x3
- 1102 0057 0E       		.uleb128 0xe
- 1103 0058 3A       		.uleb128 0x3a
- 1104 0059 0B       		.uleb128 0xb
- 1105 005a 3B       		.uleb128 0x3b
- 1106 005b 0B       		.uleb128 0xb
- 1107 005c 49       		.uleb128 0x49
- 1108 005d 13       		.uleb128 0x13
- 1109 005e 38       		.uleb128 0x38
- 1110 005f 0A       		.uleb128 0xa
- 1111 0060 00       		.byte	0
- 1112 0061 00       		.byte	0
- 1113 0062 09       		.uleb128 0x9
- 1114 0063 0D       		.uleb128 0xd
- 1115 0064 00       		.byte	0
- 1116 0065 03       		.uleb128 0x3
- 1117 0066 08       		.uleb128 0x8
- 1118 0067 3A       		.uleb128 0x3a
- 1119 0068 0B       		.uleb128 0xb
- 1120 0069 3B       		.uleb128 0x3b
- 1121 006a 0B       		.uleb128 0xb
- 1122 006b 49       		.uleb128 0x49
- 1123 006c 13       		.uleb128 0x13
- 1124 006d 38       		.uleb128 0x38
- 1125 006e 0A       		.uleb128 0xa
- 1126 006f 00       		.byte	0
- 1127 0070 00       		.byte	0
- 1128 0071 0A       		.uleb128 0xa
- 1129 0072 0F       		.uleb128 0xf
- 1130 0073 00       		.byte	0
- 1131 0074 0B       		.uleb128 0xb
- 1132 0075 0B       		.uleb128 0xb
- 1133 0076 00       		.byte	0
- 1134 0077 00       		.byte	0
- 1135 0078 0B       		.uleb128 0xb
- 1136 0079 0F       		.uleb128 0xf
- 1137 007a 00       		.byte	0
- 1138 007b 0B       		.uleb128 0xb
- 1139 007c 0B       		.uleb128 0xb
- 1140 007d 49       		.uleb128 0x49
- 1141 007e 13       		.uleb128 0x13
- 1142 007f 00       		.byte	0
- 1143 0080 00       		.byte	0
- 1144 0081 0C       		.uleb128 0xc
- 1145 0082 34       		.uleb128 0x34
- 1146 0083 00       		.byte	0
- 1147 0084 03       		.uleb128 0x3
- 1148 0085 0E       		.uleb128 0xe
- 1149 0086 3A       		.uleb128 0x3a
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc28WVH2.s 			page 25
+ 1488 0174 00000000 		.4byte	0
+ 1489              		.section	.debug_aranges,"",%progbits
+ 1490 0000 1C000000 		.4byte	0x1c
+ 1491 0004 0200     		.2byte	0x2
+ 1492 0006 00000000 		.4byte	.Ldebug_info0
+ 1493 000a 04       		.byte	0x4
+ 1494 000b 00       		.byte	0
+ 1495 000c 0000     		.2byte	0
+ 1496 000e 0000     		.2byte	0
+ 1497 0010 00000000 		.4byte	.Ltext0
+ 1498 0014 20020000 		.4byte	.Letext0-.Ltext0
+ 1499 0018 00000000 		.4byte	0
+ 1500 001c 00000000 		.4byte	0
+ 1501              		.section	.debug_line,"",%progbits
+ 1502              	.Ldebug_line0:
+ 1503 0000 1D010000 		.section	.debug_str,"MS",%progbits,1
+ 1503      0200B600 
+ 1503      00000201 
+ 1503      FB0E0D00 
+ 1503      01010101 
+ 1504              	.LASF32:
+ 1505 0000 5F5F7274 		.ascii	"__rtmsym_set_time_name\000"
+ 1505      6D73796D 
+ 1505      5F736574 
+ 1505      5F74696D 
+ 1505      655F6E61 
+ 1506              	.LASF24:
+ 1507 0017 5F5F7274 		.ascii	"__rtmsym_get_tick_name\000"
+ 1507      6D73796D 
+ 1507      5F676574 
+ 1507      5F746963 
+ 1507      6B5F6E61 
+ 1508              	.LASF43:
+ 1509 002e 74696D65 		.ascii	"time_ptr\000"
+ 1509      5F707472 
+ 1509      00
+ 1510              	.LASF34:
+ 1511 0037 6370755F 		.ascii	"cpu_sr\000"
+ 1511      737200
+ 1512              	.LASF4:
+ 1513 003e 55494E54 		.ascii	"UINT8\000"
+ 1513      3800
+ 1514              	.LASF15:
+ 1515 0044 79656172 		.ascii	"year\000"
+ 1515      00
+ 1516              	.LASF11:
+ 1517 0049 6D696E75 		.ascii	"minute\000"
+ 1517      746500
+ 1518              	.LASF14:
+ 1519 0050 6D6F6E74 		.ascii	"month\000"
+ 1519      6800
+ 1520              	.LASF35:
+ 1521 0056 73797374 		.ascii	"system_time_increase\000"
+ 1521      656D5F74 
+ 1521      696D655F 
+ 1521      696E6372 
+ 1521      65617365 
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccHo9Q91.s 			page 31
 
 
- 1150 0087 0B       		.uleb128 0xb
- 1151 0088 3B       		.uleb128 0x3b
- 1152 0089 0B       		.uleb128 0xb
- 1153 008a 49       		.uleb128 0x49
- 1154 008b 13       		.uleb128 0x13
- 1155 008c 3F       		.uleb128 0x3f
- 1156 008d 0C       		.uleb128 0xc
- 1157 008e 02       		.uleb128 0x2
- 1158 008f 0A       		.uleb128 0xa
- 1159 0090 00       		.byte	0
- 1160 0091 00       		.byte	0
- 1161 0092 0D       		.uleb128 0xd
- 1162 0093 01       		.uleb128 0x1
- 1163 0094 01       		.byte	0x1
- 1164 0095 49       		.uleb128 0x49
- 1165 0096 13       		.uleb128 0x13
- 1166 0097 01       		.uleb128 0x1
- 1167 0098 13       		.uleb128 0x13
- 1168 0099 00       		.byte	0
- 1169 009a 00       		.byte	0
- 1170 009b 0E       		.uleb128 0xe
- 1171 009c 21       		.uleb128 0x21
- 1172 009d 00       		.byte	0
- 1173 009e 49       		.uleb128 0x49
- 1174 009f 13       		.uleb128 0x13
- 1175 00a0 2F       		.uleb128 0x2f
- 1176 00a1 0B       		.uleb128 0xb
- 1177 00a2 00       		.byte	0
- 1178 00a3 00       		.byte	0
- 1179 00a4 0F       		.uleb128 0xf
- 1180 00a5 34       		.uleb128 0x34
- 1181 00a6 00       		.byte	0
- 1182 00a7 03       		.uleb128 0x3
- 1183 00a8 0E       		.uleb128 0xe
- 1184 00a9 3A       		.uleb128 0x3a
- 1185 00aa 0B       		.uleb128 0xb
- 1186 00ab 3B       		.uleb128 0x3b
- 1187 00ac 0B       		.uleb128 0xb
- 1188 00ad 49       		.uleb128 0x49
- 1189 00ae 13       		.uleb128 0x13
- 1190 00af 02       		.uleb128 0x2
- 1191 00b0 0A       		.uleb128 0xa
- 1192 00b1 00       		.byte	0
- 1193 00b2 00       		.byte	0
- 1194 00b3 10       		.uleb128 0x10
- 1195 00b4 2E       		.uleb128 0x2e
- 1196 00b5 01       		.byte	0x1
- 1197 00b6 3F       		.uleb128 0x3f
- 1198 00b7 0C       		.uleb128 0xc
- 1199 00b8 03       		.uleb128 0x3
- 1200 00b9 0E       		.uleb128 0xe
- 1201 00ba 3A       		.uleb128 0x3a
- 1202 00bb 0B       		.uleb128 0xb
- 1203 00bc 3B       		.uleb128 0x3b
- 1204 00bd 0B       		.uleb128 0xb
- 1205 00be 27       		.uleb128 0x27
- 1206 00bf 0C       		.uleb128 0xc
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc28WVH2.s 			page 26
+ 1522              	.LASF13:
+ 1523 006b 64617465 		.ascii	"date\000"
+ 1523      00
+ 1524              	.LASF20:
+ 1525 0070 61646472 		.ascii	"addr\000"
+ 1525      00
+ 1526              	.LASF26:
+ 1527 0075 7379735F 		.ascii	"sys_time\000"
+ 1527      74696D65 
+ 1527      00
+ 1528              	.LASF17:
+ 1529 007e 4350555F 		.ascii	"CPU_SR\000"
+ 1529      535200
+ 1530              	.LASF3:
+ 1531 0085 756E7369 		.ascii	"unsigned char\000"
+ 1531      676E6564 
+ 1531      20636861 
+ 1531      7200
+ 1532              	.LASF8:
+ 1533 0093 55494E54 		.ascii	"UINT64\000"
+ 1533      363400
+ 1534              	.LASF6:
+ 1535 009a 73686F72 		.ascii	"short unsigned int\000"
+ 1535      7420756E 
+ 1535      7369676E 
+ 1535      65642069 
+ 1535      6E7400
+ 1536              	.LASF37:
+ 1537 00ad 73797374 		.ascii	"system_time_display\000"
+ 1537      656D5F74 
+ 1537      696D655F 
+ 1537      64697370 
+ 1537      6C617900 
+ 1538              	.LASF40:
+ 1539 00c1 2E2E2F2E 		.ascii	"../../source/src/kernel/OS_CORE/os_time.c\000"
+ 1539      2E2F736F 
+ 1539      75726365 
+ 1539      2F737263 
+ 1539      2F6B6572 
+ 1540              	.LASF10:
+ 1541 00eb 7365636F 		.ascii	"second\000"
+ 1541      6E6400
+ 1542              	.LASF28:
+ 1543 00f2 5F5F7274 		.ascii	"__rtmsym___init_system_time_name\000"
+ 1543      6D73796D 
+ 1543      5F5F5F69 
+ 1543      6E69745F 
+ 1543      73797374 
+ 1544              	.LASF23:
+ 1545 0113 675F7469 		.ascii	"g_time_tick_count\000"
+ 1545      6D655F74 
+ 1545      69636B5F 
+ 1545      636F756E 
+ 1545      7400
+ 1546              	.LASF7:
+ 1547 0125 756E7369 		.ascii	"unsigned int\000"
+ 1547      676E6564 
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccHo9Q91.s 			page 32
 
 
- 1207 00c0 49       		.uleb128 0x49
- 1208 00c1 13       		.uleb128 0x13
- 1209 00c2 11       		.uleb128 0x11
- 1210 00c3 01       		.uleb128 0x1
- 1211 00c4 12       		.uleb128 0x12
- 1212 00c5 01       		.uleb128 0x1
- 1213 00c6 40       		.uleb128 0x40
- 1214 00c7 06       		.uleb128 0x6
- 1215 00c8 9742     		.uleb128 0x2117
- 1216 00ca 0C       		.uleb128 0xc
- 1217 00cb 01       		.uleb128 0x1
- 1218 00cc 13       		.uleb128 0x13
- 1219 00cd 00       		.byte	0
- 1220 00ce 00       		.byte	0
- 1221 00cf 11       		.uleb128 0x11
- 1222 00d0 05       		.uleb128 0x5
- 1223 00d1 00       		.byte	0
- 1224 00d2 03       		.uleb128 0x3
- 1225 00d3 0E       		.uleb128 0xe
- 1226 00d4 3A       		.uleb128 0x3a
- 1227 00d5 0B       		.uleb128 0xb
- 1228 00d6 3B       		.uleb128 0x3b
- 1229 00d7 0B       		.uleb128 0xb
- 1230 00d8 49       		.uleb128 0x49
- 1231 00d9 13       		.uleb128 0x13
- 1232 00da 02       		.uleb128 0x2
- 1233 00db 06       		.uleb128 0x6
- 1234 00dc 00       		.byte	0
- 1235 00dd 00       		.byte	0
- 1236 00de 12       		.uleb128 0x12
- 1237 00df 34       		.uleb128 0x34
- 1238 00e0 00       		.byte	0
- 1239 00e1 03       		.uleb128 0x3
- 1240 00e2 0E       		.uleb128 0xe
- 1241 00e3 3A       		.uleb128 0x3a
- 1242 00e4 0B       		.uleb128 0xb
- 1243 00e5 3B       		.uleb128 0x3b
- 1244 00e6 0B       		.uleb128 0xb
- 1245 00e7 49       		.uleb128 0x49
- 1246 00e8 13       		.uleb128 0x13
- 1247 00e9 02       		.uleb128 0x2
- 1248 00ea 06       		.uleb128 0x6
- 1249 00eb 00       		.byte	0
- 1250 00ec 00       		.byte	0
- 1251 00ed 13       		.uleb128 0x13
- 1252 00ee 898201   		.uleb128 0x4109
- 1253 00f1 00       		.byte	0
- 1254 00f2 11       		.uleb128 0x11
- 1255 00f3 01       		.uleb128 0x1
- 1256 00f4 31       		.uleb128 0x31
- 1257 00f5 13       		.uleb128 0x13
- 1258 00f6 00       		.byte	0
- 1259 00f7 00       		.byte	0
- 1260 00f8 14       		.uleb128 0x14
- 1261 00f9 898201   		.uleb128 0x4109
- 1262 00fc 01       		.byte	0x1
- 1263 00fd 11       		.uleb128 0x11
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc28WVH2.s 			page 27
+ 1547      20696E74 
+ 1547      00
+ 1548              	.LASF9:
+ 1549 0132 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 1549      206C6F6E 
+ 1549      6720756E 
+ 1549      7369676E 
+ 1549      65642069 
+ 1550              	.LASF31:
+ 1551 0149 5F5F7274 		.ascii	"__rtmsym_system_time_display\000"
+ 1551      6D73796D 
+ 1551      5F737973 
+ 1551      74656D5F 
+ 1551      74696D65 
+ 1552              	.LASF12:
+ 1553 0166 686F7572 		.ascii	"hour\000"
+ 1553      00
+ 1554              	.LASF18:
+ 1555 016b 74696D65 		.ascii	"time\000"
+ 1555      00
+ 1556              	.LASF19:
+ 1557 0170 6B615F6D 		.ascii	"ka_module_symtab\000"
+ 1557      6F64756C 
+ 1557      655F7379 
+ 1557      6D746162 
+ 1557      00
+ 1558              	.LASF25:
+ 1559 0181 5F5F7274 		.ascii	"__rtmsym_get_tick\000"
+ 1559      6D73796D 
+ 1559      5F676574 
+ 1559      5F746963 
+ 1559      6B00
+ 1560              	.LASF2:
+ 1561 0193 6C6F6E67 		.ascii	"long long int\000"
+ 1561      206C6F6E 
+ 1561      6720696E 
+ 1561      7400
+ 1562              	.LASF5:
+ 1563 01a1 55494E54 		.ascii	"UINT16\000"
+ 1563      313600
+ 1564              	.LASF21:
+ 1565 01a8 6E616D65 		.ascii	"name\000"
+ 1565      00
+ 1566              	.LASF30:
+ 1567 01ad 5F5F7274 		.ascii	"__rtmsym_system_time_display_name\000"
+ 1567      6D73796D 
+ 1567      5F737973 
+ 1567      74656D5F 
+ 1567      74696D65 
+ 1568              	.LASF16:
+ 1569 01cf 4350555F 		.ascii	"CPU_INT32U\000"
+ 1569      494E5433 
+ 1569      325500
+ 1570              	.LASF1:
+ 1571 01da 73686F72 		.ascii	"short int\000"
+ 1571      7420696E 
+ 1571      7400
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccHo9Q91.s 			page 33
 
 
- 1264 00fe 01       		.uleb128 0x1
- 1265 00ff 31       		.uleb128 0x31
- 1266 0100 13       		.uleb128 0x13
- 1267 0101 01       		.uleb128 0x1
- 1268 0102 13       		.uleb128 0x13
- 1269 0103 00       		.byte	0
- 1270 0104 00       		.byte	0
- 1271 0105 15       		.uleb128 0x15
- 1272 0106 8A8201   		.uleb128 0x410a
- 1273 0109 00       		.byte	0
- 1274 010a 02       		.uleb128 0x2
- 1275 010b 0A       		.uleb128 0xa
- 1276 010c 9142     		.uleb128 0x2111
- 1277 010e 0A       		.uleb128 0xa
- 1278 010f 00       		.byte	0
- 1279 0110 00       		.byte	0
- 1280 0111 16       		.uleb128 0x16
- 1281 0112 898201   		.uleb128 0x4109
- 1282 0115 01       		.byte	0x1
- 1283 0116 11       		.uleb128 0x11
- 1284 0117 01       		.uleb128 0x1
- 1285 0118 31       		.uleb128 0x31
- 1286 0119 13       		.uleb128 0x13
- 1287 011a 00       		.byte	0
- 1288 011b 00       		.byte	0
- 1289 011c 17       		.uleb128 0x17
- 1290 011d 2E       		.uleb128 0x2e
- 1291 011e 01       		.byte	0x1
- 1292 011f 3F       		.uleb128 0x3f
- 1293 0120 0C       		.uleb128 0xc
- 1294 0121 03       		.uleb128 0x3
- 1295 0122 0E       		.uleb128 0xe
- 1296 0123 3A       		.uleb128 0x3a
- 1297 0124 0B       		.uleb128 0xb
- 1298 0125 3B       		.uleb128 0x3b
- 1299 0126 0B       		.uleb128 0xb
- 1300 0127 27       		.uleb128 0x27
- 1301 0128 0C       		.uleb128 0xc
- 1302 0129 11       		.uleb128 0x11
- 1303 012a 01       		.uleb128 0x1
- 1304 012b 12       		.uleb128 0x12
- 1305 012c 01       		.uleb128 0x1
- 1306 012d 40       		.uleb128 0x40
- 1307 012e 06       		.uleb128 0x6
- 1308 012f 9742     		.uleb128 0x2117
- 1309 0131 0C       		.uleb128 0xc
- 1310 0132 01       		.uleb128 0x1
- 1311 0133 13       		.uleb128 0x13
- 1312 0134 00       		.byte	0
- 1313 0135 00       		.byte	0
- 1314 0136 18       		.uleb128 0x18
- 1315 0137 898201   		.uleb128 0x4109
- 1316 013a 00       		.byte	0
- 1317 013b 11       		.uleb128 0x11
- 1318 013c 01       		.uleb128 0x1
- 1319 013d 9542     		.uleb128 0x2115
- 1320 013f 0C       		.uleb128 0xc
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc28WVH2.s 			page 28
+ 1572              	.LASF27:
+ 1573 01e4 6D6F6E74 		.ascii	"month_date_table\000"
+ 1573      685F6461 
+ 1573      74655F74 
+ 1573      61626C65 
+ 1573      00
+ 1574              	.LASF36:
+ 1575 01f5 5F5F696E 		.ascii	"__init_system_time\000"
+ 1575      69745F73 
+ 1575      79737465 
+ 1575      6D5F7469 
+ 1575      6D6500
+ 1576              	.LASF33:
+ 1577 0208 5F5F7274 		.ascii	"__rtmsym_set_time\000"
+ 1577      6D73796D 
+ 1577      5F736574 
+ 1577      5F74696D 
+ 1577      6500
+ 1578              	.LASF39:
+ 1579 021a 474E5520 		.ascii	"GNU C11 7.3.1 20180622 (release) [ARM/embedded-7-br"
+ 1579      43313120 
+ 1579      372E332E 
+ 1579      31203230 
+ 1579      31383036 
+ 1580 024d 616E6368 		.ascii	"anch revision 261907] -mcpu=cortex-m3 -mthumb -mapc"
+ 1580      20726576 
+ 1580      6973696F 
+ 1580      6E203236 
+ 1580      31393037 
+ 1581 0280 732D6672 		.ascii	"s-frame -mthumb-interwork -mcpu=cortex-m3 -mthumb -"
+ 1581      616D6520 
+ 1581      2D6D7468 
+ 1581      756D622D 
+ 1581      696E7465 
+ 1582 02b3 67647761 		.ascii	"gdwarf-2 -O0\000"
+ 1582      72662D32 
+ 1582      202D4F30 
+ 1582      00
+ 1583              	.LASF22:
+ 1584 02c0 63686172 		.ascii	"char\000"
+ 1584      00
+ 1585              	.LASF0:
+ 1586 02c5 7369676E 		.ascii	"signed char\000"
+ 1586      65642063 
+ 1586      68617200 
+ 1587              	.LASF38:
+ 1588 02d1 6765745F 		.ascii	"get_tick\000"
+ 1588      7469636B 
+ 1588      00
+ 1589              	.LASF42:
+ 1590 02da 7365745F 		.ascii	"set_time\000"
+ 1590      74696D65 
+ 1590      00
+ 1591              	.LASF41:
+ 1592 02e3 463A5C6B 		.ascii	"F:\\kaka\\KAKAOS\\C\\windows\\Project\\RVMDK\243\250"
+ 1592      616B615C 
+ 1592      4B414B41 
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccHo9Q91.s 			page 34
 
 
- 1321 0140 31       		.uleb128 0x31
- 1322 0141 13       		.uleb128 0x13
- 1323 0142 00       		.byte	0
- 1324 0143 00       		.byte	0
- 1325 0144 19       		.uleb128 0x19
- 1326 0145 2E       		.uleb128 0x2e
- 1327 0146 00       		.byte	0
- 1328 0147 3F       		.uleb128 0x3f
- 1329 0148 0C       		.uleb128 0xc
- 1330 0149 03       		.uleb128 0x3
- 1331 014a 0E       		.uleb128 0xe
- 1332 014b 3A       		.uleb128 0x3a
- 1333 014c 0B       		.uleb128 0xb
- 1334 014d 3B       		.uleb128 0x3b
- 1335 014e 0B       		.uleb128 0xb
- 1336 014f 27       		.uleb128 0x27
- 1337 0150 0C       		.uleb128 0xc
- 1338 0151 11       		.uleb128 0x11
- 1339 0152 01       		.uleb128 0x1
- 1340 0153 12       		.uleb128 0x12
- 1341 0154 01       		.uleb128 0x1
- 1342 0155 40       		.uleb128 0x40
- 1343 0156 06       		.uleb128 0x6
- 1344 0157 9742     		.uleb128 0x2117
- 1345 0159 0C       		.uleb128 0xc
- 1346 015a 00       		.byte	0
- 1347 015b 00       		.byte	0
- 1348 015c 1A       		.uleb128 0x1a
- 1349 015d 2E       		.uleb128 0x2e
- 1350 015e 00       		.byte	0
- 1351 015f 3F       		.uleb128 0x3f
- 1352 0160 0C       		.uleb128 0xc
- 1353 0161 03       		.uleb128 0x3
- 1354 0162 0E       		.uleb128 0xe
- 1355 0163 3A       		.uleb128 0x3a
- 1356 0164 0B       		.uleb128 0xb
- 1357 0165 3B       		.uleb128 0x3b
- 1358 0166 0B       		.uleb128 0xb
- 1359 0167 27       		.uleb128 0x27
- 1360 0168 0C       		.uleb128 0xc
- 1361 0169 11       		.uleb128 0x11
- 1362 016a 01       		.uleb128 0x1
- 1363 016b 12       		.uleb128 0x12
- 1364 016c 01       		.uleb128 0x1
- 1365 016d 40       		.uleb128 0x40
- 1366 016e 0A       		.uleb128 0xa
- 1367 016f 9742     		.uleb128 0x2117
- 1368 0171 0C       		.uleb128 0xc
- 1369 0172 00       		.byte	0
- 1370 0173 00       		.byte	0
- 1371 0174 1B       		.uleb128 0x1b
- 1372 0175 34       		.uleb128 0x34
- 1373 0176 00       		.byte	0
- 1374 0177 03       		.uleb128 0x3
- 1375 0178 08       		.uleb128 0x8
- 1376 0179 3A       		.uleb128 0x3a
- 1377 017a 0B       		.uleb128 0xb
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc28WVH2.s 			page 29
-
-
- 1378 017b 3B       		.uleb128 0x3b
- 1379 017c 0B       		.uleb128 0xb
- 1380 017d 49       		.uleb128 0x49
- 1381 017e 13       		.uleb128 0x13
- 1382 017f 02       		.uleb128 0x2
- 1383 0180 06       		.uleb128 0x6
- 1384 0181 00       		.byte	0
- 1385 0182 00       		.byte	0
- 1386 0183 1C       		.uleb128 0x1c
- 1387 0184 2E       		.uleb128 0x2e
- 1388 0185 00       		.byte	0
- 1389 0186 3F       		.uleb128 0x3f
- 1390 0187 0C       		.uleb128 0xc
- 1391 0188 3C       		.uleb128 0x3c
- 1392 0189 0C       		.uleb128 0xc
- 1393 018a 8740     		.uleb128 0x2007
- 1394 018c 0E       		.uleb128 0xe
- 1395 018d 03       		.uleb128 0x3
- 1396 018e 0E       		.uleb128 0xe
- 1397 018f 3A       		.uleb128 0x3a
- 1398 0190 0B       		.uleb128 0xb
- 1399 0191 3B       		.uleb128 0x3b
- 1400 0192 0B       		.uleb128 0xb
- 1401 0193 00       		.byte	0
- 1402 0194 00       		.byte	0
- 1403 0195 00       		.byte	0
- 1404              		.section	.debug_loc,"",%progbits
- 1405              	.Ldebug_loc0:
- 1406              	.LLST5:
- 1407 0000 70000000 		.4byte	.LFB4-.Ltext0
- 1408 0004 72000000 		.4byte	.LCFI5-.Ltext0
- 1409 0008 0200     		.2byte	0x2
- 1410 000a 7D       		.byte	0x7d
- 1411 000b 00       		.sleb128 0
- 1412 000c 72000000 		.4byte	.LCFI5-.Ltext0
- 1413 0010 C0000000 		.4byte	.LFE4-.Ltext0
- 1414 0014 0200     		.2byte	0x2
- 1415 0016 7D       		.byte	0x7d
- 1416 0017 10       		.sleb128 16
- 1417 0018 00000000 		.4byte	0
- 1418 001c 00000000 		.4byte	0
- 1419              	.LLST6:
- 1420 0020 70000000 		.4byte	.LVL12-.Ltext0
- 1421 0024 79000000 		.4byte	.LVL14-1-.Ltext0
- 1422 0028 0100     		.2byte	0x1
- 1423 002a 50       		.byte	0x50
- 1424 002b 79000000 		.4byte	.LVL14-1-.Ltext0
- 1425 002f A0000000 		.4byte	.LVL16-.Ltext0
- 1426 0033 0100     		.2byte	0x1
- 1427 0035 54       		.byte	0x54
- 1428 0036 A0000000 		.4byte	.LVL16-.Ltext0
- 1429 003a A4000000 		.4byte	.LVL17-.Ltext0
- 1430 003e 0100     		.2byte	0x1
- 1431 0040 50       		.byte	0x50
- 1432 0041 A4000000 		.4byte	.LVL17-.Ltext0
- 1433 0045 B4000000 		.4byte	.LVL20-.Ltext0
- 1434 0049 0100     		.2byte	0x1
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc28WVH2.s 			page 30
-
-
- 1435 004b 54       		.byte	0x54
- 1436 004c B4000000 		.4byte	.LVL20-.Ltext0
- 1437 0050 C0000000 		.4byte	.LFE4-.Ltext0
- 1438 0054 0400     		.2byte	0x4
- 1439 0056 F3       		.byte	0xf3
- 1440 0057 01       		.uleb128 0x1
- 1441 0058 50       		.byte	0x50
- 1442 0059 9F       		.byte	0x9f
- 1443 005a 00000000 		.4byte	0
- 1444 005e 00000000 		.4byte	0
- 1445              	.LLST7:
- 1446 0062 76000000 		.4byte	.LVL13-.Ltext0
- 1447 0066 7A000000 		.4byte	.LVL14-.Ltext0
- 1448 006a 0200     		.2byte	0x2
- 1449 006c 30       		.byte	0x30
- 1450 006d 9F       		.byte	0x9f
- 1451 006e 7A000000 		.4byte	.LVL14-.Ltext0
- 1452 0072 9B000000 		.4byte	.LVL15-1-.Ltext0
- 1453 0076 0100     		.2byte	0x1
- 1454 0078 50       		.byte	0x50
- 1455 0079 00000000 		.4byte	0
- 1456 007d 00000000 		.4byte	0
- 1457              	.LLST3:
- 1458 0081 34000000 		.4byte	.LFB3-.Ltext0
- 1459 0085 36000000 		.4byte	.LCFI1-.Ltext0
- 1460 0089 0200     		.2byte	0x2
- 1461 008b 7D       		.byte	0x7d
- 1462 008c 00       		.sleb128 0
- 1463 008d 36000000 		.4byte	.LCFI1-.Ltext0
- 1464 0091 38000000 		.4byte	.LCFI2-.Ltext0
- 1465 0095 0200     		.2byte	0x2
- 1466 0097 7D       		.byte	0x7d
- 1467 0098 14       		.sleb128 20
- 1468 0099 38000000 		.4byte	.LCFI2-.Ltext0
- 1469 009d 60000000 		.4byte	.LCFI3-.Ltext0
- 1470 00a1 0200     		.2byte	0x2
- 1471 00a3 7D       		.byte	0x7d
- 1472 00a4 28       		.sleb128 40
- 1473 00a5 60000000 		.4byte	.LCFI3-.Ltext0
- 1474 00a9 64000000 		.4byte	.LCFI4-.Ltext0
- 1475 00ad 0200     		.2byte	0x2
- 1476 00af 7D       		.byte	0x7d
- 1477 00b0 14       		.sleb128 20
- 1478 00b1 64000000 		.4byte	.LCFI4-.Ltext0
- 1479 00b5 70000000 		.4byte	.LFE3-.Ltext0
- 1480 00b9 0200     		.2byte	0x2
- 1481 00bb 7D       		.byte	0x7d
- 1482 00bc 00       		.sleb128 0
- 1483 00bd 00000000 		.4byte	0
- 1484 00c1 00000000 		.4byte	0
- 1485              	.LLST4:
- 1486 00c5 34000000 		.4byte	.LVL5-.Ltext0
- 1487 00c9 3E000000 		.4byte	.LVL7-.Ltext0
- 1488 00cd 0200     		.2byte	0x2
- 1489 00cf 30       		.byte	0x30
- 1490 00d0 9F       		.byte	0x9f
- 1491 00d1 3E000000 		.4byte	.LVL7-.Ltext0
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc28WVH2.s 			page 31
-
-
- 1492 00d5 42000000 		.4byte	.LVL8-.Ltext0
- 1493 00d9 0100     		.2byte	0x1
- 1494 00db 50       		.byte	0x50
- 1495 00dc 42000000 		.4byte	.LVL8-.Ltext0
- 1496 00e0 64000000 		.4byte	.LVL10-.Ltext0
- 1497 00e4 0100     		.2byte	0x1
- 1498 00e6 55       		.byte	0x55
- 1499 00e7 64000000 		.4byte	.LVL10-.Ltext0
- 1500 00eb 67000000 		.4byte	.LVL11-1-.Ltext0
- 1501 00ef 0100     		.2byte	0x1
- 1502 00f1 50       		.byte	0x50
- 1503 00f2 00000000 		.4byte	0
- 1504 00f6 00000000 		.4byte	0
- 1505              	.LLST8:
- 1506 00fa C0000000 		.4byte	.LFB2-.Ltext0
- 1507 00fe C2000000 		.4byte	.LCFI6-.Ltext0
- 1508 0102 0200     		.2byte	0x2
- 1509 0104 7D       		.byte	0x7d
- 1510 0105 00       		.sleb128 0
- 1511 0106 C2000000 		.4byte	.LCFI6-.Ltext0
- 1512 010a D2000000 		.4byte	.LCFI7-.Ltext0
- 1513 010e 0200     		.2byte	0x2
- 1514 0110 7D       		.byte	0x7d
- 1515 0111 08       		.sleb128 8
- 1516 0112 D2000000 		.4byte	.LCFI7-.Ltext0
- 1517 0116 D4000000 		.4byte	.LCFI8-.Ltext0
- 1518 011a 0200     		.2byte	0x2
- 1519 011c 7D       		.byte	0x7d
- 1520 011d 00       		.sleb128 0
- 1521 011e D4000000 		.4byte	.LCFI8-.Ltext0
- 1522 0122 E6000000 		.4byte	.LCFI9-.Ltext0
- 1523 0126 0200     		.2byte	0x2
- 1524 0128 7D       		.byte	0x7d
- 1525 0129 08       		.sleb128 8
- 1526 012a E6000000 		.4byte	.LCFI9-.Ltext0
- 1527 012e E8000000 		.4byte	.LCFI10-.Ltext0
- 1528 0132 0200     		.2byte	0x2
- 1529 0134 7D       		.byte	0x7d
- 1530 0135 00       		.sleb128 0
- 1531 0136 E8000000 		.4byte	.LCFI10-.Ltext0
- 1532 013a 44010000 		.4byte	.LFE2-.Ltext0
- 1533 013e 0200     		.2byte	0x2
- 1534 0140 7D       		.byte	0x7d
- 1535 0141 08       		.sleb128 8
- 1536 0142 00000000 		.4byte	0
- 1537 0146 00000000 		.4byte	0
- 1538              	.LLST0:
- 1539 014a 18000000 		.4byte	.LFB0-.Ltext0
- 1540 014e 1A000000 		.4byte	.LCFI0-.Ltext0
- 1541 0152 0200     		.2byte	0x2
- 1542 0154 7D       		.byte	0x7d
- 1543 0155 00       		.sleb128 0
- 1544 0156 1A000000 		.4byte	.LCFI0-.Ltext0
- 1545 015a 34000000 		.4byte	.LFE0-.Ltext0
- 1546 015e 0200     		.2byte	0x2
- 1547 0160 7D       		.byte	0x7d
- 1548 0161 10       		.sleb128 16
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc28WVH2.s 			page 32
-
-
- 1549 0162 00000000 		.4byte	0
- 1550 0166 00000000 		.4byte	0
- 1551              	.LLST1:
- 1552 016a 24000000 		.4byte	.LVL2-.Ltext0
- 1553 016e 2E000000 		.4byte	.LVL4-.Ltext0
- 1554 0172 0600     		.2byte	0x6
- 1555 0174 54       		.byte	0x54
- 1556 0175 93       		.byte	0x93
- 1557 0176 04       		.uleb128 0x4
- 1558 0177 55       		.byte	0x55
- 1559 0178 93       		.byte	0x93
- 1560 0179 04       		.uleb128 0x4
- 1561 017a 00000000 		.4byte	0
- 1562 017e 00000000 		.4byte	0
- 1563              	.LLST2:
- 1564 0182 18000000 		.4byte	.LVL0-.Ltext0
- 1565 0186 1E000000 		.4byte	.LVL1-.Ltext0
- 1566 018a 0200     		.2byte	0x2
- 1567 018c 30       		.byte	0x30
- 1568 018d 9F       		.byte	0x9f
- 1569 018e 1E000000 		.4byte	.LVL1-.Ltext0
- 1570 0192 27000000 		.4byte	.LVL3-1-.Ltext0
- 1571 0196 0100     		.2byte	0x1
- 1572 0198 50       		.byte	0x50
- 1573 0199 00000000 		.4byte	0
- 1574 019d 00000000 		.4byte	0
- 1575              		.section	.debug_aranges,"",%progbits
- 1576 0000 1C000000 		.4byte	0x1c
- 1577 0004 0200     		.2byte	0x2
- 1578 0006 00000000 		.4byte	.Ldebug_info0
- 1579 000a 04       		.byte	0x4
- 1580 000b 00       		.byte	0
- 1581 000c 0000     		.2byte	0
- 1582 000e 0000     		.2byte	0
- 1583 0010 00000000 		.4byte	.Ltext0
- 1584 0014 44010000 		.4byte	.Letext0-.Ltext0
- 1585 0018 00000000 		.4byte	0
- 1586 001c 00000000 		.4byte	0
- 1587              		.section	.debug_line,"",%progbits
- 1588              	.Ldebug_line0:
- 1589 0000 7E010000 		.section	.debug_str,"MS",%progbits,1
- 1589      0200F000 
- 1589      00000201 
- 1589      FB0E0D00 
- 1589      01010101 
- 1590              	.LASF32:
- 1591 0000 5F5F7274 		.ascii	"__rtmsym_set_time_name\000"
- 1591      6D73796D 
- 1591      5F736574 
- 1591      5F74696D 
- 1591      655F6E61 
- 1592              	.LASF40:
- 1593 0017 4350555F 		.ascii	"CPU_SR_Restore\000"
- 1593      53525F52 
- 1593      6573746F 
- 1593      726500
- 1594              	.LASF24:
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc28WVH2.s 			page 33
-
-
- 1595 0026 5F5F7274 		.ascii	"__rtmsym_get_tick_name\000"
+ 1592      4F535C43 
+ 1592      5C77696E 
+ 1593 030b 757635A3 		.ascii	"uv5\243\251\000"
+ 1593      A900
+ 1594              	.LASF29:
+ 1595 0311 5F5F7274 		.ascii	"__rtmsym___init_system_time\000"
  1595      6D73796D 
- 1595      5F676574 
- 1595      5F746963 
- 1595      6B5F6E61 
- 1596              	.LASF46:
- 1597 003d 74696D65 		.ascii	"time_ptr\000"
- 1597      5F707472 
- 1597      00
- 1598              	.LASF34:
- 1599 0046 6370755F 		.ascii	"cpu_sr\000"
- 1599      737200
- 1600              	.LASF4:
- 1601 004d 55494E54 		.ascii	"UINT8\000"
- 1601      3800
- 1602              	.LASF15:
- 1603 0053 79656172 		.ascii	"year\000"
- 1603      00
- 1604              	.LASF11:
- 1605 0058 6D696E75 		.ascii	"minute\000"
- 1605      746500
- 1606              	.LASF14:
- 1607 005f 6D6F6E74 		.ascii	"month\000"
- 1607      6800
- 1608              	.LASF35:
- 1609 0065 73797374 		.ascii	"system_time_increase\000"
- 1609      656D5F74 
- 1609      696D655F 
- 1609      696E6372 
- 1609      65617365 
- 1610              	.LASF39:
- 1611 007a 4350555F 		.ascii	"CPU_SR_Save\000"
- 1611      53525F53 
- 1611      61766500 
- 1612              	.LASF13:
- 1613 0086 64617465 		.ascii	"date\000"
- 1613      00
- 1614              	.LASF20:
- 1615 008b 61646472 		.ascii	"addr\000"
- 1615      00
- 1616              	.LASF26:
- 1617 0090 7379735F 		.ascii	"sys_time\000"
- 1617      74696D65 
- 1617      00
- 1618              	.LASF17:
- 1619 0099 4350555F 		.ascii	"CPU_SR\000"
- 1619      535200
- 1620              	.LASF3:
- 1621 00a0 756E7369 		.ascii	"unsigned char\000"
- 1621      676E6564 
- 1621      20636861 
- 1621      7200
- 1622              	.LASF8:
- 1623 00ae 55494E54 		.ascii	"UINT64\000"
- 1623      363400
- 1624              	.LASF6:
- 1625 00b5 73686F72 		.ascii	"short unsigned int\000"
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc28WVH2.s 			page 34
-
-
- 1625      7420756E 
- 1625      7369676E 
- 1625      65642069 
- 1625      6E7400
- 1626              	.LASF47:
- 1627 00c8 73797374 		.ascii	"system_time_display\000"
- 1627      656D5F74 
- 1627      696D655F 
- 1627      64697370 
- 1627      6C617900 
- 1628              	.LASF44:
- 1629 00dc 2E2E2F2E 		.ascii	"../../source/src/kernel/OS_CORE/os_time.c\000"
- 1629      2E2F736F 
- 1629      75726365 
- 1629      2F737263 
- 1629      2F6B6572 
- 1630              	.LASF10:
- 1631 0106 7365636F 		.ascii	"second\000"
- 1631      6E6400
- 1632              	.LASF28:
- 1633 010d 5F5F7274 		.ascii	"__rtmsym___init_system_time_name\000"
- 1633      6D73796D 
- 1633      5F5F5F69 
- 1633      6E69745F 
- 1633      73797374 
- 1634              	.LASF23:
- 1635 012e 675F7469 		.ascii	"g_time_tick_count\000"
- 1635      6D655F74 
- 1635      69636B5F 
- 1635      636F756E 
- 1635      7400
- 1636              	.LASF7:
- 1637 0140 756E7369 		.ascii	"unsigned int\000"
- 1637      676E6564 
- 1637      20696E74 
- 1637      00
- 1638              	.LASF9:
- 1639 014d 6C6F6E67 		.ascii	"long long unsigned int\000"
- 1639      206C6F6E 
- 1639      6720756E 
- 1639      7369676E 
- 1639      65642069 
- 1640              	.LASF31:
- 1641 0164 5F5F7274 		.ascii	"__rtmsym_system_time_display\000"
- 1641      6D73796D 
- 1641      5F737973 
- 1641      74656D5F 
- 1641      74696D65 
- 1642              	.LASF12:
- 1643 0181 686F7572 		.ascii	"hour\000"
- 1643      00
- 1644              	.LASF18:
- 1645 0186 74696D65 		.ascii	"time\000"
- 1645      00
- 1646              	.LASF19:
- 1647 018b 6B615F6D 		.ascii	"ka_module_symtab\000"
- 1647      6F64756C 
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc28WVH2.s 			page 35
-
-
- 1647      655F7379 
- 1647      6D746162 
- 1647      00
- 1648              	.LASF25:
- 1649 019c 5F5F7274 		.ascii	"__rtmsym_get_tick\000"
- 1649      6D73796D 
- 1649      5F676574 
- 1649      5F746963 
- 1649      6B00
- 1650              	.LASF2:
- 1651 01ae 6C6F6E67 		.ascii	"long long int\000"
- 1651      206C6F6E 
- 1651      6720696E 
- 1651      7400
- 1652              	.LASF5:
- 1653 01bc 55494E54 		.ascii	"UINT16\000"
- 1653      313600
- 1654              	.LASF21:
- 1655 01c3 6E616D65 		.ascii	"name\000"
- 1655      00
- 1656              	.LASF30:
- 1657 01c8 5F5F7274 		.ascii	"__rtmsym_system_time_display_name\000"
- 1657      6D73796D 
- 1657      5F737973 
- 1657      74656D5F 
- 1657      74696D65 
- 1658              	.LASF16:
- 1659 01ea 4350555F 		.ascii	"CPU_INT32U\000"
- 1659      494E5433 
- 1659      325500
- 1660              	.LASF1:
- 1661 01f5 73686F72 		.ascii	"short int\000"
- 1661      7420696E 
- 1661      7400
- 1662              	.LASF27:
- 1663 01ff 6D6F6E74 		.ascii	"month_date_table\000"
- 1663      685F6461 
- 1663      74655F74 
- 1663      61626C65 
- 1663      00
- 1664              	.LASF36:
- 1665 0210 5F5F696E 		.ascii	"__init_system_time\000"
- 1665      69745F73 
- 1665      79737465 
- 1665      6D5F7469 
- 1665      6D6500
- 1666              	.LASF33:
- 1667 0223 5F5F7274 		.ascii	"__rtmsym_set_time\000"
- 1667      6D73796D 
- 1667      5F736574 
- 1667      5F74696D 
- 1667      6500
- 1668              	.LASF22:
- 1669 0235 63686172 		.ascii	"char\000"
- 1669      00
- 1670              	.LASF43:
- 1671 023a 474E5520 		.ascii	"GNU C11 7.3.1 20180622 (release) [ARM/embedded-7-br"
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc28WVH2.s 			page 36
-
-
- 1671      43313120 
- 1671      372E332E 
- 1671      31203230 
- 1671      31383036 
- 1672 026d 616E6368 		.ascii	"anch revision 261907] -mcpu=cortex-m3 -mthumb -mapc"
- 1672      20726576 
- 1672      6973696F 
- 1672      6E203236 
- 1672      31393037 
- 1673 02a0 732D6672 		.ascii	"s-frame -mthumb-interwork -mcpu=cortex-m3 -mthumb -"
- 1673      616D6520 
- 1673      2D6D7468 
- 1673      756D622D 
- 1673      696E7465 
- 1674 02d3 67647761 		.ascii	"gdwarf-2 -O2\000"
- 1674      72662D32 
- 1674      202D4F32 
- 1674      00
- 1675              	.LASF41:
- 1676 02e0 5F415353 		.ascii	"_ASSERT\000"
- 1676      45525400 
- 1677              	.LASF0:
- 1678 02e8 7369676E 		.ascii	"signed char\000"
- 1678      65642063 
- 1678      68617200 
- 1679              	.LASF42:
- 1680 02f4 6B615F70 		.ascii	"ka_printf\000"
- 1680      72696E74 
- 1680      6600
- 1681              	.LASF38:
- 1682 02fe 6765745F 		.ascii	"get_tick\000"
- 1682      7469636B 
- 1682      00
- 1683              	.LASF37:
- 1684 0307 7365745F 		.ascii	"set_time\000"
- 1684      74696D65 
- 1684      00
- 1685              	.LASF45:
- 1686 0310 463A5C6B 		.ascii	"F:\\kaka\\KAKAOS\\C\\windows\\Project\\RVMDK\243\250"
- 1686      616B615C 
- 1686      4B414B41 
- 1686      4F535C43 
- 1686      5C77696E 
- 1687 0338 757635A3 		.ascii	"uv5\243\251\000"
- 1687      A900
- 1688              	.LASF29:
- 1689 033e 5F5F7274 		.ascii	"__rtmsym___init_system_time\000"
- 1689      6D73796D 
- 1689      5F5F5F69 
- 1689      6E69745F 
- 1689      73797374 
- 1690              		.ident	"GCC: (GNU Tools for Arm Embedded Processors 7-2018-q2-update) 7.3.1 20180622 (release) [AR
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc28WVH2.s 			page 37
+ 1595      5F5F5F69 
+ 1595      6E69745F 
+ 1595      73797374 
+ 1596              		.ident	"GCC: (GNU Tools for Arm Embedded Processors 7-2018-q2-update) 7.3.1 20180622 (release) [AR
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccHo9Q91.s 			page 35
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 os_time.c
-G:\Users\Jaxb\AppData\Local\Temp\cc28WVH2.s:15     .text:00000000 $t
-G:\Users\Jaxb\AppData\Local\Temp\cc28WVH2.s:23     .text:00000000 __init_system_time
-G:\Users\Jaxb\AppData\Local\Temp\cc28WVH2.s:42     .text:0000000c $d
-G:\Users\Jaxb\AppData\Local\Temp\cc28WVH2.s:48     .text:00000018 $t
-G:\Users\Jaxb\AppData\Local\Temp\cc28WVH2.s:56     .text:00000018 get_tick
-G:\Users\Jaxb\AppData\Local\Temp\cc28WVH2.s:88     .text:00000030 $d
-G:\Users\Jaxb\AppData\Local\Temp\cc28WVH2.s:92     .text:00000034 $t
-G:\Users\Jaxb\AppData\Local\Temp\cc28WVH2.s:100    .text:00000034 system_time_display
-G:\Users\Jaxb\AppData\Local\Temp\cc28WVH2.s:161    .text:00000068 $d
-G:\Users\Jaxb\AppData\Local\Temp\cc28WVH2.s:166    .text:00000070 $t
-G:\Users\Jaxb\AppData\Local\Temp\cc28WVH2.s:174    .text:00000070 set_time
-G:\Users\Jaxb\AppData\Local\Temp\cc28WVH2.s:251    .text:000000b4 $d
-G:\Users\Jaxb\AppData\Local\Temp\cc28WVH2.s:257    .text:000000c0 $t
-G:\Users\Jaxb\AppData\Local\Temp\cc28WVH2.s:265    .text:000000c0 system_time_increase
-G:\Users\Jaxb\AppData\Local\Temp\cc28WVH2.s:400    .text:0000013c $d
-G:\Users\Jaxb\AppData\Local\Temp\cc28WVH2.s:447    .RTMSymTab:00000000 __rtmsym_set_time
-G:\Users\Jaxb\AppData\Local\Temp\cc28WVH2.s:469    .rodata.name:00000000 __rtmsym_set_time_name
-G:\Users\Jaxb\AppData\Local\Temp\cc28WVH2.s:452    .RTMSymTab:00000008 __rtmsym_system_time_display
-G:\Users\Jaxb\AppData\Local\Temp\cc28WVH2.s:474    .rodata.name:0000000c __rtmsym_system_time_display_name
-G:\Users\Jaxb\AppData\Local\Temp\cc28WVH2.s:457    .RTMSymTab:00000010 __rtmsym___init_system_time
-G:\Users\Jaxb\AppData\Local\Temp\cc28WVH2.s:478    .rodata.name:00000020 __rtmsym___init_system_time_name
-G:\Users\Jaxb\AppData\Local\Temp\cc28WVH2.s:462    .RTMSymTab:00000018 __rtmsym_get_tick
-G:\Users\Jaxb\AppData\Local\Temp\cc28WVH2.s:483    .rodata.name:00000034 __rtmsym_get_tick_name
-G:\Users\Jaxb\AppData\Local\Temp\cc28WVH2.s:441    .bss:00000008 g_time_tick_count
-G:\Users\Jaxb\AppData\Local\Temp\cc28WVH2.s:415    .rodata:00000000 $d
-G:\Users\Jaxb\AppData\Local\Temp\cc28WVH2.s:419    .rodata:00000000 month_date_table
-G:\Users\Jaxb\AppData\Local\Temp\cc28WVH2.s:433    .bss:00000000 $d
-G:\Users\Jaxb\AppData\Local\Temp\cc28WVH2.s:437    .bss:00000000 sys_time
-G:\Users\Jaxb\AppData\Local\Temp\cc28WVH2.s:444    .RTMSymTab:00000000 $d
-G:\Users\Jaxb\AppData\Local\Temp\cc28WVH2.s:466    .rodata.name:00000000 $d
-G:\Users\Jaxb\AppData\Local\Temp\cc28WVH2.s:486    .rodata.str1.4:00000000 $d
+G:\Users\Jaxb\AppData\Local\Temp\ccHo9Q91.s:20     .bss:00000000 g_time_tick_count
+G:\Users\Jaxb\AppData\Local\Temp\ccHo9Q91.s:17     .bss:00000000 $d
+G:\Users\Jaxb\AppData\Local\Temp\ccHo9Q91.s:23     .text:00000000 $t
+G:\Users\Jaxb\AppData\Local\Temp\ccHo9Q91.s:30     .text:00000000 get_tick
+G:\Users\Jaxb\AppData\Local\Temp\ccHo9Q91.s:78     .text:0000002c $d
+G:\Users\Jaxb\AppData\Local\Temp\ccHo9Q91.s:87     .rodata.name:00000000 __rtmsym_get_tick_name
+G:\Users\Jaxb\AppData\Local\Temp\ccHo9Q91.s:84     .rodata.name:00000000 $d
+G:\Users\Jaxb\AppData\Local\Temp\ccHo9Q91.s:94     .RTMSymTab:00000000 __rtmsym_get_tick
+G:\Users\Jaxb\AppData\Local\Temp\ccHo9Q91.s:91     .RTMSymTab:00000000 $d
+G:\Users\Jaxb\AppData\Local\Temp\ccHo9Q91.s:99     .bss:00000008 sys_time
+G:\Users\Jaxb\AppData\Local\Temp\ccHo9Q91.s:103    .rodata:00000000 $d
+G:\Users\Jaxb\AppData\Local\Temp\ccHo9Q91.s:106    .rodata:00000000 month_date_table
+G:\Users\Jaxb\AppData\Local\Temp\ccHo9Q91.s:120    .text:00000030 $t
+G:\Users\Jaxb\AppData\Local\Temp\ccHo9Q91.s:127    .text:00000030 __init_system_time
+G:\Users\Jaxb\AppData\Local\Temp\ccHo9Q91.s:183    .text:00000068 $d
+G:\Users\Jaxb\AppData\Local\Temp\ccHo9Q91.s:192    .rodata.name:0000000c __rtmsym___init_system_time_name
+G:\Users\Jaxb\AppData\Local\Temp\ccHo9Q91.s:199    .RTMSymTab:00000008 __rtmsym___init_system_time
+G:\Users\Jaxb\AppData\Local\Temp\ccHo9Q91.s:203    .text:0000006c $t
+G:\Users\Jaxb\AppData\Local\Temp\ccHo9Q91.s:210    .text:0000006c system_time_increase
+G:\Users\Jaxb\AppData\Local\Temp\ccHo9Q91.s:348    .text:0000012c $d
+G:\Users\Jaxb\AppData\Local\Temp\ccHo9Q91.s:360    .text:00000134 $t
+G:\Users\Jaxb\AppData\Local\Temp\ccHo9Q91.s:367    .text:00000134 system_time_display
+G:\Users\Jaxb\AppData\Local\Temp\ccHo9Q91.s:451    .text:00000190 $d
+G:\Users\Jaxb\AppData\Local\Temp\ccHo9Q91.s:461    .rodata.name:00000020 __rtmsym_system_time_display_name
+G:\Users\Jaxb\AppData\Local\Temp\ccHo9Q91.s:468    .RTMSymTab:00000010 __rtmsym_system_time_display
+G:\Users\Jaxb\AppData\Local\Temp\ccHo9Q91.s:480    .text:00000198 $t
+G:\Users\Jaxb\AppData\Local\Temp\ccHo9Q91.s:487    .text:00000198 set_time
+G:\Users\Jaxb\AppData\Local\Temp\ccHo9Q91.s:585    .text:00000214 $d
+G:\Users\Jaxb\AppData\Local\Temp\ccHo9Q91.s:596    .rodata.name:00000034 __rtmsym_set_time_name
+G:\Users\Jaxb\AppData\Local\Temp\ccHo9Q91.s:603    .RTMSymTab:00000018 __rtmsym_set_time
 
 UNDEFINED SYMBOLS
 CPU_SR_Save

@@ -109,31 +109,31 @@ stacked_psr = ((unsigned long) hardfault_args[7]);
 
 ka_printf ("[Hard fault handler]\n");   
 
-ka_printf ("R0 = %x\r\n", stacked_r0);   
+ka_printf ("R0 = 0x%x\r\n", stacked_r0);   
 
-ka_printf ("R1 = %x\r\n", stacked_r1);   
+ka_printf ("R1 = 0x%x\r\n", stacked_r1);   
 
-ka_printf ("R2 = %x\r\n", stacked_r2);   
+ka_printf ("R2 = 0x%x\r\n", stacked_r2);   
 
-ka_printf ("R3 = %x\r\n", stacked_r3);   
+ka_printf ("R3 = 0x%x\r\n", stacked_r3);   
 
-ka_printf ("R12 = %x\r\n", stacked_r12);   
+ka_printf ("R12 = 0x%x\r\n", stacked_r12);   
 
-ka_printf ("LR = %x\r\n", stacked_lr);   
+ka_printf ("LR = 0x%x\r\n", stacked_lr);   
 
-ka_printf ("PC = %x\r\n", stacked_pc);   
+ka_printf ("PC = 0x%x\r\n", stacked_pc);   
 
-ka_printf ("PSR = %x\r\n", stacked_psr);   
+ka_printf ("PSR = 0x%x\r\n", stacked_psr);   
 
-ka_printf ("BFAR = %x\r\n", (*((volatile unsigned long *)(0xE000ED38))));   
+ka_printf ("BFAR = 0x%x\r\n", (*((volatile unsigned long *)(0xE000ED38))));   
 
-ka_printf ("CFSR = %x\r\n", (*((volatile unsigned long *)(0xE000ED28))));   
+ka_printf ("CFSR = 0x%x\r\n", (*((volatile unsigned long *)(0xE000ED28))));   
 
-ka_printf ("HFSR = %x\r\n", (*((volatile unsigned long *)(0xE000ED2C))));   
+ka_printf ("HFSR = 0x%x\r\n", (*((volatile unsigned long *)(0xE000ED2C))));   
 
-ka_printf ("DFSR = %x\r\n", (*((volatile unsigned long *)(0xE000ED30))));   
+ka_printf ("DFSR = 0x%x\r\n", (*((volatile unsigned long *)(0xE000ED30))));   
 
-ka_printf ("AFSR = %x\r\n", (*((volatile unsigned long *)(0xE000ED3C))));   
+ka_printf ("AFSR = 0x%x\r\n", (*((volatile unsigned long *)(0xE000ED3C))));   
 
   
 

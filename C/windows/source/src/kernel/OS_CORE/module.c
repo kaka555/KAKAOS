@@ -4,6 +4,7 @@
 #include <osinit.h>
 #include <os_schedule.h>
 #include <myassert.h>
+#include <export.h>
 
 /* RT-Thread error code definitions */
 #define RT_EOK                          0               /**< There is no error */
@@ -125,6 +126,7 @@ int dlmodule_relocate(struct rt_dlmodule *module, Elf32_Rel *rel, Elf32_Addr sym
         lower = *(UINT16 *)((Elf32_Addr)where + 2);
         break;
     default:
+        ka_printf("do nothing\n");
         return -1;
     }
 
@@ -387,6 +389,7 @@ rt_err_t dlmodule_load_relocated_object(struct rt_dlmodule* module, void *module
         return -RT_ERROR;
     }
     module->mem_size = module_size;
+    ka_printf("mem_space is %p\n",module->mem_space);
 
     /* zero all space */
     ptr = module->mem_space;
@@ -442,14 +445,17 @@ rt_err_t dlmodule_load_relocated_object(struct rt_dlmodule* module, void *module
     module->entry_addr = (rt_dlmodule_entry_func_t)((UINT8 *)module->mem_space + elf_module->e_entry - module_addr);
     ka_printf("module entry point is %p\n",module->entry_addr);
     /* handle relocation section */
-    for (index = 0; index < elf_module->e_shnum; index ++)
+    for (index = 0; index < elf_module->e_shnum; index ++) //number of section headers
     {
         UINT32 i, nr_reloc;
         Elf32_Sym *symtab;
         Elf32_Rel *rel;
 
         if (!IS_REL(shdr[index]))
+        {
+            ka_printf("type is %u\n",shdr[index]);
             continue;
+        }
 
         /* get relocate item */
         rel = (Elf32_Rel *)((UINT8 *)module_ptr + shdr[index].sh_offset);
@@ -472,8 +478,11 @@ rt_err_t dlmodule_load_relocated_object(struct rt_dlmodule* module, void *module
 
             ka_printf("relocate symbol: %s\n", strtab + sym->st_name);
 
-            if (sym->st_shndx != STN_UNDEF)
+            if (sym->st_shndx != STN_UNDEF)  //符号所在段
             {
+
+                ka_printf("!STN_UNDEF\n");
+
                 Elf32_Addr addr = 0;
 
                 if ((ELF_ST_TYPE(sym->st_info) == STT_SECTION) ||
@@ -505,6 +514,8 @@ rt_err_t dlmodule_load_relocated_object(struct rt_dlmodule* module, void *module
                 }
                 else if (ELF_ST_TYPE(sym->st_info) == STT_FUNC)
                 {
+                    ka_printf("function\n");
+
                     addr = (Elf32_Addr)((UINT8 *) module->mem_space - module_addr + sym->st_value);
 
                     /* relocate function */
@@ -513,6 +524,8 @@ rt_err_t dlmodule_load_relocated_object(struct rt_dlmodule* module, void *module
             }
             else if (ELF_ST_TYPE(sym->st_info) == STT_FUNC)
             {
+                ka_printf("STT_FUNC\n");
+
                 /* relocate function */
                 dlmodule_relocate(module, rel,
                                   (Elf32_Addr)((UINT8 *)
@@ -522,7 +535,9 @@ rt_err_t dlmodule_load_relocated_object(struct rt_dlmodule* module, void *module
             }
             else
             {
-                Elf32_Addr addr;
+                ka_printf("other\n");
+
+                Elf32_Addr addr = NULL;
 
                 if (ELF32_R_TYPE(rel->r_info) != R_ARM_V4BX)
                 {
@@ -530,6 +545,7 @@ rt_err_t dlmodule_load_relocated_object(struct rt_dlmodule* module, void *module
 
                     /* need to resolve symbol in kernel symbol table */
                     addr = get_export_function_addr((const char *)(strtab + sym->st_name));
+                    ka_printf("get addr is %p\n",addr);
                     if (addr != (Elf32_Addr)NULL)
                     {
                         dlmodule_relocate(module, rel, addr);
@@ -588,8 +604,6 @@ struct rt_dlmodule* dlmodule_load(void)
 
     /* set the name of module */
     //_dlmodule_set_name(module, filename);
-
-    ka_printf("rt_module_load: %s\n",  module->parent.name);
 
     if (elf_module->e_type == ET_REL)
     {
