@@ -24,11 +24,10 @@
   */
 
 /* Includes ------------------------------------------------------------------*/
-#include "stm32f10x_it.h"
+//#include "stm32f10x_it.h"
 #include "bsp_usart.h"
-#include "myMicroLIB.h"
-#include "myassert.h"
-#include "TCB.h"
+#include <myMicroLIB.h>
+#include <TCB.h>
 /** @addtogroup STM32F10x_StdPeriph_Template
   * @{
   */
@@ -110,31 +109,31 @@ stacked_psr = ((unsigned long) hardfault_args[7]);
 
 ka_printf ("[Hard fault handler]\n");   
 
-ka_printf ("R0 = %x\r\n", stacked_r0);   
+ka_printf ("R0 = 0x%x\r\n", stacked_r0);   
 
-ka_printf ("R1 = %x\r\n", stacked_r1);   
+ka_printf ("R1 = 0x%x\r\n", stacked_r1);   
 
-ka_printf ("R2 = %x\r\n", stacked_r2);   
+ka_printf ("R2 = 0x%x\r\n", stacked_r2);   
 
-ka_printf ("R3 = %x\r\n", stacked_r3);   
+ka_printf ("R3 = 0x%x\r\n", stacked_r3);   
 
-ka_printf ("R12 = %x\r\n", stacked_r12);   
+ka_printf ("R12 = 0x%x\r\n", stacked_r12);   
 
-ka_printf ("LR = %x\r\n", stacked_lr);   
+ka_printf ("LR = 0x%x\r\n", stacked_lr);   
 
-ka_printf ("PC = %x\r\n", stacked_pc);   
+ka_printf ("PC = 0x%x\r\n", stacked_pc);   
 
-ka_printf ("PSR = %x\r\n", stacked_psr);   
+ka_printf ("PSR = 0x%x\r\n", stacked_psr);   
 
-ka_printf ("BFAR = %x\r\n", (*((volatile unsigned long *)(0xE000ED38))));   
+ka_printf ("BFAR = 0x%x\r\n", (*((volatile unsigned long *)(0xE000ED38))));   
 
-ka_printf ("CFSR = %x\r\n", (*((volatile unsigned long *)(0xE000ED28))));   
+ka_printf ("CFSR = 0x%x\r\n", (*((volatile unsigned long *)(0xE000ED28))));   
 
-ka_printf ("HFSR = %x\r\n", (*((volatile unsigned long *)(0xE000ED2C))));   
+ka_printf ("HFSR = 0x%x\r\n", (*((volatile unsigned long *)(0xE000ED2C))));   
 
-ka_printf ("DFSR = %x\r\n", (*((volatile unsigned long *)(0xE000ED30))));   
+ka_printf ("DFSR = 0x%x\r\n", (*((volatile unsigned long *)(0xE000ED30))));   
 
-ka_printf ("AFSR = %x\r\n", (*((volatile unsigned long *)(0xE000ED3C))));   
+ka_printf ("AFSR = 0x%x\r\n", (*((volatile unsigned long *)(0xE000ED3C))));   
 
   
 
@@ -232,12 +231,10 @@ void SysTick_Handler(void)
 {
 }
 
-#include "shell.h"
-#include "os_cpu.h"
-#include "myMicroLIB.h"
-//extern MACB MACB_test;
-// 串口中断服务函数
-// 把接收到的数据存在一个数组缓冲区里面，当接收到的的值等于0XFF时，把值返回
+#include <shell.h>
+#include <os_cpu.h>
+#include <myMicroLIB.h>
+
 void DEBUG_USART_IRQHandler(void)
 {	
 #if CONFIG_SHELL_EN
@@ -252,18 +249,16 @@ void DEBUG_USART_IRQHandler(void)
 #endif
 }
 
-/**
-  * @brief  This function handles PPP interrupt request.
-  * @param  None
-  * @retval None
-  */
-/*void PPP_IRQHandler(void)
+#include <module.h>
+void USART2_IRQHandler(void)
 {
-}*/
-
-/**
-  * @}
-  */ 
+  SYS_ENTER_INTERRUPT();
+  if(USART_GetITStatus(USART2,USART_IT_RXNE)!=RESET)
+  {
+    put_in_module_buffer(USART_ReceiveData(USART2));      
+  }
+  SYS_EXIT_INTERRUPT();
+}
 
 
 /******************* (C) COPYRIGHT 2011 STMicroelectronics *****END OF FILE****/

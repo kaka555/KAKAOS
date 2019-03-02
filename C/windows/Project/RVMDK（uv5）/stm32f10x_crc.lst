@@ -1,4 +1,4 @@
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccDzUlyB.s 			page 1
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc4agCHs.s 			page 1
 
 
    1              		.cpu cortex-m3
@@ -8,7 +8,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccDzUlyB.s 			page 1
    5              		.eabi_attribute 24, 1
    6              		.eabi_attribute 25, 1
    7              		.eabi_attribute 26, 1
-   8              		.eabi_attribute 30, 2
+   8              		.eabi_attribute 30, 6
    9              		.eabi_attribute 34, 1
   10              		.eabi_attribute 18, 4
   11              		.file	"stm32f10x_crc.c"
@@ -16,16 +16,15 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccDzUlyB.s 			page 1
   13              	.Ltext0:
   14              		.cfi_sections	.debug_frame
   15              		.align	1
-  16              		.p2align 2,,3
-  17              		.global	CRC_ResetDR
-  18              		.syntax unified
-  19              		.thumb
-  20              		.thumb_func
-  21              		.fpu softvfp
-  22              		.type	CRC_ResetDR, %function
-  23              	CRC_ResetDR:
-  24              	.LFB29:
-  25              		.file 1 "../../source/src/FWlib/src/stm32f10x_crc.c"
+  16              		.global	CRC_ResetDR
+  17              		.syntax unified
+  18              		.thumb
+  19              		.thumb_func
+  20              		.fpu softvfp
+  21              		.type	CRC_ResetDR, %function
+  22              	CRC_ResetDR:
+  23              	.LFB29:
+  24              		.file 1 "../../source/src/FWlib/src/stm32f10x_crc.c"
    1:../../source/src/FWlib/src/stm32f10x_crc.c **** /**
    2:../../source/src/FWlib/src/stm32f10x_crc.c ****   ******************************************************************************
    3:../../source/src/FWlib/src/stm32f10x_crc.c ****   * @file    stm32f10x_crc.c
@@ -58,10 +57,10 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccDzUlyB.s 			page 1
   30:../../source/src/FWlib/src/stm32f10x_crc.c ****   * @brief CRC driver modules
   31:../../source/src/FWlib/src/stm32f10x_crc.c ****   * @{
   32:../../source/src/FWlib/src/stm32f10x_crc.c ****   */
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccDzUlyB.s 			page 2
-
-
   33:../../source/src/FWlib/src/stm32f10x_crc.c **** 
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc4agCHs.s 			page 2
+
+
   34:../../source/src/FWlib/src/stm32f10x_crc.c **** /** @defgroup CRC_Private_TypesDefinitions
   35:../../source/src/FWlib/src/stm32f10x_crc.c ****   * @{
   36:../../source/src/FWlib/src/stm32f10x_crc.c ****   */
@@ -113,40 +112,55 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccDzUlyB.s 			page 1
   82:../../source/src/FWlib/src/stm32f10x_crc.c ****   */
   83:../../source/src/FWlib/src/stm32f10x_crc.c **** void CRC_ResetDR(void)
   84:../../source/src/FWlib/src/stm32f10x_crc.c **** {
-  26              		.loc 1 84 0
-  27              		.cfi_startproc
-  28              		@ args = 0, pretend = 0, frame = 0
-  29              		@ frame_needed = 0, uses_anonymous_args = 0
-  30              		@ link register save eliminated.
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccDzUlyB.s 			page 3
+  25              		.loc 1 84 0
+  26              		.cfi_startproc
+  27              		@ args = 0, pretend = 0, frame = 0
+  28              		@ frame_needed = 1, uses_anonymous_args = 0
+  29              		@ link register save eliminated.
+  30 0000 80B4     		push	{r7}
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc4agCHs.s 			page 3
 
 
+  31              	.LCFI0:
+  32              		.cfi_def_cfa_offset 4
+  33              		.cfi_offset 7, -4
+  34 0002 00AF     		add	r7, sp, #0
+  35              	.LCFI1:
+  36              		.cfi_def_cfa_register 7
   85:../../source/src/FWlib/src/stm32f10x_crc.c ****   /* Reset CRC generator */
   86:../../source/src/FWlib/src/stm32f10x_crc.c ****   CRC->CR = CRC_CR_RESET;
-  31              		.loc 1 86 0
-  32 0000 0122     		movs	r2, #1
-  33 0002 014B     		ldr	r3, .L3
-  34 0004 9A60     		str	r2, [r3, #8]
+  37              		.loc 1 86 0
+  38 0004 034B     		ldr	r3, .L2
+  39 0006 0122     		movs	r2, #1
+  40 0008 9A60     		str	r2, [r3, #8]
   87:../../source/src/FWlib/src/stm32f10x_crc.c **** }
-  35              		.loc 1 87 0
-  36 0006 7047     		bx	lr
-  37              	.L4:
-  38              		.align	2
-  39              	.L3:
-  40 0008 00300240 		.word	1073885184
-  41              		.cfi_endproc
-  42              	.LFE29:
-  43              		.size	CRC_ResetDR, .-CRC_ResetDR
-  44              		.align	1
-  45              		.p2align 2,,3
-  46              		.global	CRC_CalcCRC
-  47              		.syntax unified
-  48              		.thumb
-  49              		.thumb_func
-  50              		.fpu softvfp
-  51              		.type	CRC_CalcCRC, %function
-  52              	CRC_CalcCRC:
-  53              	.LFB30:
+  41              		.loc 1 87 0
+  42 000a 00BF     		nop
+  43 000c BD46     		mov	sp, r7
+  44              	.LCFI2:
+  45              		.cfi_def_cfa_register 13
+  46              		@ sp needed
+  47 000e 80BC     		pop	{r7}
+  48              	.LCFI3:
+  49              		.cfi_restore 7
+  50              		.cfi_def_cfa_offset 0
+  51 0010 7047     		bx	lr
+  52              	.L3:
+  53 0012 00BF     		.align	2
+  54              	.L2:
+  55 0014 00300240 		.word	1073885184
+  56              		.cfi_endproc
+  57              	.LFE29:
+  58              		.size	CRC_ResetDR, .-CRC_ResetDR
+  59              		.align	1
+  60              		.global	CRC_CalcCRC
+  61              		.syntax unified
+  62              		.thumb
+  63              		.thumb_func
+  64              		.fpu softvfp
+  65              		.type	CRC_CalcCRC, %function
+  66              	CRC_CalcCRC:
+  67              	.LFB30:
   88:../../source/src/FWlib/src/stm32f10x_crc.c **** 
   89:../../source/src/FWlib/src/stm32f10x_crc.c **** /**
   90:../../source/src/FWlib/src/stm32f10x_crc.c ****   * @brief  Computes the 32-bit CRC of a given data word(32-bit).
@@ -155,44 +169,66 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccDzUlyB.s 			page 1
   93:../../source/src/FWlib/src/stm32f10x_crc.c ****   */
   94:../../source/src/FWlib/src/stm32f10x_crc.c **** uint32_t CRC_CalcCRC(uint32_t Data)
   95:../../source/src/FWlib/src/stm32f10x_crc.c **** {
-  54              		.loc 1 95 0
-  55              		.cfi_startproc
-  56              		@ args = 0, pretend = 0, frame = 0
-  57              		@ frame_needed = 0, uses_anonymous_args = 0
-  58              		@ link register save eliminated.
-  59              	.LVL0:
+  68              		.loc 1 95 0
+  69              		.cfi_startproc
+  70              		@ args = 0, pretend = 0, frame = 8
+  71              		@ frame_needed = 1, uses_anonymous_args = 0
+  72              		@ link register save eliminated.
+  73 0018 80B4     		push	{r7}
+  74              	.LCFI4:
+  75              		.cfi_def_cfa_offset 4
+  76              		.cfi_offset 7, -4
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc4agCHs.s 			page 4
+
+
+  77 001a 83B0     		sub	sp, sp, #12
+  78              	.LCFI5:
+  79              		.cfi_def_cfa_offset 16
+  80 001c 00AF     		add	r7, sp, #0
+  81              	.LCFI6:
+  82              		.cfi_def_cfa_register 7
+  83 001e 7860     		str	r0, [r7, #4]
   96:../../source/src/FWlib/src/stm32f10x_crc.c ****   CRC->DR = Data;
-  60              		.loc 1 96 0
-  61 000c 014B     		ldr	r3, .L6
-  62 000e 1860     		str	r0, [r3]
+  84              		.loc 1 96 0
+  85 0020 044A     		ldr	r2, .L6
+  86 0022 7B68     		ldr	r3, [r7, #4]
+  87 0024 1360     		str	r3, [r2]
   97:../../source/src/FWlib/src/stm32f10x_crc.c ****   
   98:../../source/src/FWlib/src/stm32f10x_crc.c ****   return (CRC->DR);
-  63              		.loc 1 98 0
-  64 0010 1868     		ldr	r0, [r3]
-  65              	.LVL1:
+  88              		.loc 1 98 0
+  89 0026 034B     		ldr	r3, .L6
+  90 0028 1B68     		ldr	r3, [r3]
   99:../../source/src/FWlib/src/stm32f10x_crc.c **** }
-  66              		.loc 1 99 0
-  67 0012 7047     		bx	lr
-  68              	.L7:
-  69              		.align	2
-  70              	.L6:
-  71 0014 00300240 		.word	1073885184
-  72              		.cfi_endproc
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccDzUlyB.s 			page 4
-
-
-  73              	.LFE30:
-  74              		.size	CRC_CalcCRC, .-CRC_CalcCRC
-  75              		.align	1
-  76              		.p2align 2,,3
-  77              		.global	CRC_CalcBlockCRC
-  78              		.syntax unified
-  79              		.thumb
-  80              		.thumb_func
-  81              		.fpu softvfp
-  82              		.type	CRC_CalcBlockCRC, %function
-  83              	CRC_CalcBlockCRC:
-  84              	.LFB31:
+  91              		.loc 1 99 0
+  92 002a 1846     		mov	r0, r3
+  93 002c 0C37     		adds	r7, r7, #12
+  94              	.LCFI7:
+  95              		.cfi_def_cfa_offset 4
+  96 002e BD46     		mov	sp, r7
+  97              	.LCFI8:
+  98              		.cfi_def_cfa_register 13
+  99              		@ sp needed
+ 100 0030 80BC     		pop	{r7}
+ 101              	.LCFI9:
+ 102              		.cfi_restore 7
+ 103              		.cfi_def_cfa_offset 0
+ 104 0032 7047     		bx	lr
+ 105              	.L7:
+ 106              		.align	2
+ 107              	.L6:
+ 108 0034 00300240 		.word	1073885184
+ 109              		.cfi_endproc
+ 110              	.LFE30:
+ 111              		.size	CRC_CalcCRC, .-CRC_CalcCRC
+ 112              		.align	1
+ 113              		.global	CRC_CalcBlockCRC
+ 114              		.syntax unified
+ 115              		.thumb
+ 116              		.thumb_func
+ 117              		.fpu softvfp
+ 118              		.type	CRC_CalcBlockCRC, %function
+ 119              	CRC_CalcBlockCRC:
+ 120              	.LFB31:
  100:../../source/src/FWlib/src/stm32f10x_crc.c **** 
  101:../../source/src/FWlib/src/stm32f10x_crc.c **** /**
  102:../../source/src/FWlib/src/stm32f10x_crc.c ****   * @brief  Computes the 32-bit CRC of a given buffer of data word(32-bit).
@@ -202,65 +238,98 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccDzUlyB.s 			page 1
  106:../../source/src/FWlib/src/stm32f10x_crc.c ****   */
  107:../../source/src/FWlib/src/stm32f10x_crc.c **** uint32_t CRC_CalcBlockCRC(uint32_t pBuffer[], uint32_t BufferLength)
  108:../../source/src/FWlib/src/stm32f10x_crc.c **** {
-  85              		.loc 1 108 0
-  86              		.cfi_startproc
-  87              		@ args = 0, pretend = 0, frame = 0
-  88              		@ frame_needed = 0, uses_anonymous_args = 0
-  89              		@ link register save eliminated.
-  90              	.LVL2:
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc4agCHs.s 			page 5
+
+
+ 121              		.loc 1 108 0
+ 122              		.cfi_startproc
+ 123              		@ args = 0, pretend = 0, frame = 16
+ 124              		@ frame_needed = 1, uses_anonymous_args = 0
+ 125              		@ link register save eliminated.
+ 126 0038 80B4     		push	{r7}
+ 127              	.LCFI10:
+ 128              		.cfi_def_cfa_offset 4
+ 129              		.cfi_offset 7, -4
+ 130 003a 85B0     		sub	sp, sp, #20
+ 131              	.LCFI11:
+ 132              		.cfi_def_cfa_offset 24
+ 133 003c 00AF     		add	r7, sp, #0
+ 134              	.LCFI12:
+ 135              		.cfi_def_cfa_register 7
+ 136 003e 7860     		str	r0, [r7, #4]
+ 137 0040 3960     		str	r1, [r7]
  109:../../source/src/FWlib/src/stm32f10x_crc.c ****   uint32_t index = 0;
+ 138              		.loc 1 109 0
+ 139 0042 0023     		movs	r3, #0
+ 140 0044 FB60     		str	r3, [r7, #12]
  110:../../source/src/FWlib/src/stm32f10x_crc.c ****   
  111:../../source/src/FWlib/src/stm32f10x_crc.c ****   for(index = 0; index < BufferLength; index++)
-  91              		.loc 1 111 0
-  92 0018 41B1     		cbz	r1, .L9
-  93 001a 0438     		subs	r0, r0, #4
-  94              	.LVL3:
+ 141              		.loc 1 111 0
+ 142 0046 0023     		movs	r3, #0
+ 143 0048 FB60     		str	r3, [r7, #12]
+ 144 004a 09E0     		b	.L9
+ 145              	.L10:
  112:../../source/src/FWlib/src/stm32f10x_crc.c ****   {
  113:../../source/src/FWlib/src/stm32f10x_crc.c ****     CRC->DR = pBuffer[index];
-  95              		.loc 1 113 0
-  96 001c 054A     		ldr	r2, .L15
-  97 001e 00EB8101 		add	r1, r0, r1, lsl #2
-  98              	.LVL4:
-  99              	.L10:
- 100              		.loc 1 113 0 is_stmt 0 discriminator 3
- 101 0022 50F8043F 		ldr	r3, [r0, #4]!
+ 146              		.loc 1 113 0 discriminator 3
+ 147 004c FB68     		ldr	r3, [r7, #12]
+ 148 004e 9B00     		lsls	r3, r3, #2
+ 149 0050 7A68     		ldr	r2, [r7, #4]
+ 150 0052 1344     		add	r3, r3, r2
+ 151 0054 084A     		ldr	r2, .L12
+ 152 0056 1B68     		ldr	r3, [r3]
+ 153 0058 1360     		str	r3, [r2]
  111:../../source/src/FWlib/src/stm32f10x_crc.c ****   {
- 102              		.loc 1 111 0 is_stmt 1 discriminator 3
- 103 0026 8842     		cmp	r0, r1
- 104              		.loc 1 113 0 discriminator 3
- 105 0028 1360     		str	r3, [r2]
+ 154              		.loc 1 111 0 discriminator 3
+ 155 005a FB68     		ldr	r3, [r7, #12]
+ 156 005c 0133     		adds	r3, r3, #1
+ 157 005e FB60     		str	r3, [r7, #12]
+ 158              	.L9:
  111:../../source/src/FWlib/src/stm32f10x_crc.c ****   {
- 106              		.loc 1 111 0 discriminator 3
- 107 002a FAD1     		bne	.L10
- 108              	.L9:
+ 159              		.loc 1 111 0 is_stmt 0 discriminator 1
+ 160 0060 FA68     		ldr	r2, [r7, #12]
+ 161 0062 3B68     		ldr	r3, [r7]
+ 162 0064 9A42     		cmp	r2, r3
+ 163 0066 F1D3     		bcc	.L10
  114:../../source/src/FWlib/src/stm32f10x_crc.c ****   }
  115:../../source/src/FWlib/src/stm32f10x_crc.c ****   return (CRC->DR);
- 109              		.loc 1 115 0
- 110 002c 014B     		ldr	r3, .L15
- 111 002e 1868     		ldr	r0, [r3]
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccDzUlyB.s 			page 5
-
-
+ 164              		.loc 1 115 0 is_stmt 1
+ 165 0068 034B     		ldr	r3, .L12
+ 166 006a 1B68     		ldr	r3, [r3]
  116:../../source/src/FWlib/src/stm32f10x_crc.c **** }
- 112              		.loc 1 116 0
- 113 0030 7047     		bx	lr
- 114              	.L16:
- 115 0032 00BF     		.align	2
- 116              	.L15:
- 117 0034 00300240 		.word	1073885184
- 118              		.cfi_endproc
- 119              	.LFE31:
- 120              		.size	CRC_CalcBlockCRC, .-CRC_CalcBlockCRC
- 121              		.align	1
- 122              		.p2align 2,,3
- 123              		.global	CRC_GetCRC
- 124              		.syntax unified
- 125              		.thumb
- 126              		.thumb_func
- 127              		.fpu softvfp
- 128              		.type	CRC_GetCRC, %function
- 129              	CRC_GetCRC:
- 130              	.LFB32:
+ 167              		.loc 1 116 0
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc4agCHs.s 			page 6
+
+
+ 168 006c 1846     		mov	r0, r3
+ 169 006e 1437     		adds	r7, r7, #20
+ 170              	.LCFI13:
+ 171              		.cfi_def_cfa_offset 4
+ 172 0070 BD46     		mov	sp, r7
+ 173              	.LCFI14:
+ 174              		.cfi_def_cfa_register 13
+ 175              		@ sp needed
+ 176 0072 80BC     		pop	{r7}
+ 177              	.LCFI15:
+ 178              		.cfi_restore 7
+ 179              		.cfi_def_cfa_offset 0
+ 180 0074 7047     		bx	lr
+ 181              	.L13:
+ 182 0076 00BF     		.align	2
+ 183              	.L12:
+ 184 0078 00300240 		.word	1073885184
+ 185              		.cfi_endproc
+ 186              	.LFE31:
+ 187              		.size	CRC_CalcBlockCRC, .-CRC_CalcBlockCRC
+ 188              		.align	1
+ 189              		.global	CRC_GetCRC
+ 190              		.syntax unified
+ 191              		.thumb
+ 192              		.thumb_func
+ 193              		.fpu softvfp
+ 194              		.type	CRC_GetCRC, %function
+ 195              	CRC_GetCRC:
+ 196              	.LFB32:
  117:../../source/src/FWlib/src/stm32f10x_crc.c **** 
  118:../../source/src/FWlib/src/stm32f10x_crc.c **** /**
  119:../../source/src/FWlib/src/stm32f10x_crc.c ****   * @brief  Returns the current CRC value.
@@ -269,38 +338,53 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccDzUlyB.s 			page 1
  122:../../source/src/FWlib/src/stm32f10x_crc.c ****   */
  123:../../source/src/FWlib/src/stm32f10x_crc.c **** uint32_t CRC_GetCRC(void)
  124:../../source/src/FWlib/src/stm32f10x_crc.c **** {
- 131              		.loc 1 124 0
- 132              		.cfi_startproc
- 133              		@ args = 0, pretend = 0, frame = 0
- 134              		@ frame_needed = 0, uses_anonymous_args = 0
- 135              		@ link register save eliminated.
+ 197              		.loc 1 124 0
+ 198              		.cfi_startproc
+ 199              		@ args = 0, pretend = 0, frame = 0
+ 200              		@ frame_needed = 1, uses_anonymous_args = 0
+ 201              		@ link register save eliminated.
+ 202 007c 80B4     		push	{r7}
+ 203              	.LCFI16:
+ 204              		.cfi_def_cfa_offset 4
+ 205              		.cfi_offset 7, -4
+ 206 007e 00AF     		add	r7, sp, #0
+ 207              	.LCFI17:
+ 208              		.cfi_def_cfa_register 7
  125:../../source/src/FWlib/src/stm32f10x_crc.c ****   return (CRC->DR);
- 136              		.loc 1 125 0
- 137 0038 014B     		ldr	r3, .L18
- 138 003a 1868     		ldr	r0, [r3]
+ 209              		.loc 1 125 0
+ 210 0080 024B     		ldr	r3, .L16
+ 211 0082 1B68     		ldr	r3, [r3]
  126:../../source/src/FWlib/src/stm32f10x_crc.c **** }
- 139              		.loc 1 126 0
- 140 003c 7047     		bx	lr
- 141              	.L19:
- 142 003e 00BF     		.align	2
- 143              	.L18:
- 144 0040 00300240 		.word	1073885184
- 145              		.cfi_endproc
- 146              	.LFE32:
- 147              		.size	CRC_GetCRC, .-CRC_GetCRC
- 148              		.align	1
- 149              		.p2align 2,,3
- 150              		.global	CRC_SetIDRegister
- 151              		.syntax unified
- 152              		.thumb
- 153              		.thumb_func
- 154              		.fpu softvfp
- 155              		.type	CRC_SetIDRegister, %function
- 156              	CRC_SetIDRegister:
- 157              	.LFB33:
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccDzUlyB.s 			page 6
+ 212              		.loc 1 126 0
+ 213 0084 1846     		mov	r0, r3
+ 214 0086 BD46     		mov	sp, r7
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc4agCHs.s 			page 7
 
 
+ 215              	.LCFI18:
+ 216              		.cfi_def_cfa_register 13
+ 217              		@ sp needed
+ 218 0088 80BC     		pop	{r7}
+ 219              	.LCFI19:
+ 220              		.cfi_restore 7
+ 221              		.cfi_def_cfa_offset 0
+ 222 008a 7047     		bx	lr
+ 223              	.L17:
+ 224              		.align	2
+ 225              	.L16:
+ 226 008c 00300240 		.word	1073885184
+ 227              		.cfi_endproc
+ 228              	.LFE32:
+ 229              		.size	CRC_GetCRC, .-CRC_GetCRC
+ 230              		.align	1
+ 231              		.global	CRC_SetIDRegister
+ 232              		.syntax unified
+ 233              		.thumb
+ 234              		.thumb_func
+ 235              		.fpu softvfp
+ 236              		.type	CRC_SetIDRegister, %function
+ 237              	CRC_SetIDRegister:
+ 238              	.LFB33:
  127:../../source/src/FWlib/src/stm32f10x_crc.c **** 
  128:../../source/src/FWlib/src/stm32f10x_crc.c **** /**
  129:../../source/src/FWlib/src/stm32f10x_crc.c ****   * @brief  Stores a 8-bit data in the Independent Data(ID) register.
@@ -309,36 +393,62 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccDzUlyB.s 			page 1
  132:../../source/src/FWlib/src/stm32f10x_crc.c ****   */
  133:../../source/src/FWlib/src/stm32f10x_crc.c **** void CRC_SetIDRegister(uint8_t IDValue)
  134:../../source/src/FWlib/src/stm32f10x_crc.c **** {
- 158              		.loc 1 134 0
- 159              		.cfi_startproc
- 160              		@ args = 0, pretend = 0, frame = 0
- 161              		@ frame_needed = 0, uses_anonymous_args = 0
- 162              		@ link register save eliminated.
- 163              	.LVL5:
+ 239              		.loc 1 134 0
+ 240              		.cfi_startproc
+ 241              		@ args = 0, pretend = 0, frame = 8
+ 242              		@ frame_needed = 1, uses_anonymous_args = 0
+ 243              		@ link register save eliminated.
+ 244 0090 80B4     		push	{r7}
+ 245              	.LCFI20:
+ 246              		.cfi_def_cfa_offset 4
+ 247              		.cfi_offset 7, -4
+ 248 0092 83B0     		sub	sp, sp, #12
+ 249              	.LCFI21:
+ 250              		.cfi_def_cfa_offset 16
+ 251 0094 00AF     		add	r7, sp, #0
+ 252              	.LCFI22:
+ 253              		.cfi_def_cfa_register 7
+ 254 0096 0346     		mov	r3, r0
+ 255 0098 FB71     		strb	r3, [r7, #7]
  135:../../source/src/FWlib/src/stm32f10x_crc.c ****   CRC->IDR = IDValue;
- 164              		.loc 1 135 0
- 165 0044 014B     		ldr	r3, .L21
- 166 0046 1871     		strb	r0, [r3, #4]
+ 256              		.loc 1 135 0
+ 257 009a 044A     		ldr	r2, .L19
+ 258 009c FB79     		ldrb	r3, [r7, #7]
+ 259 009e 1371     		strb	r3, [r2, #4]
  136:../../source/src/FWlib/src/stm32f10x_crc.c **** }
- 167              		.loc 1 136 0
- 168 0048 7047     		bx	lr
- 169              	.L22:
- 170 004a 00BF     		.align	2
- 171              	.L21:
- 172 004c 00300240 		.word	1073885184
- 173              		.cfi_endproc
- 174              	.LFE33:
- 175              		.size	CRC_SetIDRegister, .-CRC_SetIDRegister
- 176              		.align	1
- 177              		.p2align 2,,3
- 178              		.global	CRC_GetIDRegister
- 179              		.syntax unified
- 180              		.thumb
- 181              		.thumb_func
- 182              		.fpu softvfp
- 183              		.type	CRC_GetIDRegister, %function
- 184              	CRC_GetIDRegister:
- 185              	.LFB34:
+ 260              		.loc 1 136 0
+ 261 00a0 00BF     		nop
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc4agCHs.s 			page 8
+
+
+ 262 00a2 0C37     		adds	r7, r7, #12
+ 263              	.LCFI23:
+ 264              		.cfi_def_cfa_offset 4
+ 265 00a4 BD46     		mov	sp, r7
+ 266              	.LCFI24:
+ 267              		.cfi_def_cfa_register 13
+ 268              		@ sp needed
+ 269 00a6 80BC     		pop	{r7}
+ 270              	.LCFI25:
+ 271              		.cfi_restore 7
+ 272              		.cfi_def_cfa_offset 0
+ 273 00a8 7047     		bx	lr
+ 274              	.L20:
+ 275 00aa 00BF     		.align	2
+ 276              	.L19:
+ 277 00ac 00300240 		.word	1073885184
+ 278              		.cfi_endproc
+ 279              	.LFE33:
+ 280              		.size	CRC_SetIDRegister, .-CRC_SetIDRegister
+ 281              		.align	1
+ 282              		.global	CRC_GetIDRegister
+ 283              		.syntax unified
+ 284              		.thumb
+ 285              		.thumb_func
+ 286              		.fpu softvfp
+ 287              		.type	CRC_GetIDRegister, %function
+ 288              	CRC_GetIDRegister:
+ 289              	.LFB34:
  137:../../source/src/FWlib/src/stm32f10x_crc.c **** 
  138:../../source/src/FWlib/src/stm32f10x_crc.c **** /**
  139:../../source/src/FWlib/src/stm32f10x_crc.c ****   * @brief  Returns the 8-bit data stored in the Independent Data(ID) register
@@ -347,928 +457,1077 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccDzUlyB.s 			page 1
  142:../../source/src/FWlib/src/stm32f10x_crc.c ****   */
  143:../../source/src/FWlib/src/stm32f10x_crc.c **** uint8_t CRC_GetIDRegister(void)
  144:../../source/src/FWlib/src/stm32f10x_crc.c **** {
- 186              		.loc 1 144 0
- 187              		.cfi_startproc
- 188              		@ args = 0, pretend = 0, frame = 0
- 189              		@ frame_needed = 0, uses_anonymous_args = 0
- 190              		@ link register save eliminated.
+ 290              		.loc 1 144 0
+ 291              		.cfi_startproc
+ 292              		@ args = 0, pretend = 0, frame = 0
+ 293              		@ frame_needed = 1, uses_anonymous_args = 0
+ 294              		@ link register save eliminated.
+ 295 00b0 80B4     		push	{r7}
+ 296              	.LCFI26:
+ 297              		.cfi_def_cfa_offset 4
+ 298              		.cfi_offset 7, -4
+ 299 00b2 00AF     		add	r7, sp, #0
+ 300              	.LCFI27:
+ 301              		.cfi_def_cfa_register 7
  145:../../source/src/FWlib/src/stm32f10x_crc.c ****   return (CRC->IDR);
- 191              		.loc 1 145 0
- 192 0050 014B     		ldr	r3, .L24
- 193 0052 1879     		ldrb	r0, [r3, #4]	@ zero_extendqisi2
+ 302              		.loc 1 145 0
+ 303 00b4 034B     		ldr	r3, .L23
+ 304 00b6 1B79     		ldrb	r3, [r3, #4]
+ 305 00b8 DBB2     		uxtb	r3, r3
  146:../../source/src/FWlib/src/stm32f10x_crc.c **** }
- 194              		.loc 1 146 0
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccDzUlyB.s 			page 7
+ 306              		.loc 1 146 0
+ 307 00ba 1846     		mov	r0, r3
+ 308 00bc BD46     		mov	sp, r7
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc4agCHs.s 			page 9
 
 
- 195 0054 7047     		bx	lr
- 196              	.L25:
- 197 0056 00BF     		.align	2
- 198              	.L24:
- 199 0058 00300240 		.word	1073885184
- 200              		.cfi_endproc
- 201              	.LFE34:
- 202              		.size	CRC_GetIDRegister, .-CRC_GetIDRegister
- 203              	.Letext0:
- 204              		.file 2 "f:\\arm\\gcc2018\\arm-none-eabi\\include\\machine\\_default_types.h"
- 205              		.file 3 "f:\\arm\\gcc2018\\arm-none-eabi\\include\\sys\\_stdint.h"
- 206              		.file 4 "../../source/include/core_cm3.h"
- 207              		.file 5 "../../source/include/system_stm32f10x.h"
- 208              		.file 6 "../../source/include/stm32f10x.h"
- 209              		.section	.debug_info,"",%progbits
- 210              	.Ldebug_info0:
- 211 0000 1F020000 		.4byte	0x21f
- 212 0004 0200     		.2byte	0x2
- 213 0006 00000000 		.4byte	.Ldebug_abbrev0
- 214 000a 04       		.byte	0x4
- 215 000b 01       		.uleb128 0x1
- 216 000c 88010000 		.4byte	.LASF28
- 217 0010 0C       		.byte	0xc
- 218 0011 D9000000 		.4byte	.LASF29
- 219 0015 4C020000 		.4byte	.LASF30
- 220 0019 00000000 		.4byte	.Ltext0
- 221 001d 5C000000 		.4byte	.Letext0
- 222 0021 00000000 		.4byte	.Ldebug_line0
- 223 0025 02       		.uleb128 0x2
- 224 0026 01       		.byte	0x1
- 225 0027 06       		.byte	0x6
- 226 0028 2E020000 		.4byte	.LASF0
- 227 002c 03       		.uleb128 0x3
- 228 002d 00000000 		.4byte	.LASF3
- 229 0031 02       		.byte	0x2
- 230 0032 2B       		.byte	0x2b
- 231 0033 37000000 		.4byte	0x37
- 232 0037 02       		.uleb128 0x2
- 233 0038 01       		.byte	0x1
- 234 0039 08       		.byte	0x8
- 235 003a 35000000 		.4byte	.LASF1
- 236 003e 02       		.uleb128 0x2
- 237 003f 02       		.byte	0x2
- 238 0040 05       		.byte	0x5
- 239 0041 56010000 		.4byte	.LASF2
- 240 0045 03       		.uleb128 0x3
- 241 0046 81000000 		.4byte	.LASF4
- 242 004a 02       		.byte	0x2
- 243 004b 39       		.byte	0x39
- 244 004c 50000000 		.4byte	0x50
- 245 0050 02       		.uleb128 0x2
- 246 0051 02       		.byte	0x2
- 247 0052 07       		.byte	0x7
- 248 0053 55000000 		.4byte	.LASF5
- 249 0057 02       		.uleb128 0x2
- 250 0058 04       		.byte	0x4
- 251 0059 05       		.byte	0x5
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccDzUlyB.s 			page 8
+ 309              	.LCFI28:
+ 310              		.cfi_def_cfa_register 13
+ 311              		@ sp needed
+ 312 00be 80BC     		pop	{r7}
+ 313              	.LCFI29:
+ 314              		.cfi_restore 7
+ 315              		.cfi_def_cfa_offset 0
+ 316 00c0 7047     		bx	lr
+ 317              	.L24:
+ 318 00c2 00BF     		.align	2
+ 319              	.L23:
+ 320 00c4 00300240 		.word	1073885184
+ 321              		.cfi_endproc
+ 322              	.LFE34:
+ 323              		.size	CRC_GetIDRegister, .-CRC_GetIDRegister
+ 324              	.Letext0:
+ 325              		.file 2 "f:\\arm\\gcc2018\\arm-none-eabi\\include\\machine\\_default_types.h"
+ 326              		.file 3 "f:\\arm\\gcc2018\\arm-none-eabi\\include\\sys\\_stdint.h"
+ 327              		.file 4 "../../source/include/core_cm3.h"
+ 328              		.file 5 "../../source/include/system_stm32f10x.h"
+ 329              		.file 6 "../../source/include/stm32f10x.h"
+ 330              		.section	.debug_info,"",%progbits
+ 331              	.Ldebug_info0:
+ 332 0000 22020000 		.4byte	0x222
+ 333 0004 0200     		.2byte	0x2
+ 334 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 335 000a 04       		.byte	0x4
+ 336 000b 01       		.uleb128 0x1
+ 337 000c 88010000 		.4byte	.LASF28
+ 338 0010 0C       		.byte	0xc
+ 339 0011 E2000000 		.4byte	.LASF29
+ 340 0015 4C020000 		.4byte	.LASF30
+ 341 0019 00000000 		.4byte	.Ltext0
+ 342 001d C8000000 		.4byte	.Letext0
+ 343 0021 00000000 		.4byte	.Ldebug_line0
+ 344 0025 02       		.uleb128 0x2
+ 345 0026 01       		.byte	0x1
+ 346 0027 06       		.byte	0x6
+ 347 0028 2E020000 		.4byte	.LASF0
+ 348 002c 03       		.uleb128 0x3
+ 349 002d 00000000 		.4byte	.LASF3
+ 350 0031 02       		.byte	0x2
+ 351 0032 2B       		.byte	0x2b
+ 352 0033 37000000 		.4byte	0x37
+ 353 0037 02       		.uleb128 0x2
+ 354 0038 01       		.byte	0x1
+ 355 0039 08       		.byte	0x8
+ 356 003a 3E000000 		.4byte	.LASF1
+ 357 003e 02       		.uleb128 0x2
+ 358 003f 02       		.byte	0x2
+ 359 0040 05       		.byte	0x5
+ 360 0041 5F010000 		.4byte	.LASF2
+ 361 0045 03       		.uleb128 0x3
+ 362 0046 8A000000 		.4byte	.LASF4
+ 363 004a 02       		.byte	0x2
+ 364 004b 39       		.byte	0x39
+ 365 004c 50000000 		.4byte	0x50
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc4agCHs.s 			page 10
 
 
- 252 005a 7F010000 		.4byte	.LASF6
- 253 005e 03       		.uleb128 0x3
- 254 005f 91000000 		.4byte	.LASF7
- 255 0063 02       		.byte	0x2
- 256 0064 4F       		.byte	0x4f
- 257 0065 69000000 		.4byte	0x69
- 258 0069 02       		.uleb128 0x2
- 259 006a 04       		.byte	0x4
- 260 006b 07       		.byte	0x7
- 261 006c 43000000 		.4byte	.LASF8
- 262 0070 02       		.uleb128 0x2
- 263 0071 08       		.byte	0x8
- 264 0072 05       		.byte	0x5
- 265 0073 20010000 		.4byte	.LASF9
- 266 0077 02       		.uleb128 0x2
- 267 0078 08       		.byte	0x8
- 268 0079 07       		.byte	0x7
- 269 007a BA000000 		.4byte	.LASF10
- 270 007e 04       		.uleb128 0x4
- 271 007f 04       		.byte	0x4
- 272 0080 05       		.byte	0x5
- 273 0081 696E7400 		.ascii	"int\000"
- 274 0085 05       		.uleb128 0x5
- 275 0086 7E000000 		.4byte	0x7e
- 276 008a 02       		.uleb128 0x2
- 277 008b 04       		.byte	0x4
- 278 008c 07       		.byte	0x7
- 279 008d AD000000 		.4byte	.LASF11
- 280 0091 03       		.uleb128 0x3
- 281 0092 D1000000 		.4byte	.LASF12
- 282 0096 03       		.byte	0x3
- 283 0097 18       		.byte	0x18
- 284 0098 2C000000 		.4byte	0x2c
- 285 009c 05       		.uleb128 0x5
- 286 009d 91000000 		.4byte	0x91
- 287 00a1 03       		.uleb128 0x3
- 288 00a2 6D010000 		.4byte	.LASF13
- 289 00a6 03       		.byte	0x3
- 290 00a7 24       		.byte	0x24
- 291 00a8 45000000 		.4byte	0x45
- 292 00ac 03       		.uleb128 0x3
- 293 00ad 76010000 		.4byte	.LASF14
- 294 00b1 03       		.byte	0x3
- 295 00b2 30       		.byte	0x30
- 296 00b3 5E000000 		.4byte	0x5e
- 297 00b7 05       		.uleb128 0x5
- 298 00b8 AC000000 		.4byte	0xac
- 299 00bc 06       		.uleb128 0x6
- 300 00bd 74000000 		.4byte	.LASF15
- 301 00c1 04       		.byte	0x4
- 302 00c2 CE06     		.2byte	0x6ce
- 303 00c4 85000000 		.4byte	0x85
- 304 00c8 01       		.byte	0x1
- 305 00c9 01       		.byte	0x1
- 306 00ca 07       		.uleb128 0x7
- 307 00cb 2E010000 		.4byte	.LASF16
- 308 00cf 05       		.byte	0x5
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccDzUlyB.s 			page 9
+ 366 0050 02       		.uleb128 0x2
+ 367 0051 02       		.byte	0x2
+ 368 0052 07       		.byte	0x7
+ 369 0053 5E000000 		.4byte	.LASF5
+ 370 0057 02       		.uleb128 0x2
+ 371 0058 04       		.byte	0x4
+ 372 0059 05       		.byte	0x5
+ 373 005a 0A000000 		.4byte	.LASF6
+ 374 005e 03       		.uleb128 0x3
+ 375 005f 9A000000 		.4byte	.LASF7
+ 376 0063 02       		.byte	0x2
+ 377 0064 4F       		.byte	0x4f
+ 378 0065 69000000 		.4byte	0x69
+ 379 0069 02       		.uleb128 0x2
+ 380 006a 04       		.byte	0x4
+ 381 006b 07       		.byte	0x7
+ 382 006c 4C000000 		.4byte	.LASF8
+ 383 0070 02       		.uleb128 0x2
+ 384 0071 08       		.byte	0x8
+ 385 0072 05       		.byte	0x5
+ 386 0073 29010000 		.4byte	.LASF9
+ 387 0077 02       		.uleb128 0x2
+ 388 0078 08       		.byte	0x8
+ 389 0079 07       		.byte	0x7
+ 390 007a C3000000 		.4byte	.LASF10
+ 391 007e 04       		.uleb128 0x4
+ 392 007f 04       		.byte	0x4
+ 393 0080 05       		.byte	0x5
+ 394 0081 696E7400 		.ascii	"int\000"
+ 395 0085 05       		.uleb128 0x5
+ 396 0086 7E000000 		.4byte	0x7e
+ 397 008a 02       		.uleb128 0x2
+ 398 008b 04       		.byte	0x4
+ 399 008c 07       		.byte	0x7
+ 400 008d B6000000 		.4byte	.LASF11
+ 401 0091 03       		.uleb128 0x3
+ 402 0092 DA000000 		.4byte	.LASF12
+ 403 0096 03       		.byte	0x3
+ 404 0097 18       		.byte	0x18
+ 405 0098 2C000000 		.4byte	0x2c
+ 406 009c 05       		.uleb128 0x5
+ 407 009d 91000000 		.4byte	0x91
+ 408 00a1 03       		.uleb128 0x3
+ 409 00a2 76010000 		.4byte	.LASF13
+ 410 00a6 03       		.byte	0x3
+ 411 00a7 24       		.byte	0x24
+ 412 00a8 45000000 		.4byte	0x45
+ 413 00ac 03       		.uleb128 0x3
+ 414 00ad 7F010000 		.4byte	.LASF14
+ 415 00b1 03       		.byte	0x3
+ 416 00b2 30       		.byte	0x30
+ 417 00b3 5E000000 		.4byte	0x5e
+ 418 00b7 05       		.uleb128 0x5
+ 419 00b8 AC000000 		.4byte	0xac
+ 420 00bc 06       		.uleb128 0x6
+ 421 00bd 7D000000 		.4byte	.LASF15
+ 422 00c1 04       		.byte	0x4
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc4agCHs.s 			page 11
 
 
- 309 00d0 35       		.byte	0x35
- 310 00d1 AC000000 		.4byte	0xac
- 311 00d5 01       		.byte	0x1
- 312 00d6 01       		.byte	0x1
- 313 00d7 08       		.uleb128 0x8
- 314 00d8 0C       		.byte	0xc
- 315 00d9 06       		.byte	0x6
- 316 00da EF02     		.2byte	0x2ef
- 317 00dc 2A010000 		.4byte	0x12a
- 318 00e0 09       		.uleb128 0x9
- 319 00e1 445200   		.ascii	"DR\000"
- 320 00e4 06       		.byte	0x6
- 321 00e5 F102     		.2byte	0x2f1
- 322 00e7 B7000000 		.4byte	0xb7
- 323 00eb 02       		.byte	0x2
- 324 00ec 23       		.byte	0x23
- 325 00ed 00       		.uleb128 0
- 326 00ee 09       		.uleb128 0x9
- 327 00ef 49445200 		.ascii	"IDR\000"
- 328 00f3 06       		.byte	0x6
- 329 00f4 F202     		.2byte	0x2f2
- 330 00f6 9C000000 		.4byte	0x9c
- 331 00fa 02       		.byte	0x2
- 332 00fb 23       		.byte	0x23
- 333 00fc 04       		.uleb128 0x4
- 334 00fd 0A       		.uleb128 0xa
- 335 00fe 15000000 		.4byte	.LASF17
- 336 0102 06       		.byte	0x6
- 337 0103 F302     		.2byte	0x2f3
- 338 0105 91000000 		.4byte	0x91
- 339 0109 02       		.byte	0x2
- 340 010a 23       		.byte	0x23
- 341 010b 05       		.uleb128 0x5
- 342 010c 0A       		.uleb128 0xa
- 343 010d 1F000000 		.4byte	.LASF18
- 344 0111 06       		.byte	0x6
- 345 0112 F402     		.2byte	0x2f4
- 346 0114 A1000000 		.4byte	0xa1
- 347 0118 02       		.byte	0x2
- 348 0119 23       		.byte	0x23
- 349 011a 06       		.uleb128 0x6
- 350 011b 09       		.uleb128 0x9
- 351 011c 435200   		.ascii	"CR\000"
- 352 011f 06       		.byte	0x6
- 353 0120 F502     		.2byte	0x2f5
- 354 0122 B7000000 		.4byte	0xb7
- 355 0126 02       		.byte	0x2
- 356 0127 23       		.byte	0x23
- 357 0128 08       		.uleb128 0x8
- 358 0129 00       		.byte	0
- 359 012a 0B       		.uleb128 0xb
- 360 012b 68000000 		.4byte	.LASF19
- 361 012f 06       		.byte	0x6
- 362 0130 F602     		.2byte	0x2f6
- 363 0132 D7000000 		.4byte	0xd7
- 364 0136 0C       		.uleb128 0xc
- 365 0137 01       		.byte	0x1
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccDzUlyB.s 			page 10
+ 423 00c2 CE06     		.2byte	0x6ce
+ 424 00c4 85000000 		.4byte	0x85
+ 425 00c8 01       		.byte	0x1
+ 426 00c9 01       		.byte	0x1
+ 427 00ca 07       		.uleb128 0x7
+ 428 00cb 37010000 		.4byte	.LASF16
+ 429 00cf 05       		.byte	0x5
+ 430 00d0 35       		.byte	0x35
+ 431 00d1 AC000000 		.4byte	0xac
+ 432 00d5 01       		.byte	0x1
+ 433 00d6 01       		.byte	0x1
+ 434 00d7 08       		.uleb128 0x8
+ 435 00d8 0C       		.byte	0xc
+ 436 00d9 06       		.byte	0x6
+ 437 00da EF02     		.2byte	0x2ef
+ 438 00dc 2A010000 		.4byte	0x12a
+ 439 00e0 09       		.uleb128 0x9
+ 440 00e1 445200   		.ascii	"DR\000"
+ 441 00e4 06       		.byte	0x6
+ 442 00e5 F102     		.2byte	0x2f1
+ 443 00e7 B7000000 		.4byte	0xb7
+ 444 00eb 02       		.byte	0x2
+ 445 00ec 23       		.byte	0x23
+ 446 00ed 00       		.uleb128 0
+ 447 00ee 09       		.uleb128 0x9
+ 448 00ef 49445200 		.ascii	"IDR\000"
+ 449 00f3 06       		.byte	0x6
+ 450 00f4 F202     		.2byte	0x2f2
+ 451 00f6 9C000000 		.4byte	0x9c
+ 452 00fa 02       		.byte	0x2
+ 453 00fb 23       		.byte	0x23
+ 454 00fc 04       		.uleb128 0x4
+ 455 00fd 0A       		.uleb128 0xa
+ 456 00fe 1E000000 		.4byte	.LASF17
+ 457 0102 06       		.byte	0x6
+ 458 0103 F302     		.2byte	0x2f3
+ 459 0105 91000000 		.4byte	0x91
+ 460 0109 02       		.byte	0x2
+ 461 010a 23       		.byte	0x23
+ 462 010b 05       		.uleb128 0x5
+ 463 010c 0A       		.uleb128 0xa
+ 464 010d 28000000 		.4byte	.LASF18
+ 465 0111 06       		.byte	0x6
+ 466 0112 F402     		.2byte	0x2f4
+ 467 0114 A1000000 		.4byte	0xa1
+ 468 0118 02       		.byte	0x2
+ 469 0119 23       		.byte	0x23
+ 470 011a 06       		.uleb128 0x6
+ 471 011b 09       		.uleb128 0x9
+ 472 011c 435200   		.ascii	"CR\000"
+ 473 011f 06       		.byte	0x6
+ 474 0120 F502     		.2byte	0x2f5
+ 475 0122 B7000000 		.4byte	0xb7
+ 476 0126 02       		.byte	0x2
+ 477 0127 23       		.byte	0x23
+ 478 0128 08       		.uleb128 0x8
+ 479 0129 00       		.byte	0
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc4agCHs.s 			page 12
 
 
- 366 0138 44010000 		.4byte	.LASF20
- 367 013c 01       		.byte	0x1
- 368 013d 8F       		.byte	0x8f
- 369 013e 01       		.byte	0x1
- 370 013f 91000000 		.4byte	0x91
- 371 0143 50000000 		.4byte	.LFB34
- 372 0147 5C000000 		.4byte	.LFE34
- 373 014b 02       		.byte	0x2
- 374 014c 7D       		.byte	0x7d
- 375 014d 00       		.sleb128 0
- 376 014e 01       		.byte	0x1
- 377 014f 0D       		.uleb128 0xd
- 378 0150 01       		.byte	0x1
- 379 0151 3A020000 		.4byte	.LASF31
- 380 0155 01       		.byte	0x1
- 381 0156 85       		.byte	0x85
- 382 0157 01       		.byte	0x1
- 383 0158 44000000 		.4byte	.LFB33
- 384 015c 50000000 		.4byte	.LFE33
- 385 0160 02       		.byte	0x2
- 386 0161 7D       		.byte	0x7d
- 387 0162 00       		.sleb128 0
- 388 0163 01       		.byte	0x1
- 389 0164 76010000 		.4byte	0x176
- 390 0168 0E       		.uleb128 0xe
- 391 0169 18010000 		.4byte	.LASF22
- 392 016d 01       		.byte	0x1
- 393 016e 85       		.byte	0x85
- 394 016f 91000000 		.4byte	0x91
- 395 0173 01       		.byte	0x1
- 396 0174 50       		.byte	0x50
- 397 0175 00       		.byte	0
- 398 0176 0C       		.uleb128 0xc
- 399 0177 01       		.byte	0x1
- 400 0178 0A000000 		.4byte	.LASF21
- 401 017c 01       		.byte	0x1
- 402 017d 7B       		.byte	0x7b
- 403 017e 01       		.byte	0x1
- 404 017f AC000000 		.4byte	0xac
- 405 0183 38000000 		.4byte	.LFB32
- 406 0187 44000000 		.4byte	.LFE32
- 407 018b 02       		.byte	0x2
- 408 018c 7D       		.byte	0x7d
- 409 018d 00       		.sleb128 0
- 410 018e 01       		.byte	0x1
- 411 018f 0F       		.uleb128 0xf
- 412 0190 01       		.byte	0x1
- 413 0191 9C000000 		.4byte	.LASF25
- 414 0195 01       		.byte	0x1
- 415 0196 6B       		.byte	0x6b
- 416 0197 01       		.byte	0x1
- 417 0198 AC000000 		.4byte	0xac
- 418 019c 18000000 		.4byte	.LFB31
- 419 01a0 38000000 		.4byte	.LFE31
- 420 01a4 02       		.byte	0x2
- 421 01a5 7D       		.byte	0x7d
- 422 01a6 00       		.sleb128 0
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccDzUlyB.s 			page 11
+ 480 012a 0B       		.uleb128 0xb
+ 481 012b 71000000 		.4byte	.LASF19
+ 482 012f 06       		.byte	0x6
+ 483 0130 F602     		.2byte	0x2f6
+ 484 0132 D7000000 		.4byte	0xd7
+ 485 0136 0C       		.uleb128 0xc
+ 486 0137 01       		.byte	0x1
+ 487 0138 4D010000 		.4byte	.LASF20
+ 488 013c 01       		.byte	0x1
+ 489 013d 8F       		.byte	0x8f
+ 490 013e 01       		.byte	0x1
+ 491 013f 91000000 		.4byte	0x91
+ 492 0143 B0000000 		.4byte	.LFB34
+ 493 0147 C8000000 		.4byte	.LFE34
+ 494 014b 00000000 		.4byte	.LLST5
+ 495 014f 01       		.byte	0x1
+ 496 0150 0D       		.uleb128 0xd
+ 497 0151 01       		.byte	0x1
+ 498 0152 3A020000 		.4byte	.LASF31
+ 499 0156 01       		.byte	0x1
+ 500 0157 85       		.byte	0x85
+ 501 0158 01       		.byte	0x1
+ 502 0159 90000000 		.4byte	.LFB33
+ 503 015d B0000000 		.4byte	.LFE33
+ 504 0161 44000000 		.4byte	.LLST4
+ 505 0165 01       		.byte	0x1
+ 506 0166 79010000 		.4byte	0x179
+ 507 016a 0E       		.uleb128 0xe
+ 508 016b 21010000 		.4byte	.LASF22
+ 509 016f 01       		.byte	0x1
+ 510 0170 85       		.byte	0x85
+ 511 0171 91000000 		.4byte	0x91
+ 512 0175 02       		.byte	0x2
+ 513 0176 91       		.byte	0x91
+ 514 0177 77       		.sleb128 -9
+ 515 0178 00       		.byte	0
+ 516 0179 0C       		.uleb128 0xc
+ 517 017a 01       		.byte	0x1
+ 518 017b 13000000 		.4byte	.LASF21
+ 519 017f 01       		.byte	0x1
+ 520 0180 7B       		.byte	0x7b
+ 521 0181 01       		.byte	0x1
+ 522 0182 AC000000 		.4byte	0xac
+ 523 0186 7C000000 		.4byte	.LFB32
+ 524 018a 90000000 		.4byte	.LFE32
+ 525 018e A0000000 		.4byte	.LLST3
+ 526 0192 01       		.byte	0x1
+ 527 0193 0F       		.uleb128 0xf
+ 528 0194 01       		.byte	0x1
+ 529 0195 A5000000 		.4byte	.LASF25
+ 530 0199 01       		.byte	0x1
+ 531 019a 6B       		.byte	0x6b
+ 532 019b 01       		.byte	0x1
+ 533 019c AC000000 		.4byte	0xac
+ 534 01a0 38000000 		.4byte	.LFB31
+ 535 01a4 7C000000 		.4byte	.LFE31
+ 536 01a8 E4000000 		.4byte	.LLST2
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc4agCHs.s 			page 13
 
 
- 423 01a7 01       		.byte	0x1
- 424 01a8 DA010000 		.4byte	0x1da
- 425 01ac 10       		.uleb128 0x10
- 426 01ad 04010000 		.4byte	.LASF23
- 427 01b1 01       		.byte	0x1
- 428 01b2 6B       		.byte	0x6b
- 429 01b3 DA010000 		.4byte	0x1da
- 430 01b7 00000000 		.4byte	.LLST1
- 431 01bb 10       		.uleb128 0x10
- 432 01bc 60010000 		.4byte	.LASF24
- 433 01c0 01       		.byte	0x1
- 434 01c1 6B       		.byte	0x6b
- 435 01c2 AC000000 		.4byte	0xac
- 436 01c6 2E000000 		.4byte	.LLST2
- 437 01ca 11       		.uleb128 0x11
- 438 01cb 3E010000 		.4byte	.LASF32
- 439 01cf 01       		.byte	0x1
- 440 01d0 6D       		.byte	0x6d
- 441 01d1 AC000000 		.4byte	0xac
- 442 01d5 4F000000 		.4byte	.LLST3
- 443 01d9 00       		.byte	0
- 444 01da 12       		.uleb128 0x12
- 445 01db 04       		.byte	0x4
- 446 01dc AC000000 		.4byte	0xac
- 447 01e0 0F       		.uleb128 0xf
- 448 01e1 01       		.byte	0x1
- 449 01e2 29000000 		.4byte	.LASF26
- 450 01e6 01       		.byte	0x1
- 451 01e7 5E       		.byte	0x5e
- 452 01e8 01       		.byte	0x1
- 453 01e9 AC000000 		.4byte	0xac
- 454 01ed 0C000000 		.4byte	.LFB30
- 455 01f1 18000000 		.4byte	.LFE30
- 456 01f5 02       		.byte	0x2
- 457 01f6 7D       		.byte	0x7d
- 458 01f7 00       		.sleb128 0
- 459 01f8 01       		.byte	0x1
- 460 01f9 0D020000 		.4byte	0x20d
- 461 01fd 10       		.uleb128 0x10
- 462 01fe 8C000000 		.4byte	.LASF27
- 463 0202 01       		.byte	0x1
- 464 0203 5E       		.byte	0x5e
- 465 0204 AC000000 		.4byte	0xac
- 466 0208 63000000 		.4byte	.LLST0
- 467 020c 00       		.byte	0
- 468 020d 13       		.uleb128 0x13
- 469 020e 01       		.byte	0x1
- 470 020f 0C010000 		.4byte	.LASF33
- 471 0213 01       		.byte	0x1
- 472 0214 53       		.byte	0x53
- 473 0215 01       		.byte	0x1
- 474 0216 00000000 		.4byte	.LFB29
- 475 021a 0C000000 		.4byte	.LFE29
- 476 021e 02       		.byte	0x2
- 477 021f 7D       		.byte	0x7d
- 478 0220 00       		.sleb128 0
- 479 0221 01       		.byte	0x1
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccDzUlyB.s 			page 12
+ 537 01ac 01       		.byte	0x1
+ 538 01ad DC010000 		.4byte	0x1dc
+ 539 01b1 0E       		.uleb128 0xe
+ 540 01b2 0D010000 		.4byte	.LASF23
+ 541 01b6 01       		.byte	0x1
+ 542 01b7 6B       		.byte	0x6b
+ 543 01b8 DC010000 		.4byte	0x1dc
+ 544 01bc 02       		.byte	0x2
+ 545 01bd 91       		.byte	0x91
+ 546 01be 6C       		.sleb128 -20
+ 547 01bf 0E       		.uleb128 0xe
+ 548 01c0 69010000 		.4byte	.LASF24
+ 549 01c4 01       		.byte	0x1
+ 550 01c5 6B       		.byte	0x6b
+ 551 01c6 AC000000 		.4byte	0xac
+ 552 01ca 02       		.byte	0x2
+ 553 01cb 91       		.byte	0x91
+ 554 01cc 68       		.sleb128 -24
+ 555 01cd 10       		.uleb128 0x10
+ 556 01ce 47010000 		.4byte	.LASF32
+ 557 01d2 01       		.byte	0x1
+ 558 01d3 6D       		.byte	0x6d
+ 559 01d4 AC000000 		.4byte	0xac
+ 560 01d8 02       		.byte	0x2
+ 561 01d9 91       		.byte	0x91
+ 562 01da 74       		.sleb128 -12
+ 563 01db 00       		.byte	0
+ 564 01dc 11       		.uleb128 0x11
+ 565 01dd 04       		.byte	0x4
+ 566 01de AC000000 		.4byte	0xac
+ 567 01e2 0F       		.uleb128 0xf
+ 568 01e3 01       		.byte	0x1
+ 569 01e4 32000000 		.4byte	.LASF26
+ 570 01e8 01       		.byte	0x1
+ 571 01e9 5E       		.byte	0x5e
+ 572 01ea 01       		.byte	0x1
+ 573 01eb AC000000 		.4byte	0xac
+ 574 01ef 18000000 		.4byte	.LFB30
+ 575 01f3 38000000 		.4byte	.LFE30
+ 576 01f7 40010000 		.4byte	.LLST1
+ 577 01fb 01       		.byte	0x1
+ 578 01fc 0F020000 		.4byte	0x20f
+ 579 0200 0E       		.uleb128 0xe
+ 580 0201 95000000 		.4byte	.LASF27
+ 581 0205 01       		.byte	0x1
+ 582 0206 5E       		.byte	0x5e
+ 583 0207 AC000000 		.4byte	0xac
+ 584 020b 02       		.byte	0x2
+ 585 020c 91       		.byte	0x91
+ 586 020d 74       		.sleb128 -12
+ 587 020e 00       		.byte	0
+ 588 020f 12       		.uleb128 0x12
+ 589 0210 01       		.byte	0x1
+ 590 0211 15010000 		.4byte	.LASF33
+ 591 0215 01       		.byte	0x1
+ 592 0216 53       		.byte	0x53
+ 593 0217 01       		.byte	0x1
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc4agCHs.s 			page 14
 
 
- 480 0222 00       		.byte	0
- 481              		.section	.debug_abbrev,"",%progbits
- 482              	.Ldebug_abbrev0:
- 483 0000 01       		.uleb128 0x1
- 484 0001 11       		.uleb128 0x11
- 485 0002 01       		.byte	0x1
- 486 0003 25       		.uleb128 0x25
- 487 0004 0E       		.uleb128 0xe
- 488 0005 13       		.uleb128 0x13
- 489 0006 0B       		.uleb128 0xb
- 490 0007 03       		.uleb128 0x3
- 491 0008 0E       		.uleb128 0xe
- 492 0009 1B       		.uleb128 0x1b
- 493 000a 0E       		.uleb128 0xe
- 494 000b 11       		.uleb128 0x11
- 495 000c 01       		.uleb128 0x1
- 496 000d 12       		.uleb128 0x12
- 497 000e 01       		.uleb128 0x1
- 498 000f 10       		.uleb128 0x10
- 499 0010 06       		.uleb128 0x6
- 500 0011 00       		.byte	0
- 501 0012 00       		.byte	0
- 502 0013 02       		.uleb128 0x2
- 503 0014 24       		.uleb128 0x24
- 504 0015 00       		.byte	0
- 505 0016 0B       		.uleb128 0xb
- 506 0017 0B       		.uleb128 0xb
- 507 0018 3E       		.uleb128 0x3e
- 508 0019 0B       		.uleb128 0xb
- 509 001a 03       		.uleb128 0x3
- 510 001b 0E       		.uleb128 0xe
- 511 001c 00       		.byte	0
- 512 001d 00       		.byte	0
- 513 001e 03       		.uleb128 0x3
- 514 001f 16       		.uleb128 0x16
- 515 0020 00       		.byte	0
- 516 0021 03       		.uleb128 0x3
- 517 0022 0E       		.uleb128 0xe
- 518 0023 3A       		.uleb128 0x3a
- 519 0024 0B       		.uleb128 0xb
- 520 0025 3B       		.uleb128 0x3b
- 521 0026 0B       		.uleb128 0xb
- 522 0027 49       		.uleb128 0x49
- 523 0028 13       		.uleb128 0x13
- 524 0029 00       		.byte	0
- 525 002a 00       		.byte	0
- 526 002b 04       		.uleb128 0x4
- 527 002c 24       		.uleb128 0x24
- 528 002d 00       		.byte	0
- 529 002e 0B       		.uleb128 0xb
- 530 002f 0B       		.uleb128 0xb
- 531 0030 3E       		.uleb128 0x3e
- 532 0031 0B       		.uleb128 0xb
- 533 0032 03       		.uleb128 0x3
- 534 0033 08       		.uleb128 0x8
- 535 0034 00       		.byte	0
- 536 0035 00       		.byte	0
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccDzUlyB.s 			page 13
+ 594 0218 00000000 		.4byte	.LFB29
+ 595 021c 18000000 		.4byte	.LFE29
+ 596 0220 9C010000 		.4byte	.LLST0
+ 597 0224 01       		.byte	0x1
+ 598 0225 00       		.byte	0
+ 599              		.section	.debug_abbrev,"",%progbits
+ 600              	.Ldebug_abbrev0:
+ 601 0000 01       		.uleb128 0x1
+ 602 0001 11       		.uleb128 0x11
+ 603 0002 01       		.byte	0x1
+ 604 0003 25       		.uleb128 0x25
+ 605 0004 0E       		.uleb128 0xe
+ 606 0005 13       		.uleb128 0x13
+ 607 0006 0B       		.uleb128 0xb
+ 608 0007 03       		.uleb128 0x3
+ 609 0008 0E       		.uleb128 0xe
+ 610 0009 1B       		.uleb128 0x1b
+ 611 000a 0E       		.uleb128 0xe
+ 612 000b 11       		.uleb128 0x11
+ 613 000c 01       		.uleb128 0x1
+ 614 000d 12       		.uleb128 0x12
+ 615 000e 01       		.uleb128 0x1
+ 616 000f 10       		.uleb128 0x10
+ 617 0010 06       		.uleb128 0x6
+ 618 0011 00       		.byte	0
+ 619 0012 00       		.byte	0
+ 620 0013 02       		.uleb128 0x2
+ 621 0014 24       		.uleb128 0x24
+ 622 0015 00       		.byte	0
+ 623 0016 0B       		.uleb128 0xb
+ 624 0017 0B       		.uleb128 0xb
+ 625 0018 3E       		.uleb128 0x3e
+ 626 0019 0B       		.uleb128 0xb
+ 627 001a 03       		.uleb128 0x3
+ 628 001b 0E       		.uleb128 0xe
+ 629 001c 00       		.byte	0
+ 630 001d 00       		.byte	0
+ 631 001e 03       		.uleb128 0x3
+ 632 001f 16       		.uleb128 0x16
+ 633 0020 00       		.byte	0
+ 634 0021 03       		.uleb128 0x3
+ 635 0022 0E       		.uleb128 0xe
+ 636 0023 3A       		.uleb128 0x3a
+ 637 0024 0B       		.uleb128 0xb
+ 638 0025 3B       		.uleb128 0x3b
+ 639 0026 0B       		.uleb128 0xb
+ 640 0027 49       		.uleb128 0x49
+ 641 0028 13       		.uleb128 0x13
+ 642 0029 00       		.byte	0
+ 643 002a 00       		.byte	0
+ 644 002b 04       		.uleb128 0x4
+ 645 002c 24       		.uleb128 0x24
+ 646 002d 00       		.byte	0
+ 647 002e 0B       		.uleb128 0xb
+ 648 002f 0B       		.uleb128 0xb
+ 649 0030 3E       		.uleb128 0x3e
+ 650 0031 0B       		.uleb128 0xb
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc4agCHs.s 			page 15
 
 
- 537 0036 05       		.uleb128 0x5
- 538 0037 35       		.uleb128 0x35
- 539 0038 00       		.byte	0
- 540 0039 49       		.uleb128 0x49
- 541 003a 13       		.uleb128 0x13
- 542 003b 00       		.byte	0
- 543 003c 00       		.byte	0
- 544 003d 06       		.uleb128 0x6
- 545 003e 34       		.uleb128 0x34
- 546 003f 00       		.byte	0
- 547 0040 03       		.uleb128 0x3
- 548 0041 0E       		.uleb128 0xe
- 549 0042 3A       		.uleb128 0x3a
- 550 0043 0B       		.uleb128 0xb
- 551 0044 3B       		.uleb128 0x3b
- 552 0045 05       		.uleb128 0x5
- 553 0046 49       		.uleb128 0x49
- 554 0047 13       		.uleb128 0x13
- 555 0048 3F       		.uleb128 0x3f
- 556 0049 0C       		.uleb128 0xc
- 557 004a 3C       		.uleb128 0x3c
- 558 004b 0C       		.uleb128 0xc
- 559 004c 00       		.byte	0
- 560 004d 00       		.byte	0
- 561 004e 07       		.uleb128 0x7
- 562 004f 34       		.uleb128 0x34
- 563 0050 00       		.byte	0
- 564 0051 03       		.uleb128 0x3
- 565 0052 0E       		.uleb128 0xe
- 566 0053 3A       		.uleb128 0x3a
- 567 0054 0B       		.uleb128 0xb
- 568 0055 3B       		.uleb128 0x3b
- 569 0056 0B       		.uleb128 0xb
- 570 0057 49       		.uleb128 0x49
- 571 0058 13       		.uleb128 0x13
- 572 0059 3F       		.uleb128 0x3f
- 573 005a 0C       		.uleb128 0xc
- 574 005b 3C       		.uleb128 0x3c
- 575 005c 0C       		.uleb128 0xc
- 576 005d 00       		.byte	0
- 577 005e 00       		.byte	0
- 578 005f 08       		.uleb128 0x8
- 579 0060 13       		.uleb128 0x13
- 580 0061 01       		.byte	0x1
- 581 0062 0B       		.uleb128 0xb
- 582 0063 0B       		.uleb128 0xb
- 583 0064 3A       		.uleb128 0x3a
- 584 0065 0B       		.uleb128 0xb
- 585 0066 3B       		.uleb128 0x3b
- 586 0067 05       		.uleb128 0x5
- 587 0068 01       		.uleb128 0x1
- 588 0069 13       		.uleb128 0x13
- 589 006a 00       		.byte	0
- 590 006b 00       		.byte	0
- 591 006c 09       		.uleb128 0x9
- 592 006d 0D       		.uleb128 0xd
- 593 006e 00       		.byte	0
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccDzUlyB.s 			page 14
+ 651 0032 03       		.uleb128 0x3
+ 652 0033 08       		.uleb128 0x8
+ 653 0034 00       		.byte	0
+ 654 0035 00       		.byte	0
+ 655 0036 05       		.uleb128 0x5
+ 656 0037 35       		.uleb128 0x35
+ 657 0038 00       		.byte	0
+ 658 0039 49       		.uleb128 0x49
+ 659 003a 13       		.uleb128 0x13
+ 660 003b 00       		.byte	0
+ 661 003c 00       		.byte	0
+ 662 003d 06       		.uleb128 0x6
+ 663 003e 34       		.uleb128 0x34
+ 664 003f 00       		.byte	0
+ 665 0040 03       		.uleb128 0x3
+ 666 0041 0E       		.uleb128 0xe
+ 667 0042 3A       		.uleb128 0x3a
+ 668 0043 0B       		.uleb128 0xb
+ 669 0044 3B       		.uleb128 0x3b
+ 670 0045 05       		.uleb128 0x5
+ 671 0046 49       		.uleb128 0x49
+ 672 0047 13       		.uleb128 0x13
+ 673 0048 3F       		.uleb128 0x3f
+ 674 0049 0C       		.uleb128 0xc
+ 675 004a 3C       		.uleb128 0x3c
+ 676 004b 0C       		.uleb128 0xc
+ 677 004c 00       		.byte	0
+ 678 004d 00       		.byte	0
+ 679 004e 07       		.uleb128 0x7
+ 680 004f 34       		.uleb128 0x34
+ 681 0050 00       		.byte	0
+ 682 0051 03       		.uleb128 0x3
+ 683 0052 0E       		.uleb128 0xe
+ 684 0053 3A       		.uleb128 0x3a
+ 685 0054 0B       		.uleb128 0xb
+ 686 0055 3B       		.uleb128 0x3b
+ 687 0056 0B       		.uleb128 0xb
+ 688 0057 49       		.uleb128 0x49
+ 689 0058 13       		.uleb128 0x13
+ 690 0059 3F       		.uleb128 0x3f
+ 691 005a 0C       		.uleb128 0xc
+ 692 005b 3C       		.uleb128 0x3c
+ 693 005c 0C       		.uleb128 0xc
+ 694 005d 00       		.byte	0
+ 695 005e 00       		.byte	0
+ 696 005f 08       		.uleb128 0x8
+ 697 0060 13       		.uleb128 0x13
+ 698 0061 01       		.byte	0x1
+ 699 0062 0B       		.uleb128 0xb
+ 700 0063 0B       		.uleb128 0xb
+ 701 0064 3A       		.uleb128 0x3a
+ 702 0065 0B       		.uleb128 0xb
+ 703 0066 3B       		.uleb128 0x3b
+ 704 0067 05       		.uleb128 0x5
+ 705 0068 01       		.uleb128 0x1
+ 706 0069 13       		.uleb128 0x13
+ 707 006a 00       		.byte	0
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc4agCHs.s 			page 16
 
 
- 594 006f 03       		.uleb128 0x3
- 595 0070 08       		.uleb128 0x8
- 596 0071 3A       		.uleb128 0x3a
- 597 0072 0B       		.uleb128 0xb
- 598 0073 3B       		.uleb128 0x3b
- 599 0074 05       		.uleb128 0x5
- 600 0075 49       		.uleb128 0x49
- 601 0076 13       		.uleb128 0x13
- 602 0077 38       		.uleb128 0x38
- 603 0078 0A       		.uleb128 0xa
- 604 0079 00       		.byte	0
- 605 007a 00       		.byte	0
- 606 007b 0A       		.uleb128 0xa
- 607 007c 0D       		.uleb128 0xd
- 608 007d 00       		.byte	0
- 609 007e 03       		.uleb128 0x3
- 610 007f 0E       		.uleb128 0xe
- 611 0080 3A       		.uleb128 0x3a
- 612 0081 0B       		.uleb128 0xb
- 613 0082 3B       		.uleb128 0x3b
- 614 0083 05       		.uleb128 0x5
- 615 0084 49       		.uleb128 0x49
- 616 0085 13       		.uleb128 0x13
- 617 0086 38       		.uleb128 0x38
- 618 0087 0A       		.uleb128 0xa
- 619 0088 00       		.byte	0
- 620 0089 00       		.byte	0
- 621 008a 0B       		.uleb128 0xb
- 622 008b 16       		.uleb128 0x16
- 623 008c 00       		.byte	0
- 624 008d 03       		.uleb128 0x3
- 625 008e 0E       		.uleb128 0xe
- 626 008f 3A       		.uleb128 0x3a
- 627 0090 0B       		.uleb128 0xb
- 628 0091 3B       		.uleb128 0x3b
- 629 0092 05       		.uleb128 0x5
- 630 0093 49       		.uleb128 0x49
- 631 0094 13       		.uleb128 0x13
- 632 0095 00       		.byte	0
- 633 0096 00       		.byte	0
- 634 0097 0C       		.uleb128 0xc
- 635 0098 2E       		.uleb128 0x2e
- 636 0099 00       		.byte	0
- 637 009a 3F       		.uleb128 0x3f
- 638 009b 0C       		.uleb128 0xc
- 639 009c 03       		.uleb128 0x3
- 640 009d 0E       		.uleb128 0xe
- 641 009e 3A       		.uleb128 0x3a
- 642 009f 0B       		.uleb128 0xb
- 643 00a0 3B       		.uleb128 0x3b
- 644 00a1 0B       		.uleb128 0xb
- 645 00a2 27       		.uleb128 0x27
- 646 00a3 0C       		.uleb128 0xc
- 647 00a4 49       		.uleb128 0x49
- 648 00a5 13       		.uleb128 0x13
- 649 00a6 11       		.uleb128 0x11
- 650 00a7 01       		.uleb128 0x1
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccDzUlyB.s 			page 15
+ 708 006b 00       		.byte	0
+ 709 006c 09       		.uleb128 0x9
+ 710 006d 0D       		.uleb128 0xd
+ 711 006e 00       		.byte	0
+ 712 006f 03       		.uleb128 0x3
+ 713 0070 08       		.uleb128 0x8
+ 714 0071 3A       		.uleb128 0x3a
+ 715 0072 0B       		.uleb128 0xb
+ 716 0073 3B       		.uleb128 0x3b
+ 717 0074 05       		.uleb128 0x5
+ 718 0075 49       		.uleb128 0x49
+ 719 0076 13       		.uleb128 0x13
+ 720 0077 38       		.uleb128 0x38
+ 721 0078 0A       		.uleb128 0xa
+ 722 0079 00       		.byte	0
+ 723 007a 00       		.byte	0
+ 724 007b 0A       		.uleb128 0xa
+ 725 007c 0D       		.uleb128 0xd
+ 726 007d 00       		.byte	0
+ 727 007e 03       		.uleb128 0x3
+ 728 007f 0E       		.uleb128 0xe
+ 729 0080 3A       		.uleb128 0x3a
+ 730 0081 0B       		.uleb128 0xb
+ 731 0082 3B       		.uleb128 0x3b
+ 732 0083 05       		.uleb128 0x5
+ 733 0084 49       		.uleb128 0x49
+ 734 0085 13       		.uleb128 0x13
+ 735 0086 38       		.uleb128 0x38
+ 736 0087 0A       		.uleb128 0xa
+ 737 0088 00       		.byte	0
+ 738 0089 00       		.byte	0
+ 739 008a 0B       		.uleb128 0xb
+ 740 008b 16       		.uleb128 0x16
+ 741 008c 00       		.byte	0
+ 742 008d 03       		.uleb128 0x3
+ 743 008e 0E       		.uleb128 0xe
+ 744 008f 3A       		.uleb128 0x3a
+ 745 0090 0B       		.uleb128 0xb
+ 746 0091 3B       		.uleb128 0x3b
+ 747 0092 05       		.uleb128 0x5
+ 748 0093 49       		.uleb128 0x49
+ 749 0094 13       		.uleb128 0x13
+ 750 0095 00       		.byte	0
+ 751 0096 00       		.byte	0
+ 752 0097 0C       		.uleb128 0xc
+ 753 0098 2E       		.uleb128 0x2e
+ 754 0099 00       		.byte	0
+ 755 009a 3F       		.uleb128 0x3f
+ 756 009b 0C       		.uleb128 0xc
+ 757 009c 03       		.uleb128 0x3
+ 758 009d 0E       		.uleb128 0xe
+ 759 009e 3A       		.uleb128 0x3a
+ 760 009f 0B       		.uleb128 0xb
+ 761 00a0 3B       		.uleb128 0x3b
+ 762 00a1 0B       		.uleb128 0xb
+ 763 00a2 27       		.uleb128 0x27
+ 764 00a3 0C       		.uleb128 0xc
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc4agCHs.s 			page 17
 
 
- 651 00a8 12       		.uleb128 0x12
- 652 00a9 01       		.uleb128 0x1
- 653 00aa 40       		.uleb128 0x40
- 654 00ab 0A       		.uleb128 0xa
- 655 00ac 9742     		.uleb128 0x2117
- 656 00ae 0C       		.uleb128 0xc
- 657 00af 00       		.byte	0
- 658 00b0 00       		.byte	0
- 659 00b1 0D       		.uleb128 0xd
- 660 00b2 2E       		.uleb128 0x2e
- 661 00b3 01       		.byte	0x1
- 662 00b4 3F       		.uleb128 0x3f
- 663 00b5 0C       		.uleb128 0xc
- 664 00b6 03       		.uleb128 0x3
- 665 00b7 0E       		.uleb128 0xe
- 666 00b8 3A       		.uleb128 0x3a
- 667 00b9 0B       		.uleb128 0xb
- 668 00ba 3B       		.uleb128 0x3b
- 669 00bb 0B       		.uleb128 0xb
- 670 00bc 27       		.uleb128 0x27
- 671 00bd 0C       		.uleb128 0xc
- 672 00be 11       		.uleb128 0x11
- 673 00bf 01       		.uleb128 0x1
- 674 00c0 12       		.uleb128 0x12
- 675 00c1 01       		.uleb128 0x1
- 676 00c2 40       		.uleb128 0x40
- 677 00c3 0A       		.uleb128 0xa
- 678 00c4 9742     		.uleb128 0x2117
- 679 00c6 0C       		.uleb128 0xc
- 680 00c7 01       		.uleb128 0x1
- 681 00c8 13       		.uleb128 0x13
- 682 00c9 00       		.byte	0
- 683 00ca 00       		.byte	0
- 684 00cb 0E       		.uleb128 0xe
- 685 00cc 05       		.uleb128 0x5
- 686 00cd 00       		.byte	0
- 687 00ce 03       		.uleb128 0x3
- 688 00cf 0E       		.uleb128 0xe
- 689 00d0 3A       		.uleb128 0x3a
- 690 00d1 0B       		.uleb128 0xb
- 691 00d2 3B       		.uleb128 0x3b
- 692 00d3 0B       		.uleb128 0xb
- 693 00d4 49       		.uleb128 0x49
- 694 00d5 13       		.uleb128 0x13
- 695 00d6 02       		.uleb128 0x2
- 696 00d7 0A       		.uleb128 0xa
- 697 00d8 00       		.byte	0
- 698 00d9 00       		.byte	0
- 699 00da 0F       		.uleb128 0xf
- 700 00db 2E       		.uleb128 0x2e
- 701 00dc 01       		.byte	0x1
- 702 00dd 3F       		.uleb128 0x3f
- 703 00de 0C       		.uleb128 0xc
- 704 00df 03       		.uleb128 0x3
- 705 00e0 0E       		.uleb128 0xe
- 706 00e1 3A       		.uleb128 0x3a
- 707 00e2 0B       		.uleb128 0xb
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccDzUlyB.s 			page 16
+ 765 00a4 49       		.uleb128 0x49
+ 766 00a5 13       		.uleb128 0x13
+ 767 00a6 11       		.uleb128 0x11
+ 768 00a7 01       		.uleb128 0x1
+ 769 00a8 12       		.uleb128 0x12
+ 770 00a9 01       		.uleb128 0x1
+ 771 00aa 40       		.uleb128 0x40
+ 772 00ab 06       		.uleb128 0x6
+ 773 00ac 9742     		.uleb128 0x2117
+ 774 00ae 0C       		.uleb128 0xc
+ 775 00af 00       		.byte	0
+ 776 00b0 00       		.byte	0
+ 777 00b1 0D       		.uleb128 0xd
+ 778 00b2 2E       		.uleb128 0x2e
+ 779 00b3 01       		.byte	0x1
+ 780 00b4 3F       		.uleb128 0x3f
+ 781 00b5 0C       		.uleb128 0xc
+ 782 00b6 03       		.uleb128 0x3
+ 783 00b7 0E       		.uleb128 0xe
+ 784 00b8 3A       		.uleb128 0x3a
+ 785 00b9 0B       		.uleb128 0xb
+ 786 00ba 3B       		.uleb128 0x3b
+ 787 00bb 0B       		.uleb128 0xb
+ 788 00bc 27       		.uleb128 0x27
+ 789 00bd 0C       		.uleb128 0xc
+ 790 00be 11       		.uleb128 0x11
+ 791 00bf 01       		.uleb128 0x1
+ 792 00c0 12       		.uleb128 0x12
+ 793 00c1 01       		.uleb128 0x1
+ 794 00c2 40       		.uleb128 0x40
+ 795 00c3 06       		.uleb128 0x6
+ 796 00c4 9742     		.uleb128 0x2117
+ 797 00c6 0C       		.uleb128 0xc
+ 798 00c7 01       		.uleb128 0x1
+ 799 00c8 13       		.uleb128 0x13
+ 800 00c9 00       		.byte	0
+ 801 00ca 00       		.byte	0
+ 802 00cb 0E       		.uleb128 0xe
+ 803 00cc 05       		.uleb128 0x5
+ 804 00cd 00       		.byte	0
+ 805 00ce 03       		.uleb128 0x3
+ 806 00cf 0E       		.uleb128 0xe
+ 807 00d0 3A       		.uleb128 0x3a
+ 808 00d1 0B       		.uleb128 0xb
+ 809 00d2 3B       		.uleb128 0x3b
+ 810 00d3 0B       		.uleb128 0xb
+ 811 00d4 49       		.uleb128 0x49
+ 812 00d5 13       		.uleb128 0x13
+ 813 00d6 02       		.uleb128 0x2
+ 814 00d7 0A       		.uleb128 0xa
+ 815 00d8 00       		.byte	0
+ 816 00d9 00       		.byte	0
+ 817 00da 0F       		.uleb128 0xf
+ 818 00db 2E       		.uleb128 0x2e
+ 819 00dc 01       		.byte	0x1
+ 820 00dd 3F       		.uleb128 0x3f
+ 821 00de 0C       		.uleb128 0xc
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc4agCHs.s 			page 18
 
 
- 708 00e3 3B       		.uleb128 0x3b
- 709 00e4 0B       		.uleb128 0xb
- 710 00e5 27       		.uleb128 0x27
- 711 00e6 0C       		.uleb128 0xc
- 712 00e7 49       		.uleb128 0x49
- 713 00e8 13       		.uleb128 0x13
- 714 00e9 11       		.uleb128 0x11
- 715 00ea 01       		.uleb128 0x1
- 716 00eb 12       		.uleb128 0x12
- 717 00ec 01       		.uleb128 0x1
- 718 00ed 40       		.uleb128 0x40
- 719 00ee 0A       		.uleb128 0xa
- 720 00ef 9742     		.uleb128 0x2117
- 721 00f1 0C       		.uleb128 0xc
- 722 00f2 01       		.uleb128 0x1
- 723 00f3 13       		.uleb128 0x13
- 724 00f4 00       		.byte	0
- 725 00f5 00       		.byte	0
- 726 00f6 10       		.uleb128 0x10
- 727 00f7 05       		.uleb128 0x5
- 728 00f8 00       		.byte	0
- 729 00f9 03       		.uleb128 0x3
- 730 00fa 0E       		.uleb128 0xe
- 731 00fb 3A       		.uleb128 0x3a
- 732 00fc 0B       		.uleb128 0xb
- 733 00fd 3B       		.uleb128 0x3b
- 734 00fe 0B       		.uleb128 0xb
- 735 00ff 49       		.uleb128 0x49
- 736 0100 13       		.uleb128 0x13
- 737 0101 02       		.uleb128 0x2
- 738 0102 06       		.uleb128 0x6
- 739 0103 00       		.byte	0
- 740 0104 00       		.byte	0
- 741 0105 11       		.uleb128 0x11
- 742 0106 34       		.uleb128 0x34
- 743 0107 00       		.byte	0
- 744 0108 03       		.uleb128 0x3
- 745 0109 0E       		.uleb128 0xe
- 746 010a 3A       		.uleb128 0x3a
- 747 010b 0B       		.uleb128 0xb
- 748 010c 3B       		.uleb128 0x3b
- 749 010d 0B       		.uleb128 0xb
- 750 010e 49       		.uleb128 0x49
- 751 010f 13       		.uleb128 0x13
- 752 0110 02       		.uleb128 0x2
- 753 0111 06       		.uleb128 0x6
- 754 0112 00       		.byte	0
- 755 0113 00       		.byte	0
- 756 0114 12       		.uleb128 0x12
- 757 0115 0F       		.uleb128 0xf
- 758 0116 00       		.byte	0
- 759 0117 0B       		.uleb128 0xb
- 760 0118 0B       		.uleb128 0xb
- 761 0119 49       		.uleb128 0x49
- 762 011a 13       		.uleb128 0x13
- 763 011b 00       		.byte	0
- 764 011c 00       		.byte	0
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccDzUlyB.s 			page 17
+ 822 00df 03       		.uleb128 0x3
+ 823 00e0 0E       		.uleb128 0xe
+ 824 00e1 3A       		.uleb128 0x3a
+ 825 00e2 0B       		.uleb128 0xb
+ 826 00e3 3B       		.uleb128 0x3b
+ 827 00e4 0B       		.uleb128 0xb
+ 828 00e5 27       		.uleb128 0x27
+ 829 00e6 0C       		.uleb128 0xc
+ 830 00e7 49       		.uleb128 0x49
+ 831 00e8 13       		.uleb128 0x13
+ 832 00e9 11       		.uleb128 0x11
+ 833 00ea 01       		.uleb128 0x1
+ 834 00eb 12       		.uleb128 0x12
+ 835 00ec 01       		.uleb128 0x1
+ 836 00ed 40       		.uleb128 0x40
+ 837 00ee 06       		.uleb128 0x6
+ 838 00ef 9742     		.uleb128 0x2117
+ 839 00f1 0C       		.uleb128 0xc
+ 840 00f2 01       		.uleb128 0x1
+ 841 00f3 13       		.uleb128 0x13
+ 842 00f4 00       		.byte	0
+ 843 00f5 00       		.byte	0
+ 844 00f6 10       		.uleb128 0x10
+ 845 00f7 34       		.uleb128 0x34
+ 846 00f8 00       		.byte	0
+ 847 00f9 03       		.uleb128 0x3
+ 848 00fa 0E       		.uleb128 0xe
+ 849 00fb 3A       		.uleb128 0x3a
+ 850 00fc 0B       		.uleb128 0xb
+ 851 00fd 3B       		.uleb128 0x3b
+ 852 00fe 0B       		.uleb128 0xb
+ 853 00ff 49       		.uleb128 0x49
+ 854 0100 13       		.uleb128 0x13
+ 855 0101 02       		.uleb128 0x2
+ 856 0102 0A       		.uleb128 0xa
+ 857 0103 00       		.byte	0
+ 858 0104 00       		.byte	0
+ 859 0105 11       		.uleb128 0x11
+ 860 0106 0F       		.uleb128 0xf
+ 861 0107 00       		.byte	0
+ 862 0108 0B       		.uleb128 0xb
+ 863 0109 0B       		.uleb128 0xb
+ 864 010a 49       		.uleb128 0x49
+ 865 010b 13       		.uleb128 0x13
+ 866 010c 00       		.byte	0
+ 867 010d 00       		.byte	0
+ 868 010e 12       		.uleb128 0x12
+ 869 010f 2E       		.uleb128 0x2e
+ 870 0110 00       		.byte	0
+ 871 0111 3F       		.uleb128 0x3f
+ 872 0112 0C       		.uleb128 0xc
+ 873 0113 03       		.uleb128 0x3
+ 874 0114 0E       		.uleb128 0xe
+ 875 0115 3A       		.uleb128 0x3a
+ 876 0116 0B       		.uleb128 0xb
+ 877 0117 3B       		.uleb128 0x3b
+ 878 0118 0B       		.uleb128 0xb
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc4agCHs.s 			page 19
 
 
- 765 011d 13       		.uleb128 0x13
- 766 011e 2E       		.uleb128 0x2e
- 767 011f 00       		.byte	0
- 768 0120 3F       		.uleb128 0x3f
- 769 0121 0C       		.uleb128 0xc
- 770 0122 03       		.uleb128 0x3
- 771 0123 0E       		.uleb128 0xe
- 772 0124 3A       		.uleb128 0x3a
- 773 0125 0B       		.uleb128 0xb
- 774 0126 3B       		.uleb128 0x3b
- 775 0127 0B       		.uleb128 0xb
- 776 0128 27       		.uleb128 0x27
- 777 0129 0C       		.uleb128 0xc
- 778 012a 11       		.uleb128 0x11
- 779 012b 01       		.uleb128 0x1
- 780 012c 12       		.uleb128 0x12
- 781 012d 01       		.uleb128 0x1
- 782 012e 40       		.uleb128 0x40
- 783 012f 0A       		.uleb128 0xa
- 784 0130 9742     		.uleb128 0x2117
- 785 0132 0C       		.uleb128 0xc
- 786 0133 00       		.byte	0
- 787 0134 00       		.byte	0
- 788 0135 00       		.byte	0
- 789              		.section	.debug_loc,"",%progbits
- 790              	.Ldebug_loc0:
- 791              	.LLST1:
- 792 0000 18000000 		.4byte	.LVL2-.Ltext0
- 793 0004 1C000000 		.4byte	.LVL3-.Ltext0
- 794 0008 0100     		.2byte	0x1
- 795 000a 50       		.byte	0x50
- 796 000b 1C000000 		.4byte	.LVL3-.Ltext0
- 797 000f 22000000 		.4byte	.LVL4-.Ltext0
- 798 0013 0300     		.2byte	0x3
- 799 0015 70       		.byte	0x70
- 800 0016 04       		.sleb128 4
- 801 0017 9F       		.byte	0x9f
- 802 0018 22000000 		.4byte	.LVL4-.Ltext0
- 803 001c 38000000 		.4byte	.LFE31-.Ltext0
- 804 0020 0400     		.2byte	0x4
- 805 0022 F3       		.byte	0xf3
- 806 0023 01       		.uleb128 0x1
- 807 0024 50       		.byte	0x50
- 808 0025 9F       		.byte	0x9f
- 809 0026 00000000 		.4byte	0
- 810 002a 00000000 		.4byte	0
- 811              	.LLST2:
- 812 002e 18000000 		.4byte	.LVL2-.Ltext0
- 813 0032 22000000 		.4byte	.LVL4-.Ltext0
- 814 0036 0100     		.2byte	0x1
- 815 0038 51       		.byte	0x51
- 816 0039 22000000 		.4byte	.LVL4-.Ltext0
- 817 003d 38000000 		.4byte	.LFE31-.Ltext0
- 818 0041 0400     		.2byte	0x4
- 819 0043 F3       		.byte	0xf3
- 820 0044 01       		.uleb128 0x1
- 821 0045 51       		.byte	0x51
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccDzUlyB.s 			page 18
+ 879 0119 27       		.uleb128 0x27
+ 880 011a 0C       		.uleb128 0xc
+ 881 011b 11       		.uleb128 0x11
+ 882 011c 01       		.uleb128 0x1
+ 883 011d 12       		.uleb128 0x12
+ 884 011e 01       		.uleb128 0x1
+ 885 011f 40       		.uleb128 0x40
+ 886 0120 06       		.uleb128 0x6
+ 887 0121 9742     		.uleb128 0x2117
+ 888 0123 0C       		.uleb128 0xc
+ 889 0124 00       		.byte	0
+ 890 0125 00       		.byte	0
+ 891 0126 00       		.byte	0
+ 892              		.section	.debug_loc,"",%progbits
+ 893              	.Ldebug_loc0:
+ 894              	.LLST5:
+ 895 0000 B0000000 		.4byte	.LFB34-.Ltext0
+ 896 0004 B2000000 		.4byte	.LCFI26-.Ltext0
+ 897 0008 0200     		.2byte	0x2
+ 898 000a 7D       		.byte	0x7d
+ 899 000b 00       		.sleb128 0
+ 900 000c B2000000 		.4byte	.LCFI26-.Ltext0
+ 901 0010 B4000000 		.4byte	.LCFI27-.Ltext0
+ 902 0014 0200     		.2byte	0x2
+ 903 0016 7D       		.byte	0x7d
+ 904 0017 04       		.sleb128 4
+ 905 0018 B4000000 		.4byte	.LCFI27-.Ltext0
+ 906 001c BE000000 		.4byte	.LCFI28-.Ltext0
+ 907 0020 0200     		.2byte	0x2
+ 908 0022 77       		.byte	0x77
+ 909 0023 04       		.sleb128 4
+ 910 0024 BE000000 		.4byte	.LCFI28-.Ltext0
+ 911 0028 C0000000 		.4byte	.LCFI29-.Ltext0
+ 912 002c 0200     		.2byte	0x2
+ 913 002e 7D       		.byte	0x7d
+ 914 002f 04       		.sleb128 4
+ 915 0030 C0000000 		.4byte	.LCFI29-.Ltext0
+ 916 0034 C8000000 		.4byte	.LFE34-.Ltext0
+ 917 0038 0200     		.2byte	0x2
+ 918 003a 7D       		.byte	0x7d
+ 919 003b 00       		.sleb128 0
+ 920 003c 00000000 		.4byte	0
+ 921 0040 00000000 		.4byte	0
+ 922              	.LLST4:
+ 923 0044 90000000 		.4byte	.LFB33-.Ltext0
+ 924 0048 92000000 		.4byte	.LCFI20-.Ltext0
+ 925 004c 0200     		.2byte	0x2
+ 926 004e 7D       		.byte	0x7d
+ 927 004f 00       		.sleb128 0
+ 928 0050 92000000 		.4byte	.LCFI20-.Ltext0
+ 929 0054 94000000 		.4byte	.LCFI21-.Ltext0
+ 930 0058 0200     		.2byte	0x2
+ 931 005a 7D       		.byte	0x7d
+ 932 005b 04       		.sleb128 4
+ 933 005c 94000000 		.4byte	.LCFI21-.Ltext0
+ 934 0060 96000000 		.4byte	.LCFI22-.Ltext0
+ 935 0064 0200     		.2byte	0x2
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc4agCHs.s 			page 20
 
 
- 822 0046 9F       		.byte	0x9f
- 823 0047 00000000 		.4byte	0
- 824 004b 00000000 		.4byte	0
- 825              	.LLST3:
- 826 004f 18000000 		.4byte	.LVL2-.Ltext0
- 827 0053 22000000 		.4byte	.LVL4-.Ltext0
- 828 0057 0200     		.2byte	0x2
- 829 0059 30       		.byte	0x30
- 830 005a 9F       		.byte	0x9f
- 831 005b 00000000 		.4byte	0
- 832 005f 00000000 		.4byte	0
- 833              	.LLST0:
- 834 0063 0C000000 		.4byte	.LVL0-.Ltext0
- 835 0067 12000000 		.4byte	.LVL1-.Ltext0
- 836 006b 0100     		.2byte	0x1
- 837 006d 50       		.byte	0x50
- 838 006e 12000000 		.4byte	.LVL1-.Ltext0
- 839 0072 18000000 		.4byte	.LFE30-.Ltext0
- 840 0076 0200     		.2byte	0x2
- 841 0078 73       		.byte	0x73
- 842 0079 00       		.sleb128 0
- 843 007a 00000000 		.4byte	0
- 844 007e 00000000 		.4byte	0
- 845              		.section	.debug_aranges,"",%progbits
- 846 0000 1C000000 		.4byte	0x1c
- 847 0004 0200     		.2byte	0x2
- 848 0006 00000000 		.4byte	.Ldebug_info0
- 849 000a 04       		.byte	0x4
- 850 000b 00       		.byte	0
- 851 000c 0000     		.2byte	0
- 852 000e 0000     		.2byte	0
- 853 0010 00000000 		.4byte	.Ltext0
- 854 0014 5C000000 		.4byte	.Letext0-.Ltext0
- 855 0018 00000000 		.4byte	0
- 856 001c 00000000 		.4byte	0
- 857              		.section	.debug_line,"",%progbits
- 858              	.Ldebug_line0:
- 859 0000 42010000 		.section	.debug_str,"MS",%progbits,1
- 859      02000001 
- 859      00000201 
- 859      FB0E0D00 
- 859      01010101 
- 860              	.LASF3:
- 861 0000 5F5F7569 		.ascii	"__uint8_t\000"
- 861      6E74385F 
- 861      7400
- 862              	.LASF21:
- 863 000a 4352435F 		.ascii	"CRC_GetCRC\000"
- 863      47657443 
- 863      524300
- 864              	.LASF17:
- 865 0015 52455345 		.ascii	"RESERVED0\000"
- 865      52564544 
- 865      3000
- 866              	.LASF18:
- 867 001f 52455345 		.ascii	"RESERVED1\000"
- 867      52564544 
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccDzUlyB.s 			page 19
+ 936 0066 7D       		.byte	0x7d
+ 937 0067 10       		.sleb128 16
+ 938 0068 96000000 		.4byte	.LCFI22-.Ltext0
+ 939 006c A4000000 		.4byte	.LCFI23-.Ltext0
+ 940 0070 0200     		.2byte	0x2
+ 941 0072 77       		.byte	0x77
+ 942 0073 10       		.sleb128 16
+ 943 0074 A4000000 		.4byte	.LCFI23-.Ltext0
+ 944 0078 A6000000 		.4byte	.LCFI24-.Ltext0
+ 945 007c 0200     		.2byte	0x2
+ 946 007e 77       		.byte	0x77
+ 947 007f 04       		.sleb128 4
+ 948 0080 A6000000 		.4byte	.LCFI24-.Ltext0
+ 949 0084 A8000000 		.4byte	.LCFI25-.Ltext0
+ 950 0088 0200     		.2byte	0x2
+ 951 008a 7D       		.byte	0x7d
+ 952 008b 04       		.sleb128 4
+ 953 008c A8000000 		.4byte	.LCFI25-.Ltext0
+ 954 0090 B0000000 		.4byte	.LFE33-.Ltext0
+ 955 0094 0200     		.2byte	0x2
+ 956 0096 7D       		.byte	0x7d
+ 957 0097 00       		.sleb128 0
+ 958 0098 00000000 		.4byte	0
+ 959 009c 00000000 		.4byte	0
+ 960              	.LLST3:
+ 961 00a0 7C000000 		.4byte	.LFB32-.Ltext0
+ 962 00a4 7E000000 		.4byte	.LCFI16-.Ltext0
+ 963 00a8 0200     		.2byte	0x2
+ 964 00aa 7D       		.byte	0x7d
+ 965 00ab 00       		.sleb128 0
+ 966 00ac 7E000000 		.4byte	.LCFI16-.Ltext0
+ 967 00b0 80000000 		.4byte	.LCFI17-.Ltext0
+ 968 00b4 0200     		.2byte	0x2
+ 969 00b6 7D       		.byte	0x7d
+ 970 00b7 04       		.sleb128 4
+ 971 00b8 80000000 		.4byte	.LCFI17-.Ltext0
+ 972 00bc 88000000 		.4byte	.LCFI18-.Ltext0
+ 973 00c0 0200     		.2byte	0x2
+ 974 00c2 77       		.byte	0x77
+ 975 00c3 04       		.sleb128 4
+ 976 00c4 88000000 		.4byte	.LCFI18-.Ltext0
+ 977 00c8 8A000000 		.4byte	.LCFI19-.Ltext0
+ 978 00cc 0200     		.2byte	0x2
+ 979 00ce 7D       		.byte	0x7d
+ 980 00cf 04       		.sleb128 4
+ 981 00d0 8A000000 		.4byte	.LCFI19-.Ltext0
+ 982 00d4 90000000 		.4byte	.LFE32-.Ltext0
+ 983 00d8 0200     		.2byte	0x2
+ 984 00da 7D       		.byte	0x7d
+ 985 00db 00       		.sleb128 0
+ 986 00dc 00000000 		.4byte	0
+ 987 00e0 00000000 		.4byte	0
+ 988              	.LLST2:
+ 989 00e4 38000000 		.4byte	.LFB31-.Ltext0
+ 990 00e8 3A000000 		.4byte	.LCFI10-.Ltext0
+ 991 00ec 0200     		.2byte	0x2
+ 992 00ee 7D       		.byte	0x7d
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc4agCHs.s 			page 21
 
 
- 867      3100
- 868              	.LASF26:
- 869 0029 4352435F 		.ascii	"CRC_CalcCRC\000"
- 869      43616C63 
- 869      43524300 
- 870              	.LASF1:
- 871 0035 756E7369 		.ascii	"unsigned char\000"
- 871      676E6564 
- 871      20636861 
- 871      7200
- 872              	.LASF8:
- 873 0043 6C6F6E67 		.ascii	"long unsigned int\000"
- 873      20756E73 
- 873      69676E65 
- 873      6420696E 
- 873      7400
- 874              	.LASF5:
- 875 0055 73686F72 		.ascii	"short unsigned int\000"
- 875      7420756E 
- 875      7369676E 
- 875      65642069 
- 875      6E7400
- 876              	.LASF19:
- 877 0068 4352435F 		.ascii	"CRC_TypeDef\000"
- 877      54797065 
- 877      44656600 
- 878              	.LASF15:
- 879 0074 49544D5F 		.ascii	"ITM_RxBuffer\000"
- 879      52784275 
- 879      66666572 
- 879      00
- 880              	.LASF4:
- 881 0081 5F5F7569 		.ascii	"__uint16_t\000"
- 881      6E743136 
- 881      5F7400
- 882              	.LASF27:
- 883 008c 44617461 		.ascii	"Data\000"
- 883      00
- 884              	.LASF7:
- 885 0091 5F5F7569 		.ascii	"__uint32_t\000"
- 885      6E743332 
- 885      5F7400
- 886              	.LASF25:
- 887 009c 4352435F 		.ascii	"CRC_CalcBlockCRC\000"
- 887      43616C63 
- 887      426C6F63 
- 887      6B435243 
- 887      00
- 888              	.LASF11:
- 889 00ad 756E7369 		.ascii	"unsigned int\000"
- 889      676E6564 
- 889      20696E74 
- 889      00
- 890              	.LASF10:
- 891 00ba 6C6F6E67 		.ascii	"long long unsigned int\000"
- 891      206C6F6E 
- 891      6720756E 
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccDzUlyB.s 			page 20
+ 993 00ef 00       		.sleb128 0
+ 994 00f0 3A000000 		.4byte	.LCFI10-.Ltext0
+ 995 00f4 3C000000 		.4byte	.LCFI11-.Ltext0
+ 996 00f8 0200     		.2byte	0x2
+ 997 00fa 7D       		.byte	0x7d
+ 998 00fb 04       		.sleb128 4
+ 999 00fc 3C000000 		.4byte	.LCFI11-.Ltext0
+ 1000 0100 3E000000 		.4byte	.LCFI12-.Ltext0
+ 1001 0104 0200     		.2byte	0x2
+ 1002 0106 7D       		.byte	0x7d
+ 1003 0107 18       		.sleb128 24
+ 1004 0108 3E000000 		.4byte	.LCFI12-.Ltext0
+ 1005 010c 70000000 		.4byte	.LCFI13-.Ltext0
+ 1006 0110 0200     		.2byte	0x2
+ 1007 0112 77       		.byte	0x77
+ 1008 0113 18       		.sleb128 24
+ 1009 0114 70000000 		.4byte	.LCFI13-.Ltext0
+ 1010 0118 72000000 		.4byte	.LCFI14-.Ltext0
+ 1011 011c 0200     		.2byte	0x2
+ 1012 011e 77       		.byte	0x77
+ 1013 011f 04       		.sleb128 4
+ 1014 0120 72000000 		.4byte	.LCFI14-.Ltext0
+ 1015 0124 74000000 		.4byte	.LCFI15-.Ltext0
+ 1016 0128 0200     		.2byte	0x2
+ 1017 012a 7D       		.byte	0x7d
+ 1018 012b 04       		.sleb128 4
+ 1019 012c 74000000 		.4byte	.LCFI15-.Ltext0
+ 1020 0130 7C000000 		.4byte	.LFE31-.Ltext0
+ 1021 0134 0200     		.2byte	0x2
+ 1022 0136 7D       		.byte	0x7d
+ 1023 0137 00       		.sleb128 0
+ 1024 0138 00000000 		.4byte	0
+ 1025 013c 00000000 		.4byte	0
+ 1026              	.LLST1:
+ 1027 0140 18000000 		.4byte	.LFB30-.Ltext0
+ 1028 0144 1A000000 		.4byte	.LCFI4-.Ltext0
+ 1029 0148 0200     		.2byte	0x2
+ 1030 014a 7D       		.byte	0x7d
+ 1031 014b 00       		.sleb128 0
+ 1032 014c 1A000000 		.4byte	.LCFI4-.Ltext0
+ 1033 0150 1C000000 		.4byte	.LCFI5-.Ltext0
+ 1034 0154 0200     		.2byte	0x2
+ 1035 0156 7D       		.byte	0x7d
+ 1036 0157 04       		.sleb128 4
+ 1037 0158 1C000000 		.4byte	.LCFI5-.Ltext0
+ 1038 015c 1E000000 		.4byte	.LCFI6-.Ltext0
+ 1039 0160 0200     		.2byte	0x2
+ 1040 0162 7D       		.byte	0x7d
+ 1041 0163 10       		.sleb128 16
+ 1042 0164 1E000000 		.4byte	.LCFI6-.Ltext0
+ 1043 0168 2E000000 		.4byte	.LCFI7-.Ltext0
+ 1044 016c 0200     		.2byte	0x2
+ 1045 016e 77       		.byte	0x77
+ 1046 016f 10       		.sleb128 16
+ 1047 0170 2E000000 		.4byte	.LCFI7-.Ltext0
+ 1048 0174 30000000 		.4byte	.LCFI8-.Ltext0
+ 1049 0178 0200     		.2byte	0x2
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc4agCHs.s 			page 22
 
 
- 891      7369676E 
- 891      65642069 
- 892              	.LASF12:
- 893 00d1 75696E74 		.ascii	"uint8_t\000"
- 893      385F7400 
- 894              	.LASF29:
- 895 00d9 2E2E2F2E 		.ascii	"../../source/src/FWlib/src/stm32f10x_crc.c\000"
- 895      2E2F736F 
- 895      75726365 
- 895      2F737263 
- 895      2F46576C 
- 896              	.LASF23:
- 897 0104 70427566 		.ascii	"pBuffer\000"
- 897      66657200 
- 898              	.LASF33:
- 899 010c 4352435F 		.ascii	"CRC_ResetDR\000"
- 899      52657365 
- 899      74445200 
- 900              	.LASF22:
- 901 0118 49445661 		.ascii	"IDValue\000"
- 901      6C756500 
- 902              	.LASF9:
- 903 0120 6C6F6E67 		.ascii	"long long int\000"
- 903      206C6F6E 
- 903      6720696E 
- 903      7400
- 904              	.LASF16:
- 905 012e 53797374 		.ascii	"SystemCoreClock\000"
- 905      656D436F 
- 905      7265436C 
- 905      6F636B00 
- 906              	.LASF32:
- 907 013e 696E6465 		.ascii	"index\000"
- 907      7800
- 908              	.LASF20:
- 909 0144 4352435F 		.ascii	"CRC_GetIDRegister\000"
- 909      47657449 
- 909      44526567 
- 909      69737465 
- 909      7200
- 910              	.LASF2:
- 911 0156 73686F72 		.ascii	"short int\000"
- 911      7420696E 
- 911      7400
- 912              	.LASF24:
- 913 0160 42756666 		.ascii	"BufferLength\000"
- 913      65724C65 
- 913      6E677468 
- 913      00
- 914              	.LASF13:
- 915 016d 75696E74 		.ascii	"uint16_t\000"
- 915      31365F74 
- 915      00
- 916              	.LASF14:
- 917 0176 75696E74 		.ascii	"uint32_t\000"
- 917      33325F74 
- 917      00
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccDzUlyB.s 			page 21
+ 1050 017a 77       		.byte	0x77
+ 1051 017b 04       		.sleb128 4
+ 1052 017c 30000000 		.4byte	.LCFI8-.Ltext0
+ 1053 0180 32000000 		.4byte	.LCFI9-.Ltext0
+ 1054 0184 0200     		.2byte	0x2
+ 1055 0186 7D       		.byte	0x7d
+ 1056 0187 04       		.sleb128 4
+ 1057 0188 32000000 		.4byte	.LCFI9-.Ltext0
+ 1058 018c 38000000 		.4byte	.LFE30-.Ltext0
+ 1059 0190 0200     		.2byte	0x2
+ 1060 0192 7D       		.byte	0x7d
+ 1061 0193 00       		.sleb128 0
+ 1062 0194 00000000 		.4byte	0
+ 1063 0198 00000000 		.4byte	0
+ 1064              	.LLST0:
+ 1065 019c 00000000 		.4byte	.LFB29-.Ltext0
+ 1066 01a0 02000000 		.4byte	.LCFI0-.Ltext0
+ 1067 01a4 0200     		.2byte	0x2
+ 1068 01a6 7D       		.byte	0x7d
+ 1069 01a7 00       		.sleb128 0
+ 1070 01a8 02000000 		.4byte	.LCFI0-.Ltext0
+ 1071 01ac 04000000 		.4byte	.LCFI1-.Ltext0
+ 1072 01b0 0200     		.2byte	0x2
+ 1073 01b2 7D       		.byte	0x7d
+ 1074 01b3 04       		.sleb128 4
+ 1075 01b4 04000000 		.4byte	.LCFI1-.Ltext0
+ 1076 01b8 0E000000 		.4byte	.LCFI2-.Ltext0
+ 1077 01bc 0200     		.2byte	0x2
+ 1078 01be 77       		.byte	0x77
+ 1079 01bf 04       		.sleb128 4
+ 1080 01c0 0E000000 		.4byte	.LCFI2-.Ltext0
+ 1081 01c4 10000000 		.4byte	.LCFI3-.Ltext0
+ 1082 01c8 0200     		.2byte	0x2
+ 1083 01ca 7D       		.byte	0x7d
+ 1084 01cb 04       		.sleb128 4
+ 1085 01cc 10000000 		.4byte	.LCFI3-.Ltext0
+ 1086 01d0 18000000 		.4byte	.LFE29-.Ltext0
+ 1087 01d4 0200     		.2byte	0x2
+ 1088 01d6 7D       		.byte	0x7d
+ 1089 01d7 00       		.sleb128 0
+ 1090 01d8 00000000 		.4byte	0
+ 1091 01dc 00000000 		.4byte	0
+ 1092              		.section	.debug_aranges,"",%progbits
+ 1093 0000 1C000000 		.4byte	0x1c
+ 1094 0004 0200     		.2byte	0x2
+ 1095 0006 00000000 		.4byte	.Ldebug_info0
+ 1096 000a 04       		.byte	0x4
+ 1097 000b 00       		.byte	0
+ 1098 000c 0000     		.2byte	0
+ 1099 000e 0000     		.2byte	0
+ 1100 0010 00000000 		.4byte	.Ltext0
+ 1101 0014 C8000000 		.4byte	.Letext0-.Ltext0
+ 1102 0018 00000000 		.4byte	0
+ 1103 001c 00000000 		.4byte	0
+ 1104              		.section	.debug_line,"",%progbits
+ 1105              	.Ldebug_line0:
+ 1106 0000 3D010000 		.section	.debug_str,"MS",%progbits,1
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc4agCHs.s 			page 23
 
 
- 918              	.LASF6:
- 919 017f 6C6F6E67 		.ascii	"long int\000"
- 919      20696E74 
- 919      00
- 920              	.LASF28:
- 921 0188 474E5520 		.ascii	"GNU C11 7.3.1 20180622 (release) [ARM/embedded-7-br"
- 921      43313120 
- 921      372E332E 
- 921      31203230 
- 921      31383036 
- 922 01bb 616E6368 		.ascii	"anch revision 261907] -mcpu=cortex-m3 -mthumb -mapc"
- 922      20726576 
- 922      6973696F 
- 922      6E203236 
- 922      31393037 
- 923 01ee 732D6672 		.ascii	"s-frame -mthumb-interwork -mcpu=cortex-m3 -mthumb -"
- 923      616D6520 
- 923      2D6D7468 
- 923      756D622D 
- 923      696E7465 
- 924 0221 67647761 		.ascii	"gdwarf-2 -O2\000"
- 924      72662D32 
- 924      202D4F32 
- 924      00
- 925              	.LASF0:
- 926 022e 7369676E 		.ascii	"signed char\000"
- 926      65642063 
- 926      68617200 
- 927              	.LASF31:
- 928 023a 4352435F 		.ascii	"CRC_SetIDRegister\000"
- 928      53657449 
- 928      44526567 
- 928      69737465 
- 928      7200
- 929              	.LASF30:
- 930 024c 473A5C55 		.ascii	"G:\\Users\\Jaxb\\Desktop\\KAKAOS-0.07  2019.2.21  f"
- 930      73657273 
- 930      5C4A6178 
- 930      625C4465 
- 930      736B746F 
- 931 027b 6F722067 		.ascii	"or gcc\\Project\\RVMDK\243\250uv5\243\251\000"
- 931      63635C50 
- 931      726F6A65 
- 931      63745C52 
- 931      564D444B 
- 932              		.ident	"GCC: (GNU Tools for Arm Embedded Processors 7-2018-q2-update) 7.3.1 20180622 (release) [AR
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccDzUlyB.s 			page 22
+ 1106      02000001 
+ 1106      00000201 
+ 1106      FB0E0D00 
+ 1106      01010101 
+ 1107              	.LASF3:
+ 1108 0000 5F5F7569 		.ascii	"__uint8_t\000"
+ 1108      6E74385F 
+ 1108      7400
+ 1109              	.LASF6:
+ 1110 000a 6C6F6E67 		.ascii	"long int\000"
+ 1110      20696E74 
+ 1110      00
+ 1111              	.LASF21:
+ 1112 0013 4352435F 		.ascii	"CRC_GetCRC\000"
+ 1112      47657443 
+ 1112      524300
+ 1113              	.LASF17:
+ 1114 001e 52455345 		.ascii	"RESERVED0\000"
+ 1114      52564544 
+ 1114      3000
+ 1115              	.LASF18:
+ 1116 0028 52455345 		.ascii	"RESERVED1\000"
+ 1116      52564544 
+ 1116      3100
+ 1117              	.LASF26:
+ 1118 0032 4352435F 		.ascii	"CRC_CalcCRC\000"
+ 1118      43616C63 
+ 1118      43524300 
+ 1119              	.LASF1:
+ 1120 003e 756E7369 		.ascii	"unsigned char\000"
+ 1120      676E6564 
+ 1120      20636861 
+ 1120      7200
+ 1121              	.LASF8:
+ 1122 004c 6C6F6E67 		.ascii	"long unsigned int\000"
+ 1122      20756E73 
+ 1122      69676E65 
+ 1122      6420696E 
+ 1122      7400
+ 1123              	.LASF5:
+ 1124 005e 73686F72 		.ascii	"short unsigned int\000"
+ 1124      7420756E 
+ 1124      7369676E 
+ 1124      65642069 
+ 1124      6E7400
+ 1125              	.LASF19:
+ 1126 0071 4352435F 		.ascii	"CRC_TypeDef\000"
+ 1126      54797065 
+ 1126      44656600 
+ 1127              	.LASF15:
+ 1128 007d 49544D5F 		.ascii	"ITM_RxBuffer\000"
+ 1128      52784275 
+ 1128      66666572 
+ 1128      00
+ 1129              	.LASF4:
+ 1130 008a 5F5F7569 		.ascii	"__uint16_t\000"
+ 1130      6E743136 
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc4agCHs.s 			page 24
+
+
+ 1130      5F7400
+ 1131              	.LASF27:
+ 1132 0095 44617461 		.ascii	"Data\000"
+ 1132      00
+ 1133              	.LASF7:
+ 1134 009a 5F5F7569 		.ascii	"__uint32_t\000"
+ 1134      6E743332 
+ 1134      5F7400
+ 1135              	.LASF25:
+ 1136 00a5 4352435F 		.ascii	"CRC_CalcBlockCRC\000"
+ 1136      43616C63 
+ 1136      426C6F63 
+ 1136      6B435243 
+ 1136      00
+ 1137              	.LASF11:
+ 1138 00b6 756E7369 		.ascii	"unsigned int\000"
+ 1138      676E6564 
+ 1138      20696E74 
+ 1138      00
+ 1139              	.LASF10:
+ 1140 00c3 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 1140      206C6F6E 
+ 1140      6720756E 
+ 1140      7369676E 
+ 1140      65642069 
+ 1141              	.LASF12:
+ 1142 00da 75696E74 		.ascii	"uint8_t\000"
+ 1142      385F7400 
+ 1143              	.LASF29:
+ 1144 00e2 2E2E2F2E 		.ascii	"../../source/src/FWlib/src/stm32f10x_crc.c\000"
+ 1144      2E2F736F 
+ 1144      75726365 
+ 1144      2F737263 
+ 1144      2F46576C 
+ 1145              	.LASF23:
+ 1146 010d 70427566 		.ascii	"pBuffer\000"
+ 1146      66657200 
+ 1147              	.LASF33:
+ 1148 0115 4352435F 		.ascii	"CRC_ResetDR\000"
+ 1148      52657365 
+ 1148      74445200 
+ 1149              	.LASF22:
+ 1150 0121 49445661 		.ascii	"IDValue\000"
+ 1150      6C756500 
+ 1151              	.LASF9:
+ 1152 0129 6C6F6E67 		.ascii	"long long int\000"
+ 1152      206C6F6E 
+ 1152      6720696E 
+ 1152      7400
+ 1153              	.LASF16:
+ 1154 0137 53797374 		.ascii	"SystemCoreClock\000"
+ 1154      656D436F 
+ 1154      7265436C 
+ 1154      6F636B00 
+ 1155              	.LASF32:
+ 1156 0147 696E6465 		.ascii	"index\000"
+ 1156      7800
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc4agCHs.s 			page 25
+
+
+ 1157              	.LASF20:
+ 1158 014d 4352435F 		.ascii	"CRC_GetIDRegister\000"
+ 1158      47657449 
+ 1158      44526567 
+ 1158      69737465 
+ 1158      7200
+ 1159              	.LASF2:
+ 1160 015f 73686F72 		.ascii	"short int\000"
+ 1160      7420696E 
+ 1160      7400
+ 1161              	.LASF24:
+ 1162 0169 42756666 		.ascii	"BufferLength\000"
+ 1162      65724C65 
+ 1162      6E677468 
+ 1162      00
+ 1163              	.LASF13:
+ 1164 0176 75696E74 		.ascii	"uint16_t\000"
+ 1164      31365F74 
+ 1164      00
+ 1165              	.LASF14:
+ 1166 017f 75696E74 		.ascii	"uint32_t\000"
+ 1166      33325F74 
+ 1166      00
+ 1167              	.LASF28:
+ 1168 0188 474E5520 		.ascii	"GNU C11 7.3.1 20180622 (release) [ARM/embedded-7-br"
+ 1168      43313120 
+ 1168      372E332E 
+ 1168      31203230 
+ 1168      31383036 
+ 1169 01bb 616E6368 		.ascii	"anch revision 261907] -mcpu=cortex-m3 -mthumb -mapc"
+ 1169      20726576 
+ 1169      6973696F 
+ 1169      6E203236 
+ 1169      31393037 
+ 1170 01ee 732D6672 		.ascii	"s-frame -mthumb-interwork -mcpu=cortex-m3 -mthumb -"
+ 1170      616D6520 
+ 1170      2D6D7468 
+ 1170      756D622D 
+ 1170      696E7465 
+ 1171 0221 67647761 		.ascii	"gdwarf-2 -O0\000"
+ 1171      72662D32 
+ 1171      202D4F30 
+ 1171      00
+ 1172              	.LASF0:
+ 1173 022e 7369676E 		.ascii	"signed char\000"
+ 1173      65642063 
+ 1173      68617200 
+ 1174              	.LASF31:
+ 1175 023a 4352435F 		.ascii	"CRC_SetIDRegister\000"
+ 1175      53657449 
+ 1175      44526567 
+ 1175      69737465 
+ 1175      7200
+ 1176              	.LASF30:
+ 1177 024c 463A5C6B 		.ascii	"F:\\kaka\\KAKAOS\\C\\windows\\Project\\RVMDK\243\250"
+ 1177      616B615C 
+ 1177      4B414B41 
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc4agCHs.s 			page 26
+
+
+ 1177      4F535C43 
+ 1177      5C77696E 
+ 1178 0274 757635A3 		.ascii	"uv5\243\251\000"
+ 1178      A900
+ 1179              		.ident	"GCC: (GNU Tools for Arm Embedded Processors 7-2018-q2-update) 7.3.1 20180622 (release) [AR
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc4agCHs.s 			page 27
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 stm32f10x_crc.c
-G:\Users\Jaxb\AppData\Local\Temp\ccDzUlyB.s:15     .text:00000000 $t
-G:\Users\Jaxb\AppData\Local\Temp\ccDzUlyB.s:23     .text:00000000 CRC_ResetDR
-G:\Users\Jaxb\AppData\Local\Temp\ccDzUlyB.s:40     .text:00000008 $d
-G:\Users\Jaxb\AppData\Local\Temp\ccDzUlyB.s:44     .text:0000000c $t
-G:\Users\Jaxb\AppData\Local\Temp\ccDzUlyB.s:52     .text:0000000c CRC_CalcCRC
-G:\Users\Jaxb\AppData\Local\Temp\ccDzUlyB.s:71     .text:00000014 $d
-G:\Users\Jaxb\AppData\Local\Temp\ccDzUlyB.s:75     .text:00000018 $t
-G:\Users\Jaxb\AppData\Local\Temp\ccDzUlyB.s:83     .text:00000018 CRC_CalcBlockCRC
-G:\Users\Jaxb\AppData\Local\Temp\ccDzUlyB.s:117    .text:00000034 $d
-G:\Users\Jaxb\AppData\Local\Temp\ccDzUlyB.s:121    .text:00000038 $t
-G:\Users\Jaxb\AppData\Local\Temp\ccDzUlyB.s:129    .text:00000038 CRC_GetCRC
-G:\Users\Jaxb\AppData\Local\Temp\ccDzUlyB.s:144    .text:00000040 $d
-G:\Users\Jaxb\AppData\Local\Temp\ccDzUlyB.s:148    .text:00000044 $t
-G:\Users\Jaxb\AppData\Local\Temp\ccDzUlyB.s:156    .text:00000044 CRC_SetIDRegister
-G:\Users\Jaxb\AppData\Local\Temp\ccDzUlyB.s:172    .text:0000004c $d
-G:\Users\Jaxb\AppData\Local\Temp\ccDzUlyB.s:176    .text:00000050 $t
-G:\Users\Jaxb\AppData\Local\Temp\ccDzUlyB.s:184    .text:00000050 CRC_GetIDRegister
-G:\Users\Jaxb\AppData\Local\Temp\ccDzUlyB.s:199    .text:00000058 $d
+G:\Users\Jaxb\AppData\Local\Temp\cc4agCHs.s:15     .text:00000000 $t
+G:\Users\Jaxb\AppData\Local\Temp\cc4agCHs.s:22     .text:00000000 CRC_ResetDR
+G:\Users\Jaxb\AppData\Local\Temp\cc4agCHs.s:55     .text:00000014 $d
+G:\Users\Jaxb\AppData\Local\Temp\cc4agCHs.s:59     .text:00000018 $t
+G:\Users\Jaxb\AppData\Local\Temp\cc4agCHs.s:66     .text:00000018 CRC_CalcCRC
+G:\Users\Jaxb\AppData\Local\Temp\cc4agCHs.s:108    .text:00000034 $d
+G:\Users\Jaxb\AppData\Local\Temp\cc4agCHs.s:112    .text:00000038 $t
+G:\Users\Jaxb\AppData\Local\Temp\cc4agCHs.s:119    .text:00000038 CRC_CalcBlockCRC
+G:\Users\Jaxb\AppData\Local\Temp\cc4agCHs.s:184    .text:00000078 $d
+G:\Users\Jaxb\AppData\Local\Temp\cc4agCHs.s:188    .text:0000007c $t
+G:\Users\Jaxb\AppData\Local\Temp\cc4agCHs.s:195    .text:0000007c CRC_GetCRC
+G:\Users\Jaxb\AppData\Local\Temp\cc4agCHs.s:226    .text:0000008c $d
+G:\Users\Jaxb\AppData\Local\Temp\cc4agCHs.s:230    .text:00000090 $t
+G:\Users\Jaxb\AppData\Local\Temp\cc4agCHs.s:237    .text:00000090 CRC_SetIDRegister
+G:\Users\Jaxb\AppData\Local\Temp\cc4agCHs.s:277    .text:000000ac $d
+G:\Users\Jaxb\AppData\Local\Temp\cc4agCHs.s:281    .text:000000b0 $t
+G:\Users\Jaxb\AppData\Local\Temp\cc4agCHs.s:288    .text:000000b0 CRC_GetIDRegister
+G:\Users\Jaxb\AppData\Local\Temp\cc4agCHs.s:320    .text:000000c4 $d
 
 NO UNDEFINED SYMBOLS

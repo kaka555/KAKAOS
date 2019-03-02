@@ -9,6 +9,7 @@
 
 
 void __init_my_micro_lib(void);
+//int __attribute__((format(printf,1,2))) ka_printf(const char *str,...);
 int ka_printf(const char *str,...);
 unsigned int ka_strlen(const char *s);
 void ka_memcpy(void *dest, const void *src, int n);

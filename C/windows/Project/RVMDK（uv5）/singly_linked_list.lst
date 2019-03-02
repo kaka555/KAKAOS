@@ -1,4 +1,4 @@
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccupSofr.s 			page 1
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccguw8EI.s 			page 1
 
 
    1              		.cpu cortex-m3
@@ -8,7 +8,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccupSofr.s 			page 1
    5              		.eabi_attribute 24, 1
    6              		.eabi_attribute 25, 1
    7              		.eabi_attribute 26, 1
-   8              		.eabi_attribute 30, 2
+   8              		.eabi_attribute 30, 6
    9              		.eabi_attribute 34, 1
   10              		.eabi_attribute 18, 4
   11              		.file	"singly_linked_list.c"
@@ -16,71 +16,14 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccupSofr.s 			page 1
   13              	.Ltext0:
   14              		.cfi_sections	.debug_frame
   15              		.align	1
-  16              		.p2align 2,,3
-  17              		.global	singly_list_del
-  18              		.syntax unified
-  19              		.thumb
-  20              		.thumb_func
-  21              		.fpu softvfp
-  22              		.type	singly_list_del, %function
-  23              	singly_list_del:
-  24              	.LFB5:
-  25              		.file 1 "../../source/src/user/OS_LIB/singly_linked_list.c"
-   1:../../source/src/user/OS_LIB/singly_linked_list.c **** #include <singly_linked_list.h>
-   2:../../source/src/user/OS_LIB/singly_linked_list.c **** #include <kakaosstdint.h>
-   3:../../source/src/user/OS_LIB/singly_linked_list.c **** 
-   4:../../source/src/user/OS_LIB/singly_linked_list.c **** static void _singly_list_del(
-   5:../../source/src/user/OS_LIB/singly_linked_list.c **** 	struct singly_list_head *head,
-   6:../../source/src/user/OS_LIB/singly_linked_list.c **** 	const struct singly_list_head *entity)
-   7:../../source/src/user/OS_LIB/singly_linked_list.c **** {
-   8:../../source/src/user/OS_LIB/singly_linked_list.c **** 	struct singly_list_head *pos,*pre;
-   9:../../source/src/user/OS_LIB/singly_linked_list.c **** 	singly_list_for_each_del(pos,pre,head)
-  10:../../source/src/user/OS_LIB/singly_linked_list.c **** 	{
-  11:../../source/src/user/OS_LIB/singly_linked_list.c **** 		if(pos == entity)
-  12:../../source/src/user/OS_LIB/singly_linked_list.c **** 		{
-  13:../../source/src/user/OS_LIB/singly_linked_list.c **** 			_singly_list_del_next(pre);
-  14:../../source/src/user/OS_LIB/singly_linked_list.c **** 			return ;
-  15:../../source/src/user/OS_LIB/singly_linked_list.c **** 		}
-  16:../../source/src/user/OS_LIB/singly_linked_list.c **** 	}
-  17:../../source/src/user/OS_LIB/singly_linked_list.c **** }
-  18:../../source/src/user/OS_LIB/singly_linked_list.c **** 
-  19:../../source/src/user/OS_LIB/singly_linked_list.c **** void singly_list_del(
-  20:../../source/src/user/OS_LIB/singly_linked_list.c **** 	struct singly_list_head *head,
-  21:../../source/src/user/OS_LIB/singly_linked_list.c **** 	struct singly_list_head *entity,
-  22:../../source/src/user/OS_LIB/singly_linked_list.c **** 	void (*copy_data)(struct singly_list_head *from,struct singly_list_head *to))
-  23:../../source/src/user/OS_LIB/singly_linked_list.c **** {
-  26              		.loc 1 23 0
-  27              		.cfi_startproc
-  28              		@ args = 0, pretend = 0, frame = 0
-  29              		@ frame_needed = 0, uses_anonymous_args = 0
-  30              	.LVL0:
-  31 0000 10B5     		push	{r4, lr}
-  32              	.LCFI0:
-  33              		.cfi_def_cfa_offset 8
-  34              		.cfi_offset 4, -8
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccupSofr.s 			page 2
-
-
-  35              		.cfi_offset 14, -4
-  36              		.loc 1 23 0
-  37 0002 0C46     		mov	r4, r1
-  24:../../source/src/user/OS_LIB/singly_linked_list.c **** 	if((NULL != copy_data) && (head != entity->next))
-  38              		.loc 1 24 0
-  39 0004 42B1     		cbz	r2, .L2
-  40              		.loc 1 24 0 is_stmt 0 discriminator 1
-  41 0006 0B68     		ldr	r3, [r1]
-  42 0008 8342     		cmp	r3, r0
-  43 000a 05D0     		beq	.L2
-  25:../../source/src/user/OS_LIB/singly_linked_list.c **** 	{
-  26:../../source/src/user/OS_LIB/singly_linked_list.c **** 		copy_data(entity->next,entity);
-  44              		.loc 1 26 0 is_stmt 1
-  45 000c 1846     		mov	r0, r3
-  46              	.LVL1:
-  47 000e 9047     		blx	r2
-  48              	.LVL2:
-  49              	.LBB10:
-  50              	.LBB11:
-  51              		.file 2 "../../source/include/os_lib/singly_linked_list.h"
+  16              		.syntax unified
+  17              		.thumb
+  18              		.thumb_func
+  19              		.fpu softvfp
+  20              		.type	_singly_list_del_next, %function
+  21              	_singly_list_del_next:
+  22              	.LFB2:
+  23              		.file 1 "../../source/include/os_lib/singly_linked_list.h"
    1:../../source/include/os_lib/singly_linked_list.h **** #ifndef _SINGLY_LINKED_LIST_H
    2:../../source/include/os_lib/singly_linked_list.h **** #define _SINGLY_LINKED_LIST_H
    3:../../source/include/os_lib/singly_linked_list.h **** 
@@ -106,887 +49,904 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccupSofr.s 			page 1
   23:../../source/include/os_lib/singly_linked_list.h **** 
   24:../../source/include/os_lib/singly_linked_list.h **** static inline void _singly_list_del_next(struct singly_list_head *pre)
   25:../../source/include/os_lib/singly_linked_list.h **** {
+  24              		.loc 1 25 0
+  25              		.cfi_startproc
+  26              		@ args = 0, pretend = 0, frame = 8
+  27              		@ frame_needed = 1, uses_anonymous_args = 0
+  28              		@ link register save eliminated.
+  29 0000 80B4     		push	{r7}
+  30              	.LCFI0:
+  31              		.cfi_def_cfa_offset 4
+  32              		.cfi_offset 7, -4
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccguw8EI.s 			page 2
+
+
+  33 0002 83B0     		sub	sp, sp, #12
+  34              	.LCFI1:
+  35              		.cfi_def_cfa_offset 16
+  36 0004 00AF     		add	r7, sp, #0
+  37              	.LCFI2:
+  38              		.cfi_def_cfa_register 7
+  39 0006 7860     		str	r0, [r7, #4]
   26:../../source/include/os_lib/singly_linked_list.h **** 	pre->next = pre->next->next;
-  52              		.loc 2 26 0
-  53 0010 2368     		ldr	r3, [r4]
-  54 0012 1B68     		ldr	r3, [r3]
-  55 0014 2360     		str	r3, [r4]
-  56              	.LVL3:
-  57              	.L1:
-  58              	.LBE11:
-  59              	.LBE10:
-  27:../../source/src/user/OS_LIB/singly_linked_list.c **** 		_singly_list_del_next(entity);
-  28:../../source/src/user/OS_LIB/singly_linked_list.c **** 	}
-  29:../../source/src/user/OS_LIB/singly_linked_list.c **** 	else
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccupSofr.s 			page 3
+  40              		.loc 1 26 0
+  41 0008 7B68     		ldr	r3, [r7, #4]
+  42 000a 1B68     		ldr	r3, [r3]
+  43 000c 1A68     		ldr	r2, [r3]
+  44 000e 7B68     		ldr	r3, [r7, #4]
+  45 0010 1A60     		str	r2, [r3]
+  27:../../source/include/os_lib/singly_linked_list.h **** }
+  46              		.loc 1 27 0
+  47 0012 00BF     		nop
+  48 0014 0C37     		adds	r7, r7, #12
+  49              	.LCFI3:
+  50              		.cfi_def_cfa_offset 4
+  51 0016 BD46     		mov	sp, r7
+  52              	.LCFI4:
+  53              		.cfi_def_cfa_register 13
+  54              		@ sp needed
+  55 0018 80BC     		pop	{r7}
+  56              	.LCFI5:
+  57              		.cfi_restore 7
+  58              		.cfi_def_cfa_offset 0
+  59 001a 7047     		bx	lr
+  60              		.cfi_endproc
+  61              	.LFE2:
+  62              		.size	_singly_list_del_next, .-_singly_list_del_next
+  63              		.align	1
+  64              		.syntax unified
+  65              		.thumb
+  66              		.thumb_func
+  67              		.fpu softvfp
+  68              		.type	_singly_list_del, %function
+  69              	_singly_list_del:
+  70              	.LFB4:
+  71              		.file 2 "../../source/src/kernel/OS_LIB/singly_linked_list.c"
+   1:../../source/src/kernel/OS_LIB/singly_linked_list.c **** #include <singly_linked_list.h>
+   2:../../source/src/kernel/OS_LIB/singly_linked_list.c **** #include <kakaosstdint.h>
+   3:../../source/src/kernel/OS_LIB/singly_linked_list.c **** 
+   4:../../source/src/kernel/OS_LIB/singly_linked_list.c **** static void _singly_list_del(
+   5:../../source/src/kernel/OS_LIB/singly_linked_list.c **** 	struct singly_list_head *head,
+   6:../../source/src/kernel/OS_LIB/singly_linked_list.c **** 	const struct singly_list_head *entity)
+   7:../../source/src/kernel/OS_LIB/singly_linked_list.c **** {
+  72              		.loc 2 7 0
+  73              		.cfi_startproc
+  74              		@ args = 0, pretend = 0, frame = 16
+  75              		@ frame_needed = 1, uses_anonymous_args = 0
+  76 001c 80B5     		push	{r7, lr}
+  77              	.LCFI6:
+  78              		.cfi_def_cfa_offset 8
+  79              		.cfi_offset 7, -8
+  80              		.cfi_offset 14, -4
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccguw8EI.s 			page 3
 
 
-  30:../../source/src/user/OS_LIB/singly_linked_list.c **** 	{
-  31:../../source/src/user/OS_LIB/singly_linked_list.c **** 		_singly_list_del(head,entity);
-  32:../../source/src/user/OS_LIB/singly_linked_list.c **** 	}
-  33:../../source/src/user/OS_LIB/singly_linked_list.c **** }
-  60              		.loc 1 33 0
-  61 0016 10BD     		pop	{r4, pc}
-  62              	.LVL4:
-  63              	.L2:
-  64              	.LBB12:
-  65              	.LBB13:
-   9:../../source/src/user/OS_LIB/singly_linked_list.c **** 	{
-  66              		.loc 1 9 0
-  67 0018 0268     		ldr	r2, [r0]
-  68              	.LVL5:
-  69 001a 9042     		cmp	r0, r2
-  70 001c FBD0     		beq	.L1
-  11:../../source/src/user/OS_LIB/singly_linked_list.c **** 		{
-  71              		.loc 1 11 0
-  72 001e 9442     		cmp	r4, r2
-  73 0020 03D1     		bne	.L5
-  74 0022 06E0     		b	.L13
-  75              	.LVL6:
-  76              	.L6:
-  77 0024 9C42     		cmp	r4, r3
-  78 0026 05D0     		beq	.L4
-  79 0028 1A46     		mov	r2, r3
-  80              	.LVL7:
-  81              	.L5:
-   9:../../source/src/user/OS_LIB/singly_linked_list.c **** 	{
-  82              		.loc 1 9 0
-  83 002a 1368     		ldr	r3, [r2]
-  84              	.LVL8:
-  85 002c 9842     		cmp	r0, r3
-  86 002e F9D1     		bne	.L6
-  87 0030 F1E7     		b	.L1
-  88              	.LVL9:
-  89              	.L13:
-  11:../../source/src/user/OS_LIB/singly_linked_list.c **** 		{
-  90              		.loc 1 11 0
-  91 0032 0246     		mov	r2, r0
-  92              	.LVL10:
-  93              	.L4:
-  94              	.LBB14:
-  95              	.LBB15:
-  96              		.loc 2 26 0
-  97 0034 2368     		ldr	r3, [r4]
-  98 0036 1360     		str	r3, [r2]
-  99              	.LBE15:
- 100              	.LBE14:
- 101              	.LBE13:
- 102              	.LBE12:
- 103              		.loc 1 33 0
- 104 0038 10BD     		pop	{r4, pc}
- 105              		.cfi_endproc
- 106              	.LFE5:
- 107              		.size	singly_list_del, .-singly_list_del
- 108              	.Letext0:
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccupSofr.s 			page 4
+  81 001e 84B0     		sub	sp, sp, #16
+  82              	.LCFI7:
+  83              		.cfi_def_cfa_offset 24
+  84 0020 00AF     		add	r7, sp, #0
+  85              	.LCFI8:
+  86              		.cfi_def_cfa_register 7
+  87 0022 7860     		str	r0, [r7, #4]
+  88 0024 3960     		str	r1, [r7]
+   8:../../source/src/kernel/OS_LIB/singly_linked_list.c **** 	struct singly_list_head *pos,*pre;
+   9:../../source/src/kernel/OS_LIB/singly_linked_list.c **** 	singly_list_for_each_del(pos,pre,head)
+  89              		.loc 2 9 0
+  90 0026 7B68     		ldr	r3, [r7, #4]
+  91 0028 1B68     		ldr	r3, [r3]
+  92 002a FB60     		str	r3, [r7, #12]
+  93 002c 7B68     		ldr	r3, [r7, #4]
+  94 002e BB60     		str	r3, [r7, #8]
+  95 0030 0CE0     		b	.L3
+  96              	.L6:
+  10:../../source/src/kernel/OS_LIB/singly_linked_list.c **** 	{
+  11:../../source/src/kernel/OS_LIB/singly_linked_list.c **** 		if(pos == entity)
+  97              		.loc 2 11 0
+  98 0032 FA68     		ldr	r2, [r7, #12]
+  99 0034 3B68     		ldr	r3, [r7]
+ 100 0036 9A42     		cmp	r2, r3
+ 101 0038 03D1     		bne	.L4
+  12:../../source/src/kernel/OS_LIB/singly_linked_list.c **** 		{
+  13:../../source/src/kernel/OS_LIB/singly_linked_list.c **** 			_singly_list_del_next(pre);
+ 102              		.loc 2 13 0
+ 103 003a B868     		ldr	r0, [r7, #8]
+ 104 003c FFF7E0FF 		bl	_singly_list_del_next
+  14:../../source/src/kernel/OS_LIB/singly_linked_list.c **** 			return ;
+ 105              		.loc 2 14 0
+ 106 0040 08E0     		b	.L2
+ 107              	.L4:
+   9:../../source/src/kernel/OS_LIB/singly_linked_list.c **** 	{
+ 108              		.loc 2 9 0 discriminator 2
+ 109 0042 FB68     		ldr	r3, [r7, #12]
+ 110 0044 BB60     		str	r3, [r7, #8]
+ 111 0046 FB68     		ldr	r3, [r7, #12]
+ 112 0048 1B68     		ldr	r3, [r3]
+ 113 004a FB60     		str	r3, [r7, #12]
+ 114              	.L3:
+   9:../../source/src/kernel/OS_LIB/singly_linked_list.c **** 	{
+ 115              		.loc 2 9 0 is_stmt 0 discriminator 1
+ 116 004c FA68     		ldr	r2, [r7, #12]
+ 117 004e 7B68     		ldr	r3, [r7, #4]
+ 118 0050 9A42     		cmp	r2, r3
+ 119 0052 EED1     		bne	.L6
+ 120              	.L2:
+  15:../../source/src/kernel/OS_LIB/singly_linked_list.c **** 		}
+  16:../../source/src/kernel/OS_LIB/singly_linked_list.c **** 	}
+  17:../../source/src/kernel/OS_LIB/singly_linked_list.c **** }
+ 121              		.loc 2 17 0 is_stmt 1
+ 122 0054 1037     		adds	r7, r7, #16
+ 123              	.LCFI9:
+ 124              		.cfi_def_cfa_offset 8
+ 125 0056 BD46     		mov	sp, r7
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccguw8EI.s 			page 4
 
 
- 109 003a 00BF     		.section	.debug_info,"",%progbits
- 110              	.Ldebug_info0:
- 111 0000 B6010000 		.4byte	0x1b6
- 112 0004 0200     		.2byte	0x2
- 113 0006 00000000 		.4byte	.Ldebug_abbrev0
- 114 000a 04       		.byte	0x4
- 115 000b 01       		.uleb128 0x1
- 116 000c 44010000 		.4byte	.LASF10
- 117 0010 0C       		.byte	0xc
- 118 0011 5F000000 		.4byte	.LASF11
- 119 0015 D0000000 		.4byte	.LASF12
- 120 0019 00000000 		.4byte	.Ltext0
- 121 001d 3A000000 		.4byte	.Letext0
- 122 0021 00000000 		.4byte	.Ldebug_line0
- 123 0025 02       		.uleb128 0x2
- 124 0026 4E000000 		.4byte	.LASF13
- 125 002a 04       		.byte	0x4
- 126 002b 02       		.byte	0x2
- 127 002c 04       		.byte	0x4
- 128 002d 40000000 		.4byte	0x40
- 129 0031 03       		.uleb128 0x3
- 130 0032 EA010000 		.4byte	.LASF14
- 131 0036 02       		.byte	0x2
- 132 0037 05       		.byte	0x5
- 133 0038 45000000 		.4byte	0x45
- 134 003c 02       		.byte	0x2
- 135 003d 23       		.byte	0x23
- 136 003e 00       		.uleb128 0
- 137 003f 00       		.byte	0
- 138 0040 04       		.uleb128 0x4
- 139 0041 25000000 		.4byte	0x25
- 140 0045 05       		.uleb128 0x5
- 141 0046 04       		.byte	0x4
- 142 0047 25000000 		.4byte	0x25
- 143 004b 06       		.uleb128 0x6
- 144 004c 01       		.byte	0x1
- 145 004d 06       		.byte	0x6
- 146 004e 2E010000 		.4byte	.LASF0
- 147 0052 06       		.uleb128 0x6
- 148 0053 02       		.byte	0x2
- 149 0054 05       		.byte	0x5
- 150 0055 3A010000 		.4byte	.LASF1
- 151 0059 07       		.uleb128 0x7
- 152 005a 04       		.byte	0x4
- 153 005b 05       		.byte	0x5
- 154 005c 696E7400 		.ascii	"int\000"
- 155 0060 06       		.uleb128 0x6
- 156 0061 08       		.byte	0x8
- 157 0062 05       		.byte	0x5
- 158 0063 00000000 		.4byte	.LASF2
- 159 0067 06       		.uleb128 0x6
- 160 0068 01       		.byte	0x1
- 161 0069 08       		.byte	0x8
- 162 006a A8000000 		.4byte	.LASF3
- 163 006e 06       		.uleb128 0x6
- 164 006f 02       		.byte	0x2
- 165 0070 07       		.byte	0x7
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccupSofr.s 			page 5
+ 126              	.LCFI10:
+ 127              		.cfi_def_cfa_register 13
+ 128              		@ sp needed
+ 129 0058 80BD     		pop	{r7, pc}
+ 130              		.cfi_endproc
+ 131              	.LFE4:
+ 132              		.size	_singly_list_del, .-_singly_list_del
+ 133              		.align	1
+ 134              		.global	singly_list_del
+ 135              		.syntax unified
+ 136              		.thumb
+ 137              		.thumb_func
+ 138              		.fpu softvfp
+ 139              		.type	singly_list_del, %function
+ 140              	singly_list_del:
+ 141              	.LFB5:
+  18:../../source/src/kernel/OS_LIB/singly_linked_list.c **** 
+  19:../../source/src/kernel/OS_LIB/singly_linked_list.c **** void singly_list_del(
+  20:../../source/src/kernel/OS_LIB/singly_linked_list.c **** 	struct singly_list_head *head,
+  21:../../source/src/kernel/OS_LIB/singly_linked_list.c **** 	struct singly_list_head *entity,
+  22:../../source/src/kernel/OS_LIB/singly_linked_list.c **** 	void (*copy_data)(struct singly_list_head *from,struct singly_list_head *to))
+  23:../../source/src/kernel/OS_LIB/singly_linked_list.c **** {
+ 142              		.loc 2 23 0
+ 143              		.cfi_startproc
+ 144              		@ args = 0, pretend = 0, frame = 16
+ 145              		@ frame_needed = 1, uses_anonymous_args = 0
+ 146 005a 80B5     		push	{r7, lr}
+ 147              	.LCFI11:
+ 148              		.cfi_def_cfa_offset 8
+ 149              		.cfi_offset 7, -8
+ 150              		.cfi_offset 14, -4
+ 151 005c 84B0     		sub	sp, sp, #16
+ 152              	.LCFI12:
+ 153              		.cfi_def_cfa_offset 24
+ 154 005e 00AF     		add	r7, sp, #0
+ 155              	.LCFI13:
+ 156              		.cfi_def_cfa_register 7
+ 157 0060 F860     		str	r0, [r7, #12]
+ 158 0062 B960     		str	r1, [r7, #8]
+ 159 0064 7A60     		str	r2, [r7, #4]
+  24:../../source/src/kernel/OS_LIB/singly_linked_list.c **** 	if((NULL != copy_data) && (head != entity->next))
+ 160              		.loc 2 24 0
+ 161 0066 7B68     		ldr	r3, [r7, #4]
+ 162 0068 002B     		cmp	r3, #0
+ 163 006a 0ED0     		beq	.L8
+ 164              		.loc 2 24 0 is_stmt 0 discriminator 1
+ 165 006c BB68     		ldr	r3, [r7, #8]
+ 166 006e 1B68     		ldr	r3, [r3]
+ 167 0070 FA68     		ldr	r2, [r7, #12]
+ 168 0072 9A42     		cmp	r2, r3
+ 169 0074 09D0     		beq	.L8
+  25:../../source/src/kernel/OS_LIB/singly_linked_list.c **** 	{
+  26:../../source/src/kernel/OS_LIB/singly_linked_list.c **** 		copy_data(entity->next,entity);
+ 170              		.loc 2 26 0 is_stmt 1
+ 171 0076 BB68     		ldr	r3, [r7, #8]
+ 172 0078 1A68     		ldr	r2, [r3]
+ 173 007a 7B68     		ldr	r3, [r7, #4]
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccguw8EI.s 			page 5
 
 
- 166 0071 1B010000 		.4byte	.LASF4
- 167 0075 06       		.uleb128 0x6
- 168 0076 04       		.byte	0x4
- 169 0077 07       		.byte	0x7
- 170 0078 15000000 		.4byte	.LASF5
- 171 007c 06       		.uleb128 0x6
- 172 007d 08       		.byte	0x8
- 173 007e 07       		.byte	0x7
- 174 007f 91000000 		.4byte	.LASF6
- 175 0083 08       		.uleb128 0x8
- 176 0084 01       		.byte	0x1
- 177 0085 C0000000 		.4byte	.LASF15
- 178 0089 01       		.byte	0x1
- 179 008a 13       		.byte	0x13
- 180 008b 01       		.byte	0x1
- 181 008c 00000000 		.4byte	.LFB5
- 182 0090 3A000000 		.4byte	.LFE5
- 183 0094 00000000 		.4byte	.LLST0
- 184 0098 01       		.byte	0x1
- 185 0099 4D010000 		.4byte	0x14d
- 186 009d 09       		.uleb128 0x9
- 187 009e 38000000 		.4byte	.LASF7
- 188 00a2 01       		.byte	0x1
- 189 00a3 14       		.byte	0x14
- 190 00a4 45000000 		.4byte	0x45
- 191 00a8 20000000 		.4byte	.LLST1
- 192 00ac 09       		.uleb128 0x9
- 193 00ad 0E000000 		.4byte	.LASF8
- 194 00b1 01       		.byte	0x1
- 195 00b2 15       		.byte	0x15
- 196 00b3 45000000 		.4byte	0x45
- 197 00b7 4C000000 		.4byte	.LLST2
- 198 00bb 09       		.uleb128 0x9
- 199 00bc B6000000 		.4byte	.LASF9
- 200 00c0 01       		.byte	0x1
- 201 00c1 16       		.byte	0x16
- 202 00c2 5E010000 		.4byte	0x15e
- 203 00c6 75000000 		.4byte	.LLST3
- 204 00ca 0A       		.uleb128 0xa
- 205 00cb A4010000 		.4byte	0x1a4
- 206 00cf 10000000 		.4byte	.LBB10
- 207 00d3 16000000 		.4byte	.LBE10
- 208 00d7 01       		.byte	0x1
- 209 00d8 1B       		.byte	0x1b
- 210 00d9 E7000000 		.4byte	0xe7
- 211 00dd 0B       		.uleb128 0xb
- 212 00de AD010000 		.4byte	0x1ad
- 213 00e2 AF000000 		.4byte	.LLST4
- 214 00e6 00       		.byte	0
- 215 00e7 0A       		.uleb128 0xa
- 216 00e8 64010000 		.4byte	0x164
- 217 00ec 18000000 		.4byte	.LBB12
- 218 00f0 38000000 		.4byte	.LBE12
- 219 00f4 01       		.byte	0x1
- 220 00f5 1F       		.byte	0x1f
- 221 00f6 3C010000 		.4byte	0x13c
- 222 00fa 0C       		.uleb128 0xc
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccupSofr.s 			page 6
+ 174 007c B968     		ldr	r1, [r7, #8]
+ 175 007e 1046     		mov	r0, r2
+ 176 0080 9847     		blx	r3
+ 177              	.LVL0:
+  27:../../source/src/kernel/OS_LIB/singly_linked_list.c **** 		_singly_list_del_next(entity);
+ 178              		.loc 2 27 0
+ 179 0082 B868     		ldr	r0, [r7, #8]
+ 180 0084 FFF7BCFF 		bl	_singly_list_del_next
+ 181 0088 03E0     		b	.L9
+ 182              	.L8:
+  28:../../source/src/kernel/OS_LIB/singly_linked_list.c **** 	}
+  29:../../source/src/kernel/OS_LIB/singly_linked_list.c **** 	else
+  30:../../source/src/kernel/OS_LIB/singly_linked_list.c **** 	{
+  31:../../source/src/kernel/OS_LIB/singly_linked_list.c **** 		_singly_list_del(head,entity);
+ 183              		.loc 2 31 0
+ 184 008a B968     		ldr	r1, [r7, #8]
+ 185 008c F868     		ldr	r0, [r7, #12]
+ 186 008e FFF7C5FF 		bl	_singly_list_del
+ 187              	.L9:
+  32:../../source/src/kernel/OS_LIB/singly_linked_list.c **** 	}
+  33:../../source/src/kernel/OS_LIB/singly_linked_list.c **** }
+ 188              		.loc 2 33 0
+ 189 0092 00BF     		nop
+ 190 0094 1037     		adds	r7, r7, #16
+ 191              	.LCFI14:
+ 192              		.cfi_def_cfa_offset 8
+ 193 0096 BD46     		mov	sp, r7
+ 194              	.LCFI15:
+ 195              		.cfi_def_cfa_register 13
+ 196              		@ sp needed
+ 197 0098 80BD     		pop	{r7, pc}
+ 198              		.cfi_endproc
+ 199              	.LFE5:
+ 200              		.size	singly_list_del, .-singly_list_del
+ 201              	.Letext0:
+ 202              		.section	.debug_info,"",%progbits
+ 203              	.Ldebug_info0:
+ 204 0000 58010000 		.4byte	0x158
+ 205 0004 0200     		.2byte	0x2
+ 206 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 207 000a 04       		.byte	0x4
+ 208 000b 01       		.uleb128 0x1
+ 209 000c 18010000 		.4byte	.LASF10
+ 210 0010 0C       		.byte	0xc
+ 211 0011 47000000 		.4byte	.LASF11
+ 212 0015 BA000000 		.4byte	.LASF12
+ 213 0019 00000000 		.4byte	.Ltext0
+ 214 001d 9A000000 		.4byte	.Letext0
+ 215 0021 00000000 		.4byte	.Ldebug_line0
+ 216 0025 02       		.uleb128 0x2
+ 217 0026 36000000 		.4byte	.LASF13
+ 218 002a 04       		.byte	0x4
+ 219 002b 01       		.byte	0x1
+ 220 002c 04       		.byte	0x4
+ 221 002d 40000000 		.4byte	0x40
+ 222 0031 03       		.uleb128 0x3
+ 223 0032 CF010000 		.4byte	.LASF14
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccguw8EI.s 			page 6
 
 
- 223 00fb 7C010000 		.4byte	0x17c
- 224 00ff 01       		.byte	0x1
- 225 0100 51       		.byte	0x51
- 226 0101 0C       		.uleb128 0xc
- 227 0102 71010000 		.4byte	0x171
- 228 0106 01       		.byte	0x1
- 229 0107 50       		.byte	0x50
- 230 0108 0D       		.uleb128 0xd
- 231 0109 18000000 		.4byte	.LBB13
- 232 010d 38000000 		.4byte	.LBE13
- 233 0111 0E       		.uleb128 0xe
- 234 0112 87010000 		.4byte	0x187
- 235 0116 C2000000 		.4byte	.LLST5
- 236 011a 0E       		.uleb128 0xe
- 237 011b 92010000 		.4byte	0x192
- 238 011f 01010000 		.4byte	.LLST6
- 239 0123 0F       		.uleb128 0xf
- 240 0124 A4010000 		.4byte	0x1a4
- 241 0128 34000000 		.4byte	.LBB14
- 242 012c 38000000 		.4byte	.LBE14
- 243 0130 01       		.byte	0x1
- 244 0131 0D       		.byte	0xd
- 245 0132 0C       		.uleb128 0xc
- 246 0133 AD010000 		.4byte	0x1ad
- 247 0137 01       		.byte	0x1
- 248 0138 52       		.byte	0x52
- 249 0139 00       		.byte	0
- 250 013a 00       		.byte	0
- 251 013b 00       		.byte	0
- 252 013c 10       		.uleb128 0x10
- 253 013d 10000000 		.4byte	.LVL2
- 254 0141 03       		.byte	0x3
- 255 0142 F3       		.byte	0xf3
- 256 0143 01       		.uleb128 0x1
- 257 0144 52       		.byte	0x52
- 258 0145 11       		.uleb128 0x11
- 259 0146 01       		.byte	0x1
- 260 0147 51       		.byte	0x51
- 261 0148 02       		.byte	0x2
- 262 0149 74       		.byte	0x74
- 263 014a 00       		.sleb128 0
- 264 014b 00       		.byte	0
- 265 014c 00       		.byte	0
- 266 014d 12       		.uleb128 0x12
- 267 014e 01       		.byte	0x1
- 268 014f 5E010000 		.4byte	0x15e
- 269 0153 13       		.uleb128 0x13
- 270 0154 45000000 		.4byte	0x45
- 271 0158 13       		.uleb128 0x13
- 272 0159 45000000 		.4byte	0x45
- 273 015d 00       		.byte	0
- 274 015e 05       		.uleb128 0x5
- 275 015f 04       		.byte	0x4
- 276 0160 4D010000 		.4byte	0x14d
- 277 0164 14       		.uleb128 0x14
- 278 0165 3D000000 		.4byte	.LASF16
- 279 0169 01       		.byte	0x1
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccupSofr.s 			page 7
+ 224 0036 01       		.byte	0x1
+ 225 0037 05       		.byte	0x5
+ 226 0038 45000000 		.4byte	0x45
+ 227 003c 02       		.byte	0x2
+ 228 003d 23       		.byte	0x23
+ 229 003e 00       		.uleb128 0
+ 230 003f 00       		.byte	0
+ 231 0040 04       		.uleb128 0x4
+ 232 0041 25000000 		.4byte	0x25
+ 233 0045 05       		.uleb128 0x5
+ 234 0046 04       		.byte	0x4
+ 235 0047 25000000 		.4byte	0x25
+ 236 004b 06       		.uleb128 0x6
+ 237 004c 01       		.byte	0x1
+ 238 004d 06       		.byte	0x6
+ 239 004e 02010000 		.4byte	.LASF0
+ 240 0052 06       		.uleb128 0x6
+ 241 0053 02       		.byte	0x2
+ 242 0054 05       		.byte	0x5
+ 243 0055 0E010000 		.4byte	.LASF1
+ 244 0059 07       		.uleb128 0x7
+ 245 005a 04       		.byte	0x4
+ 246 005b 05       		.byte	0x5
+ 247 005c 696E7400 		.ascii	"int\000"
+ 248 0060 06       		.uleb128 0x6
+ 249 0061 08       		.byte	0x8
+ 250 0062 05       		.byte	0x5
+ 251 0063 00000000 		.4byte	.LASF2
+ 252 0067 06       		.uleb128 0x6
+ 253 0068 01       		.byte	0x1
+ 254 0069 08       		.byte	0x8
+ 255 006a 92000000 		.4byte	.LASF3
+ 256 006e 06       		.uleb128 0x6
+ 257 006f 02       		.byte	0x2
+ 258 0070 07       		.byte	0x7
+ 259 0071 EF000000 		.4byte	.LASF4
+ 260 0075 06       		.uleb128 0x6
+ 261 0076 04       		.byte	0x4
+ 262 0077 07       		.byte	0x7
+ 263 0078 0E000000 		.4byte	.LASF5
+ 264 007c 06       		.uleb128 0x6
+ 265 007d 08       		.byte	0x8
+ 266 007e 07       		.byte	0x7
+ 267 007f 7B000000 		.4byte	.LASF6
+ 268 0083 08       		.uleb128 0x8
+ 269 0084 01       		.byte	0x1
+ 270 0085 AA000000 		.4byte	.LASF15
+ 271 0089 02       		.byte	0x2
+ 272 008a 13       		.byte	0x13
+ 273 008b 01       		.byte	0x1
+ 274 008c 5A000000 		.4byte	.LFB5
+ 275 0090 9A000000 		.4byte	.LFE5
+ 276 0094 00000000 		.4byte	.LLST2
+ 277 0098 01       		.byte	0x1
+ 278 0099 C8000000 		.4byte	0xc8
+ 279 009d 09       		.uleb128 0x9
+ 280 009e 31000000 		.4byte	.LASF7
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccguw8EI.s 			page 7
 
 
- 280 016a 04       		.byte	0x4
- 281 016b 01       		.byte	0x1
- 282 016c 01       		.byte	0x1
- 283 016d 9E010000 		.4byte	0x19e
- 284 0171 15       		.uleb128 0x15
- 285 0172 38000000 		.4byte	.LASF7
- 286 0176 01       		.byte	0x1
- 287 0177 05       		.byte	0x5
- 288 0178 45000000 		.4byte	0x45
- 289 017c 15       		.uleb128 0x15
- 290 017d 0E000000 		.4byte	.LASF8
- 291 0181 01       		.byte	0x1
- 292 0182 06       		.byte	0x6
- 293 0183 9E010000 		.4byte	0x19e
- 294 0187 16       		.uleb128 0x16
- 295 0188 706F7300 		.ascii	"pos\000"
- 296 018c 01       		.byte	0x1
- 297 018d 08       		.byte	0x8
- 298 018e 45000000 		.4byte	0x45
- 299 0192 16       		.uleb128 0x16
- 300 0193 70726500 		.ascii	"pre\000"
- 301 0197 01       		.byte	0x1
- 302 0198 08       		.byte	0x8
- 303 0199 45000000 		.4byte	0x45
- 304 019d 00       		.byte	0
- 305 019e 05       		.uleb128 0x5
- 306 019f 04       		.byte	0x4
- 307 01a0 40000000 		.4byte	0x40
- 308 01a4 17       		.uleb128 0x17
- 309 01a5 22000000 		.4byte	.LASF17
- 310 01a9 02       		.byte	0x2
- 311 01aa 18       		.byte	0x18
- 312 01ab 01       		.byte	0x1
- 313 01ac 03       		.byte	0x3
- 314 01ad 18       		.uleb128 0x18
- 315 01ae 70726500 		.ascii	"pre\000"
- 316 01b2 02       		.byte	0x2
- 317 01b3 18       		.byte	0x18
- 318 01b4 45000000 		.4byte	0x45
- 319 01b8 00       		.byte	0
- 320 01b9 00       		.byte	0
- 321              		.section	.debug_abbrev,"",%progbits
- 322              	.Ldebug_abbrev0:
- 323 0000 01       		.uleb128 0x1
- 324 0001 11       		.uleb128 0x11
- 325 0002 01       		.byte	0x1
- 326 0003 25       		.uleb128 0x25
- 327 0004 0E       		.uleb128 0xe
- 328 0005 13       		.uleb128 0x13
- 329 0006 0B       		.uleb128 0xb
- 330 0007 03       		.uleb128 0x3
- 331 0008 0E       		.uleb128 0xe
- 332 0009 1B       		.uleb128 0x1b
- 333 000a 0E       		.uleb128 0xe
- 334 000b 11       		.uleb128 0x11
- 335 000c 01       		.uleb128 0x1
- 336 000d 12       		.uleb128 0x12
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccupSofr.s 			page 8
+ 281 00a2 02       		.byte	0x2
+ 282 00a3 14       		.byte	0x14
+ 283 00a4 45000000 		.4byte	0x45
+ 284 00a8 02       		.byte	0x2
+ 285 00a9 91       		.byte	0x91
+ 286 00aa 74       		.sleb128 -12
+ 287 00ab 09       		.uleb128 0x9
+ 288 00ac E8000000 		.4byte	.LASF8
+ 289 00b0 02       		.byte	0x2
+ 290 00b1 15       		.byte	0x15
+ 291 00b2 45000000 		.4byte	0x45
+ 292 00b6 02       		.byte	0x2
+ 293 00b7 91       		.byte	0x91
+ 294 00b8 70       		.sleb128 -16
+ 295 00b9 09       		.uleb128 0x9
+ 296 00ba A0000000 		.4byte	.LASF9
+ 297 00be 02       		.byte	0x2
+ 298 00bf 16       		.byte	0x16
+ 299 00c0 D9000000 		.4byte	0xd9
+ 300 00c4 02       		.byte	0x2
+ 301 00c5 91       		.byte	0x91
+ 302 00c6 6C       		.sleb128 -20
+ 303 00c7 00       		.byte	0
+ 304 00c8 0A       		.uleb128 0xa
+ 305 00c9 01       		.byte	0x1
+ 306 00ca D9000000 		.4byte	0xd9
+ 307 00ce 0B       		.uleb128 0xb
+ 308 00cf 45000000 		.4byte	0x45
+ 309 00d3 0B       		.uleb128 0xb
+ 310 00d4 45000000 		.4byte	0x45
+ 311 00d8 00       		.byte	0
+ 312 00d9 05       		.uleb128 0x5
+ 313 00da 04       		.byte	0x4
+ 314 00db C8000000 		.4byte	0xc8
+ 315 00df 0C       		.uleb128 0xc
+ 316 00e0 BE010000 		.4byte	.LASF16
+ 317 00e4 02       		.byte	0x2
+ 318 00e5 04       		.byte	0x4
+ 319 00e6 01       		.byte	0x1
+ 320 00e7 1C000000 		.4byte	.LFB4
+ 321 00eb 5A000000 		.4byte	.LFE4
+ 322 00ef 50000000 		.4byte	.LLST1
+ 323 00f3 01       		.byte	0x1
+ 324 00f4 31010000 		.4byte	0x131
+ 325 00f8 09       		.uleb128 0x9
+ 326 00f9 31000000 		.4byte	.LASF7
+ 327 00fd 02       		.byte	0x2
+ 328 00fe 05       		.byte	0x5
+ 329 00ff 45000000 		.4byte	0x45
+ 330 0103 02       		.byte	0x2
+ 331 0104 91       		.byte	0x91
+ 332 0105 6C       		.sleb128 -20
+ 333 0106 09       		.uleb128 0x9
+ 334 0107 E8000000 		.4byte	.LASF8
+ 335 010b 02       		.byte	0x2
+ 336 010c 06       		.byte	0x6
+ 337 010d 31010000 		.4byte	0x131
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccguw8EI.s 			page 8
 
 
- 337 000e 01       		.uleb128 0x1
- 338 000f 10       		.uleb128 0x10
- 339 0010 06       		.uleb128 0x6
- 340 0011 00       		.byte	0
- 341 0012 00       		.byte	0
- 342 0013 02       		.uleb128 0x2
- 343 0014 13       		.uleb128 0x13
- 344 0015 01       		.byte	0x1
- 345 0016 03       		.uleb128 0x3
- 346 0017 0E       		.uleb128 0xe
- 347 0018 0B       		.uleb128 0xb
- 348 0019 0B       		.uleb128 0xb
- 349 001a 3A       		.uleb128 0x3a
- 350 001b 0B       		.uleb128 0xb
- 351 001c 3B       		.uleb128 0x3b
- 352 001d 0B       		.uleb128 0xb
- 353 001e 01       		.uleb128 0x1
- 354 001f 13       		.uleb128 0x13
- 355 0020 00       		.byte	0
- 356 0021 00       		.byte	0
- 357 0022 03       		.uleb128 0x3
- 358 0023 0D       		.uleb128 0xd
- 359 0024 00       		.byte	0
- 360 0025 03       		.uleb128 0x3
- 361 0026 0E       		.uleb128 0xe
- 362 0027 3A       		.uleb128 0x3a
- 363 0028 0B       		.uleb128 0xb
- 364 0029 3B       		.uleb128 0x3b
- 365 002a 0B       		.uleb128 0xb
- 366 002b 49       		.uleb128 0x49
- 367 002c 13       		.uleb128 0x13
- 368 002d 38       		.uleb128 0x38
- 369 002e 0A       		.uleb128 0xa
- 370 002f 00       		.byte	0
- 371 0030 00       		.byte	0
- 372 0031 04       		.uleb128 0x4
- 373 0032 26       		.uleb128 0x26
- 374 0033 00       		.byte	0
- 375 0034 49       		.uleb128 0x49
- 376 0035 13       		.uleb128 0x13
- 377 0036 00       		.byte	0
- 378 0037 00       		.byte	0
- 379 0038 05       		.uleb128 0x5
- 380 0039 0F       		.uleb128 0xf
- 381 003a 00       		.byte	0
- 382 003b 0B       		.uleb128 0xb
- 383 003c 0B       		.uleb128 0xb
- 384 003d 49       		.uleb128 0x49
- 385 003e 13       		.uleb128 0x13
- 386 003f 00       		.byte	0
- 387 0040 00       		.byte	0
- 388 0041 06       		.uleb128 0x6
- 389 0042 24       		.uleb128 0x24
- 390 0043 00       		.byte	0
- 391 0044 0B       		.uleb128 0xb
- 392 0045 0B       		.uleb128 0xb
- 393 0046 3E       		.uleb128 0x3e
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccupSofr.s 			page 9
+ 338 0111 02       		.byte	0x2
+ 339 0112 91       		.byte	0x91
+ 340 0113 68       		.sleb128 -24
+ 341 0114 0D       		.uleb128 0xd
+ 342 0115 706F7300 		.ascii	"pos\000"
+ 343 0119 02       		.byte	0x2
+ 344 011a 08       		.byte	0x8
+ 345 011b 45000000 		.4byte	0x45
+ 346 011f 02       		.byte	0x2
+ 347 0120 91       		.byte	0x91
+ 348 0121 74       		.sleb128 -12
+ 349 0122 0D       		.uleb128 0xd
+ 350 0123 70726500 		.ascii	"pre\000"
+ 351 0127 02       		.byte	0x2
+ 352 0128 08       		.byte	0x8
+ 353 0129 45000000 		.4byte	0x45
+ 354 012d 02       		.byte	0x2
+ 355 012e 91       		.byte	0x91
+ 356 012f 70       		.sleb128 -16
+ 357 0130 00       		.byte	0
+ 358 0131 05       		.uleb128 0x5
+ 359 0132 04       		.byte	0x4
+ 360 0133 40000000 		.4byte	0x40
+ 361 0137 0E       		.uleb128 0xe
+ 362 0138 1B000000 		.4byte	.LASF17
+ 363 013c 01       		.byte	0x1
+ 364 013d 18       		.byte	0x18
+ 365 013e 01       		.byte	0x1
+ 366 013f 00000000 		.4byte	.LFB2
+ 367 0143 1C000000 		.4byte	.LFE2
+ 368 0147 A0000000 		.4byte	.LLST0
+ 369 014b 01       		.byte	0x1
+ 370 014c 0F       		.uleb128 0xf
+ 371 014d 70726500 		.ascii	"pre\000"
+ 372 0151 01       		.byte	0x1
+ 373 0152 18       		.byte	0x18
+ 374 0153 45000000 		.4byte	0x45
+ 375 0157 02       		.byte	0x2
+ 376 0158 91       		.byte	0x91
+ 377 0159 74       		.sleb128 -12
+ 378 015a 00       		.byte	0
+ 379 015b 00       		.byte	0
+ 380              		.section	.debug_abbrev,"",%progbits
+ 381              	.Ldebug_abbrev0:
+ 382 0000 01       		.uleb128 0x1
+ 383 0001 11       		.uleb128 0x11
+ 384 0002 01       		.byte	0x1
+ 385 0003 25       		.uleb128 0x25
+ 386 0004 0E       		.uleb128 0xe
+ 387 0005 13       		.uleb128 0x13
+ 388 0006 0B       		.uleb128 0xb
+ 389 0007 03       		.uleb128 0x3
+ 390 0008 0E       		.uleb128 0xe
+ 391 0009 1B       		.uleb128 0x1b
+ 392 000a 0E       		.uleb128 0xe
+ 393 000b 11       		.uleb128 0x11
+ 394 000c 01       		.uleb128 0x1
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccguw8EI.s 			page 9
 
 
- 394 0047 0B       		.uleb128 0xb
- 395 0048 03       		.uleb128 0x3
- 396 0049 0E       		.uleb128 0xe
- 397 004a 00       		.byte	0
- 398 004b 00       		.byte	0
- 399 004c 07       		.uleb128 0x7
- 400 004d 24       		.uleb128 0x24
- 401 004e 00       		.byte	0
- 402 004f 0B       		.uleb128 0xb
- 403 0050 0B       		.uleb128 0xb
- 404 0051 3E       		.uleb128 0x3e
- 405 0052 0B       		.uleb128 0xb
- 406 0053 03       		.uleb128 0x3
- 407 0054 08       		.uleb128 0x8
- 408 0055 00       		.byte	0
- 409 0056 00       		.byte	0
- 410 0057 08       		.uleb128 0x8
- 411 0058 2E       		.uleb128 0x2e
- 412 0059 01       		.byte	0x1
- 413 005a 3F       		.uleb128 0x3f
- 414 005b 0C       		.uleb128 0xc
- 415 005c 03       		.uleb128 0x3
- 416 005d 0E       		.uleb128 0xe
- 417 005e 3A       		.uleb128 0x3a
- 418 005f 0B       		.uleb128 0xb
- 419 0060 3B       		.uleb128 0x3b
- 420 0061 0B       		.uleb128 0xb
- 421 0062 27       		.uleb128 0x27
- 422 0063 0C       		.uleb128 0xc
- 423 0064 11       		.uleb128 0x11
- 424 0065 01       		.uleb128 0x1
- 425 0066 12       		.uleb128 0x12
- 426 0067 01       		.uleb128 0x1
- 427 0068 40       		.uleb128 0x40
- 428 0069 06       		.uleb128 0x6
- 429 006a 9742     		.uleb128 0x2117
- 430 006c 0C       		.uleb128 0xc
- 431 006d 01       		.uleb128 0x1
- 432 006e 13       		.uleb128 0x13
- 433 006f 00       		.byte	0
- 434 0070 00       		.byte	0
- 435 0071 09       		.uleb128 0x9
- 436 0072 05       		.uleb128 0x5
- 437 0073 00       		.byte	0
- 438 0074 03       		.uleb128 0x3
- 439 0075 0E       		.uleb128 0xe
- 440 0076 3A       		.uleb128 0x3a
- 441 0077 0B       		.uleb128 0xb
- 442 0078 3B       		.uleb128 0x3b
- 443 0079 0B       		.uleb128 0xb
- 444 007a 49       		.uleb128 0x49
- 445 007b 13       		.uleb128 0x13
- 446 007c 02       		.uleb128 0x2
- 447 007d 06       		.uleb128 0x6
- 448 007e 00       		.byte	0
- 449 007f 00       		.byte	0
- 450 0080 0A       		.uleb128 0xa
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccupSofr.s 			page 10
+ 395 000d 12       		.uleb128 0x12
+ 396 000e 01       		.uleb128 0x1
+ 397 000f 10       		.uleb128 0x10
+ 398 0010 06       		.uleb128 0x6
+ 399 0011 00       		.byte	0
+ 400 0012 00       		.byte	0
+ 401 0013 02       		.uleb128 0x2
+ 402 0014 13       		.uleb128 0x13
+ 403 0015 01       		.byte	0x1
+ 404 0016 03       		.uleb128 0x3
+ 405 0017 0E       		.uleb128 0xe
+ 406 0018 0B       		.uleb128 0xb
+ 407 0019 0B       		.uleb128 0xb
+ 408 001a 3A       		.uleb128 0x3a
+ 409 001b 0B       		.uleb128 0xb
+ 410 001c 3B       		.uleb128 0x3b
+ 411 001d 0B       		.uleb128 0xb
+ 412 001e 01       		.uleb128 0x1
+ 413 001f 13       		.uleb128 0x13
+ 414 0020 00       		.byte	0
+ 415 0021 00       		.byte	0
+ 416 0022 03       		.uleb128 0x3
+ 417 0023 0D       		.uleb128 0xd
+ 418 0024 00       		.byte	0
+ 419 0025 03       		.uleb128 0x3
+ 420 0026 0E       		.uleb128 0xe
+ 421 0027 3A       		.uleb128 0x3a
+ 422 0028 0B       		.uleb128 0xb
+ 423 0029 3B       		.uleb128 0x3b
+ 424 002a 0B       		.uleb128 0xb
+ 425 002b 49       		.uleb128 0x49
+ 426 002c 13       		.uleb128 0x13
+ 427 002d 38       		.uleb128 0x38
+ 428 002e 0A       		.uleb128 0xa
+ 429 002f 00       		.byte	0
+ 430 0030 00       		.byte	0
+ 431 0031 04       		.uleb128 0x4
+ 432 0032 26       		.uleb128 0x26
+ 433 0033 00       		.byte	0
+ 434 0034 49       		.uleb128 0x49
+ 435 0035 13       		.uleb128 0x13
+ 436 0036 00       		.byte	0
+ 437 0037 00       		.byte	0
+ 438 0038 05       		.uleb128 0x5
+ 439 0039 0F       		.uleb128 0xf
+ 440 003a 00       		.byte	0
+ 441 003b 0B       		.uleb128 0xb
+ 442 003c 0B       		.uleb128 0xb
+ 443 003d 49       		.uleb128 0x49
+ 444 003e 13       		.uleb128 0x13
+ 445 003f 00       		.byte	0
+ 446 0040 00       		.byte	0
+ 447 0041 06       		.uleb128 0x6
+ 448 0042 24       		.uleb128 0x24
+ 449 0043 00       		.byte	0
+ 450 0044 0B       		.uleb128 0xb
+ 451 0045 0B       		.uleb128 0xb
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccguw8EI.s 			page 10
 
 
- 451 0081 1D       		.uleb128 0x1d
- 452 0082 01       		.byte	0x1
- 453 0083 31       		.uleb128 0x31
- 454 0084 13       		.uleb128 0x13
- 455 0085 11       		.uleb128 0x11
- 456 0086 01       		.uleb128 0x1
- 457 0087 12       		.uleb128 0x12
- 458 0088 01       		.uleb128 0x1
- 459 0089 58       		.uleb128 0x58
- 460 008a 0B       		.uleb128 0xb
- 461 008b 59       		.uleb128 0x59
- 462 008c 0B       		.uleb128 0xb
- 463 008d 01       		.uleb128 0x1
- 464 008e 13       		.uleb128 0x13
- 465 008f 00       		.byte	0
- 466 0090 00       		.byte	0
- 467 0091 0B       		.uleb128 0xb
- 468 0092 05       		.uleb128 0x5
- 469 0093 00       		.byte	0
- 470 0094 31       		.uleb128 0x31
- 471 0095 13       		.uleb128 0x13
- 472 0096 02       		.uleb128 0x2
- 473 0097 06       		.uleb128 0x6
- 474 0098 00       		.byte	0
- 475 0099 00       		.byte	0
- 476 009a 0C       		.uleb128 0xc
- 477 009b 05       		.uleb128 0x5
- 478 009c 00       		.byte	0
- 479 009d 31       		.uleb128 0x31
- 480 009e 13       		.uleb128 0x13
- 481 009f 02       		.uleb128 0x2
- 482 00a0 0A       		.uleb128 0xa
- 483 00a1 00       		.byte	0
- 484 00a2 00       		.byte	0
- 485 00a3 0D       		.uleb128 0xd
- 486 00a4 0B       		.uleb128 0xb
- 487 00a5 01       		.byte	0x1
- 488 00a6 11       		.uleb128 0x11
- 489 00a7 01       		.uleb128 0x1
- 490 00a8 12       		.uleb128 0x12
- 491 00a9 01       		.uleb128 0x1
- 492 00aa 00       		.byte	0
- 493 00ab 00       		.byte	0
- 494 00ac 0E       		.uleb128 0xe
- 495 00ad 34       		.uleb128 0x34
- 496 00ae 00       		.byte	0
- 497 00af 31       		.uleb128 0x31
- 498 00b0 13       		.uleb128 0x13
- 499 00b1 02       		.uleb128 0x2
- 500 00b2 06       		.uleb128 0x6
- 501 00b3 00       		.byte	0
- 502 00b4 00       		.byte	0
- 503 00b5 0F       		.uleb128 0xf
- 504 00b6 1D       		.uleb128 0x1d
- 505 00b7 01       		.byte	0x1
- 506 00b8 31       		.uleb128 0x31
- 507 00b9 13       		.uleb128 0x13
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccupSofr.s 			page 11
+ 452 0046 3E       		.uleb128 0x3e
+ 453 0047 0B       		.uleb128 0xb
+ 454 0048 03       		.uleb128 0x3
+ 455 0049 0E       		.uleb128 0xe
+ 456 004a 00       		.byte	0
+ 457 004b 00       		.byte	0
+ 458 004c 07       		.uleb128 0x7
+ 459 004d 24       		.uleb128 0x24
+ 460 004e 00       		.byte	0
+ 461 004f 0B       		.uleb128 0xb
+ 462 0050 0B       		.uleb128 0xb
+ 463 0051 3E       		.uleb128 0x3e
+ 464 0052 0B       		.uleb128 0xb
+ 465 0053 03       		.uleb128 0x3
+ 466 0054 08       		.uleb128 0x8
+ 467 0055 00       		.byte	0
+ 468 0056 00       		.byte	0
+ 469 0057 08       		.uleb128 0x8
+ 470 0058 2E       		.uleb128 0x2e
+ 471 0059 01       		.byte	0x1
+ 472 005a 3F       		.uleb128 0x3f
+ 473 005b 0C       		.uleb128 0xc
+ 474 005c 03       		.uleb128 0x3
+ 475 005d 0E       		.uleb128 0xe
+ 476 005e 3A       		.uleb128 0x3a
+ 477 005f 0B       		.uleb128 0xb
+ 478 0060 3B       		.uleb128 0x3b
+ 479 0061 0B       		.uleb128 0xb
+ 480 0062 27       		.uleb128 0x27
+ 481 0063 0C       		.uleb128 0xc
+ 482 0064 11       		.uleb128 0x11
+ 483 0065 01       		.uleb128 0x1
+ 484 0066 12       		.uleb128 0x12
+ 485 0067 01       		.uleb128 0x1
+ 486 0068 40       		.uleb128 0x40
+ 487 0069 06       		.uleb128 0x6
+ 488 006a 9642     		.uleb128 0x2116
+ 489 006c 0C       		.uleb128 0xc
+ 490 006d 01       		.uleb128 0x1
+ 491 006e 13       		.uleb128 0x13
+ 492 006f 00       		.byte	0
+ 493 0070 00       		.byte	0
+ 494 0071 09       		.uleb128 0x9
+ 495 0072 05       		.uleb128 0x5
+ 496 0073 00       		.byte	0
+ 497 0074 03       		.uleb128 0x3
+ 498 0075 0E       		.uleb128 0xe
+ 499 0076 3A       		.uleb128 0x3a
+ 500 0077 0B       		.uleb128 0xb
+ 501 0078 3B       		.uleb128 0x3b
+ 502 0079 0B       		.uleb128 0xb
+ 503 007a 49       		.uleb128 0x49
+ 504 007b 13       		.uleb128 0x13
+ 505 007c 02       		.uleb128 0x2
+ 506 007d 0A       		.uleb128 0xa
+ 507 007e 00       		.byte	0
+ 508 007f 00       		.byte	0
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccguw8EI.s 			page 11
 
 
- 508 00ba 11       		.uleb128 0x11
- 509 00bb 01       		.uleb128 0x1
- 510 00bc 12       		.uleb128 0x12
- 511 00bd 01       		.uleb128 0x1
- 512 00be 58       		.uleb128 0x58
- 513 00bf 0B       		.uleb128 0xb
- 514 00c0 59       		.uleb128 0x59
- 515 00c1 0B       		.uleb128 0xb
- 516 00c2 00       		.byte	0
- 517 00c3 00       		.byte	0
- 518 00c4 10       		.uleb128 0x10
- 519 00c5 898201   		.uleb128 0x4109
- 520 00c8 01       		.byte	0x1
- 521 00c9 11       		.uleb128 0x11
- 522 00ca 01       		.uleb128 0x1
- 523 00cb 9342     		.uleb128 0x2113
- 524 00cd 0A       		.uleb128 0xa
- 525 00ce 00       		.byte	0
- 526 00cf 00       		.byte	0
- 527 00d0 11       		.uleb128 0x11
- 528 00d1 8A8201   		.uleb128 0x410a
- 529 00d4 00       		.byte	0
- 530 00d5 02       		.uleb128 0x2
- 531 00d6 0A       		.uleb128 0xa
- 532 00d7 9142     		.uleb128 0x2111
- 533 00d9 0A       		.uleb128 0xa
- 534 00da 00       		.byte	0
- 535 00db 00       		.byte	0
- 536 00dc 12       		.uleb128 0x12
- 537 00dd 15       		.uleb128 0x15
- 538 00de 01       		.byte	0x1
- 539 00df 27       		.uleb128 0x27
- 540 00e0 0C       		.uleb128 0xc
- 541 00e1 01       		.uleb128 0x1
- 542 00e2 13       		.uleb128 0x13
- 543 00e3 00       		.byte	0
- 544 00e4 00       		.byte	0
- 545 00e5 13       		.uleb128 0x13
- 546 00e6 05       		.uleb128 0x5
- 547 00e7 00       		.byte	0
- 548 00e8 49       		.uleb128 0x49
- 549 00e9 13       		.uleb128 0x13
- 550 00ea 00       		.byte	0
- 551 00eb 00       		.byte	0
- 552 00ec 14       		.uleb128 0x14
- 553 00ed 2E       		.uleb128 0x2e
- 554 00ee 01       		.byte	0x1
- 555 00ef 03       		.uleb128 0x3
- 556 00f0 0E       		.uleb128 0xe
- 557 00f1 3A       		.uleb128 0x3a
- 558 00f2 0B       		.uleb128 0xb
- 559 00f3 3B       		.uleb128 0x3b
- 560 00f4 0B       		.uleb128 0xb
- 561 00f5 27       		.uleb128 0x27
- 562 00f6 0C       		.uleb128 0xc
- 563 00f7 20       		.uleb128 0x20
- 564 00f8 0B       		.uleb128 0xb
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccupSofr.s 			page 12
+ 509 0080 0A       		.uleb128 0xa
+ 510 0081 15       		.uleb128 0x15
+ 511 0082 01       		.byte	0x1
+ 512 0083 27       		.uleb128 0x27
+ 513 0084 0C       		.uleb128 0xc
+ 514 0085 01       		.uleb128 0x1
+ 515 0086 13       		.uleb128 0x13
+ 516 0087 00       		.byte	0
+ 517 0088 00       		.byte	0
+ 518 0089 0B       		.uleb128 0xb
+ 519 008a 05       		.uleb128 0x5
+ 520 008b 00       		.byte	0
+ 521 008c 49       		.uleb128 0x49
+ 522 008d 13       		.uleb128 0x13
+ 523 008e 00       		.byte	0
+ 524 008f 00       		.byte	0
+ 525 0090 0C       		.uleb128 0xc
+ 526 0091 2E       		.uleb128 0x2e
+ 527 0092 01       		.byte	0x1
+ 528 0093 03       		.uleb128 0x3
+ 529 0094 0E       		.uleb128 0xe
+ 530 0095 3A       		.uleb128 0x3a
+ 531 0096 0B       		.uleb128 0xb
+ 532 0097 3B       		.uleb128 0x3b
+ 533 0098 0B       		.uleb128 0xb
+ 534 0099 27       		.uleb128 0x27
+ 535 009a 0C       		.uleb128 0xc
+ 536 009b 11       		.uleb128 0x11
+ 537 009c 01       		.uleb128 0x1
+ 538 009d 12       		.uleb128 0x12
+ 539 009e 01       		.uleb128 0x1
+ 540 009f 40       		.uleb128 0x40
+ 541 00a0 06       		.uleb128 0x6
+ 542 00a1 9642     		.uleb128 0x2116
+ 543 00a3 0C       		.uleb128 0xc
+ 544 00a4 01       		.uleb128 0x1
+ 545 00a5 13       		.uleb128 0x13
+ 546 00a6 00       		.byte	0
+ 547 00a7 00       		.byte	0
+ 548 00a8 0D       		.uleb128 0xd
+ 549 00a9 34       		.uleb128 0x34
+ 550 00aa 00       		.byte	0
+ 551 00ab 03       		.uleb128 0x3
+ 552 00ac 08       		.uleb128 0x8
+ 553 00ad 3A       		.uleb128 0x3a
+ 554 00ae 0B       		.uleb128 0xb
+ 555 00af 3B       		.uleb128 0x3b
+ 556 00b0 0B       		.uleb128 0xb
+ 557 00b1 49       		.uleb128 0x49
+ 558 00b2 13       		.uleb128 0x13
+ 559 00b3 02       		.uleb128 0x2
+ 560 00b4 0A       		.uleb128 0xa
+ 561 00b5 00       		.byte	0
+ 562 00b6 00       		.byte	0
+ 563 00b7 0E       		.uleb128 0xe
+ 564 00b8 2E       		.uleb128 0x2e
+ 565 00b9 01       		.byte	0x1
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccguw8EI.s 			page 12
 
 
- 565 00f9 01       		.uleb128 0x1
- 566 00fa 13       		.uleb128 0x13
- 567 00fb 00       		.byte	0
- 568 00fc 00       		.byte	0
- 569 00fd 15       		.uleb128 0x15
- 570 00fe 05       		.uleb128 0x5
- 571 00ff 00       		.byte	0
- 572 0100 03       		.uleb128 0x3
- 573 0101 0E       		.uleb128 0xe
- 574 0102 3A       		.uleb128 0x3a
- 575 0103 0B       		.uleb128 0xb
- 576 0104 3B       		.uleb128 0x3b
- 577 0105 0B       		.uleb128 0xb
- 578 0106 49       		.uleb128 0x49
- 579 0107 13       		.uleb128 0x13
- 580 0108 00       		.byte	0
- 581 0109 00       		.byte	0
- 582 010a 16       		.uleb128 0x16
- 583 010b 34       		.uleb128 0x34
- 584 010c 00       		.byte	0
- 585 010d 03       		.uleb128 0x3
- 586 010e 08       		.uleb128 0x8
- 587 010f 3A       		.uleb128 0x3a
- 588 0110 0B       		.uleb128 0xb
- 589 0111 3B       		.uleb128 0x3b
- 590 0112 0B       		.uleb128 0xb
- 591 0113 49       		.uleb128 0x49
- 592 0114 13       		.uleb128 0x13
- 593 0115 00       		.byte	0
- 594 0116 00       		.byte	0
- 595 0117 17       		.uleb128 0x17
- 596 0118 2E       		.uleb128 0x2e
- 597 0119 01       		.byte	0x1
- 598 011a 03       		.uleb128 0x3
- 599 011b 0E       		.uleb128 0xe
- 600 011c 3A       		.uleb128 0x3a
- 601 011d 0B       		.uleb128 0xb
- 602 011e 3B       		.uleb128 0x3b
- 603 011f 0B       		.uleb128 0xb
- 604 0120 27       		.uleb128 0x27
- 605 0121 0C       		.uleb128 0xc
- 606 0122 20       		.uleb128 0x20
- 607 0123 0B       		.uleb128 0xb
- 608 0124 00       		.byte	0
- 609 0125 00       		.byte	0
- 610 0126 18       		.uleb128 0x18
- 611 0127 05       		.uleb128 0x5
- 612 0128 00       		.byte	0
- 613 0129 03       		.uleb128 0x3
- 614 012a 08       		.uleb128 0x8
- 615 012b 3A       		.uleb128 0x3a
- 616 012c 0B       		.uleb128 0xb
- 617 012d 3B       		.uleb128 0x3b
- 618 012e 0B       		.uleb128 0xb
- 619 012f 49       		.uleb128 0x49
- 620 0130 13       		.uleb128 0x13
- 621 0131 00       		.byte	0
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccupSofr.s 			page 13
+ 566 00ba 03       		.uleb128 0x3
+ 567 00bb 0E       		.uleb128 0xe
+ 568 00bc 3A       		.uleb128 0x3a
+ 569 00bd 0B       		.uleb128 0xb
+ 570 00be 3B       		.uleb128 0x3b
+ 571 00bf 0B       		.uleb128 0xb
+ 572 00c0 27       		.uleb128 0x27
+ 573 00c1 0C       		.uleb128 0xc
+ 574 00c2 11       		.uleb128 0x11
+ 575 00c3 01       		.uleb128 0x1
+ 576 00c4 12       		.uleb128 0x12
+ 577 00c5 01       		.uleb128 0x1
+ 578 00c6 40       		.uleb128 0x40
+ 579 00c7 06       		.uleb128 0x6
+ 580 00c8 9742     		.uleb128 0x2117
+ 581 00ca 0C       		.uleb128 0xc
+ 582 00cb 00       		.byte	0
+ 583 00cc 00       		.byte	0
+ 584 00cd 0F       		.uleb128 0xf
+ 585 00ce 05       		.uleb128 0x5
+ 586 00cf 00       		.byte	0
+ 587 00d0 03       		.uleb128 0x3
+ 588 00d1 08       		.uleb128 0x8
+ 589 00d2 3A       		.uleb128 0x3a
+ 590 00d3 0B       		.uleb128 0xb
+ 591 00d4 3B       		.uleb128 0x3b
+ 592 00d5 0B       		.uleb128 0xb
+ 593 00d6 49       		.uleb128 0x49
+ 594 00d7 13       		.uleb128 0x13
+ 595 00d8 02       		.uleb128 0x2
+ 596 00d9 0A       		.uleb128 0xa
+ 597 00da 00       		.byte	0
+ 598 00db 00       		.byte	0
+ 599 00dc 00       		.byte	0
+ 600              		.section	.debug_loc,"",%progbits
+ 601              	.Ldebug_loc0:
+ 602              	.LLST2:
+ 603 0000 5A000000 		.4byte	.LFB5-.Ltext0
+ 604 0004 5C000000 		.4byte	.LCFI11-.Ltext0
+ 605 0008 0200     		.2byte	0x2
+ 606 000a 7D       		.byte	0x7d
+ 607 000b 00       		.sleb128 0
+ 608 000c 5C000000 		.4byte	.LCFI11-.Ltext0
+ 609 0010 5E000000 		.4byte	.LCFI12-.Ltext0
+ 610 0014 0200     		.2byte	0x2
+ 611 0016 7D       		.byte	0x7d
+ 612 0017 08       		.sleb128 8
+ 613 0018 5E000000 		.4byte	.LCFI12-.Ltext0
+ 614 001c 60000000 		.4byte	.LCFI13-.Ltext0
+ 615 0020 0200     		.2byte	0x2
+ 616 0022 7D       		.byte	0x7d
+ 617 0023 18       		.sleb128 24
+ 618 0024 60000000 		.4byte	.LCFI13-.Ltext0
+ 619 0028 96000000 		.4byte	.LCFI14-.Ltext0
+ 620 002c 0200     		.2byte	0x2
+ 621 002e 77       		.byte	0x77
+ 622 002f 18       		.sleb128 24
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccguw8EI.s 			page 13
 
 
- 622 0132 00       		.byte	0
- 623 0133 00       		.byte	0
- 624              		.section	.debug_loc,"",%progbits
- 625              	.Ldebug_loc0:
- 626              	.LLST0:
- 627 0000 00000000 		.4byte	.LFB5-.Ltext0
- 628 0004 02000000 		.4byte	.LCFI0-.Ltext0
- 629 0008 0200     		.2byte	0x2
- 630 000a 7D       		.byte	0x7d
- 631 000b 00       		.sleb128 0
- 632 000c 02000000 		.4byte	.LCFI0-.Ltext0
- 633 0010 3A000000 		.4byte	.LFE5-.Ltext0
- 634 0014 0200     		.2byte	0x2
- 635 0016 7D       		.byte	0x7d
- 636 0017 08       		.sleb128 8
- 637 0018 00000000 		.4byte	0
- 638 001c 00000000 		.4byte	0
- 639              	.LLST1:
- 640 0020 00000000 		.4byte	.LVL0-.Ltext0
- 641 0024 0E000000 		.4byte	.LVL1-.Ltext0
- 642 0028 0100     		.2byte	0x1
- 643 002a 50       		.byte	0x50
- 644 002b 0E000000 		.4byte	.LVL1-.Ltext0
- 645 002f 18000000 		.4byte	.LVL4-.Ltext0
- 646 0033 0400     		.2byte	0x4
- 647 0035 F3       		.byte	0xf3
- 648 0036 01       		.uleb128 0x1
- 649 0037 50       		.byte	0x50
- 650 0038 9F       		.byte	0x9f
- 651 0039 18000000 		.4byte	.LVL4-.Ltext0
- 652 003d 3A000000 		.4byte	.LFE5-.Ltext0
- 653 0041 0100     		.2byte	0x1
- 654 0043 50       		.byte	0x50
- 655 0044 00000000 		.4byte	0
- 656 0048 00000000 		.4byte	0
- 657              	.LLST2:
- 658 004c 00000000 		.4byte	.LVL0-.Ltext0
- 659 0050 0F000000 		.4byte	.LVL2-1-.Ltext0
- 660 0054 0100     		.2byte	0x1
- 661 0056 51       		.byte	0x51
- 662 0057 0F000000 		.4byte	.LVL2-1-.Ltext0
- 663 005b 18000000 		.4byte	.LVL4-.Ltext0
- 664 005f 0100     		.2byte	0x1
- 665 0061 54       		.byte	0x54
- 666 0062 18000000 		.4byte	.LVL4-.Ltext0
- 667 0066 3A000000 		.4byte	.LFE5-.Ltext0
- 668 006a 0100     		.2byte	0x1
- 669 006c 51       		.byte	0x51
- 670 006d 00000000 		.4byte	0
- 671 0071 00000000 		.4byte	0
- 672              	.LLST3:
- 673 0075 00000000 		.4byte	.LVL0-.Ltext0
- 674 0079 0F000000 		.4byte	.LVL2-1-.Ltext0
- 675 007d 0100     		.2byte	0x1
- 676 007f 52       		.byte	0x52
- 677 0080 0F000000 		.4byte	.LVL2-1-.Ltext0
- 678 0084 18000000 		.4byte	.LVL4-.Ltext0
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccupSofr.s 			page 14
+ 623 0030 96000000 		.4byte	.LCFI14-.Ltext0
+ 624 0034 98000000 		.4byte	.LCFI15-.Ltext0
+ 625 0038 0200     		.2byte	0x2
+ 626 003a 77       		.byte	0x77
+ 627 003b 08       		.sleb128 8
+ 628 003c 98000000 		.4byte	.LCFI15-.Ltext0
+ 629 0040 9A000000 		.4byte	.LFE5-.Ltext0
+ 630 0044 0200     		.2byte	0x2
+ 631 0046 7D       		.byte	0x7d
+ 632 0047 08       		.sleb128 8
+ 633 0048 00000000 		.4byte	0
+ 634 004c 00000000 		.4byte	0
+ 635              	.LLST1:
+ 636 0050 1C000000 		.4byte	.LFB4-.Ltext0
+ 637 0054 1E000000 		.4byte	.LCFI6-.Ltext0
+ 638 0058 0200     		.2byte	0x2
+ 639 005a 7D       		.byte	0x7d
+ 640 005b 00       		.sleb128 0
+ 641 005c 1E000000 		.4byte	.LCFI6-.Ltext0
+ 642 0060 20000000 		.4byte	.LCFI7-.Ltext0
+ 643 0064 0200     		.2byte	0x2
+ 644 0066 7D       		.byte	0x7d
+ 645 0067 08       		.sleb128 8
+ 646 0068 20000000 		.4byte	.LCFI7-.Ltext0
+ 647 006c 22000000 		.4byte	.LCFI8-.Ltext0
+ 648 0070 0200     		.2byte	0x2
+ 649 0072 7D       		.byte	0x7d
+ 650 0073 18       		.sleb128 24
+ 651 0074 22000000 		.4byte	.LCFI8-.Ltext0
+ 652 0078 56000000 		.4byte	.LCFI9-.Ltext0
+ 653 007c 0200     		.2byte	0x2
+ 654 007e 77       		.byte	0x77
+ 655 007f 18       		.sleb128 24
+ 656 0080 56000000 		.4byte	.LCFI9-.Ltext0
+ 657 0084 58000000 		.4byte	.LCFI10-.Ltext0
+ 658 0088 0200     		.2byte	0x2
+ 659 008a 77       		.byte	0x77
+ 660 008b 08       		.sleb128 8
+ 661 008c 58000000 		.4byte	.LCFI10-.Ltext0
+ 662 0090 5A000000 		.4byte	.LFE4-.Ltext0
+ 663 0094 0200     		.2byte	0x2
+ 664 0096 7D       		.byte	0x7d
+ 665 0097 08       		.sleb128 8
+ 666 0098 00000000 		.4byte	0
+ 667 009c 00000000 		.4byte	0
+ 668              	.LLST0:
+ 669 00a0 00000000 		.4byte	.LFB2-.Ltext0
+ 670 00a4 02000000 		.4byte	.LCFI0-.Ltext0
+ 671 00a8 0200     		.2byte	0x2
+ 672 00aa 7D       		.byte	0x7d
+ 673 00ab 00       		.sleb128 0
+ 674 00ac 02000000 		.4byte	.LCFI0-.Ltext0
+ 675 00b0 04000000 		.4byte	.LCFI1-.Ltext0
+ 676 00b4 0200     		.2byte	0x2
+ 677 00b6 7D       		.byte	0x7d
+ 678 00b7 04       		.sleb128 4
+ 679 00b8 04000000 		.4byte	.LCFI1-.Ltext0
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccguw8EI.s 			page 14
 
 
- 679 0088 0400     		.2byte	0x4
- 680 008a F3       		.byte	0xf3
- 681 008b 01       		.uleb128 0x1
- 682 008c 52       		.byte	0x52
- 683 008d 9F       		.byte	0x9f
- 684 008e 18000000 		.4byte	.LVL4-.Ltext0
- 685 0092 1A000000 		.4byte	.LVL5-.Ltext0
- 686 0096 0100     		.2byte	0x1
- 687 0098 52       		.byte	0x52
- 688 0099 1A000000 		.4byte	.LVL5-.Ltext0
- 689 009d 3A000000 		.4byte	.LFE5-.Ltext0
- 690 00a1 0400     		.2byte	0x4
- 691 00a3 F3       		.byte	0xf3
- 692 00a4 01       		.uleb128 0x1
- 693 00a5 52       		.byte	0x52
- 694 00a6 9F       		.byte	0x9f
- 695 00a7 00000000 		.4byte	0
- 696 00ab 00000000 		.4byte	0
- 697              	.LLST4:
- 698 00af 10000000 		.4byte	.LVL2-.Ltext0
- 699 00b3 16000000 		.4byte	.LVL3-.Ltext0
- 700 00b7 0100     		.2byte	0x1
- 701 00b9 54       		.byte	0x54
- 702 00ba 00000000 		.4byte	0
- 703 00be 00000000 		.4byte	0
- 704              	.LLST5:
- 705 00c2 1A000000 		.4byte	.LVL5-.Ltext0
- 706 00c6 24000000 		.4byte	.LVL6-.Ltext0
- 707 00ca 0100     		.2byte	0x1
- 708 00cc 52       		.byte	0x52
- 709 00cd 24000000 		.4byte	.LVL6-.Ltext0
- 710 00d1 2A000000 		.4byte	.LVL7-.Ltext0
- 711 00d5 0100     		.2byte	0x1
- 712 00d7 53       		.byte	0x53
- 713 00d8 2A000000 		.4byte	.LVL7-.Ltext0
- 714 00dc 2C000000 		.4byte	.LVL8-.Ltext0
- 715 00e0 0100     		.2byte	0x1
- 716 00e2 52       		.byte	0x52
- 717 00e3 2C000000 		.4byte	.LVL8-.Ltext0
- 718 00e7 32000000 		.4byte	.LVL9-.Ltext0
- 719 00eb 0100     		.2byte	0x1
- 720 00ed 53       		.byte	0x53
- 721 00ee 32000000 		.4byte	.LVL9-.Ltext0
- 722 00f2 34000000 		.4byte	.LVL10-.Ltext0
- 723 00f6 0100     		.2byte	0x1
- 724 00f8 52       		.byte	0x52
- 725 00f9 00000000 		.4byte	0
- 726 00fd 00000000 		.4byte	0
- 727              	.LLST6:
- 728 0101 1A000000 		.4byte	.LVL5-.Ltext0
- 729 0105 24000000 		.4byte	.LVL6-.Ltext0
- 730 0109 0100     		.2byte	0x1
- 731 010b 50       		.byte	0x50
- 732 010c 24000000 		.4byte	.LVL6-.Ltext0
- 733 0110 32000000 		.4byte	.LVL9-.Ltext0
- 734 0114 0100     		.2byte	0x1
- 735 0116 52       		.byte	0x52
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccupSofr.s 			page 15
+ 680 00bc 06000000 		.4byte	.LCFI2-.Ltext0
+ 681 00c0 0200     		.2byte	0x2
+ 682 00c2 7D       		.byte	0x7d
+ 683 00c3 10       		.sleb128 16
+ 684 00c4 06000000 		.4byte	.LCFI2-.Ltext0
+ 685 00c8 16000000 		.4byte	.LCFI3-.Ltext0
+ 686 00cc 0200     		.2byte	0x2
+ 687 00ce 77       		.byte	0x77
+ 688 00cf 10       		.sleb128 16
+ 689 00d0 16000000 		.4byte	.LCFI3-.Ltext0
+ 690 00d4 18000000 		.4byte	.LCFI4-.Ltext0
+ 691 00d8 0200     		.2byte	0x2
+ 692 00da 77       		.byte	0x77
+ 693 00db 04       		.sleb128 4
+ 694 00dc 18000000 		.4byte	.LCFI4-.Ltext0
+ 695 00e0 1A000000 		.4byte	.LCFI5-.Ltext0
+ 696 00e4 0200     		.2byte	0x2
+ 697 00e6 7D       		.byte	0x7d
+ 698 00e7 04       		.sleb128 4
+ 699 00e8 1A000000 		.4byte	.LCFI5-.Ltext0
+ 700 00ec 1C000000 		.4byte	.LFE2-.Ltext0
+ 701 00f0 0200     		.2byte	0x2
+ 702 00f2 7D       		.byte	0x7d
+ 703 00f3 00       		.sleb128 0
+ 704 00f4 00000000 		.4byte	0
+ 705 00f8 00000000 		.4byte	0
+ 706              		.section	.debug_aranges,"",%progbits
+ 707 0000 1C000000 		.4byte	0x1c
+ 708 0004 0200     		.2byte	0x2
+ 709 0006 00000000 		.4byte	.Ldebug_info0
+ 710 000a 04       		.byte	0x4
+ 711 000b 00       		.byte	0
+ 712 000c 0000     		.2byte	0
+ 713 000e 0000     		.2byte	0
+ 714 0010 00000000 		.4byte	.Ltext0
+ 715 0014 9A000000 		.4byte	.Letext0-.Ltext0
+ 716 0018 00000000 		.4byte	0
+ 717 001c 00000000 		.4byte	0
+ 718              		.section	.debug_line,"",%progbits
+ 719              	.Ldebug_line0:
+ 720 0000 B8000000 		.section	.debug_str,"MS",%progbits,1
+ 720      02007E00 
+ 720      00000201 
+ 720      FB0E0D00 
+ 720      01010101 
+ 721              	.LASF2:
+ 722 0000 6C6F6E67 		.ascii	"long long int\000"
+ 722      206C6F6E 
+ 722      6720696E 
+ 722      7400
+ 723              	.LASF5:
+ 724 000e 756E7369 		.ascii	"unsigned int\000"
+ 724      676E6564 
+ 724      20696E74 
+ 724      00
+ 725              	.LASF17:
+ 726 001b 5F73696E 		.ascii	"_singly_list_del_next\000"
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccguw8EI.s 			page 15
 
 
- 736 0117 32000000 		.4byte	.LVL9-.Ltext0
- 737 011b 34000000 		.4byte	.LVL10-.Ltext0
- 738 011f 0100     		.2byte	0x1
- 739 0121 50       		.byte	0x50
- 740 0122 00000000 		.4byte	0
- 741 0126 00000000 		.4byte	0
- 742              		.section	.debug_aranges,"",%progbits
- 743 0000 1C000000 		.4byte	0x1c
- 744 0004 0200     		.2byte	0x2
- 745 0006 00000000 		.4byte	.Ldebug_info0
- 746 000a 04       		.byte	0x4
- 747 000b 00       		.byte	0
- 748 000c 0000     		.2byte	0
- 749 000e 0000     		.2byte	0
- 750 0010 00000000 		.4byte	.Ltext0
- 751 0014 3A000000 		.4byte	.Letext0-.Ltext0
- 752 0018 00000000 		.4byte	0
- 753 001c 00000000 		.4byte	0
- 754              		.section	.debug_line,"",%progbits
- 755              	.Ldebug_line0:
- 756 0000 AF000000 		.section	.debug_str,"MS",%progbits,1
- 756      02007C00 
- 756      00000201 
- 756      FB0E0D00 
- 756      01010101 
- 757              	.LASF2:
- 758 0000 6C6F6E67 		.ascii	"long long int\000"
- 758      206C6F6E 
- 758      6720696E 
- 758      7400
- 759              	.LASF8:
- 760 000e 656E7469 		.ascii	"entity\000"
- 760      747900
- 761              	.LASF5:
- 762 0015 756E7369 		.ascii	"unsigned int\000"
- 762      676E6564 
- 762      20696E74 
- 762      00
- 763              	.LASF17:
- 764 0022 5F73696E 		.ascii	"_singly_list_del_next\000"
- 764      676C795F 
- 764      6C697374 
- 764      5F64656C 
- 764      5F6E6578 
- 765              	.LASF7:
- 766 0038 68656164 		.ascii	"head\000"
- 766      00
- 767              	.LASF16:
- 768 003d 5F73696E 		.ascii	"_singly_list_del\000"
- 768      676C795F 
- 768      6C697374 
- 768      5F64656C 
- 768      00
- 769              	.LASF13:
- 770 004e 73696E67 		.ascii	"singly_list_head\000"
- 770      6C795F6C 
- 770      6973745F 
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccupSofr.s 			page 16
+ 726      676C795F 
+ 726      6C697374 
+ 726      5F64656C 
+ 726      5F6E6578 
+ 727              	.LASF7:
+ 728 0031 68656164 		.ascii	"head\000"
+ 728      00
+ 729              	.LASF13:
+ 730 0036 73696E67 		.ascii	"singly_list_head\000"
+ 730      6C795F6C 
+ 730      6973745F 
+ 730      68656164 
+ 730      00
+ 731              	.LASF11:
+ 732 0047 2E2E2F2E 		.ascii	"../../source/src/kernel/OS_LIB/singly_linked_list.c"
+ 732      2E2F736F 
+ 732      75726365 
+ 732      2F737263 
+ 732      2F6B6572 
+ 733 007a 00       		.ascii	"\000"
+ 734              	.LASF6:
+ 735 007b 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 735      206C6F6E 
+ 735      6720756E 
+ 735      7369676E 
+ 735      65642069 
+ 736              	.LASF3:
+ 737 0092 756E7369 		.ascii	"unsigned char\000"
+ 737      676E6564 
+ 737      20636861 
+ 737      7200
+ 738              	.LASF9:
+ 739 00a0 636F7079 		.ascii	"copy_data\000"
+ 739      5F646174 
+ 739      6100
+ 740              	.LASF15:
+ 741 00aa 73696E67 		.ascii	"singly_list_del\000"
+ 741      6C795F6C 
+ 741      6973745F 
+ 741      64656C00 
+ 742              	.LASF12:
+ 743 00ba 463A5C6B 		.ascii	"F:\\kaka\\KAKAOS\\C\\windows\\Project\\RVMDK\243\250"
+ 743      616B615C 
+ 743      4B414B41 
+ 743      4F535C43 
+ 743      5C77696E 
+ 744 00e2 757635A3 		.ascii	"uv5\243\251\000"
+ 744      A900
+ 745              	.LASF8:
+ 746 00e8 656E7469 		.ascii	"entity\000"
+ 746      747900
+ 747              	.LASF4:
+ 748 00ef 73686F72 		.ascii	"short unsigned int\000"
+ 748      7420756E 
+ 748      7369676E 
+ 748      65642069 
+ 748      6E7400
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccguw8EI.s 			page 16
 
 
- 770      68656164 
- 770      00
- 771              	.LASF11:
- 772 005f 2E2E2F2E 		.ascii	"../../source/src/user/OS_LIB/singly_linked_list.c\000"
- 772      2E2F736F 
- 772      75726365 
- 772      2F737263 
- 772      2F757365 
- 773              	.LASF6:
- 774 0091 6C6F6E67 		.ascii	"long long unsigned int\000"
- 774      206C6F6E 
- 774      6720756E 
- 774      7369676E 
- 774      65642069 
- 775              	.LASF3:
- 776 00a8 756E7369 		.ascii	"unsigned char\000"
- 776      676E6564 
- 776      20636861 
- 776      7200
- 777              	.LASF9:
- 778 00b6 636F7079 		.ascii	"copy_data\000"
- 778      5F646174 
- 778      6100
- 779              	.LASF15:
- 780 00c0 73696E67 		.ascii	"singly_list_del\000"
- 780      6C795F6C 
- 780      6973745F 
- 780      64656C00 
- 781              	.LASF12:
- 782 00d0 473A5C55 		.ascii	"G:\\Users\\Jaxb\\Desktop\\KAKAOS-0.07  2019.2.21  f"
- 782      73657273 
- 782      5C4A6178 
- 782      625C4465 
- 782      736B746F 
- 783 00ff 6F722067 		.ascii	"or gcc\\Project\\RVMDK\243\250uv5\243\251\000"
- 783      63635C50 
- 783      726F6A65 
- 783      63745C52 
- 783      564D444B 
- 784              	.LASF4:
- 785 011b 73686F72 		.ascii	"short unsigned int\000"
- 785      7420756E 
- 785      7369676E 
- 785      65642069 
- 785      6E7400
- 786              	.LASF0:
- 787 012e 7369676E 		.ascii	"signed char\000"
- 787      65642063 
- 787      68617200 
- 788              	.LASF1:
- 789 013a 73686F72 		.ascii	"short int\000"
- 789      7420696E 
- 789      7400
- 790              	.LASF10:
- 791 0144 474E5520 		.ascii	"GNU C11 7.3.1 20180622 (release) [ARM/embedded-7-br"
- 791      43313120 
- 791      372E332E 
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccupSofr.s 			page 17
-
-
- 791      31203230 
- 791      31383036 
- 792 0177 616E6368 		.ascii	"anch revision 261907] -mcpu=cortex-m3 -mthumb -mapc"
- 792      20726576 
- 792      6973696F 
- 792      6E203236 
- 792      31393037 
- 793 01aa 732D6672 		.ascii	"s-frame -mthumb-interwork -mcpu=cortex-m3 -mthumb -"
- 793      616D6520 
- 793      2D6D7468 
- 793      756D622D 
- 793      696E7465 
- 794 01dd 67647761 		.ascii	"gdwarf-2 -O2\000"
- 794      72662D32 
- 794      202D4F32 
- 794      00
- 795              	.LASF14:
- 796 01ea 6E657874 		.ascii	"next\000"
- 796      00
- 797              		.ident	"GCC: (GNU Tools for Arm Embedded Processors 7-2018-q2-update) 7.3.1 20180622 (release) [AR
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccupSofr.s 			page 18
+ 749              	.LASF0:
+ 750 0102 7369676E 		.ascii	"signed char\000"
+ 750      65642063 
+ 750      68617200 
+ 751              	.LASF1:
+ 752 010e 73686F72 		.ascii	"short int\000"
+ 752      7420696E 
+ 752      7400
+ 753              	.LASF10:
+ 754 0118 474E5520 		.ascii	"GNU C11 7.3.1 20180622 (release) [ARM/embedded-7-br"
+ 754      43313120 
+ 754      372E332E 
+ 754      31203230 
+ 754      31383036 
+ 755 014b 616E6368 		.ascii	"anch revision 261907] -mcpu=cortex-m3 -mthumb -mapc"
+ 755      20726576 
+ 755      6973696F 
+ 755      6E203236 
+ 755      31393037 
+ 756 017e 732D6672 		.ascii	"s-frame -mthumb-interwork -mcpu=cortex-m3 -mthumb -"
+ 756      616D6520 
+ 756      2D6D7468 
+ 756      756D622D 
+ 756      696E7465 
+ 757 01b1 67647761 		.ascii	"gdwarf-2 -O0\000"
+ 757      72662D32 
+ 757      202D4F30 
+ 757      00
+ 758              	.LASF16:
+ 759 01be 5F73696E 		.ascii	"_singly_list_del\000"
+ 759      676C795F 
+ 759      6C697374 
+ 759      5F64656C 
+ 759      00
+ 760              	.LASF14:
+ 761 01cf 6E657874 		.ascii	"next\000"
+ 761      00
+ 762              		.ident	"GCC: (GNU Tools for Arm Embedded Processors 7-2018-q2-update) 7.3.1 20180622 (release) [AR
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccguw8EI.s 			page 17
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 singly_linked_list.c
-G:\Users\Jaxb\AppData\Local\Temp\ccupSofr.s:15     .text:00000000 $t
-G:\Users\Jaxb\AppData\Local\Temp\ccupSofr.s:23     .text:00000000 singly_list_del
+G:\Users\Jaxb\AppData\Local\Temp\ccguw8EI.s:15     .text:00000000 $t
+G:\Users\Jaxb\AppData\Local\Temp\ccguw8EI.s:21     .text:00000000 _singly_list_del_next
+G:\Users\Jaxb\AppData\Local\Temp\ccguw8EI.s:69     .text:0000001c _singly_list_del
+G:\Users\Jaxb\AppData\Local\Temp\ccguw8EI.s:140    .text:0000005a singly_list_del
 
 NO UNDEFINED SYMBOLS

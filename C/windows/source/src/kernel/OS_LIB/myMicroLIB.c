@@ -4,6 +4,7 @@
 #include <myassert.h>
 #include <kakaosstdint.h>
 #include <os_cpu.h>
+#include <export.h>
 
 unsigned long ka_pow(int x,unsigned int y)
 {
@@ -233,8 +234,6 @@ int ka_printf(const char *str,...)
 	                    }
 	                    res += count;//返回值长度增加​   
 	                    r_val = val; 
-						ka_putchar('0');
-	                    ka_putchar('x');
 	                    while(count)   
 	                    {   
 	                        ch = r_val / ka_pow(16, count - 1);   
@@ -276,8 +275,6 @@ int ka_printf(const char *str,...)
 	                    }
 	                    res += count;//返回值长度增加​   
 	                    r_val = val;
-	                    ka_putchar('0');
-	                    ka_putchar('x');
 	                    buffer = 8-count;
 	                    while(buffer--)
 	                    {
@@ -315,8 +312,8 @@ int ka_printf(const char *str,...)
 	}
 	va_end(ap);  
     return res;	
-
 }
+EXPORT_SYMBOL(ka_printf);
 
 int ka_strncmp(const char * str1, const char * str2, int num)
 {

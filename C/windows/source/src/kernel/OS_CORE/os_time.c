@@ -3,10 +3,11 @@
 #include <myMicroLIB.h>
 #include <myassert.h>
 #include <os_error.h>
+#include <export.h>
 
 volatile UINT64 g_time_tick_count = 0;
 
-inline UINT64 
+UINT64 
 get_tick(void)
 {
 	UINT64 num;
@@ -16,6 +17,7 @@ get_tick(void)
 	CPU_CRITICAL_EXIT();
 	return num;
 }
+EXPORT_SYMBOL(get_tick);
 
 #if CONFIG_TIME_EN
 
@@ -47,6 +49,7 @@ __init_system_time(void)
 	sys_time.year    =  OS_YEAR;
 	sys_time.day     =  OS_DAY;
 }
+EXPORT_SYMBOL(__init_system_time);
 
 
 /**
@@ -100,6 +103,7 @@ system_time_display(void)
 	sys_time.month,sys_time.date,sys_time.hour,sys_time.minute,sys_time.second,sys_time.day);
 	CPU_CRITICAL_EXIT();
 }
+EXPORT_SYMBOL(system_time_display);
 
 int set_time(struct time *time_ptr)
 {
@@ -123,5 +127,6 @@ int set_time(struct time *time_ptr)
 	CPU_CRITICAL_EXIT();
 	return FUN_EXECUTE_SUCCESSFULLY;
 }
+EXPORT_SYMBOL(set_time);
 
 #endif	

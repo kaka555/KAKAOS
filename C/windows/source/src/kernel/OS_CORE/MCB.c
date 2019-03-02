@@ -7,6 +7,7 @@
 #include <os_schedule.h>
 #include <os_suspend.h>
 #include <os_delay.h>
+#include <export.h>
 
 
 extern TCB * OSTCBCurPtr;
@@ -32,7 +33,6 @@ init_MCB(
 #if CONFIG_PARA_CHECK
 	if(NULL == MCB_ptr)
 	{
-		OS_ERROR_MESSAGE_DISPLAY(dasdasfasdas);
 		OS_ERROR_PARA_MESSAGE_DISPLAY(init_MCB,MCB_ptr);
 		return -ERROR_NULL_INPUT_PTR;
 	}
@@ -62,6 +62,7 @@ init_MCB(
 	CPU_CRITICAL_EXIT();
 	return FUN_EXECUTE_SUCCESSFULLY;
 }
+EXPORT_SYMBOL(init_MCB);
 
 int delete_MCB(MCB *MCB_ptr)
 {
@@ -96,6 +97,7 @@ int delete_MCB(MCB *MCB_ptr)
 	CPU_CRITICAL_EXIT();
 	return FUN_EXECUTE_SUCCESSFULLY;
 }
+EXPORT_SYMBOL(delete_MCB);
 
 int 
 p(
@@ -169,7 +171,7 @@ p(
 	CPU_CRITICAL_EXIT(); //exit  critical
 	return FUN_EXECUTE_SUCCESSFULLY;
 }
-
+EXPORT_SYMBOL(p);
 
 int 
 v(MCB *MCB_ptr)
@@ -202,6 +204,7 @@ v(MCB *MCB_ptr)
 	CPU_CRITICAL_EXIT(); //exit  critical
 	return FUN_EXECUTE_SUCCESSFULLY;
 }
+EXPORT_SYMBOL(v);
 
 void 
 clear_MCB_index(MCB *MCB_ptr)
@@ -213,5 +216,6 @@ clear_MCB_index(MCB *MCB_ptr)
 		MCB_ptr->resource_num = 0;
 	CPU_CRITICAL_EXIT();
 }
+EXPORT_SYMBOL(clear_MCB_index);
 
 /*************************end of MCB*****************************/

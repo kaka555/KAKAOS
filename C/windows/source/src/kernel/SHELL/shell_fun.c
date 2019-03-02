@@ -10,6 +10,8 @@
 #include <os_TCB_list.h>
 #include <printf_debug.h>
 #include <buddy.h>
+#include <osinit.h>
+#include <module.h>
 
 #if CONFIG_SHELL_EN
 
@@ -135,6 +137,64 @@ void shell_reboot(int argc, char const *argv[])
 	(void)argc;
 	(void)argv;
 	ReBoot();
+}
+
+extern void show_get_size(void);
+extern int add_page_alloc_record(unsigned int level,void *ptr);
+void shell_module(int argc, char const *argv[])
+{
+	void *buf;
+	char *shell_buf_ptr;
+	if(1 == argc)
+	{
+		buf = alloc_power3_page();
+		if(0 > add_page_alloc_record(3,buf))
+		{
+			ASSERT(0);
+		}
+	}
+	else
+	{
+		buf = ka_malloc(ka_atoi(argv[1]));
+	}
+	if (NULL == buf)
+	{
+		ka_printf("no enough room for module\n");
+		return ;
+	}
+
+	struct shell_buffer shell_buffer;
+	shell_buf_ptr = (char *)ka_malloc(20);
+	if(NULL == shell_buf_ptr)
+	{
+		ka_printf("no enough room for module\n");
+		goto out;
+	}
+	if(__init_shell_buffer(&shell_buffer,shell_buf_ptr,NULL) < 0)
+	{
+		ka_printf("module change buffer error\n");
+		goto out1;
+	}
+	struct shell_buffer *sys_shell_buffer_ptr = change_shell_buffer(&shell_buffer); // save the system input buffer
+	set_module_buffer(buf);
+
+	ka_printf("now transfer the module,input 'end' to end the transformation\n");
+	
+	shell_buffer_wait_str("end");  // thread will going to sleep
+
+	show_get_size();
+
+	change_shell_buffer(sys_shell_buffer_ptr);
+	ka_free(shell_buf_ptr);
+
+	ka_printf("execute module\n");
+	dlmodule_exec();
+	clear_module_buffer();
+	return ;
+out1:
+	ka_free(shell_buf_ptr);
+out:
+	ka_free(buf);
 }
 
 #if CONFIG_POWER_MANAGEMENT

@@ -1,4 +1,4 @@
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccEgJnWc.s 			page 1
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccregVf7.s 			page 1
 
 
    1              		.cpu cortex-m3
@@ -8,326 +8,255 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccEgJnWc.s 			page 1
    5              		.eabi_attribute 24, 1
    6              		.eabi_attribute 25, 1
    7              		.eabi_attribute 26, 1
-   8              		.eabi_attribute 30, 2
+   8              		.eabi_attribute 30, 6
    9              		.eabi_attribute 34, 1
   10              		.eabi_attribute 18, 4
   11              		.file	"main.c"
   12              		.text
   13              	.Ltext0:
   14              		.cfi_sections	.debug_frame
-  15              		.section	.text.startup,"ax",%progbits
-  16              		.align	1
-  17              		.p2align 2,,3
-  18              		.global	main
-  19              		.syntax unified
-  20              		.thumb
-  21              		.thumb_func
-  22              		.fpu softvfp
-  23              		.type	main, %function
-  24              	main:
-  25              	.LFB0:
-  26              		.file 1 "../../source/main/main.c"
+  15              		.align	1
+  16              		.global	main
+  17              		.syntax unified
+  18              		.thumb
+  19              		.thumb_func
+  20              		.fpu softvfp
+  21              		.type	main, %function
+  22              	main:
+  23              	.LFB0:
+  24              		.file 1 "../../source/main/main.c"
    1:../../source/main/main.c **** #include "os_cpu.h"
    2:../../source/main/main.c **** #include "osinit.h"
    3:../../source/main/main.c **** 
    4:../../source/main/main.c **** int main()
    5:../../source/main/main.c **** {
-  27              		.loc 1 5 0
-  28              		.cfi_startproc
-  29              		@ Volatile: function does not return.
-  30              		@ args = 0, pretend = 0, frame = 0
-  31              		@ frame_needed = 0, uses_anonymous_args = 0
-  32 0000 08B5     		push	{r3, lr}
-  33              	.LCFI0:
-  34              		.cfi_def_cfa_offset 8
-  35              		.cfi_offset 3, -8
-  36              		.cfi_offset 14, -4
+  25              		.loc 1 5 0
+  26              		.cfi_startproc
+  27              		@ args = 0, pretend = 0, frame = 0
+  28              		@ frame_needed = 1, uses_anonymous_args = 0
+  29 0000 80B5     		push	{r7, lr}
+  30              	.LCFI0:
+  31              		.cfi_def_cfa_offset 8
+  32              		.cfi_offset 7, -8
+  33              		.cfi_offset 14, -4
+  34 0002 00AF     		add	r7, sp, #0
+  35              	.LCFI1:
+  36              		.cfi_def_cfa_register 7
    6:../../source/main/main.c **** 	CPU_IntDis();
   37              		.loc 1 6 0
-  38 0002 FFF7FEFF 		bl	CPU_IntDis
-  39              	.LVL0:
+  38 0004 FFF7FEFF 		bl	CPU_IntDis
    7:../../source/main/main.c **** 	os_start();
-  40              		.loc 1 7 0
-  41 0006 FFF7FEFF 		bl	os_start
-  42              	.LVL1:
-  43              	.L2:
-  44 000a FEE7     		b	.L2
-  45              		.cfi_endproc
-  46              	.LFE0:
-  47              		.size	main, .-main
-  48              		.text
-  49              	.Letext0:
-  50              		.file 2 "../../source/include/os_cpu/os_cpu_stm32.h"
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccEgJnWc.s 			page 2
+  39              		.loc 1 7 0
+  40 0008 FFF7FEFF 		bl	os_start
+  41              	.L2:
+   8:../../source/main/main.c **** 	while(1)
+  42              		.loc 1 8 0 discriminator 1
+  43 000c FEE7     		b	.L2
+  44              		.cfi_endproc
+  45              	.LFE0:
+  46              		.size	main, .-main
+  47              	.Letext0:
+  48              		.section	.debug_info,"",%progbits
+  49              	.Ldebug_info0:
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccregVf7.s 			page 2
 
 
-  51              		.file 3 "../../source/include/os_core/osinit.h"
-  52              		.section	.debug_info,"",%progbits
-  53              	.Ldebug_info0:
-  54 0000 7E000000 		.4byte	0x7e
-  55 0004 0200     		.2byte	0x2
-  56 0006 00000000 		.4byte	.Ldebug_abbrev0
-  57 000a 04       		.byte	0x4
-  58 000b 01       		.uleb128 0x1
-  59 000c 09000000 		.4byte	.LASF3
-  60 0010 0C       		.byte	0xc
-  61 0011 AF000000 		.4byte	.LASF4
-  62 0015 E5000000 		.4byte	.LASF5
-  63 0019 00000000 		.4byte	.Ldebug_ranges0+0
-  64 001d 00000000 		.4byte	0
-  65 0021 00000000 		.4byte	0
-  66 0025 00000000 		.4byte	.Ldebug_line0
-  67 0029 02       		.uleb128 0x2
-  68 002a 04       		.byte	0x4
-  69 002b 07       		.byte	0x7
-  70 002c CD000000 		.4byte	.LASF0
-  71 0030 03       		.uleb128 0x3
-  72 0031 01       		.byte	0x1
-  73 0032 C8000000 		.4byte	.LASF6
-  74 0036 01       		.byte	0x1
-  75 0037 04       		.byte	0x4
-  76 0038 60000000 		.4byte	0x60
-  77 003c 00000000 		.4byte	.LFB0
-  78 0040 0C000000 		.4byte	.LFE0
-  79 0044 00000000 		.4byte	.LLST0
-  80 0048 01       		.byte	0x1
-  81 0049 60000000 		.4byte	0x60
-  82 004d 04       		.uleb128 0x4
-  83 004e 06000000 		.4byte	.LVL0
-  84 0052 67000000 		.4byte	0x67
-  85 0056 04       		.uleb128 0x4
-  86 0057 0A000000 		.4byte	.LVL1
-  87 005b 74000000 		.4byte	0x74
-  88 005f 00       		.byte	0
-  89 0060 05       		.uleb128 0x5
-  90 0061 04       		.byte	0x4
-  91 0062 05       		.byte	0x5
-  92 0063 696E7400 		.ascii	"int\000"
-  93 0067 06       		.uleb128 0x6
-  94 0068 01       		.byte	0x1
-  95 0069 01       		.byte	0x1
-  96 006a DA000000 		.4byte	.LASF1
-  97 006e DA000000 		.4byte	.LASF1
-  98 0072 02       		.byte	0x2
-  99 0073 31       		.byte	0x31
- 100 0074 06       		.uleb128 0x6
- 101 0075 01       		.byte	0x1
- 102 0076 01       		.byte	0x1
- 103 0077 00000000 		.4byte	.LASF2
- 104 007b 00000000 		.4byte	.LASF2
- 105 007f 03       		.byte	0x3
- 106 0080 0B       		.byte	0xb
- 107 0081 00       		.byte	0
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccEgJnWc.s 			page 3
+  50 0000 49000000 		.4byte	0x49
+  51 0004 0200     		.2byte	0x2
+  52 0006 00000000 		.4byte	.Ldebug_abbrev0
+  53 000a 04       		.byte	0x4
+  54 000b 01       		.uleb128 0x1
+  55 000c 00000000 		.4byte	.LASF1
+  56 0010 0C       		.byte	0xc
+  57 0011 D4000000 		.4byte	.LASF2
+  58 0015 A6000000 		.4byte	.LASF3
+  59 0019 00000000 		.4byte	.Ltext0
+  60 001d 0E000000 		.4byte	.Letext0
+  61 0021 00000000 		.4byte	.Ldebug_line0
+  62 0025 02       		.uleb128 0x2
+  63 0026 04       		.byte	0x4
+  64 0027 07       		.byte	0x7
+  65 0028 ED000000 		.4byte	.LASF0
+  66 002c 03       		.uleb128 0x3
+  67 002d 01       		.byte	0x1
+  68 002e FA000000 		.4byte	.LASF4
+  69 0032 01       		.byte	0x1
+  70 0033 04       		.byte	0x4
+  71 0034 45000000 		.4byte	0x45
+  72 0038 00000000 		.4byte	.LFB0
+  73 003c 0E000000 		.4byte	.LFE0
+  74 0040 00000000 		.4byte	.LLST0
+  75 0044 01       		.byte	0x1
+  76 0045 04       		.uleb128 0x4
+  77 0046 04       		.byte	0x4
+  78 0047 05       		.byte	0x5
+  79 0048 696E7400 		.ascii	"int\000"
+  80 004c 00       		.byte	0
+  81              		.section	.debug_abbrev,"",%progbits
+  82              	.Ldebug_abbrev0:
+  83 0000 01       		.uleb128 0x1
+  84 0001 11       		.uleb128 0x11
+  85 0002 01       		.byte	0x1
+  86 0003 25       		.uleb128 0x25
+  87 0004 0E       		.uleb128 0xe
+  88 0005 13       		.uleb128 0x13
+  89 0006 0B       		.uleb128 0xb
+  90 0007 03       		.uleb128 0x3
+  91 0008 0E       		.uleb128 0xe
+  92 0009 1B       		.uleb128 0x1b
+  93 000a 0E       		.uleb128 0xe
+  94 000b 11       		.uleb128 0x11
+  95 000c 01       		.uleb128 0x1
+  96 000d 12       		.uleb128 0x12
+  97 000e 01       		.uleb128 0x1
+  98 000f 10       		.uleb128 0x10
+  99 0010 06       		.uleb128 0x6
+ 100 0011 00       		.byte	0
+ 101 0012 00       		.byte	0
+ 102 0013 02       		.uleb128 0x2
+ 103 0014 24       		.uleb128 0x24
+ 104 0015 00       		.byte	0
+ 105 0016 0B       		.uleb128 0xb
+ 106 0017 0B       		.uleb128 0xb
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccregVf7.s 			page 3
 
 
- 108              		.section	.debug_abbrev,"",%progbits
- 109              	.Ldebug_abbrev0:
- 110 0000 01       		.uleb128 0x1
- 111 0001 11       		.uleb128 0x11
- 112 0002 01       		.byte	0x1
- 113 0003 25       		.uleb128 0x25
- 114 0004 0E       		.uleb128 0xe
- 115 0005 13       		.uleb128 0x13
- 116 0006 0B       		.uleb128 0xb
- 117 0007 03       		.uleb128 0x3
- 118 0008 0E       		.uleb128 0xe
- 119 0009 1B       		.uleb128 0x1b
- 120 000a 0E       		.uleb128 0xe
- 121 000b 55       		.uleb128 0x55
- 122 000c 06       		.uleb128 0x6
- 123 000d 11       		.uleb128 0x11
- 124 000e 01       		.uleb128 0x1
- 125 000f 52       		.uleb128 0x52
- 126 0010 01       		.uleb128 0x1
- 127 0011 10       		.uleb128 0x10
- 128 0012 06       		.uleb128 0x6
- 129 0013 00       		.byte	0
- 130 0014 00       		.byte	0
- 131 0015 02       		.uleb128 0x2
- 132 0016 24       		.uleb128 0x24
- 133 0017 00       		.byte	0
- 134 0018 0B       		.uleb128 0xb
- 135 0019 0B       		.uleb128 0xb
- 136 001a 3E       		.uleb128 0x3e
- 137 001b 0B       		.uleb128 0xb
- 138 001c 03       		.uleb128 0x3
- 139 001d 0E       		.uleb128 0xe
- 140 001e 00       		.byte	0
- 141 001f 00       		.byte	0
- 142 0020 03       		.uleb128 0x3
- 143 0021 2E       		.uleb128 0x2e
- 144 0022 01       		.byte	0x1
- 145 0023 3F       		.uleb128 0x3f
- 146 0024 0C       		.uleb128 0xc
- 147 0025 03       		.uleb128 0x3
- 148 0026 0E       		.uleb128 0xe
- 149 0027 3A       		.uleb128 0x3a
- 150 0028 0B       		.uleb128 0xb
- 151 0029 3B       		.uleb128 0x3b
- 152 002a 0B       		.uleb128 0xb
- 153 002b 49       		.uleb128 0x49
- 154 002c 13       		.uleb128 0x13
- 155 002d 11       		.uleb128 0x11
- 156 002e 01       		.uleb128 0x1
- 157 002f 12       		.uleb128 0x12
- 158 0030 01       		.uleb128 0x1
- 159 0031 40       		.uleb128 0x40
- 160 0032 06       		.uleb128 0x6
- 161 0033 9742     		.uleb128 0x2117
- 162 0035 0C       		.uleb128 0xc
- 163 0036 01       		.uleb128 0x1
- 164 0037 13       		.uleb128 0x13
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccEgJnWc.s 			page 4
+ 107 0018 3E       		.uleb128 0x3e
+ 108 0019 0B       		.uleb128 0xb
+ 109 001a 03       		.uleb128 0x3
+ 110 001b 0E       		.uleb128 0xe
+ 111 001c 00       		.byte	0
+ 112 001d 00       		.byte	0
+ 113 001e 03       		.uleb128 0x3
+ 114 001f 2E       		.uleb128 0x2e
+ 115 0020 00       		.byte	0
+ 116 0021 3F       		.uleb128 0x3f
+ 117 0022 0C       		.uleb128 0xc
+ 118 0023 03       		.uleb128 0x3
+ 119 0024 0E       		.uleb128 0xe
+ 120 0025 3A       		.uleb128 0x3a
+ 121 0026 0B       		.uleb128 0xb
+ 122 0027 3B       		.uleb128 0x3b
+ 123 0028 0B       		.uleb128 0xb
+ 124 0029 49       		.uleb128 0x49
+ 125 002a 13       		.uleb128 0x13
+ 126 002b 11       		.uleb128 0x11
+ 127 002c 01       		.uleb128 0x1
+ 128 002d 12       		.uleb128 0x12
+ 129 002e 01       		.uleb128 0x1
+ 130 002f 40       		.uleb128 0x40
+ 131 0030 06       		.uleb128 0x6
+ 132 0031 9642     		.uleb128 0x2116
+ 133 0033 0C       		.uleb128 0xc
+ 134 0034 00       		.byte	0
+ 135 0035 00       		.byte	0
+ 136 0036 04       		.uleb128 0x4
+ 137 0037 24       		.uleb128 0x24
+ 138 0038 00       		.byte	0
+ 139 0039 0B       		.uleb128 0xb
+ 140 003a 0B       		.uleb128 0xb
+ 141 003b 3E       		.uleb128 0x3e
+ 142 003c 0B       		.uleb128 0xb
+ 143 003d 03       		.uleb128 0x3
+ 144 003e 08       		.uleb128 0x8
+ 145 003f 00       		.byte	0
+ 146 0040 00       		.byte	0
+ 147 0041 00       		.byte	0
+ 148              		.section	.debug_loc,"",%progbits
+ 149              	.Ldebug_loc0:
+ 150              	.LLST0:
+ 151 0000 00000000 		.4byte	.LFB0-.Ltext0
+ 152 0004 02000000 		.4byte	.LCFI0-.Ltext0
+ 153 0008 0200     		.2byte	0x2
+ 154 000a 7D       		.byte	0x7d
+ 155 000b 00       		.sleb128 0
+ 156 000c 02000000 		.4byte	.LCFI0-.Ltext0
+ 157 0010 04000000 		.4byte	.LCFI1-.Ltext0
+ 158 0014 0200     		.2byte	0x2
+ 159 0016 7D       		.byte	0x7d
+ 160 0017 08       		.sleb128 8
+ 161 0018 04000000 		.4byte	.LCFI1-.Ltext0
+ 162 001c 0E000000 		.4byte	.LFE0-.Ltext0
+ 163 0020 0200     		.2byte	0x2
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccregVf7.s 			page 4
 
 
- 165 0038 00       		.byte	0
- 166 0039 00       		.byte	0
- 167 003a 04       		.uleb128 0x4
- 168 003b 898201   		.uleb128 0x4109
- 169 003e 00       		.byte	0
- 170 003f 11       		.uleb128 0x11
- 171 0040 01       		.uleb128 0x1
- 172 0041 31       		.uleb128 0x31
- 173 0042 13       		.uleb128 0x13
- 174 0043 00       		.byte	0
- 175 0044 00       		.byte	0
- 176 0045 05       		.uleb128 0x5
- 177 0046 24       		.uleb128 0x24
- 178 0047 00       		.byte	0
- 179 0048 0B       		.uleb128 0xb
- 180 0049 0B       		.uleb128 0xb
- 181 004a 3E       		.uleb128 0x3e
- 182 004b 0B       		.uleb128 0xb
- 183 004c 03       		.uleb128 0x3
- 184 004d 08       		.uleb128 0x8
- 185 004e 00       		.byte	0
- 186 004f 00       		.byte	0
- 187 0050 06       		.uleb128 0x6
- 188 0051 2E       		.uleb128 0x2e
- 189 0052 00       		.byte	0
- 190 0053 3F       		.uleb128 0x3f
- 191 0054 0C       		.uleb128 0xc
- 192 0055 3C       		.uleb128 0x3c
- 193 0056 0C       		.uleb128 0xc
- 194 0057 8740     		.uleb128 0x2007
- 195 0059 0E       		.uleb128 0xe
- 196 005a 03       		.uleb128 0x3
- 197 005b 0E       		.uleb128 0xe
- 198 005c 3A       		.uleb128 0x3a
- 199 005d 0B       		.uleb128 0xb
- 200 005e 3B       		.uleb128 0x3b
- 201 005f 0B       		.uleb128 0xb
- 202 0060 00       		.byte	0
- 203 0061 00       		.byte	0
- 204 0062 00       		.byte	0
- 205              		.section	.debug_loc,"",%progbits
- 206              	.Ldebug_loc0:
- 207              	.LLST0:
- 208 0000 00000000 		.4byte	.LFB0
- 209 0004 02000000 		.4byte	.LCFI0
- 210 0008 0200     		.2byte	0x2
- 211 000a 7D       		.byte	0x7d
- 212 000b 00       		.sleb128 0
- 213 000c 02000000 		.4byte	.LCFI0
- 214 0010 0C000000 		.4byte	.LFE0
- 215 0014 0200     		.2byte	0x2
- 216 0016 7D       		.byte	0x7d
- 217 0017 08       		.sleb128 8
- 218 0018 00000000 		.4byte	0
- 219 001c 00000000 		.4byte	0
- 220              		.section	.debug_aranges,"",%progbits
- 221 0000 1C000000 		.4byte	0x1c
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccEgJnWc.s 			page 5
+ 164 0022 77       		.byte	0x77
+ 165 0023 08       		.sleb128 8
+ 166 0024 00000000 		.4byte	0
+ 167 0028 00000000 		.4byte	0
+ 168              		.section	.debug_aranges,"",%progbits
+ 169 0000 1C000000 		.4byte	0x1c
+ 170 0004 0200     		.2byte	0x2
+ 171 0006 00000000 		.4byte	.Ldebug_info0
+ 172 000a 04       		.byte	0x4
+ 173 000b 00       		.byte	0
+ 174 000c 0000     		.2byte	0
+ 175 000e 0000     		.2byte	0
+ 176 0010 00000000 		.4byte	.Ltext0
+ 177 0014 0E000000 		.4byte	.Letext0-.Ltext0
+ 178 0018 00000000 		.4byte	0
+ 179 001c 00000000 		.4byte	0
+ 180              		.section	.debug_line,"",%progbits
+ 181              	.Ldebug_line0:
+ 182 0000 49000000 		.section	.debug_str,"MS",%progbits,1
+ 182      02002F00 
+ 182      00000201 
+ 182      FB0E0D00 
+ 182      01010101 
+ 183              	.LASF1:
+ 184 0000 474E5520 		.ascii	"GNU C11 7.3.1 20180622 (release) [ARM/embedded-7-br"
+ 184      43313120 
+ 184      372E332E 
+ 184      31203230 
+ 184      31383036 
+ 185 0033 616E6368 		.ascii	"anch revision 261907] -mcpu=cortex-m3 -mthumb -mapc"
+ 185      20726576 
+ 185      6973696F 
+ 185      6E203236 
+ 185      31393037 
+ 186 0066 732D6672 		.ascii	"s-frame -mthumb-interwork -mcpu=cortex-m3 -mthumb -"
+ 186      616D6520 
+ 186      2D6D7468 
+ 186      756D622D 
+ 186      696E7465 
+ 187 0099 67647761 		.ascii	"gdwarf-2 -O0\000"
+ 187      72662D32 
+ 187      202D4F30 
+ 187      00
+ 188              	.LASF3:
+ 189 00a6 463A5C6B 		.ascii	"F:\\kaka\\KAKAOS\\C\\windows\\Project\\RVMDK\243\250"
+ 189      616B615C 
+ 189      4B414B41 
+ 189      4F535C43 
+ 189      5C77696E 
+ 190 00ce 757635A3 		.ascii	"uv5\243\251\000"
+ 190      A900
+ 191              	.LASF2:
+ 192 00d4 2E2E2F2E 		.ascii	"../../source/main/main.c\000"
+ 192      2E2F736F 
+ 192      75726365 
+ 192      2F6D6169 
+ 192      6E2F6D61 
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccregVf7.s 			page 5
 
 
- 222 0004 0200     		.2byte	0x2
- 223 0006 00000000 		.4byte	.Ldebug_info0
- 224 000a 04       		.byte	0x4
- 225 000b 00       		.byte	0
- 226 000c 0000     		.2byte	0
- 227 000e 0000     		.2byte	0
- 228 0010 00000000 		.4byte	.LFB0
- 229 0014 0C000000 		.4byte	.LFE0-.LFB0
- 230 0018 00000000 		.4byte	0
- 231 001c 00000000 		.4byte	0
- 232              		.section	.debug_ranges,"",%progbits
- 233              	.Ldebug_ranges0:
- 234 0000 00000000 		.4byte	.LFB0
- 235 0004 0C000000 		.4byte	.LFE0
- 236 0008 00000000 		.4byte	0
- 237 000c 00000000 		.4byte	0
- 238              		.section	.debug_line,"",%progbits
- 239              	.Ldebug_line0:
- 240 0000 9B000000 		.section	.debug_str,"MS",%progbits,1
- 240      02008600 
- 240      00000201 
- 240      FB0E0D00 
- 240      01010101 
- 241              	.LASF2:
- 242 0000 6F735F73 		.ascii	"os_start\000"
- 242      74617274 
- 242      00
- 243              	.LASF3:
- 244 0009 474E5520 		.ascii	"GNU C11 7.3.1 20180622 (release) [ARM/embedded-7-br"
- 244      43313120 
- 244      372E332E 
- 244      31203230 
- 244      31383036 
- 245 003c 616E6368 		.ascii	"anch revision 261907] -mcpu=cortex-m3 -mthumb -mapc"
- 245      20726576 
- 245      6973696F 
- 245      6E203236 
- 245      31393037 
- 246 006f 732D6672 		.ascii	"s-frame -mthumb-interwork -mcpu=cortex-m3 -mthumb -"
- 246      616D6520 
- 246      2D6D7468 
- 246      756D622D 
- 246      696E7465 
- 247 00a2 67647761 		.ascii	"gdwarf-2 -O2\000"
- 247      72662D32 
- 247      202D4F32 
- 247      00
- 248              	.LASF4:
- 249 00af 2E2E2F2E 		.ascii	"../../source/main/main.c\000"
- 249      2E2F736F 
- 249      75726365 
- 249      2F6D6169 
- 249      6E2F6D61 
- 250              	.LASF6:
- 251 00c8 6D61696E 		.ascii	"main\000"
- 251      00
- 252              	.LASF0:
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccEgJnWc.s 			page 6
-
-
- 253 00cd 756E7369 		.ascii	"unsigned int\000"
- 253      676E6564 
- 253      20696E74 
- 253      00
- 254              	.LASF1:
- 255 00da 4350555F 		.ascii	"CPU_IntDis\000"
- 255      496E7444 
- 255      697300
- 256              	.LASF5:
- 257 00e5 473A5C55 		.ascii	"G:\\Users\\Jaxb\\Desktop\\KAKAOS-0.07  2019.2.21  f"
- 257      73657273 
- 257      5C4A6178 
- 257      625C4465 
- 257      736B746F 
- 258 0114 6F722067 		.ascii	"or gcc\\Project\\RVMDK\243\250uv5\243\251\000"
- 258      63635C50 
- 258      726F6A65 
- 258      63745C52 
- 258      564D444B 
- 259              		.ident	"GCC: (GNU Tools for Arm Embedded Processors 7-2018-q2-update) 7.3.1 20180622 (release) [AR
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccEgJnWc.s 			page 7
+ 193              	.LASF0:
+ 194 00ed 756E7369 		.ascii	"unsigned int\000"
+ 194      676E6564 
+ 194      20696E74 
+ 194      00
+ 195              	.LASF4:
+ 196 00fa 6D61696E 		.ascii	"main\000"
+ 196      00
+ 197              		.ident	"GCC: (GNU Tools for Arm Embedded Processors 7-2018-q2-update) 7.3.1 20180622 (release) [AR
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccregVf7.s 			page 6
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 main.c
-G:\Users\Jaxb\AppData\Local\Temp\ccEgJnWc.s:16     .text.startup:00000000 $t
-G:\Users\Jaxb\AppData\Local\Temp\ccEgJnWc.s:24     .text.startup:00000000 main
+G:\Users\Jaxb\AppData\Local\Temp\ccregVf7.s:15     .text:00000000 $t
+G:\Users\Jaxb\AppData\Local\Temp\ccregVf7.s:22     .text:00000000 main
 
 UNDEFINED SYMBOLS
 CPU_IntDis

@@ -6,6 +6,7 @@
 #include <os_schedule.h>
 #include <os_time.h>
 #include <os_cpu.h>
+#include <export.h>
 
 #if CONFIG_TIMER_EN
 
@@ -95,6 +96,7 @@ int timer_init(
 	CPU_CRITICAL_EXIT();
 	return FUN_EXECUTE_SUCCESSFULLY;
 }
+EXPORT_SYMBOL(timer_init);
 
 /**
  * This is a system function
@@ -128,6 +130,7 @@ int timer_create(
 	CPU_CRITICAL_EXIT();
 	return FUN_EXECUTE_SUCCESSFULLY;
 }
+EXPORT_SYMBOL(timer_create);
 
 /**
  * This is a system function
@@ -156,6 +159,7 @@ int timer_enable(struct timer *timer_ptr)
 	CPU_CRITICAL_EXIT();
 	return ret;
 }
+EXPORT_SYMBOL(timer_enable);
 
 /**
  * This is a system function
@@ -187,6 +191,7 @@ int timer_disable(struct timer *timer_ptr)
 	CPU_CRITICAL_EXIT();
 	return FUN_EXECUTE_SUCCESSFULLY;
 }
+EXPORT_SYMBOL(timer_disable);
 
 /**
  * This is a system function
@@ -220,6 +225,7 @@ int timer_delete(struct timer *timer_ptr)
 	CPU_CRITICAL_EXIT();
 	return FUN_EXECUTE_SUCCESSFULLY;
 }
+EXPORT_SYMBOL(timer_delete);
 
 /**
  * This is a system function
