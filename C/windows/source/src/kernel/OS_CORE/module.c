@@ -6,6 +6,8 @@
 #include <myassert.h>
 #include <export.h>
 
+#if CONFIG_MODULE
+
 /* RT-Thread error code definitions */
 #define RT_EOK                          0               /**< There is no error */
 #define RT_ERROR                        1               /**< A generic error happens */
@@ -343,235 +345,6 @@ rt_err_t dlmodule_load_shared_object(struct rt_dlmodule* module, void *module_pt
     return RT_EOK;
 }
 
-rt_err_t dlmodule_load_relocated_object(struct rt_dlmodule* module, void *module_ptr)
-{
-    UINT32 index, rodata_addr = 0, bss_addr = 0, data_addr = 0;
-    UINT32 module_addr = 0, module_size = 0;
-    UINT8 *ptr, *strtab, *shstrab;
-
-    /* get the ELF image size */
-    for (index = 0; index < elf_module->e_shnum; index ++)
-    {
-        /* text */
-        if (IS_PROG(shdr[index]) && IS_AX(shdr[index]))
-        {
-            module_size += shdr[index].sh_size;
-            module_addr = shdr[index].sh_addr;
-        }
-        /* rodata */
-        if (IS_PROG(shdr[index]) && IS_ALLOC(shdr[index]))
-        {
-            module_size += shdr[index].sh_size;
-        }
-        /* data */
-        if (IS_PROG(shdr[index]) && IS_AW(shdr[index]))
-        {
-            module_size += shdr[index].sh_size;
-        }
-        /* bss */
-        if (IS_NOPROG(shdr[index]) && IS_AW(shdr[index]))
-        {
-            module_size += shdr[index].sh_size;
-        }
-    }
-
-    /* no text, data and bss on image */
-    if (module_size == 0) return NULL;
-
-    module->vstart_addr = 0;
-
-    /* allocate module space */
-    ka_printf("module size is %u\n",module_size);
-    module->mem_space = ka_malloc(module_size);
-    if (module->mem_space == NULL)
-    {
-        ka_printf("Module: allocate space failed.\n");
-        return -RT_ERROR;
-    }
-    module->mem_size = module_size;
-    ka_printf("mem_space is %p\n",module->mem_space);
-
-    /* zero all space */
-    ptr = module->mem_space;
-    ka_memset(ptr, 0, module_size);
-
-    /* load text and data section */
-    for (index = 0; index < elf_module->e_shnum; index ++)
-    {
-        /* load text section */
-        if (IS_PROG(shdr[index]) && IS_AX(shdr[index]))
-        {
-            ka_memcpy(ptr,
-                      (UINT8 *)elf_module + shdr[index].sh_offset,
-                      shdr[index].sh_size);
-            ka_printf("load text 0x%x, size %d\n", ptr, shdr[index].sh_size);
-            ptr += shdr[index].sh_size;
-        }
-
-        /* load rodata section */
-        if (IS_PROG(shdr[index]) && IS_ALLOC(shdr[index]))
-        {
-            ka_memcpy(ptr,
-                      (UINT8 *)elf_module + shdr[index].sh_offset,
-                      shdr[index].sh_size);
-            rodata_addr = (UINT32)ptr;
-            ka_printf("load rodata 0x%x, size %d, rodata 0x%x\n", ptr,
-                      shdr[index].sh_size, *(UINT32 *)data_addr);
-            ptr += shdr[index].sh_size;
-        }
-
-        /* load data section */
-        if (IS_PROG(shdr[index]) && IS_AW(shdr[index]))
-        {
-            ka_memcpy(ptr,
-                      (UINT8 *)elf_module + shdr[index].sh_offset,
-                      shdr[index].sh_size);
-            data_addr = (UINT32)ptr;
-            ka_printf("load data 0x%x, size %d, data 0x%x\n", ptr,
-                      shdr[index].sh_size, *(UINT32 *)data_addr);
-            ptr += shdr[index].sh_size;
-        }
-
-        /* load bss section */
-        if (IS_NOPROG(shdr[index]) && IS_AW(shdr[index]))
-        {
-            ka_memset(ptr, 0, shdr[index].sh_size);
-            bss_addr = (UINT32)ptr;
-            ka_printf("load bss 0x%x, size %d\n", ptr, shdr[index].sh_size);
-        }
-    }
-
-    /* set module entry */
-    module->entry_addr = (rt_dlmodule_entry_func_t)((UINT8 *)module->mem_space + elf_module->e_entry - module_addr);
-    //module->entry_addr = (rt_dlmodule_entry_func_t)((UINT8 *)module->mem_space + elf_module->e_entry - module->vstart_addr);
-    ka_printf("module entry point is %p\n",module->entry_addr);
-    /* handle relocation section */
-    for (index = 0; index < elf_module->e_shnum; index ++) //number of section headers
-    {
-        UINT32 i, nr_reloc;
-        Elf32_Sym *symtab;
-        Elf32_Rel *rel;
-
-        if (!IS_REL(shdr[index]))
-        {
-            ka_printf("type is %u\n",shdr[index]);
-            continue;
-        }
-
-        /* get relocate item */
-        rel = (Elf32_Rel *)((UINT8 *)module_ptr + shdr[index].sh_offset);
-
-        /* locate .dynsym and .dynstr */
-        symtab   = (Elf32_Sym *)((UINT8 *)module_ptr +
-                                 shdr[shdr[index].sh_link].sh_offset);
-        strtab   = (UINT8 *)module_ptr +
-                   shdr[shdr[shdr[index].sh_link].sh_link].sh_offset;
-        shstrab  = (UINT8 *)module_ptr +
-                   shdr[elf_module->e_shstrndx].sh_offset;
-        nr_reloc = (UINT32)(shdr[index].sh_size / sizeof(Elf32_Rel));
-
-        /* relocate every items */
-        for (i = 0; i < nr_reloc; i ++)
-        {
-            ka_printf("relocate items round %d\n",i);
-
-            Elf32_Sym *sym = &symtab[ELF32_R_SYM(rel->r_info)];
-
-            ka_printf("relocate symbol: %s\n", strtab + sym->st_name);
-
-            if (sym->st_shndx != STN_UNDEF)  //符号所在段
-            {
-
-                ka_printf("!STN_UNDEF\n");
-
-                Elf32_Addr addr = 0;
-
-                if ((ELF_ST_TYPE(sym->st_info) == STT_SECTION) ||
-                        (ELF_ST_TYPE(sym->st_info) == STT_OBJECT))
-                {
-                    if (ka_strncmp((const char *)(shstrab +
-                                                  shdr[sym->st_shndx].sh_name), ELF_RODATA, 8) == 0)
-                    {
-                        /* relocate rodata section */
-                        ka_printf("rodata\n");
-                        addr = (Elf32_Addr)(rodata_addr + sym->st_value);
-                    }
-                    else if (ka_strncmp((const char *)
-                                        (shstrab + shdr[sym->st_shndx].sh_name), ELF_BSS, 5) == 0)
-                    {
-                        /* relocate bss section */
-                        ka_printf("bss\n");
-                        addr = (Elf32_Addr)bss_addr + sym->st_value;
-                    }
-                    else if (ka_strncmp((const char *)(shstrab + shdr[sym->st_shndx].sh_name),
-                                        ELF_DATA, 6) == 0)
-                    {
-                        /* relocate data section */
-                        ka_printf("data\n");
-                        addr = (Elf32_Addr)data_addr + sym->st_value;
-                    }
-
-                    if (addr != 0) dlmodule_relocate(module, rel, addr);
-                }
-                else if (ELF_ST_TYPE(sym->st_info) == STT_FUNC)
-                {
-                    ka_printf("function\n");
-
-                    addr = (Elf32_Addr)((UINT8 *) module->mem_space - module_addr + sym->st_value);
-
-                    /* relocate function */
-                    dlmodule_relocate(module, rel, addr);
-                }
-            }
-            else if (ELF_ST_TYPE(sym->st_info) == STT_FUNC)
-            {
-                ka_printf("STT_FUNC\n");
-
-                /* relocate function */
-                dlmodule_relocate(module, rel,
-                                  (Elf32_Addr)((UINT8 *)
-                                               module->mem_space
-                                               - module_addr
-                                               + sym->st_value));
-            }
-            else
-            {
-                ka_printf("other\n");
-
-                Elf32_Addr addr = NULL;
-
-                if (ELF32_R_TYPE(rel->r_info) != R_ARM_V4BX)
-                {
-                    ka_printf("relocate symbol: %s\n", strtab + sym->st_name);
-
-                    /* need to resolve symbol in kernel symbol table */
-                    addr = get_export_function_addr((const char *)(strtab + sym->st_name));
-                    ka_printf("get addr is %p\n",addr);
-                    if (addr != (Elf32_Addr)NULL)
-                    {
-                        dlmodule_relocate(module, rel, addr);
-                        ka_printf("symbol addr 0x%x\n", addr);
-                    }
-                    else
-                        ka_printf("Module: can't find %s in kernel symbol table\n",
-                                  strtab + sym->st_name);
-                }
-                else
-                {
-                    addr = (Elf32_Addr)((UINT8 *) module->mem_space - module_addr + sym->st_value);
-                    dlmodule_relocate(module, rel, addr);
-                }
-            }
-
-            rel ++;
-        }
-    }
-
-    return RT_EOK;
-}
-
-
-
 struct rt_dlmodule* dlmodule_load(void)
 {
     rt_err_t ret = RT_EOK;
@@ -603,15 +376,7 @@ struct rt_dlmodule* dlmodule_load(void)
 
     INIT_LIST_HEAD(&(module->object_list));
 
-    /* set the name of module */
-    //_dlmodule_set_name(module, filename);
-
-    if (elf_module->e_type == ET_REL)
-    {
-        ka_printf("load relocated file\n");
-        ret = dlmodule_load_relocated_object(module, module_ptr);
-    }
-    else if (elf_module->e_type == ET_DYN)
+    if (elf_module->e_type == ET_DYN)
     {
         ka_printf("load shared file\n");
         ret = dlmodule_load_shared_object(module, module_ptr);
@@ -624,10 +389,7 @@ struct rt_dlmodule* dlmodule_load(void)
 
     /* check return value */
     if (ret != RT_EOK) goto __exit;
-    ka_printf("4\n");
-    /* release module data */
-    ka_free(module_ptr);
-    ka_printf("5\n");
+
     /* increase module reference count */
     module->nref ++;
 
@@ -652,7 +414,6 @@ struct rt_dlmodule* dlmodule_load(void)
     return module;
 
 __exit:
-    ka_printf("6\n");
     if (module_ptr) ka_free(module_ptr);
 		
     //if (module) dlmodule_destroy(module);
@@ -721,3 +482,5 @@ void set_module_buffer(void *add)
 {
 	module_buffer = (char *)add;
 }
+
+#endif

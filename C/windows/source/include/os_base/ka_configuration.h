@@ -13,6 +13,7 @@
 #define CONFIG_SHELL_EN 					1
 #define CONFIG_PRINTF_DEBUG 				1
 #define CONFIG_POWER_MANAGEMENT 			1
+#define CONFIG_MODULE						1
 
 //parameter control
 #define CPU_BIT      						32

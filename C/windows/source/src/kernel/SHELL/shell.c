@@ -11,6 +11,7 @@
 #include <os_ready.h>
 #include <os_TCB_list.h>
 #include <os_cpu.h>
+#include <export.h>
 
 #if CONFIG_SHELL_EN
 
@@ -282,11 +283,13 @@ static struct command resident_command_6[] =
 	{
 		.command_name = "reboot",
 		.f = shell_reboot,
-	},
-	{
+	}
+#if CONFIG_MODULE
+	,{
 		.command_name = "module",
 		.f = shell_module,
 	}
+#endif
 };
 static struct command resident_command_7[] = 
 {
@@ -298,6 +301,12 @@ static struct command resident_command_7[] =
 	,{
 		.command_name = "debinfo",
 		.f = shell_debug_info,
+	}
+#endif
+#if CONFIG_MODULE
+	,{
+		.command_name = "symlist",
+		.f = shell_symbol_list_display,
 	}
 #endif
 	,{

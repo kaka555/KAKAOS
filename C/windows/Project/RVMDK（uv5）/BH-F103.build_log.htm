@@ -4,48 +4,369 @@
 <h1>µVision Build Log</h1>
 <h2>Project:</h2>
 F:\kaka\KAKAOS\C\windows\Project\RVMDK£¨uv5£©\BH-F103.uvprojx
-Project File Date:  02/25/2019
+Project File Date:  03/02/2019
 
 <h2>Output:</h2>
 Build target 'KAKAOS'
+compiling MCB.c...
+compiling message_queue.c...
 compiling module.c...
+compiling mutex.c...
+compiling os_time.c...
+compiling os_timer.c...
+compiling os_schedule.c...
+compiling export.c...
+compiling myMicroLIB.c...
+compiling shell.c...
 linking...
 ".\BH-F103.elf" - 0 Error(s), 0 Warning(s).
-Load "F:\\kaka\\KAKAOS\\C\\windows\\Project\\RVMDK£¨uv5£©\\BH-F103.elf" 
-Set JLink Project File to "F:\kaka\KAKAOS\C\windows\Project\RVMDK£¨uv5£©\JLinkSettings.ini"
-* JLink Info: Device "STM32F103ZE" selected (512 KB flash, 64 KB RAM).
- 
-JLink info:
-------------
-DLL: V4.80g, compiled Feb 13 2014 20:50:02
-Firmware: J-Link V9 compiled Mar  2 2018 17:07:57
-Hardware: V9.40
-S/N : 59402926 
-Feature(s) : RDI, GDB, FlashDL, FlashBP, JFlash 
- 
-* JLink Info: TotalIRLen = 9, IRPrint = 0x0011
-* JLink Info: TotalIRLen = 9, IRPrint = 0x0011
-* JLink Info: Found Cortex-M3 r1p1, Little endian.
-* JLink Info: FPUnit: 6 code (BP) slots and 2 literal slots
-* JLink Info: TPIU fitted.
-* JLink Info: ETM fitted.
-ROMTableAddr = 0xE00FF003
- 
-Target info:
-------------
-Device: STM32F103ZE
-VTarget = 3.319V
-State of Pins: 
-TCK: 1, TDI: 0, TDO: 1, TMS: 0, TRES: 1, TRST: 1
-Hardware-Breakpoints: 6
-Software-Breakpoints: 8192
-Watchpoints:          4
-JTAG speed: 2000 kHz
- 
-Erase Done.
-Programming Done.
-Verify OK.
-Application running ...
-</pre>
-</body>
-</html>
+er to incomplete type 'struct ka_module_symtab'
+".\BH-F103.elf" - 2 Error(s), 0 Warning(s).
+Target not created
+0x_dma.c...
+compiling stm32f10x_exti.c...
+compiling stm32f10x_flash.c...
+compiling stm32f10x_fsmc.c...
+compiling stm32f10x_gpio.c...
+compiling stm32f10x_i2c.c...
+compiling stm32f10x_iwdg.c...
+compiling stm32f10x_pwr.c...
+compiling stm32f10x_rcc.c...
+compiling stm32f10x_rtc.c...
+compiling stm32f10x_sdio.c...
+compiling stm32f10x_spi.c...
+compiling stm32f10x_tim.c...
+compiling stm32f10x_usart.c...
+compiling stm32f10x_wwdg.c...
+compiling MCB.c...
+compiling message_queue.c...
+compiling module.c...
+compiling mutex.c...
+compiling os_time.c...
+compiling os_timer.c...
+compiling osinit.c...
+compiling TCB.c...
+compiling os_delay.c...
+compiling os_ready.c...
+compiling os_schedule.c...
+compiling os_suspend.c...
+compiling os_TCB_list.c...
+compiling os_tick.c...
+compiling export.c...
+../../source/src/kernel/OS_CORE/export.c: In function 'get_export_function_addr':
+../../source/src/kernel/OS_CORE/export.c(17): error: increment of pointer to an incomplete type 'struct ka_module_symtab'
+../../source/src/kernel/OS_CORE/export.c(19): error: dereferencing pointer to incomplete type 'struct ka_module_symtab'
+../../source/src/kernel/OS_CORE/export.c: In function 'shell_symbol_list_display':
+../../source/src/kernel/OS_CORE/export.c(33): error: increment of pointer to an incomplete type 'struct ka_module_symtab'
+../../source/src/kernel/OS_CORE/export.c(35): error: dereferencing pointer to incomplete type 'struct ka_module_symtab'
+assembling CPU_A.s...
+assembling OS_CPU_A.s...
+compiling OS_CPU_STM32.c...
+compiling stm32f10x_it.c...
+compiling bsp.c...
+compiling bsp_usart.c...
+compiling sram.c...
+compiling buddy.c...
+compiling heap_oo.c...
+compiling insert_sort.c...
+compiling insert_sort_oo.c...
+compiling malloc.c...
+compiling myassert.c...
+compiling myMicroLIB.c...
+compiling singly_linked_list.c...
+compiling slab.c...
+compiling vector.c...
+compiling command_processor.c...
+compiling shell.c...
+compiling shell_debug.c...
+compiling shell_fun.c...
+".\BH-F103.elf" - 4 Error(s), 0 Warning(s).
+Target not created
+ you mean 'shell_v_display'?
+compiling shell_debug.c...
+compiling shell_fun.c...
+".\BH-F103.elf" - 5 Error(s), 0 Warning(s).
+Target not created
+or: note: in expansion of macro 'EXPORT_SYMBOL'
+compiling message_queue.c...
+../../source/include/os_core/export.h(15): warning: ISO C forbids conversion of function pointer to object pointer type [-Wpedantic]
+../../source/src/kernel/OS_CORE/message_queue.c(60): error: note: in expansion of macro 'EXPORT_SYMBOL'
+../../source/include/os_core/export.h(15): warning: ISO C forbids conversion of function pointer to object pointer type [-Wpedantic]
+../../source/src/kernel/OS_CORE/message_queue.c(150): error: note: in expansion of macro 'EXPORT_SYMBOL'
+../../source/src/kernel/OS_CORE/message_queue.c: In function 'msg_receive':
+../../source/include/os_lib/double_linked_list.h(91): warning: ISO C forbids braced-groups within expressions [-Wpedantic]
+../../source/include/os_lib/double_linked_list.h(120): error: note: in expansion of macro 'container_of'
+../../source/src/kernel/OS_CORE/message_queue.c(175): error: note: in expansion of macro 'list_entry'
+../../source/include/os_lib/double_linked_list.h(91): warning: ISO C forbids braced-groups within expressions [-Wpedantic]
+../../source/include/os_lib/double_linked_list.h(120): error: note: in expansion of macro 'container_of'
+../../source/src/kernel/OS_CORE/message_queue.c(243): error: note: in expansion of macro 'list_entry'
+../../source/src/kernel/OS_CORE/message_queue.c: At top level:
+../../source/include/os_core/export.h(15): warning: ISO C forbids conversion of function pointer to object pointer type [-Wpedantic]
+../../source/src/kernel/OS_CORE/message_queue.c(249): error: note: in expansion of macro 'EXPORT_SYMBOL'
+../../source/include/os_core/export.h(15): warning: ISO C forbids conversion of function pointer to object pointer type [-Wpedantic]
+../../source/src/kernel/OS_CORE/message_queue.c(296): error: note: in expansion of macro 'EXPORT_SYMBOL'
+../../source/include/os_core/export.h(15): warning: ISO C forbids conversion of function pointer to object pointer type [-Wpedantic]
+../../source/src/kernel/OS_CORE/message_queue.c(314): error: note: in expansion of macro 'EXPORT_SYMBOL'
+compiling module.c...
+../../source/src/kernel/OS_CORE/module.c: In function 'dlmodule_load_shared_object':
+../../source/src/kernel/OS_CORE/module.c(222): warning: pointer of type 'void *' used in arithmetic [-Wpointer-arith]
+../../source/src/kernel/OS_CORE/module.c(222): warning: pointer of type 'void *' used in arithmetic [-Wpointer-arith]
+../../source/src/kernel/OS_CORE/module.c(229): warning: pointer of type 'void *' used in arithmetic [-Wpointer-arith]
+../../source/src/kernel/OS_CORE/module.c(229): warning: pointer of type 'void *' used in arithmetic [-Wpointer-arith]
+../../source/src/kernel/OS_CORE/module.c(229): warning: ISO C forbids assignment between function pointer and 'void *' [-Wpedantic]
+../../source/src/kernel/OS_CORE/module.c(264): warning: pointer of type 'void *' used in arithmetic [-Wpointer-arith]
+../../source/src/kernel/OS_CORE/module.c(264): warning: pointer of type 'void *' used in arithmetic [-Wpointer-arith]
+../../source/src/kernel/OS_CORE/module.c(333): warning: pointer of type 'void *' used in arithmetic [-Wpointer-arith]
+../../source/src/kernel/OS_CORE/module.c(333): warning: pointer of type 'void *' used in arithmetic [-Wpointer-arith]
+compiling mutex.c...
+../../source/include/os_core/export.h(15): warning: ISO C forbids conversion of function pointer to object pointer type [-Wpedantic]
+../../source/src/kernel/OS_CORE/mutex.c(48): error: note: in expansion of macro 'EXPORT_SYMBOL'
+../../source/include/os_core/export.h(15): warning: ISO C forbids conversion of function pointer to object pointer type [-Wpedantic]
+../../source/src/kernel/OS_CORE/mutex.c(107): error: note: in expansion of macro 'EXPORT_SYMBOL'
+../../source/include/os_core/export.h(15): warning: ISO C forbids conversion of function pointer to object pointer type [-Wpedantic]
+../../source/src/kernel/OS_CORE/mutex.c(135): error: note: in expansion of macro 'EXPORT_SYMBOL'
+../../source/include/os_core/export.h(15): warning: ISO C forbids conversion of function pointer to object pointer type [-Wpedantic]
+../../source/src/kernel/OS_CORE/mutex.c(182): error: note: in expansion of macro 'EXPORT_SYMBOL'
+../../source/include/os_core/export.h(15): warning: ISO C forbids conversion of function pointer to object pointer type [-Wpedantic]
+../../source/src/kernel/OS_CORE/mutex.c(206): error: note: in expansion of macro 'EXPORT_SYMBOL'
+compiling os_time.c...
+../../source/include/os_core/export.h(15): warning: ISO C forbids conversion of function pointer to object pointer type [-Wpedantic]
+../../source/src/kernel/OS_CORE/os_time.c(20): error: note: in expansion of macro 'EXPORT_SYMBOL'
+../../source/include/os_core/export.h(15): warning: ISO C forbids conversion of function pointer to object pointer type [-Wpedantic]
+../../source/src/kernel/OS_CORE/os_time.c(52): error: note: in expansion of macro 'EXPORT_SYMBOL'
+../../source/include/os_core/export.h(15): warning: ISO C forbids conversion of function pointer to object pointer type [-Wpedantic]
+../../source/src/kernel/OS_CORE/os_time.c(106): error: note: in expansion of macro 'EXPORT_SYMBOL'
+../../source/include/os_core/export.h(15): warning: ISO C forbids conversion of function pointer to object pointer type [-Wpedantic]
+../../source/src/kernel/OS_CORE/os_time.c(130): error: note: in expansion of macro 'EXPORT_SYMBOL'
+compiling os_timer.c...
+../../source/include/os_core/export.h(15): warning: ISO C forbids conversion of function pointer to object pointer type [-Wpedantic]
+../../source/src/kernel/OS_CORE/os_timer.c(99): error: note: in expansion of macro 'EXPORT_SYMBOL'
+../../source/include/os_core/export.h(15): warning: ISO C forbids conversion of function pointer to object pointer type [-Wpedantic]
+../../source/src/kernel/OS_CORE/os_timer.c(133): error: note: in expansion of macro 'EXPORT_SYMBOL'
+../../source/include/os_core/export.h(15): warning: ISO C forbids conversion of function pointer to object pointer type [-Wpedantic]
+../../source/src/kernel/OS_CORE/os_timer.c(162): error: note: in expansion of macro 'EXPORT_SYMBOL'
+../../source/include/os_core/export.h(15): warning: ISO C forbids conversion of function pointer to object pointer type [-Wpedantic]
+../../source/src/kernel/OS_CORE/os_timer.c(194): error: note: in expansion of macro 'EXPORT_SYMBOL'
+../../source/include/os_core/export.h(15): warning: ISO C forbids conversion of function pointer to object pointer type [-Wpedantic]
+../../source/src/kernel/OS_CORE/os_timer.c(228): error: note: in expansion of macro 'EXPORT_SYMBOL'
+compiling osinit.c...
+../../source/src/kernel/OS_CORE/osinit.c: In function 'thread_init':
+../../source/include/os_lib/double_linked_list.h(91): warning: ISO C forbids braced-groups within expressions [-Wpedantic]
+../../source/include/os_lib/double_linked_list.h(120): error: note: in expansion of macro 'container_of'
+../../source/src/kernel/OS_CORE/osinit.c(313): error: note: in expansion of macro 'list_entry'
+../../source/include/os_lib/double_linked_list.h(91): warning: ISO C forbids braced-groups within expressions [-Wpedantic]
+../../source/include/os_lib/double_linked_list.h(120): error: note: in expansion of macro 'container_of'
+../../source/src/kernel/OS_CORE/osinit.c(314): error: note: in expansion of macro 'list_entry'
+../../source/include/os_lib/double_linked_list.h(91): warning: ISO C forbids braced-groups within expressions [-Wpedantic]
+../../source/include/os_lib/double_linked_list.h(120): error: note: in expansion of macro 'container_of'
+../../source/src/kernel/OS_CORE/osinit.c(320): error: note: in expansion of macro 'list_entry'
+compiling TCB.c...
+../../source/src/kernel/OS_CORE/TCB.c: In function 'task_init':
+../../source/src/kernel/OS_CORE/TCB.c(54): warning: ISO C forbids passing argument 2 of 'set_register' between function pointer and 'void *' [-Wpedantic]
+../../source/include/os_cpu/os_cpu_stm32.h(50): error: note: expected 'void *' but argument is of type 'functionptr {aka void (*)(void *)}'
+../../source/src/kernel/OS_CORE/TCB.c(54): warning: ISO C forbids passing argument 3 of 'set_register' between function pointer and 'void *' [-Wpedantic]
+../../source/include/os_cpu/os_cpu_stm32.h(50): error: note: expected 'void *' but argument is of type 'void (*)(void)'
+compiling os_delay.c...
+compiling os_ready.c...
+../../source/src/kernel/OS_CORE/schedule/os_ready.c: In function 'get_highest_prio_ready_TCB':
+../../source/include/os_lib/double_linked_list.h(91): warning: ISO C forbids braced-groups within expressions [-Wpedantic]
+../../source/include/os_lib/double_linked_list.h(120): error: note: in expansion of macro 'container_of'
+../../source/src/kernel/OS_CORE/schedule/os_ready.c(114): error: note: in expansion of macro 'list_entry'
+../../source/src/kernel/OS_CORE/schedule/os_ready.c: In function 'shell_check_os_ready':
+../../source/include/os_lib/double_linked_list.h(91): warning: ISO C forbids braced-groups within expressions [-Wpedantic]
+../../source/include/os_lib/double_linked_list.h(120): error: note: in expansion of macro 'container_of'
+../../source/src/kernel/OS_CORE/schedule/os_ready.c(158): error: note: in expansion of macro 'list_entry'
+../../source/include/os_lib/double_linked_list.h(91): warning: ISO C forbids braced-groups within expressions [-Wpedantic]
+../../source/include/os_lib/double_linked_list.h(120): error: note: in expansion of macro 'container_of'
+../../source/src/kernel/OS_CORE/schedule/os_ready.c(169): error: note: in expansion of macro 'list_entry'
+../../source/include/os_lib/double_linked_list.h(91): warning: ISO C forbids braced-groups within expressions [-Wpedantic]
+../../source/include/os_lib/double_linked_list.h(120): error: note: in expansion of macro 'container_of'
+../../source/src/kernel/OS_CORE/schedule/os_ready.c(173): error: note: in expansion of macro 'list_entry'
+../../source/include/os_lib/double_linked_list.h(91): warning: ISO C forbids braced-groups within expressions [-Wpedantic]
+../../source/include/os_lib/double_linked_list.h(120): error: note: in expansion of macro 'container_of'
+../../source/src/kernel/OS_CORE/schedule/os_ready.c(191): error: note: in expansion of macro 'list_entry'
+compiling os_schedule.c...
+../../source/include/os_core/export.h(15): warning: ISO C forbids conversion of function pointer to object pointer type [-Wpedantic]
+../../source/src/kernel/OS_CORE/schedule/os_schedule.c(41): error: note: in expansion of macro 'EXPORT_SYMBOL'
+../../source/include/os_core/export.h(15): warning: ISO C forbids conversion of function pointer to object pointer type [-Wpedantic]
+../../source/src/kernel/OS_CORE/schedule/os_schedule.c(94): error: note: in expansion of macro 'EXPORT_SYMBOL'
+../../source/include/os_core/export.h(15): warning: ISO C forbids conversion of function pointer to object pointer type [-Wpedantic]
+../../source/src/kernel/OS_CORE/schedule/os_schedule.c(128): error: note: in expansion of macro 'EXPORT_SYMBOL'
+../../source/include/os_core/export.h(15): warning: ISO C forbids conversion of function pointer to object pointer type [-Wpedantic]
+../../source/src/kernel/OS_CORE/schedule/os_schedule.c(165): error: note: in expansion of macro 'EXPORT_SYMBOL'
+../../source/include/os_core/export.h(15): warning: ISO C forbids conversion of function pointer to object pointer type [-Wpedantic]
+../../source/src/kernel/OS_CORE/schedule/os_schedule.c(199): error: note: in expansion of macro 'EXPORT_SYMBOL'
+compiling os_suspend.c...
+compiling os_TCB_list.c...
+../../source/src/kernel/OS_CORE/schedule/os_TCB_list.c: In function 'shell_check_TCB_list':
+../../source/include/os_lib/double_linked_list.h(91): warning: ISO C forbids braced-groups within expressions [-Wpedantic]
+../../source/include/os_lib/double_linked_list.h(120): error: note: in expansion of macro 'container_of'
+../../source/src/kernel/OS_CORE/schedule/os_TCB_list.c(138): error: note: in expansion of macro 'list_entry'
+../../source/src/kernel/OS_CORE/schedule/os_TCB_list.c: In function 'shell_stack_check':
+../../source/include/os_lib/double_linked_list.h(91): warning: ISO C forbids braced-groups within expressions [-Wpedantic]
+../../source/include/os_lib/double_linked_list.h(120): error: note: in expansion of macro 'container_of'
+../../source/src/kernel/OS_CORE/schedule/os_TCB_list.c(197): error: note: in expansion of macro 'list_entry'
+../../source/src/kernel/OS_CORE/schedule/os_TCB_list.c: In function 'shell_show_tasks_registers':
+../../source/include/os_lib/double_linked_list.h(91): warning: ISO C forbids braced-groups within expressions [-Wpedantic]
+../../source/include/os_lib/double_linked_list.h(120): error: note: in expansion of macro 'container_of'
+../../source/include/os_lib/double_linked_list.h(100): error: note: in expansion of macro 'list_entry'
+../../source/src/kernel/OS_CORE/schedule/os_TCB_list.c(237): error: note: in expansion of macro 'list_for_each_entry'
+../../source/include/os_lib/double_linked_list.h(91): warning: ISO C forbids braced-groups within expressions [-Wpedantic]
+../../source/include/os_lib/double_linked_list.h(120): error: note: in expansion of macro 'container_of'
+../../source/include/os_lib/double_linked_list.h(102): error: note: in expansion of macro 'list_entry'
+../../source/src/kernel/OS_CORE/schedule/os_TCB_list.c(237): error: note: in expansion of macro 'list_for_each_entry'
+compiling os_tick.c...
+compiling export.c...
+compiling OS_CPU_STM32.c...
+compiling stm32f10x_it.c...
+compiling bsp.c...
+compiling bsp_usart.c...
+compiling sram.c...
+compiling buddy.c...
+../../source/src/kernel/OS_LIB/buddy.c: In function 'check_buddy':
+../../source/src/kernel/OS_LIB/buddy.c(826): warning: ISO C99 requires at least one argument for the "..." in a variadic macro
+  PRINTF("now going to step1:check from flag to level array\n");
+../../source/src/kernel/OS_LIB/buddy.c(845): warning: ISO C99 requires at least one argument for the "..." in a variadic macro
+  PRINTF("Inspection step 1:check from flag to level array is completed.Nothing wrong\n");
+../../source/src/kernel/OS_LIB/buddy.c(846): warning: ISO C99 requires at least one argument for the "..." in a variadic macro
+  PRINTF("now going to step2:check from level array to flag\n");
+../../source/src/kernel/OS_LIB/buddy.c: In function 'shell_buddy_debug':
+../../source/src/kernel/OS_LIB/buddy.c(865): warning: ISO C99 requires at least one argument for the "..." in a variadic macro
+../../source/src/kernel/OS_LIB/buddy.c(866): warning: ISO C99 requires at least one argument for the "..." in a variadic macro
+../../source/src/kernel/OS_LIB/buddy.c(872): warning: ISO C99 requires at least one argument for the "..." in a variadic macro
+../../source/src/kernel/OS_LIB/buddy.c(873): warning: ISO C99 requires at least one argument for the "..." in a variadic macro
+   PRINTF("buddy flag infomation :\n");
+../../source/src/kernel/OS_LIB/buddy.c(881): warning: ISO C99 requires at least one argument for the "..." in a variadic macro
+../../source/src/kernel/OS_LIB/buddy.c(882): warning: ISO C99 requires at least one argument for the "..." in a variadic macro
+   PRINTF("each level's infomation :\n");
+../../source/src/kernel/OS_LIB/buddy.c(888): warning: ISO C99 requires at least one argument for the "..." in a variadic macro
+../../source/src/kernel/OS_LIB/buddy.c(898): warning: ISO C99 requires at least one argument for the "..." in a variadic macro
+../../source/src/kernel/OS_LIB/buddy.c(905): warning: ISO C99 requires at least one argument for the "..." in a variadic macro
+../../source/src/kernel/OS_LIB/buddy.c(908): warning: ISO C99 requires at least one argument for the "..." in a variadic macro
+../../source/src/kernel/OS_LIB/buddy.c(911): warning: ISO C99 requires at least one argument for the "..." in a variadic macro
+../../source/src/kernel/OS_LIB/buddy.c(915): warning: ISO C99 requires at least one argument for the "..." in a variadic macro
+../../source/src/kernel/OS_LIB/buddy.c(917): warning: ISO C99 requires at least one argument for the "..." in a variadic macro
+../../source/src/kernel/OS_LIB/buddy.c(920): warning: ISO C99 requires at least one argument for the "..." in a variadic macro
+compiling heap_oo.c...
+compiling insert_sort.c...
+../../source/src/kernel/OS_LIB/insert_sort.c: In function 'get_next_IL':
+../../source/include/os_lib/double_linked_list.h(91): warning: ISO C forbids braced-groups within expressions [-Wpedantic]
+../../source/include/os_lib/double_linked_list.h(120): error: note: in expansion of macro 'container_of'
+../../source/src/kernel/OS_LIB/insert_sort.c(24): error: note: in expansion of macro 'list_entry'
+../../source/src/kernel/OS_LIB/insert_sort.c: In function 'insert_chain':
+../../source/include/os_lib/double_linked_list.h(91): warning: ISO C forbids braced-groups within expressions [-Wpedantic]
+../../source/include/os_lib/double_linked_list.h(120): error: note: in expansion of macro 'container_of'
+../../source/src/kernel/OS_LIB/insert_sort.c(47): error: note: in expansion of macro 'list_entry'
+../../source/src/kernel/OS_LIB/insert_sort.c: In function 'find_in_chain':
+../../source/include/os_lib/double_linked_list.h(91): warning: ISO C forbids braced-groups within expressions [-Wpedantic]
+../../source/include/os_lib/double_linked_list.h(120): error: note: in expansion of macro 'container_of'
+../../source/src/kernel/OS_LIB/insert_sort.c(66): error: note: in expansion of macro 'list_entry'
+../../source/src/kernel/OS_LIB/insert_sort.c: In function 'delete_from_chain':
+../../source/include/os_lib/double_linked_list.h(91): warning: ISO C forbids braced-groups within expressions [-Wpedantic]
+../../source/include/os_lib/double_linked_list.h(120): error: note: in expansion of macro 'container_of'
+../../source/src/kernel/OS_LIB/insert_sort.c(81): error: note: in expansion of macro 'list_entry'
+../../source/src/kernel/OS_LIB/insert_sort.c: In function 'delete_first_in_chain':
+../../source/include/os_lib/double_linked_list.h(91): warning: ISO C forbids braced-groups within expressions [-Wpedantic]
+../../source/include/os_lib/double_linked_list.h(120): error: note: in expansion of macro 'container_of'
+../../source/src/kernel/OS_LIB/insert_sort.c(102): error: note: in expansion of macro 'list_entry'
+../../source/src/kernel/OS_LIB/insert_sort.c: In function 'find_first_bigger_IL':
+../../source/include/os_lib/double_linked_list.h(91): warning: ISO C forbids braced-groups within expressions [-Wpedantic]
+../../source/include/os_lib/double_linked_list.h(120): error: note: in expansion of macro 'container_of'
+../../source/src/kernel/OS_LIB/insert_sort.c(113): error: note: in expansion of macro 'list_entry'
+compiling insert_sort_oo.c...
+../../source/src/kernel/OS_LIB/insert_sort_oo.c: In function 'insert_sort_insert_into':
+../../source/include/os_lib/double_linked_list.h(91): warning: ISO C forbids braced-groups within expressions [-Wpedantic]
+../../source/include/os_lib/double_linked_list.h(120): error: note: in expansion of macro 'container_of'
+../../source/src/kernel/OS_LIB/insert_sort_oo.c(24): error: note: in expansion of macro 'list_entry'
+../../source/src/kernel/OS_LIB/insert_sort_oo.c: In function 'insert_sort_find_data':
+../../source/include/os_lib/double_linked_list.h(91): warning: ISO C forbids braced-groups within expressions [-Wpedantic]
+../../source/include/os_lib/double_linked_list.h(120): error: note: in expansion of macro 'container_of'
+../../source/src/kernel/OS_LIB/insert_sort_oo.c(60): error: note: in expansion of macro 'list_entry'
+../../source/src/kernel/OS_LIB/insert_sort_oo.c: In function 'insert_sort_find_data_with_id':
+../../source/include/os_lib/double_linked_list.h(91): warning: ISO C forbids braced-groups within expressions [-Wpedantic]
+../../source/include/os_lib/double_linked_list.h(120): error: note: in expansion of macro 'container_of'
+../../source/src/kernel/OS_LIB/insert_sort_oo.c(86): error: note: in expansion of macro 'list_entry'
+../../source/src/kernel/OS_LIB/insert_sort_oo.c: In function 'insert_sort_delete_head':
+../../source/include/os_lib/double_linked_list.h(91): warning: ISO C forbids braced-groups within expressions [-Wpedantic]
+../../source/include/os_lib/double_linked_list.h(120): error: note: in expansion of macro 'container_of'
+../../source/src/kernel/OS_LIB/insert_sort_oo.c(116): error: note: in expansion of macro 'list_entry'
+../../source/src/kernel/OS_LIB/insert_sort_oo.c: In function 'insert_sort_get_first_data_ptr':
+../../source/include/os_lib/double_linked_list.h(91): warning: ISO C forbids braced-groups within expressions [-Wpedantic]
+../../source/include/os_lib/double_linked_list.h(120): error: note: in expansion of macro 'container_of'
+../../source/src/kernel/OS_LIB/insert_sort_oo.c(229): error: note: in expansion of macro 'list_entry'
+compiling malloc.c...
+../../source/src/kernel/OS_LIB/malloc.c: In function 'dis_page_alloc_record':
+../../source/include/os_lib/singly_linked_list.h(42): warning: ISO C forbids braced-groups within expressions [-Wpedantic]
+../../source/src/kernel/OS_LIB/malloc.c(27): error: note: in expansion of macro 'singly_list_entry'
+../../source/src/kernel/OS_LIB/malloc.c: In function 'find_and_remove_record':
+../../source/include/os_lib/singly_linked_list.h(42): warning: ISO C forbids braced-groups within expressions [-Wpedantic]
+../../source/src/kernel/OS_LIB/malloc.c(61): error: note: in expansion of macro 'singly_list_entry'
+../../source/src/kernel/OS_LIB/malloc.c: In function 'ka_malloc':
+../../source/include/os_lib/double_linked_list.h(91): warning: ISO C forbids braced-groups within expressions [-Wpedantic]
+../../source/include/os_lib/double_linked_list.h(120): error: note: in expansion of macro 'container_of'
+../../source/src/kernel/OS_LIB/malloc.c(206): error: note: in expansion of macro 'list_entry'
+../../source/include/os_lib/double_linked_list.h(91): warning: ISO C forbids braced-groups within expressions [-Wpedantic]
+../../source/include/os_lib/double_linked_list.h(120): error: note: in expansion of macro 'container_of'
+../../source/src/kernel/OS_LIB/malloc.c(210): error: note: in expansion of macro 'list_entry'
+../../source/include/os_lib/double_linked_list.h(91): warning: ISO C forbids braced-groups within expressions [-Wpedantic]
+../../source/include/os_lib/double_linked_list.h(120): error: note: in expansion of macro 'container_of'
+../../source/src/kernel/OS_LIB/malloc.c(223): error: note: in expansion of macro 'list_entry'
+../../source/src/kernel/OS_LIB/malloc.c: In function 'free_find_in_slab_chain':
+../../source/include/os_lib/double_linked_list.h(91): warning: ISO C forbids braced-groups within expressions [-Wpedantic]
+../../source/include/os_lib/double_linked_list.h(120): error: note: in expansion of macro 'container_of'
+../../source/src/kernel/OS_LIB/malloc.c(309): error: note: in expansion of macro 'list_entry'
+../../source/src/kernel/OS_LIB/malloc.c: In function 'ka_free':
+../../source/include/os_lib/double_linked_list.h(91): warning: ISO C forbids braced-groups within expressions [-Wpedantic]
+../../source/include/os_lib/double_linked_list.h(120): error: note: in expansion of macro 'container_of'
+../../source/src/kernel/OS_LIB/malloc.c(351): error: note: in expansion of macro 'list_entry'
+../../source/include/os_lib/double_linked_list.h(91): warning: ISO C forbids braced-groups within expressions [-Wpedantic]
+../../source/include/os_lib/double_linked_list.h(120): error: note: in expansion of macro 'container_of'
+../../source/src/kernel/OS_LIB/malloc.c(352): error: note: in expansion of macro 'list_entry'
+../../source/src/kernel/OS_LIB/malloc.c: In function 'shell_check_kmem':
+../../source/include/os_lib/double_linked_list.h(91): warning: ISO C forbids braced-groups within expressions [-Wpedantic]
+../../source/include/os_lib/double_linked_list.h(120): error: note: in expansion of macro 'container_of'
+../../source/src/kernel/OS_LIB/malloc.c(402): error: note: in expansion of macro 'list_entry'
+../../source/include/os_lib/double_linked_list.h(91): warning: ISO C forbids braced-groups within expressions [-Wpedantic]
+../../source/include/os_lib/double_linked_list.h(120): error: note: in expansion of macro 'container_of'
+../../source/src/kernel/OS_LIB/malloc.c(404): error: note: in expansion of macro 'list_entry'
+../../source/src/kernel/OS_LIB/malloc.c: In function 'shell_check_slab':
+../../source/include/os_lib/double_linked_list.h(91): warning: ISO C forbids braced-groups within expressions [-Wpedantic]
+../../source/include/os_lib/double_linked_list.h(120): error: note: in expansion of macro 'container_of'
+../../source/src/kernel/OS_LIB/malloc.c(468): error: note: in expansion of macro 'list_entry'
+../../source/include/os_lib/double_linked_list.h(91): warning: ISO C forbids braced-groups within expressions [-Wpedantic]
+../../source/include/os_lib/double_linked_list.h(120): error: note: in expansion of macro 'container_of'
+../../source/src/kernel/OS_LIB/malloc.c(470): error: note: in expansion of macro 'list_entry'
+../../source/include/os_lib/double_linked_list.h(91): warning: ISO C forbids braced-groups within expressions [-Wpedantic]
+../../source/include/os_lib/double_linked_list.h(120): error: note: in expansion of macro 'container_of'
+../../source/src/kernel/OS_LIB/malloc.c(479): error: note: in expansion of macro 'list_entry'
+../../source/include/os_lib/double_linked_list.h(91): warning: ISO C forbids braced-groups within expressions [-Wpedantic]
+../../source/include/os_lib/double_linked_list.h(120): error: note: in expansion of macro 'container_of'
+../../source/src/kernel/OS_LIB/malloc.c(502): error: note: in expansion of macro 'list_entry'
+../../source/include/os_lib/double_linked_list.h(91): warning: ISO C forbids braced-groups within expressions [-Wpedantic]
+../../source/include/os_lib/double_linked_list.h(120): error: note: in expansion of macro 'container_of'
+../../source/src/kernel/OS_LIB/malloc.c(525): error: note: in expansion of macro 'list_entry'
+compiling myassert.c...
+compiling myMicroLIB.c...
+../../source/include/os_core/export.h(15): warning: ISO C forbids conversion of function pointer to object pointer type [-Wpedantic]
+../../source/src/kernel/OS_LIB/myMicroLIB.c(316): error: note: in expansion of macro 'EXPORT_SYMBOL'
+compiling singly_linked_list.c...
+compiling slab.c...
+compiling vector.c...
+compiling command_processor.c...
+../../source/src/kernel/SHELL/command_processor.c: In function 'match_and_execute_command':
+../../source/include/os_lib/singly_linked_list.h(42): warning: ISO C forbids braced-groups within expressions [-Wpedantic]
+../../source/src/kernel/SHELL/command_processor.c(84): error: note: in expansion of macro 'singly_list_entry'
+compiling shell.c...
+compiling shell_debug.c...
+../../source/src/kernel/SHELL/shell_debug.c: In function 'shell_debug_info':
+../../source/include/os_lib/singly_linked_list.h(42): warning: ISO C forbids braced-groups within expressions [-Wpedantic]
+../../source/src/kernel/SHELL/shell_debug.c(82): error: note: in expansion of macro 'singly_list_entry'
+../../source/src/kernel/SHELL/shell_debug.c: In function 'find_in_variable_array':
+../../source/include/os_lib/singly_linked_list.h(42): warning: ISO C forbids braced-groups within expressions [-Wpedantic]
+../../source/src/kernel/SHELL/shell_debug.c(110): error: note: in expansion of macro 'singly_list_entry'
+compiling shell_fun.c...
+../../source/src/kernel/SHELL/shell_fun.c: In function 'shell_memory':
+../../source/src/kernel/SHELL/shell_fun.c(53): warning: ISO C99 requires at least one argument for the "..." in a variadic macro
+../../source/src/kernel/SHELL/shell_fun.c(58): warning: ISO C99 requires at least one argument for the "..." in a variadic macro
+".\BH-F103.elf" - 118 Error(s), 106 Warning(s).
+Target not created

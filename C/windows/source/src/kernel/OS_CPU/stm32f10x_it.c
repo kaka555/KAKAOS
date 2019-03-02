@@ -255,8 +255,10 @@ void USART2_IRQHandler(void)
   SYS_ENTER_INTERRUPT();
   if(USART_GetITStatus(USART2,USART_IT_RXNE)!=RESET)
   {
-    put_in_module_buffer(USART_ReceiveData(USART2));      
-  }
+#if CONFIG_MODULE
+    put_in_module_buffer(USART_ReceiveData(USART2));
+#endif
+  }   
   SYS_EXIT_INTERRUPT();
 }
 

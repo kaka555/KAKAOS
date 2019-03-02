@@ -139,6 +139,7 @@ void shell_reboot(int argc, char const *argv[])
 	ReBoot();
 }
 
+#if CONFIG_MODULE
 extern void show_get_size(void);
 extern int add_page_alloc_record(unsigned int level,void *ptr);
 void shell_module(int argc, char const *argv[])
@@ -189,6 +190,7 @@ void shell_module(int argc, char const *argv[])
 
 	ka_printf("execute module\n");
 	dlmodule_exec();
+	ka_free(buf);
 	clear_module_buffer();
 	return ;
 out1:
@@ -196,6 +198,7 @@ out1:
 out:
 	ka_free(buf);
 }
+#endif
 
 #if CONFIG_POWER_MANAGEMENT
 extern void sys_sleep(void);
