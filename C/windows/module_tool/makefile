@@ -1,4 +1,4 @@
-src = kaka.c
+src = kaka.c led.c
 
 HOME = /home/ka/KAKAOS-0.07
 
@@ -18,25 +18,25 @@ FLAGS = -W -Wall $(INCLUDE) -mcpu=cortex-m3 -mthumb -fno-builtin -ffunction-sect
 
 LIBPATH = /home/ka/stm32/gcc-arm-none-eabi-5_4-2016q3/arm-none-eabi/lib/armv7-m/ -L/home/ka/stm32/gcc-arm-none-eabi-5_4-2016q3/lib/gcc/arm-none-eabi/5.4.1/armv7-m/
 
-LFLAGS = -r -nostartfiles -nostdlib  -L$(LIBPATH) -T stm32_flash.ld -e main -static -lgcc
+#LFLAGS = -r -nostartfiles -nostdlib  -L$(LIBPATH) -T stm32_flash.ld -e main -static -lgcc
+LFLAGS = -Bsymbolic -fno-common -nostartfiles -nostdlib -shared -fPIC -L$(LIBPATH) -T stm32_flash.ld -e main -static -lgcc
 
-all:target.ko
+all:target.so
 
-target.ko : $(src:.c=.o)
+target.so : $(src:.c=.o)
 	arm-none-eabi-ld $(LFLAGS) $^ -o $@
+	arm-none-eabi-strip -R .hash $@
 
 %.o : %.c
 	#arm-none-eabi-gcc $(FLAGS)  -fPIC -mlong-calls -c $< -o $@
 	arm-none-eabi-gcc $(FLAGS)  -mword-relocations -mlong-calls -c $< -o $@
 
 clean:
-	rm -rf *.o *.ko
+	rm -rf *.o *.so
 
 
 
 
 
 
-#arm-none-eabi-ld -z max-page-size=0x4 -nostartfiles -nostdlib $(src:.c=.o) -r -o $@
 #arm-none-eabi-strip -R .hash target.o
-#arm-none-eabi-strip -R .hash $(src:.c=.o)

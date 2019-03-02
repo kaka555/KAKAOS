@@ -185,6 +185,7 @@ void shell_module(int argc, char const *argv[])
 	show_get_size();
 
 	change_shell_buffer(sys_shell_buffer_ptr);
+	ka_free(shell_buf_ptr);
 
 	ka_printf("execute module\n");
 	dlmodule_exec();

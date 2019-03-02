@@ -443,6 +443,7 @@ rt_err_t dlmodule_load_relocated_object(struct rt_dlmodule* module, void *module
 
     /* set module entry */
     module->entry_addr = (rt_dlmodule_entry_func_t)((UINT8 *)module->mem_space + elf_module->e_entry - module_addr);
+    //module->entry_addr = (rt_dlmodule_entry_func_t)((UINT8 *)module->mem_space + elf_module->e_entry - module->vstart_addr);
     ka_printf("module entry point is %p\n",module->entry_addr);
     /* handle relocation section */
     for (index = 0; index < elf_module->e_shnum; index ++) //number of section headers
@@ -610,11 +611,11 @@ struct rt_dlmodule* dlmodule_load(void)
         ka_printf("load relocated file\n");
         ret = dlmodule_load_relocated_object(module, module_ptr);
     }
-    /*else if (elf_module->e_type == ET_DYN)
+    else if (elf_module->e_type == ET_DYN)
     {
         ka_printf("load shared file\n");
         ret = dlmodule_load_shared_object(module, module_ptr);
-    }*/
+    }
     else
     {
         ka_printf("Module: unsupported elf type\n");
