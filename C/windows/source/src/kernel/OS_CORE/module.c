@@ -61,6 +61,23 @@ void shell_list_module(int argc, char const *argv[])
     ka_printf("total %u modules\n",i);
 }
 
+static UINT32 get_mod_export_function_addr(const char *fun_name)
+{
+    struct dynamic_module *dynamic_module_ptr;
+    list_for_each_entry(dynamic_module_ptr,&module_list_head,module_list)
+    {
+        unsigned int i;
+        for(i=0;i<dynamic_module_ptr->export_symbols_num;++i)
+        {
+            if (0 == ka_strcmp(dynamic_module_ptr->export_symbols_array[i].name, fun_name))
+            {
+                return (UINT32)dynamic_module_ptr->export_symbols_array[i].addr;
+            }
+        }
+    }
+    return 0;
+}
+
 int dlmodule_relocate(struct dynamic_module *module, Elf32_Rel *rel, Elf32_Addr sym_val)
 {
     Elf32_Addr *where, tmp;
@@ -307,8 +324,8 @@ int dlmodule_load_shared_object(struct dynamic_module* module, void *module_ptr)
 
                 //ka_printf("relocate symbol: %s", strtab + sym->st_name);
                 /* need to resolve symbol in kernel symbol table */
-                addr = get_export_function_addr((const char *)(strtab + sym->st_name));
-                if (addr == 0)
+                addr = get_sys_export_function_addr((const char *)(strtab + sym->st_name));
+                if ((0 == addr) && (!(addr = get_mod_export_function_addr((const char *)(strtab + sym->st_name)))))
                 {
                     ka_printf("Module: can't find %s in kernel symbol table", strtab + sym->st_name);
                     unsolved = KA_TRUE;
@@ -359,6 +376,11 @@ int dlmodule_load_shared_object(struct dynamic_module* module, void *module_ptr)
                     --count;
                     module->init = module->module_space + symtab[i].st_value - module->vstart_addr;
                 }
+                else if(0 == ka_strcmp("exit_module",(const char *)(strtab + symtab[i].st_name)))
+                {
+                    --count;
+                    module->exit = module->module_space + symtab[i].st_value - module->vstart_addr;
+                }
             }
         }
 
@@ -371,7 +393,8 @@ int dlmodule_load_shared_object(struct dynamic_module* module, void *module_ptr)
 
             if ((ELF_ST_BIND(symtab[i].st_info) != STB_GLOBAL) ||
                 (ELF_ST_TYPE(symtab[i].st_info) != STT_FUNC)   ||
-                (0 == ka_strcmp("init_module",(const char *)(strtab + symtab[i].st_name))))
+                (0 == ka_strcmp("init_module",(const char *)(strtab + symtab[i].st_name))) ||
+                (0 == ka_strcmp("exit_module",(const char *)(strtab + symtab[i].st_name))))
                 continue;
 
             length = ka_strlen((const char *)(strtab + symtab[i].st_name)) + 1;

@@ -18,6 +18,9 @@
 
 #define module_init(initfn)                 \
     int init_module(void) __attribute__((alias(#initfn)))
+    
+#define module_exit(initfn)                 \
+    int exit_module(void) __attribute__((alias(#initfn)))
 
 //===================
 //module state

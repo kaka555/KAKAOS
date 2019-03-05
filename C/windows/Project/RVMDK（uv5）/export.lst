@@ -1,4 +1,4 @@
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccBvo5su.s 			page 1
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccr5ZR9D.s 			page 1
 
 
    1              		.cpu cortex-m3
@@ -25,13 +25,13 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccBvo5su.s 			page 1
   18      2F6B6572 
   19              		.text
   20              		.align	1
-  21              		.global	get_export_function_addr
+  21              		.global	get_sys_export_function_addr
   22              		.syntax unified
   23              		.thumb
   24              		.thumb_func
   25              		.fpu softvfp
-  26              		.type	get_export_function_addr, %function
-  27              	get_export_function_addr:
+  26              		.type	get_sys_export_function_addr, %function
+  27              	get_sys_export_function_addr:
   28              	.LFB0:
   29              		.file 1 "../../source/src/kernel/OS_CORE/export.c"
    1:../../source/src/kernel/OS_CORE/export.c **** #include <export.h>
@@ -44,7 +44,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccBvo5su.s 			page 1
    8:../../source/src/kernel/OS_CORE/export.c **** extern unsigned long _ka_module_symtab_begin;
    9:../../source/src/kernel/OS_CORE/export.c **** extern unsigned long _ka_module_symtab_end;
   10:../../source/src/kernel/OS_CORE/export.c **** 
-  11:../../source/src/kernel/OS_CORE/export.c **** UINT32 get_export_function_addr(const char *fun_name)
+  11:../../source/src/kernel/OS_CORE/export.c **** UINT32 get_sys_export_function_addr(const char *fun_name)
   12:../../source/src/kernel/OS_CORE/export.c **** {
   30              		.loc 1 12 0
   31              		.cfi_startproc
@@ -58,7 +58,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccBvo5su.s 			page 1
   39 0002 84B0     		sub	sp, sp, #16
   40              	.LCFI1:
   41              		.cfi_def_cfa_offset 24
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccBvo5su.s 			page 2
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccr5ZR9D.s 			page 2
 
 
   42 0004 00AF     		add	r7, sp, #0
@@ -118,7 +118,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccBvo5su.s 			page 1
   23:../../source/src/kernel/OS_CORE/export.c ****     return 0;
   84              		.loc 1 23 0
   85 0042 0023     		movs	r3, #0
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccBvo5su.s 			page 3
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccr5ZR9D.s 			page 3
 
 
   86              	.L5:
@@ -141,7 +141,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccBvo5su.s 			page 1
  102 0054 00000000 		.word	_ka_module_symtab_end
  103              		.cfi_endproc
  104              	.LFE0:
- 105              		.size	get_export_function_addr, .-get_export_function_addr
+ 105              		.size	get_sys_export_function_addr, .-get_sys_export_function_addr
  106              		.section	.rodata
  107 0029 000000   		.align	2
  108              	.LC1:
@@ -178,7 +178,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccBvo5su.s 			page 1
  132 005a 84B0     		sub	sp, sp, #16
  133              	.LCFI6:
  134              		.cfi_def_cfa_offset 24
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccBvo5su.s 			page 4
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccr5ZR9D.s 			page 4
 
 
  135 005c 00AF     		add	r7, sp, #0
@@ -238,7 +238,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccBvo5su.s 			page 1
  177 0090 2C000000 		.word	.LC1
  178 0094 00000000 		.word	_ka_module_symtab_begin
  179 0098 44000000 		.word	.LC2
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccBvo5su.s 			page 5
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccr5ZR9D.s 			page 5
 
 
  180 009c 00000000 		.word	_ka_module_symtab_end
@@ -255,21 +255,21 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccBvo5su.s 			page 1
  191 0006 00000000 		.4byte	.Ldebug_abbrev0
  192 000a 04       		.byte	0x4
  193 000b 01       		.uleb128 0x1
- 194 000c 73010000 		.4byte	.LASF19
+ 194 000c 77010000 		.4byte	.LASF19
  195 0010 0C       		.byte	0xc
- 196 0011 CF000000 		.4byte	.LASF20
- 197 0015 7E000000 		.4byte	.LASF21
+ 196 0011 D3000000 		.4byte	.LASF20
+ 197 0015 82000000 		.4byte	.LASF21
  198 0019 00000000 		.4byte	.Ltext0
  199 001d A0000000 		.4byte	.Letext0
  200 0021 00000000 		.4byte	.Ldebug_line0
  201 0025 02       		.uleb128 0x2
  202 0026 01       		.byte	0x1
  203 0027 06       		.byte	0x6
- 204 0028 42010000 		.4byte	.LASF0
+ 204 0028 46010000 		.4byte	.LASF0
  205 002c 02       		.uleb128 0x2
  206 002d 02       		.byte	0x2
  207 002e 05       		.byte	0x5
- 208 002f 69010000 		.4byte	.LASF1
+ 208 002f 6D010000 		.4byte	.LASF1
  209 0033 03       		.uleb128 0x3
  210 0034 04       		.byte	0x4
  211 0035 05       		.byte	0x5
@@ -281,11 +281,11 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccBvo5su.s 			page 1
  217 0041 02       		.uleb128 0x2
  218 0042 01       		.byte	0x1
  219 0043 08       		.byte	0x8
- 220 0044 BC000000 		.4byte	.LASF3
+ 220 0044 C0000000 		.4byte	.LASF3
  221 0048 02       		.uleb128 0x2
  222 0049 02       		.byte	0x2
  223 004a 07       		.byte	0x7
- 224 004b 2F010000 		.4byte	.LASF4
+ 224 004b 33010000 		.4byte	.LASF4
  225 004f 04       		.uleb128 0x4
  226 0050 1B000000 		.4byte	.LASF22
  227 0054 03       		.byte	0x3
@@ -298,18 +298,18 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccBvo5su.s 			page 1
  234 0061 02       		.uleb128 0x2
  235 0062 08       		.byte	0x8
  236 0063 07       		.byte	0x7
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccBvo5su.s 			page 6
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccr5ZR9D.s 			page 6
 
 
- 237 0064 67000000 		.4byte	.LASF6
+ 237 0064 6B000000 		.4byte	.LASF6
  238 0068 05       		.uleb128 0x5
- 239 0069 56000000 		.4byte	.LASF23
+ 239 0069 5A000000 		.4byte	.LASF23
  240 006d 08       		.byte	0x8
  241 006e 02       		.byte	0x2
  242 006f 08       		.byte	0x8
  243 0070 91000000 		.4byte	0x91
  244 0074 06       		.uleb128 0x6
- 245 0075 AC000000 		.4byte	.LASF7
+ 245 0075 B0000000 		.4byte	.LASF7
  246 0079 02       		.byte	0x2
  247 007a 0A       		.byte	0xa
  248 007b 91000000 		.4byte	0x91
@@ -317,7 +317,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccBvo5su.s 			page 1
  250 0080 23       		.byte	0x23
  251 0081 00       		.uleb128 0
  252 0082 06       		.uleb128 0x6
- 253 0083 B7000000 		.4byte	.LASF8
+ 253 0083 BB000000 		.4byte	.LASF8
  254 0087 02       		.byte	0x2
  255 0088 0B       		.byte	0xb
  256 0089 93000000 		.4byte	0x93
@@ -333,11 +333,11 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccBvo5su.s 			page 1
  266 0099 02       		.uleb128 0x2
  267 009a 01       		.byte	0x1
  268 009b 08       		.byte	0x8
- 269 009c CA000000 		.4byte	.LASF9
+ 269 009c CE000000 		.4byte	.LASF9
  270 00a0 09       		.uleb128 0x9
  271 00a1 99000000 		.4byte	0x99
  272 00a5 0A       		.uleb128 0xa
- 273 00a6 12010000 		.4byte	.LASF11
+ 273 00a6 16010000 		.4byte	.LASF11
  274 00aa 01       		.byte	0x1
  275 00ab 08       		.byte	0x8
  276 00ac B2000000 		.4byte	0xb2
@@ -346,9 +346,9 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccBvo5su.s 			page 1
  279 00b2 02       		.uleb128 0x2
  280 00b3 04       		.byte	0x4
  281 00b4 07       		.byte	0x7
- 282 00b5 44000000 		.4byte	.LASF10
+ 282 00b5 48000000 		.4byte	.LASF10
  283 00b9 0A       		.uleb128 0xa
- 284 00ba 4E010000 		.4byte	.LASF12
+ 284 00ba 52010000 		.4byte	.LASF12
  285 00be 01       		.byte	0x1
  286 00bf 09       		.byte	0x9
  287 00c0 B2000000 		.4byte	0xb2
@@ -356,9 +356,9 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccBvo5su.s 			page 1
  289 00c5 01       		.byte	0x1
  290 00c6 0B       		.uleb128 0xb
  291 00c7 01       		.byte	0x1
- 292 00c8 F8000000 		.4byte	.LASF15
+ 292 00c8 FC000000 		.4byte	.LASF15
  293 00cc 01       		.byte	0x1
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccBvo5su.s 			page 7
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccr5ZR9D.s 			page 7
 
 
  294 00cd 1A       		.byte	0x1a
@@ -369,7 +369,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccBvo5su.s 			page 1
  299 00db 01       		.byte	0x1
  300 00dc 0B010000 		.4byte	0x10b
  301 00e0 0C       		.uleb128 0xc
- 302 00e1 2A010000 		.4byte	.LASF13
+ 302 00e1 2E010000 		.4byte	.LASF13
  303 00e5 01       		.byte	0x1
  304 00e6 1A       		.byte	0x1a
  305 00e7 33000000 		.4byte	0x33
@@ -377,7 +377,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccBvo5su.s 			page 1
  307 00ec 91       		.byte	0x91
  308 00ed 6C       		.sleb128 -20
  309 00ee 0C       		.uleb128 0xc
- 310 00ef 64010000 		.4byte	.LASF14
+ 310 00ef 68010000 		.4byte	.LASF14
  311 00f3 01       		.byte	0x1
  312 00f4 1A       		.byte	0x1a
  313 00f5 0B010000 		.4byte	0x10b
@@ -385,7 +385,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccBvo5su.s 			page 1
  315 00fa 91       		.byte	0x91
  316 00fb 68       		.sleb128 -24
  317 00fc 0D       		.uleb128 0xd
- 318 00fd B1000000 		.4byte	.LASF18
+ 318 00fd B5000000 		.4byte	.LASF18
  319 0101 01       		.byte	0x1
  320 0102 1E       		.byte	0x1e
  321 0103 11010000 		.4byte	0x111
@@ -418,11 +418,11 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccBvo5su.s 			page 1
  348 013c 02       		.byte	0x2
  349 013d 91       		.byte	0x91
  350 013e 6C       		.sleb128 -20
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccBvo5su.s 			page 8
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccr5ZR9D.s 			page 8
 
 
  351 013f 0D       		.uleb128 0xd
- 352 0140 B1000000 		.4byte	.LASF18
+ 352 0140 B5000000 		.4byte	.LASF18
  353 0144 01       		.byte	0x1
  354 0145 0E       		.byte	0xe
  355 0146 11010000 		.4byte	0x111
@@ -478,7 +478,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccBvo5su.s 			page 1
  405 002a 16       		.uleb128 0x16
  406 002b 00       		.byte	0
  407 002c 03       		.uleb128 0x3
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccBvo5su.s 			page 9
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccr5ZR9D.s 			page 9
 
 
  408 002d 0E       		.uleb128 0xe
@@ -538,7 +538,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccBvo5su.s 			page 1
  462 0063 00       		.byte	0
  463 0064 09       		.uleb128 0x9
  464 0065 26       		.uleb128 0x26
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccBvo5su.s 			page 10
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccr5ZR9D.s 			page 10
 
 
  465 0066 00       		.byte	0
@@ -598,7 +598,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccBvo5su.s 			page 1
  519 009d 3B       		.uleb128 0x3b
  520 009e 0B       		.uleb128 0xb
  521 009f 49       		.uleb128 0x49
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccBvo5su.s 			page 11
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccr5ZR9D.s 			page 11
 
 
  522 00a0 13       		.uleb128 0x13
@@ -658,7 +658,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccBvo5su.s 			page 1
  576 000c 5A000000 		.4byte	.LCFI5-.Ltext0
  577 0010 5C000000 		.4byte	.LCFI6-.Ltext0
  578 0014 0200     		.2byte	0x2
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccBvo5su.s 			page 12
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccr5ZR9D.s 			page 12
 
 
  579 0016 7D       		.byte	0x7d
@@ -718,7 +718,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccBvo5su.s 			page 1
  633 0097 08       		.sleb128 8
  634 0098 00000000 		.4byte	0
  635 009c 00000000 		.4byte	0
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccBvo5su.s 			page 13
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccr5ZR9D.s 			page 13
 
 
  636              		.section	.debug_aranges,"",%progbits
@@ -758,137 +758,137 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccBvo5su.s 			page 1
  658      6E616D65 
  658      00
  659              	.LASF16:
- 660 002b 6765745F 		.ascii	"get_export_function_addr\000"
+ 660 002b 6765745F 		.ascii	"get_sys_export_function_addr\000"
+ 660      7379735F 
  660      6578706F 
  660      72745F66 
  660      756E6374 
- 660      696F6E5F 
  661              	.LASF10:
- 662 0044 6C6F6E67 		.ascii	"long unsigned int\000"
+ 662 0048 6C6F6E67 		.ascii	"long unsigned int\000"
  662      20756E73 
  662      69676E65 
  662      6420696E 
  662      7400
  663              	.LASF23:
- 664 0056 6B615F6D 		.ascii	"ka_module_symtab\000"
+ 664 005a 6B615F6D 		.ascii	"ka_module_symtab\000"
  664      6F64756C 
  664      655F7379 
  664      6D746162 
  664      00
  665              	.LASF6:
- 666 0067 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 666 006b 6C6F6E67 		.ascii	"long long unsigned int\000"
  666      206C6F6E 
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccBvo5su.s 			page 14
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccr5ZR9D.s 			page 14
 
 
  666      6720756E 
  666      7369676E 
  666      65642069 
  667              	.LASF21:
- 668 007e 463A5C6B 		.ascii	"F:\\kaka\\KAKAOS\\C\\windows\\Project\\RVMDK\243\250"
+ 668 0082 463A5C6B 		.ascii	"F:\\kaka\\KAKAOS\\C\\windows\\Project\\RVMDK\243\250"
  668      616B615C 
  668      4B414B41 
  668      4F535C43 
  668      5C77696E 
- 669 00a6 757635A3 		.ascii	"uv5\243\251\000"
+ 669 00aa 757635A3 		.ascii	"uv5\243\251\000"
  669      A900
  670              	.LASF7:
- 671 00ac 61646472 		.ascii	"addr\000"
+ 671 00b0 61646472 		.ascii	"addr\000"
  671      00
  672              	.LASF18:
- 673 00b1 696E6465 		.ascii	"index\000"
+ 673 00b5 696E6465 		.ascii	"index\000"
  673      7800
  674              	.LASF8:
- 675 00b7 6E616D65 		.ascii	"name\000"
+ 675 00bb 6E616D65 		.ascii	"name\000"
  675      00
  676              	.LASF3:
- 677 00bc 756E7369 		.ascii	"unsigned char\000"
+ 677 00c0 756E7369 		.ascii	"unsigned char\000"
  677      676E6564 
  677      20636861 
  677      7200
  678              	.LASF9:
- 679 00ca 63686172 		.ascii	"char\000"
+ 679 00ce 63686172 		.ascii	"char\000"
  679      00
  680              	.LASF20:
- 681 00cf 2E2E2F2E 		.ascii	"../../source/src/kernel/OS_CORE/export.c\000"
+ 681 00d3 2E2E2F2E 		.ascii	"../../source/src/kernel/OS_CORE/export.c\000"
  681      2E2F736F 
  681      75726365 
  681      2F737263 
  681      2F6B6572 
  682              	.LASF15:
- 683 00f8 7368656C 		.ascii	"shell_symbol_list_display\000"
+ 683 00fc 7368656C 		.ascii	"shell_symbol_list_display\000"
  683      6C5F7379 
  683      6D626F6C 
  683      5F6C6973 
  683      745F6469 
  684              	.LASF11:
- 685 0112 5F6B615F 		.ascii	"_ka_module_symtab_begin\000"
+ 685 0116 5F6B615F 		.ascii	"_ka_module_symtab_begin\000"
  685      6D6F6475 
  685      6C655F73 
  685      796D7461 
  685      625F6265 
  686              	.LASF13:
- 687 012a 61726763 		.ascii	"argc\000"
+ 687 012e 61726763 		.ascii	"argc\000"
  687      00
  688              	.LASF4:
- 689 012f 73686F72 		.ascii	"short unsigned int\000"
+ 689 0133 73686F72 		.ascii	"short unsigned int\000"
  689      7420756E 
  689      7369676E 
  689      65642069 
  689      6E7400
  690              	.LASF0:
- 691 0142 7369676E 		.ascii	"signed char\000"
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccBvo5su.s 			page 15
+ 691 0146 7369676E 		.ascii	"signed char\000"
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccr5ZR9D.s 			page 15
 
 
  691      65642063 
  691      68617200 
  692              	.LASF12:
- 693 014e 5F6B615F 		.ascii	"_ka_module_symtab_end\000"
+ 693 0152 5F6B615F 		.ascii	"_ka_module_symtab_end\000"
  693      6D6F6475 
  693      6C655F73 
  693      796D7461 
  693      625F656E 
  694              	.LASF14:
- 695 0164 61726776 		.ascii	"argv\000"
+ 695 0168 61726776 		.ascii	"argv\000"
  695      00
  696              	.LASF1:
- 697 0169 73686F72 		.ascii	"short int\000"
+ 697 016d 73686F72 		.ascii	"short int\000"
  697      7420696E 
  697      7400
  698              	.LASF19:
- 699 0173 474E5520 		.ascii	"GNU C11 7.3.1 20180622 (release) [ARM/embedded-7-br"
+ 699 0177 474E5520 		.ascii	"GNU C11 7.3.1 20180622 (release) [ARM/embedded-7-br"
  699      43313120 
  699      372E332E 
  699      31203230 
  699      31383036 
- 700 01a6 616E6368 		.ascii	"anch revision 261907] -mcpu=cortex-m3 -mthumb -mapc"
+ 700 01aa 616E6368 		.ascii	"anch revision 261907] -mcpu=cortex-m3 -mthumb -mapc"
  700      20726576 
  700      6973696F 
  700      6E203236 
  700      31393037 
- 701 01d9 732D6672 		.ascii	"s-frame -mthumb-interwork -mcpu=cortex-m3 -mthumb -"
+ 701 01dd 732D6672 		.ascii	"s-frame -mthumb-interwork -mcpu=cortex-m3 -mthumb -"
  701      616D6520 
  701      2D6D7468 
  701      756D622D 
  701      696E7465 
- 702 020c 67647761 		.ascii	"gdwarf-2 -O0\000"
+ 702 0210 67647761 		.ascii	"gdwarf-2 -O0\000"
  702      72662D32 
  702      202D4F30 
  702      00
  703              		.ident	"GCC: (GNU Tools for Arm Embedded Processors 7-2018-q2-update) 7.3.1 20180622 (release) [AR
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccBvo5su.s 			page 16
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccr5ZR9D.s 			page 16
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 export.c
-G:\Users\Jaxb\AppData\Local\Temp\ccBvo5su.s:16     .rodata:00000000 $d
-G:\Users\Jaxb\AppData\Local\Temp\ccBvo5su.s:20     .text:00000000 $t
-G:\Users\Jaxb\AppData\Local\Temp\ccBvo5su.s:27     .text:00000000 get_export_function_addr
-G:\Users\Jaxb\AppData\Local\Temp\ccBvo5su.s:100    .text:0000004c $d
-G:\Users\Jaxb\AppData\Local\Temp\ccBvo5su.s:114    .text:00000058 $t
-G:\Users\Jaxb\AppData\Local\Temp\ccBvo5su.s:121    .text:00000058 shell_symbol_list_display
-G:\Users\Jaxb\AppData\Local\Temp\ccBvo5su.s:177    .text:00000090 $d
+G:\Users\Jaxb\AppData\Local\Temp\ccr5ZR9D.s:16     .rodata:00000000 $d
+G:\Users\Jaxb\AppData\Local\Temp\ccr5ZR9D.s:20     .text:00000000 $t
+G:\Users\Jaxb\AppData\Local\Temp\ccr5ZR9D.s:27     .text:00000000 get_sys_export_function_addr
+G:\Users\Jaxb\AppData\Local\Temp\ccr5ZR9D.s:100    .text:0000004c $d
+G:\Users\Jaxb\AppData\Local\Temp\ccr5ZR9D.s:114    .text:00000058 $t
+G:\Users\Jaxb\AppData\Local\Temp\ccr5ZR9D.s:121    .text:00000058 shell_symbol_list_display
+G:\Users\Jaxb\AppData\Local\Temp\ccr5ZR9D.s:177    .text:00000090 $d
 
 UNDEFINED SYMBOLS
 _ASSERT
