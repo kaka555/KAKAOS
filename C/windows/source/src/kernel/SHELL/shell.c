@@ -12,6 +12,7 @@
 #include <os_TCB_list.h>
 #include <os_cpu.h>
 #include <export.h>
+#include <module.h>
 
 #if CONFIG_SHELL_EN
 
@@ -57,6 +58,19 @@ void shell_buffer_wait_str(const char *str_ptr) // thread will going to sleep
 		ka_printf("wrong input\n");
 		clear_input_buffer();
 	}
+}
+
+char *get_para_add(int argc, char const *argv[], const char *pre_name)
+{
+	unsigned int i;
+	for(i=1;i<argc;++i)
+	{
+		if(0 == ka_strncmp(pre_name,argv[i],ka_strlen(pre_name)))
+		{
+			return (char *)(argv[i] + ka_strlen(pre_name));
+		}
+	}
+	return NULL;
 }
 
 struct shell_buffer *change_shell_buffer(struct shell_buffer *shell_buffer_ptr)
@@ -107,7 +121,7 @@ void put_in_shell_buffer(char c)  // deal with input layer
 	if( ! (	IS_LOWER(c) || IS_UPPER(c) || (0x0d == c) || 
 			(0x03 == c) || (0x08 == c) || (' ' == c)  || 
 			IS_NUM(c) 	|| IS_DOT(c)   || ('-' == c)  || 
-			('+' == c)))
+			('+' == c)	|| ('=' == c)))
 	{
 		ka_printf("\nerror input\n");
 		ka_printf("%s",using_shell_buffer_ptr->buffer);
@@ -277,6 +291,12 @@ static struct command resident_command_5[] =
 		.f = shell_sleep,
 	}
 #endif
+#if CONFIG_MODULE
+	,{
+		.command_name = "lsmod",
+		.f = shell_list_module,
+	}
+#endif
 };
 static struct command resident_command_6[] = 
 {
@@ -286,7 +306,7 @@ static struct command resident_command_6[] =
 	}
 #if CONFIG_MODULE
 	,{
-		.command_name = "module",
+		.command_name = "insmod",
 		.f = shell_module,
 	}
 #endif
@@ -307,6 +327,10 @@ static struct command resident_command_7[] =
 	,{
 		.command_name = "symlist",
 		.f = shell_symbol_list_display,
+	}
+	,{
+		.command_name = "modinfo",
+		.f = shell_modinfo,
 	}
 #endif
 	,{

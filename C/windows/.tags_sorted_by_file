@@ -1094,6 +1094,22 @@
 [fd]	Output\USART.htm	/^<P><STRONG><a name="[fd]"><\/a>alloc_power4_page<\/STRONG> (Thumb, 70 bytes, Stack size 16 bytes, buddy.o(.text))$/;"	a
 [fe]	Output\USART.htm	/^<P><STRONG><a name="[fe]"><\/a>alloc_power5_page<\/STRONG> (Thumb, 70 bytes, Stack size 16 bytes, buddy.o(.text), UNUSED)$/;"	a
 [ff]	Output\USART.htm	/^<P><STRONG><a name="[ff]"><\/a>alloc_power6_page<\/STRONG> (Thumb, 70 bytes, Stack size 16 bytes, buddy.o(.text), UNUSED)$/;"	a
+a	module_tool\kaka.c	/^int a = 5;$/;"	v
+main	module_tool\kaka.c	/^int main()$/;"	f
+AHBPERIPH_BASE	module_tool\led.c	5;"	d	file:
+APB2PERIPH_BASE	module_tool\led.c	3;"	d	file:
+GPIOB_BASE	module_tool\led.c	7;"	d	file:
+GPIOB_BRR	module_tool\led.c	14;"	d	file:
+GPIOB_BSRR	module_tool\led.c	13;"	d	file:
+GPIOB_CRH	module_tool\led.c	10;"	d	file:
+GPIOB_CRL	module_tool\led.c	9;"	d	file:
+GPIOB_IDR	module_tool\led.c	11;"	d	file:
+GPIOB_LCKR	module_tool\led.c	15;"	d	file:
+GPIOB_ODR	module_tool\led.c	12;"	d	file:
+PERIPH_BASE	module_tool\led.c	1;"	d	file:
+RCC_APB2ENR	module_tool\led.c	18;"	d	file:
+RCC_BASE	module_tool\led.c	17;"	d	file:
+led	module_tool\led.c	/^void led()$/;"	f
 ACTLR	source\include\core_cm3.h	/^  __IO uint32_t ACTLR;                        \/*!< Offset: 0x08  Auxiliary Control Register      *\/$/;"	m	struct:__anon6
 ADR	source\include\core_cm3.h	/^  __I  uint32_t ADR;                          \/*!< Offset: 0x4C  Auxiliary Feature Register                            *\/$/;"	m	struct:__anon2
 AFSR	source\include\core_cm3.h	/^  __IO uint32_t AFSR;                         \/*!< Offset: 0x3C  Auxiliary Fault Status Register                       *\/$/;"	m	struct:__anon2
@@ -1549,6 +1565,7 @@ CONFIG_ASSERT_DEBUG	source\include\os_base\ka_configuration.h	8;"	d
 CONFIG_BREAK_POINT_DEBUG	source\include\os_base\ka_configuration.h	10;"	d
 CONFIG_CPU_USE_RATE_CALCULATION	source\include\os_base\ka_configuration.h	7;"	d
 CONFIG_DEBUG_COUNT_INIT	source\include\os_base\ka_configuration.h	5;"	d
+CONFIG_MODULE	source\include\os_base\ka_configuration.h	16;"	d
 CONFIG_PARA_CHECK	source\include\os_base\ka_configuration.h	6;"	d
 CONFIG_POWER_MANAGEMENT	source\include\os_base\ka_configuration.h	15;"	d
 CONFIG_PRINTF_DEBUG	source\include\os_base\ka_configuration.h	14;"	d
@@ -1556,24 +1573,27 @@ CONFIG_SHELL_DEBUG_EN	source\include\os_base\ka_configuration.h	11;"	d
 CONFIG_SHELL_EN	source\include\os_base\ka_configuration.h	13;"	d
 CONFIG_TIMER_EN	source\include\os_base\ka_configuration.h	9;"	d
 CONFIG_TIME_EN	source\include\os_base\ka_configuration.h	12;"	d
-COUNT_DELAY_NUM	source\include\os_base\ka_configuration.h	19;"	d
-CPU_BIT	source\include\os_base\ka_configuration.h	18;"	d
-PRECISE_DELAY_NUM	source\include\os_base\ka_configuration.h	20;"	d
-THREAD_INIT_PERIOD	source\include\os_base\ka_configuration.h	21;"	d
+COUNT_DELAY_NUM	source\include\os_base\ka_configuration.h	20;"	d
+CPU_BIT	source\include\os_base\ka_configuration.h	19;"	d
+PRECISE_DELAY_NUM	source\include\os_base\ka_configuration.h	21;"	d
+THREAD_INIT_PERIOD	source\include\os_base\ka_configuration.h	22;"	d
 _KA_CONFIGURATION_H	source\include\os_base\ka_configuration.h	2;"	d
 ERROR_EXECUTE_IN_INTERRUPT	source\include\os_base\os_error.h	14;"	d
 ERROR_FUN_USE_IN_INTER	source\include\os_base\os_error.h	13;"	d
+ERROR_LOGIC	source\include\os_base\os_error.h	17;"	d
 ERROR_MODULE_DELETED	source\include\os_base\os_error.h	16;"	d
 ERROR_NO_MEM	source\include\os_base\os_error.h	15;"	d
 ERROR_NULL_INPUT_PTR	source\include\os_base\os_error.h	11;"	d
 ERROR_VALUELESS_INPUT	source\include\os_base\os_error.h	12;"	d
 FUN_EXECUTE_SUCCESSFULLY	source\include\os_base\os_error.h	6;"	d
-OS_ERROR_MESSAGE_DISPLAY	source\include\os_base\os_error.h	22;"	d
-OS_ERROR_PARA_MESSAGE_DISPLAY	source\include\os_base\os_error.h	23;"	d
-PRIVATE	source\include\os_base\os_error.h	20;"	d
-PUBLIC	source\include\os_base\os_error.h	19;"	d
+KA_FALSE	source\include\os_base\os_error.h	24;"	d
+KA_TRUE	source\include\os_base\os_error.h	23;"	d
+OS_ERROR_MESSAGE_DISPLAY	source\include\os_base\os_error.h	26;"	d
+OS_ERROR_PARA_MESSAGE_DISPLAY	source\include\os_base\os_error.h	27;"	d
+PRIVATE	source\include\os_base\os_error.h	21;"	d
+PUBLIC	source\include\os_base\os_error.h	20;"	d
 _OS_ERROR_H	source\include\os_base\os_error.h	2;"	d
-_must_check	source\include\os_base\os_error.h	18;"	d
+_must_check	source\include\os_base\os_error.h	19;"	d
 PRINTF	source\include\os_base\printf_debug.h	6;"	d
 PRINTF	source\include\os_base\printf_debug.h	8;"	d
 _USER_DEBUG	source\include\os_base\printf_debug.h	2;"	d
@@ -1825,11 +1845,12 @@ st_other	source\include\os_core\elf.h	/^    unsigned char st_other;             
 st_shndx	source\include\os_core\elf.h	/^    Elf32_Half    st_shndx;                    \/* section header index *\/$/;"	m	struct:elf32_sym
 st_size	source\include\os_core\elf.h	/^    Elf32_Word    st_size;                     \/* symbol size *\/$/;"	m	struct:elf32_sym
 st_value	source\include\os_core\elf.h	/^    Elf32_Addr    st_value;                    \/* symbol value *\/$/;"	m	struct:elf32_sym
-RTM_EXPORT	source\include\os_core\export.h	10;"	d
+EXPORT_SYMBOL	source\include\os_core\export.h	14;"	d
+EXPORT_SYMBOL	source\include\os_core\export.h	27;"	d
 _EXPORT_H	source\include\os_core\export.h	2;"	d
-addr	source\include\os_core\export.h	/^	void       *addr;$/;"	m	struct:rt_module_symtab
-name	source\include\os_core\export.h	/^	const char *name;$/;"	m	struct:rt_module_symtab
-rt_module_symtab	source\include\os_core\export.h	/^struct rt_module_symtab$/;"	s
+addr	source\include\os_core\export.h	/^	void       *addr;$/;"	m	struct:ka_module_symtab
+ka_module_symtab	source\include\os_core\export.h	/^struct ka_module_symtab$/;"	s
+name	source\include\os_core\export.h	/^	const char *name;$/;"	m	struct:ka_module_symtab
 ERROR_MSG_FULL	source\include\os_core\message_queue.h	31;"	d
 MQB	source\include\os_core\message_queue.h	/^}MQB;$/;"	t	typeref:struct:message_queue_block
 MSG_FLAG	source\include\os_core\message_queue.h	/^}MSG_FLAG;$/;"	t	typeref:enum:MSG_WAIT_FLAG
@@ -1852,45 +1873,33 @@ name	source\include\os_core\message_queue.h	/^	char *name;$/;"	m	struct:message_
 put_num	source\include\os_core\message_queue.h	/^	unsigned int put_num; \/\/ the task num that wait for put message$/;"	m	struct:message_queue_block
 tick	source\include\os_core\message_queue.h	/^	UINT64 tick;$/;"	m	struct:message
 wait_num	source\include\os_core\message_queue.h	/^	unsigned int wait_num;\/\/ the task num that wait for get message$/;"	m	struct:message_queue_block
-RT_DLMODULE_STAT_CLOSED	source\include\os_core\module.h	11;"	d
-RT_DLMODULE_STAT_CLOSING	source\include\os_core\module.h	10;"	d
-RT_DLMODULE_STAT_INIT	source\include\os_core\module.h	8;"	d
-RT_DLMODULE_STAT_RUNNING	source\include\os_core\module.h	9;"	d
-RT_FALSE	source\include\os_core\module.h	15;"	d
-RT_NAME_MAX	source\include\os_core\module.h	26;"	d
-RT_TRUE	source\include\os_core\module.h	14;"	d
+D_MODULE_DEFAULT_NAME	source\include\os_core\module.h	15;"	d
+D_MODULE_NAME_MAX	source\include\os_core\module.h	14;"	d
+MODULE_STATE_DEFAULT	source\include\os_core\module.h	20;"	d
+MODULE_STATE_INIT	source\include\os_core\module.h	21;"	d
+MODULE_STATE_LOADED	source\include\os_core\module.h	22;"	d
+MODULE_STATE_RUN	source\include\os_core\module.h	23;"	d
+RT_DLMODULE_STAT_CLOSED	source\include\os_core\module.h	12;"	d
+RT_DLMODULE_STAT_CLOSING	source\include\os_core\module.h	11;"	d
+RT_DLMODULE_STAT_INIT	source\include\os_core\module.h	9;"	d
+RT_DLMODULE_STAT_RUNNING	source\include\os_core\module.h	10;"	d
 _MODULE_H	source\include\os_core\module.h	2;"	d
-addr	source\include\os_core\module.h	/^    void       *addr;$/;"	m	struct:rt_module_symtab
-cleanup_func	source\include\os_core\module.h	/^    rt_dlmodule_cleanup_func_t  cleanup_func;$/;"	m	struct:rt_dlmodule
-cmd_line	source\include\os_core\module.h	/^    char *cmd_line;         \/* command line *\/$/;"	m	struct:rt_dlmodule
-entry_addr	source\include\os_core\module.h	/^    rt_dlmodule_entry_func_t  entry_addr;$/;"	m	struct:rt_dlmodule
-flag	source\include\os_core\module.h	/^    UINT8 flag;                                    \/**< flag of kernel object *\/$/;"	m	struct:rt_object
-init_func	source\include\os_core\module.h	/^    rt_dlmodule_init_func_t     init_func;$/;"	m	struct:rt_dlmodule
-main_thread	source\include\os_core\module.h	/^    TCB *main_thread;$/;"	m	struct:rt_dlmodule
-mem_size	source\include\os_core\module.h	/^    UINT32 mem_size;   \/* sizeof memory space *\/$/;"	m	struct:rt_dlmodule
-mem_space	source\include\os_core\module.h	/^    rt_addr_t   mem_space;  \/* memory space *\/$/;"	m	struct:rt_dlmodule
-module_id	source\include\os_core\module.h	/^    void      *module_id;                               \/**< id of application module *\/$/;"	m	struct:rt_object
-name	source\include\os_core\module.h	/^    char       name[RT_NAME_MAX];                       \/**< name of kernel object *\/$/;"	m	struct:rt_object
-name	source\include\os_core\module.h	/^    const char *name;$/;"	m	struct:rt_module_symtab
-nref	source\include\os_core\module.h	/^    UINT16 nref;       \/* reference count *\/$/;"	m	struct:rt_dlmodule
-nsym	source\include\os_core\module.h	/^    UINT16 nsym;       \/* number of symbols in the module *\/$/;"	m	struct:rt_dlmodule
-object_list	source\include\os_core\module.h	/^    struct list_head object_list;  \/* objects inside this module *\/$/;"	m	struct:rt_dlmodule	typeref:struct:rt_dlmodule::list_head
-parent	source\include\os_core\module.h	/^    struct rt_object parent;$/;"	m	struct:rt_dlmodule	typeref:struct:rt_dlmodule::rt_object
-priority	source\include\os_core\module.h	/^    UINT16 priority;$/;"	m	struct:rt_dlmodule
-ret_code	source\include\os_core\module.h	/^    int ret_code;$/;"	m	struct:rt_dlmodule
-rt_addr_t	source\include\os_core\module.h	/^typedef void* rt_addr_t;$/;"	t
-rt_bool_t	source\include\os_core\module.h	/^typedef int                             rt_bool_t;      \/**< boolean type *\/$/;"	t
-rt_dlmodule	source\include\os_core\module.h	/^struct rt_dlmodule$/;"	s
-rt_dlmodule_cleanup_func_t	source\include\os_core\module.h	/^typedef void (*rt_dlmodule_cleanup_func_t)(struct rt_dlmodule *module);$/;"	t
-rt_dlmodule_entry_func_t	source\include\os_core\module.h	/^typedef int  (*rt_dlmodule_entry_func_t)(int argc, char** argv);$/;"	t
-rt_dlmodule_init_func_t	source\include\os_core\module.h	/^typedef void (*rt_dlmodule_init_func_t)(struct rt_dlmodule *module);$/;"	t
-rt_module_symtab	source\include\os_core\module.h	/^struct rt_module_symtab$/;"	s
-rt_object	source\include\os_core\module.h	/^struct rt_object$/;"	s
-stack_size	source\include\os_core\module.h	/^    UINT32 stack_size;$/;"	m	struct:rt_dlmodule
-stat	source\include\os_core\module.h	/^    UINT8 stat;        \/* status of module *\/$/;"	m	struct:rt_dlmodule
-symtab	source\include\os_core\module.h	/^    struct rt_module_symtab *symtab;    \/* module symbol table *\/$/;"	m	struct:rt_dlmodule	typeref:struct:rt_dlmodule::rt_module_symtab
-type	source\include\os_core\module.h	/^    UINT8 type;                                    \/**< type of kernel object *\/$/;"	m	struct:rt_object
-vstart_addr	source\include\os_core\module.h	/^    UINT32 vstart_addr;$/;"	m	struct:rt_dlmodule
+d_module	source\include\os_core\module.h	/^typedef struct dynamic_module d_module;$/;"	t	typeref:struct:dynamic_module
+dynamic_module	source\include\os_core\module.h	/^struct dynamic_module$/;"	s
+entry	source\include\os_core\module.h	/^    void *entry;                    \/\/module entry point$/;"	m	struct:dynamic_module
+exit	source\include\os_core\module.h	/^    void (*exit)(void);             \/\/this function will be called after module return $/;"	m	struct:dynamic_module
+export_symbols_array	source\include\os_core\module.h	/^    struct ka_module_symtab *export_symbols_array;$/;"	m	struct:dynamic_module	typeref:struct:dynamic_module::ka_module_symtab
+export_symbols_num	source\include\os_core\module.h	/^    unsigned int export_symbols_num;$/;"	m	struct:dynamic_module
+init	source\include\os_core\module.h	/^    int (*init)(void);              \/\/this function will be called before module execute$/;"	m	struct:dynamic_module
+init_space	source\include\os_core\module.h	/^    void *init_space;$/;"	m	struct:dynamic_module
+module_list	source\include\os_core\module.h	/^    struct list_head module_list;   \/\/link all modules$/;"	m	struct:dynamic_module	typeref:struct:dynamic_module::list_head
+module_size	source\include\os_core\module.h	/^    unsigned int module_size;$/;"	m	struct:dynamic_module
+module_space	source\include\os_core\module.h	/^    void *module_space;$/;"	m	struct:dynamic_module
+module_state	source\include\os_core\module.h	/^    UINT32 module_state;$/;"	m	struct:dynamic_module
+name	source\include\os_core\module.h	/^    char name[D_MODULE_NAME_MAX];$/;"	m	struct:dynamic_module
+ref	source\include\os_core\module.h	/^    unsigned int ref;$/;"	m	struct:dynamic_module
+set_module_state	source\include\os_core\module.h	/^static inline void set_module_state(struct dynamic_module *dynamic_module_ptr,UINT32 state)$/;"	f
+vstart_addr	source\include\os_core\module.h	/^    UINT32 vstart_addr;            \/\/VMA base address for the first LOAD segment$/;"	m	struct:dynamic_module
 ERROR_MUTEX_LOCK_FAIL	source\include\os_core\mutex.h	18;"	d
 ERROR_MUTEX_UNLOCK_FAIL	source\include\os_core\mutex.h	19;"	d
 MUTEX	source\include\os_core\mutex.h	/^}MUTEX;$/;"	t	typeref:struct:mutex_block
@@ -11317,11 +11326,16 @@ WWDG_OFFSET	source\src\FWlib\src\stm32f10x_wwdg.c	48;"	d	file:
 WWDG_SetCounter	source\src\FWlib\src\stm32f10x_wwdg.c	/^void WWDG_SetCounter(uint8_t Counter)$/;"	f
 WWDG_SetPrescaler	source\src\FWlib\src\stm32f10x_wwdg.c	/^void WWDG_SetPrescaler(uint32_t WWDG_Prescaler)$/;"	f
 WWDG_SetWindowValue	source\src\FWlib\src\stm32f10x_wwdg.c	/^void WWDG_SetWindowValue(uint8_t WindowValue)$/;"	f
+clear_MCB_index	source\src\kernel\OS_CORE\MCB.c	/^EXPORT_SYMBOL(clear_MCB_index);$/;"	v
 clear_MCB_index	source\src\kernel\OS_CORE\MCB.c	/^clear_MCB_index(MCB *MCB_ptr)$/;"	f
 compare	source\src\kernel\OS_CORE\MCB.c	/^inline static int compare(struct insert_sort_data *data1,struct insert_sort_data *data2)$/;"	f	file:
+delete_MCB	source\src\kernel\OS_CORE\MCB.c	/^EXPORT_SYMBOL(delete_MCB);$/;"	v
 delete_MCB	source\src\kernel\OS_CORE\MCB.c	/^int delete_MCB(MCB *MCB_ptr)$/;"	f
+init_MCB	source\src\kernel\OS_CORE\MCB.c	/^EXPORT_SYMBOL(init_MCB);$/;"	v
 init_MCB	source\src\kernel\OS_CORE\MCB.c	/^init_MCB($/;"	f
+p	source\src\kernel\OS_CORE\MCB.c	/^EXPORT_SYMBOL(p);$/;"	v
 p	source\src\kernel\OS_CORE\MCB.c	/^p($/;"	f
+v	source\src\kernel\OS_CORE\MCB.c	/^EXPORT_SYMBOL(v);$/;"	v
 v	source\src\kernel\OS_CORE\MCB.c	/^v(MCB *MCB_ptr)$/;"	f
 value_cmp	source\src\kernel\OS_CORE\MCB.c	/^inline static int value_cmp(void *data1,void *data2)$/;"	f	file:
 OSTCBCurPtr	source\src\kernel\OS_CORE\TCB.c	/^volatile TCB *OSTCBCurPtr;$/;"	v
@@ -11332,62 +11346,73 @@ task_change_prio	source\src\kernel\OS_CORE\TCB.c	/^int task_change_prio(TCB *TCB
 task_creat	source\src\kernel\OS_CORE\TCB.c	/^TCB *_must_check task_creat($/;"	f
 task_delete	source\src\kernel\OS_CORE\TCB.c	/^int task_delete(TCB *TCB_ptr)$/;"	f
 task_init	source\src\kernel\OS_CORE\TCB.c	/^int _must_check task_init($/;"	f
+get_export_function_addr	source\src\kernel\OS_CORE\export.c	/^UINT32 get_export_function_addr(const char *fun_name)$/;"	f
+shell_symbol_list_display	source\src\kernel\OS_CORE\export.c	/^void shell_symbol_list_display(int argc, char const *argv[])$/;"	f
 compare	source\src\kernel\OS_CORE\message_queue.c	/^inline static int compare(struct insert_sort_data *data1,struct insert_sort_data *data2)$/;"	f	file:
+message_init	source\src\kernel\OS_CORE\message_queue.c	/^EXPORT_SYMBOL(message_init);$/;"	v
 message_init	source\src\kernel\OS_CORE\message_queue.c	/^int message_init(struct message *message_ptr,unsigned int message_size,void *data)$/;"	f
+msg_del	source\src\kernel\OS_CORE\message_queue.c	/^EXPORT_SYMBOL(msg_del);$/;"	v
 msg_del	source\src\kernel\OS_CORE\message_queue.c	/^int msg_del(MQB *MQB_ptr)$/;"	f
+msg_init	source\src\kernel\OS_CORE\message_queue.c	/^EXPORT_SYMBOL(msg_init);$/;"	v
 msg_init	source\src\kernel\OS_CORE\message_queue.c	/^int msg_init(MQB *MQB_ptr,char *name,unsigned int max_message_num)$/;"	f
+msg_receive	source\src\kernel\OS_CORE\message_queue.c	/^EXPORT_SYMBOL(msg_receive);$/;"	v
 msg_receive	source\src\kernel\OS_CORE\message_queue.c	/^int msg_receive(MQB *MQB_ptr,struct message **message_ptr,MSG_FLAG flag,unsigned int time)$/;"	f
+msg_send	source\src\kernel\OS_CORE\message_queue.c	/^EXPORT_SYMBOL(msg_send);$/;"	v
 msg_send	source\src\kernel\OS_CORE\message_queue.c	/^int msg_send(MQB *MQB_ptr,struct message *message_ptr,MSG_FLAG flag,unsigned int time)$/;"	f
 value_cmp	source\src\kernel\OS_CORE\message_queue.c	/^inline static int value_cmp(void *data1,void *data2)$/;"	f	file:
-RT_EBUSY	source\src\kernel\OS_CORE\module.c	16;"	d	file:
-RT_EEMPTY	source\src\kernel\OS_CORE\module.c	13;"	d	file:
-RT_EFULL	source\src\kernel\OS_CORE\module.c	12;"	d	file:
-RT_EINTR	source\src\kernel\OS_CORE\module.c	18;"	d	file:
-RT_EINVAL	source\src\kernel\OS_CORE\module.c	19;"	d	file:
-RT_EIO	source\src\kernel\OS_CORE\module.c	17;"	d	file:
-RT_ENOMEM	source\src\kernel\OS_CORE\module.c	14;"	d	file:
-RT_ENOSYS	source\src\kernel\OS_CORE\module.c	15;"	d	file:
-RT_EOK	source\src\kernel\OS_CORE\module.c	9;"	d	file:
-RT_ERROR	source\src\kernel\OS_CORE\module.c	10;"	d	file:
-RT_ETIMEOUT	source\src\kernel\OS_CORE\module.c	11;"	d	file:
+__init_d_module	source\src\kernel\OS_CORE\module.c	/^static void __init_d_module(struct dynamic_module *dynamic_module_ptr)$/;"	f	file:
+__init_module	source\src\kernel\OS_CORE\module.c	/^void __init_module(void)$/;"	f
 clear_module_buffer	source\src\kernel\OS_CORE\module.c	/^void clear_module_buffer(void)$/;"	f
-dlmodule_exec	source\src\kernel\OS_CORE\module.c	/^struct rt_dlmodule* dlmodule_exec(void)$/;"	f
-dlmodule_load	source\src\kernel\OS_CORE\module.c	/^struct rt_dlmodule* dlmodule_load(void)$/;"	f
-dlmodule_load_relocated_object	source\src\kernel\OS_CORE\module.c	/^rt_err_t dlmodule_load_relocated_object(struct rt_dlmodule* module, void *module_ptr)$/;"	f
-dlmodule_load_shared_object	source\src\kernel\OS_CORE\module.c	/^rt_err_t dlmodule_load_shared_object(struct rt_dlmodule* module, void *module_ptr)$/;"	f
-dlmodule_relocate	source\src\kernel\OS_CORE\module.c	/^int dlmodule_relocate(struct rt_dlmodule *module, Elf32_Rel *rel, Elf32_Addr sym_val)$/;"	f
-dlmodule_symbol_find	source\src\kernel\OS_CORE\module.c	/^UINT32 dlmodule_symbol_find(const char *sym_str)$/;"	f
-elf_module	source\src\kernel\OS_CORE\module.c	21;"	d	file:
+dlmodule_exec	source\src\kernel\OS_CORE\module.c	/^struct dynamic_module* dlmodule_exec(void)$/;"	f
+dlmodule_load	source\src\kernel\OS_CORE\module.c	/^struct dynamic_module* dlmodule_load(void)$/;"	f
+dlmodule_load_shared_object	source\src\kernel\OS_CORE\module.c	/^int dlmodule_load_shared_object(struct dynamic_module* module, void *module_ptr)$/;"	f
+dlmodule_relocate	source\src\kernel\OS_CORE\module.c	/^int dlmodule_relocate(struct dynamic_module *module, Elf32_Rel *rel, Elf32_Addr sym_val)$/;"	f
+elf_module	source\src\kernel\OS_CORE\module.c	11;"	d	file:
 module_buffer	source\src\kernel\OS_CORE\module.c	/^static char *module_buffer = NULL;$/;"	v	file:
+module_list_head	source\src\kernel\OS_CORE\module.c	/^static struct list_head module_list_head;$/;"	v	typeref:struct:list_head	file:
 num	source\src\kernel\OS_CORE\module.c	/^static unsigned int num = 0;$/;"	v	file:
 put_in_module_buffer	source\src\kernel\OS_CORE\module.c	/^void put_in_module_buffer(char c)$/;"	f
-rt_err_t	source\src\kernel\OS_CORE\module.c	/^typedef long                       rt_err_t;       \/**< Type for error number *\/$/;"	t	file:
 set_module_buffer	source\src\kernel\OS_CORE\module.c	/^void set_module_buffer(void *add)$/;"	f
+shell_modinfo	source\src\kernel\OS_CORE\module.c	/^void shell_modinfo(int argc, char const *argv[])$/;"	f
 show_get_size	source\src\kernel\OS_CORE\module.c	/^void show_get_size(void)$/;"	f
 compare	source\src\kernel\OS_CORE\mutex.c	/^inline static int compare(struct insert_sort_data *data1,struct insert_sort_data *data2)$/;"	f	file:
+mutex_del	source\src\kernel\OS_CORE\mutex.c	/^EXPORT_SYMBOL(mutex_del);$/;"	v
 mutex_del	source\src\kernel\OS_CORE\mutex.c	/^int mutex_del(MUTEX *MUTEX_ptr)$/;"	f
+mutex_init	source\src\kernel\OS_CORE\mutex.c	/^EXPORT_SYMBOL(mutex_init);$/;"	v
 mutex_init	source\src\kernel\OS_CORE\mutex.c	/^int mutex_init(MUTEX *MUTEX_ptr)$/;"	f
+mutex_lock	source\src\kernel\OS_CORE\mutex.c	/^EXPORT_SYMBOL(mutex_lock);$/;"	v
 mutex_lock	source\src\kernel\OS_CORE\mutex.c	/^int mutex_lock(MUTEX *MUTEX_ptr)$/;"	f
+mutex_try_lock	source\src\kernel\OS_CORE\mutex.c	/^EXPORT_SYMBOL(mutex_try_lock);$/;"	v
 mutex_try_lock	source\src\kernel\OS_CORE\mutex.c	/^int mutex_try_lock(MUTEX *MUTEX_ptr)$/;"	f
+mutex_unlock	source\src\kernel\OS_CORE\mutex.c	/^EXPORT_SYMBOL(mutex_unlock);$/;"	v
 mutex_unlock	source\src\kernel\OS_CORE\mutex.c	/^int mutex_unlock(MUTEX *MUTEX_ptr)$/;"	f
 value_cmp	source\src\kernel\OS_CORE\mutex.c	/^inline static int value_cmp(void *data1,void *data2)$/;"	f	file:
+__init_system_time	source\src\kernel\OS_CORE\os_time.c	/^EXPORT_SYMBOL(__init_system_time);$/;"	v
 __init_system_time	source\src\kernel\OS_CORE\os_time.c	/^__init_system_time(void)$/;"	f
 g_time_tick_count	source\src\kernel\OS_CORE\os_time.c	/^volatile UINT64 g_time_tick_count = 0;$/;"	v
+get_tick	source\src\kernel\OS_CORE\os_time.c	/^EXPORT_SYMBOL(get_tick);$/;"	v
 get_tick	source\src\kernel\OS_CORE\os_time.c	/^get_tick(void)$/;"	f
 month_date_table	source\src\kernel\OS_CORE\os_time.c	/^static const UINT8 month_date_table[] = {$/;"	v	file:
+set_time	source\src\kernel\OS_CORE\os_time.c	/^EXPORT_SYMBOL(set_time);$/;"	v
 set_time	source\src\kernel\OS_CORE\os_time.c	/^int set_time(struct time *time_ptr)$/;"	f
 sys_time	source\src\kernel\OS_CORE\os_time.c	/^static struct time sys_time;$/;"	v	typeref:struct:time	file:
+system_time_display	source\src\kernel\OS_CORE\os_time.c	/^EXPORT_SYMBOL(system_time_display);$/;"	v
 system_time_display	source\src\kernel\OS_CORE\os_time.c	/^system_time_display(void)$/;"	f
 system_time_increase	source\src\kernel\OS_CORE\os_time.c	/^system_time_increase(void)$/;"	f
 __init_timer	source\src\kernel\OS_CORE\os_timer.c	/^void __init_timer(void)$/;"	f
 cmp	source\src\kernel\OS_CORE\os_timer.c	/^static int cmp(Vector *Vector_ptr,unsigned int index1,unsigned int index2)$/;"	f	file:
 get_timer_heap_top	source\src\kernel\OS_CORE\os_timer.c	/^int get_timer_heap_top(struct timer **timer_ptr)$/;"	f
 index_change_record	source\src\kernel\OS_CORE\os_timer.c	/^static inline void index_change_record(Vector *Vector_ptr,int index)$/;"	f	file:
+timer_create	source\src\kernel\OS_CORE\os_timer.c	/^EXPORT_SYMBOL(timer_create);$/;"	v
 timer_create	source\src\kernel\OS_CORE\os_timer.c	/^int timer_create($/;"	f
+timer_delete	source\src\kernel\OS_CORE\os_timer.c	/^EXPORT_SYMBOL(timer_delete);$/;"	v
 timer_delete	source\src\kernel\OS_CORE\os_timer.c	/^int timer_delete(struct timer *timer_ptr)$/;"	f
+timer_disable	source\src\kernel\OS_CORE\os_timer.c	/^EXPORT_SYMBOL(timer_disable);$/;"	v
 timer_disable	source\src\kernel\OS_CORE\os_timer.c	/^int timer_disable(struct timer *timer_ptr)$/;"	f
+timer_enable	source\src\kernel\OS_CORE\os_timer.c	/^EXPORT_SYMBOL(timer_enable);$/;"	v
 timer_enable	source\src\kernel\OS_CORE\os_timer.c	/^int timer_enable(struct timer *timer_ptr)$/;"	f
 timer_heap	source\src\kernel\OS_CORE\os_timer.c	/^static struct little_heap timer_heap;$/;"	v	typeref:struct:little_heap	file:
+timer_init	source\src\kernel\OS_CORE\os_timer.c	/^EXPORT_SYMBOL(timer_init);$/;"	v
 timer_init	source\src\kernel\OS_CORE\os_timer.c	/^int timer_init($/;"	f
 timer_task	source\src\kernel\OS_CORE\os_timer.c	/^void timer_task(void *para)$/;"	f
 FastLog2	source\src\kernel\OS_CORE\osinit.c	/^static int __attribute__((optimize("O1"))) FastLog2(int x)$/;"	f	file:
@@ -11399,7 +11424,7 @@ TCB_shell	source\src\kernel\OS_CORE\osinit.c	/^	static TCB TCB_shell;$/;"	v	file
 TCB_timer_task	source\src\kernel\OS_CORE\osinit.c	/^	TCB TCB_timer_task;$/;"	v
 _case_slab_free_buddy	source\src\kernel\OS_CORE\osinit.c	/^void _case_slab_free_buddy(void *ptr,void *end_ptr)$/;"	f
 count_init	source\src\kernel\OS_CORE\osinit.c	/^static void count_init(void *para)	$/;"	f	file:
-count_max_num	source\src\kernel\OS_CORE\osinit.c	/^UINT64 count_max_num = 0;\/\/used for counting cpu used rate$/;"	v
+count_max_num	source\src\kernel\OS_CORE\osinit.c	/^unsigned int  count_max_num = 0;\/\/used for counting cpu used rate$/;"	v
 idle	source\src\kernel\OS_CORE\osinit.c	/^static void  idle(void *para)$/;"	f	file:
 idle_num	source\src\kernel\OS_CORE\osinit.c	/^UINT64 idle_num = 0;$/;"	v
 num_pre_tick	source\src\kernel\OS_CORE\osinit.c	/^	UINT64 num_pre_tick = 0;\/\/used for precise timing$/;"	v
@@ -11445,18 +11470,23 @@ ready_group	source\src\kernel\OS_CORE\schedule\os_ready.c	/^static READY_GROUP_T
 ready_table	source\src\kernel\OS_CORE\schedule\os_ready.c	/^static READY_TABLE_TYPE ready_table[PRIO_MAX\/(sizeof(READY_TABLE_TYPE)*8)];$/;"	v	file:
 shell_check_os_ready	source\src\kernel\OS_CORE\schedule\os_ready.c	/^void shell_check_os_ready(void)$/;"	f
 unmap	source\src\kernel\OS_CORE\schedule\os_ready.c	/^static const INT8 unmap[256] = { $/;"	v	file:
-MS_PER_TICK	source\src\kernel\OS_CORE\schedule\os_schedule.c	44;"	d	file:
-US_PER_TICK	source\src\kernel\OS_CORE\schedule\os_schedule.c	51;"	d	file:
+MS_PER_TICK	source\src\kernel\OS_CORE\schedule\os_schedule.c	46;"	d	file:
+US_PER_TICK	source\src\kernel\OS_CORE\schedule\os_schedule.c	53;"	d	file:
 delay_ms	source\src\kernel\OS_CORE\schedule\os_schedule.c	/^void delay_ms(unsigned int ms)$/;"	f
 delay_us	source\src\kernel\OS_CORE\schedule\os_schedule.c	/^void delay_us(unsigned int us)$/;"	f
 g_schedule_lock	source\src\kernel\OS_CORE\schedule\os_schedule.c	/^volatile int g_schedule_lock = 0;\/\/ 0:do not lock;  !0: lock$/;"	v
+schedule	source\src\kernel\OS_CORE\schedule\os_schedule.c	/^EXPORT_SYMBOL(schedule);$/;"	v
 schedule	source\src\kernel\OS_CORE\schedule\os_schedule.c	/^void schedule(void)$/;"	f
+sys_delay	source\src\kernel\OS_CORE\schedule\os_schedule.c	/^EXPORT_SYMBOL(sys_delay);$/;"	v
 sys_delay	source\src\kernel\OS_CORE\schedule\os_schedule.c	/^int sys_delay(unsigned int delay_ticks_num,TASK_STATE state)$/;"	f
-sys_schedule_islock	source\src\kernel\OS_CORE\schedule\os_schedule.c	/^inline int sys_schedule_islock(void)$/;"	f
-sys_schedule_lock	source\src\kernel\OS_CORE\schedule\os_schedule.c	/^inline void sys_schedule_lock(void)$/;"	f
-sys_schedule_unlock	source\src\kernel\OS_CORE\schedule\os_schedule.c	/^inline void sys_schedule_unlock(void)$/;"	f
+sys_schedule_islock	source\src\kernel\OS_CORE\schedule\os_schedule.c	/^int sys_schedule_islock(void)$/;"	f
+sys_schedule_lock	source\src\kernel\OS_CORE\schedule\os_schedule.c	/^void sys_schedule_lock(void)$/;"	f
+sys_schedule_unlock	source\src\kernel\OS_CORE\schedule\os_schedule.c	/^void sys_schedule_unlock(void)$/;"	f
+sys_suspend	source\src\kernel\OS_CORE\schedule\os_schedule.c	/^EXPORT_SYMBOL(sys_suspend);$/;"	v
 sys_suspend	source\src\kernel\OS_CORE\schedule\os_schedule.c	/^int sys_suspend(TASK_STATE state)$/;"	f
+task_creat_ready	source\src\kernel\OS_CORE\schedule\os_schedule.c	/^EXPORT_SYMBOL(task_creat_ready);$/;"	v
 task_creat_ready	source\src\kernel\OS_CORE\schedule\os_schedule.c	/^int _must_check task_creat_ready($/;"	f
+task_init_ready	source\src\kernel\OS_CORE\schedule\os_schedule.c	/^EXPORT_SYMBOL(task_init_ready);$/;"	v
 task_init_ready	source\src\kernel\OS_CORE\schedule\os_schedule.c	/^int _must_check task_init_ready($/;"	f
 __init_suspend_list	source\src\kernel\OS_CORE\schedule\os_suspend.c	/^void __init_suspend_list(void)$/;"	f
 insert_into_suspend_list	source\src\kernel\OS_CORE\schedule\os_suspend.c	/^inline int  insert_into_suspend_list(TCB *TCB_ptr)$/;"	f
@@ -11588,7 +11618,7 @@ insert_sort_find_data_with_id	source\src\kernel\OS_LIB\insert_sort_oo.c	/^struct
 insert_sort_get_first_data_ptr	source\src\kernel\OS_LIB\insert_sort_oo.c	/^inline struct insert_sort_data * insert_sort_get_first_data_ptr(struct insert_sort_entity *insert_sort_entity_ptr)$/;"	f
 insert_sort_insert_into	source\src\kernel\OS_LIB\insert_sort_oo.c	/^int insert_sort_insert_into(struct insert_sort_data *data_ptr,struct insert_sort_entity *insert_sort_entity_ptr)$/;"	f
 _case_alloc_buddy	source\src\kernel\OS_LIB\malloc.c	/^static void *_case_alloc_buddy(unsigned int level)$/;"	f	file:
-add_page_alloc_record	source\src\kernel\OS_LIB\malloc.c	/^static int add_page_alloc_record(unsigned int level,void *ptr)$/;"	f	file:
+add_page_alloc_record	source\src\kernel\OS_LIB\malloc.c	/^int add_page_alloc_record(unsigned int level,void *ptr)$/;"	f
 cache_chain_head	source\src\kernel\OS_LIB\malloc.c	/^static struct list_head cache_chain_head;$/;"	v	typeref:struct:list_head	file:
 cache_chain_head_ptr	source\src\kernel\OS_LIB\malloc.c	/^struct list_head *const cache_chain_head_ptr = &cache_chain_head;$/;"	v
 dis_page_alloc_record	source\src\kernel\OS_LIB\malloc.c	/^void dis_page_alloc_record(void)$/;"	f
@@ -11612,6 +11642,7 @@ ka_atoi	source\src\kernel\OS_LIB\myMicroLIB.c	/^int ka_atoi(const char *char_ptr
 ka_memcpy	source\src\kernel\OS_LIB\myMicroLIB.c	/^void ka_memcpy(void *dest, const void *src, int n)$/;"	f
 ka_memset	source\src\kernel\OS_LIB\myMicroLIB.c	/^void ka_memset(void *s,const int ch, int n)$/;"	f
 ka_pow	source\src\kernel\OS_LIB\myMicroLIB.c	/^unsigned long ka_pow(int x,unsigned int y)$/;"	f
+ka_printf	source\src\kernel\OS_LIB\myMicroLIB.c	/^EXPORT_SYMBOL(ka_printf);$/;"	v
 ka_printf	source\src\kernel\OS_LIB\myMicroLIB.c	/^int ka_printf(const char *str,...)$/;"	f
 ka_puts	source\src\kernel\OS_LIB\myMicroLIB.c	/^void ka_puts(const char *string)$/;"	f
 ka_strcmp	source\src\kernel\OS_LIB\myMicroLIB.c	/^int ka_strcmp(const char * str1, const char * str2)$/;"	f

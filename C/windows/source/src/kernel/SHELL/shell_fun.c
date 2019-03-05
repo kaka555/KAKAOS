@@ -142,28 +142,52 @@ void shell_reboot(int argc, char const *argv[])
 #if CONFIG_MODULE
 extern void show_get_size(void);
 extern int add_page_alloc_record(unsigned int level,void *ptr);
+/******************
+* 
+*   insmod -name=dmodule -prio=20 -stacksize=2048 -filesize=4096
+*
+*******************/
+
 void shell_module(int argc, char const *argv[])
 {
 	void *buf;
 	char *shell_buf_ptr;
-	if(1 == argc)
+	int buf_is_allo = KA_FALSE;
+	unsigned int stack_size = D_MODULE_DEFAULT_STACK_SIZE;
+	TASK_PRIO_TYPE prio = D_MODULE_DEFAULT_PRIO;
+	char *value_ptr;
+	value_ptr = get_para_add(argc,argv,"-filesize=");
+	if(NULL != value_ptr)
 	{
-		buf = alloc_power3_page();
-		if(0 > add_page_alloc_record(3,buf))
-		{
-			ASSERT(0);
-		}
+		buf = ka_malloc(ka_atoi(value_ptr));
+		buf_is_allo = KA_TRUE;
 	}
 	else
 	{
-		buf = ka_malloc(ka_atoi(argv[1]));
+		buf = alloc_power3_page();
 	}
+/*
+	unsigned int i;
+	for(i=1;i<argc;++i)
+	{
+		if(0 == ka_strncmp("-filesize=",argv[i],ka_strlen("-filesize=")))
+		{
+			buf = ka_malloc(ka_atoi(argv[i] + ka_strlen("-filesize=")));
+			buf_is_allo = KA_TRUE;
+			break ;
+		}
+	}
+*/
 	if (NULL == buf)
 	{
 		ka_printf("no enough room for module\n");
 		return ;
 	}
-
+	if ((!buf_is_allo) && (0 > add_page_alloc_record(3,buf)))
+	{
+		ASSERT(0);
+	}
+	
 	struct shell_buffer shell_buffer;
 	shell_buf_ptr = (char *)ka_malloc(20);
 	if(NULL == shell_buf_ptr)
@@ -188,8 +212,20 @@ void shell_module(int argc, char const *argv[])
 	change_shell_buffer(sys_shell_buffer_ptr);
 	ka_free(shell_buf_ptr);
 
+//get the parament
+	value_ptr = get_para_add(argc,argv,"-stacksize=");
+	if(NULL != value_ptr)
+	{
+		stack_size = ka_atoi(value_ptr);
+	}
+	value_ptr = get_para_add(argc,argv,"-prio=");
+	if(NULL != value_ptr)
+	{
+		prio = ka_atoi(value_ptr);
+	}
+	value_ptr = get_para_add(argc,argv,"-name=");
 	ka_printf("execute module\n");
-	dlmodule_exec();
+	dlmodule_exec(stack_size,prio,value_ptr);
 	ka_free(buf);
 	clear_module_buffer();
 	return ;

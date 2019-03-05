@@ -21,6 +21,7 @@ struct shell_buffer *change_shell_buffer(struct shell_buffer *shell_buffer_ptr);
 void shell_buffer_wait_str(const char *str_ptr); // thread will going to sleep
 void shell(void *para);
 void put_in_shell_buffer(char c);
+char *get_para_add(int argc, char const *argv[], const char *pre_name);
 
 #endif
 

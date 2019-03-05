@@ -4,76 +4,65 @@
 #include <double_linked_list.h>
 #include <TCB.h>
 #include <kakaosstdint.h>
+#include <export.h>
 
 #define RT_DLMODULE_STAT_INIT       0x00
 #define RT_DLMODULE_STAT_RUNNING    0x01
 #define RT_DLMODULE_STAT_CLOSING    0x02
 #define RT_DLMODULE_STAT_CLOSED     0x03
 
-typedef int                             rt_bool_t;      /**< boolean type */
-#define RT_TRUE                         1               /**< boolean true  */
-#define RT_FALSE                        0               /**< boolean fails */
+#define D_MODULE_NAME_MAX               32
+#define D_MODULE_DEFAULT_NAME           "dynamic module"
+#define D_MODULE_DEFAULT_PRIO           (PRIO_MAX-2)
+#define D_MODULE_DEFAULT_STACK_SIZE     2048
 
-struct rt_dlmodule;
-typedef void* rt_addr_t;
+#define module_init(initfn)                 \
+    int init_module(void) __attribute__((alias(#initfn)))
 
-struct rt_module_symtab
+//===================
+//module state
+
+#define MODULE_STATE_DEFAULT    0x00
+#define MODULE_STATE_INIT       MODULE_STATE_DEFAULT
+#define MODULE_STATE_LOADED     0x01
+#define MODULE_STATE_RUN        0x02
+//======================================================
+
+struct dynamic_module
 {
-    void       *addr;
-    const char *name;
+    char name[D_MODULE_NAME_MAX];
+    struct list_head module_list;   //link all modules
+    UINT32 module_state;
+    int (*init)(void);              //this function will be called before module execute
+    void (*exit)(void);             //this function will be called after module return 
+    void *module_space;
+    unsigned int module_size;
+    void *init_space;
+    void *entry;                    //module entry point
+    UINT32 vstart_addr;            //VMA base address for the first LOAD segment
+    struct ka_module_symtab *export_symbols_array;
+    unsigned int export_symbols_num;
+    unsigned int ref;
 };
 
-#define RT_NAME_MAX 10
+typedef struct dynamic_module d_module;
 
-struct rt_object
+static inline void set_module_state(struct dynamic_module *dynamic_module_ptr,UINT32 state)
 {
-    char       name[RT_NAME_MAX];                       /**< name of kernel object */
-    UINT8 type;                                    /**< type of kernel object */
-    UINT8 flag;                                    /**< flag of kernel object */
-    void      *module_id;                               /**< id of application module */
-};
-
-typedef int  (*rt_dlmodule_entry_func_t)(int argc, char** argv);
-typedef void (*rt_dlmodule_init_func_t)(struct rt_dlmodule *module);
-typedef void (*rt_dlmodule_cleanup_func_t)(struct rt_dlmodule *module);
-
-struct rt_dlmodule
-{
-    struct rt_object parent;
-    struct list_head object_list;  /* objects inside this module */
-
-    UINT8 stat;        /* status of module */
-
-    /* main thread of this module */
-    UINT16 priority;
-    UINT32 stack_size;
-    TCB *main_thread;
-    /* the return code */
-    int ret_code;
-
-    /* VMA base address for the first LOAD segment */
-    UINT32 vstart_addr;
-
-    /* module entry, RT_NULL for dynamic library */
-    rt_dlmodule_entry_func_t  entry_addr;
-    char *cmd_line;         /* command line */
-
-    rt_addr_t   mem_space;  /* memory space */
-    UINT32 mem_size;   /* sizeof memory space */
-
-    /* init and clean function */
-    rt_dlmodule_init_func_t     init_func;
-    rt_dlmodule_cleanup_func_t  cleanup_func;
-
-    UINT16 nref;       /* reference count */
-
-    UINT16 nsym;       /* number of symbols in the module */
-    struct rt_module_symtab *symtab;    /* module symbol table */
-};
+    dynamic_module_ptr->module_state |= state;
+}
 
 void put_in_module_buffer(char c);
 void clear_module_buffer(void);
-struct rt_dlmodule* dlmodule_exec(void);
+int dlmodule_exec(
+    unsigned int stack_size,
+    TASK_PRIO_TYPE prio,
+    const char *name);
 void set_module_buffer(void *add);
+void __init_module(void);
+int remove_a_module(struct dynamic_module *dynamic_module_ptr);
+void shell_modinfo(int argc, char const *argv[]);
+void shell_remove_module(int argc, char const *argv[]);
+void shell_list_module(int argc, char const *argv[]);
 
 #endif

@@ -14,6 +14,7 @@
 #include <myassert.h>
 #include <slab.h>
 #include <double_linked_list.h>
+#include <module.h>
 
 
 #if CONFIG_SHELL_EN
@@ -74,6 +75,10 @@ static void __INIT os_init(void)
 
 #if CONFIG_SHELL_DEBUG_EN && CONFIG_SHELL_EN
 	__init_shell_debug();
+#endif
+
+#if CONFIG_MODULE
+	__init_module();
 #endif
 }
 
