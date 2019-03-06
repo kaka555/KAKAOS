@@ -1,7 +1,7 @@
 #include "os_cpu.h"
 #include "osinit.h"
 
-int main()
+void start_kernel()
 {
 	CPU_IntDis();
 	os_start();

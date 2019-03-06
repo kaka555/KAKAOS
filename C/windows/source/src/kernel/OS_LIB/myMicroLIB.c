@@ -441,7 +441,6 @@ void ka_strcpy(char *strDest, const char *strSrc)
 {
 	if(!(strDest && strSrc))
 		return;
-	//while((*strDest++ = *strSrc++));
 	while((*strDest++ = *strSrc++));
 }
 

@@ -4,13 +4,13 @@
 <h1>µVision Build Log</h1>
 <h2>Project:</h2>
 F:\kaka\KAKAOS\C\windows\Project\RVMDK£¨uv5£©\BH-F103.uvprojx
-Project File Date:  03/05/2019
+Project File Date:  03/06/2019
 
 <h2>Output:</h2>
 Rebuild target 'KAKAOS'
-compiling main.c...
 compiling user.c...
 compiling bsp_led.c...
+compiling start.c...
 compiling core_cm3.c...
 compiling system_stm32f10x.c...
 assembling startup_stm32f10x_hd.s...
@@ -79,368 +79,19 @@ linking...
 </pre>
 </body>
 </html>
-.c...
-compiling os_tick.c...
-compiling export.c...
-compiling bsp.c...
-assembling CPU_A.s...
-assembling OS_CPU_A.s...
-compiling OS_CPU_STM32.c...
-compiling stm32f10x_it.c...
-compiling bsp_usart.c...
-compiling sram.c...
-compiling stm32_bsp.c...
-compiling buddy.c...
-compiling heap_oo.c...
-compiling insert_sort.c...
-compiling insert_sort_oo.c...
-compiling malloc.c...
-compiling myassert.c...
-compiling myMicroLIB.c...
-compiling singly_linked_list.c...
-compiling slab.c...
-compiling vector.c...
-compiling command_processor.c...
-compiling shell.c...
-compiling shell_debug.c...
-compiling shell_fun.c...
-".\BH-F103.elf" - 1 Error(s), 3 Warning(s).
-Target not created
- of macro 'list_entry'
-../../source/src/kernel/SHELL/shell_fun.c(243): error: note: in expansion of macro 'list_for_each_entry'
-../../source/src/kernel/SHELL/shell_fun.c(243): error: note: each undeclared identifier is reported only once for each function it appears in
-../../source/include/os_lib/double_linked_list.h(92): error: note: in definition of macro 'container_of'
-../../source/include/os_lib/double_linked_list.h(100): error: note: in expansion of macro 'list_entry'
-../../source/src/kernel/SHELL/shell_fun.c(243): error: note: in expansion of macro 'list_for_each_entry'
-".\BH-F103.elf" - 9 Error(s), 1 Warning(s).
-Target not created
-.c...
-compiling singly_linked_list.c...
-compiling slab.c...
-compiling vector.c...
-compiling command_processor.c...
-compiling shell.c...
-../../source/include/os_core/TCB.h(61): error: unknown type name 'TASK_PRYPE'
-compiling shell_debug.c...
-../../source/include/os_core/TCB.h(61): error: unknown type name 'TASK_PRYPE'
-compiling shell_fun.c...
-../../source/include/os_core/TCB.h(61): error: unknown type name 'TASK_PRYPE'
-../../source/src/kernel/SHELL/shell_fun.c: In function 'shell_remove_module':
-../../source/src/kernel/SHELL/shell_fun.c(243): error: 'module_list_head' undeclared (first use in this function); did you mean 'singly_list_head'?
-../../source/include/os_lib/double_linked_list.h(92): error: note: in definition of macro 'container_of'
-../../source/include/os_lib/double_linked_list.h(100): error: note: in expansion of macro 'list_entry'
-../../source/src/kernel/SHELL/shell_fun.c(243): error: note: in expansion of macro 'list_for_each_entry'
-../../source/src/kernel/SHELL/shell_fun.c(243): error: note: each undeclared identifier is reported only once for each function it appears in
-../../source/include/os_lib/double_linked_list.h(92): error: note: in definition of macro 'container_of'
-../../source/include/os_lib/double_linked_list.h(100): error: note: in expansion of macro 'list_entry'
-../../source/src/kernel/SHELL/shell_fun.c(243): error: note: in expansion of macro 'list_for_each_entry'
-".\BH-F103.elf" - 28 Error(s), 1 Warning(s).
-Target not created
-/source/src/kernel/OS_CORE/message_queue.c: In function 'msg_send':
-../../source/src/kernel/OS_CORE/message_queue.c(89): error: 'TCB {aka struct task_control_block_struct}' has no member named 'task_state'; did you mean 'stack_size'?
-../../source/src/kernel/OS_CORE/message_queue.c(95): error: 'TCB {aka struct task_control_block_struct}' has no member named 'task_state'; did you mean 'stack_size'?
-../../source/include/os_lib/myassert.h(8): error: note: in definition of macro 'ASSERT'
-../../source/include/os_core/TCB.h(38): error: 'TCB {aka struct task_control_block_struct}' has no member named 'attribution'
-../../source/src/kernel/OS_CORE/message_queue.c(136): error: note: in expansion of macro 'TCB_state_is_bad'
-../../source/include/os_core/TCB.h(39): error: 'TCB {aka struct task_control_block_struct}' has no member named 'attribution'
-../../source/src/kernel/OS_CORE/message_queue.c(138): error: note: in expansion of macro 'clear_bad_state'
-../../source/src/kernel/OS_CORE/message_queue.c: In function 'msg_receive':
-../../source/src/kernel/OS_CORE/message_queue.c(186): error: 'TCB {aka struct task_control_block_struct}' has no member named 'task_state'; did you mean 'stack_size'?
-../../source/src/kernel/OS_CORE/message_queue.c(192): error: 'TCB {aka struct task_control_block_struct}' has no member named 'task_state'; did you mean 'stack_size'?
-../../source/include/os_lib/myassert.h(8): error: note: in definition of macro 'ASSERT'
-../../source/include/os_core/TCB.h(38): error: 'TCB {aka struct task_control_block_struct}' has no member named 'attribution'
-../../source/src/kernel/OS_CORE/message_queue.c(233): error: note: in expansion of macro 'TCB_state_is_bad'
-../../source/include/os_core/TCB.h(39): error: 'TCB {aka struct task_control_block_struct}' has no member named 'attribution'
-../../source/src/kernel/OS_CORE/message_queue.c(235): error: note: in expansion of macro 'clear_bad_state'
-../../source/src/kernel/OS_CORE/message_queue.c: In function 'msg_del':
-../../source/src/kernel/OS_CORE/message_queue.c(266): error: 'TCB {aka struct task_control_block_struct}' has no member named 'task_state'; did you mean 'stack_size'?
-../../source/src/kernel/OS_CORE/message_queue.c(272): error: 'TCB {aka struct task_control_block_struct}' has no member named 'task_state'; did you mean 'stack_size'?
-../../source/include/os_lib/myassert.h(8): error: note: in definition of macro 'ASSERT'
-../../source/include/os_core/TCB.h(40): error: 'TCB {aka struct task_control_block_struct}' has no member named 'attribution'
-../../source/src/kernel/OS_CORE/message_queue.c(275): error: note: in expansion of macro 'set_bad_state'
-../../source/src/kernel/OS_CORE/message_queue.c(282): error: 'TCB {aka struct task_control_block_struct}' has no member named 'task_state'; did you mean 'stack_size'?
-../../source/src/kernel/OS_CORE/message_queue.c(288): error: 'TCB {aka struct task_control_block_struct}' has no member named 'task_state'; did you mean 'stack_size'?
-../../source/include/os_lib/myassert.h(8): error: note: in definition of macro 'ASSERT'
-../../source/include/os_core/TCB.h(40): error: 'TCB {aka struct task_control_block_struct}' has no member named 'attribution'
-../../source/src/kernel/OS_CORE/message_queue.c(291): error: note: in expansion of macro 'set_bad_state'
-../../source/src/kernel/OS_CORE/message_queue.c: In function 'value_cmp':
-../../source/src/kernel/OS_CORE/message_queue.c(20): warning: control reaches end of non-void function [-Wreturn-type]
-../../source/src/kernel/OS_CORE/message_queue.c: In function 'compare':
-../../source/src/kernel/OS_CORE/message_queue.c(15): warning: control reaches end of non-void function [-Wreturn-type]
-compiling module.c...
-../../source/include/os_core/TCB.h(59): error: unknown type name 'TASK_PRIO_TIO_TYPE'
-../../source/include/os_core/TCB.h(60): error: expected ':', ',', ';', '}' or '__attribute__' before 'prio'
-../../source/src/kernel/OS_CORE/module.c: In function '_remove_a_module':
-../../source/src/kernel/OS_CORE/module.c(97): warning: passing argument 1 of 'ka_free' discards 'const' qualifier from pointer target type [-Wdiscarded-qualifiers]
-../../source/include/os_lib/myMicroLIB.h(22): error: note: expected 'void *' but argument is of type 'const char *'
-../../source/src/kernel/OS_CORE/module.c: In function 'dlmodule_exec':
-../../source/include/os_core/TCB.h(51): error: 'TCB {aka struct task_control_block_struct}' has no member named 'attribution'
-../../source/src/kernel/OS_CORE/module.c(579): error: note: in expansion of macro 'set_module_flag'
-compiling mutex.c...
-../../source/include/os_core/TCB.h(59): error: unknown type name 'TASK_PRIO_TIO_TYPE'
-../../source/include/os_core/TCB.h(60): error: expected ':', ',', ';', '}' or '__attribute__' before 'prio'
-../../source/src/kernel/OS_CORE/mutex.c: In function 'compare':
-../../source/src/kernel/OS_CORE/mutex.c(12): error: 'TCB {aka struct task_control_block_struct}' has no member named 'prio'
-../../source/src/kernel/OS_CORE/mutex.c(12): error: 'TCB {aka struct task_control_block_struct}' has no member named 'prio'
-../../source/src/kernel/OS_CORE/mutex.c: In function 'value_cmp':
-../../source/src/kernel/OS_CORE/mutex.c(17): error: 'TCB {aka struct task_control_block_struct}' has no member named 'prio'
-../../source/src/kernel/OS_CORE/mutex.c(17): error: 'TCB {aka struct task_control_block_struct}' has no member named 'prio'
-../../source/src/kernel/OS_CORE/mutex.c: In function 'mutex_lock':
-../../source/src/kernel/OS_CORE/mutex.c(85): error: 'TCB {aka struct task_control_block_struct}' has no member named 'prio'
-../../source/src/kernel/OS_CORE/mutex.c(85): error: 'TCB {aka struct task_control_block_struct}' has no member named 'prio'
-../../source/src/kernel/OS_CORE/mutex.c(89): error: 'TCB {aka struct task_control_block_struct}' has no member named 'prio'
-../../source/src/kernel/OS_CORE/mutex.c(91): error: 'TCB {aka struct task_control_block_struct}' has no member named 'prio'
-../../source/include/os_core/TCB.h(38): error: 'TCB {aka volatile struct task_control_block_struct}' has no member named 'attribution'
-../../source/src/kernel/OS_CORE/mutex.c(97): error: note: in expansion of macro 'TCB_state_is_bad'
-../../source/include/os_core/TCB.h(39): error: 'TCB {aka volatile struct task_control_block_struct}' has no member named 'attribution'
-../../source/src/kernel/OS_CORE/mutex.c(99): error: note: in expansion of macro 'clear_bad_state'
-../../source/src/kernel/OS_CORE/mutex.c: In function 'mutex_del':
-../../source/src/kernel/OS_CORE/mutex.c(199): error: 'TCB {aka struct task_control_block_struct}' has no member named 'task_state'; did you mean 'stack_size'?
-../../source/include/os_lib/myassert.h(8): error: note: in definition of macro 'ASSERT'
-../../source/include/os_core/TCB.h(40): error: 'TCB {aka struct task_control_block_struct}' has no member named 'attribution'
-../../source/src/kernel/OS_CORE/mutex.c(201): error: note: in expansion of macro 'set_bad_state'
-../../source/src/kernel/OS_CORE/mutex.c: In function 'value_cmp':
-../../source/src/kernel/OS_CORE/mutex.c(18): warning: control reaches end of non-void function [-Wreturn-type]
-../../source/src/kernel/OS_CORE/mutex.c: In function 'compare':
-../../source/src/kernel/OS_CORE/mutex.c(13): warning: control reaches end of non-void function [-Wreturn-type]
-compiling os_time.c...
-compiling os_timer.c...
-../../source/include/os_core/TCB.h(59): error: unknown type name 'TASK_PRIO_TIO_TYPE'
-../../source/include/os_core/TCB.h(60): error: expected ':', ',', ';', '}' or '__attribute__' before 'prio'
-compiling osinit.c...
-../../source/include/os_core/TCB.h(59): error: unknown type name 'TASK_PRIO_TIO_TYPE'
-../../source/include/os_core/TCB.h(60): error: expected ':', ',', ';', '}' or '__attribute__' before 'prio'
-compiling TCB.c...
-../../source/include/os_core/TCB.h(59): error: unknown type name 'TASK_PRIO_TIO_TYPE'
-../../source/include/os_core/TCB.h(60): error: expected ':', ',', ';', '}' or '__attribute__' before 'prio'
-../../source/src/kernel/OS_CORE/TCB.c: In function 'task_init':
-../../source/src/kernel/OS_CORE/TCB.c(56): error: 'TCB {aka struct task_control_block_struct}' has no member named 'prio'
-../../source/src/kernel/OS_CORE/TCB.c(58): error: 'TCB {aka struct task_control_block_struct}' has no member named 'task_state'; did you mean 'stack_size'?
-../../source/src/kernel/OS_CORE/TCB.c(59): error: 'TCB {aka struct task_control_block_struct}' has no member named 'attribution'
-../../source/src/kernel/OS_CORE/TCB.c(60): error: 'TCB {aka struct task_control_block_struct}' has no member named 'delay_reach_time'
-../../source/src/kernel/OS_CORE/TCB.c(61): error: 'TCB {aka struct task_control_block_struct}' has no member named 'delay_heap_position'
-../../source/src/kernel/OS_CORE/TCB.c(62): error: 'TCB {aka struct task_control_block_struct}' has no member named 'same_prio_list'
-../../source/src/kernel/OS_CORE/TCB.c(63): error: 'TCB {aka struct task_control_block_struct}' has no member named 'suspend_list'
-../../source/src/kernel/OS_CORE/TCB.c(64): error: 'TCB {aka struct task_control_block_struct}' has no member named 'name'
-../../source/src/kernel/OS_CORE/TCB.c(65): error: 'TCB {aka struct task_control_block_struct}' has no member named 'timeslice_hope_time'
-../../source/src/kernel/OS_CORE/TCB.c(66): error: 'TCB {aka struct task_control_block_struct}' has no member named 'timeslice_rest_time'
-../../source/src/kernel/OS_CORE/TCB.c(67): error: 'TCB {aka struct task_control_block_struct}' has no member named 'dynamic_module_ptr'
-../../source/src/kernel/OS_CORE/TCB.c: In function 'task_creat':
-../../source/src/kernel/OS_CORE/TCB.c(110): error: 'TCB {aka struct task_control_block_struct}' has no member named 'attribution'
-../../source/src/kernel/OS_CORE/TCB.c: In function 'task_change_prio':
-../../source/src/kernel/OS_CORE/TCB.c(134): error: 'TCB {aka struct task_control_block_struct}' has no member named 'task_state'; did you mean 'stack_size'?
-../../source/src/kernel/OS_CORE/TCB.c(147): error: 'TCB {aka struct task_control_block_struct}' has no member named 'prio'
-../../source/src/kernel/OS_CORE/TCB.c(152): error: 'TCB {aka struct task_control_block_struct}' has no member named 'task_state'; did you mean 'stack_size'?
-../../source/src/kernel/OS_CORE/TCB.c: In function 'task_delete':
-../../source/src/kernel/OS_CORE/TCB.c(183): error: 'TCB {aka struct task_control_block_struct}' has no member named 'task_state'; did you mean 'stack_size'?
-../../source/include/os_core/TCB.h(34): error: 'TCB {aka struct task_control_block_struct}' has no member named 'attribution'
-../../source/src/kernel/OS_CORE/TCB.c(200): error: note: in expansion of macro 'TCB_IS_CREATED'
-../../source/include/os_core/TCB.h(50): error: 'TCB {aka struct task_control_block_struct}' has no member named 'attribution'
-../../source/src/kernel/OS_CORE/TCB.c(204): error: note: in expansion of macro 'is_module'
-../../source/src/kernel/OS_CORE/TCB.c(206): error: 'TCB {aka struct task_control_block_struct}' has no member named 'dynamic_module_ptr'
-../../source/include/os_lib/myassert.h(8): error: note: in definition of macro 'ASSERT'
-../../source/src/kernel/OS_CORE/TCB.c(207): error: 'TCB {aka struct task_control_block_struct}' has no member named 'dynamic_module_ptr'
+ TCB.c...
 compiling os_delay.c...
-../../source/include/os_core/TCB.h(59): error: unknown type name 'TASK_PRIO_TIO_TYPE'
-../../source/include/os_core/TCB.h(60): error: expected ':', ',', ';', '}' or '__attribute__' before 'prio'
-../../source/src/kernel/OS_CORE/schedule/os_delay.c: In function '_cmp':
-../../source/src/kernel/OS_CORE/schedule/os_delay.c(20): error: 'TCB {aka const struct task_control_block_struct}' has no member named 'delay_reach_time'
-../../source/src/kernel/OS_CORE/schedule/os_delay.c(9): error: note: in definition of macro 'TIME_FIRST_SMALLER_THAN_SECOND'
-../../source/src/kernel/OS_CORE/schedule/os_delay.c(20): error: 'TCB {aka const struct task_control_block_struct}' has no member named 'delay_reach_time'
-../../source/src/kernel/OS_CORE/schedule/os_delay.c(9): error: note: in definition of macro 'TIME_FIRST_SMALLER_THAN_SECOND'
-../../source/src/kernel/OS_CORE/schedule/os_delay.c(24): error: 'TCB {aka const struct task_control_block_struct}' has no member named 'delay_reach_time'
-../../source/src/kernel/OS_CORE/schedule/os_delay.c(10): error: note: in definition of macro 'TIME_FIRST_BIGGER_THAN_SECOND'
-../../source/src/kernel/OS_CORE/schedule/os_delay.c(24): error: 'TCB {aka const struct task_control_block_struct}' has no member named 'delay_reach_time'
-../../source/src/kernel/OS_CORE/schedule/os_delay.c(10): error: note: in definition of macro 'TIME_FIRST_BIGGER_THAN_SECOND'
-../../source/src/kernel/OS_CORE/schedule/os_delay.c: In function 'index_change_record':
-../../source/src/kernel/OS_CORE/schedule/os_delay.c(38): error: 'TCB {aka struct task_control_block_struct}' has no member named 'delay_heap_position'
-../../source/src/kernel/OS_CORE/schedule/os_delay.c: In function 'shell_delay_heap_check':
-../../source/src/kernel/OS_CORE/schedule/os_delay.c(131): error: 'TCB {aka struct task_control_block_struct}' has no member named 'delay_reach_time'
-../../source/src/kernel/OS_CORE/schedule/os_delay.c(9): error: note: in definition of macro 'TIME_FIRST_SMALLER_THAN_SECOND'
-../../source/src/kernel/OS_CORE/schedule/os_delay.c(131): error: 'TCB {aka struct task_control_block_struct}' has no member named 'delay_reach_time'
-../../source/src/kernel/OS_CORE/schedule/os_delay.c(9): error: note: in definition of macro 'TIME_FIRST_SMALLER_THAN_SECOND'
-../../source/src/kernel/OS_CORE/schedule/os_delay.c: In function '_cmp':
-../../source/src/kernel/OS_CORE/schedule/os_delay.c(32): warning: control reaches end of non-void function [-Wreturn-type]
 compiling os_ready.c...
-../../source/include/os_core/TCB.h(59): error: unknown type name 'TASK_PRIO_TIO_TYPE'
-../../source/include/os_core/TCB.h(60): error: expected ':', ',', ';', '}' or '__attribute__' before 'prio'
-../../source/src/kernel/OS_CORE/schedule/os_ready.c: In function 'insert_ready_TCB':
-../../source/src/kernel/OS_CORE/schedule/os_ready.c(67): error: 'TCB {aka struct task_control_block_struct}' has no member named 'task_state'; did you mean 'stack_size'?
-../../source/src/kernel/OS_CORE/schedule/os_ready.c(68): error: 'TCB {aka struct task_control_block_struct}' has no member named 'prio'
-../../source/src/kernel/OS_CORE/schedule/os_ready.c(70): error: 'TCB {aka struct task_control_block_struct}' has no member named 'prio'
-../../source/src/kernel/OS_CORE/schedule/os_ready.c(71): error: 'TCB {aka struct task_control_block_struct}' has no member named 'prio'
-../../source/src/kernel/OS_CORE/schedule/os_ready.c(71): error: 'TCB {aka struct task_control_block_struct}' has no member named 'prio'
-../../source/src/kernel/OS_CORE/schedule/os_ready.c: In function 'delete_TCB_from_ready':
-../../source/src/kernel/OS_CORE/schedule/os_ready.c(87): error: 'TCB {aka struct task_control_block_struct}' has no member named 'prio'
-../../source/src/kernel/OS_CORE/schedule/os_ready.c(88): error: 'TCB {aka struct task_control_block_struct}' has no member named 'prio'
-../../source/src/kernel/OS_CORE/schedule/os_ready.c(94): error: 'TCB {aka struct task_control_block_struct}' has no member named 'prio'
-../../source/src/kernel/OS_CORE/schedule/os_ready.c(94): error: 'TCB {aka struct task_control_block_struct}' has no member named 'prio'
-../../source/src/kernel/OS_CORE/schedule/os_ready.c(96): error: 'TCB {aka struct task_control_block_struct}' has no member named 'prio'
-../../source/src/kernel/OS_CORE/schedule/os_ready.c(98): error: 'TCB {aka struct task_control_block_struct}' has no member named 'prio'
-../../source/src/kernel/OS_CORE/schedule/os_ready.c: In function 'get_highest_prio_ready_TCB':
-../../source/include/os_lib/double_linked_list.h(92): error: 'TCB {aka struct task_control_block_struct}' has no member named 'same_prio_list'
-../../source/include/os_lib/double_linked_list.h(120): error: note: in expansion of macro 'container_of'
-../../source/src/kernel/OS_CORE/schedule/os_ready.c(114): error: note: in expansion of macro 'list_entry'
-../../source/include/os_lib/double_linked_list.h(92): warning: initialization from incompatible pointer type [-Wincompatible-pointer-types]
-../../source/include/os_lib/double_linked_list.h(120): error: note: in expansion of macro 'container_of'
-../../source/src/kernel/OS_CORE/schedule/os_ready.c(114): error: note: in expansion of macro 'list_entry'
-../../source/include/os_lib/double_linked_list.h(88): error: 'TCB {aka struct task_control_block_struct}' has no member named 'same_prio_list'
-../../source/include/os_lib/double_linked_list.h(93): error: note: in expansion of macro 'ka_offsetof'
-../../source/include/os_lib/double_linked_list.h(120): error: note: in expansion of macro 'container_of'
-../../source/src/kernel/OS_CORE/schedule/os_ready.c(114): error: note: in expansion of macro 'list_entry'
-../../source/src/kernel/OS_CORE/schedule/os_ready.c(115): error: 'TCB {aka struct task_control_block_struct}' has no member named 'task_state'; did you mean 'stack_size'?
-../../source/src/kernel/OS_CORE/schedule/os_ready.c: In function 'shell_check_os_ready':
-../../source/include/os_lib/double_linked_list.h(92): error: 'TCB {aka struct task_control_block_struct}' has no member named 'same_prio_list'
-../../source/include/os_lib/double_linked_list.h(120): error: note: in expansion of macro 'container_of'
-../../source/src/kernel/OS_CORE/schedule/os_ready.c(158): error: note: in expansion of macro 'list_entry'
-../../source/include/os_lib/double_linked_list.h(92): warning: initialization from incompatible pointer type [-Wincompatible-pointer-types]
-../../source/include/os_lib/double_linked_list.h(120): error: note: in expansion of macro 'container_of'
-../../source/src/kernel/OS_CORE/schedule/os_ready.c(158): error: note: in expansion of macro 'list_entry'
-../../source/include/os_lib/double_linked_list.h(88): error: 'TCB {aka struct task_control_block_struct}' has no member named 'same_prio_list'
-../../source/include/os_lib/double_linked_list.h(93): error: note: in expansion of macro 'ka_offsetof'
-../../source/include/os_lib/double_linked_list.h(120): error: note: in expansion of macro 'container_of'
-../../source/src/kernel/OS_CORE/schedule/os_ready.c(158): error: note: in expansion of macro 'list_entry'
-../../source/src/kernel/OS_CORE/schedule/os_ready.c(159): error: 'TCB {aka struct task_control_block_struct}' has no member named 'task_state'; did you mean 'stack_size'?
-../../source/include/os_lib/double_linked_list.h(92): error: 'TCB {aka struct task_control_block_struct}' has no member named 'same_prio_list'
-../../source/include/os_lib/double_linked_list.h(120): error: note: in expansion of macro 'container_of'
-../../source/src/kernel/OS_CORE/schedule/os_ready.c(191): error: note: in expansion of macro 'list_entry'
-../../source/include/os_lib/double_linked_list.h(92): warning: initialization from incompatible pointer type [-Wincompatible-pointer-types]
-../../source/include/os_lib/double_linked_list.h(120): error: note: in expansion of macro 'container_of'
-../../source/src/kernel/OS_CORE/schedule/os_ready.c(191): error: note: in expansion of macro 'list_entry'
-../../source/include/os_lib/double_linked_list.h(88): error: 'TCB {aka struct task_control_block_struct}' has no member named 'same_prio_list'
-../../source/include/os_lib/double_linked_list.h(93): error: note: in expansion of macro 'ka_offsetof'
-../../source/include/os_lib/double_linked_list.h(120): error: note: in expansion of macro 'container_of'
-../../source/src/kernel/OS_CORE/schedule/os_ready.c(191): error: note: in expansion of macro 'list_entry'
-../../source/src/kernel/OS_CORE/schedule/os_ready.c(192): error: 'TCB {aka struct task_control_block_struct}' has no member named 'task_state'; did you mean 'stack_size'?
 compiling os_schedule.c...
-../../source/include/os_core/TCB.h(59): error: unknown type name 'TASK_PRIO_TIO_TYPE'
-../../source/include/os_core/TCB.h(60): error: expected ':', ',', ';', '}' or '__attribute__' before 'prio'
-../../source/src/kernel/OS_CORE/schedule/os_schedule.c: In function 'sys_delay':
-../../source/src/kernel/OS_CORE/schedule/os_schedule.c(86): error: 'TCB {aka volatile struct task_control_block_struct}' has no member named 'delay_reach_time'
-../../source/src/kernel/OS_CORE/schedule/os_schedule.c(87): error: 'TCB {aka volatile struct task_control_block_struct}' has no member named 'task_state'; did you mean 'stack_size'?
-../../source/src/kernel/OS_CORE/schedule/os_schedule.c(92): error: 'TCB {aka volatile struct task_control_block_struct}' has no member named 'delay_reach_time'
-../../source/src/kernel/OS_CORE/schedule/os_schedule.c: In function 'sys_suspend':
-../../source/src/kernel/OS_CORE/schedule/os_schedule.c(121): error: 'TCB {aka volatile struct task_control_block_struct}' has no member named 'task_state'; did you mean 'stack_size'?
-../../source/src/kernel/OS_CORE/schedule/os_schedule.c: In function 'sys_delay':
-../../source/src/kernel/OS_CORE/schedule/os_schedule.c(93): warning: control reaches end of non-void function [-Wreturn-type]
 compiling os_suspend.c...
-../../source/include/os_core/TCB.h(59): error: unknown type name 'TASK_PRIO_TIO_TYPE'
-../../source/include/os_core/TCB.h(60): error: expected ':', ',', ';', '}' or '__attribute__' before 'prio'
-../../source/src/kernel/OS_CORE/schedule/os_suspend.c: In function 'insert_into_suspend_list':
-../../source/src/kernel/OS_CORE/schedule/os_suspend.c(24): error: 'TCB {aka struct task_control_block_struct}' has no member named 'suspend_list'
-../../source/src/kernel/OS_CORE/schedule/os_suspend.c: In function 'remove_from_suspend_list':
-../../source/src/kernel/OS_CORE/schedule/os_suspend.c(41): error: 'TCB {aka struct task_control_block_struct}' has no member named 'suspend_list'
 compiling os_TCB_list.c...
-../../source/include/os_core/TCB.h(59): error: unknown type name 'TASK_PRIO_TIO_TYPE'
-../../source/include/os_core/TCB.h(60): error: expected ':', ',', ';', '}' or '__attribute__' before 'prio'
-../../source/src/kernel/OS_CORE/schedule/os_TCB_list.c: In function 'register_in_TCB_list':
-../../source/src/kernel/OS_CORE/schedule/os_TCB_list.c(31): error: 'TCB {aka struct task_control_block_struct}' has no member named 'same_prio_list'
-../../source/src/kernel/OS_CORE/schedule/os_TCB_list.c(31): error: 'TCB {aka struct task_control_block_struct}' has no member named 'prio'
-../../source/src/kernel/OS_CORE/schedule/os_TCB_list.c(32): error: 'TCB {aka struct task_control_block_struct}' has no member named 'prio'
-../../source/src/kernel/OS_CORE/schedule/os_TCB_list.c: In function 'delete_from_TCB_list':
-../../source/src/kernel/OS_CORE/schedule/os_TCB_list.c(57): error: 'TCB {aka struct task_control_block_struct}' has no member named 'prio'
-../../source/include/os_lib/double_linked_list.h(97): error: note: in definition of macro 'list_for_each'
-../../source/src/kernel/OS_CORE/schedule/os_TCB_list.c(57): error: 'TCB {aka struct task_control_block_struct}' has no member named 'prio'
-../../source/include/os_lib/double_linked_list.h(97): error: note: in definition of macro 'list_for_each'
-../../source/src/kernel/OS_CORE/schedule/os_TCB_list.c(59): error: 'TCB {aka struct task_control_block_struct}' has no member named 'same_prio_list'
-../../source/src/kernel/OS_CORE/schedule/os_TCB_list.c(62): error: 'TCB {aka struct task_control_block_struct}' has no member named 'prio'
-../../source/include/os_lib/myassert.h(8): error: note: in definition of macro 'ASSERT'
-../../source/src/kernel/OS_CORE/schedule/os_TCB_list.c(63): error: 'TCB {aka struct task_control_block_struct}' has no member named 'prio'
-../../source/src/kernel/OS_CORE/schedule/os_TCB_list.c: In function 'shell_check_TCB_list':
-../../source/include/os_lib/double_linked_list.h(92): error: 'TCB {aka struct task_control_block_struct}' has no member named 'same_prio_list'
-../../source/include/os_lib/double_linked_list.h(120): error: note: in expansion of macro 'container_of'
-../../source/src/kernel/OS_CORE/schedule/os_TCB_list.c(138): error: note: in expansion of macro 'list_entry'
-../../source/include/os_lib/double_linked_list.h(92): warning: initialization from incompatible pointer type [-Wincompatible-pointer-types]
-../../source/include/os_lib/double_linked_list.h(120): error: note: in expansion of macro 'container_of'
-../../source/src/kernel/OS_CORE/schedule/os_TCB_list.c(138): error: note: in expansion of macro 'list_entry'
-../../source/include/os_lib/double_linked_list.h(88): error: 'TCB {aka struct task_control_block_struct}' has no member named 'same_prio_list'
-../../source/include/os_lib/double_linked_list.h(93): error: note: in expansion of macro 'ka_offsetof'
-../../source/include/os_lib/double_linked_list.h(120): error: note: in expansion of macro 'container_of'
-../../source/src/kernel/OS_CORE/schedule/os_TCB_list.c(138): error: note: in expansion of macro 'list_entry'
-../../source/src/kernel/OS_CORE/schedule/os_TCB_list.c(140): error: 'TCB {aka struct task_control_block_struct}' has no member named 'task_state'; did you mean 'stack_size'?
-../../source/src/kernel/OS_CORE/schedule/os_TCB_list.c(144): error: 'TCB {aka struct task_control_block_struct}' has no member named 'name'
-     ka_printf("name: %s\n",TCB_ptr->name);
-../../source/src/kernel/OS_CORE/schedule/os_TCB_list.c(145): error: 'TCB {aka struct task_control_block_struct}' has no member named 'timeslice_hope_time'
-     ka_printf("timeslice_hope_time: %d\n",TCB_ptr->timeslice_hope_time);
-../../source/src/kernel/OS_CORE/schedule/os_TCB_list.c(149): error: 'TCB {aka struct task_control_block_struct}' has no member named 'task_state'; did you mean 'stack_size'?
-../../source/src/kernel/OS_CORE/schedule/os_TCB_list.c: In function 'shell_stack_check':
-../../source/include/os_lib/double_linked_list.h(92): error: 'TCB {aka struct task_control_block_struct}' has no member named 'same_prio_list'
-../../source/include/os_lib/double_linked_list.h(120): error: note: in expansion of macro 'container_of'
-../../source/src/kernel/OS_CORE/schedule/os_TCB_list.c(197): error: note: in expansion of macro 'list_entry'
-../../source/include/os_lib/double_linked_list.h(92): warning: initialization from incompatible pointer type [-Wincompatible-pointer-types]
-../../source/include/os_lib/double_linked_list.h(120): error: note: in expansion of macro 'container_of'
-../../source/src/kernel/OS_CORE/schedule/os_TCB_list.c(197): error: note: in expansion of macro 'list_entry'
-../../source/include/os_lib/double_linked_list.h(88): error: 'TCB {aka struct task_control_block_struct}' has no member named 'same_prio_list'
-../../source/include/os_lib/double_linked_list.h(93): error: note: in expansion of macro 'ka_offsetof'
-../../source/include/os_lib/double_linked_list.h(120): error: note: in expansion of macro 'container_of'
-../../source/src/kernel/OS_CORE/schedule/os_TCB_list.c(197): error: note: in expansion of macro 'list_entry'
-../../source/src/kernel/OS_CORE/schedule/os_TCB_list.c(200): error: 'TCB {aka struct task_control_block_struct}' has no member named 'name'
-     ka_printf("task name : %s\n",TCB_ptr->name);
-../../source/src/kernel/OS_CORE/schedule/os_TCB_list.c: In function 'shell_show_tasks_registers':
-../../source/include/os_lib/double_linked_list.h(92): error: 'TCB {aka struct task_control_block_struct}' has no member named 'same_prio_list'
-../../source/include/os_lib/double_linked_list.h(120): error: note: in expansion of macro 'container_of'
-../../source/include/os_lib/double_linked_list.h(100): error: note: in expansion of macro 'list_entry'
-../../source/src/kernel/OS_CORE/schedule/os_TCB_list.c(237): error: note: in expansion of macro 'list_for_each_entry'
-../../source/include/os_lib/double_linked_list.h(92): warning: initialization from incompatible pointer type [-Wincompatible-pointer-types]
-../../source/include/os_lib/double_linked_list.h(120): error: note: in expansion of macro 'container_of'
-../../source/include/os_lib/double_linked_list.h(100): error: note: in expansion of macro 'list_entry'
-../../source/src/kernel/OS_CORE/schedule/os_TCB_list.c(237): error: note: in expansion of macro 'list_for_each_entry'
-../../source/include/os_lib/double_linked_list.h(88): error: 'TCB {aka struct task_control_block_struct}' has no member named 'same_prio_list'
-../../source/include/os_lib/double_linked_list.h(93): error: note: in expansion of macro 'ka_offsetof'
-../../source/include/os_lib/double_linked_list.h(120): error: note: in expansion of macro 'container_of'
-../../source/include/os_lib/double_linked_list.h(100): error: note: in expansion of macro 'list_entry'
-../../source/src/kernel/OS_CORE/schedule/os_TCB_list.c(237): error: note: in expansion of macro 'list_for_each_entry'
-../../source/include/os_lib/double_linked_list.h(101): error: 'TCB {aka struct task_control_block_struct}' has no member named 'same_prio_list'
-../../source/src/kernel/OS_CORE/schedule/os_TCB_list.c(237): error: note: in expansion of macro 'list_for_each_entry'
-../../source/include/os_lib/double_linked_list.h(92): error: 'TCB {aka struct task_control_block_struct}' has no member named 'same_prio_list'
-../../source/include/os_lib/double_linked_list.h(120): error: note: in expansion of macro 'container_of'
-../../source/include/os_lib/double_linked_list.h(102): error: note: in expansion of macro 'list_entry'
-../../source/src/kernel/OS_CORE/schedule/os_TCB_list.c(237): error: note: in expansion of macro 'list_for_each_entry'
-../../source/include/os_lib/double_linked_list.h(102): error: 'TCB {aka struct task_control_block_struct}' has no member named 'same_prio_list'
-../../source/include/os_lib/double_linked_list.h(92): error: note: in definition of macro 'container_of'
-../../source/include/os_lib/double_linked_list.h(102): error: note: in expansion of macro 'list_entry'
-../../source/src/kernel/OS_CORE/schedule/os_TCB_list.c(237): error: note: in expansion of macro 'list_for_each_entry'
-../../source/include/os_lib/double_linked_list.h(88): error: 'TCB {aka struct task_control_block_struct}' has no member named 'same_prio_list'
-../../source/include/os_lib/double_linked_list.h(93): error: note: in expansion of macro 'ka_offsetof'
-../../source/include/os_lib/double_linked_list.h(120): error: note: in expansion of macro 'container_of'
-../../source/include/os_lib/double_linked_list.h(102): error: note: in expansion of macro 'list_entry'
-../../source/src/kernel/OS_CORE/schedule/os_TCB_list.c(237): error: note: in expansion of macro 'list_for_each_entry'
-../../source/src/kernel/OS_CORE/schedule/os_TCB_list.c(241): error: 'TCB {aka struct task_control_block_struct}' has no member named 'name'
-     ka_printf("task name : %s\n",TCB_ptr->name);
-../../source/src/kernel/OS_CORE/schedule/os_TCB_list.c(242): error: 'TCB {aka struct task_control_block_struct}' has no member named 'name'
 compiling os_tick.c...
-../../source/include/os_core/TCB.h(59): error: unknown type name 'TASK_PRIO_TIO_TYPE'
-../../source/include/os_core/TCB.h(60): error: expected ':', ',', ';', '}' or '__attribute__' before 'prio'
-../../source/src/kernel/OS_CORE/schedule/os_tick.c: In function 'delay_task_check':
-../../source/src/kernel/OS_CORE/schedule/os_tick.c(77): error: 'TCB {aka struct task_control_block_struct}' has no member named 'delay_reach_time'
-../../source/include/os_core/TCB.h(46): error: 'TCB {aka volatile struct task_control_block_struct}' has no member named 'attribution'
-../../source/src/kernel/OS_CORE/schedule/os_tick.c(82): error: note: in expansion of macro 'set_rescheduled_flag'
-../../source/src/kernel/OS_CORE/schedule/os_tick.c: In function 'timer_task_check':
-../../source/include/os_core/TCB.h(46): error: 'TCB {aka volatile struct task_control_block_struct}' has no member named 'attribution'
-../../source/src/kernel/OS_CORE/schedule/os_tick.c(107): error: note: in expansion of macro 'set_rescheduled_flag'
-../../source/src/kernel/OS_CORE/schedule/os_tick.c: In function 'run_task_handler':
-../../source/src/kernel/OS_CORE/schedule/os_tick.c(122): error: 'TCB {aka struct task_control_block_struct}' has no member named 'timeslice_rest_time'
-../../source/src/kernel/OS_CORE/schedule/os_tick.c(126): error: 'TCB {aka struct task_control_block_struct}' has no member named 'timeslice_rest_time'
-../../source/src/kernel/OS_CORE/schedule/os_tick.c(126): error: 'TCB {aka struct task_control_block_struct}' has no member named 'timeslice_hope_time'
-../../source/src/kernel/OS_CORE/schedule/os_tick.c(127): error: 'TCB {aka struct task_control_block_struct}' has no member named 'prio'
-../../source/src/kernel/OS_CORE/schedule/os_tick.c(134): error: 'TCB {aka struct task_control_block_struct}' has no member named 'prio'
-../../source/src/kernel/OS_CORE/schedule/os_tick.c(135): error: 'TCB {aka struct task_control_block_struct}' has no member named 'same_prio_list'
-../../source/src/kernel/OS_CORE/schedule/os_tick.c(136): error: 'TCB {aka struct task_control_block_struct}' has no member named 'same_prio_list'
-../../source/include/os_core/TCB.h(46): error: 'TCB {aka volatile struct task_control_block_struct}' has no member named 'attribution'
-../../source/src/kernel/OS_CORE/schedule/os_tick.c(137): error: note: in expansion of macro 'set_rescheduled_flag'
-../../source/src/kernel/OS_CORE/schedule/os_tick.c: In function 'OS_CPU_SysTickHandler':
-../../source/include/os_core/TCB.h(44): error: 'TCB {aka volatile struct task_control_block_struct}' has no member named 'attribution'
-../../source/src/kernel/OS_CORE/schedule/os_tick.c(157): error: note: in expansion of macro 'need_rescheduled'
-../../source/include/os_core/TCB.h(45): error: 'TCB {aka volatile struct task_control_block_struct}' has no member named 'attribution'
-../../source/src/kernel/OS_CORE/schedule/os_tick.c(159): error: note: in expansion of macro 'clear_rescheduled_flag'
 compiling export.c...
 compiling bsp.c...
 assembling CPU_A.s...
 assembling OS_CPU_A.s...
 compiling OS_CPU_STM32.c...
 compiling stm32f10x_it.c...
-../../source/include/os_core/TCB.h(59): error: unknown type name 'TASK_PRIO_TIO_TYPE'
-../../source/include/os_core/TCB.h(60): error: expected ':', ',', ';', '}' or '__attribute__' before 'prio'
 compiling bsp_usart.c...
 compiling sram.c...
 compiling stm32_bsp.c...
@@ -449,8 +100,6 @@ compiling heap_oo.c...
 compiling insert_sort.c...
 compiling insert_sort_oo.c...
 compiling malloc.c...
-../../source/include/os_core/TCB.h(59): error: unknown type name 'TASK_PRIO_TIO_TYPE'
-../../source/include/os_core/TCB.h(60): error: expected ':', ',', ';', '}' or '__attribute__' before 'prio'
 compiling myassert.c...
 compiling myMicroLIB.c...
 compiling singly_linked_list.c...
@@ -458,22 +107,20 @@ compiling slab.c...
 compiling vector.c...
 compiling command_processor.c...
 compiling shell.c...
-../../source/include/os_core/TCB.h(59): error: unknown type name 'TASK_PRIO_TIO_TYPE'
-../../source/include/os_core/TCB.h(60): error: expected ':', ',', ';', '}' or '__attribute__' before 'prio'
 compiling shell_debug.c...
-../../source/include/os_core/TCB.h(59): error: unknown type name 'TASK_PRIO_TIO_TYPE'
-../../source/include/os_core/TCB.h(60): error: expected ':', ',', ';', '}' or '__attribute__' before 'prio'
 compiling shell_fun.c...
-../../source/include/os_core/TCB.h(59): error: unknown type name 'TASK_PRIO_TIO_TYPE'
-../../source/include/os_core/TCB.h(60): error: expected ':', ',', ';', '}' or '__attribute__' before 'prio'
-../../source/src/kernel/SHELL/shell_fun.c: In function 'shell_remove_module':
-../../source/src/kernel/SHELL/shell_fun.c(243): error: 'module_list_head' undeclared (first use in this function); did you mean 'singly_list_head'?
-../../source/include/os_lib/double_linked_list.h(92): error: note: in definition of macro 'container_of'
-../../source/include/os_lib/double_linked_list.h(100): error: note: in expansion of macro 'list_entry'
-../../source/src/kernel/SHELL/shell_fun.c(243): error: note: in expansion of macro 'list_for_each_entry'
-../../source/src/kernel/SHELL/shell_fun.c(243): error: note: each undeclared identifier is reported only once for each function it appears in
-../../source/include/os_lib/double_linked_list.h(92): error: note: in definition of macro 'container_of'
-../../source/include/os_lib/double_linked_list.h(100): error: note: in expansion of macro 'list_entry'
-../../source/src/kernel/SHELL/shell_fun.c(243): error: note: in expansion of macro 'list_for_each_entry'
-".\BH-F103.elf" - 272 Error(s), 15 Warning(s).
+".\BH-F103.elf" - 6 Error(s), 1 Warning(s).
+Target not created
+...
+compiling vector.c...
+compiling command_processor.c...
+compiling shell.c...
+compiling shell_debug.c...
+compiling shell_fun.c...
+../../source/src/kernel/SHELL/shell_fun.c: In function 'shell_module':
+../../source/src/kernel/SHELL/shell_fun.c(186): warning: passing argument 1 of '_restart_module' makes integer from pointer without a cast [-Wint-conversion]
+../../source/include/os_core/module.h(71): error: note: expected 'int' but argument is of type 'char *'
+../../source/src/kernel/SHELL/shell_fun.c(186): error: too few arguments to function '_restart_module'
+../../source/include/os_core/module.h(71): error: note: declared here
+".\BH-F103.elf" - 11 Error(s), 2 Warning(s).
 Target not created

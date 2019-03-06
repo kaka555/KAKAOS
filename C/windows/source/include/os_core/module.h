@@ -39,7 +39,7 @@ struct dynamic_module
     int (*init)(void);              //this function will be called before module execute
     void (*exit)(void);             //this function will be called after module return 
     void *module_space;
-    unsigned int module_size;
+    unsigned int module_size;       //the room size that module finally use
     void *init_space;               // not use
     void *entry;                    //module entry point
     UINT32 vstart_addr;            //VMA base address for the first LOAD segment
@@ -67,5 +67,10 @@ void __init_module(void);
 int remove_module(struct dynamic_module *dynamic_module_ptr);
 void shell_modinfo(int argc, char const *argv[]);
 void shell_list_module(int argc, char const *argv[]);
+int _check_same_mod_name(const char *name);
+void _restart_module(
+    unsigned int stack_size,
+    TASK_PRIO_TYPE prio,
+    const char *name);
 
 #endif

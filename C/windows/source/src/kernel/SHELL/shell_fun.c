@@ -144,7 +144,8 @@ extern void show_get_size(void);
 extern int add_page_alloc_record(unsigned int level,void *ptr);
 /******************
 * 
-*   insmod -name=dmodule -prio=20 -stacksize=2048 -filesize=4096
+*   insmod -name=dmodule -prio=20 -stacksize=2048 -filesize=4096 // install a new module
+*   insmod -r -name=dmodule //restart a module which has been loaded 
 *
 *******************/
 
@@ -153,9 +154,47 @@ void shell_module(int argc, char const *argv[])
 	void *buf;
 	char *shell_buf_ptr;
 	int buf_is_allo = KA_FALSE;
+	int error;
 	unsigned int stack_size = D_MODULE_DEFAULT_STACK_SIZE;
 	TASK_PRIO_TYPE prio = D_MODULE_DEFAULT_PRIO;
 	char *value_ptr;
+	char *name = D_MODULE_DEFAULT_NAME;
+
+//get the parament
+	value_ptr = get_para_add(argc,argv,"-stacksize=");
+	if(NULL != value_ptr)
+	{
+		stack_size = ka_atoi(value_ptr);
+	}
+	value_ptr = get_para_add(argc,argv,"-prio=");
+	if(NULL != value_ptr)
+	{
+		prio = ka_atoi(value_ptr);
+	}
+
+//get module's name
+	value_ptr = get_para_add(argc,argv,"-name=");
+	if(NULL != value_ptr)
+	{
+		name = value_ptr;
+	}
+
+	value_ptr = get_para_add(argc,argv,"-r");
+	if(NULL != value_ptr)
+	{
+		//restart a module
+		_restart_module(stack_size,prio,name);
+		return ;
+	}
+
+//Look for duplicate names
+	error = _check_same_mod_name(name);
+	if(0 != error)
+	{
+		ka_printf("please change an other module name\n");
+		return ;
+	}
+// allocate room for receiving module's data
 	value_ptr = get_para_add(argc,argv,"-filesize=");
 	if(NULL != value_ptr)
 	{
@@ -175,7 +214,7 @@ void shell_module(int argc, char const *argv[])
 	{
 		ASSERT(0);
 	}
-	
+// allocate room for shell
 	struct shell_buffer shell_buffer;
 	shell_buf_ptr = (char *)ka_malloc(20);
 	if(NULL == shell_buf_ptr)
@@ -200,20 +239,8 @@ void shell_module(int argc, char const *argv[])
 	change_shell_buffer(sys_shell_buffer_ptr);
 	ka_free(shell_buf_ptr);
 
-//get the parament
-	value_ptr = get_para_add(argc,argv,"-stacksize=");
-	if(NULL != value_ptr)
-	{
-		stack_size = ka_atoi(value_ptr);
-	}
-	value_ptr = get_para_add(argc,argv,"-prio=");
-	if(NULL != value_ptr)
-	{
-		prio = ka_atoi(value_ptr);
-	}
-	value_ptr = get_para_add(argc,argv,"-name=");
 	ka_printf("execute module\n");
-	dlmodule_exec(stack_size,prio,value_ptr);
+	dlmodule_exec(stack_size,prio,name);
 	ka_free(buf);
 	clear_module_buffer();
 	return ;

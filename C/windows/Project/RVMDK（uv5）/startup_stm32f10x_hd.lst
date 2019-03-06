@@ -102,7 +102,7 @@ ARM GAS  ../../source/src/CMSIS/startup/startup_stm32f10x_hd.s 			page 1
   96              	/* Call the clock system intitialization function.*/
   97 0026 FFF7FEFF 	  bl  SystemInit   
   98              	/* Call the application's entry point.*/
-  99 002a FFF7FEFF 	  bl  main
+  99 002a FFF7FEFF 	  bl  start_kernel
  100 002e 7047     	  bx  lr    
  101              	.size  Reset_Handler, .-Reset_Handler
  102              	
@@ -604,7 +604,7 @@ _edata
 _sbss
 _ebss
 SystemInit
-main
+start_kernel
 hard_fault_handler_c
 _estack
 OS_CPU_PendSVHandler

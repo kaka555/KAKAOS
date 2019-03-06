@@ -1,6 +1,8 @@
 #ifndef _OS_CPU_STM32_H
 #define _OS_CPU_STM32_H
 
+#include <barrier.h>
+
 typedef  unsigned  int         CPU_INT32U;
 typedef  volatile  CPU_INT32U  CPU_REG32;
 typedef  CPU_INT32U            CPU_SR;
@@ -42,8 +44,8 @@ typedef  CPU_INT32U            CPU_SR;
 #define  CPU_SR_ALLOC()             CPU_SR  cpu_sr = (CPU_SR)0
 #define  CPU_INT_DIS()         do { cpu_sr = CPU_SR_Save(); } while (0) /* Save    CPU status word & disable interrupts.*/
 #define  CPU_INT_EN()          do { CPU_SR_Restore(cpu_sr); } while (0) /* Restore CPU status word.                     */
-#define  CPU_CRITICAL_ENTER()  do { CPU_INT_DIS(); } while (0)          /* Disable   interrupts */
-#define  CPU_CRITICAL_EXIT()   do { CPU_INT_EN();  } while (0)          /* Re-enable interrupts */
+#define  CPU_CRITICAL_ENTER()  do { CPU_INT_DIS(); barrier();} while (0)          /* Disable   interrupts */
+#define  CPU_CRITICAL_EXIT()   do { barrier();CPU_INT_EN();  } while (0)          /* Re-enable interrupts */
 
 
 void CPU_IntDis(void);

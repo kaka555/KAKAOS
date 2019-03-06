@@ -80,6 +80,58 @@ static UINT32 get_mod_export_function_addr(const char *fun_name)
     return 0;
 }
 
+/*
+check that if there is a same-name-module exists
+
+exist ? 1,0
+ */
+int _check_same_mod_name(const char *name)
+{
+    struct dynamic_module *dynamic_module_ptr;
+    list_for_each_entry(dynamic_module_ptr,&module_list_head,module_list)
+    {
+        if(0 == ka_strcmp(name,dynamic_module_ptr->name))
+        {
+            return 1;
+        }
+    }
+    return 0;
+}
+
+void _restart_module(
+    unsigned int stack_size,
+    TASK_PRIO_TYPE prio,
+    const char *name)
+{
+    struct dynamic_module *dynamic_module_ptr;
+    list_for_each_entry(dynamic_module_ptr,&module_list_head,module_list)
+    {
+        if(0 == ka_strcmp(name,dynamic_module_ptr->name))
+        {
+            ASSERT(MODULE_STATE_LOADED == dynamic_module_ptr->module_state);
+            if(prio >= PRIO_MAX)
+            {
+                prio = D_MODULE_DEFAULT_PRIO;
+            }
+						TCB *TCB_ptr;
+            int error = task_creat_ready(stack_size, prio, HZ / 10, name,
+                                 (functionptr)(dynamic_module_ptr->entry), NULL, &TCB_ptr);
+            if (!error)
+            {
+                dynamic_module_ptr->thread_TCB_ptr = TCB_ptr;
+                set_module_flag(TCB_ptr);
+                set_module_state(dynamic_module_ptr,MODULE_STATE_RUN);
+                ka_printf("module_thread run\n");
+            }
+            else
+            {
+                ka_printf("module_thread fail,error code is %d\n",error);
+            }
+            return ;
+        }
+    }
+}
+
 /******************
 * 
 *   rmmod -name=dmodule
@@ -599,6 +651,7 @@ int dlmodule_exec(
         if(name)
         {
             ka_strcpy(module->name,name);
+            module->name[ka_strlen(name)] = '\0';
         }
         if(prio >= PRIO_MAX)
         {

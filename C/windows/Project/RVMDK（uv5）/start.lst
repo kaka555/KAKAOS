@@ -1,4 +1,4 @@
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cchHsCQN.s 			page 1
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cccbtsO3.s 			page 1
 
 
    1              		.cpu cortex-m3
@@ -11,7 +11,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cchHsCQN.s 			page 1
    8              		.eabi_attribute 30, 6
    9              		.eabi_attribute 34, 1
   10              		.eabi_attribute 18, 4
-  11              		.file	"main.c"
+  11              		.file	"start.c"
   12              		.text
   13              	.Ltext0:
   14              		.cfi_sections	.debug_frame
@@ -24,12 +24,12 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cchHsCQN.s 			page 1
   21              		.type	start_kernel, %function
   22              	start_kernel:
   23              	.LFB0:
-  24              		.file 1 "../../source/main/main.c"
-   1:../../source/main/main.c **** #include "os_cpu.h"
-   2:../../source/main/main.c **** #include "osinit.h"
-   3:../../source/main/main.c **** 
-   4:../../source/main/main.c **** void start_kernel()
-   5:../../source/main/main.c **** {
+  24              		.file 1 "../../source/main/start.c"
+   1:../../source/main/start.c **** #include "os_cpu.h"
+   2:../../source/main/start.c **** #include "osinit.h"
+   3:../../source/main/start.c **** 
+   4:../../source/main/start.c **** void start_kernel()
+   5:../../source/main/start.c **** {
   25              		.loc 1 5 0
   26              		.cfi_startproc
   27              		@ args = 0, pretend = 0, frame = 0
@@ -42,14 +42,14 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cchHsCQN.s 			page 1
   34 0002 00AF     		add	r7, sp, #0
   35              	.LCFI1:
   36              		.cfi_def_cfa_register 7
-   6:../../source/main/main.c **** 	CPU_IntDis();
+   6:../../source/main/start.c **** 	CPU_IntDis();
   37              		.loc 1 6 0
   38 0004 FFF7FEFF 		bl	CPU_IntDis
-   7:../../source/main/main.c **** 	os_start();
+   7:../../source/main/start.c **** 	os_start();
   39              		.loc 1 7 0
   40 0008 FFF7FEFF 		bl	os_start
   41              	.L2:
-   8:../../source/main/main.c **** 	while(1)
+   8:../../source/main/start.c **** 	while(1)
   42              		.loc 1 8 0 discriminator 1
   43 000c FEE7     		b	.L2
   44              		.cfi_endproc
@@ -58,7 +58,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cchHsCQN.s 			page 1
   47              	.Letext0:
   48              		.section	.debug_info,"",%progbits
   49              	.Ldebug_info0:
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cchHsCQN.s 			page 2
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cccbtsO3.s 			page 2
 
 
   50 0000 3E000000 		.4byte	0x3e
@@ -68,7 +68,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cchHsCQN.s 			page 1
   54 000b 01       		.uleb128 0x1
   55 000c 00000000 		.4byte	.LASF0
   56 0010 0C       		.byte	0xc
-  57 0011 D4000000 		.4byte	.LASF1
+  57 0011 E1000000 		.4byte	.LASF1
   58 0015 A6000000 		.4byte	.LASF2
   59 0019 00000000 		.4byte	.Ltext0
   60 001d 0E000000 		.4byte	.Letext0
@@ -76,10 +76,10 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cchHsCQN.s 			page 1
   62 0025 02       		.uleb128 0x2
   63 0026 04       		.byte	0x4
   64 0027 07       		.byte	0x7
-  65 0028 ED000000 		.4byte	.LASF3
+  65 0028 D4000000 		.4byte	.LASF3
   66 002c 03       		.uleb128 0x3
   67 002d 01       		.byte	0x1
-  68 002e FA000000 		.4byte	.LASF4
+  68 002e FB000000 		.4byte	.LASF4
   69 0032 01       		.byte	0x1
   70 0033 04       		.byte	0x4
   71 0034 00000000 		.4byte	.LFB0
@@ -118,7 +118,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cchHsCQN.s 			page 1
  104 001a 03       		.uleb128 0x3
  105 001b 0E       		.uleb128 0xe
  106 001c 00       		.byte	0
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cchHsCQN.s 			page 3
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cccbtsO3.s 			page 3
 
 
  107 001d 00       		.byte	0
@@ -178,11 +178,11 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cchHsCQN.s 			page 1
  161 001c 00000000 		.4byte	0
  162              		.section	.debug_line,"",%progbits
  163              	.Ldebug_line0:
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cchHsCQN.s 			page 4
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cccbtsO3.s 			page 4
 
 
- 164 0000 49000000 		.section	.debug_str,"MS",%progbits,1
- 164      02002F00 
+ 164 0000 4A000000 		.section	.debug_str,"MS",%progbits,1
+ 164      02003000 
  164      00000201 
  164      FB0E0D00 
  164      01010101 
@@ -214,30 +214,30 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cchHsCQN.s 			page 1
  171      5C77696E 
  172 00ce 757635A3 		.ascii	"uv5\243\251\000"
  172      A900
- 173              	.LASF1:
- 174 00d4 2E2E2F2E 		.ascii	"../../source/main/main.c\000"
- 174      2E2F736F 
- 174      75726365 
- 174      2F6D6169 
- 174      6E2F6D61 
- 175              	.LASF3:
- 176 00ed 756E7369 		.ascii	"unsigned int\000"
- 176      676E6564 
- 176      20696E74 
- 176      00
+ 173              	.LASF3:
+ 174 00d4 756E7369 		.ascii	"unsigned int\000"
+ 174      676E6564 
+ 174      20696E74 
+ 174      00
+ 175              	.LASF1:
+ 176 00e1 2E2E2F2E 		.ascii	"../../source/main/start.c\000"
+ 176      2E2F736F 
+ 176      75726365 
+ 176      2F6D6169 
+ 176      6E2F7374 
  177              	.LASF4:
- 178 00fa 73746172 		.ascii	"start_kernel\000"
+ 178 00fb 73746172 		.ascii	"start_kernel\000"
  178      745F6B65 
  178      726E656C 
  178      00
  179              		.ident	"GCC: (GNU Tools for Arm Embedded Processors 7-2018-q2-update) 7.3.1 20180622 (release) [AR
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cchHsCQN.s 			page 5
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cccbtsO3.s 			page 5
 
 
 DEFINED SYMBOLS
-                            *ABS*:00000000 main.c
-G:\Users\Jaxb\AppData\Local\Temp\cchHsCQN.s:15     .text:00000000 $t
-G:\Users\Jaxb\AppData\Local\Temp\cchHsCQN.s:22     .text:00000000 start_kernel
+                            *ABS*:00000000 start.c
+G:\Users\Jaxb\AppData\Local\Temp\cccbtsO3.s:15     .text:00000000 $t
+G:\Users\Jaxb\AppData\Local\Temp\cccbtsO3.s:22     .text:00000000 start_kernel
 
 UNDEFINED SYMBOLS
 CPU_IntDis
