@@ -73,7 +73,8 @@ int ka_printf(const char *str,...)
 	va_list ap;
 	int val,r_val;
 	double val_f;
-	INT64 val_l,r_val_l;
+	long val_l,r_val_l;
+	unsigned long val_l1,r_val_l1;
 	unsigned int val1,r_val1;
 	char count,ch;
 	char *s = NULL;
@@ -89,6 +90,7 @@ int ka_printf(const char *str,...)
 				str++;
 				switch(*str)  
 				{
+					case 'i':
 				 	case 'd': // decimal
 				 		val = va_arg(ap, int); 
 				 		if(0 == val) 
@@ -163,34 +165,102 @@ int ka_printf(const char *str,...)
 	                    break ;
 
 	                case 'l': // decimal
-				 		val_l = va_arg(ap, INT64); 
-				 		if(0 == val_l) 
-				 		{
-				 			ka_putchar('0');
-				 			break;
-				 		} 
-				 		if(val_l < 0)
-				 		{
-				 			val_l = -val_l;
-				 			ka_putchar('-');
-				 		}
-	                    r_val_l = val_l;   
-	                    count = 0;
-	                    while(r_val_l)
-	                    {   
-	                         count++;
-	                         r_val_l /= 10;  
-	                    } 
-	                    res += count; 
-	                    r_val_l = val_l;  
-	                    while(count)  
-	                    {   
-	                          ch = r_val_l / ka_pow(10,count - 1);  
-	                          r_val_l %= ka_pow(10,count - 1); 
-	                          ka_putchar(ch + '0');
-	                          count--;  
-	                    }  
-	                    break; 
+	                	++str;
+	                	switch(*str)
+	                	{
+	                		case 'd':
+		                		val_l = va_arg(ap, long); 
+						 		if(0 == val_l) 
+						 		{
+						 			ka_putchar('0');
+						 			break;
+						 		} 
+						 		if(val_l < 0)
+						 		{
+						 			val_l = -val_l;
+						 			ka_putchar('-');
+						 		}
+			                    r_val_l = val_l;   
+			                    count = 0;
+			                    while(r_val_l)
+			                    {   
+			                         count++;
+			                         r_val_l /= 10;  
+			                    } 
+			                    res += count; 
+			                    r_val_l = val_l;  
+			                    while(count)  
+			                    {   
+			                          ch = r_val_l / ka_pow(10,count - 1);  
+			                          r_val_l %= ka_pow(10,count - 1); 
+			                          ka_putchar(ch + '0');
+			                          count--;  
+			                    }  
+			                    break;
+
+		                    case 'u':
+		                		val_l1 = va_arg(ap, long); 
+						 		if(0 == val_l1) 
+						 		{
+						 			ka_putchar('0');
+						 			break;
+						 		} 
+						 		if(val_l1 < 0)
+						 		{
+						 			val_l1 = -val_l1;
+						 			ka_putchar('-');
+						 		}
+			                    r_val_l1 = val_l1;   
+			                    count = 0;
+			                    while(r_val_l1)
+			                    {   
+			                         count++;
+			                         r_val_l1 /= 10;  
+			                    } 
+			                    res += count; 
+			                    r_val_l1 = val_l1;  
+			                    while(count)  
+			                    {   
+			                          ch = r_val_l1 / ka_pow(10,count - 1);  
+			                          r_val_l1 %= ka_pow(10,count - 1); 
+			                          ka_putchar(ch + '0');
+			                          count--;  
+			                    }  
+			                    break;
+
+			                case 'x': // hexadecimal
+			                 	val_l1 = va_arg(ap, unsigned long); 
+			                 	if(0 == val_l1) 
+						 		{
+						 			ka_puts("0x00");
+						 			break;
+						 		} 
+			                    r_val_l1 = val_l1;   
+			                    count = 0;  
+			                    while(r_val_l1)  
+			                    {   
+			                         count++; //整数的长度   
+			                         r_val_l1 /= 16;   
+			                    }
+			                    res += count;//返回值长度增加​   
+			                    r_val_l1 = val_l1; 
+			                    while(count)   
+			                    {   
+			                        ch = r_val_l1 / ka_pow(16, count - 1);   
+			                        r_val_l1 %= ka_pow(16, count - 1);  
+			                        if(ch <= 9) 
+			                            ka_putchar(ch + '0');
+			                        else   
+			                            ka_putchar(ch - 10 + 'a');
+			                        count--;  
+			                    }
+			                    break;
+
+			                default :
+				                ka_putchar(*str);
+		            			res += 1;
+	                	}
+				 		break;
 
 	                case 'u': // decimal
 				 		val1 = va_arg(ap,unsigned int);  
@@ -215,8 +285,32 @@ int ka_printf(const char *str,...)
 	                          ka_putchar(ch + '0');
 	                          count--;  
 	                    }  
-	                    break; 
+	                    break;
 
+	                case 'o': // octal
+				 		val1 = va_arg(ap,unsigned int);  
+				 		if(0 == val1) 
+				 		{
+				 			ka_putchar('0');
+				 			break;
+				 		} 
+	                    r_val1 = val1;   
+	                    count = 0;
+	                    while(r_val1)
+	                    {   
+	                        count++;
+	                        r_val1 /= 8;  
+	                    } 
+	                    res += count; 
+	                    r_val1 = val1;  
+	                    while(count)  
+	                    {   
+	                        ch = r_val1 / ka_pow(8,count - 1);  
+	                        r_val1 %= ka_pow(8,count - 1); 
+	                        ka_putchar(ch + '0');
+	                        count--;  
+	                    }  
+	                    break;
 
 	                case 'x': // hexadecimal
 	                 	val = va_arg(ap, int); 
@@ -293,8 +387,8 @@ int ka_printf(const char *str,...)
 	                    break;
 
 	                default :
-	                	ASSERT(0);
-	                    	;
+	                	ka_putchar(*str);
+	            		res += 1;
 				}
 				break ;
 

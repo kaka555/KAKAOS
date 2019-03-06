@@ -38,6 +38,6 @@ struct device
 	}u;
 };
 
-void bsp_init(void);
+void _bsp_init(const struct device *device_array,unsigned int num);
 
 #endif

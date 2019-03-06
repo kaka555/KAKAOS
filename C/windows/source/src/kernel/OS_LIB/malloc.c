@@ -466,7 +466,7 @@ void shell_check_slab(int argc, char const *argv[])
 	{
 		ka_printf("===========get NO.%d kmem===========\n",++i);
 		IL_ptr = list_entry(pos,IL,insert);
-		ka_printf("the size of this kmem_cache is %l\n",IL_ptr->prio);
+		ka_printf("the size of this kmem_cache is %u\n",IL_ptr->prio);
 		kmem_cache_ptr = list_entry(IL_ptr,struct kmem_cache,kmem_cache_insert_chain);
 		if(!list_empty(&kmem_cache_ptr->slabs_full))
 		{

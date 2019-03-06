@@ -201,7 +201,7 @@ int dlmodule_load_shared_object(struct dynamic_module* module, void *module_ptr)
         if (phdr[index].p_type != PT_LOAD)
             continue;
 
-        ka_printf("LOAD segment: %d, 0x%p, 0x%x\n", index, phdr[index].p_vaddr, phdr[index].p_memsz);
+        ka_printf("LOAD segment: %d, 0x%p, 0x%x\n", index, (void *)phdr[index].p_vaddr, phdr[index].p_memsz);
 
         if (phdr[index].p_memsz < phdr[index].p_filesz)
         {
@@ -245,7 +245,7 @@ int dlmodule_load_shared_object(struct dynamic_module* module, void *module_ptr)
     }
 
     module_size = vend_addr - vstart_addr;
-    ka_printf("module size: %d, vstart_addr: 0x%p\n", module_size, vstart_addr);
+    ka_printf("module size: %d, vstart_addr: 0x%p\n", module_size, (void *)vstart_addr);
     if (module_size == 0)
     {
         ka_printf("Module: size error\n");

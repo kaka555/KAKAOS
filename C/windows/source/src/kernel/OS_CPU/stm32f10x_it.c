@@ -125,15 +125,15 @@ ka_printf ("PC = 0x%x\r\n", stacked_pc);
 
 ka_printf ("PSR = 0x%x\r\n", stacked_psr);   
 
-ka_printf ("BFAR = 0x%x\r\n", (*((volatile unsigned long *)(0xE000ED38))));   
+ka_printf ("BFAR = 0x%lx\r\n", (*((volatile unsigned long *)(0xE000ED38))));   
 
-ka_printf ("CFSR = 0x%x\r\n", (*((volatile unsigned long *)(0xE000ED28))));   
+ka_printf ("CFSR = 0x%lx\r\n", (*((volatile unsigned long *)(0xE000ED28))));   
 
-ka_printf ("HFSR = 0x%x\r\n", (*((volatile unsigned long *)(0xE000ED2C))));   
+ka_printf ("HFSR = 0x%lx\r\n", (*((volatile unsigned long *)(0xE000ED2C))));   
 
-ka_printf ("DFSR = 0x%x\r\n", (*((volatile unsigned long *)(0xE000ED30))));   
+ka_printf ("DFSR = 0x%lx\r\n", (*((volatile unsigned long *)(0xE000ED30))));   
 
-ka_printf ("AFSR = 0x%x\r\n", (*((volatile unsigned long *)(0xE000ED3C))));   
+ka_printf ("AFSR = 0x%lx\r\n", (*((volatile unsigned long *)(0xE000ED3C))));   
 
   
 

@@ -143,7 +143,7 @@ void shell_check_TCB_list(void)
 				}
 				ka_printf("name: %s\n",TCB_ptr->name);
 				ka_printf("timeslice_hope_time: %d\n",TCB_ptr->timeslice_hope_time);
-				ka_printf("stack: %x\n",TCB_ptr->stack);
+				ka_printf("stack: %p\n",(void *)TCB_ptr->stack);
 				ka_printf("stack_size: %d\n",TCB_ptr->stack_size);
 				ka_printf("task_state: ");
 				switch(TCB_ptr->task_state)
