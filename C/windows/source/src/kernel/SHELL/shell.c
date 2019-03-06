@@ -296,6 +296,10 @@ static struct command resident_command_5[] =
 		.command_name = "lsmod",
 		.f = shell_list_module,
 	}
+	,{
+		.command_name = "rmmod",
+		.f = shell_list_module,
+	}
 #endif
 };
 static struct command resident_command_6[] = 

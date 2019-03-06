@@ -6,6 +6,8 @@
 #include <task_state.h>
 #include <os_error.h>
 
+struct dynamic_module;
+
 typedef  unsigned  int         STACK_TYPE;
 
 typedef  unsigned  int         TASK_PRIO_TYPE;
@@ -42,23 +44,30 @@ extern volatile int g_interrupt_count;
 #define need_rescheduled()					(OSTCBCurPtr->attribution & TCB_ATTRIBUTION_NEED_RESCHEDULED)
 #define clear_rescheduled_flag()			(OSTCBCurPtr->attribution &= ~TCB_ATTRIBUTION_NEED_RESCHEDULED)
 #define set_rescheduled_flag()				(OSTCBCurPtr->attribution |= TCB_ATTRIBUTION_NEED_RESCHEDULED)
+/**** bit 3 ****/	
+#define TCB_ATTRIBUTION_IS_NOT_MODULE 		(0X00<<3)
+#define TCB_ATTRIBUTION_IS_DYNAMIC_MODULE 	(0X01<<3)
+#define is_module(TCB_ptr)					((TCB_ptr)->attribution & TCB_ATTRIBUTION_IS_DYNAMIC_MODULE)
+#define set_module_flag(TCB_ptr)			((TCB_ptr)->attribution |= TCB_ATTRIBUTION_IS_DYNAMIC_MODULE)
+#define clear_module_flag(TCB_ptr)			((TCB_ptr)->attribution &= ~TCB_ATTRIBUTION_IS_DYNAMIC_MODULE)
 /****end of attribution macro ****/
 
 typedef struct task_control_block_struct{
-	STACK_TYPE *stack; 			//the stack top of the task
-	unsigned int stack_size;	//bytes
-	STACK_TYPE *stack_end; 		//the stack tail of the task
-	TASK_PRIO_TYPE prio;				//priority 0-PRIO_MAX-1
+	STACK_TYPE *stack; 						//the stack top of the task
+	unsigned int stack_size;				//bytes
+	STACK_TYPE *stack_end; 					//the stack tail of the task
 	TASK_PRIO_TYPE reserve_prio;		//used for Priority inversion problem
-	TASK_STATE task_state;
+	TASK_STATE task_state;				//priority 0-PRIO_MAX-1
+	TASK_PRIO_TYPE prio;
 	int delay_heap_position;
 	struct list_head same_prio_list;
 	struct list_head suspend_list;
 	char *name;
 	unsigned int timeslice_hope_time;
 	unsigned int timeslice_rest_time;
-	UINT32 attribution;		//each bit of this element present an attribution
-	UINT64 delay_reach_time; 	// use when task is delayed
+	UINT32 attribution;						//each bit of this element present an attribution
+	struct dynamic_module *dynamic_module_ptr;	// the related dynamic module
+	UINT64 delay_reach_time; 					// use when task is delayed
 }TCB;
 
 //To creat a task, use one of the two following function 

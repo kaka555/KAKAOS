@@ -166,18 +166,6 @@ void shell_module(int argc, char const *argv[])
 	{
 		buf = alloc_power3_page();
 	}
-/*
-	unsigned int i;
-	for(i=1;i<argc;++i)
-	{
-		if(0 == ka_strncmp("-filesize=",argv[i],ka_strlen("-filesize=")))
-		{
-			buf = ka_malloc(ka_atoi(argv[i] + ka_strlen("-filesize=")));
-			buf_is_allo = KA_TRUE;
-			break ;
-		}
-	}
-*/
 	if (NULL == buf)
 	{
 		ka_printf("no enough room for module\n");

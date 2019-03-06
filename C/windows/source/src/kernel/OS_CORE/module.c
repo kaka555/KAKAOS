@@ -5,6 +5,8 @@
 #include <os_schedule.h>
 #include <myassert.h>
 #include <export.h>
+#include <printf_debug.h>
+#include <shell.h>
 
 #if CONFIG_MODULE
 
@@ -76,6 +78,73 @@ static UINT32 get_mod_export_function_addr(const char *fun_name)
         }
     }
     return 0;
+}
+
+/******************
+* 
+*   rmmod -name=dmodule
+*
+*******************/
+void shell_remove_module(int argc, char const *argv[])
+{
+    if(argc < 2)
+    {
+        goto out;
+    }
+    char *para = get_para_add(argc,argv,"-name=");
+    if(NULL == para)
+    {
+        goto out;
+    }
+    struct dynamic_module *dynamic_module_ptr;
+    list_for_each_entry(dynamic_module_ptr,&module_list_head,module_list)
+    {
+        if(0 == ka_strcmp(para,dynamic_module_ptr->name))
+        {
+            remove_module(dynamic_module_ptr);
+            return ;
+        }
+    }
+    ka_printf("invalid module name\n");
+    return ;
+out:
+    ka_printf("please input module name\n");
+    return ;
+}
+
+static int _remove_a_module(struct dynamic_module *dynamic_module_ptr)
+{
+    PRINTF("remove module name is %s",dynamic_module_ptr->name);
+    if(MODULE_STATE_RUN == dynamic_module_ptr->module_state)
+    {
+        ASSERT(dynamic_module_ptr->thread_TCB_ptr);
+        task_delete(dynamic_module_ptr->thread_TCB_ptr);
+    }
+    if(dynamic_module_ptr->exit)
+    {
+        dynamic_module_ptr->exit();
+    }
+    unsigned int i;
+    for(i=0;i<dynamic_module_ptr->export_symbols_num;++i)
+    {
+        ka_free((void *)dynamic_module_ptr->export_symbols_array[i].name);
+    }
+    ka_free(dynamic_module_ptr->module_space);
+    list_del(&dynamic_module_ptr->module_list);
+    ka_free(dynamic_module_ptr);
+    return FUN_EXECUTE_SUCCESSFULLY;
+}
+
+int remove_module(struct dynamic_module *dynamic_module_ptr)
+{
+    if(NULL == dynamic_module_ptr)
+    {
+        OS_ERROR_PARA_MESSAGE_DISPLAY(remove_module,dynamic_module_ptr);
+        return -ERROR_NULL_INPUT_PTR;
+    }
+    ASSERT(NULL != dynamic_module_ptr);
+    _remove_a_module(dynamic_module_ptr);
+    return FUN_EXECUTE_SUCCESSFULLY;
 }
 
 int dlmodule_relocate(struct dynamic_module *module, Elf32_Rel *rel, Elf32_Addr sym_val)
@@ -428,6 +497,7 @@ static void __init_d_module(struct dynamic_module *dynamic_module_ptr)
     dynamic_module_ptr->export_symbols_array    = NULL;
     dynamic_module_ptr->export_symbols_num      = 0;
     dynamic_module_ptr->ref                     = 0;
+    dynamic_module_ptr->thread_TCB_ptr          = NULL;
 }
 
 struct dynamic_module* dlmodule_load(void)
@@ -525,6 +595,7 @@ int dlmodule_exec(
     module = dlmodule_load();
     if ((module) && (module->entry))
     {
+        set_module_state(module,MODULE_STATE_LOADED);
         if(name)
         {
             ka_strcpy(module->name,name);
@@ -537,6 +608,9 @@ int dlmodule_exec(
                                  (functionptr)(module->entry), NULL, &TCB_ptr);
         if (!error)
         {
+            module->thread_TCB_ptr = TCB_ptr;
+            set_module_flag(TCB_ptr);
+            set_module_state(module,MODULE_STATE_RUN);
             ka_printf("module_thread run\n");
         }
         else

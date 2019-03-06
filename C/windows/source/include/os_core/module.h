@@ -40,12 +40,13 @@ struct dynamic_module
     void (*exit)(void);             //this function will be called after module return 
     void *module_space;
     unsigned int module_size;
-    void *init_space;
+    void *init_space;               // not use
     void *entry;                    //module entry point
     UINT32 vstart_addr;            //VMA base address for the first LOAD segment
     struct ka_module_symtab *export_symbols_array;
     unsigned int export_symbols_num;
     unsigned int ref;
+    TCB *thread_TCB_ptr;
 };
 
 typedef struct dynamic_module d_module;
@@ -63,9 +64,8 @@ int dlmodule_exec(
     const char *name);
 void set_module_buffer(void *add);
 void __init_module(void);
-int remove_a_module(struct dynamic_module *dynamic_module_ptr);
+int remove_module(struct dynamic_module *dynamic_module_ptr);
 void shell_modinfo(int argc, char const *argv[]);
-void shell_remove_module(int argc, char const *argv[]);
 void shell_list_module(int argc, char const *argv[]);
 
 #endif

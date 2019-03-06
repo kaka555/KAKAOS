@@ -9,12 +9,13 @@
 #include <os_suspend.h>
 #include <os_delay.h>
 #include <os_schedule.h>
+#include <module.h>
 
 volatile TCB *OSTCBCurPtr;
 volatile TCB *OSTCBHighRdyPtr;
 volatile int g_interrupt_count = 0;
 
-static inline void delete_myself(void)
+static void delete_myself(void)
 {
 	task_delete((TCB *)OSTCBCurPtr);
 }
@@ -63,6 +64,7 @@ int _must_check task_init(
 	TCB_ptr->name = (char *)name;
 	TCB_ptr->timeslice_hope_time = timeslice_hope_time;
 	TCB_ptr->timeslice_rest_time = timeslice_hope_time;
+	TCB_ptr->dynamic_module_ptr = NULL;
 	register_in_TCB_list(TCB_ptr);
 	return FUN_EXECUTE_SUCCESSFULLY;
 }
@@ -198,6 +200,11 @@ int task_delete(TCB *TCB_ptr)
 	if(TCB_IS_CREATED(TCB_ptr))
 	{
 		ka_free(TCB_ptr);
+	}
+	if(is_module(TCB_ptr))
+	{
+		ASSERT(TCB_ptr->dynamic_module_ptr);
+		set_module_state(TCB_ptr->dynamic_module_ptr,MODULE_STATE_LOADED);
 	}
 	CPU_CRITICAL_EXIT();
 	schedule();
