@@ -141,11 +141,11 @@ void put_in_shell_buffer(char c)  // deal with input layer
 		else
 		{
 			ASSERT(0 == using_shell_buffer_ptr->index);
-			ka_putchar('\a');
+			ka_putchar('>');
 		}
 		return ;
 	}
-	if(using_shell_buffer_ptr->index < BUFFER_SIZE*0.8)
+	if(using_shell_buffer_ptr->index < BUFFER_SIZE)
 	{
 		using_shell_buffer_ptr->buffer[(using_shell_buffer_ptr->index)++] = c;
 		using_shell_buffer_ptr->buffer[using_shell_buffer_ptr->index] = '\0';
@@ -298,7 +298,7 @@ static struct command resident_command_5[] =
 	}
 	,{
 		.command_name = "rmmod",
-		.f = shell_list_module,
+		.f = shell_remove_module,
 	}
 #endif
 };

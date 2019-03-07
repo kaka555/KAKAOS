@@ -12,7 +12,7 @@
 #define RT_DLMODULE_STAT_CLOSED     0x03
 
 #define D_MODULE_NAME_MAX               32
-#define D_MODULE_DEFAULT_NAME           "dynamic module"
+#define D_MODULE_DEFAULT_NAME           "dynamicmodule"
 #define D_MODULE_DEFAULT_PRIO           (PRIO_MAX-2)
 #define D_MODULE_DEFAULT_STACK_SIZE     2048
 
@@ -53,7 +53,7 @@ typedef struct dynamic_module d_module;
 
 static inline void set_module_state(struct dynamic_module *dynamic_module_ptr,UINT32 state)
 {
-    dynamic_module_ptr->module_state |= state;
+    dynamic_module_ptr->module_state = state;
 }
 
 void put_in_module_buffer(char c);

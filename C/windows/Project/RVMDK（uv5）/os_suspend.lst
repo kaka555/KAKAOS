@@ -1,4 +1,4 @@
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccPCKVza.s 			page 1
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc3XPma7.s 			page 1
 
 
    1              		.cpu cortex-m3
@@ -58,7 +58,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccPCKVza.s 			page 1
   38              		.cfi_def_cfa_register 7
   39 0006 7860     		str	r0, [r7, #4]
   18:../../source/include/os_lib/double_linked_list.h ****     list->next = list;
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccPCKVza.s 			page 2
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc3XPma7.s 			page 2
 
 
   40              		.loc 1 18 0
@@ -118,7 +118,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccPCKVza.s 			page 1
   86              	.LCFI8:
   87              		.cfi_def_cfa_register 7
   88 0024 F860     		str	r0, [r7, #12]
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccPCKVza.s 			page 3
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc3XPma7.s 			page 3
 
 
   89 0026 B960     		str	r1, [r7, #8]
@@ -178,7 +178,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccPCKVza.s 			page 1
   38:../../source/include/os_lib/double_linked_list.h **** 
   39:../../source/include/os_lib/double_linked_list.h **** 
   40:../../source/include/os_lib/double_linked_list.h **** static inline void list_add_tail(struct list_head *new, struct list_head *head)
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccPCKVza.s 			page 4
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc3XPma7.s 			page 4
 
 
   41:../../source/include/os_lib/double_linked_list.h **** {
@@ -238,7 +238,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccPCKVza.s 			page 1
  179              		@ args = 0, pretend = 0, frame = 8
  180              		@ frame_needed = 1, uses_anonymous_args = 0
  181              		@ link register save eliminated.
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccPCKVza.s 			page 5
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc3XPma7.s 			page 5
 
 
  182 006c 80B4     		push	{r7}
@@ -298,7 +298,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccPCKVza.s 			page 1
  229              		@ args = 0, pretend = 0, frame = 8
  230              		@ frame_needed = 1, uses_anonymous_args = 0
  231 008c 80B5     		push	{r7, lr}
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccPCKVza.s 			page 6
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc3XPma7.s 			page 6
 
 
  232              	.LCFI23:
@@ -350,7 +350,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccPCKVza.s 			page 1
  275              		.fpu softvfp
  276              		.type	__init_suspend_list, %function
  277              	__init_suspend_list:
- 278              	.LFB10:
+ 278              	.LFB11:
  279              		.file 2 "../../source/src/kernel/OS_CORE/schedule/os_suspend.c"
    1:../../source/src/kernel/OS_CORE/schedule/os_suspend.c **** #include <os_suspend.h>
    2:../../source/src/kernel/OS_CORE/schedule/os_suspend.c **** #include <double_linked_list.h>
@@ -358,7 +358,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccPCKVza.s 			page 1
    4:../../source/src/kernel/OS_CORE/schedule/os_suspend.c **** #include <myassert.h>
    5:../../source/src/kernel/OS_CORE/schedule/os_suspend.c **** #include <os_ready.h>
    6:../../source/src/kernel/OS_CORE/schedule/os_suspend.c **** 
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccPCKVza.s 			page 7
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc3XPma7.s 			page 7
 
 
    7:../../source/src/kernel/OS_CORE/schedule/os_suspend.c **** static struct list_head suspend_list_head;
@@ -390,7 +390,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccPCKVza.s 			page 1
  300              	.L7:
  301 00bc 00000000 		.word	suspend_list_head
  302              		.cfi_endproc
- 303              	.LFE10:
+ 303              	.LFE11:
  304              		.size	__init_suspend_list, .-__init_suspend_list
  305              		.section	.rodata
  306              		.align	2
@@ -418,13 +418,13 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccPCKVza.s 			page 1
  317              		.syntax unified
  318              		.thumb
  319              		.thumb_func
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccPCKVza.s 			page 8
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc3XPma7.s 			page 8
 
 
  320              		.fpu softvfp
  321              		.type	insert_into_suspend_list, %function
  322              	insert_into_suspend_list:
- 323              	.LFB11:
+ 323              	.LFB12:
   13:../../source/src/kernel/OS_CORE/schedule/os_suspend.c **** 
   14:../../source/src/kernel/OS_CORE/schedule/os_suspend.c **** inline int  insert_into_suspend_list(TCB *TCB_ptr)
   15:../../source/src/kernel/OS_CORE/schedule/os_suspend.c **** {
@@ -478,7 +478,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccPCKVza.s 			page 1
  362 00ea 2433     		adds	r3, r3, #36
  363 00ec 0649     		ldr	r1, .L13+8
  364 00ee 1846     		mov	r0, r3
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccPCKVza.s 			page 9
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc3XPma7.s 			page 9
 
 
  365 00f0 FFF7ACFF 		bl	list_add_tail
@@ -504,7 +504,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccPCKVza.s 			page 1
  383 0104 38000000 		.word	.LC1
  384 0108 00000000 		.word	suspend_list_head
  385              		.cfi_endproc
- 386              	.LFE11:
+ 386              	.LFE12:
  387              		.size	insert_into_suspend_list, .-insert_into_suspend_list
  388              		.section	.rodata
  389              		.align	2
@@ -527,7 +527,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccPCKVza.s 			page 1
  399              		.fpu softvfp
  400              		.type	remove_from_suspend_list, %function
  401              	remove_from_suspend_list:
- 402              	.LFB12:
+ 402              	.LFB13:
   27:../../source/src/kernel/OS_CORE/schedule/os_suspend.c **** 
   28:../../source/src/kernel/OS_CORE/schedule/os_suspend.c **** int remove_from_suspend_list(TCB *TCB_ptr)
   29:../../source/src/kernel/OS_CORE/schedule/os_suspend.c **** {
@@ -538,7 +538,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccPCKVza.s 			page 1
  407 010c 80B5     		push	{r7, lr}
  408              	.LCFI35:
  409              		.cfi_def_cfa_offset 8
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccPCKVza.s 			page 10
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc3XPma7.s 			page 10
 
 
  410              		.cfi_offset 7, -8
@@ -598,7 +598,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccPCKVza.s 			page 1
   43:../../source/src/kernel/OS_CORE/schedule/os_suspend.c **** 			list_del(pos);
  451              		.loc 2 43 0
  452 0146 F868     		ldr	r0, [r7, #12]
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccPCKVza.s 			page 11
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc3XPma7.s 			page 11
 
 
  453 0148 FFF7A0FF 		bl	list_del
@@ -647,7 +647,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccPCKVza.s 			page 1
  488 0174 78000000 		.word	.LC2
  489 0178 00000000 		.word	suspend_list_head
  490              		.cfi_endproc
- 491              	.LFE12:
+ 491              	.LFE13:
  492              		.size	remove_from_suspend_list, .-remove_from_suspend_list
  493              	.Letext0:
  494              		.file 3 "../../source/include/os_cpu/kakaosstdint.h"
@@ -658,7 +658,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccPCKVza.s 			page 1
  499 0000 BA030000 		.4byte	0x3ba
  500 0004 0200     		.2byte	0x2
  501 0006 00000000 		.4byte	.Ldebug_abbrev0
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccPCKVza.s 			page 12
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc3XPma7.s 			page 12
 
 
  502 000a 04       		.byte	0x4
@@ -718,7 +718,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccPCKVza.s 			page 1
  556 0079 6F020000 		.4byte	.LASF24
  557 007d 08       		.byte	0x8
  558 007e 01       		.byte	0x1
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccPCKVza.s 			page 13
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc3XPma7.s 			page 13
 
 
  559 007f 04       		.byte	0x4
@@ -778,7 +778,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccPCKVza.s 			page 1
  613 00e8 0A       		.uleb128 0xa
  614 00e9 52000000 		.4byte	.LASF19
  615 00ed 09       		.byte	0x9
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccPCKVza.s 			page 14
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc3XPma7.s 			page 14
 
 
  616 00ee 0A       		.uleb128 0xa
@@ -838,7 +838,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccPCKVza.s 			page 1
  670 0157 23       		.byte	0x23
  671 0158 08       		.uleb128 0x8
  672 0159 07       		.uleb128 0x7
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccPCKVza.s 			page 15
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc3XPma7.s 			page 15
 
 
  673 015a 02010000 		.4byte	.LASF29
@@ -898,7 +898,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccPCKVza.s 			page 1
  727 01ba 2C       		.uleb128 0x2c
  728 01bb 07       		.uleb128 0x7
  729 01bc 86000000 		.4byte	.LASF36
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccPCKVza.s 			page 16
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc3XPma7.s 			page 16
 
 
  730 01c0 05       		.byte	0x5
@@ -958,7 +958,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccPCKVza.s 			page 1
  784 021d 15020000 		.4byte	0x215
  785 0221 0D       		.uleb128 0xd
  786 0222 54434200 		.ascii	"TCB\000"
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccPCKVza.s 			page 17
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc3XPma7.s 			page 17
 
 
  787 0226 05       		.byte	0x5
@@ -979,8 +979,8 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccPCKVza.s 			page 1
  802 0244 1C       		.byte	0x1c
  803 0245 01       		.byte	0x1
  804 0246 33000000 		.4byte	0x33
- 805 024a 0C010000 		.4byte	.LFB12
- 806 024e 7C010000 		.4byte	.LFE12
+ 805 024a 0C010000 		.4byte	.LFB13
+ 806 024e 7C010000 		.4byte	.LFE13
  807 0252 00000000 		.4byte	.LLST7
  808 0256 01       		.byte	0x1
  809 0257 78020000 		.4byte	0x278
@@ -1011,14 +1011,14 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccPCKVza.s 			page 1
  834 0285 0E       		.byte	0xe
  835 0286 01       		.byte	0x1
  836 0287 33000000 		.4byte	0x33
- 837 028b C0000000 		.4byte	.LFB11
- 838 028f 0C010000 		.4byte	.LFE11
+ 837 028b C0000000 		.4byte	.LFB12
+ 838 028f 0C010000 		.4byte	.LFE12
  839 0293 50000000 		.4byte	.LLST6
  840 0297 01       		.byte	0x1
  841 0298 AB020000 		.4byte	0x2ab
  842 029c 10       		.uleb128 0x10
  843 029d A0000000 		.4byte	.LASF45
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccPCKVza.s 			page 18
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc3XPma7.s 			page 18
 
 
  844 02a1 02       		.byte	0x2
@@ -1034,8 +1034,8 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccPCKVza.s 			page 1
  854 02b1 02       		.byte	0x2
  855 02b2 09       		.byte	0x9
  856 02b3 01       		.byte	0x1
- 857 02b4 AC000000 		.4byte	.LFB10
- 858 02b8 C0000000 		.4byte	.LFE10
+ 857 02b4 AC000000 		.4byte	.LFB11
+ 858 02b8 C0000000 		.4byte	.LFE11
  859 02bc A0000000 		.4byte	.LLST5
  860 02c0 01       		.byte	0x1
  861 02c1 13       		.uleb128 0x13
@@ -1078,7 +1078,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccPCKVza.s 			page 1
  898 0310 10       		.uleb128 0x10
  899 0311 15000000 		.4byte	.LASF9
  900 0315 01       		.byte	0x1
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccPCKVza.s 			page 19
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc3XPma7.s 			page 19
 
 
  901 0316 2E       		.byte	0x2e
@@ -1138,7 +1138,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccPCKVza.s 			page 1
  955 0382 18       		.byte	0x18
  956 0383 A1000000 		.4byte	0xa1
  957 0387 02       		.byte	0x2
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccPCKVza.s 			page 20
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc3XPma7.s 			page 20
 
 
  958 0388 91       		.byte	0x91
@@ -1198,7 +1198,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccPCKVza.s 			page 1
  1012 0016 0B       		.uleb128 0xb
  1013 0017 0B       		.uleb128 0xb
  1014 0018 3E       		.uleb128 0x3e
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccPCKVza.s 			page 21
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc3XPma7.s 			page 21
 
 
  1015 0019 0B       		.uleb128 0xb
@@ -1258,7 +1258,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccPCKVza.s 			page 1
  1069 004f 03       		.uleb128 0x3
  1070 0050 0E       		.uleb128 0xe
  1071 0051 3A       		.uleb128 0x3a
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccPCKVza.s 			page 22
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc3XPma7.s 			page 22
 
 
  1072 0052 0B       		.uleb128 0xb
@@ -1318,7 +1318,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccPCKVza.s 			page 1
  1126 0088 0B       		.uleb128 0xb
  1127 0089 49       		.uleb128 0x49
  1128 008a 13       		.uleb128 0x13
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccPCKVza.s 			page 23
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc3XPma7.s 			page 23
 
 
  1129 008b 3F       		.uleb128 0x3f
@@ -1378,7 +1378,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccPCKVza.s 			page 1
  1183 00c1 27       		.uleb128 0x27
  1184 00c2 0C       		.uleb128 0xc
  1185 00c3 49       		.uleb128 0x49
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccPCKVza.s 			page 24
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc3XPma7.s 			page 24
 
 
  1186 00c4 13       		.uleb128 0x13
@@ -1438,7 +1438,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccPCKVza.s 			page 1
  1240 00fb 27       		.uleb128 0x27
  1241 00fc 0C       		.uleb128 0xc
  1242 00fd 11       		.uleb128 0x11
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccPCKVza.s 			page 25
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc3XPma7.s 			page 25
 
 
  1243 00fe 01       		.uleb128 0x1
@@ -1498,7 +1498,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccPCKVza.s 			page 1
  1297 0137 00       		.byte	0
  1298 0138 15       		.uleb128 0x15
  1299 0139 05       		.uleb128 0x5
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccPCKVza.s 			page 26
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc3XPma7.s 			page 26
 
 
  1300 013a 00       		.byte	0
@@ -1539,7 +1539,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccPCKVza.s 			page 1
  1335              		.section	.debug_loc,"",%progbits
  1336              	.Ldebug_loc0:
  1337              	.LLST7:
- 1338 0000 0C010000 		.4byte	.LFB12-.Ltext0
+ 1338 0000 0C010000 		.4byte	.LFB13-.Ltext0
  1339 0004 0E010000 		.4byte	.LCFI35-.Ltext0
  1340 0008 0200     		.2byte	0x2
  1341 000a 7D       		.byte	0x7d
@@ -1558,7 +1558,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccPCKVza.s 			page 1
  1354 0028 6C010000 		.4byte	.LCFI38-.Ltext0
  1355 002c 0200     		.2byte	0x2
  1356 002e 77       		.byte	0x77
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccPCKVza.s 			page 27
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc3XPma7.s 			page 27
 
 
  1357 002f 18       		.sleb128 24
@@ -1568,14 +1568,14 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccPCKVza.s 			page 1
  1361 003a 77       		.byte	0x77
  1362 003b 08       		.sleb128 8
  1363 003c 6E010000 		.4byte	.LCFI39-.Ltext0
- 1364 0040 7C010000 		.4byte	.LFE12-.Ltext0
+ 1364 0040 7C010000 		.4byte	.LFE13-.Ltext0
  1365 0044 0200     		.2byte	0x2
  1366 0046 7D       		.byte	0x7d
  1367 0047 08       		.sleb128 8
  1368 0048 00000000 		.4byte	0
  1369 004c 00000000 		.4byte	0
  1370              	.LLST6:
- 1371 0050 C0000000 		.4byte	.LFB11-.Ltext0
+ 1371 0050 C0000000 		.4byte	.LFB12-.Ltext0
  1372 0054 C2000000 		.4byte	.LCFI30-.Ltext0
  1373 0058 0200     		.2byte	0x2
  1374 005a 7D       		.byte	0x7d
@@ -1601,14 +1601,14 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccPCKVza.s 			page 1
  1394 008a 77       		.byte	0x77
  1395 008b 08       		.sleb128 8
  1396 008c FC000000 		.4byte	.LCFI34-.Ltext0
- 1397 0090 0C010000 		.4byte	.LFE11-.Ltext0
+ 1397 0090 0C010000 		.4byte	.LFE12-.Ltext0
  1398 0094 0200     		.2byte	0x2
  1399 0096 7D       		.byte	0x7d
  1400 0097 08       		.sleb128 8
  1401 0098 00000000 		.4byte	0
  1402 009c 00000000 		.4byte	0
  1403              	.LLST5:
- 1404 00a0 AC000000 		.4byte	.LFB10-.Ltext0
+ 1404 00a0 AC000000 		.4byte	.LFB11-.Ltext0
  1405 00a4 AE000000 		.4byte	.LCFI28-.Ltext0
  1406 00a8 0200     		.2byte	0x2
  1407 00aa 7D       		.byte	0x7d
@@ -1618,11 +1618,11 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccPCKVza.s 			page 1
  1411 00b4 0200     		.2byte	0x2
  1412 00b6 7D       		.byte	0x7d
  1413 00b7 08       		.sleb128 8
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccPCKVza.s 			page 28
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc3XPma7.s 			page 28
 
 
  1414 00b8 B0000000 		.4byte	.LCFI29-.Ltext0
- 1415 00bc C0000000 		.4byte	.LFE10-.Ltext0
+ 1415 00bc C0000000 		.4byte	.LFE11-.Ltext0
  1416 00c0 0200     		.2byte	0x2
  1417 00c2 77       		.byte	0x77
  1418 00c3 08       		.sleb128 8
@@ -1678,7 +1678,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccPCKVza.s 			page 1
  1468 013e 7D       		.byte	0x7d
  1469 013f 10       		.sleb128 16
  1470 0140 72000000 		.4byte	.LCFI19-.Ltext0
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccPCKVza.s 			page 29
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc3XPma7.s 			page 29
 
 
  1471 0144 86000000 		.4byte	.LCFI20-.Ltext0
@@ -1738,7 +1738,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccPCKVza.s 			page 1
  1525              	.LLST1:
  1526 01c8 1E000000 		.4byte	.LFB1-.Ltext0
  1527 01cc 20000000 		.4byte	.LCFI6-.Ltext0
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccPCKVza.s 			page 30
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc3XPma7.s 			page 30
 
 
  1528 01d0 0200     		.2byte	0x2
@@ -1798,7 +1798,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccPCKVza.s 			page 1
  1582 0252 77       		.byte	0x77
  1583 0253 10       		.sleb128 16
  1584 0254 18000000 		.4byte	.LCFI3-.Ltext0
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccPCKVza.s 			page 31
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc3XPma7.s 			page 31
 
 
  1585 0258 1A000000 		.4byte	.LCFI4-.Ltext0
@@ -1858,7 +1858,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccPCKVza.s 			page 1
  1627      5F505249 
  1627      4F5F5459 
  1627      504500
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccPCKVza.s 			page 32
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc3XPma7.s 			page 32
 
 
  1628              	.LASF59:
@@ -1918,7 +1918,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccPCKVza.s 			page 1
  1649      47455F51 
  1650              	.LASF11:
  1651 00f6 53544154 		.ascii	"STATE_READY\000"
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccPCKVza.s 			page 33
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc3XPma7.s 			page 33
 
 
  1651      455F5245 
@@ -1978,7 +1978,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccPCKVza.s 			page 1
  1673 01ad 68656164 		.ascii	"head\000"
  1673      00
  1674              	.LASF44:
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccPCKVza.s 			page 34
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc3XPma7.s 			page 34
 
 
  1675 01b2 696E7365 		.ascii	"insert_into_suspend_list\000"
@@ -2038,7 +2038,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccPCKVza.s 			page 1
  1695      504500
  1696              	.LASF24:
  1697 026f 6C697374 		.ascii	"list_head\000"
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccPCKVza.s 			page 35
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc3XPma7.s 			page 35
 
 
  1697      5F686561 
@@ -2098,7 +2098,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccPCKVza.s 			page 1
  1720      6E203236 
  1720      31393037 
  1721 0363 732D6672 		.ascii	"s-frame -mthumb-interwork -mcpu=cortex-m3 -mthumb -"
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccPCKVza.s 			page 36
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc3XPma7.s 			page 36
 
 
  1721      616D6520 
@@ -2158,32 +2158,32 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccPCKVza.s 			page 1
  1741      5C77696E 
  1742 0466 757635A3 		.ascii	"uv5\243\251\000"
  1742      A900
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccPCKVza.s 			page 37
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc3XPma7.s 			page 37
 
 
  1743              		.ident	"GCC: (GNU Tools for Arm Embedded Processors 7-2018-q2-update) 7.3.1 20180622 (release) [AR
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccPCKVza.s 			page 38
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cc3XPma7.s 			page 38
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 os_suspend.c
-G:\Users\Jaxb\AppData\Local\Temp\ccPCKVza.s:15     .text:00000000 $t
-G:\Users\Jaxb\AppData\Local\Temp\ccPCKVza.s:21     .text:00000000 INIT_LIST_HEAD
-G:\Users\Jaxb\AppData\Local\Temp\ccPCKVza.s:71     .text:0000001e __list_add
-G:\Users\Jaxb\AppData\Local\Temp\ccPCKVza.s:130    .text:0000004c list_add_tail
-G:\Users\Jaxb\AppData\Local\Temp\ccPCKVza.s:175    .text:0000006c __list_del
-G:\Users\Jaxb\AppData\Local\Temp\ccPCKVza.s:225    .text:0000008c list_del
-G:\Users\Jaxb\AppData\Local\Temp\ccPCKVza.s:265    .bss:00000000 $d
-G:\Users\Jaxb\AppData\Local\Temp\ccPCKVza.s:266    .bss:00000000 suspend_list_head
-G:\Users\Jaxb\AppData\Local\Temp\ccPCKVza.s:277    .text:000000ac __init_suspend_list
-G:\Users\Jaxb\AppData\Local\Temp\ccPCKVza.s:301    .text:000000bc $d
-G:\Users\Jaxb\AppData\Local\Temp\ccPCKVza.s:306    .rodata:00000000 $d
-G:\Users\Jaxb\AppData\Local\Temp\ccPCKVza.s:315    .text:000000c0 $t
-G:\Users\Jaxb\AppData\Local\Temp\ccPCKVza.s:322    .text:000000c0 insert_into_suspend_list
-G:\Users\Jaxb\AppData\Local\Temp\ccPCKVza.s:382    .text:00000100 $d
-G:\Users\Jaxb\AppData\Local\Temp\ccPCKVza.s:394    .text:0000010c $t
-G:\Users\Jaxb\AppData\Local\Temp\ccPCKVza.s:401    .text:0000010c remove_from_suspend_list
-G:\Users\Jaxb\AppData\Local\Temp\ccPCKVza.s:487    .text:00000170 $d
+G:\Users\Jaxb\AppData\Local\Temp\cc3XPma7.s:15     .text:00000000 $t
+G:\Users\Jaxb\AppData\Local\Temp\cc3XPma7.s:21     .text:00000000 INIT_LIST_HEAD
+G:\Users\Jaxb\AppData\Local\Temp\cc3XPma7.s:71     .text:0000001e __list_add
+G:\Users\Jaxb\AppData\Local\Temp\cc3XPma7.s:130    .text:0000004c list_add_tail
+G:\Users\Jaxb\AppData\Local\Temp\cc3XPma7.s:175    .text:0000006c __list_del
+G:\Users\Jaxb\AppData\Local\Temp\cc3XPma7.s:225    .text:0000008c list_del
+G:\Users\Jaxb\AppData\Local\Temp\cc3XPma7.s:265    .bss:00000000 $d
+G:\Users\Jaxb\AppData\Local\Temp\cc3XPma7.s:266    .bss:00000000 suspend_list_head
+G:\Users\Jaxb\AppData\Local\Temp\cc3XPma7.s:277    .text:000000ac __init_suspend_list
+G:\Users\Jaxb\AppData\Local\Temp\cc3XPma7.s:301    .text:000000bc $d
+G:\Users\Jaxb\AppData\Local\Temp\cc3XPma7.s:306    .rodata:00000000 $d
+G:\Users\Jaxb\AppData\Local\Temp\cc3XPma7.s:315    .text:000000c0 $t
+G:\Users\Jaxb\AppData\Local\Temp\cc3XPma7.s:322    .text:000000c0 insert_into_suspend_list
+G:\Users\Jaxb\AppData\Local\Temp\cc3XPma7.s:382    .text:00000100 $d
+G:\Users\Jaxb\AppData\Local\Temp\cc3XPma7.s:394    .text:0000010c $t
+G:\Users\Jaxb\AppData\Local\Temp\cc3XPma7.s:401    .text:0000010c remove_from_suspend_list
+G:\Users\Jaxb\AppData\Local\Temp\cc3XPma7.s:487    .text:00000170 $d
 
 UNDEFINED SYMBOLS
 _ASSERT

@@ -32,6 +32,7 @@ void shell_modinfo(int argc, char const *argv[])
         switch(dynamic_module_ptr->module_state)
         {
             default :
+                PRINTF("bad state num is %d\n",dynamic_module_ptr->module_state);
                 ASSERT(0);ka_printf("\n"); break;
             case MODULE_STATE_INIT:
                 ka_printf("STATE_INIT\n"); break;
@@ -121,6 +122,7 @@ void _restart_module(
                 dynamic_module_ptr->thread_TCB_ptr = TCB_ptr;
                 set_module_flag(TCB_ptr);
                 set_module_state(dynamic_module_ptr,MODULE_STATE_RUN);
+                set_tcb_module(TCB_ptr,dynamic_module_ptr);
                 ka_printf("module_thread run\n");
             }
             else
@@ -166,7 +168,7 @@ out:
 
 static int _remove_a_module(struct dynamic_module *dynamic_module_ptr)
 {
-    PRINTF("remove module name is %s",dynamic_module_ptr->name);
+    PRINTF("remove module name is %s\n",dynamic_module_ptr->name);
     if(MODULE_STATE_RUN == dynamic_module_ptr->module_state)
     {
         ASSERT(dynamic_module_ptr->thread_TCB_ptr);
@@ -664,6 +666,7 @@ int dlmodule_exec(
             module->thread_TCB_ptr = TCB_ptr;
             set_module_flag(TCB_ptr);
             set_module_state(module,MODULE_STATE_RUN);
+            set_tcb_module(TCB_ptr,module);
             ka_printf("module_thread run\n");
         }
         else
@@ -678,7 +681,6 @@ int dlmodule_exec(
             {
                 ka_printf("module init error\n");
                 task_delete(TCB_ptr);
-                //remove_a_module(module);
             }
         }
     }

@@ -1,4 +1,4 @@
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwkYVoC.s 			page 1
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cckE54GI.s 			page 1
 
 
    1              		.cpu cortex-m3
@@ -58,7 +58,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwkYVoC.s 			page 1
   29 0000 80B4     		push	{r7}
   30              	.LCFI0:
   31              		.cfi_def_cfa_offset 4
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwkYVoC.s 			page 2
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cckE54GI.s 			page 2
 
 
   32              		.cfi_offset 7, -4
@@ -118,7 +118,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwkYVoC.s 			page 1
   81              	list_add_tail:
   82              	.LFB3:
   32:../../source/include/os_lib/double_linked_list.h **** 
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwkYVoC.s 			page 3
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cckE54GI.s 			page 3
 
 
   33:../../source/include/os_lib/double_linked_list.h **** 
@@ -178,7 +178,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwkYVoC.s 			page 1
  126              	__list_del:
  127              	.LFB4:
   44:../../source/include/os_lib/double_linked_list.h **** 
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwkYVoC.s 			page 4
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cckE54GI.s 			page 4
 
 
   45:../../source/include/os_lib/double_linked_list.h **** 
@@ -238,7 +238,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwkYVoC.s 			page 1
  176              	list_del:
  177              	.LFB5:
   51:../../source/include/os_lib/double_linked_list.h **** 
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwkYVoC.s 			page 5
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cckE54GI.s 			page 5
 
 
   52:../../source/include/os_lib/double_linked_list.h **** 
@@ -290,7 +290,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwkYVoC.s 			page 1
  219              		.fpu softvfp
  220              		.type	tick_time_handler, %function
  221              	tick_time_handler:
- 222              	.LFB12:
+ 222              	.LFB13:
  223              		.file 2 "../../source/src/kernel/OS_CORE/schedule/os_tick.c"
    1:../../source/src/kernel/OS_CORE/schedule/os_tick.c **** #include <osinit.h>
    2:../../source/src/kernel/OS_CORE/schedule/os_tick.c **** #include <ka_configuration.h>
@@ -298,7 +298,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwkYVoC.s 			page 1
    4:../../source/src/kernel/OS_CORE/schedule/os_tick.c **** #include <TCB.h>
    5:../../source/src/kernel/OS_CORE/schedule/os_tick.c **** #include <os_delay.h>
    6:../../source/src/kernel/OS_CORE/schedule/os_tick.c **** #include <os_ready.h>
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwkYVoC.s 			page 6
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cckE54GI.s 			page 6
 
 
    7:../../source/src/kernel/OS_CORE/schedule/os_tick.c **** #include <os_TCB_list.h>
@@ -358,7 +358,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwkYVoC.s 			page 1
  242 0098 0A4A     		ldr	r2, .L8
  243 009a 1360     		str	r3, [r2]
   43:../../source/src/kernel/OS_CORE/schedule/os_tick.c **** #endif
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwkYVoC.s 			page 7
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cckE54GI.s 			page 7
 
 
   44:../../source/src/kernel/OS_CORE/schedule/os_tick.c **** 	++g_time_tick_count;
@@ -399,10 +399,10 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwkYVoC.s 			page 1
  266              	.L9:
  267              		.align	2
  268              	.L8:
- 269 00c4 00000000 		.word	time_flag.4510
+ 269 00c4 00000000 		.word	time_flag.4514
  270 00c8 00000000 		.word	g_time_tick_count
  271              		.cfi_endproc
- 272              	.LFE12:
+ 272              	.LFE13:
  273              		.size	tick_time_handler, .-tick_time_handler
  274              		.align	1
  275              		.syntax unified
@@ -411,14 +411,14 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwkYVoC.s 			page 1
  278              		.fpu softvfp
  279              		.type	delay_task_check, %function
  280              	delay_task_check:
- 281              	.LFB13:
+ 281              	.LFB14:
   57:../../source/src/kernel/OS_CORE/schedule/os_tick.c **** 
   58:../../source/src/kernel/OS_CORE/schedule/os_tick.c **** #if CONFIG_CPU_USE_RATE_CALCULATION
   59:../../source/src/kernel/OS_CORE/schedule/os_tick.c **** unsigned int get_cpu_use_rate(void)
   60:../../source/src/kernel/OS_CORE/schedule/os_tick.c **** {
   61:../../source/src/kernel/OS_CORE/schedule/os_tick.c **** 	return use_rate;
   62:../../source/src/kernel/OS_CORE/schedule/os_tick.c **** }
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwkYVoC.s 			page 8
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cckE54GI.s 			page 8
 
 
   63:../../source/src/kernel/OS_CORE/schedule/os_tick.c **** #endif	
@@ -478,7 +478,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwkYVoC.s 			page 1
   81:../../source/src/kernel/OS_CORE/schedule/os_tick.c **** 			TCB_ptr = delay_heap_get_top_TCB();
  318              		.loc 2 81 0
  319 00f6 FFF7FEFF 		bl	delay_heap_get_top_TCB
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwkYVoC.s 			page 9
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cckE54GI.s 			page 9
 
 
  320 00fa 7860     		str	r0, [r7, #4]
@@ -530,7 +530,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwkYVoC.s 			page 1
  355 0120 00000000 		.word	g_time_tick_count
  356 0124 00000000 		.word	OSTCBCurPtr
  357              		.cfi_endproc
- 358              	.LFE13:
+ 358              	.LFE14:
  359              		.size	delay_task_check, .-delay_task_check
  360              		.align	1
  361              		.global	timer_task_check
@@ -538,12 +538,12 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwkYVoC.s 			page 1
  363              		.thumb
  364              		.thumb_func
  365              		.fpu softvfp
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwkYVoC.s 			page 10
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cckE54GI.s 			page 10
 
 
  366              		.type	timer_task_check, %function
  367              	timer_task_check:
- 368              	.LFB14:
+ 368              	.LFB15:
   91:../../source/src/kernel/OS_CORE/schedule/os_tick.c **** 
   92:../../source/src/kernel/OS_CORE/schedule/os_tick.c **** #if CONFIG_TIMER_EN
   93:../../source/src/kernel/OS_CORE/schedule/os_tick.c **** void timer_task_check(void)
@@ -598,7 +598,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwkYVoC.s 			page 1
  410 016a 0DDB     		blt	.L24
  101:../../source/src/kernel/OS_CORE/schedule/os_tick.c **** 	{
  102:../../source/src/kernel/OS_CORE/schedule/os_tick.c **** 		return;
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwkYVoC.s 			page 11
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cckE54GI.s 			page 11
 
 
  103:../../source/src/kernel/OS_CORE/schedule/os_tick.c **** 	}
@@ -645,7 +645,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwkYVoC.s 			page 1
  443 0194 00000000 		.word	TCB_timer_task
  444 0198 00000000 		.word	OSTCBCurPtr
  445              		.cfi_endproc
- 446              	.LFE14:
+ 446              	.LFE15:
  447              		.size	timer_task_check, .-timer_task_check
  448              		.align	1
  449              		.syntax unified
@@ -654,11 +654,11 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwkYVoC.s 			page 1
  452              		.fpu softvfp
  453              		.type	run_task_handler, %function
  454              	run_task_handler:
- 455              	.LFB15:
+ 455              	.LFB16:
  110:../../source/src/kernel/OS_CORE/schedule/os_tick.c **** #endif
  111:../../source/src/kernel/OS_CORE/schedule/os_tick.c **** 
  112:../../source/src/kernel/OS_CORE/schedule/os_tick.c **** /**
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwkYVoC.s 			page 12
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cckE54GI.s 			page 12
 
 
  113:../../source/src/kernel/OS_CORE/schedule/os_tick.c ****  * This is a system function
@@ -718,7 +718,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwkYVoC.s 			page 1
  495 01cc 0346     		mov	r3, r0
  496 01ce 012B     		cmp	r3, #1
  497 01d0 1BD0     		beq	.L32
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwkYVoC.s 			page 13
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cckE54GI.s 			page 13
 
 
  498              	.LBB2:
@@ -778,7 +778,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwkYVoC.s 			page 1
  538 020e BD46     		mov	sp, r7
  539              	.LCFI38:
  540              		.cfi_def_cfa_register 13
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwkYVoC.s 			page 14
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cckE54GI.s 			page 14
 
 
  541              		@ sp needed
@@ -788,7 +788,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwkYVoC.s 			page 1
  545              	.L33:
  546 0214 00000000 		.word	OSTCBCurPtr
  547              		.cfi_endproc
- 548              	.LFE15:
+ 548              	.LFE16:
  549              		.size	run_task_handler, .-run_task_handler
  550              		.align	1
  551              		.global	OS_CPU_SysTickHandler
@@ -798,7 +798,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwkYVoC.s 			page 1
  555              		.fpu softvfp
  556              		.type	OS_CPU_SysTickHandler, %function
  557              	OS_CPU_SysTickHandler:
- 558              	.LFB16:
+ 558              	.LFB17:
  140:../../source/src/kernel/OS_CORE/schedule/os_tick.c **** 
  141:../../source/src/kernel/OS_CORE/schedule/os_tick.c **** /**
  142:../../source/src/kernel/OS_CORE/schedule/os_tick.c ****  * This is a system function
@@ -838,7 +838,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwkYVoC.s 			page 1
  154:../../source/src/kernel/OS_CORE/schedule/os_tick.c **** 	timer_task_check();
  581              		.loc 2 154 0
  582 022e FFF7FEFF 		bl	timer_task_check
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwkYVoC.s 			page 15
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cckE54GI.s 			page 15
 
 
  155:../../source/src/kernel/OS_CORE/schedule/os_tick.c **** #endif
@@ -890,15 +890,15 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwkYVoC.s 			page 1
  620 0270 00000000 		.word	g_interrupt_count
  621 0274 00000000 		.word	OSTCBCurPtr
  622              		.cfi_endproc
- 623              	.LFE16:
+ 623              	.LFE17:
  624              		.size	OS_CPU_SysTickHandler, .-OS_CPU_SysTickHandler
  625              		.bss
  626              		.align	2
- 627              	time_flag.4510:
+ 627              	time_flag.4514:
  628 0000 00000000 		.space	4
- 629              		.size	time_flag.4510, 4
+ 629              		.size	time_flag.4514, 4
  630              		.text
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwkYVoC.s 			page 16
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cckE54GI.s 			page 16
 
 
  631              	.Letext0:
@@ -958,7 +958,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwkYVoC.s 			page 1
  685 0066 6A000000 		.4byte	0x6a
  686 006a 02       		.uleb128 0x2
  687 006b 04       		.byte	0x4
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwkYVoC.s 			page 17
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cckE54GI.s 			page 17
 
 
  688 006c 07       		.byte	0x7
@@ -1018,7 +1018,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwkYVoC.s 			page 1
  742 00d5 0F000000 		.4byte	.LASF14
  743 00d9 03       		.byte	0x3
  744 00da 0A       		.uleb128 0xa
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwkYVoC.s 			page 18
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cckE54GI.s 			page 18
 
 
  745 00db D4030000 		.4byte	.LASF15
@@ -1078,7 +1078,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwkYVoC.s 			page 1
  799 0147 06       		.uleb128 0x6
  800 0148 EB030000 		.4byte	.LASF26
  801 014c 48       		.byte	0x48
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwkYVoC.s 			page 19
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cckE54GI.s 			page 19
 
 
  802 014d 05       		.byte	0x5
@@ -1138,7 +1138,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwkYVoC.s 			page 1
  856 01ad 3E       		.byte	0x3e
  857 01ae 33000000 		.4byte	0x33
  858 01b2 02       		.byte	0x2
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwkYVoC.s 			page 20
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cckE54GI.s 			page 20
 
 
  859 01b3 23       		.byte	0x23
@@ -1198,7 +1198,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwkYVoC.s 			page 1
  913 0210 3F020000 		.4byte	0x23f
  914 0214 02       		.byte	0x2
  915 0215 23       		.byte	0x23
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwkYVoC.s 			page 21
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cckE54GI.s 			page 21
 
 
  916 0216 3C       		.uleb128 0x3c
@@ -1258,7 +1258,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwkYVoC.s 			page 1
  970 027f 15       		.byte	0x15
  971 0280 55020000 		.4byte	0x255
  972 0284 09       		.uleb128 0x9
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwkYVoC.s 			page 22
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cckE54GI.s 			page 22
 
 
  973 0285 68030000 		.4byte	.LASF49
@@ -1318,7 +1318,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwkYVoC.s 			page 1
  1027 02ee 02       		.byte	0x2
  1028 02ef 23       		.byte	0x23
  1029 02f0 08       		.uleb128 0x8
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwkYVoC.s 			page 23
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cckE54GI.s 			page 23
 
 
  1030 02f1 11       		.uleb128 0x11
@@ -1378,7 +1378,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwkYVoC.s 			page 1
  1084 0351 16       		.byte	0x16
  1085 0352 45030000 		.4byte	0x345
  1086 0356 01       		.byte	0x1
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwkYVoC.s 			page 24
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cckE54GI.s 			page 24
 
 
  1087 0357 01       		.byte	0x1
@@ -1402,8 +1402,8 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwkYVoC.s 			page 1
  1105 0378 02       		.byte	0x2
  1106 0379 94       		.byte	0x94
  1107 037a 01       		.byte	0x1
- 1108 037b 18020000 		.4byte	.LFB16
- 1109 037f 78020000 		.4byte	.LFE16
+ 1108 037b 18020000 		.4byte	.LFB17
+ 1109 037f 78020000 		.4byte	.LFE17
  1110 0383 00000000 		.4byte	.LLST8
  1111 0387 01       		.byte	0x1
  1112 0388 13       		.uleb128 0x13
@@ -1411,8 +1411,8 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwkYVoC.s 			page 1
  1114 038d 02       		.byte	0x2
  1115 038e 77       		.byte	0x77
  1116 038f 01       		.byte	0x1
- 1117 0390 9C010000 		.4byte	.LFB15
- 1118 0394 18020000 		.4byte	.LFE15
+ 1117 0390 9C010000 		.4byte	.LFB16
+ 1118 0394 18020000 		.4byte	.LFE16
  1119 0398 2C000000 		.4byte	.LLST7
  1120 039c 01       		.byte	0x1
  1121 039d C8030000 		.4byte	0x3c8
@@ -1438,7 +1438,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwkYVoC.s 			page 1
  1141 03c6 00       		.byte	0
  1142 03c7 00       		.byte	0
  1143 03c8 08       		.uleb128 0x8
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwkYVoC.s 			page 25
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cckE54GI.s 			page 25
 
 
  1144 03c9 04       		.byte	0x4
@@ -1449,8 +1449,8 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwkYVoC.s 			page 1
  1149 03d4 02       		.byte	0x2
  1150 03d5 5D       		.byte	0x5d
  1151 03d6 01       		.byte	0x1
- 1152 03d7 28010000 		.4byte	.LFB14
- 1153 03db 9C010000 		.4byte	.LFE14
+ 1152 03d7 28010000 		.4byte	.LFB15
+ 1153 03db 9C010000 		.4byte	.LFE15
  1154 03df 7C000000 		.4byte	.LLST6
  1155 03e3 01       		.byte	0x1
  1156 03e4 F7030000 		.4byte	0x3f7
@@ -1471,8 +1471,8 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwkYVoC.s 			page 1
  1171 0402 02       		.byte	0x2
  1172 0403 48       		.byte	0x48
  1173 0404 01       		.byte	0x1
- 1174 0405 CC000000 		.4byte	.LFB13
- 1175 0409 28010000 		.4byte	.LFE13
+ 1174 0405 CC000000 		.4byte	.LFB14
+ 1175 0409 28010000 		.4byte	.LFE14
  1176 040d CC000000 		.4byte	.LLST5
  1177 0411 01       		.byte	0x1
  1178 0412 25040000 		.4byte	0x425
@@ -1490,22 +1490,22 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwkYVoC.s 			page 1
  1190 042a 02       		.byte	0x2
  1191 042b 26       		.byte	0x26
  1192 042c 01       		.byte	0x1
- 1193 042d 8E000000 		.4byte	.LFB12
- 1194 0431 CC000000 		.4byte	.LFE12
+ 1193 042d 8E000000 		.4byte	.LFB13
+ 1194 0431 CC000000 		.4byte	.LFE13
  1195 0435 1C010000 		.4byte	.LLST4
  1196 0439 01       		.byte	0x1
  1197 043a 50040000 		.4byte	0x450
  1198 043e 14       		.uleb128 0x14
  1199 043f BC010000 		.4byte	.LASF73
  1200 0443 02       		.byte	0x2
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwkYVoC.s 			page 26
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cckE54GI.s 			page 26
 
 
  1201 0444 29       		.byte	0x29
  1202 0445 3A000000 		.4byte	0x3a
  1203 0449 05       		.byte	0x5
  1204 044a 03       		.byte	0x3
- 1205 044b 00000000 		.4byte	time_flag.4510
+ 1205 044b 00000000 		.4byte	time_flag.4514
  1206 044f 00       		.byte	0
  1207 0450 13       		.uleb128 0x13
  1208 0451 34000000 		.4byte	.LASF74
@@ -1558,7 +1558,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwkYVoC.s 			page 1
  1255 04b3 01       		.byte	0x1
  1256 04b4 28       		.byte	0x28
  1257 04b5 01       		.byte	0x1
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwkYVoC.s 			page 27
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cckE54GI.s 			page 27
 
 
  1258 04b6 2E000000 		.4byte	.LFB3
@@ -1618,7 +1618,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwkYVoC.s 			page 1
  1312 0522 6C       		.sleb128 -20
  1313 0523 00       		.byte	0
  1314 0524 00       		.byte	0
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwkYVoC.s 			page 28
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cckE54GI.s 			page 28
 
 
  1315              		.section	.debug_abbrev,"",%progbits
@@ -1678,7 +1678,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwkYVoC.s 			page 1
  1369 0034 0E       		.uleb128 0xe
  1370 0035 3A       		.uleb128 0x3a
  1371 0036 0B       		.uleb128 0xb
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwkYVoC.s 			page 29
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cckE54GI.s 			page 29
 
 
  1372 0037 3B       		.uleb128 0x3b
@@ -1738,7 +1738,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwkYVoC.s 			page 1
  1426 006d 49       		.uleb128 0x49
  1427 006e 13       		.uleb128 0x13
  1428 006f 3A       		.uleb128 0x3a
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwkYVoC.s 			page 30
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cckE54GI.s 			page 30
 
 
  1429 0070 0B       		.uleb128 0xb
@@ -1798,7 +1798,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwkYVoC.s 			page 1
  1483 00a6 00       		.byte	0
  1484 00a7 00       		.byte	0
  1485 00a8 0F       		.uleb128 0xf
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwkYVoC.s 			page 31
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cckE54GI.s 			page 31
 
 
  1486 00a9 13       		.uleb128 0x13
@@ -1858,7 +1858,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwkYVoC.s 			page 1
  1540 00df 06       		.uleb128 0x6
  1541 00e0 9642     		.uleb128 0x2116
  1542 00e2 0C       		.uleb128 0xc
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwkYVoC.s 			page 32
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cckE54GI.s 			page 32
 
 
  1543 00e3 00       		.byte	0
@@ -1918,7 +1918,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwkYVoC.s 			page 1
  1597 011a 03       		.uleb128 0x3
  1598 011b 0E       		.uleb128 0xe
  1599 011c 3A       		.uleb128 0x3a
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwkYVoC.s 			page 33
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cckE54GI.s 			page 33
 
 
  1600 011d 0B       		.uleb128 0xb
@@ -1978,7 +1978,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwkYVoC.s 			page 1
  1654 0155 00       		.byte	0
  1655 0156 19       		.uleb128 0x19
  1656 0157 05       		.uleb128 0x5
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwkYVoC.s 			page 34
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cckE54GI.s 			page 34
 
 
  1657 0158 00       		.byte	0
@@ -2019,7 +2019,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwkYVoC.s 			page 1
  1692              		.section	.debug_loc,"",%progbits
  1693              	.Ldebug_loc0:
  1694              	.LLST8:
- 1695 0000 18020000 		.4byte	.LFB16-.Ltext0
+ 1695 0000 18020000 		.4byte	.LFB17-.Ltext0
  1696 0004 1A020000 		.4byte	.LCFI39-.Ltext0
  1697 0008 0200     		.2byte	0x2
  1698 000a 7D       		.byte	0x7d
@@ -2030,15 +2030,15 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwkYVoC.s 			page 1
  1703 0016 7D       		.byte	0x7d
  1704 0017 08       		.sleb128 8
  1705 0018 1C020000 		.4byte	.LCFI40-.Ltext0
- 1706 001c 78020000 		.4byte	.LFE16-.Ltext0
+ 1706 001c 78020000 		.4byte	.LFE17-.Ltext0
  1707 0020 0200     		.2byte	0x2
  1708 0022 77       		.byte	0x77
  1709 0023 08       		.sleb128 8
  1710 0024 00000000 		.4byte	0
  1711 0028 00000000 		.4byte	0
  1712              	.LLST7:
- 1713 002c 9C010000 		.4byte	.LFB15-.Ltext0
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwkYVoC.s 			page 35
+ 1713 002c 9C010000 		.4byte	.LFB16-.Ltext0
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cckE54GI.s 			page 35
 
 
  1714 0030 9E010000 		.4byte	.LCFI34-.Ltext0
@@ -2066,14 +2066,14 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwkYVoC.s 			page 1
  1736 0066 77       		.byte	0x77
  1737 0067 08       		.sleb128 8
  1738 0068 10020000 		.4byte	.LCFI38-.Ltext0
- 1739 006c 18020000 		.4byte	.LFE15-.Ltext0
+ 1739 006c 18020000 		.4byte	.LFE16-.Ltext0
  1740 0070 0200     		.2byte	0x2
  1741 0072 7D       		.byte	0x7d
  1742 0073 08       		.sleb128 8
  1743 0074 00000000 		.4byte	0
  1744 0078 00000000 		.4byte	0
  1745              	.LLST6:
- 1746 007c 28010000 		.4byte	.LFB14-.Ltext0
+ 1746 007c 28010000 		.4byte	.LFB15-.Ltext0
  1747 0080 2C010000 		.4byte	.LCFI29-.Ltext0
  1748 0084 0200     		.2byte	0x2
  1749 0086 7D       		.byte	0x7d
@@ -2098,18 +2098,18 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwkYVoC.s 			page 1
  1768 00b4 0200     		.2byte	0x2
  1769 00b6 77       		.byte	0x77
  1770 00b7 10       		.sleb128 16
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwkYVoC.s 			page 36
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cckE54GI.s 			page 36
 
 
  1771 00b8 8E010000 		.4byte	.LCFI33-.Ltext0
- 1772 00bc 9C010000 		.4byte	.LFE14-.Ltext0
+ 1772 00bc 9C010000 		.4byte	.LFE15-.Ltext0
  1773 00c0 0200     		.2byte	0x2
  1774 00c2 7D       		.byte	0x7d
  1775 00c3 10       		.sleb128 16
  1776 00c4 00000000 		.4byte	0
  1777 00c8 00000000 		.4byte	0
  1778              	.LLST5:
- 1779 00cc CC000000 		.4byte	.LFB13-.Ltext0
+ 1779 00cc CC000000 		.4byte	.LFB14-.Ltext0
  1780 00d0 CE000000 		.4byte	.LCFI24-.Ltext0
  1781 00d4 0200     		.2byte	0x2
  1782 00d6 7D       		.byte	0x7d
@@ -2135,14 +2135,14 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwkYVoC.s 			page 1
  1802 0106 77       		.byte	0x77
  1803 0107 0C       		.sleb128 12
  1804 0108 1E010000 		.4byte	.LCFI28-.Ltext0
- 1805 010c 28010000 		.4byte	.LFE13-.Ltext0
+ 1805 010c 28010000 		.4byte	.LFE14-.Ltext0
  1806 0110 0200     		.2byte	0x2
  1807 0112 7D       		.byte	0x7d
  1808 0113 0C       		.sleb128 12
  1809 0114 00000000 		.4byte	0
  1810 0118 00000000 		.4byte	0
  1811              	.LLST4:
- 1812 011c 8E000000 		.4byte	.LFB12-.Ltext0
+ 1812 011c 8E000000 		.4byte	.LFB13-.Ltext0
  1813 0120 90000000 		.4byte	.LCFI22-.Ltext0
  1814 0124 0200     		.2byte	0x2
  1815 0126 7D       		.byte	0x7d
@@ -2153,12 +2153,12 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwkYVoC.s 			page 1
  1820 0132 7D       		.byte	0x7d
  1821 0133 10       		.sleb128 16
  1822 0134 92000000 		.4byte	.LCFI23-.Ltext0
- 1823 0138 CC000000 		.4byte	.LFE12-.Ltext0
+ 1823 0138 CC000000 		.4byte	.LFE13-.Ltext0
  1824 013c 0200     		.2byte	0x2
  1825 013e 77       		.byte	0x77
  1826 013f 10       		.sleb128 16
  1827 0140 00000000 		.4byte	0
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwkYVoC.s 			page 37
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cckE54GI.s 			page 37
 
 
  1828 0144 00000000 		.4byte	0
@@ -2218,7 +2218,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwkYVoC.s 			page 1
  1882 01c7 10       		.sleb128 16
  1883 01c8 68000000 		.4byte	.LCFI14-.Ltext0
  1884 01cc 6A000000 		.4byte	.LCFI15-.Ltext0
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwkYVoC.s 			page 38
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cckE54GI.s 			page 38
 
 
  1885 01d0 0200     		.2byte	0x2
@@ -2278,7 +2278,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwkYVoC.s 			page 1
  1939 0250 02000000 		.4byte	.LCFI0-.Ltext0
  1940 0254 04000000 		.4byte	.LCFI1-.Ltext0
  1941 0258 0200     		.2byte	0x2
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwkYVoC.s 			page 39
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cckE54GI.s 			page 39
 
 
  1942 025a 7D       		.byte	0x7d
@@ -2338,7 +2338,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwkYVoC.s 			page 1
  1989 000f 53544154 		.ascii	"STATE_SUSPEND_NORMAL\000"
  1989      455F5355 
  1989      5350454E 
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwkYVoC.s 			page 40
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cckE54GI.s 			page 40
 
 
  1989      445F4E4F 
@@ -2398,7 +2398,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwkYVoC.s 			page 1
  2014              	.LASF19:
  2015 00e2 53544154 		.ascii	"STATE_PUT_MESSAGE_QUEUE_FOREVER\000"
  2015      455F5055 
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwkYVoC.s 			page 41
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cckE54GI.s 			page 41
 
 
  2015      545F4D45 
@@ -2458,7 +2458,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwkYVoC.s 			page 1
  2038      696D6500 
  2039              	.LASF73:
  2040 01bc 74696D65 		.ascii	"time_flag\000"
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwkYVoC.s 			page 42
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cckE54GI.s 			page 42
 
 
  2040      5F666C61 
@@ -2518,7 +2518,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwkYVoC.s 			page 1
  2064      4C415900 
  2065              	.LASF75:
  2066 025c 5F5F6C69 		.ascii	"__list_del\000"
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwkYVoC.s 			page 43
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cckE54GI.s 			page 43
 
 
  2066      73745F64 
@@ -2578,7 +2578,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwkYVoC.s 			page 1
  2089              	.LASF12:
  2090 0300 53544154 		.ascii	"STATE_READY\000"
  2090      455F5245 
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwkYVoC.s 			page 44
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cckE54GI.s 			page 44
 
 
  2090      41445900 
@@ -2638,7 +2638,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwkYVoC.s 			page 1
  2114      736C6963 
  2114      655F7265 
  2114      73745F74 
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwkYVoC.s 			page 45
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cckE54GI.s 			page 45
 
 
  2114      696D6500 
@@ -2698,7 +2698,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwkYVoC.s 			page 1
  2138 045a 474E5520 		.ascii	"GNU C11 7.3.1 20180622 (release) [ARM/embedded-7-br"
  2138      43313120 
  2138      372E332E 
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwkYVoC.s 			page 46
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cckE54GI.s 			page 46
 
 
  2138      31203230 
@@ -2755,32 +2755,32 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwkYVoC.s 			page 1
  2159      52494F44 
  2159      494300
  2160              		.ident	"GCC: (GNU Tools for Arm Embedded Processors 7-2018-q2-update) 7.3.1 20180622 (release) [AR
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccwkYVoC.s 			page 47
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cckE54GI.s 			page 47
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 os_tick.c
-G:\Users\Jaxb\AppData\Local\Temp\ccwkYVoC.s:15     .text:00000000 $t
-G:\Users\Jaxb\AppData\Local\Temp\ccwkYVoC.s:21     .text:00000000 __list_add
-G:\Users\Jaxb\AppData\Local\Temp\ccwkYVoC.s:81     .text:0000002e list_add_tail
-G:\Users\Jaxb\AppData\Local\Temp\ccwkYVoC.s:126    .text:0000004e __list_del
-G:\Users\Jaxb\AppData\Local\Temp\ccwkYVoC.s:176    .text:0000006e list_del
-G:\Users\Jaxb\AppData\Local\Temp\ccwkYVoC.s:221    .text:0000008e tick_time_handler
-G:\Users\Jaxb\AppData\Local\Temp\ccwkYVoC.s:269    .text:000000c4 $d
-G:\Users\Jaxb\AppData\Local\Temp\ccwkYVoC.s:627    .bss:00000000 time_flag.4510
-G:\Users\Jaxb\AppData\Local\Temp\ccwkYVoC.s:274    .text:000000cc $t
-G:\Users\Jaxb\AppData\Local\Temp\ccwkYVoC.s:280    .text:000000cc delay_task_check
-G:\Users\Jaxb\AppData\Local\Temp\ccwkYVoC.s:355    .text:00000120 $d
-G:\Users\Jaxb\AppData\Local\Temp\ccwkYVoC.s:360    .text:00000128 $t
-G:\Users\Jaxb\AppData\Local\Temp\ccwkYVoC.s:367    .text:00000128 timer_task_check
-G:\Users\Jaxb\AppData\Local\Temp\ccwkYVoC.s:443    .text:00000194 $d
-G:\Users\Jaxb\AppData\Local\Temp\ccwkYVoC.s:448    .text:0000019c $t
-G:\Users\Jaxb\AppData\Local\Temp\ccwkYVoC.s:454    .text:0000019c run_task_handler
-G:\Users\Jaxb\AppData\Local\Temp\ccwkYVoC.s:546    .text:00000214 $d
-G:\Users\Jaxb\AppData\Local\Temp\ccwkYVoC.s:550    .text:00000218 $t
-G:\Users\Jaxb\AppData\Local\Temp\ccwkYVoC.s:557    .text:00000218 OS_CPU_SysTickHandler
-G:\Users\Jaxb\AppData\Local\Temp\ccwkYVoC.s:620    .text:00000270 $d
-G:\Users\Jaxb\AppData\Local\Temp\ccwkYVoC.s:626    .bss:00000000 $d
+G:\Users\Jaxb\AppData\Local\Temp\cckE54GI.s:15     .text:00000000 $t
+G:\Users\Jaxb\AppData\Local\Temp\cckE54GI.s:21     .text:00000000 __list_add
+G:\Users\Jaxb\AppData\Local\Temp\cckE54GI.s:81     .text:0000002e list_add_tail
+G:\Users\Jaxb\AppData\Local\Temp\cckE54GI.s:126    .text:0000004e __list_del
+G:\Users\Jaxb\AppData\Local\Temp\cckE54GI.s:176    .text:0000006e list_del
+G:\Users\Jaxb\AppData\Local\Temp\cckE54GI.s:221    .text:0000008e tick_time_handler
+G:\Users\Jaxb\AppData\Local\Temp\cckE54GI.s:269    .text:000000c4 $d
+G:\Users\Jaxb\AppData\Local\Temp\cckE54GI.s:627    .bss:00000000 time_flag.4514
+G:\Users\Jaxb\AppData\Local\Temp\cckE54GI.s:274    .text:000000cc $t
+G:\Users\Jaxb\AppData\Local\Temp\cckE54GI.s:280    .text:000000cc delay_task_check
+G:\Users\Jaxb\AppData\Local\Temp\cckE54GI.s:355    .text:00000120 $d
+G:\Users\Jaxb\AppData\Local\Temp\cckE54GI.s:360    .text:00000128 $t
+G:\Users\Jaxb\AppData\Local\Temp\cckE54GI.s:367    .text:00000128 timer_task_check
+G:\Users\Jaxb\AppData\Local\Temp\cckE54GI.s:443    .text:00000194 $d
+G:\Users\Jaxb\AppData\Local\Temp\cckE54GI.s:448    .text:0000019c $t
+G:\Users\Jaxb\AppData\Local\Temp\cckE54GI.s:454    .text:0000019c run_task_handler
+G:\Users\Jaxb\AppData\Local\Temp\cckE54GI.s:546    .text:00000214 $d
+G:\Users\Jaxb\AppData\Local\Temp\cckE54GI.s:550    .text:00000218 $t
+G:\Users\Jaxb\AppData\Local\Temp\cckE54GI.s:557    .text:00000218 OS_CPU_SysTickHandler
+G:\Users\Jaxb\AppData\Local\Temp\cckE54GI.s:620    .text:00000270 $d
+G:\Users\Jaxb\AppData\Local\Temp\cckE54GI.s:626    .bss:00000000 $d
 
 UNDEFINED SYMBOLS
 system_time_increase

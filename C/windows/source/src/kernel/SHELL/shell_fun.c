@@ -145,7 +145,7 @@ extern int add_page_alloc_record(unsigned int level,void *ptr);
 /******************
 * 
 *   insmod -name=dmodule -prio=20 -stacksize=2048 -filesize=4096 // install a new module
-*   insmod -r -name=dmodule //restart a module which has been loaded 
+*   insmod -r -name=dmodule -prio=20 -stacksize=2048 -filesize=4096//restart a module which has been loaded 
 *
 *******************/
 

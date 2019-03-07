@@ -93,4 +93,9 @@ int _must_check task_init(
 int task_change_prio(TCB *TCB_ptr,TASK_PRIO_TYPE prio);
 int task_delete(TCB *TCB_ptr);
 
+static inline void set_tcb_module(TCB *TCB_ptr,struct dynamic_module *mod_ptr)
+{
+	TCB_ptr->dynamic_module_ptr = mod_ptr;
+}
+
 #endif
