@@ -6,7 +6,7 @@
 #include <os_TCB_list.h>
 #include <os_schedule.h>
 #include <TCB.h>
-#include <os_cpu_stm32.h>
+#include <os_cpu.h>
 #include <kakaosstdint.h>
 #include <myMicroLIB.h>
 #include <shell.h>
@@ -80,6 +80,16 @@ static void __INIT os_init(void)
 #if CONFIG_MODULE
 	__init_module();
 #endif
+}
+
+void start_kernel()
+{
+	CPU_IntDis();
+	os_start();
+	while(1)
+	{
+		;//should never go here;
+	}
 }
 
 void task_start(void)

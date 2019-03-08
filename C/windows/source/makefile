@@ -35,7 +35,7 @@ export ASFLAGS = -W -Wall -g -mcpu=cortex-m3 -mthumb --specs=nosys.specs
 
 export SUB_TGT = built-in.o
 ########################################################################
-SUB_DIR = main src
+SUB_DIR = user src
 
 $(TARGET): $(SUB_DIR)
 	$(LD)  $(^:=/$(SUB_TGT)) -T $(SCRIPT)  -nodefaultlibs -nostdlib -o $@ -static $(LIBPATH) -lgcc -lc

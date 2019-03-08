@@ -7,6 +7,7 @@
 #include <export.h>
 #include <printf_debug.h>
 #include <shell.h>
+#include <os_cpu.h>
 
 #if CONFIG_MODULE
 
@@ -191,13 +192,17 @@ static int _remove_a_module(struct dynamic_module *dynamic_module_ptr)
 
 int remove_module(struct dynamic_module *dynamic_module_ptr)
 {
+    CPU_SR_ALLOC();
+    CPU_CRITICAL_ENTER();
     if(NULL == dynamic_module_ptr)
     {
         OS_ERROR_PARA_MESSAGE_DISPLAY(remove_module,dynamic_module_ptr);
+        CPU_CRITICAL_EXIT();
         return -ERROR_NULL_INPUT_PTR;
     }
     ASSERT(NULL != dynamic_module_ptr);
     _remove_a_module(dynamic_module_ptr);
+    CPU_CRITICAL_EXIT();
     return FUN_EXECUTE_SUCCESSFULLY;
 }
 
@@ -556,6 +561,8 @@ static void __init_d_module(struct dynamic_module *dynamic_module_ptr)
 
 struct dynamic_module* dlmodule_load(void)
 {
+    CPU_SR_ALLOC();
+    CPU_CRITICAL_ENTER();
     int error = FUN_EXECUTE_SUCCESSFULLY;
     UINT8 *module_ptr = (UINT8 *)module_buffer;
     struct dynamic_module *module = NULL;
@@ -616,7 +623,7 @@ struct dynamic_module* dlmodule_load(void)
             goto __exit;
         }
     }
-
+    CPU_CRITICAL_EXIT();
     return module;
 
 __exit:
@@ -632,7 +639,7 @@ __exit:
     }
 
     clear_module_buffer();
-		
+	CPU_CRITICAL_EXIT();
     return NULL;
 }
 
@@ -715,7 +722,7 @@ void clear_module_buffer(void)
 	num = 0;
 }
 
-void set_module_buffer(void *add)
+void _set_module_buffer(void *add)
 {
 	module_buffer = (char *)add;
 }

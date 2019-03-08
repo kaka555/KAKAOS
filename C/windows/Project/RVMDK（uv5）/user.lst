@@ -1,4 +1,4 @@
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccan3aTE.s 			page 1
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccHgbWM2.s 			page 1
 
 
    1              		.cpu cortex-m3
@@ -32,11 +32,11 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccan3aTE.s 			page 1
   21      69732025 
   22 002f 00       		.align	2
   23              	.LC2:
-  24 0030 2E2E2F2E 		.ascii	"../../source/main/user.c\000"
+  24 0030 2E2E2F2E 		.ascii	"../../source/user/user.c\000"
   24      2E2F736F 
   24      75726365 
-  24      2F6D6169 
-  24      6E2F7573 
+  24      2F757365 
+  24      722F7573 
   25 0049 000000   		.align	2
   26              	.LC3:
   27 004c 72656C65 		.ascii	"release address\012\000"
@@ -58,614 +58,614 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccan3aTE.s 			page 1
   38              		.type	three, %function
   39              	three:
   40              	.LFB17:
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccan3aTE.s 			page 2
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccHgbWM2.s 			page 2
 
 
-  41              		.file 1 "../../source/main/user.c"
-   1:../../source/main/user.c **** #include "user.h"
-   2:../../source/main/user.c **** #include "osinit.h"
-   3:../../source/main/user.c **** #include <os_delay.h>
-   4:../../source/main/user.c **** 
-   5:../../source/main/user.c **** 
-   6:../../source/main/user.c **** extern volatile TCB *OSTCBCurPtr;
-   7:../../source/main/user.c **** extern volatile TCB *OSTCBHighRdyPtr;
-   8:../../source/main/user.c **** 
-   9:../../source/main/user.c **** #if 0
-  10:../../source/main/user.c **** void three(void *para)
-  11:../../source/main/user.c **** {
-  12:../../source/main/user.c **** 	ka_printf("go into task three\n");
-  13:../../source/main/user.c **** 	ka_printf("get out of task three\n");
-  14:../../source/main/user.c **** }
-  15:../../source/main/user.c **** void four(void *para)
-  16:../../source/main/user.c **** {
-  17:../../source/main/user.c **** 	while(1)
-  18:../../source/main/user.c **** 	{
-  19:../../source/main/user.c **** 		ka_printf("four\n");
-  20:../../source/main/user.c **** 		suspend();
-  21:../../source/main/user.c **** 	}
-  22:../../source/main/user.c **** }
-  23:../../source/main/user.c **** 
-  24:../../source/main/user.c **** void five(void *para)
-  25:../../source/main/user.c **** {
-  26:../../source/main/user.c **** int i,j;
-  27:../../source/main/user.c **** 	while(1)
-  28:../../source/main/user.c **** 	{
-  29:../../source/main/user.c **** 			//ka_printf("55\n");
-  30:../../source/main/user.c **** 		for(i=0;i<5000;++i)
-  31:../../source/main/user.c **** 		{
-  32:../../source/main/user.c **** 			for(j=0;j<1000;++j)
-  33:../../source/main/user.c **** 			{
-  34:../../source/main/user.c **** 				;
-  35:../../source/main/user.c **** 			}
-  36:../../source/main/user.c **** 		}
-  37:../../source/main/user.c **** 	}
-  38:../../source/main/user.c **** }
-  39:../../source/main/user.c **** 
-  40:../../source/main/user.c **** void six(void *para)
-  41:../../source/main/user.c **** {
-  42:../../source/main/user.c **** int i,j;
-  43:../../source/main/user.c **** 	while(1)
-  44:../../source/main/user.c **** 	{
-  45:../../source/main/user.c **** 			ka_printf("six\n");
-  46:../../source/main/user.c **** 		for(i=0;i<5000;++i)
-  47:../../source/main/user.c **** 		{
-  48:../../source/main/user.c **** 			for(j=0;j<1000;++j)
-  49:../../source/main/user.c **** 			{
-  50:../../source/main/user.c **** 				;
-  51:../../source/main/user.c **** 			}
-  52:../../source/main/user.c **** 		}
-  53:../../source/main/user.c **** 		
-  54:../../source/main/user.c **** 	}
-  55:../../source/main/user.c **** }
-  56:../../source/main/user.c **** #endif
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccan3aTE.s 			page 3
+  41              		.file 1 "../../source/user/user.c"
+   1:../../source/user/user.c **** #include "user.h"
+   2:../../source/user/user.c **** #include "osinit.h"
+   3:../../source/user/user.c **** #include <os_delay.h>
+   4:../../source/user/user.c **** 
+   5:../../source/user/user.c **** 
+   6:../../source/user/user.c **** extern volatile TCB *OSTCBCurPtr;
+   7:../../source/user/user.c **** extern volatile TCB *OSTCBHighRdyPtr;
+   8:../../source/user/user.c **** 
+   9:../../source/user/user.c **** #if 0
+  10:../../source/user/user.c **** void three(void *para)
+  11:../../source/user/user.c **** {
+  12:../../source/user/user.c **** 	ka_printf("go into task three\n");
+  13:../../source/user/user.c **** 	ka_printf("get out of task three\n");
+  14:../../source/user/user.c **** }
+  15:../../source/user/user.c **** void four(void *para)
+  16:../../source/user/user.c **** {
+  17:../../source/user/user.c **** 	while(1)
+  18:../../source/user/user.c **** 	{
+  19:../../source/user/user.c **** 		ka_printf("four\n");
+  20:../../source/user/user.c **** 		suspend();
+  21:../../source/user/user.c **** 	}
+  22:../../source/user/user.c **** }
+  23:../../source/user/user.c **** 
+  24:../../source/user/user.c **** void five(void *para)
+  25:../../source/user/user.c **** {
+  26:../../source/user/user.c **** int i,j;
+  27:../../source/user/user.c **** 	while(1)
+  28:../../source/user/user.c **** 	{
+  29:../../source/user/user.c **** 			//ka_printf("55\n");
+  30:../../source/user/user.c **** 		for(i=0;i<5000;++i)
+  31:../../source/user/user.c **** 		{
+  32:../../source/user/user.c **** 			for(j=0;j<1000;++j)
+  33:../../source/user/user.c **** 			{
+  34:../../source/user/user.c **** 				;
+  35:../../source/user/user.c **** 			}
+  36:../../source/user/user.c **** 		}
+  37:../../source/user/user.c **** 	}
+  38:../../source/user/user.c **** }
+  39:../../source/user/user.c **** 
+  40:../../source/user/user.c **** void six(void *para)
+  41:../../source/user/user.c **** {
+  42:../../source/user/user.c **** int i,j;
+  43:../../source/user/user.c **** 	while(1)
+  44:../../source/user/user.c **** 	{
+  45:../../source/user/user.c **** 			ka_printf("six\n");
+  46:../../source/user/user.c **** 		for(i=0;i<5000;++i)
+  47:../../source/user/user.c **** 		{
+  48:../../source/user/user.c **** 			for(j=0;j<1000;++j)
+  49:../../source/user/user.c **** 			{
+  50:../../source/user/user.c **** 				;
+  51:../../source/user/user.c **** 			}
+  52:../../source/user/user.c **** 		}
+  53:../../source/user/user.c **** 		
+  54:../../source/user/user.c **** 	}
+  55:../../source/user/user.c **** }
+  56:../../source/user/user.c **** #endif
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccHgbWM2.s 			page 3
 
 
-  57:../../source/main/user.c **** 
-  58:../../source/main/user.c **** #if 0
-  59:../../source/main/user.c **** static void ka(void *para)
-  60:../../source/main/user.c **** {
-  61:../../source/main/user.c **** 	ka_printf("task three timer test\n");
-  62:../../source/main/user.c **** }
-  63:../../source/main/user.c **** struct timer kaka;
-  64:../../source/main/user.c **** void three(void *para)
-  65:../../source/main/user.c **** {
-  66:../../source/main/user.c **** 	
-  67:../../source/main/user.c **** 	if(timer_init(&kaka,TIMER_PERIODIC,"test",ka,NULL,15,10) < 0)
-  68:../../source/main/user.c **** 	{
-  69:../../source/main/user.c **** 		ka_printf("fatal error\n");
-  70:../../source/main/user.c **** 	}
-  71:../../source/main/user.c **** 	if(timer_enable(&kaka) < 0)
-  72:../../source/main/user.c **** 	{
-  73:../../source/main/user.c **** 		ka_printf("fatal error\n");
-  74:../../source/main/user.c **** 	}
-  75:../../source/main/user.c **** 	suspend();
-  76:../../source/main/user.c **** 	while(1)
-  77:../../source/main/user.c **** 	{
-  78:../../source/main/user.c **** 
-  79:../../source/main/user.c **** 	}
-  80:../../source/main/user.c **** }
-  81:../../source/main/user.c **** void four(void *para)
-  82:../../source/main/user.c **** {
-  83:../../source/main/user.c **** 	while(1)
-  84:../../source/main/user.c **** 	{
-  85:../../source/main/user.c **** 		ka_printf("four\n");
-  86:../../source/main/user.c **** 		sleep(HZ);
-  87:../../source/main/user.c **** 	}
-  88:../../source/main/user.c **** }
-  89:../../source/main/user.c **** #endif
-  90:../../source/main/user.c **** 
-  91:../../source/main/user.c **** #if 0 //test timer
-  92:../../source/main/user.c **** static void ka(void *para)
-  93:../../source/main/user.c **** {
-  94:../../source/main/user.c **** 	ka_printf("task three timer test ka\n");
-  95:../../source/main/user.c **** }
-  96:../../source/main/user.c **** 
-  97:../../source/main/user.c **** static void kb(void *para)
-  98:../../source/main/user.c **** {
-  99:../../source/main/user.c **** 	ka_printf("task three timer test kb\n");
- 100:../../source/main/user.c **** }
- 101:../../source/main/user.c **** struct timer timer1;
- 102:../../source/main/user.c **** struct timer timer0;
- 103:../../source/main/user.c **** void three(void *para)
- 104:../../source/main/user.c **** {
- 105:../../source/main/user.c **** 	timer_init(&timer0, TIMER_ONE_TIME, "T1", ka, 0, 15, 8);
- 106:../../source/main/user.c **** 	timer_enable(&timer0);
- 107:../../source/main/user.c **** 	suspend();
- 108:../../source/main/user.c **** }
- 109:../../source/main/user.c **** 
- 110:../../source/main/user.c **** void four(void *para)
- 111:../../source/main/user.c **** {
- 112:../../source/main/user.c **** 	timer_init(&timer1, TIMER_TIME, "T2", kb, 0, 20, 8);
- 113:../../source/main/user.c **** 	timer_enable(&timer1);
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccan3aTE.s 			page 4
+  57:../../source/user/user.c **** 
+  58:../../source/user/user.c **** #if 0
+  59:../../source/user/user.c **** static void ka(void *para)
+  60:../../source/user/user.c **** {
+  61:../../source/user/user.c **** 	ka_printf("task three timer test\n");
+  62:../../source/user/user.c **** }
+  63:../../source/user/user.c **** struct timer kaka;
+  64:../../source/user/user.c **** void three(void *para)
+  65:../../source/user/user.c **** {
+  66:../../source/user/user.c **** 	
+  67:../../source/user/user.c **** 	if(timer_init(&kaka,TIMER_PERIODIC,"test",ka,NULL,15,10) < 0)
+  68:../../source/user/user.c **** 	{
+  69:../../source/user/user.c **** 		ka_printf("fatal error\n");
+  70:../../source/user/user.c **** 	}
+  71:../../source/user/user.c **** 	if(timer_enable(&kaka) < 0)
+  72:../../source/user/user.c **** 	{
+  73:../../source/user/user.c **** 		ka_printf("fatal error\n");
+  74:../../source/user/user.c **** 	}
+  75:../../source/user/user.c **** 	suspend();
+  76:../../source/user/user.c **** 	while(1)
+  77:../../source/user/user.c **** 	{
+  78:../../source/user/user.c **** 
+  79:../../source/user/user.c **** 	}
+  80:../../source/user/user.c **** }
+  81:../../source/user/user.c **** void four(void *para)
+  82:../../source/user/user.c **** {
+  83:../../source/user/user.c **** 	while(1)
+  84:../../source/user/user.c **** 	{
+  85:../../source/user/user.c **** 		ka_printf("four\n");
+  86:../../source/user/user.c **** 		sleep(HZ);
+  87:../../source/user/user.c **** 	}
+  88:../../source/user/user.c **** }
+  89:../../source/user/user.c **** #endif
+  90:../../source/user/user.c **** 
+  91:../../source/user/user.c **** #if 0 //test timer
+  92:../../source/user/user.c **** static void ka(void *para)
+  93:../../source/user/user.c **** {
+  94:../../source/user/user.c **** 	ka_printf("task three timer test ka\n");
+  95:../../source/user/user.c **** }
+  96:../../source/user/user.c **** 
+  97:../../source/user/user.c **** static void kb(void *para)
+  98:../../source/user/user.c **** {
+  99:../../source/user/user.c **** 	ka_printf("task three timer test kb\n");
+ 100:../../source/user/user.c **** }
+ 101:../../source/user/user.c **** struct timer timer1;
+ 102:../../source/user/user.c **** struct timer timer0;
+ 103:../../source/user/user.c **** void three(void *para)
+ 104:../../source/user/user.c **** {
+ 105:../../source/user/user.c **** 	timer_init(&timer0, TIMER_ONE_TIME, "T1", ka, 0, 15, 8);
+ 106:../../source/user/user.c **** 	timer_enable(&timer0);
+ 107:../../source/user/user.c **** 	suspend();
+ 108:../../source/user/user.c **** }
+ 109:../../source/user/user.c **** 
+ 110:../../source/user/user.c **** void four(void *para)
+ 111:../../source/user/user.c **** {
+ 112:../../source/user/user.c **** 	timer_init(&timer1, TIMER_TIME, "T2", kb, 0, 20, 8);
+ 113:../../source/user/user.c **** 	timer_enable(&timer1);
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccHgbWM2.s 			page 4
 
 
- 114:../../source/main/user.c **** 	suspend();
- 115:../../source/main/user.c **** }
- 116:../../source/main/user.c **** 
- 117:../../source/main/user.c **** #endif
- 118:../../source/main/user.c **** 
- 119:../../source/main/user.c **** #if 0
- 120:../../source/main/user.c **** void three(void *para)
- 121:../../source/main/user.c **** {
- 122:../../source/main/user.c **** 	int i = 5;
- 123:../../source/main/user.c **** 	int ia = 7;
- 124:../../source/main/user.c **** 	double kaka = 6.66;
- 125:../../source/main/user.c **** 	shell_insert_variable_INT("i",&i);
- 126:../../source/main/user.c **** 	shell_insert_variable_INT("ia",&ia);
- 127:../../source/main/user.c **** 	shell_insert_variable_FLOAT("kaka",&kaka);
- 128:../../source/main/user.c **** 	ka_printf("address of i is %x\n",&i);
- 129:../../source/main/user.c **** 	ka_printf("address of ia is %x\n",&ia);
- 130:../../source/main/user.c **** 	ka_printf("address of kaka is %x\n",&kaka);
- 131:../../source/main/user.c **** 	ka_printf("i is %d\n",i);
- 132:../../source/main/user.c **** 	ka_printf("ia is %d\n",ia);
- 133:../../source/main/user.c **** 	ka_printf("kaka is %f\n",kaka);
- 134:../../source/main/user.c **** 	INSERT_BREAK_POINT();
- 135:../../source/main/user.c **** 	ka_printf("i is %d\n",i);
- 136:../../source/main/user.c **** 	ka_printf("ia is %d\n",ia);
- 137:../../source/main/user.c **** 	ka_printf("kaka is %f\n",kaka);
- 138:../../source/main/user.c **** 	INSERT_BREAK_POINT();
- 139:../../source/main/user.c **** 	ka_printf("i is %d\n",i);
- 140:../../source/main/user.c **** 	ka_printf("ia is %d\n",ia);
- 141:../../source/main/user.c **** 	ka_printf("kaka is %f\n",kaka);
- 142:../../source/main/user.c **** 	while(1)
- 143:../../source/main/user.c **** 	{
- 144:../../source/main/user.c **** 		ka_printf("three\n");	
- 145:../../source/main/user.c **** 		sleep(10);	
- 146:../../source/main/user.c **** 	}	
- 147:../../source/main/user.c **** }
- 148:../../source/main/user.c **** #endif
- 149:../../source/main/user.c **** 
- 150:../../source/main/user.c **** #if 0
- 151:../../source/main/user.c **** void six(void *para)
- 152:../../source/main/user.c **** {
- 153:../../source/main/user.c **** 	
- 154:../../source/main/user.c **** }
- 155:../../source/main/user.c **** void five(void *para)
- 156:../../source/main/user.c **** {
- 157:../../source/main/user.c **** 	while(1)
- 158:../../source/main/user.c **** 	{
- 159:../../source/main/user.c **** 		ka_printf("five\n");	
- 160:../../source/main/user.c **** 		sleep(20);	
- 161:../../source/main/user.c **** 	}	
- 162:../../source/main/user.c **** }
- 163:../../source/main/user.c **** void four(void *para)
- 164:../../source/main/user.c **** {
- 165:../../source/main/user.c **** 	while(1)
- 166:../../source/main/user.c **** 	{
- 167:../../source/main/user.c **** 		ka_printf("four\n");	
- 168:../../source/main/user.c **** 		sleep(30);	
- 169:../../source/main/user.c **** 	}	
- 170:../../source/main/user.c **** }
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccan3aTE.s 			page 5
+ 114:../../source/user/user.c **** 	suspend();
+ 115:../../source/user/user.c **** }
+ 116:../../source/user/user.c **** 
+ 117:../../source/user/user.c **** #endif
+ 118:../../source/user/user.c **** 
+ 119:../../source/user/user.c **** #if 0
+ 120:../../source/user/user.c **** void three(void *para)
+ 121:../../source/user/user.c **** {
+ 122:../../source/user/user.c **** 	int i = 5;
+ 123:../../source/user/user.c **** 	int ia = 7;
+ 124:../../source/user/user.c **** 	double kaka = 6.66;
+ 125:../../source/user/user.c **** 	shell_insert_variable_INT("i",&i);
+ 126:../../source/user/user.c **** 	shell_insert_variable_INT("ia",&ia);
+ 127:../../source/user/user.c **** 	shell_insert_variable_FLOAT("kaka",&kaka);
+ 128:../../source/user/user.c **** 	ka_printf("address of i is %x\n",&i);
+ 129:../../source/user/user.c **** 	ka_printf("address of ia is %x\n",&ia);
+ 130:../../source/user/user.c **** 	ka_printf("address of kaka is %x\n",&kaka);
+ 131:../../source/user/user.c **** 	ka_printf("i is %d\n",i);
+ 132:../../source/user/user.c **** 	ka_printf("ia is %d\n",ia);
+ 133:../../source/user/user.c **** 	ka_printf("kaka is %f\n",kaka);
+ 134:../../source/user/user.c **** 	INSERT_BREAK_POINT();
+ 135:../../source/user/user.c **** 	ka_printf("i is %d\n",i);
+ 136:../../source/user/user.c **** 	ka_printf("ia is %d\n",ia);
+ 137:../../source/user/user.c **** 	ka_printf("kaka is %f\n",kaka);
+ 138:../../source/user/user.c **** 	INSERT_BREAK_POINT();
+ 139:../../source/user/user.c **** 	ka_printf("i is %d\n",i);
+ 140:../../source/user/user.c **** 	ka_printf("ia is %d\n",ia);
+ 141:../../source/user/user.c **** 	ka_printf("kaka is %f\n",kaka);
+ 142:../../source/user/user.c **** 	while(1)
+ 143:../../source/user/user.c **** 	{
+ 144:../../source/user/user.c **** 		ka_printf("three\n");	
+ 145:../../source/user/user.c **** 		sleep(10);	
+ 146:../../source/user/user.c **** 	}	
+ 147:../../source/user/user.c **** }
+ 148:../../source/user/user.c **** #endif
+ 149:../../source/user/user.c **** 
+ 150:../../source/user/user.c **** #if 0
+ 151:../../source/user/user.c **** void six(void *para)
+ 152:../../source/user/user.c **** {
+ 153:../../source/user/user.c **** 	
+ 154:../../source/user/user.c **** }
+ 155:../../source/user/user.c **** void five(void *para)
+ 156:../../source/user/user.c **** {
+ 157:../../source/user/user.c **** 	while(1)
+ 158:../../source/user/user.c **** 	{
+ 159:../../source/user/user.c **** 		ka_printf("five\n");	
+ 160:../../source/user/user.c **** 		sleep(20);	
+ 161:../../source/user/user.c **** 	}	
+ 162:../../source/user/user.c **** }
+ 163:../../source/user/user.c **** void four(void *para)
+ 164:../../source/user/user.c **** {
+ 165:../../source/user/user.c **** 	while(1)
+ 166:../../source/user/user.c **** 	{
+ 167:../../source/user/user.c **** 		ka_printf("four\n");	
+ 168:../../source/user/user.c **** 		sleep(30);	
+ 169:../../source/user/user.c **** 	}	
+ 170:../../source/user/user.c **** }
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccHgbWM2.s 			page 5
 
 
- 171:../../source/main/user.c **** void three(void *para)
- 172:../../source/main/user.c **** {
- 173:../../source/main/user.c **** 		void *ptr[64];
- 174:../../source/main/user.c **** int i;
- 175:../../source/main/user.c **** 	for(i=0;i<64;++i)
- 176:../../source/main/user.c **** 	{
- 177:../../source/main/user.c **** 		ptr[i] = KA_MALLOC(sizeof(int));
- 178:../../source/main/user.c **** 		ka_printf("%d get ptr address is %x \n",i,(int)ptr[i]);
- 179:../../source/main/user.c **** 		ka_printf("value %d is %x\n",i,*(int *)ptr[i]);
- 180:../../source/main/user.c **** 		*(int *)ptr[i] = 66;
- 181:../../source/main/user.c **** 	}
- 182:../../source/main/user.c **** 	
- 183:../../source/main/user.c **** 	void *kaka = KA_MALLOC(48);
- 184:../../source/main/user.c **** 	ka_printf("ptr--kaka get ptr address is %x \n",(int)kaka);
- 185:../../source/main/user.c **** 	
- 186:../../source/main/user.c **** 	//sleep(300);
- 187:../../source/main/user.c **** 	
- 188:../../source/main/user.c **** 	ka_free(kaka);
- 189:../../source/main/user.c **** 	ka_printf("free complete\n");
- 190:../../source/main/user.c **** 	ka_free(ptr[24]);
- 191:../../source/main/user.c **** 	ka_printf("free complete\n");
- 192:../../source/main/user.c **** 	
- 193:../../source/main/user.c **** 	ka_free(ptr[31]);
- 194:../../source/main/user.c **** 	ka_printf("free complete\n");
- 195:../../source/main/user.c **** 	ka_free(ptr[7]);
- 196:../../source/main/user.c **** 	
- 197:../../source/main/user.c **** 	ka_free(ptr[62]);
- 198:../../source/main/user.c **** 	
- 199:../../source/main/user.c **** 	ka_printf("free complete\n");
- 200:../../source/main/user.c **** 	
- 201:../../source/main/user.c **** 	kaka = KA_MALLOC(120);
- 202:../../source/main/user.c **** 	ka_printf("ptr--kaka get ptr address is %x \n",(int)kaka);
- 203:../../source/main/user.c **** 	
- 204:../../source/main/user.c **** 	//sleep(300);
- 205:../../source/main/user.c **** 	
- 206:../../source/main/user.c **** 	ka_free(kaka);
- 207:../../source/main/user.c **** 	ka_printf("free kaka complete\n");
- 208:../../source/main/user.c **** 	
- 209:../../source/main/user.c **** 	while(1)
- 210:../../source/main/user.c **** 	{
- 211:../../source/main/user.c **** 	}	
- 212:../../source/main/user.c **** }
- 213:../../source/main/user.c **** #endif
- 214:../../source/main/user.c **** 
- 215:../../source/main/user.c **** #if 0 // test int sleep(unsigned int)
- 216:../../source/main/user.c **** void three(void *para)
- 217:../../source/main/user.c **** {
- 218:../../source/main/user.c **** 	TCB *TCB_ptr4,*TCB_ptr5;
- 219:../../source/main/user.c **** 	if(0 != task_creat_ready(256,5,5,"five",five,NULL,&TCB_ptr5))
- 220:../../source/main/user.c **** 	{
- 221:../../source/main/user.c **** 		ka_printf("os_init_fail...stop booting...\n");
- 222:../../source/main/user.c **** 		while(1);
- 223:../../source/main/user.c **** 	}
- 224:../../source/main/user.c **** 	if(0 != task_creat_ready(256,5,5,"four",four,NULL,&TCB_ptr4))
- 225:../../source/main/user.c **** 	{
- 226:../../source/main/user.c **** 		ka_printf("os_init_fail...stop booting...\n");
- 227:../../source/main/user.c **** 		while(1);
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccan3aTE.s 			page 6
+ 171:../../source/user/user.c **** void three(void *para)
+ 172:../../source/user/user.c **** {
+ 173:../../source/user/user.c **** 		void *ptr[64];
+ 174:../../source/user/user.c **** int i;
+ 175:../../source/user/user.c **** 	for(i=0;i<64;++i)
+ 176:../../source/user/user.c **** 	{
+ 177:../../source/user/user.c **** 		ptr[i] = KA_MALLOC(sizeof(int));
+ 178:../../source/user/user.c **** 		ka_printf("%d get ptr address is %x \n",i,(int)ptr[i]);
+ 179:../../source/user/user.c **** 		ka_printf("value %d is %x\n",i,*(int *)ptr[i]);
+ 180:../../source/user/user.c **** 		*(int *)ptr[i] = 66;
+ 181:../../source/user/user.c **** 	}
+ 182:../../source/user/user.c **** 	
+ 183:../../source/user/user.c **** 	void *kaka = KA_MALLOC(48);
+ 184:../../source/user/user.c **** 	ka_printf("ptr--kaka get ptr address is %x \n",(int)kaka);
+ 185:../../source/user/user.c **** 	
+ 186:../../source/user/user.c **** 	//sleep(300);
+ 187:../../source/user/user.c **** 	
+ 188:../../source/user/user.c **** 	ka_free(kaka);
+ 189:../../source/user/user.c **** 	ka_printf("free complete\n");
+ 190:../../source/user/user.c **** 	ka_free(ptr[24]);
+ 191:../../source/user/user.c **** 	ka_printf("free complete\n");
+ 192:../../source/user/user.c **** 	
+ 193:../../source/user/user.c **** 	ka_free(ptr[31]);
+ 194:../../source/user/user.c **** 	ka_printf("free complete\n");
+ 195:../../source/user/user.c **** 	ka_free(ptr[7]);
+ 196:../../source/user/user.c **** 	
+ 197:../../source/user/user.c **** 	ka_free(ptr[62]);
+ 198:../../source/user/user.c **** 	
+ 199:../../source/user/user.c **** 	ka_printf("free complete\n");
+ 200:../../source/user/user.c **** 	
+ 201:../../source/user/user.c **** 	kaka = KA_MALLOC(120);
+ 202:../../source/user/user.c **** 	ka_printf("ptr--kaka get ptr address is %x \n",(int)kaka);
+ 203:../../source/user/user.c **** 	
+ 204:../../source/user/user.c **** 	//sleep(300);
+ 205:../../source/user/user.c **** 	
+ 206:../../source/user/user.c **** 	ka_free(kaka);
+ 207:../../source/user/user.c **** 	ka_printf("free kaka complete\n");
+ 208:../../source/user/user.c **** 	
+ 209:../../source/user/user.c **** 	while(1)
+ 210:../../source/user/user.c **** 	{
+ 211:../../source/user/user.c **** 	}	
+ 212:../../source/user/user.c **** }
+ 213:../../source/user/user.c **** #endif
+ 214:../../source/user/user.c **** 
+ 215:../../source/user/user.c **** #if 0 // test int sleep(unsigned int)
+ 216:../../source/user/user.c **** void three(void *para)
+ 217:../../source/user/user.c **** {
+ 218:../../source/user/user.c **** 	TCB *TCB_ptr4,*TCB_ptr5;
+ 219:../../source/user/user.c **** 	if(0 != task_creat_ready(256,5,5,"five",five,NULL,&TCB_ptr5))
+ 220:../../source/user/user.c **** 	{
+ 221:../../source/user/user.c **** 		ka_printf("os_init_fail...stop booting...\n");
+ 222:../../source/user/user.c **** 		while(1);
+ 223:../../source/user/user.c **** 	}
+ 224:../../source/user/user.c **** 	if(0 != task_creat_ready(256,5,5,"four",four,NULL,&TCB_ptr4))
+ 225:../../source/user/user.c **** 	{
+ 226:../../source/user/user.c **** 		ka_printf("os_init_fail...stop booting...\n");
+ 227:../../source/user/user.c **** 		while(1);
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccHgbWM2.s 			page 6
 
 
- 228:../../source/main/user.c **** 	}
- 229:../../source/main/user.c **** 	int ret = sleep(30);
- 230:../../source/main/user.c **** 	ka_printf("task three ret is %d\n",ret);
- 231:../../source/main/user.c **** 	if(0 != remove_from_delay_heap(TCB_ptr5))
- 232:../../source/main/user.c **** 	{
- 233:../../source/main/user.c **** 		ka_printf("fatal error\n");
- 234:../../source/main/user.c **** 	}
- 235:../../source/main/user.c **** 	if(0 != remove_from_delay_heap(TCB_ptr4))
- 236:../../source/main/user.c **** 	{
- 237:../../source/main/user.c **** 		ka_printf("fatal error\n");
- 238:../../source/main/user.c **** 	}
- 239:../../source/main/user.c **** 	suspend();
- 240:../../source/main/user.c **** 	while(1);
- 241:../../source/main/user.c **** }
- 242:../../source/main/user.c **** 
- 243:../../source/main/user.c **** void five(void *para)
- 244:../../source/main/user.c **** {
- 245:../../source/main/user.c **** 	int ret = sleep(58);
- 246:../../source/main/user.c **** 	ka_printf("task five ret is %d\n",ret);
- 247:../../source/main/user.c **** 	suspend();
- 248:../../source/main/user.c **** 	while(1);
- 249:../../source/main/user.c **** }
- 250:../../source/main/user.c **** void four(void *para)
- 251:../../source/main/user.c **** {
- 252:../../source/main/user.c **** 	int ret = sleep(40);
- 253:../../source/main/user.c **** 	ka_printf("task four ret is %d\n",ret);
- 254:../../source/main/user.c **** 	suspend();
- 255:../../source/main/user.c **** 	while(1);
- 256:../../source/main/user.c **** }
- 257:../../source/main/user.c **** #endif
- 258:../../source/main/user.c **** 
- 259:../../source/main/user.c **** #if 0 // test message queue
- 260:../../source/main/user.c **** MQB MQB_test;
- 261:../../source/main/user.c **** 
- 262:../../source/main/user.c **** void three(void *para)
- 263:../../source/main/user.c **** {
- 264:../../source/main/user.c **** 	int i;
- 265:../../source/main/user.c **** 	msg_init(&MQB_test,"test",3);
- 266:../../source/main/user.c **** 	struct message array[10];
- 267:../../source/main/user.c **** 	array[9].tick = 1;
- 268:../../source/main/user.c **** //	for(i=0;i<4;++i)
- 269:../../source/main/user.c **** //	{
- 270:../../source/main/user.c **** //		if(0 != message_init(array+i,4,(void *)i))
- 271:../../source/main/user.c **** //		{
- 272:../../source/main/user.c **** //			ka_printf("message_init error\n");
- 273:../../source/main/user.c **** //		}
- 274:../../source/main/user.c **** //	}
- 275:../../source/main/user.c **** //	for(i=0;i<3;++i)
- 276:../../source/main/user.c **** //	{
- 277:../../source/main/user.c **** //		if(0 != msg_send(&MQB_test,array+i,MSG_FLAG_NON_BLOCKING,456))
- 278:../../source/main/user.c **** //		{
- 279:../../source/main/user.c **** //			ka_printf("msg_send error\n");
- 280:../../source/main/user.c **** //		}
- 281:../../source/main/user.c **** //	}
- 282:../../source/main/user.c **** //	if(0 != msg_send(&MQB_test,array+i,MSG_FLAG_WAIT,20))
- 283:../../source/main/user.c **** //	{
- 284:../../source/main/user.c **** //		ka_printf("msg_send error\n");
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccan3aTE.s 			page 7
+ 228:../../source/user/user.c **** 	}
+ 229:../../source/user/user.c **** 	int ret = sleep(30);
+ 230:../../source/user/user.c **** 	ka_printf("task three ret is %d\n",ret);
+ 231:../../source/user/user.c **** 	if(0 != remove_from_delay_heap(TCB_ptr5))
+ 232:../../source/user/user.c **** 	{
+ 233:../../source/user/user.c **** 		ka_printf("fatal error\n");
+ 234:../../source/user/user.c **** 	}
+ 235:../../source/user/user.c **** 	if(0 != remove_from_delay_heap(TCB_ptr4))
+ 236:../../source/user/user.c **** 	{
+ 237:../../source/user/user.c **** 		ka_printf("fatal error\n");
+ 238:../../source/user/user.c **** 	}
+ 239:../../source/user/user.c **** 	suspend();
+ 240:../../source/user/user.c **** 	while(1);
+ 241:../../source/user/user.c **** }
+ 242:../../source/user/user.c **** 
+ 243:../../source/user/user.c **** void five(void *para)
+ 244:../../source/user/user.c **** {
+ 245:../../source/user/user.c **** 	int ret = sleep(58);
+ 246:../../source/user/user.c **** 	ka_printf("task five ret is %d\n",ret);
+ 247:../../source/user/user.c **** 	suspend();
+ 248:../../source/user/user.c **** 	while(1);
+ 249:../../source/user/user.c **** }
+ 250:../../source/user/user.c **** void four(void *para)
+ 251:../../source/user/user.c **** {
+ 252:../../source/user/user.c **** 	int ret = sleep(40);
+ 253:../../source/user/user.c **** 	ka_printf("task four ret is %d\n",ret);
+ 254:../../source/user/user.c **** 	suspend();
+ 255:../../source/user/user.c **** 	while(1);
+ 256:../../source/user/user.c **** }
+ 257:../../source/user/user.c **** #endif
+ 258:../../source/user/user.c **** 
+ 259:../../source/user/user.c **** #if 0 // test message queue
+ 260:../../source/user/user.c **** MQB MQB_test;
+ 261:../../source/user/user.c **** 
+ 262:../../source/user/user.c **** void three(void *para)
+ 263:../../source/user/user.c **** {
+ 264:../../source/user/user.c **** 	int i;
+ 265:../../source/user/user.c **** 	msg_init(&MQB_test,"test",3);
+ 266:../../source/user/user.c **** 	struct message array[10];
+ 267:../../source/user/user.c **** 	array[9].tick = 1;
+ 268:../../source/user/user.c **** //	for(i=0;i<4;++i)
+ 269:../../source/user/user.c **** //	{
+ 270:../../source/user/user.c **** //		if(0 != message_init(array+i,4,(void *)i))
+ 271:../../source/user/user.c **** //		{
+ 272:../../source/user/user.c **** //			ka_printf("message_init error\n");
+ 273:../../source/user/user.c **** //		}
+ 274:../../source/user/user.c **** //	}
+ 275:../../source/user/user.c **** //	for(i=0;i<3;++i)
+ 276:../../source/user/user.c **** //	{
+ 277:../../source/user/user.c **** //		if(0 != msg_send(&MQB_test,array+i,MSG_FLAG_NON_BLOCKING,456))
+ 278:../../source/user/user.c **** //		{
+ 279:../../source/user/user.c **** //			ka_printf("msg_send error\n");
+ 280:../../source/user/user.c **** //		}
+ 281:../../source/user/user.c **** //	}
+ 282:../../source/user/user.c **** //	if(0 != msg_send(&MQB_test,array+i,MSG_FLAG_WAIT,20))
+ 283:../../source/user/user.c **** //	{
+ 284:../../source/user/user.c **** //		ka_printf("msg_send error\n");
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccHgbWM2.s 			page 7
 
 
- 285:../../source/main/user.c **** //	}
- 286:../../source/main/user.c **** 	ka_printf("complete\n");
- 287:../../source/main/user.c **** 	suspend();
- 288:../../source/main/user.c **** 	while(1);
- 289:../../source/main/user.c **** }
- 290:../../source/main/user.c **** 	
- 291:../../source/main/user.c **** 
- 292:../../source/main/user.c **** void four(void *para)
- 293:../../source/main/user.c **** {
- 294:../../source/main/user.c **** 	struct message *message_ptr;
- 295:../../source/main/user.c **** 	while(1)
- 296:../../source/main/user.c **** 	{
- 297:../../source/main/user.c **** 		if(0 != msg_receive(&MQB_test,&message_ptr,MSG_FLAG_WAIT,0))
- 298:../../source/main/user.c **** 		{
- 299:../../source/main/user.c **** 			ka_printf("msg_send error\n");
- 300:../../source/main/user.c **** 		}
- 301:../../source/main/user.c **** 		else
- 302:../../source/main/user.c **** 		{
- 303:../../source/main/user.c **** 			ka_printf("task four get a message\n");
- 304:../../source/main/user.c **** 			ka_printf("size is %u\n",message_ptr->message_size);
- 305:../../source/main/user.c **** 			ka_printf("data is %u\n",(unsigned int)(message_ptr->message_data_ptr));
- 306:../../source/main/user.c **** 			ka_printf("tick is %l\n",message_ptr->tick);
- 307:../../source/main/user.c **** 			ka_printf("=====================================");
- 308:../../source/main/user.c **** 		}
- 309:../../source/main/user.c **** 	}
- 310:../../source/main/user.c **** }
- 311:../../source/main/user.c **** #endif
- 312:../../source/main/user.c **** 
- 313:../../source/main/user.c **** 
- 314:../../source/main/user.c **** #if 0 //test mutex
- 315:../../source/main/user.c **** MUTEX kaka;
- 316:../../source/main/user.c **** 
- 317:../../source/main/user.c **** void three(void *para)
- 318:../../source/main/user.c **** {
- 319:../../source/main/user.c **** 	sleep(10*HZ);
- 320:../../source/main/user.c **** 	mutex_lock(&kaka);
- 321:../../source/main/user.c **** 	ka_printf("task three success to lock mutex\n");
- 322:../../source/main/user.c **** 	ka_printf("now task three prio is %u\n",OSTCBCurPtr->prio);
- 323:../../source/main/user.c **** 	ka_printf("release lock\n");
- 324:../../source/main/user.c **** 	int ret = mutex_unlock(&kaka);
- 325:../../source/main/user.c **** 	ka_printf("task three unlock ret is %d\n",ret);
- 326:../../source/main/user.c **** 	ka_printf("now task three prio is %u\n",OSTCBCurPtr->prio);
- 327:../../source/main/user.c **** }
- 328:../../source/main/user.c **** 
- 329:../../source/main/user.c **** void four(void *para)
- 330:../../source/main/user.c **** {
- 331:../../source/main/user.c **** 	sleep(5*HZ);
- 332:../../source/main/user.c **** 	mutex_lock(&kaka);
- 333:../../source/main/user.c **** 	ka_printf("task four success to lock mutex\n");
- 334:../../source/main/user.c **** 	ka_printf("now task four prio is %u\n",OSTCBCurPtr->prio);
- 335:../../source/main/user.c **** 	ka_printf("release lock\n");
- 336:../../source/main/user.c **** 	int ret = mutex_unlock(&kaka);
- 337:../../source/main/user.c **** 	ka_printf("task four unlock ret is %d\n",ret);
- 338:../../source/main/user.c **** 	ka_printf("now task four prio is %u\n",OSTCBCurPtr->prio);
- 339:../../source/main/user.c **** }
- 340:../../source/main/user.c **** 
- 341:../../source/main/user.c **** void five(void *para)
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccan3aTE.s 			page 8
+ 285:../../source/user/user.c **** //	}
+ 286:../../source/user/user.c **** 	ka_printf("complete\n");
+ 287:../../source/user/user.c **** 	suspend();
+ 288:../../source/user/user.c **** 	while(1);
+ 289:../../source/user/user.c **** }
+ 290:../../source/user/user.c **** 	
+ 291:../../source/user/user.c **** 
+ 292:../../source/user/user.c **** void four(void *para)
+ 293:../../source/user/user.c **** {
+ 294:../../source/user/user.c **** 	struct message *message_ptr;
+ 295:../../source/user/user.c **** 	while(1)
+ 296:../../source/user/user.c **** 	{
+ 297:../../source/user/user.c **** 		if(0 != msg_receive(&MQB_test,&message_ptr,MSG_FLAG_WAIT,0))
+ 298:../../source/user/user.c **** 		{
+ 299:../../source/user/user.c **** 			ka_printf("msg_send error\n");
+ 300:../../source/user/user.c **** 		}
+ 301:../../source/user/user.c **** 		else
+ 302:../../source/user/user.c **** 		{
+ 303:../../source/user/user.c **** 			ka_printf("task four get a message\n");
+ 304:../../source/user/user.c **** 			ka_printf("size is %u\n",message_ptr->message_size);
+ 305:../../source/user/user.c **** 			ka_printf("data is %u\n",(unsigned int)(message_ptr->message_data_ptr));
+ 306:../../source/user/user.c **** 			ka_printf("tick is %l\n",message_ptr->tick);
+ 307:../../source/user/user.c **** 			ka_printf("=====================================");
+ 308:../../source/user/user.c **** 		}
+ 309:../../source/user/user.c **** 	}
+ 310:../../source/user/user.c **** }
+ 311:../../source/user/user.c **** #endif
+ 312:../../source/user/user.c **** 
+ 313:../../source/user/user.c **** 
+ 314:../../source/user/user.c **** #if 0 //test mutex
+ 315:../../source/user/user.c **** MUTEX kaka;
+ 316:../../source/user/user.c **** 
+ 317:../../source/user/user.c **** void three(void *para)
+ 318:../../source/user/user.c **** {
+ 319:../../source/user/user.c **** 	sleep(10*HZ);
+ 320:../../source/user/user.c **** 	mutex_lock(&kaka);
+ 321:../../source/user/user.c **** 	ka_printf("task three success to lock mutex\n");
+ 322:../../source/user/user.c **** 	ka_printf("now task three prio is %u\n",OSTCBCurPtr->prio);
+ 323:../../source/user/user.c **** 	ka_printf("release lock\n");
+ 324:../../source/user/user.c **** 	int ret = mutex_unlock(&kaka);
+ 325:../../source/user/user.c **** 	ka_printf("task three unlock ret is %d\n",ret);
+ 326:../../source/user/user.c **** 	ka_printf("now task three prio is %u\n",OSTCBCurPtr->prio);
+ 327:../../source/user/user.c **** }
+ 328:../../source/user/user.c **** 
+ 329:../../source/user/user.c **** void four(void *para)
+ 330:../../source/user/user.c **** {
+ 331:../../source/user/user.c **** 	sleep(5*HZ);
+ 332:../../source/user/user.c **** 	mutex_lock(&kaka);
+ 333:../../source/user/user.c **** 	ka_printf("task four success to lock mutex\n");
+ 334:../../source/user/user.c **** 	ka_printf("now task four prio is %u\n",OSTCBCurPtr->prio);
+ 335:../../source/user/user.c **** 	ka_printf("release lock\n");
+ 336:../../source/user/user.c **** 	int ret = mutex_unlock(&kaka);
+ 337:../../source/user/user.c **** 	ka_printf("task four unlock ret is %d\n",ret);
+ 338:../../source/user/user.c **** 	ka_printf("now task four prio is %u\n",OSTCBCurPtr->prio);
+ 339:../../source/user/user.c **** }
+ 340:../../source/user/user.c **** 
+ 341:../../source/user/user.c **** void five(void *para)
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccHgbWM2.s 			page 8
 
 
- 342:../../source/main/user.c **** {
- 343:../../source/main/user.c **** 	mutex_init(&kaka);
- 344:../../source/main/user.c **** 	int ret = mutex_lock(&kaka);
- 345:../../source/main/user.c **** 	if(0 > ret)
- 346:../../source/main/user.c **** 	{
- 347:../../source/main/user.c **** 		ka_printf("lock fail\n");
- 348:../../source/main/user.c **** 	}
- 349:../../source/main/user.c **** 	else
- 350:../../source/main/user.c **** 	{
- 351:../../source/main/user.c **** 		ka_printf("task five success to lock mutex\n");
- 352:../../source/main/user.c **** 	}
- 353:../../source/main/user.c **** 	sleep(7*HZ);
- 354:../../source/main/user.c **** 	ka_printf("now task five prio is %u\n",OSTCBCurPtr->prio);
- 355:../../source/main/user.c **** 	sleep(5*HZ);
- 356:../../source/main/user.c **** 	ka_printf("now task five prio is %u\n",OSTCBCurPtr->prio);
- 357:../../source/main/user.c **** 	ret = mutex_unlock(&kaka);
- 358:../../source/main/user.c **** 	ka_printf("task five unlock ret is %d\n",ret);
- 359:../../source/main/user.c **** 	ka_printf("now task five prio is %u\n",OSTCBCurPtr->prio);
- 360:../../source/main/user.c **** }
- 361:../../source/main/user.c **** 
- 362:../../source/main/user.c **** #endif
- 363:../../source/main/user.c **** #if 0 //test delay_ms
- 364:../../source/main/user.c **** #include "bsp_led.h"  
- 365:../../source/main/user.c **** void three(void *para)
- 366:../../source/main/user.c **** {
- 367:../../source/main/user.c **** 	LED_GPIO_Config();
- 368:../../source/main/user.c **** 
- 369:../../source/main/user.c **** 	LED1_OFF;
- 370:../../source/main/user.c **** 	delay_ms(10);
- 371:../../source/main/user.c **** 	LED1_ON;
- 372:../../source/main/user.c **** 
- 373:../../source/main/user.c **** }
- 374:../../source/main/user.c **** #endif
- 375:../../source/main/user.c **** 
- 376:../../source/main/user.c **** #if 0 //test context switch's time
- 377:../../source/main/user.c **** #include "bsp_led.h"
- 378:../../source/main/user.c **** void three(void *para)
- 379:../../source/main/user.c **** {
- 380:../../source/main/user.c **** 	LED_GPIO_Config();
- 381:../../source/main/user.c **** 	LED1_OFF;
- 382:../../source/main/user.c **** 	sleep(100);
- 383:../../source/main/user.c **** 	//suspend();
- 384:../../source/main/user.c **** 	while(1);
- 385:../../source/main/user.c **** }
- 386:../../source/main/user.c **** 
- 387:../../source/main/user.c **** void four(void *para)
- 388:../../source/main/user.c **** {
- 389:../../source/main/user.c **** 	LED1_ON;
- 390:../../source/main/user.c **** 	while(1);
- 391:../../source/main/user.c **** }
- 392:../../source/main/user.c **** //void five(void *para)
- 393:../../source/main/user.c **** //{
- 394:../../source/main/user.c **** //	while(1);
- 395:../../source/main/user.c **** //}
- 396:../../source/main/user.c **** //void six(void *para)
- 397:../../source/main/user.c **** //{
- 398:../../source/main/user.c **** //	while(1);
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccan3aTE.s 			page 9
+ 342:../../source/user/user.c **** {
+ 343:../../source/user/user.c **** 	mutex_init(&kaka);
+ 344:../../source/user/user.c **** 	int ret = mutex_lock(&kaka);
+ 345:../../source/user/user.c **** 	if(0 > ret)
+ 346:../../source/user/user.c **** 	{
+ 347:../../source/user/user.c **** 		ka_printf("lock fail\n");
+ 348:../../source/user/user.c **** 	}
+ 349:../../source/user/user.c **** 	else
+ 350:../../source/user/user.c **** 	{
+ 351:../../source/user/user.c **** 		ka_printf("task five success to lock mutex\n");
+ 352:../../source/user/user.c **** 	}
+ 353:../../source/user/user.c **** 	sleep(7*HZ);
+ 354:../../source/user/user.c **** 	ka_printf("now task five prio is %u\n",OSTCBCurPtr->prio);
+ 355:../../source/user/user.c **** 	sleep(5*HZ);
+ 356:../../source/user/user.c **** 	ka_printf("now task five prio is %u\n",OSTCBCurPtr->prio);
+ 357:../../source/user/user.c **** 	ret = mutex_unlock(&kaka);
+ 358:../../source/user/user.c **** 	ka_printf("task five unlock ret is %d\n",ret);
+ 359:../../source/user/user.c **** 	ka_printf("now task five prio is %u\n",OSTCBCurPtr->prio);
+ 360:../../source/user/user.c **** }
+ 361:../../source/user/user.c **** 
+ 362:../../source/user/user.c **** #endif
+ 363:../../source/user/user.c **** #if 0 //test delay_ms
+ 364:../../source/user/user.c **** #include "bsp_led.h"  
+ 365:../../source/user/user.c **** void three(void *para)
+ 366:../../source/user/user.c **** {
+ 367:../../source/user/user.c **** 	LED_GPIO_Config();
+ 368:../../source/user/user.c **** 
+ 369:../../source/user/user.c **** 	LED1_OFF;
+ 370:../../source/user/user.c **** 	delay_ms(10);
+ 371:../../source/user/user.c **** 	LED1_ON;
+ 372:../../source/user/user.c **** 
+ 373:../../source/user/user.c **** }
+ 374:../../source/user/user.c **** #endif
+ 375:../../source/user/user.c **** 
+ 376:../../source/user/user.c **** #if 0 //test context switch's time
+ 377:../../source/user/user.c **** #include "bsp_led.h"
+ 378:../../source/user/user.c **** void three(void *para)
+ 379:../../source/user/user.c **** {
+ 380:../../source/user/user.c **** 	LED_GPIO_Config();
+ 381:../../source/user/user.c **** 	LED1_OFF;
+ 382:../../source/user/user.c **** 	sleep(100);
+ 383:../../source/user/user.c **** 	//suspend();
+ 384:../../source/user/user.c **** 	while(1);
+ 385:../../source/user/user.c **** }
+ 386:../../source/user/user.c **** 
+ 387:../../source/user/user.c **** void four(void *para)
+ 388:../../source/user/user.c **** {
+ 389:../../source/user/user.c **** 	LED1_ON;
+ 390:../../source/user/user.c **** 	while(1);
+ 391:../../source/user/user.c **** }
+ 392:../../source/user/user.c **** //void five(void *para)
+ 393:../../source/user/user.c **** //{
+ 394:../../source/user/user.c **** //	while(1);
+ 395:../../source/user/user.c **** //}
+ 396:../../source/user/user.c **** //void six(void *para)
+ 397:../../source/user/user.c **** //{
+ 398:../../source/user/user.c **** //	while(1);
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccHgbWM2.s 			page 9
 
 
- 399:../../source/main/user.c **** //}
- 400:../../source/main/user.c **** #endif
- 401:../../source/main/user.c **** 
- 402:../../source/main/user.c **** #if 0 //test new memory management
- 403:../../source/main/user.c **** 
- 404:../../source/main/user.c **** void three(void *para)
- 405:../../source/main/user.c **** {
- 406:../../source/main/user.c **** 	void *ptr[31];
- 407:../../source/main/user.c **** 	int i;
- 408:../../source/main/user.c **** 	get_os_buddy_ptr_head();
- 409:../../source/main/user.c **** 	ka_printf("%p\n",alloc_power2_page());
- 410:../../source/main/user.c **** 	ka_printf("%p\n",alloc_power3_page());
- 411:../../source/main/user.c **** 	ka_printf("%p\n",alloc_power4_page());
- 412:../../source/main/user.c **** 	ka_printf("%p\n",alloc_power6_page());
- 413:../../source/main/user.c **** 	while(1)
- 414:../../source/main/user.c **** 	{
- 415:../../source/main/user.c **** 		for(i=0;i<31;++i)
- 416:../../source/main/user.c **** 		{
- 417:../../source/main/user.c **** 			ptr[i] = ka_malloc(500);
- 418:../../source/main/user.c **** 			ka_printf("ptr[%d] is %p\n",i,ptr[i]);
- 419:../../source/main/user.c **** 		}
- 420:../../source/main/user.c **** 		sleep(200 * HZ);
- 421:../../source/main/user.c **** 		for(i=0;i<31;++i)
- 422:../../source/main/user.c **** 		{
- 423:../../source/main/user.c **** 			ka_free(ptr[i]);
- 424:../../source/main/user.c **** 		}
- 425:../../source/main/user.c **** 		ka_printf("free complete\n");
- 426:../../source/main/user.c **** 		sleep(500 * HZ);
- 427:../../source/main/user.c **** 	}
- 428:../../source/main/user.c **** }
- 429:../../source/main/user.c **** 
- 430:../../source/main/user.c **** #endif
- 431:../../source/main/user.c **** 
- 432:../../source/main/user.c **** #if 0 //test delete_MCB()
- 433:../../source/main/user.c **** 
- 434:../../source/main/user.c **** MCB kaka;
- 435:../../source/main/user.c **** 
- 436:../../source/main/user.c **** void three(void *para)
- 437:../../source/main/user.c **** {
- 438:../../source/main/user.c **** 	init_MCB(&kaka,0);
- 439:../../source/main/user.c **** 	ka_printf("task three going to p()\n");
- 440:../../source/main/user.c **** 	int ret = p(&kaka,MCB_FLAG_WAIT,0);
- 441:../../source/main/user.c **** 	ka_printf("task three ret is %d\n",ret);
- 442:../../source/main/user.c **** }
- 443:../../source/main/user.c **** 
- 444:../../source/main/user.c **** void four(void *para)
- 445:../../source/main/user.c **** {
- 446:../../source/main/user.c **** 	ka_printf("task four going to p()\n");
- 447:../../source/main/user.c **** 	int ret = p(&kaka,MCB_FLAG_WAIT,0);
- 448:../../source/main/user.c **** 	ka_printf("task four ret is %d\n",ret);
- 449:../../source/main/user.c **** }
- 450:../../source/main/user.c **** 
- 451:../../source/main/user.c **** void five(void *para)
- 452:../../source/main/user.c **** {
- 453:../../source/main/user.c **** 	ka_printf("task five going to delete_MCB()\n");
- 454:../../source/main/user.c **** 	delete_MCB(&kaka);
- 455:../../source/main/user.c **** 	ka_printf("delete completed\n");
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccan3aTE.s 			page 10
+ 399:../../source/user/user.c **** //}
+ 400:../../source/user/user.c **** #endif
+ 401:../../source/user/user.c **** 
+ 402:../../source/user/user.c **** #if 0 //test new memory management
+ 403:../../source/user/user.c **** 
+ 404:../../source/user/user.c **** void three(void *para)
+ 405:../../source/user/user.c **** {
+ 406:../../source/user/user.c **** 	void *ptr[31];
+ 407:../../source/user/user.c **** 	int i;
+ 408:../../source/user/user.c **** 	get_os_buddy_ptr_head();
+ 409:../../source/user/user.c **** 	ka_printf("%p\n",alloc_power2_page());
+ 410:../../source/user/user.c **** 	ka_printf("%p\n",alloc_power3_page());
+ 411:../../source/user/user.c **** 	ka_printf("%p\n",alloc_power4_page());
+ 412:../../source/user/user.c **** 	ka_printf("%p\n",alloc_power6_page());
+ 413:../../source/user/user.c **** 	while(1)
+ 414:../../source/user/user.c **** 	{
+ 415:../../source/user/user.c **** 		for(i=0;i<31;++i)
+ 416:../../source/user/user.c **** 		{
+ 417:../../source/user/user.c **** 			ptr[i] = ka_malloc(500);
+ 418:../../source/user/user.c **** 			ka_printf("ptr[%d] is %p\n",i,ptr[i]);
+ 419:../../source/user/user.c **** 		}
+ 420:../../source/user/user.c **** 		sleep(200 * HZ);
+ 421:../../source/user/user.c **** 		for(i=0;i<31;++i)
+ 422:../../source/user/user.c **** 		{
+ 423:../../source/user/user.c **** 			ka_free(ptr[i]);
+ 424:../../source/user/user.c **** 		}
+ 425:../../source/user/user.c **** 		ka_printf("free complete\n");
+ 426:../../source/user/user.c **** 		sleep(500 * HZ);
+ 427:../../source/user/user.c **** 	}
+ 428:../../source/user/user.c **** }
+ 429:../../source/user/user.c **** 
+ 430:../../source/user/user.c **** #endif
+ 431:../../source/user/user.c **** 
+ 432:../../source/user/user.c **** #if 0 //test delete_MCB()
+ 433:../../source/user/user.c **** 
+ 434:../../source/user/user.c **** MCB kaka;
+ 435:../../source/user/user.c **** 
+ 436:../../source/user/user.c **** void three(void *para)
+ 437:../../source/user/user.c **** {
+ 438:../../source/user/user.c **** 	init_MCB(&kaka,0);
+ 439:../../source/user/user.c **** 	ka_printf("task three going to p()\n");
+ 440:../../source/user/user.c **** 	int ret = p(&kaka,MCB_FLAG_WAIT,0);
+ 441:../../source/user/user.c **** 	ka_printf("task three ret is %d\n",ret);
+ 442:../../source/user/user.c **** }
+ 443:../../source/user/user.c **** 
+ 444:../../source/user/user.c **** void four(void *para)
+ 445:../../source/user/user.c **** {
+ 446:../../source/user/user.c **** 	ka_printf("task four going to p()\n");
+ 447:../../source/user/user.c **** 	int ret = p(&kaka,MCB_FLAG_WAIT,0);
+ 448:../../source/user/user.c **** 	ka_printf("task four ret is %d\n",ret);
+ 449:../../source/user/user.c **** }
+ 450:../../source/user/user.c **** 
+ 451:../../source/user/user.c **** void five(void *para)
+ 452:../../source/user/user.c **** {
+ 453:../../source/user/user.c **** 	ka_printf("task five going to delete_MCB()\n");
+ 454:../../source/user/user.c **** 	delete_MCB(&kaka);
+ 455:../../source/user/user.c **** 	ka_printf("delete completed\n");
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccHgbWM2.s 			page 10
 
 
- 456:../../source/main/user.c **** }
- 457:../../source/main/user.c **** 
- 458:../../source/main/user.c **** #endif
- 459:../../source/main/user.c **** 
- 460:../../source/main/user.c **** #if 0 //test msg_del()
- 461:../../source/main/user.c **** 
- 462:../../source/main/user.c **** MQB kaka;
- 463:../../source/main/user.c **** 
- 464:../../source/main/user.c **** void three(void *para)
- 465:../../source/main/user.c **** {
- 466:../../source/main/user.c **** 	struct message *a;
- 467:../../source/main/user.c **** 	msg_init(&kaka,"kaka",8);
- 468:../../source/main/user.c **** 	ka_printf("task three going to msg_receive()\n");
- 469:../../source/main/user.c **** 	int ret = msg_receive(&kaka,&a,MSG_FLAG_WAIT,0);
- 470:../../source/main/user.c **** 	ka_printf("task three ret is %d\n",ret);
- 471:../../source/main/user.c **** }
- 472:../../source/main/user.c **** 
- 473:../../source/main/user.c **** void four(void *para)
- 474:../../source/main/user.c **** {
- 475:../../source/main/user.c **** 	struct message *a;
- 476:../../source/main/user.c **** 	ka_printf("task four going to msg_receive()\n");
- 477:../../source/main/user.c **** 	int ret = msg_receive(&kaka,&a,MSG_FLAG_WAIT,0);
- 478:../../source/main/user.c **** 	ka_printf("task four ret is %d\n",ret);
- 479:../../source/main/user.c **** }
- 480:../../source/main/user.c **** 
- 481:../../source/main/user.c **** void five(void *para)
- 482:../../source/main/user.c **** {
- 483:../../source/main/user.c **** 	ka_printf("task five going to msg_del()\n");
- 484:../../source/main/user.c **** 	msg_del(&kaka);
- 485:../../source/main/user.c **** 	ka_printf("delete completed\n");
- 486:../../source/main/user.c **** }
- 487:../../source/main/user.c **** 
- 488:../../source/main/user.c **** #endif
- 489:../../source/main/user.c **** 
- 490:../../source/main/user.c **** #if 0 //test mutex_del()
- 491:../../source/main/user.c **** 
- 492:../../source/main/user.c **** MUTEX kaka;
- 493:../../source/main/user.c **** 
- 494:../../source/main/user.c **** void three(void *para)
- 495:../../source/main/user.c **** {
- 496:../../source/main/user.c **** 	mutex_init(&kaka);
- 497:../../source/main/user.c **** 	sleep(5*HZ);
- 498:../../source/main/user.c **** 	ka_printf("task three going to mutex_lock()\n");
- 499:../../source/main/user.c **** 	int ret = mutex_lock(&kaka);
- 500:../../source/main/user.c **** 	ka_printf("task three ret is %d\n",ret);
- 501:../../source/main/user.c **** }
- 502:../../source/main/user.c **** 
- 503:../../source/main/user.c **** void four(void *para)
- 504:../../source/main/user.c **** {
- 505:../../source/main/user.c **** 	sleep(5*HZ);
- 506:../../source/main/user.c **** 	ka_printf("task four going to mutex_lock()\n");
- 507:../../source/main/user.c **** 	int ret = mutex_lock(&kaka);
- 508:../../source/main/user.c **** 	ka_printf("task four ret is %d\n",ret);
- 509:../../source/main/user.c **** }
- 510:../../source/main/user.c **** 
- 511:../../source/main/user.c **** void five(void *para)
- 512:../../source/main/user.c **** {
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccan3aTE.s 			page 11
+ 456:../../source/user/user.c **** }
+ 457:../../source/user/user.c **** 
+ 458:../../source/user/user.c **** #endif
+ 459:../../source/user/user.c **** 
+ 460:../../source/user/user.c **** #if 0 //test msg_del()
+ 461:../../source/user/user.c **** 
+ 462:../../source/user/user.c **** MQB kaka;
+ 463:../../source/user/user.c **** 
+ 464:../../source/user/user.c **** void three(void *para)
+ 465:../../source/user/user.c **** {
+ 466:../../source/user/user.c **** 	struct message *a;
+ 467:../../source/user/user.c **** 	msg_init(&kaka,"kaka",8);
+ 468:../../source/user/user.c **** 	ka_printf("task three going to msg_receive()\n");
+ 469:../../source/user/user.c **** 	int ret = msg_receive(&kaka,&a,MSG_FLAG_WAIT,0);
+ 470:../../source/user/user.c **** 	ka_printf("task three ret is %d\n",ret);
+ 471:../../source/user/user.c **** }
+ 472:../../source/user/user.c **** 
+ 473:../../source/user/user.c **** void four(void *para)
+ 474:../../source/user/user.c **** {
+ 475:../../source/user/user.c **** 	struct message *a;
+ 476:../../source/user/user.c **** 	ka_printf("task four going to msg_receive()\n");
+ 477:../../source/user/user.c **** 	int ret = msg_receive(&kaka,&a,MSG_FLAG_WAIT,0);
+ 478:../../source/user/user.c **** 	ka_printf("task four ret is %d\n",ret);
+ 479:../../source/user/user.c **** }
+ 480:../../source/user/user.c **** 
+ 481:../../source/user/user.c **** void five(void *para)
+ 482:../../source/user/user.c **** {
+ 483:../../source/user/user.c **** 	ka_printf("task five going to msg_del()\n");
+ 484:../../source/user/user.c **** 	msg_del(&kaka);
+ 485:../../source/user/user.c **** 	ka_printf("delete completed\n");
+ 486:../../source/user/user.c **** }
+ 487:../../source/user/user.c **** 
+ 488:../../source/user/user.c **** #endif
+ 489:../../source/user/user.c **** 
+ 490:../../source/user/user.c **** #if 0 //test mutex_del()
+ 491:../../source/user/user.c **** 
+ 492:../../source/user/user.c **** MUTEX kaka;
+ 493:../../source/user/user.c **** 
+ 494:../../source/user/user.c **** void three(void *para)
+ 495:../../source/user/user.c **** {
+ 496:../../source/user/user.c **** 	mutex_init(&kaka);
+ 497:../../source/user/user.c **** 	sleep(5*HZ);
+ 498:../../source/user/user.c **** 	ka_printf("task three going to mutex_lock()\n");
+ 499:../../source/user/user.c **** 	int ret = mutex_lock(&kaka);
+ 500:../../source/user/user.c **** 	ka_printf("task three ret is %d\n",ret);
+ 501:../../source/user/user.c **** }
+ 502:../../source/user/user.c **** 
+ 503:../../source/user/user.c **** void four(void *para)
+ 504:../../source/user/user.c **** {
+ 505:../../source/user/user.c **** 	sleep(5*HZ);
+ 506:../../source/user/user.c **** 	ka_printf("task four going to mutex_lock()\n");
+ 507:../../source/user/user.c **** 	int ret = mutex_lock(&kaka);
+ 508:../../source/user/user.c **** 	ka_printf("task four ret is %d\n",ret);
+ 509:../../source/user/user.c **** }
+ 510:../../source/user/user.c **** 
+ 511:../../source/user/user.c **** void five(void *para)
+ 512:../../source/user/user.c **** {
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccHgbWM2.s 			page 11
 
 
- 513:../../source/main/user.c **** 	ka_printf("task five going to mutex_lock()\n");
- 514:../../source/main/user.c **** 	mutex_lock(&kaka);
- 515:../../source/main/user.c **** 	sleep(10*HZ);
- 516:../../source/main/user.c **** 	ka_printf("task five going to mutex_del()\n");
- 517:../../source/main/user.c **** 	mutex_del(&kaka);
- 518:../../source/main/user.c **** 	ka_printf("delete completed\n");
- 519:../../source/main/user.c **** }
- 520:../../source/main/user.c **** 
- 521:../../source/main/user.c **** #endif
- 522:../../source/main/user.c **** 
- 523:../../source/main/user.c **** #if 0 //test MCB
- 524:../../source/main/user.c **** 
- 525:../../source/main/user.c **** MCB kaka;
- 526:../../source/main/user.c **** 
- 527:../../source/main/user.c **** void three(void *para)
- 528:../../source/main/user.c **** {
- 529:../../source/main/user.c **** 	init_MCB_binary(&kaka,0);
- 530:../../source/main/user.c **** //	ka_printf("task three p()\n");
- 531:../../source/main/user.c **** //	p(&kaka,MCB_FLAG_WAIT,0);
- 532:../../source/main/user.c **** //	ka_printf("task three p()\n");
- 533:../../source/main/user.c **** //	p(&kaka,MCB_FLAG_WAIT,0);
- 534:../../source/main/user.c **** //	ka_printf("task three sleep()\n");
- 535:../../source/main/user.c **** //	sleep(50);
- 536:../../source/main/user.c **** 	ka_printf("task three v()\n");
- 537:../../source/main/user.c **** 	v(&kaka);
- 538:../../source/main/user.c **** 	ka_printf("task three v()\n");
- 539:../../source/main/user.c **** 	v(&kaka);
- 540:../../source/main/user.c **** }
- 541:../../source/main/user.c **** 
- 542:../../source/main/user.c **** void four(void *para)
- 543:../../source/main/user.c **** {
- 544:../../source/main/user.c **** //	ka_printf("task four p()\n");
- 545:../../source/main/user.c **** //	p(&kaka,MCB_FLAG_WAIT,0);
- 546:../../source/main/user.c **** 	ka_printf("task four p()\n");
- 547:../../source/main/user.c **** 	p(&kaka,MCB_FLAG_WAIT,0);
- 548:../../source/main/user.c **** 	ka_printf("task four sleep()\n");
- 549:../../source/main/user.c **** 	sleep(50);
- 550:../../source/main/user.c **** 	ka_printf("task four v()\n");
- 551:../../source/main/user.c **** 	v(&kaka);
- 552:../../source/main/user.c **** 	ka_printf("task four v()\n");
- 553:../../source/main/user.c **** 	v(&kaka);
- 554:../../source/main/user.c **** }
- 555:../../source/main/user.c **** 
- 556:../../source/main/user.c **** void five(void *para)
- 557:../../source/main/user.c **** {
- 558:../../source/main/user.c **** //	ka_printf("task five p()\n");
- 559:../../source/main/user.c **** //	p(&kaka,MCB_FLAG_WAIT,0);
- 560:../../source/main/user.c **** 	ka_printf("task five p()\n");
- 561:../../source/main/user.c **** 	p(&kaka,MCB_FLAG_WAIT,0);
- 562:../../source/main/user.c **** 	ka_printf("task five sleep()\n");
- 563:../../source/main/user.c **** 	sleep(50);
- 564:../../source/main/user.c **** 	ka_printf("task five v()\n");
- 565:../../source/main/user.c **** 	v(&kaka);
- 566:../../source/main/user.c **** 	ka_printf("task five v()\n");
- 567:../../source/main/user.c **** 	v(&kaka);
- 568:../../source/main/user.c **** }
- 569:../../source/main/user.c **** 
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccan3aTE.s 			page 12
+ 513:../../source/user/user.c **** 	ka_printf("task five going to mutex_lock()\n");
+ 514:../../source/user/user.c **** 	mutex_lock(&kaka);
+ 515:../../source/user/user.c **** 	sleep(10*HZ);
+ 516:../../source/user/user.c **** 	ka_printf("task five going to mutex_del()\n");
+ 517:../../source/user/user.c **** 	mutex_del(&kaka);
+ 518:../../source/user/user.c **** 	ka_printf("delete completed\n");
+ 519:../../source/user/user.c **** }
+ 520:../../source/user/user.c **** 
+ 521:../../source/user/user.c **** #endif
+ 522:../../source/user/user.c **** 
+ 523:../../source/user/user.c **** #if 0 //test MCB
+ 524:../../source/user/user.c **** 
+ 525:../../source/user/user.c **** MCB kaka;
+ 526:../../source/user/user.c **** 
+ 527:../../source/user/user.c **** void three(void *para)
+ 528:../../source/user/user.c **** {
+ 529:../../source/user/user.c **** 	init_MCB_binary(&kaka,0);
+ 530:../../source/user/user.c **** //	ka_printf("task three p()\n");
+ 531:../../source/user/user.c **** //	p(&kaka,MCB_FLAG_WAIT,0);
+ 532:../../source/user/user.c **** //	ka_printf("task three p()\n");
+ 533:../../source/user/user.c **** //	p(&kaka,MCB_FLAG_WAIT,0);
+ 534:../../source/user/user.c **** //	ka_printf("task three sleep()\n");
+ 535:../../source/user/user.c **** //	sleep(50);
+ 536:../../source/user/user.c **** 	ka_printf("task three v()\n");
+ 537:../../source/user/user.c **** 	v(&kaka);
+ 538:../../source/user/user.c **** 	ka_printf("task three v()\n");
+ 539:../../source/user/user.c **** 	v(&kaka);
+ 540:../../source/user/user.c **** }
+ 541:../../source/user/user.c **** 
+ 542:../../source/user/user.c **** void four(void *para)
+ 543:../../source/user/user.c **** {
+ 544:../../source/user/user.c **** //	ka_printf("task four p()\n");
+ 545:../../source/user/user.c **** //	p(&kaka,MCB_FLAG_WAIT,0);
+ 546:../../source/user/user.c **** 	ka_printf("task four p()\n");
+ 547:../../source/user/user.c **** 	p(&kaka,MCB_FLAG_WAIT,0);
+ 548:../../source/user/user.c **** 	ka_printf("task four sleep()\n");
+ 549:../../source/user/user.c **** 	sleep(50);
+ 550:../../source/user/user.c **** 	ka_printf("task four v()\n");
+ 551:../../source/user/user.c **** 	v(&kaka);
+ 552:../../source/user/user.c **** 	ka_printf("task four v()\n");
+ 553:../../source/user/user.c **** 	v(&kaka);
+ 554:../../source/user/user.c **** }
+ 555:../../source/user/user.c **** 
+ 556:../../source/user/user.c **** void five(void *para)
+ 557:../../source/user/user.c **** {
+ 558:../../source/user/user.c **** //	ka_printf("task five p()\n");
+ 559:../../source/user/user.c **** //	p(&kaka,MCB_FLAG_WAIT,0);
+ 560:../../source/user/user.c **** 	ka_printf("task five p()\n");
+ 561:../../source/user/user.c **** 	p(&kaka,MCB_FLAG_WAIT,0);
+ 562:../../source/user/user.c **** 	ka_printf("task five sleep()\n");
+ 563:../../source/user/user.c **** 	sleep(50);
+ 564:../../source/user/user.c **** 	ka_printf("task five v()\n");
+ 565:../../source/user/user.c **** 	v(&kaka);
+ 566:../../source/user/user.c **** 	ka_printf("task five v()\n");
+ 567:../../source/user/user.c **** 	v(&kaka);
+ 568:../../source/user/user.c **** }
+ 569:../../source/user/user.c **** 
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccHgbWM2.s 			page 12
 
 
- 570:../../source/main/user.c **** #endif
- 571:../../source/main/user.c **** 
- 572:../../source/main/user.c **** #if 1//test malloc
- 573:../../source/main/user.c **** void three(void *para)
- 574:../../source/main/user.c **** {
+ 570:../../source/user/user.c **** #endif
+ 571:../../source/user/user.c **** 
+ 572:../../source/user/user.c **** #if 1//test malloc
+ 573:../../source/user/user.c **** void three(void *para)
+ 574:../../source/user/user.c **** {
   42              		.loc 1 574 0
   43              		.cfi_startproc
   44              		@ args = 0, pretend = 0, frame = 56
@@ -682,20 +682,20 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccan3aTE.s 			page 1
   55              	.LCFI2:
   56              		.cfi_def_cfa_register 7
   57 0006 7860     		str	r0, [r7, #4]
- 575:../../source/main/user.c **** 	void *ptr[10];
- 576:../../source/main/user.c **** 	unsigned int i;
- 577:../../source/main/user.c **** 	ka_printf("going to task three\n");
+ 575:../../source/user/user.c **** 	void *ptr[10];
+ 576:../../source/user/user.c **** 	unsigned int i;
+ 577:../../source/user/user.c **** 	ka_printf("going to task three\n");
   58              		.loc 1 577 0
   59 0008 2948     		ldr	r0, .L6
   60 000a FFF7FEFF 		bl	ka_printf
- 578:../../source/main/user.c **** 	for(i=0;i<10;++i)
+ 578:../../source/user/user.c **** 	for(i=0;i<10;++i)
   61              		.loc 1 578 0
   62 000e 0023     		movs	r3, #0
   63 0010 7B63     		str	r3, [r7, #52]
   64 0012 1AE0     		b	.L2
   65              	.L3:
- 579:../../source/main/user.c **** 	{
- 580:../../source/main/user.c **** 		ptr[i] = ka_malloc(700);
+ 579:../../source/user/user.c **** 	{
+ 580:../../source/user/user.c **** 		ptr[i] = ka_malloc(700);
   66              		.loc 1 580 0 discriminator 3
   67 0014 4FF42F70 		mov	r0, #700
   68 0018 FFF7FEFF 		bl	ka_malloc
@@ -705,7 +705,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccan3aTE.s 			page 1
   72 0022 07F13801 		add	r1, r7, #56
   73 0026 0B44     		add	r3, r3, r1
   74 0028 43F82C2C 		str	r2, [r3, #-44]
- 581:../../source/main/user.c **** 		ka_printf("i is %u,address is %p\n",i,ptr[i]);
+ 581:../../source/user/user.c **** 		ka_printf("i is %u,address is %p\n",i,ptr[i]);
   75              		.loc 1 581 0 discriminator 3
   76 002c 7B6B     		ldr	r3, [r7, #52]
   77 002e 9B00     		lsls	r3, r3, #2
@@ -716,39 +716,39 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccan3aTE.s 			page 1
   82 003c 796B     		ldr	r1, [r7, #52]
   83 003e 1D48     		ldr	r0, .L6+4
   84 0040 FFF7FEFF 		bl	ka_printf
- 578:../../source/main/user.c **** 	for(i=0;i<10;++i)
+ 578:../../source/user/user.c **** 	for(i=0;i<10;++i)
   85              		.loc 1 578 0 discriminator 3
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccan3aTE.s 			page 13
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccHgbWM2.s 			page 13
 
 
   86 0044 7B6B     		ldr	r3, [r7, #52]
   87 0046 0133     		adds	r3, r3, #1
   88 0048 7B63     		str	r3, [r7, #52]
   89              	.L2:
- 578:../../source/main/user.c **** 	for(i=0;i<10;++i)
+ 578:../../source/user/user.c **** 	for(i=0;i<10;++i)
   90              		.loc 1 578 0 is_stmt 0 discriminator 1
   91 004a 7B6B     		ldr	r3, [r7, #52]
   92 004c 092B     		cmp	r3, #9
   93 004e E1D9     		bls	.L3
- 582:../../source/main/user.c **** 	}
- 583:../../source/main/user.c **** 	INSERT_BREAK_POINT();
+ 582:../../source/user/user.c **** 	}
+ 583:../../source/user/user.c **** 	INSERT_BREAK_POINT();
   94              		.loc 1 583 0 is_stmt 1
   95 0050 194A     		ldr	r2, .L6+8
   96 0052 40F24721 		movw	r1, #583
   97 0056 1948     		ldr	r0, .L6+12
   98 0058 FFF7FEFF 		bl	insert_break_point
- 584:../../source/main/user.c **** 	ka_printf("release address\n");
+ 584:../../source/user/user.c **** 	ka_printf("release address\n");
   99              		.loc 1 584 0
  100 005c 1848     		ldr	r0, .L6+16
  101 005e FFF7FEFF 		bl	ka_printf
- 585:../../source/main/user.c **** 	for(i=0;i<10;++i)
+ 585:../../source/user/user.c **** 	for(i=0;i<10;++i)
  102              		.loc 1 585 0
  103 0062 0023     		movs	r3, #0
  104 0064 7B63     		str	r3, [r7, #52]
  105 0066 12E0     		b	.L4
  106              	.L5:
- 586:../../source/main/user.c **** 	{
- 587:../../source/main/user.c **** 		ka_free(ptr[i]);
+ 586:../../source/user/user.c **** 	{
+ 587:../../source/user/user.c **** 		ka_free(ptr[i]);
  107              		.loc 1 587 0 discriminator 3
  108 0068 7B6B     		ldr	r3, [r7, #52]
  109 006a 9B00     		lsls	r3, r3, #2
@@ -757,38 +757,38 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccan3aTE.s 			page 1
  112 0072 53F82C3C 		ldr	r3, [r3, #-44]
  113 0076 1846     		mov	r0, r3
  114 0078 FFF7FEFF 		bl	ka_free
- 588:../../source/main/user.c **** 		INSERT_BREAK_POINT();
+ 588:../../source/user/user.c **** 		INSERT_BREAK_POINT();
  115              		.loc 1 588 0 discriminator 3
  116 007c 0E4A     		ldr	r2, .L6+8
  117 007e 4FF41371 		mov	r1, #588
  118 0082 0E48     		ldr	r0, .L6+12
  119 0084 FFF7FEFF 		bl	insert_break_point
- 585:../../source/main/user.c **** 	for(i=0;i<10;++i)
+ 585:../../source/user/user.c **** 	for(i=0;i<10;++i)
  120              		.loc 1 585 0 discriminator 3
  121 0088 7B6B     		ldr	r3, [r7, #52]
  122 008a 0133     		adds	r3, r3, #1
  123 008c 7B63     		str	r3, [r7, #52]
  124              	.L4:
- 585:../../source/main/user.c **** 	for(i=0;i<10;++i)
+ 585:../../source/user/user.c **** 	for(i=0;i<10;++i)
  125              		.loc 1 585 0 is_stmt 0 discriminator 1
  126 008e 7B6B     		ldr	r3, [r7, #52]
  127 0090 092B     		cmp	r3, #9
  128 0092 E9D9     		bls	.L5
- 589:../../source/main/user.c **** 	}
- 590:../../source/main/user.c **** 	INSERT_BREAK_POINT();
+ 589:../../source/user/user.c **** 	}
+ 590:../../source/user/user.c **** 	INSERT_BREAK_POINT();
  129              		.loc 1 590 0 is_stmt 1
  130 0094 084A     		ldr	r2, .L6+8
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccan3aTE.s 			page 14
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccHgbWM2.s 			page 14
 
 
  131 0096 40F24E21 		movw	r1, #590
  132 009a 0848     		ldr	r0, .L6+12
  133 009c FFF7FEFF 		bl	insert_break_point
- 591:../../source/main/user.c **** 	ka_printf("end\n");
+ 591:../../source/user/user.c **** 	ka_printf("end\n");
  134              		.loc 1 591 0
  135 00a0 0848     		ldr	r0, .L6+20
  136 00a2 FFF7FEFF 		bl	ka_printf
- 592:../../source/main/user.c **** }
+ 592:../../source/user/user.c **** }
  137              		.loc 1 592 0
  138 00a6 00BF     		nop
  139 00a8 3837     		adds	r7, r7, #56
@@ -833,12 +833,12 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccan3aTE.s 			page 1
  177 000b 01       		.uleb128 0x1
  178 000c E5020000 		.4byte	.LASF45
  179 0010 0C       		.byte	0xc
- 180 0011 1C020000 		.4byte	.LASF46
+ 180 0011 A0020000 		.4byte	.LASF46
  181 0015 D8000000 		.4byte	.LASF47
  182 0019 00000000 		.4byte	.Ltext0
  183 001d C8000000 		.4byte	.Letext0
  184 0021 00000000 		.4byte	.Ldebug_line0
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccan3aTE.s 			page 15
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccHgbWM2.s 			page 15
 
 
  185 0025 02       		.uleb128 0x2
@@ -898,7 +898,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccan3aTE.s 			page 1
  239 008b A1000000 		.4byte	0xa1
  240 008f 02       		.byte	0x2
  241 0090 23       		.byte	0x23
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccan3aTE.s 			page 16
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccHgbWM2.s 			page 16
 
 
  242 0091 00       		.uleb128 0
@@ -932,7 +932,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccan3aTE.s 			page 1
  270 00c5 0F000000 		.4byte	.LASF13
  271 00c9 03       		.byte	0x3
  272 00ca 0A       		.uleb128 0xa
- 273 00cb 7D020000 		.4byte	.LASF14
+ 273 00cb 64020000 		.4byte	.LASF14
  274 00cf 04       		.byte	0x4
  275 00d0 0A       		.uleb128 0xa
  276 00d1 A0000000 		.4byte	.LASF15
@@ -958,7 +958,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccan3aTE.s 			page 1
  296 00fa 04       		.byte	0x4
  297 00fb 0F       		.byte	0xf
  298 00fc A7000000 		.4byte	0xa7
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccan3aTE.s 			page 17
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccHgbWM2.s 			page 17
 
 
  299 0100 05       		.uleb128 0x5
@@ -981,7 +981,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccan3aTE.s 			page 1
  316 0123 01       		.byte	0x1
  317 0124 01       		.byte	0x1
  318 0125 06       		.uleb128 0x6
- 319 0126 94020000 		.4byte	.LASF25
+ 319 0126 7B020000 		.4byte	.LASF25
  320 012a 48       		.byte	0x48
  321 012b 05       		.byte	0x5
  322 012c 37       		.byte	0x37
@@ -995,7 +995,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccan3aTE.s 			page 1
  330 013d 23       		.byte	0x23
  331 013e 00       		.uleb128 0
  332 013f 07       		.uleb128 0x7
- 333 0140 AE020000 		.4byte	.LASF27
+ 333 0140 95020000 		.4byte	.LASF27
  334 0144 05       		.byte	0x5
  335 0145 39       		.byte	0x39
  336 0146 5F000000 		.4byte	0x5f
@@ -1018,11 +1018,11 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccan3aTE.s 			page 1
  353 0166 02       		.byte	0x2
  354 0167 23       		.byte	0x23
  355 0168 0C       		.uleb128 0xc
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccan3aTE.s 			page 18
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccHgbWM2.s 			page 18
 
 
  356 0169 07       		.uleb128 0x7
- 357 016a 59020000 		.4byte	.LASF30
+ 357 016a 40020000 		.4byte	.LASF30
  358 016e 05       		.byte	0x5
  359 016f 3C       		.byte	0x3c
  360 0170 F5000000 		.4byte	0xf5
@@ -1038,7 +1038,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccan3aTE.s 			page 1
  370 0183 23       		.byte	0x23
  371 0184 14       		.uleb128 0x14
  372 0185 07       		.uleb128 0x7
- 373 0186 45020000 		.4byte	.LASF32
+ 373 0186 2C020000 		.4byte	.LASF32
  374 018a 05       		.byte	0x5
  375 018b 3E       		.byte	0x3e
  376 018c 33000000 		.4byte	0x33
@@ -1078,10 +1078,10 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccan3aTE.s 			page 1
  410 01c9 23       		.byte	0x23
  411 01ca 30       		.uleb128 0x30
  412 01cb 07       		.uleb128 0x7
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccan3aTE.s 			page 19
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccHgbWM2.s 			page 19
 
 
- 413 01cc 64020000 		.4byte	.LASF37
+ 413 01cc 4B020000 		.4byte	.LASF37
  414 01d0 05       		.byte	0x5
  415 01d1 43       		.byte	0x43
  416 01d2 5F000000 		.4byte	0x5f
@@ -1138,7 +1138,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccan3aTE.s 			page 1
  467 022f 25010000 		.4byte	0x125
  468 0233 04       		.uleb128 0x4
  469 0234 28020000 		.4byte	0x228
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccan3aTE.s 			page 20
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccHgbWM2.s 			page 20
 
 
  470 0238 0C       		.uleb128 0xc
@@ -1152,7 +1152,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccan3aTE.s 			page 1
  478 0246 04       		.byte	0x4
  479 0247 33020000 		.4byte	0x233
  480 024b 0C       		.uleb128 0xc
- 481 024c 35020000 		.4byte	.LASF44
+ 481 024c 1C020000 		.4byte	.LASF44
  482 0250 01       		.byte	0x1
  483 0251 07       		.byte	0x7
  484 0252 45020000 		.4byte	0x245
@@ -1170,7 +1170,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccan3aTE.s 			page 1
  496 026e 01       		.byte	0x1
  497 026f AF020000 		.4byte	0x2af
  498 0273 11       		.uleb128 0x11
- 499 0274 78020000 		.4byte	.LASF51
+ 499 0274 5F020000 		.4byte	.LASF51
  500 0278 01       		.byte	0x1
  501 0279 3D02     		.2byte	0x23d
  502 027b 16010000 		.4byte	0x116
@@ -1198,7 +1198,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccan3aTE.s 			page 1
  524 02a3 CF020000 		.4byte	0x2cf
  525 02a7 01       		.byte	0x1
  526 02a8 05       		.byte	0x5
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccan3aTE.s 			page 21
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccHgbWM2.s 			page 21
 
 
  527 02a9 03       		.byte	0x3
@@ -1258,7 +1258,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccan3aTE.s 			page 1
  581 0020 00       		.byte	0
  582 0021 0B       		.uleb128 0xb
  583 0022 0B       		.uleb128 0xb
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccan3aTE.s 			page 22
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccHgbWM2.s 			page 22
 
 
  584 0023 3E       		.uleb128 0x3e
@@ -1318,7 +1318,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccan3aTE.s 			page 1
  638 0059 00       		.byte	0
  639 005a 00       		.byte	0
  640 005b 08       		.uleb128 0x8
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccan3aTE.s 			page 23
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccHgbWM2.s 			page 23
 
 
  641 005c 0F       		.uleb128 0xf
@@ -1378,7 +1378,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccan3aTE.s 			page 1
  695 0092 3F       		.uleb128 0x3f
  696 0093 0C       		.uleb128 0xc
  697 0094 3C       		.uleb128 0x3c
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccan3aTE.s 			page 24
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccHgbWM2.s 			page 24
 
 
  698 0095 0C       		.uleb128 0xc
@@ -1438,7 +1438,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccan3aTE.s 			page 1
  752 00cc 13       		.uleb128 0x13
  753 00cd 00       		.byte	0
  754 00ce 00       		.byte	0
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccan3aTE.s 			page 25
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccHgbWM2.s 			page 25
 
 
  755 00cf 11       		.uleb128 0x11
@@ -1498,7 +1498,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccan3aTE.s 			page 1
  809 0105 00       		.byte	0
  810 0106 49       		.uleb128 0x49
  811 0107 13       		.uleb128 0x13
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccan3aTE.s 			page 26
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccHgbWM2.s 			page 26
 
 
  812 0108 2F       		.uleb128 0x2f
@@ -1558,7 +1558,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccan3aTE.s 			page 1
  866 0000 10010000 		.section	.debug_str,"MS",%progbits,1
  866      0200C700 
  866      00000201 
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccan3aTE.s 			page 27
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccHgbWM2.s 			page 27
 
 
  866      FB0E0D00 
@@ -1618,7 +1618,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccan3aTE.s 			page 1
  889              	.LASF17:
  890 00b7 53544154 		.ascii	"STATE_WAIT_MESSAGE_QUEUE_TIMEOUT\000"
  890      455F5741 
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccan3aTE.s 			page 28
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccHgbWM2.s 			page 28
 
 
  890      49545F4D 
@@ -1678,7 +1678,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccan3aTE.s 			page 1
  913      69627574 
  913      696F6E00 
  914              	.LASF0:
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccan3aTE.s 			page 29
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccHgbWM2.s 			page 29
 
 
  915 0184 7369676E 		.ascii	"signed char\000"
@@ -1727,55 +1727,55 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccan3aTE.s 			page 1
  933      545F4D45 
  933      53534147 
  933      455F5155 
- 934              	.LASF46:
- 935 021c 2E2E2F2E 		.ascii	"../../source/main/user.c\000"
- 935      2E2F736F 
- 935      75726365 
- 935      2F6D6169 
- 935      6E2F7573 
- 936              	.LASF44:
- 937 0235 4F535443 		.ascii	"OSTCBHighRdyPtr\000"
- 937      42486967 
- 937      68526479 
- 937      50747200 
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccan3aTE.s 			page 30
+ 934              	.LASF44:
+ 935 021c 4F535443 		.ascii	"OSTCBHighRdyPtr\000"
+ 935      42486967 
+ 935      68526479 
+ 935      50747200 
+ 936              	.LASF32:
+ 937 022c 64656C61 		.ascii	"delay_heap_position\000"
+ 937      795F6865 
+ 937      61705F70 
+ 937      6F736974 
+ 937      696F6E00 
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccHgbWM2.s 			page 30
 
 
- 938              	.LASF32:
- 939 0245 64656C61 		.ascii	"delay_heap_position\000"
- 939      795F6865 
- 939      61705F70 
- 939      6F736974 
- 939      696F6E00 
- 940              	.LASF30:
- 941 0259 7461736B 		.ascii	"task_state\000"
- 941      5F737461 
- 941      746500
- 942              	.LASF37:
- 943 0264 74696D65 		.ascii	"timeslice_rest_time\000"
- 943      736C6963 
- 943      655F7265 
- 943      73745F74 
- 943      696D6500 
- 944              	.LASF51:
- 945 0278 70617261 		.ascii	"para\000"
- 945      00
- 946              	.LASF14:
- 947 027d 53544154 		.ascii	"STATE_WAIT_MCB_FOREVER\000"
- 947      455F5741 
- 947      49545F4D 
- 947      43425F46 
- 947      4F524556 
- 948              	.LASF25:
- 949 0294 7461736B 		.ascii	"task_control_block_struct\000"
- 949      5F636F6E 
- 949      74726F6C 
- 949      5F626C6F 
- 949      636B5F73 
- 950              	.LASF27:
- 951 02ae 73746163 		.ascii	"stack_size\000"
- 951      6B5F7369 
- 951      7A6500
+ 938              	.LASF30:
+ 939 0240 7461736B 		.ascii	"task_state\000"
+ 939      5F737461 
+ 939      746500
+ 940              	.LASF37:
+ 941 024b 74696D65 		.ascii	"timeslice_rest_time\000"
+ 941      736C6963 
+ 941      655F7265 
+ 941      73745F74 
+ 941      696D6500 
+ 942              	.LASF51:
+ 943 025f 70617261 		.ascii	"para\000"
+ 943      00
+ 944              	.LASF14:
+ 945 0264 53544154 		.ascii	"STATE_WAIT_MCB_FOREVER\000"
+ 945      455F5741 
+ 945      49545F4D 
+ 945      43425F46 
+ 945      4F524556 
+ 946              	.LASF25:
+ 947 027b 7461736B 		.ascii	"task_control_block_struct\000"
+ 947      5F636F6E 
+ 947      74726F6C 
+ 947      5F626C6F 
+ 947      636B5F73 
+ 948              	.LASF27:
+ 949 0295 73746163 		.ascii	"stack_size\000"
+ 949      6B5F7369 
+ 949      7A6500
+ 950              	.LASF46:
+ 951 02a0 2E2E2F2E 		.ascii	"../../source/user/user.c\000"
+ 951      2E2F736F 
+ 951      75726365 
+ 951      2F757365 
+ 951      722F7573 
  952              	.LASF29:
  953 02b9 72657365 		.ascii	"reserve_prio\000"
  953      7276655F 
@@ -1798,7 +1798,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccan3aTE.s 			page 1
  959      372E332E 
  959      31203230 
  959      31383036 
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccan3aTE.s 			page 31
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccHgbWM2.s 			page 31
 
 
  960 0318 616E6368 		.ascii	"anch revision 261907] -mcpu=cortex-m3 -mthumb -mapc"
@@ -1844,16 +1844,16 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccan3aTE.s 			page 1
  976 03d2 6E657874 		.ascii	"next\000"
  976      00
  977              		.ident	"GCC: (GNU Tools for Arm Embedded Processors 7-2018-q2-update) 7.3.1 20180622 (release) [AR
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccan3aTE.s 			page 32
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccHgbWM2.s 			page 32
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 user.c
-G:\Users\Jaxb\AppData\Local\Temp\ccan3aTE.s:16     .rodata:00000000 $d
-G:\Users\Jaxb\AppData\Local\Temp\ccan3aTE.s:32     .text:00000000 $t
-G:\Users\Jaxb\AppData\Local\Temp\ccan3aTE.s:39     .text:00000000 three
-G:\Users\Jaxb\AppData\Local\Temp\ccan3aTE.s:150    .text:000000b0 $d
-G:\Users\Jaxb\AppData\Local\Temp\ccan3aTE.s:163    .rodata:00000068 __FUNCTION__.4759
+G:\Users\Jaxb\AppData\Local\Temp\ccHgbWM2.s:16     .rodata:00000000 $d
+G:\Users\Jaxb\AppData\Local\Temp\ccHgbWM2.s:32     .text:00000000 $t
+G:\Users\Jaxb\AppData\Local\Temp\ccHgbWM2.s:39     .text:00000000 three
+G:\Users\Jaxb\AppData\Local\Temp\ccHgbWM2.s:150    .text:000000b0 $d
+G:\Users\Jaxb\AppData\Local\Temp\ccHgbWM2.s:163    .rodata:00000068 __FUNCTION__.4759
 
 UNDEFINED SYMBOLS
 ka_printf

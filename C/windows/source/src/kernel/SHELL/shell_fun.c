@@ -228,7 +228,7 @@ void shell_module(int argc, char const *argv[])
 		goto out1;
 	}
 	struct shell_buffer *sys_shell_buffer_ptr = change_shell_buffer(&shell_buffer); // save the system input buffer
-	set_module_buffer(buf);
+	_set_module_buffer(buf);
 
 	ka_printf("now transfer the module,input 'end' to end the transformation\n");
 	
