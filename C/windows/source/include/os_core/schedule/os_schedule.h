@@ -5,18 +5,11 @@
 #include <TCB.h>
 #include <os_error.h>
 
-#define ERROR_CREATE_TASK 1
-
 #define sleep(x) 		sys_delay((x),STATE_DELAY)
 #define suspend()   	sys_suspend(STATE_SUSPEND_NORMAL)
 
 #define SYS_ENTER_CRITICAL()   do { g_schedule_lock++;} while(0)
 #define SYS_EXIT_CRITICAL()   do { g_schedule_lock--;} while(0)
-
-#define ERROR_TASK_CREATE 1
-
-void delay_ms(unsigned int ms);
-//void delay_us(int us);
 
 int sys_delay(unsigned int delay_ticks_num,TASK_STATE state);
 int sys_suspend(TASK_STATE state);
@@ -37,7 +30,7 @@ int _must_check task_init_ready(
 	unsigned int stack_size,
 	TASK_PRIO_TYPE prio,
 	unsigned int timeslice_hope_time,
-	char *name,
+	const char *name,
 	functionptr function,
 	void *para);
 

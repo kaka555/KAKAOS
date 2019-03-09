@@ -1561,6 +1561,8 @@ __set_PRIMASK	source\include\core_cm3.h	/^static __INLINE void __set_PRIMASK(uin
 u16	source\include\core_cm3.h	/^    __O  uint16_t   u16;                      \/*!< Offset:       ITM Stimulus Port 16-bit                  *\/$/;"	m	union:__anon4::__anon5
 u32	source\include\core_cm3.h	/^    __O  uint32_t   u32;                      \/*!< Offset:       ITM Stimulus Port 32-bit                  *\/$/;"	m	union:__anon4::__anon5
 u8	source\include\core_cm3.h	/^    __O  uint8_t    u8;                       \/*!< Offset:       ITM Stimulus Port 8-bit                   *\/$/;"	m	union:__anon4::__anon5
+_BARRIER_H	source\include\os_base\barrier.h	2;"	d
+barrier	source\include\os_base\barrier.h	4;"	d
 CONFIG_ASSERT_DEBUG	source\include\os_base\ka_configuration.h	8;"	d
 CONFIG_BREAK_POINT_DEBUG	source\include\os_base\ka_configuration.h	10;"	d
 CONFIG_CPU_USE_RATE_CALCULATION	source\include\os_base\ka_configuration.h	7;"	d
@@ -1584,16 +1586,17 @@ ERROR_LOGIC	source\include\os_base\os_error.h	17;"	d
 ERROR_MODULE_DELETED	source\include\os_base\os_error.h	16;"	d
 ERROR_NO_MEM	source\include\os_base\os_error.h	15;"	d
 ERROR_NULL_INPUT_PTR	source\include\os_base\os_error.h	11;"	d
+ERROR_SYS	source\include\os_base\os_error.h	18;"	d
 ERROR_VALUELESS_INPUT	source\include\os_base\os_error.h	12;"	d
 FUN_EXECUTE_SUCCESSFULLY	source\include\os_base\os_error.h	6;"	d
-KA_FALSE	source\include\os_base\os_error.h	24;"	d
-KA_TRUE	source\include\os_base\os_error.h	23;"	d
-OS_ERROR_MESSAGE_DISPLAY	source\include\os_base\os_error.h	26;"	d
-OS_ERROR_PARA_MESSAGE_DISPLAY	source\include\os_base\os_error.h	27;"	d
-PRIVATE	source\include\os_base\os_error.h	21;"	d
-PUBLIC	source\include\os_base\os_error.h	20;"	d
+KA_FALSE	source\include\os_base\os_error.h	25;"	d
+KA_TRUE	source\include\os_base\os_error.h	24;"	d
+OS_ERROR_MESSAGE_DISPLAY	source\include\os_base\os_error.h	27;"	d
+OS_ERROR_PARA_MESSAGE_DISPLAY	source\include\os_base\os_error.h	28;"	d
+PRIVATE	source\include\os_base\os_error.h	22;"	d
+PUBLIC	source\include\os_base\os_error.h	21;"	d
 _OS_ERROR_H	source\include\os_base\os_error.h	2;"	d
-_must_check	source\include\os_base\os_error.h	19;"	d
+_must_check	source\include\os_base\os_error.h	20;"	d
 PRINTF	source\include\os_base\printf_debug.h	6;"	d
 PRINTF	source\include\os_base\printf_debug.h	8;"	d
 _USER_DEBUG	source\include\os_base\printf_debug.h	2;"	d
@@ -1616,46 +1619,75 @@ init_MCB_binary	source\include\os_core\MCB.h	33;"	d
 init_MCB_count	source\include\os_core\MCB.h	32;"	d
 message_struct	source\include\os_core\MCB.h	/^typedef struct message_struct{ $/;"	s
 resource_num	source\include\os_core\MCB.h	/^	int   resource_num;	$/;"	m	struct:message_struct
-DEFAULT_ATTRIBUTION	source\include\os_core\TCB.h	27;"	d
-ERROR_ALLOCATE_STACK	source\include\os_core\TCB.h	22;"	d
-PRIO_MAX	source\include\os_core\TCB.h	20;"	d
-RESERVED_PRIO	source\include\os_core\TCB.h	24;"	d
+DEFAULT_ATTRIBUTION	source\include\os_core\TCB.h	29;"	d
+ERROR_ALLOCATE_STACK	source\include\os_core\TCB.h	24;"	d
+PRIO_MAX	source\include\os_core\TCB.h	22;"	d
+RESERVED_PRIO	source\include\os_core\TCB.h	26;"	d
 STACK_TYPE	source\include\os_core\TCB.h	/^typedef  unsigned  int         STACK_TYPE;$/;"	t
-SYS_ENTER_INTERRUPT	source\include\os_core\TCB.h	14;"	d
-SYS_EXIT_INTERRUPT	source\include\os_core\TCB.h	15;"	d
+SYS_ENTER_INTERRUPT	source\include\os_core\TCB.h	16;"	d
+SYS_EXIT_INTERRUPT	source\include\os_core\TCB.h	17;"	d
 TASK_PRIO_TYPE	source\include\os_core\TCB.h	/^typedef  unsigned  int         TASK_PRIO_TYPE;$/;"	t
 TCB	source\include\os_core\TCB.h	/^}TCB;$/;"	t	typeref:struct:task_control_block_struct
-TCB_ATTRIBUTION_BAD	source\include\os_core\TCB.h	35;"	d
-TCB_ATTRIBUTION_CREATE	source\include\os_core\TCB.h	31;"	d
-TCB_ATTRIBUTION_INIT	source\include\os_core\TCB.h	30;"	d
-TCB_ATTRIBUTION_NEED_RESCHEDULED	source\include\os_core\TCB.h	41;"	d
-TCB_ATTRIBUTION_NO_NEED_RESCHEDULED	source\include\os_core\TCB.h	40;"	d
-TCB_ATTRIBUTION_OK	source\include\os_core\TCB.h	34;"	d
-TCB_IS_CREATED	source\include\os_core\TCB.h	32;"	d
-TCB_state_is_bad	source\include\os_core\TCB.h	36;"	d
+TCB_ATTRIBUTION_BAD	source\include\os_core\TCB.h	37;"	d
+TCB_ATTRIBUTION_CREATE	source\include\os_core\TCB.h	33;"	d
+TCB_ATTRIBUTION_INIT	source\include\os_core\TCB.h	32;"	d
+TCB_ATTRIBUTION_IS_DYNAMIC_MODULE	source\include\os_core\TCB.h	49;"	d
+TCB_ATTRIBUTION_IS_NOT_MODULE	source\include\os_core\TCB.h	48;"	d
+TCB_ATTRIBUTION_NEED_RESCHEDULED	source\include\os_core\TCB.h	43;"	d
+TCB_ATTRIBUTION_NO_NEED_RESCHEDULED	source\include\os_core\TCB.h	42;"	d
+TCB_ATTRIBUTION_OK	source\include\os_core\TCB.h	36;"	d
+TCB_IS_CREATED	source\include\os_core\TCB.h	34;"	d
+TCB_state_is_bad	source\include\os_core\TCB.h	38;"	d
 _TCB_H	source\include\os_core\TCB.h	2;"	d
-attribution	source\include\os_core\TCB.h	/^	UINT32 attribution;		\/\/each bit of this element present an attribution$/;"	m	struct:task_control_block_struct
-clear_bad_state	source\include\os_core\TCB.h	37;"	d
-clear_rescheduled_flag	source\include\os_core\TCB.h	43;"	d
+attribution	source\include\os_core\TCB.h	/^	UINT32 attribution;						\/\/each bit of this element present an attribution$/;"	m	struct:task_control_block_struct
+clear_bad_state	source\include\os_core\TCB.h	39;"	d
+clear_module_flag	source\include\os_core\TCB.h	52;"	d
+clear_rescheduled_flag	source\include\os_core\TCB.h	45;"	d
 delay_heap_position	source\include\os_core\TCB.h	/^	int delay_heap_position;$/;"	m	struct:task_control_block_struct
-delay_reach_time	source\include\os_core\TCB.h	/^	UINT64 delay_reach_time; 	\/\/ use when task is delayed$/;"	m	struct:task_control_block_struct
+delay_reach_time	source\include\os_core\TCB.h	/^	UINT64 delay_reach_time; 					\/\/ use when task is delayed$/;"	m	struct:task_control_block_struct
+dynamic_module_ptr	source\include\os_core\TCB.h	/^	struct dynamic_module *dynamic_module_ptr;	\/\/ the related dynamic module$/;"	m	struct:task_control_block_struct	typeref:struct:task_control_block_struct::dynamic_module
 functionptr	source\include\os_core\TCB.h	/^typedef  void                  (*functionptr)(void *para);$/;"	t
+is_module	source\include\os_core\TCB.h	50;"	d
 name	source\include\os_core\TCB.h	/^	char *name;$/;"	m	struct:task_control_block_struct
-need_rescheduled	source\include\os_core\TCB.h	42;"	d
-prio	source\include\os_core\TCB.h	/^	TASK_PRIO_TYPE prio;				\/\/priority 0-PRIO_MAX-1$/;"	m	struct:task_control_block_struct
+need_rescheduled	source\include\os_core\TCB.h	44;"	d
+prio	source\include\os_core\TCB.h	/^	TASK_PRIO_TYPE prio;$/;"	m	struct:task_control_block_struct
 reserve_prio	source\include\os_core\TCB.h	/^	TASK_PRIO_TYPE reserve_prio;		\/\/used for Priority inversion problem$/;"	m	struct:task_control_block_struct
 same_prio_list	source\include\os_core\TCB.h	/^	struct list_head same_prio_list;$/;"	m	struct:task_control_block_struct	typeref:struct:task_control_block_struct::list_head
-set_bad_state	source\include\os_core\TCB.h	38;"	d
-set_rescheduled_flag	source\include\os_core\TCB.h	44;"	d
-stack	source\include\os_core\TCB.h	/^	STACK_TYPE *stack; 			\/\/the stack top of the task$/;"	m	struct:task_control_block_struct
-stack_end	source\include\os_core\TCB.h	/^	STACK_TYPE *stack_end; 		\/\/the stack tail of the task$/;"	m	struct:task_control_block_struct
-stack_size	source\include\os_core\TCB.h	/^	unsigned int stack_size;	\/\/bytes$/;"	m	struct:task_control_block_struct
+set_bad_state	source\include\os_core\TCB.h	40;"	d
+set_module_flag	source\include\os_core\TCB.h	51;"	d
+set_rescheduled_flag	source\include\os_core\TCB.h	46;"	d
+set_tcb_module	source\include\os_core\TCB.h	/^static inline void set_tcb_module(TCB *TCB_ptr,struct dynamic_module *mod_ptr)$/;"	f
+stack	source\include\os_core\TCB.h	/^	STACK_TYPE *stack; 						\/\/the stack top of the task$/;"	m	struct:task_control_block_struct
+stack_end	source\include\os_core\TCB.h	/^	STACK_TYPE *stack_end; 					\/\/the stack tail of the task$/;"	m	struct:task_control_block_struct
+stack_size	source\include\os_core\TCB.h	/^	unsigned int stack_size;				\/\/bytes$/;"	m	struct:task_control_block_struct
 suspend_list	source\include\os_core\TCB.h	/^	struct list_head suspend_list;$/;"	m	struct:task_control_block_struct	typeref:struct:task_control_block_struct::list_head
-task_change_prio_self	source\include\os_core\TCB.h	16;"	d
+task_change_prio_self	source\include\os_core\TCB.h	18;"	d
 task_control_block_struct	source\include\os_core\TCB.h	/^typedef struct task_control_block_struct{$/;"	s
-task_state	source\include\os_core\TCB.h	/^	TASK_STATE task_state;$/;"	m	struct:task_control_block_struct
+task_state	source\include\os_core\TCB.h	/^	TASK_STATE task_state;				\/\/priority 0-PRIO_MAX-1$/;"	m	struct:task_control_block_struct
 timeslice_hope_time	source\include\os_core\TCB.h	/^	unsigned int timeslice_hope_time;$/;"	m	struct:task_control_block_struct
 timeslice_rest_time	source\include\os_core\TCB.h	/^	unsigned int timeslice_rest_time;$/;"	m	struct:task_control_block_struct
+DEV_MEM	source\include\os_core\bsp.h	/^	DEV_MEM		= 1$/;"	e	enum:device_type
+DEV_NORMAL	source\include\os_core\bsp.h	/^	DEV_NORMAL	= 0,$/;"	e	enum:device_type
+_BSP_H	source\include\os_core\bsp.h	2;"	d
+dev_info	source\include\os_core\bsp.h	/^	char *dev_info;$/;"	m	struct:device_head
+dev_mem	source\include\os_core\bsp.h	/^struct dev_mem{$/;"	s
+dev_mem_para	source\include\os_core\bsp.h	/^struct dev_mem_para{$/;"	s
+dev_name	source\include\os_core\bsp.h	/^	char *dev_name;$/;"	m	struct:device_head
+dev_normal	source\include\os_core\bsp.h	/^struct dev_normal{$/;"	s
+device	source\include\os_core\bsp.h	/^struct device$/;"	s
+device_head	source\include\os_core\bsp.h	/^struct device_head{$/;"	s
+device_type	source\include\os_core\bsp.h	/^enum device_type{$/;"	g
+head	source\include\os_core\bsp.h	/^	struct device_head head;$/;"	m	struct:device	typeref:struct:device::device_head
+init_fun	source\include\os_core\bsp.h	/^	void (*init_fun)(const struct dev_mem_para *para);$/;"	m	struct:dev_mem
+init_fun	source\include\os_core\bsp.h	/^	void (*init_fun)(void);$/;"	m	struct:dev_normal
+mem	source\include\os_core\bsp.h	/^		struct dev_mem mem;$/;"	m	union:device::__anon9	typeref:struct:device::__anon9::dev_mem
+normal	source\include\os_core\bsp.h	/^		struct dev_normal normal;$/;"	m	union:device::__anon9	typeref:struct:device::__anon9::dev_normal
+para	source\include\os_core\bsp.h	/^	const struct dev_mem_para *para;$/;"	m	struct:dev_mem	typeref:struct:dev_mem::dev_mem_para
+prio	source\include\os_core\bsp.h	/^	unsigned int prio; \/\/1 is internal memory, others is external memory$/;"	m	struct:dev_mem_para
+size	source\include\os_core\bsp.h	/^	UINT32 size; \/\/KB  must be 2^n$/;"	m	struct:dev_mem_para
+start	source\include\os_core\bsp.h	/^	void *start;$/;"	m	struct:dev_mem_para
+type	source\include\os_core\bsp.h	/^	enum device_type type;$/;"	m	struct:device_head	typeref:enum:device_head::device_type
+u	source\include\os_core\bsp.h	/^	}u;$/;"	m	struct:device	typeref:union:device::__anon9
 EI_CLASS	source\include\os_core\elf.h	23;"	d
 EI_NIDENT	source\include\os_core\elf.h	24;"	d
 ELF32_R_INFO	source\include\os_core\elf.h	166;"	d
@@ -1708,10 +1740,10 @@ Elf32_Addr	source\include\os_core\elf.h	/^typedef UINT32             Elf32_Addr;
 Elf32_Ehdr	source\include\os_core\elf.h	/^} Elf32_Ehdr;$/;"	t	typeref:struct:elfhdr
 Elf32_Half	source\include\os_core\elf.h	/^typedef UINT16             Elf32_Half;    \/* Unsigned medium integer *\/$/;"	t
 Elf32_Off	source\include\os_core\elf.h	/^typedef UINT32             Elf32_Off;     \/* Unsigned file offset *\/$/;"	t
-Elf32_Phdr	source\include\os_core\elf.h	/^} Elf32_Phdr;$/;"	t	typeref:struct:__anon12
-Elf32_Rel	source\include\os_core\elf.h	/^} Elf32_Rel;$/;"	t	typeref:struct:__anon10
-Elf32_Rela	source\include\os_core\elf.h	/^} Elf32_Rela;$/;"	t	typeref:struct:__anon11
-Elf32_Shdr	source\include\os_core\elf.h	/^} Elf32_Shdr;$/;"	t	typeref:struct:__anon9
+Elf32_Phdr	source\include\os_core\elf.h	/^} Elf32_Phdr;$/;"	t	typeref:struct:__anon13
+Elf32_Rel	source\include\os_core\elf.h	/^} Elf32_Rel;$/;"	t	typeref:struct:__anon11
+Elf32_Rela	source\include\os_core\elf.h	/^} Elf32_Rela;$/;"	t	typeref:struct:__anon12
+Elf32_Shdr	source\include\os_core\elf.h	/^} Elf32_Shdr;$/;"	t	typeref:struct:__anon10
 Elf32_Sword	source\include\os_core\elf.h	/^typedef INT32              Elf32_Sword;   \/* Signed large integer *\/$/;"	t
 Elf32_Sym	source\include\os_core\elf.h	/^} Elf32_Sym;$/;"	t	typeref:struct:elf32_sym
 Elf32_Word	source\include\os_core\elf.h	/^typedef UINT32             Elf32_Word;    \/* Unsigned large integer *\/$/;"	t
@@ -1814,30 +1846,30 @@ e_version	source\include\os_core\elf.h	/^    Elf32_Word    e_version;           
 elf32_sym	source\include\os_core\elf.h	/^typedef struct elf32_sym$/;"	s
 elf_module	source\include\os_core\elf.h	253;"	d
 elfhdr	source\include\os_core\elf.h	/^typedef struct elfhdr$/;"	s
-p_align	source\include\os_core\elf.h	/^    Elf32_Word p_align;                        \/* memory alignment *\/$/;"	m	struct:__anon12
-p_filesz	source\include\os_core\elf.h	/^    Elf32_Word p_filesz;                       \/* number of bytes in file for seg. *\/$/;"	m	struct:__anon12
-p_flags	source\include\os_core\elf.h	/^    Elf32_Word p_flags;                        \/* flags *\/$/;"	m	struct:__anon12
-p_memsz	source\include\os_core\elf.h	/^    Elf32_Word p_memsz;                        \/* number of bytes in mem. for seg. *\/$/;"	m	struct:__anon12
-p_offset	source\include\os_core\elf.h	/^    Elf32_Off  p_offset;                       \/* segment offset *\/$/;"	m	struct:__anon12
-p_paddr	source\include\os_core\elf.h	/^    Elf32_Addr p_paddr;                        \/* physical address - ignored? *\/$/;"	m	struct:__anon12
-p_type	source\include\os_core\elf.h	/^    Elf32_Word p_type;                         \/* segment type *\/$/;"	m	struct:__anon12
-p_vaddr	source\include\os_core\elf.h	/^    Elf32_Addr p_vaddr;                        \/* virtual address of segment *\/$/;"	m	struct:__anon12
+p_align	source\include\os_core\elf.h	/^    Elf32_Word p_align;                        \/* memory alignment *\/$/;"	m	struct:__anon13
+p_filesz	source\include\os_core\elf.h	/^    Elf32_Word p_filesz;                       \/* number of bytes in file for seg. *\/$/;"	m	struct:__anon13
+p_flags	source\include\os_core\elf.h	/^    Elf32_Word p_flags;                        \/* flags *\/$/;"	m	struct:__anon13
+p_memsz	source\include\os_core\elf.h	/^    Elf32_Word p_memsz;                        \/* number of bytes in mem. for seg. *\/$/;"	m	struct:__anon13
+p_offset	source\include\os_core\elf.h	/^    Elf32_Off  p_offset;                       \/* segment offset *\/$/;"	m	struct:__anon13
+p_paddr	source\include\os_core\elf.h	/^    Elf32_Addr p_paddr;                        \/* physical address - ignored? *\/$/;"	m	struct:__anon13
+p_type	source\include\os_core\elf.h	/^    Elf32_Word p_type;                         \/* segment type *\/$/;"	m	struct:__anon13
+p_vaddr	source\include\os_core\elf.h	/^    Elf32_Addr p_vaddr;                        \/* virtual address of segment *\/$/;"	m	struct:__anon13
 phdr	source\include\os_core\elf.h	255;"	d
-r_addend	source\include\os_core\elf.h	/^    Elf32_Sword r_addend;$/;"	m	struct:__anon11
-r_info	source\include\os_core\elf.h	/^    Elf32_Word  r_info;                        \/* symbol table index and type *\/$/;"	m	struct:__anon11
-r_info	source\include\os_core\elf.h	/^    Elf32_Word r_info;                         \/* symbol table index and type *\/$/;"	m	struct:__anon10
-r_offset	source\include\os_core\elf.h	/^    Elf32_Addr  r_offset;                      \/* offset of relocation *\/$/;"	m	struct:__anon11
-r_offset	source\include\os_core\elf.h	/^    Elf32_Addr r_offset;                       \/* offset of relocation *\/$/;"	m	struct:__anon10
-sh_addr	source\include\os_core\elf.h	/^    Elf32_Addr sh_addr;                        \/* address *\/$/;"	m	struct:__anon9
-sh_addralign	source\include\os_core\elf.h	/^    Elf32_Word sh_addralign;                   \/* address alignment *\/$/;"	m	struct:__anon9
-sh_entsize	source\include\os_core\elf.h	/^    Elf32_Word sh_entsize;                     \/* section entry size *\/$/;"	m	struct:__anon9
-sh_flags	source\include\os_core\elf.h	/^    Elf32_Word sh_flags;                       \/* flags *\/$/;"	m	struct:__anon9
-sh_info	source\include\os_core\elf.h	/^    Elf32_Word sh_info;                        \/* extra information *\/$/;"	m	struct:__anon9
-sh_link	source\include\os_core\elf.h	/^    Elf32_Word sh_link;                        \/* section header table index link *\/$/;"	m	struct:__anon9
-sh_name	source\include\os_core\elf.h	/^    Elf32_Word sh_name;                        \/* name - index into section header$/;"	m	struct:__anon9
-sh_offset	source\include\os_core\elf.h	/^    Elf32_Off  sh_offset;                      \/* file offset *\/$/;"	m	struct:__anon9
-sh_size	source\include\os_core\elf.h	/^    Elf32_Word sh_size;                        \/* section size *\/$/;"	m	struct:__anon9
-sh_type	source\include\os_core\elf.h	/^    Elf32_Word sh_type;                        \/* type *\/$/;"	m	struct:__anon9
+r_addend	source\include\os_core\elf.h	/^    Elf32_Sword r_addend;$/;"	m	struct:__anon12
+r_info	source\include\os_core\elf.h	/^    Elf32_Word  r_info;                        \/* symbol table index and type *\/$/;"	m	struct:__anon12
+r_info	source\include\os_core\elf.h	/^    Elf32_Word r_info;                         \/* symbol table index and type *\/$/;"	m	struct:__anon11
+r_offset	source\include\os_core\elf.h	/^    Elf32_Addr  r_offset;                      \/* offset of relocation *\/$/;"	m	struct:__anon12
+r_offset	source\include\os_core\elf.h	/^    Elf32_Addr r_offset;                       \/* offset of relocation *\/$/;"	m	struct:__anon11
+sh_addr	source\include\os_core\elf.h	/^    Elf32_Addr sh_addr;                        \/* address *\/$/;"	m	struct:__anon10
+sh_addralign	source\include\os_core\elf.h	/^    Elf32_Word sh_addralign;                   \/* address alignment *\/$/;"	m	struct:__anon10
+sh_entsize	source\include\os_core\elf.h	/^    Elf32_Word sh_entsize;                     \/* section entry size *\/$/;"	m	struct:__anon10
+sh_flags	source\include\os_core\elf.h	/^    Elf32_Word sh_flags;                       \/* flags *\/$/;"	m	struct:__anon10
+sh_info	source\include\os_core\elf.h	/^    Elf32_Word sh_info;                        \/* extra information *\/$/;"	m	struct:__anon10
+sh_link	source\include\os_core\elf.h	/^    Elf32_Word sh_link;                        \/* section header table index link *\/$/;"	m	struct:__anon10
+sh_name	source\include\os_core\elf.h	/^    Elf32_Word sh_name;                        \/* name - index into section header$/;"	m	struct:__anon10
+sh_offset	source\include\os_core\elf.h	/^    Elf32_Off  sh_offset;                      \/* file offset *\/$/;"	m	struct:__anon10
+sh_size	source\include\os_core\elf.h	/^    Elf32_Word sh_size;                        \/* section size *\/$/;"	m	struct:__anon10
+sh_type	source\include\os_core\elf.h	/^    Elf32_Word sh_type;                        \/* type *\/$/;"	m	struct:__anon10
 shdr	source\include\os_core\elf.h	254;"	d
 st_info	source\include\os_core\elf.h	/^    unsigned char st_info;                     \/* type and binding *\/$/;"	m	struct:elf32_sym
 st_name	source\include\os_core\elf.h	/^    Elf32_Word    st_name;                     \/* name - index into string table *\/$/;"	m	struct:elf32_sym
@@ -1874,11 +1906,13 @@ put_num	source\include\os_core\message_queue.h	/^	unsigned int put_num; \/\/ the
 tick	source\include\os_core\message_queue.h	/^	UINT64 tick;$/;"	m	struct:message
 wait_num	source\include\os_core\message_queue.h	/^	unsigned int wait_num;\/\/ the task num that wait for get message$/;"	m	struct:message_queue_block
 D_MODULE_DEFAULT_NAME	source\include\os_core\module.h	15;"	d
+D_MODULE_DEFAULT_PRIO	source\include\os_core\module.h	16;"	d
+D_MODULE_DEFAULT_STACK_SIZE	source\include\os_core\module.h	17;"	d
 D_MODULE_NAME_MAX	source\include\os_core\module.h	14;"	d
-MODULE_STATE_DEFAULT	source\include\os_core\module.h	20;"	d
-MODULE_STATE_INIT	source\include\os_core\module.h	21;"	d
-MODULE_STATE_LOADED	source\include\os_core\module.h	22;"	d
-MODULE_STATE_RUN	source\include\os_core\module.h	23;"	d
+MODULE_STATE_DEFAULT	source\include\os_core\module.h	28;"	d
+MODULE_STATE_INIT	source\include\os_core\module.h	29;"	d
+MODULE_STATE_LOADED	source\include\os_core\module.h	30;"	d
+MODULE_STATE_RUN	source\include\os_core\module.h	31;"	d
 RT_DLMODULE_STAT_CLOSED	source\include\os_core\module.h	12;"	d
 RT_DLMODULE_STAT_CLOSING	source\include\os_core\module.h	11;"	d
 RT_DLMODULE_STAT_INIT	source\include\os_core\module.h	9;"	d
@@ -1891,14 +1925,17 @@ exit	source\include\os_core\module.h	/^    void (*exit)(void);             \/\/t
 export_symbols_array	source\include\os_core\module.h	/^    struct ka_module_symtab *export_symbols_array;$/;"	m	struct:dynamic_module	typeref:struct:dynamic_module::ka_module_symtab
 export_symbols_num	source\include\os_core\module.h	/^    unsigned int export_symbols_num;$/;"	m	struct:dynamic_module
 init	source\include\os_core\module.h	/^    int (*init)(void);              \/\/this function will be called before module execute$/;"	m	struct:dynamic_module
-init_space	source\include\os_core\module.h	/^    void *init_space;$/;"	m	struct:dynamic_module
+init_space	source\include\os_core\module.h	/^    void *init_space;               \/\/ not use$/;"	m	struct:dynamic_module
+module_exit	source\include\os_core\module.h	22;"	d
+module_init	source\include\os_core\module.h	19;"	d
 module_list	source\include\os_core\module.h	/^    struct list_head module_list;   \/\/link all modules$/;"	m	struct:dynamic_module	typeref:struct:dynamic_module::list_head
-module_size	source\include\os_core\module.h	/^    unsigned int module_size;$/;"	m	struct:dynamic_module
+module_size	source\include\os_core\module.h	/^    unsigned int module_size;       \/\/the room size that module finally use$/;"	m	struct:dynamic_module
 module_space	source\include\os_core\module.h	/^    void *module_space;$/;"	m	struct:dynamic_module
 module_state	source\include\os_core\module.h	/^    UINT32 module_state;$/;"	m	struct:dynamic_module
 name	source\include\os_core\module.h	/^    char name[D_MODULE_NAME_MAX];$/;"	m	struct:dynamic_module
 ref	source\include\os_core\module.h	/^    unsigned int ref;$/;"	m	struct:dynamic_module
 set_module_state	source\include\os_core\module.h	/^static inline void set_module_state(struct dynamic_module *dynamic_module_ptr,UINT32 state)$/;"	f
+thread_TCB_ptr	source\include\os_core\module.h	/^    TCB *thread_TCB_ptr;$/;"	m	struct:dynamic_module
 vstart_addr	source\include\os_core\module.h	/^    UINT32 vstart_addr;            \/\/VMA base address for the first LOAD segment$/;"	m	struct:dynamic_module
 ERROR_MUTEX_LOCK_FAIL	source\include\os_core\mutex.h	18;"	d
 ERROR_MUTEX_UNLOCK_FAIL	source\include\os_core\mutex.h	19;"	d
@@ -1965,13 +2002,11 @@ head	source\include\os_core\schedule\os_TCB_list.h	/^	struct list_head head;$/;"
 ready_num	source\include\os_core\schedule\os_TCB_list.h	/^	unsigned char ready_num;$/;"	m	struct:TCB_list
 _OS_DELAY_H	source\include\os_core\schedule\os_delay.h	2;"	d
 _OS_READY_H	source\include\os_core\schedule\os_ready.h	2;"	d
-ERROR_CREATE_TASK	source\include\os_core\schedule\os_schedule.h	8;"	d
-ERROR_TASK_CREATE	source\include\os_core\schedule\os_schedule.h	16;"	d
-SYS_ENTER_CRITICAL	source\include\os_core\schedule\os_schedule.h	13;"	d
-SYS_EXIT_CRITICAL	source\include\os_core\schedule\os_schedule.h	14;"	d
+SYS_ENTER_CRITICAL	source\include\os_core\schedule\os_schedule.h	11;"	d
+SYS_EXIT_CRITICAL	source\include\os_core\schedule\os_schedule.h	12;"	d
 _OS_SCHEDULE_H	source\include\os_core\schedule\os_schedule.h	2;"	d
-sleep	source\include\os_core\schedule\os_schedule.h	10;"	d
-suspend	source\include\os_core\schedule\os_schedule.h	11;"	d
+sleep	source\include\os_core\schedule\os_schedule.h	8;"	d
+suspend	source\include\os_core\schedule\os_schedule.h	9;"	d
 _OS_SUSPEND_H	source\include\os_core\schedule\os_suspend.h	2;"	d
 STATE_DELAY	source\include\os_core\task_state.h	/^	STATE_DELAY							= 2,$/;"	e	enum:Task_State
 STATE_PUT_MESSAGE_QUEUE_FOREVER	source\include\os_core\task_state.h	/^	STATE_PUT_MESSAGE_QUEUE_FOREVER 	= 8,$/;"	e	enum:Task_State
@@ -1986,28 +2021,6 @@ STATE_WAIT_MUTEX_FOREVER	source\include\os_core\task_state.h	/^	STATE_WAIT_MUTEX
 TASK_STATE	source\include\os_core\task_state.h	/^}TASK_STATE;$/;"	t	typeref:enum:Task_State
 Task_State	source\include\os_core\task_state.h	/^typedef enum Task_State {$/;"	g
 _TASK_STATE_H	source\include\os_core\task_state.h	2;"	d
-DEV_MEM	source\include\os_cpu\bsp\bsp.h	/^	DEV_MEM		= 1$/;"	e	enum:device_type
-DEV_NORMAL	source\include\os_cpu\bsp\bsp.h	/^	DEV_NORMAL	= 0,$/;"	e	enum:device_type
-_BSP_H	source\include\os_cpu\bsp\bsp.h	2;"	d
-dev_info	source\include\os_cpu\bsp\bsp.h	/^	char *dev_info;$/;"	m	struct:device_head
-dev_mem	source\include\os_cpu\bsp\bsp.h	/^struct dev_mem{$/;"	s
-dev_mem_para	source\include\os_cpu\bsp\bsp.h	/^struct dev_mem_para{$/;"	s
-dev_name	source\include\os_cpu\bsp\bsp.h	/^	char *dev_name;$/;"	m	struct:device_head
-dev_normal	source\include\os_cpu\bsp\bsp.h	/^struct dev_normal{$/;"	s
-device	source\include\os_cpu\bsp\bsp.h	/^struct device$/;"	s
-device_head	source\include\os_cpu\bsp\bsp.h	/^struct device_head{$/;"	s
-device_type	source\include\os_cpu\bsp\bsp.h	/^enum device_type{$/;"	g
-head	source\include\os_cpu\bsp\bsp.h	/^	struct device_head head;$/;"	m	struct:device	typeref:struct:device::device_head
-init_fun	source\include\os_cpu\bsp\bsp.h	/^	void (*init_fun)(const struct dev_mem_para *para);$/;"	m	struct:dev_mem
-init_fun	source\include\os_cpu\bsp\bsp.h	/^	void (*init_fun)(void);$/;"	m	struct:dev_normal
-mem	source\include\os_cpu\bsp\bsp.h	/^		struct dev_mem mem;$/;"	m	union:device::__anon13	typeref:struct:device::__anon13::dev_mem
-normal	source\include\os_cpu\bsp\bsp.h	/^		struct dev_normal normal;$/;"	m	union:device::__anon13	typeref:struct:device::__anon13::dev_normal
-para	source\include\os_cpu\bsp\bsp.h	/^	const struct dev_mem_para *para;$/;"	m	struct:dev_mem	typeref:struct:dev_mem::dev_mem_para
-prio	source\include\os_cpu\bsp\bsp.h	/^	unsigned int prio; \/\/1 is internal memory, others is external memory$/;"	m	struct:dev_mem_para
-size	source\include\os_cpu\bsp\bsp.h	/^	UINT32 size; \/\/KB  must be 2^n$/;"	m	struct:dev_mem_para
-start	source\include\os_cpu\bsp\bsp.h	/^	void *start;$/;"	m	struct:dev_mem_para
-type	source\include\os_cpu\bsp\bsp.h	/^	enum device_type type;$/;"	m	struct:device_head	typeref:enum:device_head::device_type
-u	source\include\os_cpu\bsp\bsp.h	/^	}u;$/;"	m	struct:device	typeref:union:device::__anon13
 DEBUG_USART_APBxClkCmd	source\include\os_cpu\bsp\bsp_usart.h	16;"	d
 DEBUG_USART_BAUDRATE	source\include\os_cpu\bsp\bsp_usart.h	17;"	d
 DEBUG_USART_CLK	source\include\os_cpu\bsp\bsp_usart.h	15;"	d
@@ -2169,40 +2182,40 @@ UINT8	source\include\os_cpu\kakaosstdint.h	/^typedef   unsigned        char UINT
 __STDINT_H	source\include\os_cpu\kakaosstdint.h	2;"	d
 size_t	source\include\os_cpu\kakaosstdint.h	/^typedef unsigned int size_t;$/;"	t
 _CPU_H	source\include\os_cpu\os_cpu.h	2;"	d
-CPU_CFG_DATA_SIZE	source\include\os_cpu\os_cpu_stm32.h	27;"	d
-CPU_CRITICAL_ENTER	source\include\os_cpu\os_cpu_stm32.h	45;"	d
-CPU_CRITICAL_EXIT	source\include\os_cpu\os_cpu_stm32.h	46;"	d
+CPU_CFG_DATA_SIZE	source\include\os_cpu\os_cpu_stm32.h	29;"	d
+CPU_CRITICAL_ENTER	source\include\os_cpu\os_cpu_stm32.h	47;"	d
+CPU_CRITICAL_EXIT	source\include\os_cpu\os_cpu_stm32.h	48;"	d
 CPU_INT32U	source\include\os_cpu\os_cpu_stm32.h	/^typedef  unsigned  int         CPU_INT32U;$/;"	t
-CPU_INT_DIS	source\include\os_cpu\os_cpu_stm32.h	43;"	d
-CPU_INT_EN	source\include\os_cpu\os_cpu_stm32.h	44;"	d
+CPU_INT_DIS	source\include\os_cpu\os_cpu_stm32.h	45;"	d
+CPU_INT_EN	source\include\os_cpu\os_cpu_stm32.h	46;"	d
 CPU_REG32	source\include\os_cpu\os_cpu_stm32.h	/^typedef  volatile  CPU_INT32U  CPU_REG32;$/;"	t
-CPU_REG_NVIC_SHPRI2	source\include\os_cpu\os_cpu_stm32.h	34;"	d
-CPU_REG_NVIC_SHPRI3	source\include\os_cpu\os_cpu_stm32.h	33;"	d
-CPU_REG_NVIC_ST_CTRL	source\include\os_cpu\os_cpu_stm32.h	19;"	d
-CPU_REG_NVIC_ST_CTRL_CLKSOURCE	source\include\os_cpu\os_cpu_stm32.h	21;"	d
-CPU_REG_NVIC_ST_CTRL_COUNTFLAG	source\include\os_cpu\os_cpu_stm32.h	20;"	d
-CPU_REG_NVIC_ST_CTRL_ENABLE	source\include\os_cpu\os_cpu_stm32.h	23;"	d
-CPU_REG_NVIC_ST_CTRL_TICKINT	source\include\os_cpu\os_cpu_stm32.h	22;"	d
-CPU_REG_NVIC_ST_RELOAD	source\include\os_cpu\os_cpu_stm32.h	32;"	d
+CPU_REG_NVIC_SHPRI2	source\include\os_cpu\os_cpu_stm32.h	36;"	d
+CPU_REG_NVIC_SHPRI3	source\include\os_cpu\os_cpu_stm32.h	35;"	d
+CPU_REG_NVIC_ST_CTRL	source\include\os_cpu\os_cpu_stm32.h	21;"	d
+CPU_REG_NVIC_ST_CTRL_CLKSOURCE	source\include\os_cpu\os_cpu_stm32.h	23;"	d
+CPU_REG_NVIC_ST_CTRL_COUNTFLAG	source\include\os_cpu\os_cpu_stm32.h	22;"	d
+CPU_REG_NVIC_ST_CTRL_ENABLE	source\include\os_cpu\os_cpu_stm32.h	25;"	d
+CPU_REG_NVIC_ST_CTRL_TICKINT	source\include\os_cpu\os_cpu_stm32.h	24;"	d
+CPU_REG_NVIC_ST_RELOAD	source\include\os_cpu\os_cpu_stm32.h	34;"	d
 CPU_SR	source\include\os_cpu\os_cpu_stm32.h	/^typedef  CPU_INT32U            CPU_SR;$/;"	t
-CPU_SR_ALLOC	source\include\os_cpu\os_cpu_stm32.h	42;"	d
-CPU_WORD_SIZE_32	source\include\os_cpu\os_cpu_stm32.h	26;"	d
-DEF_BIT	source\include\os_cpu\os_cpu_stm32.h	35;"	d
-DEF_BIT_FIELD	source\include\os_cpu\os_cpu_stm32.h	36;"	d
-DEF_BIT_MASK	source\include\os_cpu\os_cpu_stm32.h	39;"	d
-DEF_INT_32U_MAX_VAL	source\include\os_cpu\os_cpu_stm32.h	14;"	d
-DEF_INT_32U_MAX_VAL	source\include\os_cpu\os_cpu_stm32.h	30;"	d
-DEF_INT_CPU_NBR_BITS	source\include\os_cpu\os_cpu_stm32.h	25;"	d
-DEF_INT_CPU_U_MAX_VAL	source\include\os_cpu\os_cpu_stm32.h	24;"	d
-DEF_OCTET_MASK	source\include\os_cpu\os_cpu_stm32.h	16;"	d
-DEF_OCTET_NBR_BITS	source\include\os_cpu\os_cpu_stm32.h	15;"	d
-DEF_OCTET_NBR_BITS	source\include\os_cpu\os_cpu_stm32.h	31;"	d
-NVIC_INT_CTRL	source\include\os_cpu\os_cpu_stm32.h	8;"	d
-NVIC_PENDSVSET	source\include\os_cpu\os_cpu_stm32.h	9;"	d
-NVIC_PENDSV_PRI	source\include\os_cpu\os_cpu_stm32.h	11;"	d
-NVIC_SYSPRI14	source\include\os_cpu\os_cpu_stm32.h	10;"	d
-OSIntCtxSw	source\include\os_cpu\os_cpu_stm32.h	12;"	d
-OS_CPU_CFG_SYSTICK_PRIO	source\include\os_cpu\os_cpu_stm32.h	17;"	d
+CPU_SR_ALLOC	source\include\os_cpu\os_cpu_stm32.h	44;"	d
+CPU_WORD_SIZE_32	source\include\os_cpu\os_cpu_stm32.h	28;"	d
+DEF_BIT	source\include\os_cpu\os_cpu_stm32.h	37;"	d
+DEF_BIT_FIELD	source\include\os_cpu\os_cpu_stm32.h	38;"	d
+DEF_BIT_MASK	source\include\os_cpu\os_cpu_stm32.h	41;"	d
+DEF_INT_32U_MAX_VAL	source\include\os_cpu\os_cpu_stm32.h	16;"	d
+DEF_INT_32U_MAX_VAL	source\include\os_cpu\os_cpu_stm32.h	32;"	d
+DEF_INT_CPU_NBR_BITS	source\include\os_cpu\os_cpu_stm32.h	27;"	d
+DEF_INT_CPU_U_MAX_VAL	source\include\os_cpu\os_cpu_stm32.h	26;"	d
+DEF_OCTET_MASK	source\include\os_cpu\os_cpu_stm32.h	18;"	d
+DEF_OCTET_NBR_BITS	source\include\os_cpu\os_cpu_stm32.h	17;"	d
+DEF_OCTET_NBR_BITS	source\include\os_cpu\os_cpu_stm32.h	33;"	d
+NVIC_INT_CTRL	source\include\os_cpu\os_cpu_stm32.h	10;"	d
+NVIC_PENDSVSET	source\include\os_cpu\os_cpu_stm32.h	11;"	d
+NVIC_PENDSV_PRI	source\include\os_cpu\os_cpu_stm32.h	13;"	d
+NVIC_SYSPRI14	source\include\os_cpu\os_cpu_stm32.h	12;"	d
+OSIntCtxSw	source\include\os_cpu\os_cpu_stm32.h	14;"	d
+OS_CPU_CFG_SYSTICK_PRIO	source\include\os_cpu\os_cpu_stm32.h	19;"	d
 _OS_CPU_STM32_H	source\include\os_cpu\os_cpu_stm32.h	2;"	d
 __STM32F10x_CONF_H	source\include\os_cpu\stm32f10x_conf.h	24;"	d
 assert_param	source\include\os_cpu\stm32f10x_conf.h	68;"	d
@@ -2372,9 +2385,10 @@ argv	source\include\shell\shell.h	/^	char *argv[ARGV_SIZE];$/;"	m	struct:shell_b
 argv_reserve	source\include\shell\shell.h	/^	char *argv_reserve[ARGV_SIZE];$/;"	m	struct:shell_buffer
 buffer	source\include\shell\shell.h	/^	char *buffer;$/;"	m	struct:shell_buffer
 buffer_reserve	source\include\shell\shell.h	/^	char *buffer_reserve;$/;"	m	struct:shell_buffer
+buffer_size	source\include\shell\shell.h	/^	unsigned int buffer_size;$/;"	m	struct:shell_buffer
 index	source\include\shell\shell.h	/^	unsigned int index;$/;"	m	struct:shell_buffer
 index_reserve	source\include\shell\shell.h	/^	unsigned int index_reserve;$/;"	m	struct:shell_buffer
-shell_buffer	source\include\shell\shell.h	/^struct shell_buffer \/\/use for thread shell to get the input$/;"	s
+shell_buffer	source\include\shell\shell.h	/^struct shell_buffer \/*use for thread shell to get the input*\/$/;"	s
 INSERT_BREAK_POINT	source\include\shell\shell_debug.h	11;"	d
 INSERT_BREAK_POINT	source\include\shell\shell_debug.h	13;"	d
 SHELL_V_ARRAY_SIZE	source\include\shell\shell_debug.h	32;"	d
@@ -8186,45 +8200,6 @@ vuc32	source\include\stm32f10x.h	/^typedef __I uint32_t vuc32;  \/*!< Read Only 
 vuc8	source\include\stm32f10x.h	/^typedef __I uint8_t vuc8;   \/*!< Read Only *\/$/;"	t
 __SYSTEM_STM32F10X_H	source\include\system_stm32f10x.h	34;"	d
 _USER_H	source\include\user.h	2;"	d
-LED_GPIO_Config	source\main\bsp_led.c	/^void LED_GPIO_Config(void)$/;"	f
-LED1	source\main\bsp_led.h	33;"	d
-LED1_GPIO_CLK	source\main\bsp_led.h	11;"	d
-LED1_GPIO_PIN	source\main\bsp_led.h	12;"	d
-LED1_GPIO_PORT	source\main\bsp_led.h	10;"	d
-LED1_OFF	source\main\bsp_led.h	57;"	d
-LED1_ON	source\main\bsp_led.h	58;"	d
-LED1_TOGGLE	source\main\bsp_led.h	56;"	d
-LED2	source\main\bsp_led.h	38;"	d
-LED2_GPIO_CLK	source\main\bsp_led.h	16;"	d
-LED2_GPIO_PIN	source\main\bsp_led.h	17;"	d
-LED2_GPIO_PORT	source\main\bsp_led.h	15;"	d
-LED2_OFF	source\main\bsp_led.h	61;"	d
-LED2_ON	source\main\bsp_led.h	62;"	d
-LED2_TOGGLE	source\main\bsp_led.h	60;"	d
-LED3	source\main\bsp_led.h	43;"	d
-LED3_GPIO_CLK	source\main\bsp_led.h	21;"	d
-LED3_GPIO_PIN	source\main\bsp_led.h	22;"	d
-LED3_GPIO_PORT	source\main\bsp_led.h	20;"	d
-LED3_OFF	source\main\bsp_led.h	65;"	d
-LED3_ON	source\main\bsp_led.h	66;"	d
-LED3_TOGGLE	source\main\bsp_led.h	64;"	d
-LED_BLUE	source\main\bsp_led.h	83;"	d
-LED_CYAN	source\main\bsp_led.h	101;"	d
-LED_GREEN	source\main\bsp_led.h	77;"	d
-LED_PURPLE	source\main\bsp_led.h	95;"	d
-LED_RED	source\main\bsp_led.h	71;"	d
-LED_RGBOFF	source\main\bsp_led.h	113;"	d
-LED_WHITE	source\main\bsp_led.h	107;"	d
-LED_YELLOW	source\main\bsp_led.h	90;"	d
-OFF	source\main\bsp_led.h	30;"	d
-ON	source\main\bsp_led.h	29;"	d
-__LED_H	source\main\bsp_led.h	2;"	d
-digitalHi	source\main\bsp_led.h	50;"	d
-digitalLo	source\main\bsp_led.h	51;"	d
-digitalToggle	source\main\bsp_led.h	52;"	d
-main	source\main\main.c	/^int main()$/;"	f
-four	source\main\user.c	/^void four(void *para)$/;"	f
-three	source\main\user.c	/^void three(void *para)$/;"	f
 __ASM	source\src\CMSIS\core_cm3.c	28;"	d	file:
 __ASM	source\src\CMSIS\core_cm3.c	32;"	d	file:
 __ASM	source\src\CMSIS\core_cm3.c	36;"	d	file:
@@ -11326,6 +11301,9 @@ WWDG_OFFSET	source\src\FWlib\src\stm32f10x_wwdg.c	48;"	d	file:
 WWDG_SetCounter	source\src\FWlib\src\stm32f10x_wwdg.c	/^void WWDG_SetCounter(uint8_t Counter)$/;"	f
 WWDG_SetPrescaler	source\src\FWlib\src\stm32f10x_wwdg.c	/^void WWDG_SetPrescaler(uint32_t WWDG_Prescaler)$/;"	f
 WWDG_SetWindowValue	source\src\FWlib\src\stm32f10x_wwdg.c	/^void WWDG_SetWindowValue(uint8_t WindowValue)$/;"	f
+_delete_MCB	source\src\kernel\OS_CORE\MCB.c	/^int _delete_MCB(MCB *MCB_ptr)$/;"	f
+_init_MCB	source\src\kernel\OS_CORE\MCB.c	/^_init_MCB($/;"	f
+_p	source\src\kernel\OS_CORE\MCB.c	/^int _p($/;"	f
 clear_MCB_index	source\src\kernel\OS_CORE\MCB.c	/^EXPORT_SYMBOL(clear_MCB_index);$/;"	v
 clear_MCB_index	source\src\kernel\OS_CORE\MCB.c	/^clear_MCB_index(MCB *MCB_ptr)$/;"	f
 compare	source\src\kernel\OS_CORE\MCB.c	/^inline static int compare(struct insert_sort_data *data1,struct insert_sort_data *data2)$/;"	f	file:
@@ -11334,19 +11312,20 @@ delete_MCB	source\src\kernel\OS_CORE\MCB.c	/^int delete_MCB(MCB *MCB_ptr)$/;"	f
 init_MCB	source\src\kernel\OS_CORE\MCB.c	/^EXPORT_SYMBOL(init_MCB);$/;"	v
 init_MCB	source\src\kernel\OS_CORE\MCB.c	/^init_MCB($/;"	f
 p	source\src\kernel\OS_CORE\MCB.c	/^EXPORT_SYMBOL(p);$/;"	v
-p	source\src\kernel\OS_CORE\MCB.c	/^p($/;"	f
+p	source\src\kernel\OS_CORE\MCB.c	/^int p($/;"	f
 v	source\src\kernel\OS_CORE\MCB.c	/^EXPORT_SYMBOL(v);$/;"	v
 v	source\src\kernel\OS_CORE\MCB.c	/^v(MCB *MCB_ptr)$/;"	f
 value_cmp	source\src\kernel\OS_CORE\MCB.c	/^inline static int value_cmp(void *data1,void *data2)$/;"	f	file:
 OSTCBCurPtr	source\src\kernel\OS_CORE\TCB.c	/^volatile TCB *OSTCBCurPtr;$/;"	v
 OSTCBHighRdyPtr	source\src\kernel\OS_CORE\TCB.c	/^volatile TCB *OSTCBHighRdyPtr;$/;"	v
-delete_myself	source\src\kernel\OS_CORE\TCB.c	/^static inline void delete_myself(void)$/;"	f	file:
+delete_myself	source\src\kernel\OS_CORE\TCB.c	/^static void delete_myself(void)$/;"	f	file:
 g_interrupt_count	source\src\kernel\OS_CORE\TCB.c	/^volatile int g_interrupt_count = 0;$/;"	v
 task_change_prio	source\src\kernel\OS_CORE\TCB.c	/^int task_change_prio(TCB *TCB_ptr,TASK_PRIO_TYPE prio)$/;"	f
 task_creat	source\src\kernel\OS_CORE\TCB.c	/^TCB *_must_check task_creat($/;"	f
 task_delete	source\src\kernel\OS_CORE\TCB.c	/^int task_delete(TCB *TCB_ptr)$/;"	f
 task_init	source\src\kernel\OS_CORE\TCB.c	/^int _must_check task_init($/;"	f
-get_export_function_addr	source\src\kernel\OS_CORE\export.c	/^UINT32 get_export_function_addr(const char *fun_name)$/;"	f
+_bsp_init	source\src\kernel\OS_CORE\bsp.c	/^void _bsp_init(const struct device *device_array,unsigned int num)$/;"	f
+_get_sys_export_function_addr	source\src\kernel\OS_CORE\export.c	/^UINT32 _get_sys_export_function_addr(const char *fun_name)$/;"	f
 shell_symbol_list_display	source\src\kernel\OS_CORE\export.c	/^void shell_symbol_list_display(int argc, char const *argv[])$/;"	f
 compare	source\src\kernel\OS_CORE\message_queue.c	/^inline static int compare(struct insert_sort_data *data1,struct insert_sort_data *data2)$/;"	f	file:
 message_init	source\src\kernel\OS_CORE\message_queue.c	/^EXPORT_SYMBOL(message_init);$/;"	v
@@ -11362,18 +11341,25 @@ msg_send	source\src\kernel\OS_CORE\message_queue.c	/^int msg_send(MQB *MQB_ptr,s
 value_cmp	source\src\kernel\OS_CORE\message_queue.c	/^inline static int value_cmp(void *data1,void *data2)$/;"	f	file:
 __init_d_module	source\src\kernel\OS_CORE\module.c	/^static void __init_d_module(struct dynamic_module *dynamic_module_ptr)$/;"	f	file:
 __init_module	source\src\kernel\OS_CORE\module.c	/^void __init_module(void)$/;"	f
+_check_same_mod_name	source\src\kernel\OS_CORE\module.c	/^int _check_same_mod_name(const char *name)$/;"	f
+_remove_a_module	source\src\kernel\OS_CORE\module.c	/^static int _remove_a_module(struct dynamic_module *dynamic_module_ptr)$/;"	f	file:
+_restart_module	source\src\kernel\OS_CORE\module.c	/^void _restart_module($/;"	f
+_set_module_buffer	source\src\kernel\OS_CORE\module.c	/^void _set_module_buffer(void *add)$/;"	f
 clear_module_buffer	source\src\kernel\OS_CORE\module.c	/^void clear_module_buffer(void)$/;"	f
-dlmodule_exec	source\src\kernel\OS_CORE\module.c	/^struct dynamic_module* dlmodule_exec(void)$/;"	f
+dlmodule_exec	source\src\kernel\OS_CORE\module.c	/^int dlmodule_exec($/;"	f
 dlmodule_load	source\src\kernel\OS_CORE\module.c	/^struct dynamic_module* dlmodule_load(void)$/;"	f
 dlmodule_load_shared_object	source\src\kernel\OS_CORE\module.c	/^int dlmodule_load_shared_object(struct dynamic_module* module, void *module_ptr)$/;"	f
 dlmodule_relocate	source\src\kernel\OS_CORE\module.c	/^int dlmodule_relocate(struct dynamic_module *module, Elf32_Rel *rel, Elf32_Addr sym_val)$/;"	f
-elf_module	source\src\kernel\OS_CORE\module.c	11;"	d	file:
+elf_module	source\src\kernel\OS_CORE\module.c	14;"	d	file:
+get_mod_export_function_addr	source\src\kernel\OS_CORE\module.c	/^static UINT32 get_mod_export_function_addr(const char *fun_name)$/;"	f	file:
 module_buffer	source\src\kernel\OS_CORE\module.c	/^static char *module_buffer = NULL;$/;"	v	file:
 module_list_head	source\src\kernel\OS_CORE\module.c	/^static struct list_head module_list_head;$/;"	v	typeref:struct:list_head	file:
 num	source\src\kernel\OS_CORE\module.c	/^static unsigned int num = 0;$/;"	v	file:
 put_in_module_buffer	source\src\kernel\OS_CORE\module.c	/^void put_in_module_buffer(char c)$/;"	f
-set_module_buffer	source\src\kernel\OS_CORE\module.c	/^void set_module_buffer(void *add)$/;"	f
+remove_module	source\src\kernel\OS_CORE\module.c	/^int remove_module(struct dynamic_module *dynamic_module_ptr)$/;"	f
+shell_list_module	source\src\kernel\OS_CORE\module.c	/^void shell_list_module(int argc, char const *argv[])$/;"	f
 shell_modinfo	source\src\kernel\OS_CORE\module.c	/^void shell_modinfo(int argc, char const *argv[])$/;"	f
+shell_remove_module	source\src\kernel\OS_CORE\module.c	/^void shell_remove_module(int argc, char const *argv[])$/;"	f
 show_get_size	source\src\kernel\OS_CORE\module.c	/^void show_get_size(void)$/;"	f
 compare	source\src\kernel\OS_CORE\mutex.c	/^inline static int compare(struct insert_sort_data *data1,struct insert_sort_data *data2)$/;"	f	file:
 mutex_del	source\src\kernel\OS_CORE\mutex.c	/^EXPORT_SYMBOL(mutex_del);$/;"	v
@@ -11433,18 +11419,19 @@ os_start	source\src\kernel\OS_CORE\osinit.c	/^void __INIT os_start(void)$/;"	f
 precise_timing	source\src\kernel\OS_CORE\osinit.c	/^static void precise_timing(void *para)$/;"	f	file:
 recycle_memory	source\src\kernel\OS_CORE\osinit.c	/^void recycle_memory(void)$/;"	f
 set_inter_stack	source\src\kernel\OS_CORE\osinit.c	/^static void set_inter_stack(void)$/;"	f	file:
+start_kernel	source\src\kernel\OS_CORE\osinit.c	/^void start_kernel(void)$/;"	f
 task_start	source\src\kernel\OS_CORE\osinit.c	/^void task_start(void)$/;"	f
 thread_init	source\src\kernel\OS_CORE\osinit.c	/^static void thread_init(void *para)	$/;"	f	file:
 TCB_list	source\src\kernel\OS_CORE\schedule\os_TCB_list.c	/^static struct TCB_list TCB_list[PRIO_MAX];$/;"	v	typeref:struct:TCB_list	file:
 __init_TCB_list	source\src\kernel\OS_CORE\schedule\os_TCB_list.c	/^void __init_TCB_list(void)$/;"	f
-decrease_TCB_num	source\src\kernel\OS_CORE\schedule\os_TCB_list.c	/^void decrease_TCB_num(unsigned int index)$/;"	f
-decrease_ready_num	source\src\kernel\OS_CORE\schedule\os_TCB_list.c	/^void decrease_ready_num(unsigned int index)$/;"	f
-delete_from_TCB_list	source\src\kernel\OS_CORE\schedule\os_TCB_list.c	/^int delete_from_TCB_list(TCB *TCB_ptr)$/;"	f
-get_from_TCB_list	source\src\kernel\OS_CORE\schedule\os_TCB_list.c	/^inline struct list_head *get_from_TCB_list(unsigned int index)$/;"	f
-get_ready_num_from_TCB_list	source\src\kernel\OS_CORE\schedule\os_TCB_list.c	/^inline unsigned char get_ready_num_from_TCB_list(unsigned int index)$/;"	f
-increase_TCB_num	source\src\kernel\OS_CORE\schedule\os_TCB_list.c	/^void increase_TCB_num(unsigned int index)$/;"	f
-increase_ready_num	source\src\kernel\OS_CORE\schedule\os_TCB_list.c	/^void increase_ready_num(unsigned int index)$/;"	f
-register_in_TCB_list	source\src\kernel\OS_CORE\schedule\os_TCB_list.c	/^inline int register_in_TCB_list(TCB *TCB_ptr)$/;"	f
+_decrease_TCB_num	source\src\kernel\OS_CORE\schedule\os_TCB_list.c	/^void _decrease_TCB_num(unsigned int index)$/;"	f
+_decrease_ready_num	source\src\kernel\OS_CORE\schedule\os_TCB_list.c	/^void _decrease_ready_num(unsigned int index)$/;"	f
+_delete_from_TCB_list	source\src\kernel\OS_CORE\schedule\os_TCB_list.c	/^int _delete_from_TCB_list(TCB *TCB_ptr)$/;"	f
+_get_from_TCB_list	source\src\kernel\OS_CORE\schedule\os_TCB_list.c	/^struct list_head *_get_from_TCB_list(unsigned int index)$/;"	f
+_get_ready_num_from_TCB_list	source\src\kernel\OS_CORE\schedule\os_TCB_list.c	/^unsigned char _get_ready_num_from_TCB_list(unsigned int index)$/;"	f
+_increase_TCB_num	source\src\kernel\OS_CORE\schedule\os_TCB_list.c	/^void _increase_TCB_num(unsigned int index)$/;"	f
+_increase_ready_num	source\src\kernel\OS_CORE\schedule\os_TCB_list.c	/^void _increase_ready_num(unsigned int index)$/;"	f
+_register_in_TCB_list	source\src\kernel\OS_CORE\schedule\os_TCB_list.c	/^void _register_in_TCB_list(TCB *TCB_ptr)$/;"	f
 shell_check_TCB_list	source\src\kernel\OS_CORE\schedule\os_TCB_list.c	/^void shell_check_TCB_list(void)$/;"	f
 shell_show_tasks_registers	source\src\kernel\OS_CORE\schedule\os_TCB_list.c	/^void shell_show_tasks_registers(int argc, char const *argv[])$/;"	f
 shell_stack_check	source\src\kernel\OS_CORE\schedule\os_TCB_list.c	/^void shell_stack_check(int argc, char const *argv[])$/;"	f
@@ -11452,28 +11439,29 @@ TIME_FIRST_BIGGER_THAN_SECOND	source\src\kernel\OS_CORE\schedule\os_delay.c	10;"
 TIME_FIRST_SMALLER_THAN_SECOND	source\src\kernel\OS_CORE\schedule\os_delay.c	9;"	d	file:
 __init_delay_heap	source\src\kernel\OS_CORE\schedule\os_delay.c	/^inline void __init_delay_heap(void)$/;"	f
 _cmp	source\src\kernel\OS_CORE\schedule\os_delay.c	/^static int _cmp(Vector *Vector_ptr,unsigned int index1,unsigned int index2)$/;"	f	file:
+_delay_heap_get_top_TCB	source\src\kernel\OS_CORE\schedule\os_delay.c	/^TCB* _delay_heap_get_top_TCB(void)$/;"	f
+_delay_heap_remove_top_TCB	source\src\kernel\OS_CORE\schedule\os_delay.c	/^TCB* _delay_heap_remove_top_TCB(void)$/;"	f
+_insert_into_delay_heap	source\src\kernel\OS_CORE\schedule\os_delay.c	/^int _insert_into_delay_heap(TCB *TCB_ptr)$/;"	f
+_remove_from_delay_heap	source\src\kernel\OS_CORE\schedule\os_delay.c	/^int _remove_from_delay_heap(TCB *TCB_ptr)$/;"	f
 delay_heap	source\src\kernel\OS_CORE\schedule\os_delay.c	/^static struct little_heap delay_heap;$/;"	v	typeref:struct:little_heap	file:
-delay_heap_get_top_TCB	source\src\kernel\OS_CORE\schedule\os_delay.c	/^inline TCB* delay_heap_get_top_TCB(void)$/;"	f
-delay_heap_remove_top_TCB	source\src\kernel\OS_CORE\schedule\os_delay.c	/^inline TCB* delay_heap_remove_top_TCB(void)$/;"	f
 index_change_record	source\src\kernel\OS_CORE\schedule\os_delay.c	/^static inline void index_change_record(Vector *Vector_ptr,int index)$/;"	f	file:
-insert_into_delay_heap	source\src\kernel\OS_CORE\schedule\os_delay.c	/^inline int insert_into_delay_heap(TCB *TCB_ptr)$/;"	f
-remove_from_delay_heap	source\src\kernel\OS_CORE\schedule\os_delay.c	/^int remove_from_delay_heap(TCB *TCB_ptr)$/;"	f
 shell_delay_heap_check	source\src\kernel\OS_CORE\schedule\os_delay.c	/^void shell_delay_heap_check(void)$/;"	f
 READY_GROUP_TYPE	source\src\kernel\OS_CORE\schedule\os_ready.c	/^typedef unsigned char READY_GROUP_TYPE;$/;"	t	file:
 READY_TABLE_TYPE	source\src\kernel\OS_CORE\schedule\os_ready.c	/^typedef unsigned char READY_TABLE_TYPE;$/;"	t	file:
 __init_ready_group	source\src\kernel\OS_CORE\schedule\os_ready.c	/^void __init_ready_group(void)$/;"	f
-delete_TCB_from_ready	source\src\kernel\OS_CORE\schedule\os_ready.c	/^int delete_TCB_from_ready(TCB *TCB_ptr)$/;"	f
-get_highest_prio_ready_TCB	source\src\kernel\OS_CORE\schedule\os_ready.c	/^TCB *get_highest_prio_ready_TCB(void)$/;"	f
-insert_ready_TCB	source\src\kernel\OS_CORE\schedule\os_ready.c	/^inline int insert_ready_TCB(TCB *TCB_ptr)$/;"	f
+_delete_TCB_from_ready	source\src\kernel\OS_CORE\schedule\os_ready.c	/^int _delete_TCB_from_ready(TCB *TCB_ptr)$/;"	f
+_get_highest_prio_ready_TCB	source\src\kernel\OS_CORE\schedule\os_ready.c	/^TCB *_get_highest_prio_ready_TCB(void)$/;"	f
+_insert_ready_TCB	source\src\kernel\OS_CORE\schedule\os_ready.c	/^int _insert_ready_TCB(TCB *TCB_ptr)$/;"	f
 map	source\src\kernel\OS_CORE\schedule\os_ready.c	/^static const READY_TABLE_TYPE map[8*sizeof(READY_GROUP_TYPE)] = {$/;"	v	file:
 ready_group	source\src\kernel\OS_CORE\schedule\os_ready.c	/^static READY_GROUP_TYPE ready_group;$/;"	v	file:
 ready_table	source\src\kernel\OS_CORE\schedule\os_ready.c	/^static READY_TABLE_TYPE ready_table[PRIO_MAX\/(sizeof(READY_TABLE_TYPE)*8)];$/;"	v	file:
 shell_check_os_ready	source\src\kernel\OS_CORE\schedule\os_ready.c	/^void shell_check_os_ready(void)$/;"	f
 unmap	source\src\kernel\OS_CORE\schedule\os_ready.c	/^static const INT8 unmap[256] = { $/;"	v	file:
-MS_PER_TICK	source\src\kernel\OS_CORE\schedule\os_schedule.c	46;"	d	file:
-US_PER_TICK	source\src\kernel\OS_CORE\schedule\os_schedule.c	53;"	d	file:
-delay_ms	source\src\kernel\OS_CORE\schedule\os_schedule.c	/^void delay_ms(unsigned int ms)$/;"	f
-delay_us	source\src\kernel\OS_CORE\schedule\os_schedule.c	/^void delay_us(unsigned int us)$/;"	f
+_schedule	source\src\kernel\OS_CORE\schedule\os_schedule.c	/^static void _schedule(void)$/;"	f	file:
+_sys_delay	source\src\kernel\OS_CORE\schedule\os_schedule.c	/^int _sys_delay(unsigned int delay_ticks_num,TASK_STATE state)$/;"	f
+_sys_suspend	source\src\kernel\OS_CORE\schedule\os_schedule.c	/^int _sys_suspend(TASK_STATE state)$/;"	f
+_task_creat_ready	source\src\kernel\OS_CORE\schedule\os_schedule.c	/^static _must_check int _task_creat_ready($/;"	f	file:
+_task_init_ready	source\src\kernel\OS_CORE\schedule\os_schedule.c	/^int _must_check _task_init_ready($/;"	f
 g_schedule_lock	source\src\kernel\OS_CORE\schedule\os_schedule.c	/^volatile int g_schedule_lock = 0;\/\/ 0:do not lock;  !0: lock$/;"	v
 schedule	source\src\kernel\OS_CORE\schedule\os_schedule.c	/^EXPORT_SYMBOL(schedule);$/;"	v
 schedule	source\src\kernel\OS_CORE\schedule\os_schedule.c	/^void schedule(void)$/;"	f
@@ -11489,8 +11477,8 @@ task_creat_ready	source\src\kernel\OS_CORE\schedule\os_schedule.c	/^int _must_ch
 task_init_ready	source\src\kernel\OS_CORE\schedule\os_schedule.c	/^EXPORT_SYMBOL(task_init_ready);$/;"	v
 task_init_ready	source\src\kernel\OS_CORE\schedule\os_schedule.c	/^int _must_check task_init_ready($/;"	f
 __init_suspend_list	source\src\kernel\OS_CORE\schedule\os_suspend.c	/^void __init_suspend_list(void)$/;"	f
-insert_into_suspend_list	source\src\kernel\OS_CORE\schedule\os_suspend.c	/^inline int  insert_into_suspend_list(TCB *TCB_ptr)$/;"	f
-remove_from_suspend_list	source\src\kernel\OS_CORE\schedule\os_suspend.c	/^int remove_from_suspend_list(TCB *TCB_ptr)$/;"	f
+_insert_into_suspend_list	source\src\kernel\OS_CORE\schedule\os_suspend.c	/^void _insert_into_suspend_list(TCB *const TCB_ptr)$/;"	f
+_remove_from_suspend_list	source\src\kernel\OS_CORE\schedule\os_suspend.c	/^int _remove_from_suspend_list(TCB *TCB_ptr)$/;"	f
 suspend_list_head	source\src\kernel\OS_CORE\schedule\os_suspend.c	/^static struct list_head suspend_list_head;$/;"	v	typeref:struct:list_head	file:
 OS_CPU_SysTickHandler	source\src\kernel\OS_CORE\schedule\os_tick.c	/^void  OS_CPU_SysTickHandler(void)$/;"	f
 delay_task_check	source\src\kernel\OS_CORE\schedule\os_tick.c	/^static void delay_task_check(void)$/;"	f	file:
@@ -11513,11 +11501,6 @@ __init_systick	source\src\kernel\OS_CPU\OS_CPU_STM32.c	/^void __init_systick(voi
 set_register	source\src\kernel\OS_CPU\OS_CPU_STM32.c	/^void set_register(void **stack_ptr,void *entry_ptr,void *return_ptr,void *para)$/;"	f
 sys_shutdown	source\src\kernel\OS_CPU\OS_CPU_STM32.c	/^void sys_shutdown(void)$/;"	f
 sys_sleep	source\src\kernel\OS_CPU\OS_CPU_STM32.c	/^void sys_sleep(void)$/;"	f
-bsp_init	source\src\kernel\OS_CPU\bsp\bsp.c	/^void bsp_init(void)$/;"	f
-device_array	source\src\kernel\OS_CPU\bsp\bsp.c	/^static const struct device device_array[] = {$/;"	v	typeref:struct:device	file:
-ka_putchar	source\src\kernel\OS_CPU\bsp\bsp.c	/^void ka_putchar(const char ch)  $/;"	f
-para1	source\src\kernel\OS_CPU\bsp\bsp.c	/^static const struct dev_mem_para para1 = {$/;"	v	typeref:struct:dev_mem_para	file:
-para2	source\src\kernel\OS_CPU\bsp\bsp.c	/^static const struct dev_mem_para para2 = {$/;"	v	typeref:struct:dev_mem_para	file:
 NVIC2_Configuration	source\src\kernel\OS_CPU\bsp\bsp_usart.c	/^static void NVIC2_Configuration(void)$/;"	f	file:
 NVIC_Configuration	source\src\kernel\OS_CPU\bsp\bsp_usart.c	/^static void NVIC_Configuration(void)$/;"	f	file:
 USART2_Config	source\src\kernel\OS_CPU\bsp\bsp_usart.c	/^void USART2_Config(void)$/;"	f
@@ -11528,6 +11511,11 @@ Usart_SendHalfWord	source\src\kernel\OS_CPU\bsp\bsp_usart.c	/^void Usart_SendHal
 Usart_SendString	source\src\kernel\OS_CPU\bsp\bsp_usart.c	/^void Usart_SendString( USART_TypeDef * pUSARTx, char *str)$/;"	f
 FSMC_SRAM_Init	source\src\kernel\OS_CPU\bsp\sram.c	/^void FSMC_SRAM_Init(void)$/;"	f
 SRAM_GPIO_Config	source\src\kernel\OS_CPU\bsp\sram.c	/^static void SRAM_GPIO_Config(void)$/;"	f	file:
+bsp_init	source\src\kernel\OS_CPU\bsp\stm32_bsp.c	/^void bsp_init(void)$/;"	f
+device_array	source\src\kernel\OS_CPU\bsp\stm32_bsp.c	/^static const struct device device_array[] = {$/;"	v	typeref:struct:device	file:
+ka_putchar	source\src\kernel\OS_CPU\bsp\stm32_bsp.c	/^void ka_putchar(const char ch)  $/;"	f
+para1	source\src\kernel\OS_CPU\bsp\stm32_bsp.c	/^static const struct dev_mem_para para1 = {$/;"	v	typeref:struct:dev_mem_para	file:
+para2	source\src\kernel\OS_CPU\bsp\stm32_bsp.c	/^static const struct dev_mem_para para2 = {$/;"	v	typeref:struct:dev_mem_para	file:
 BusFault_Handler	source\src\kernel\OS_CPU\stm32f10x_it.c	/^void BusFault_Handler(void)$/;"	f
 DEBUG_USART_IRQHandler	source\src\kernel\OS_CPU\stm32f10x_it.c	/^void DEBUG_USART_IRQHandler(void)$/;"	f
 DebugMon_Handler	source\src\kernel\OS_CPU\stm32f10x_it.c	/^void DebugMon_Handler(void)$/;"	f
@@ -11700,8 +11688,10 @@ insert_struct_command_8	source\src\kernel\SHELL\command_processor.c	/^void inser
 match_and_execute_command	source\src\kernel\SHELL\command_processor.c	/^int match_and_execute_command($/;"	f
 MCB_for_shell	source\src\kernel\SHELL\shell.c	/^static MCB MCB_for_shell;$/;"	v	file:
 __init_shell_buffer	source\src\kernel\SHELL\shell.c	/^int __init_shell_buffer(struct shell_buffer *shell_buffer_ptr,$/;"	f
+_shell_exec	source\src\kernel\SHELL\shell.c	/^static int _shell_exec(const char *command)$/;"	f	file:
 change_shell_buffer	source\src\kernel\SHELL\shell.c	/^struct shell_buffer *change_shell_buffer(struct shell_buffer *shell_buffer_ptr)$/;"	f
 clear_input_buffer	source\src\kernel\SHELL\shell.c	/^static inline void clear_input_buffer(void)$/;"	f	file:
+get_para_add	source\src\kernel\SHELL\shell.c	/^char *get_para_add(int argc, char const *argv[], const char *pre_name)$/;"	f
 main_buffer	source\src\kernel\SHELL\shell.c	/^static char main_buffer[BUFFER_SIZE];$/;"	v	file:
 main_buffer_reserve	source\src\kernel\SHELL\shell.c	/^static char main_buffer_reserve[BUFFER_SIZE];$/;"	v	file:
 main_shell_buffer	source\src\kernel\SHELL\shell.c	/^static struct shell_buffer main_shell_buffer;$/;"	v	typeref:struct:shell_buffer	file:
@@ -11718,6 +11708,7 @@ resident_command_7	source\src\kernel\SHELL\shell.c	/^static struct command resid
 resident_command_8	source\src\kernel\SHELL\shell.c	/^static struct command resident_command_8[] = $/;"	v	typeref:struct:command	file:
 shell	source\src\kernel\SHELL\shell.c	/^void shell(void *para)$/;"	f
 shell_buffer_wait_str	source\src\kernel\SHELL\shell.c	/^void shell_buffer_wait_str(const char *str_ptr) \/\/ thread will going to sleep$/;"	f
+shell_exec	source\src\kernel\SHELL\shell.c	/^int shell_exec(const char *command)$/;"	f
 shell_init	source\src\kernel\SHELL\shell.c	/^static void shell_init(void)$/;"	f	file:
 using_shell_buffer_ptr	source\src\kernel\SHELL\shell.c	/^static struct shell_buffer *using_shell_buffer_ptr = NULL;$/;"	v	typeref:struct:shell_buffer	file:
 MCB_for_shell_debug	source\src\kernel\SHELL\shell_debug.c	/^static MCB MCB_for_shell_debug;$/;"	v	file:
@@ -11750,6 +11741,44 @@ shell_sleep	source\src\kernel\SHELL\shell_fun.c	/^void shell_sleep(int argc, cha
 shell_time	source\src\kernel\SHELL\shell_fun.c	/^void shell_time(int argc, char const *argv[])$/;"	f
 shell_version	source\src\kernel\SHELL\shell_fun.c	/^void shell_version(int argc, char const *argv[])$/;"	f
 test	source\src\kernel\SHELL\shell_fun.c	/^void test(int argc, char const *argv[])$/;"	f
+LED_GPIO_Config	source\user\bsp_led.c	/^void LED_GPIO_Config(void)$/;"	f
+LED1	source\user\bsp_led.h	33;"	d
+LED1_GPIO_CLK	source\user\bsp_led.h	11;"	d
+LED1_GPIO_PIN	source\user\bsp_led.h	12;"	d
+LED1_GPIO_PORT	source\user\bsp_led.h	10;"	d
+LED1_OFF	source\user\bsp_led.h	57;"	d
+LED1_ON	source\user\bsp_led.h	58;"	d
+LED1_TOGGLE	source\user\bsp_led.h	56;"	d
+LED2	source\user\bsp_led.h	38;"	d
+LED2_GPIO_CLK	source\user\bsp_led.h	16;"	d
+LED2_GPIO_PIN	source\user\bsp_led.h	17;"	d
+LED2_GPIO_PORT	source\user\bsp_led.h	15;"	d
+LED2_OFF	source\user\bsp_led.h	61;"	d
+LED2_ON	source\user\bsp_led.h	62;"	d
+LED2_TOGGLE	source\user\bsp_led.h	60;"	d
+LED3	source\user\bsp_led.h	43;"	d
+LED3_GPIO_CLK	source\user\bsp_led.h	21;"	d
+LED3_GPIO_PIN	source\user\bsp_led.h	22;"	d
+LED3_GPIO_PORT	source\user\bsp_led.h	20;"	d
+LED3_OFF	source\user\bsp_led.h	65;"	d
+LED3_ON	source\user\bsp_led.h	66;"	d
+LED3_TOGGLE	source\user\bsp_led.h	64;"	d
+LED_BLUE	source\user\bsp_led.h	83;"	d
+LED_CYAN	source\user\bsp_led.h	101;"	d
+LED_GREEN	source\user\bsp_led.h	77;"	d
+LED_PURPLE	source\user\bsp_led.h	95;"	d
+LED_RED	source\user\bsp_led.h	71;"	d
+LED_RGBOFF	source\user\bsp_led.h	113;"	d
+LED_WHITE	source\user\bsp_led.h	107;"	d
+LED_YELLOW	source\user\bsp_led.h	90;"	d
+OFF	source\user\bsp_led.h	30;"	d
+ON	source\user\bsp_led.h	29;"	d
+__LED_H	source\user\bsp_led.h	2;"	d
+digitalHi	source\user\bsp_led.h	50;"	d
+digitalLo	source\user\bsp_led.h	51;"	d
+digitalToggle	source\user\bsp_led.h	52;"	d
+four	source\user\user.c	/^void four(void *para)$/;"	f
+three	source\user\user.c	/^void three(void *para)$/;"	f
 !_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
 !_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
 !_TAG_PROGRAM_VERSION	5.8	//

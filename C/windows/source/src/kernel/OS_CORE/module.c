@@ -169,7 +169,10 @@ out:
 
 static int _remove_a_module(struct dynamic_module *dynamic_module_ptr)
 {
+    ASSERT(NULL != dynamic_module_ptr);
     PRINTF("remove module name is %s\n",dynamic_module_ptr->name);
+    CPU_SR_ALLOC();
+    CPU_CRITICAL_ENTER();
     if(MODULE_STATE_RUN == dynamic_module_ptr->module_state)
     {
         ASSERT(dynamic_module_ptr->thread_TCB_ptr);
@@ -187,26 +190,21 @@ static int _remove_a_module(struct dynamic_module *dynamic_module_ptr)
     ka_free(dynamic_module_ptr->module_space);
     list_del(&dynamic_module_ptr->module_list);
     ka_free(dynamic_module_ptr);
+    CPU_CRITICAL_EXIT();
     return FUN_EXECUTE_SUCCESSFULLY;
 }
 
 int remove_module(struct dynamic_module *dynamic_module_ptr)
 {
-    CPU_SR_ALLOC();
-    CPU_CRITICAL_ENTER();
     if(NULL == dynamic_module_ptr)
     {
         OS_ERROR_PARA_MESSAGE_DISPLAY(remove_module,dynamic_module_ptr);
-        CPU_CRITICAL_EXIT();
         return -ERROR_NULL_INPUT_PTR;
     }
-    ASSERT(NULL != dynamic_module_ptr);
-    _remove_a_module(dynamic_module_ptr);
-    CPU_CRITICAL_EXIT();
-    return FUN_EXECUTE_SUCCESSFULLY;
+    return _remove_a_module(dynamic_module_ptr);
 }
 
-int dlmodule_relocate(struct dynamic_module *module, Elf32_Rel *rel, Elf32_Addr sym_val)
+static int dlmodule_relocate(struct dynamic_module *module, Elf32_Rel *rel, Elf32_Addr sym_val)
 {
     Elf32_Addr *where, tmp;
     Elf32_Sword addend, offset;
@@ -434,7 +432,7 @@ int dlmodule_load_shared_object(struct dynamic_module* module, void *module_ptr)
         {
             Elf32_Sym *sym = &symtab[ELF32_R_SYM(rel->r_info)];
 
-            //ka_printf("relocate symbol %s shndx %d", strtab + sym->st_name, sym->st_shndx);
+            /*ka_printf("relocate symbol %s shndx %d", strtab + sym->st_name, sym->st_shndx);*/
 
             if ((sym->st_shndx != SHT_NULL) ||(ELF_ST_BIND(sym->st_info) == STB_LOCAL))
             {
@@ -450,9 +448,9 @@ int dlmodule_load_shared_object(struct dynamic_module* module, void *module_ptr)
             {
                 Elf32_Addr addr;
 
-                //ka_printf("relocate symbol: %s", strtab + sym->st_name);
+                /*ka_printf("relocate symbol: %s", strtab + sym->st_name);*/
                 /* need to resolve symbol in kernel symbol table */
-                addr = get_sys_export_function_addr((const char *)(strtab + sym->st_name));
+                addr = _get_sys_export_function_addr((const char *)(strtab + sym->st_name));
                 if ((0 == addr) && (!(addr = get_mod_export_function_addr((const char *)(strtab + sym->st_name)))))
                 {
                     ka_printf("Module: can't find %s in kernel symbol table", strtab + sym->st_name);
@@ -585,10 +583,6 @@ struct dynamic_module* dlmodule_load(void)
     module = (struct dynamic_module *)ka_malloc(sizeof(struct dynamic_module));
     if (!module) goto __exit;
     __init_d_module(module);
-    
-    /* set initial priority and stack size */
-    //module->priority = PRIO_MAX - 10;
-    //module->stack_size = 2048;
 
     if (elf_module->e_type == ET_DYN)
     {
@@ -608,21 +602,7 @@ struct dynamic_module* dlmodule_load(void)
     module->ref ++;
     list_add(&module->module_list,&module_list_head);
 
-    /* set module initialization and cleanup function */
-    //module->init = dlsym(module, "init");
-    //module->exit = dlsym(module, "exit");
-
     set_module_state(module,MODULE_STATE_LOADED);
-    /* do module initialization */
-    if (module->init)
-    {
-        error = module->init();
-        if(FUN_EXECUTE_SUCCESSFULLY != error)
-        {
-            ka_printf("init error\n");
-            goto __exit;
-        }
-    }
     CPU_CRITICAL_EXIT();
     return module;
 
@@ -638,13 +618,13 @@ __exit:
         ka_free(module);
     }
 
-    clear_module_buffer();
+    _clear_module_buffer();
 	CPU_CRITICAL_EXIT();
     return NULL;
 }
 
 
-int dlmodule_exec(
+int _dlmodule_exec(
     unsigned int stack_size,
     TASK_PRIO_TYPE prio,
     const char *name)
@@ -699,7 +679,7 @@ int dlmodule_exec(
     return FUN_EXECUTE_SUCCESSFULLY;
 }
 
-void put_in_module_buffer(char c)
+void _put_in_module_buffer(char c)
 {
 	if(module_buffer)
 	{
@@ -716,7 +696,7 @@ void show_get_size(void)
     ka_printf("get %u bytes\n",num);
 }
 
-void clear_module_buffer(void)
+void _clear_module_buffer(void)
 {
 	module_buffer = NULL;
 	num = 0;

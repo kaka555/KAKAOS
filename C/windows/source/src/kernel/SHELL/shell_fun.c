@@ -15,7 +15,7 @@
 
 #if CONFIG_SHELL_EN
 
-//add corresponding function here
+/*add corresponding function here*/
 void test(int argc, char const *argv[])
 {
 	(void)argc;
@@ -44,7 +44,7 @@ void shell_memory(int argc, char const *argv[])
 {
 	(void)argc;
 	(void)argv;
-	struct buddy *buddy_ptr = (struct buddy *)get_os_buddy_ptr_head();
+	struct buddy *buddy_ptr = (struct buddy *)_get_os_buddy_ptr_head();
 	ASSERT(NULL != buddy_ptr);
 	unsigned int j = 0;
 	while(NULL != buddy_ptr)
@@ -52,11 +52,11 @@ void shell_memory(int argc, char const *argv[])
 		PRINTF("NO.%u memory : \n",j++);
 		PRINTF("=====================================================\n");
 		PRINTF("start address is %p\n",buddy_ptr->buddy_space_start_ptr);
-		PRINTF("rest buddy space is %u\n",get_current_buddy_space());
+		PRINTF("rest buddy space is %u\n",_get_current_buddy_space());
 		PRINTF("the total space is %uKB\n",PAGE_SIZE_KB * buddy_ptr->info.page_num);
-		PRINTF("now there are %u%% left\n",100*get_current_buddy_space()/(PAGE_SIZE_KB * buddy_ptr->info.page_num));
+		PRINTF("now there are %u%% left\n",100*_get_current_buddy_space()/(PAGE_SIZE_KB * buddy_ptr->info.page_num));
 		PRINTF("\n\n");
-		buddy_ptr = (struct buddy *)get_next_buddy_ptr_head(buddy_ptr);
+		buddy_ptr = (struct buddy *)_get_next_buddy_ptr_head(buddy_ptr);
 	}
 }
 void shell_clear(int argc, char const *argv[])
@@ -160,7 +160,7 @@ void shell_module(int argc, char const *argv[])
 	char *value_ptr;
 	char *name = D_MODULE_DEFAULT_NAME;
 
-//get the parament
+/*get the parament*/
 	value_ptr = get_para_add(argc,argv,"-stacksize=");
 	if(NULL != value_ptr)
 	{
@@ -172,7 +172,7 @@ void shell_module(int argc, char const *argv[])
 		prio = ka_atoi(value_ptr);
 	}
 
-//get module's name
+/*get module's name*/
 	value_ptr = get_para_add(argc,argv,"-name=");
 	if(NULL != value_ptr)
 	{
@@ -182,19 +182,19 @@ void shell_module(int argc, char const *argv[])
 	value_ptr = get_para_add(argc,argv,"-r");
 	if(NULL != value_ptr)
 	{
-		//restart a module
+		/*restart a module*/
 		_restart_module(stack_size,prio,name);
 		return ;
 	}
 
-//Look for duplicate names
+/*Look for duplicate names*/
 	error = _check_same_mod_name(name);
 	if(0 != error)
 	{
 		ka_printf("please change an other module name\n");
 		return ;
 	}
-// allocate room for receiving module's data
+/* allocate room for receiving module's data*/
 	value_ptr = get_para_add(argc,argv,"-filesize=");
 	if(NULL != value_ptr)
 	{
@@ -203,7 +203,7 @@ void shell_module(int argc, char const *argv[])
 	}
 	else
 	{
-		buf = alloc_power3_page();
+		buf = _alloc_power3_page();
 	}
 	if (NULL == buf)
 	{
@@ -214,7 +214,7 @@ void shell_module(int argc, char const *argv[])
 	{
 		ASSERT(0);
 	}
-// allocate room for shell
+/* allocate room for shell*/
 	struct shell_buffer shell_buffer;
 	shell_buf_ptr = (char *)ka_malloc(20);
 	if(NULL == shell_buf_ptr)
@@ -222,27 +222,27 @@ void shell_module(int argc, char const *argv[])
 		ka_printf("no enough room for module\n");
 		goto out;
 	}
-	if(__init_shell_buffer(&shell_buffer,shell_buf_ptr,NULL) < 0)
+	if(__init_shell_buffer(&shell_buffer,shell_buf_ptr,NULL,20) < 0)
 	{
 		ka_printf("module change buffer error\n");
 		goto out1;
 	}
-	struct shell_buffer *sys_shell_buffer_ptr = change_shell_buffer(&shell_buffer); // save the system input buffer
+	struct shell_buffer *sys_shell_buffer_ptr = _change_shell_buffer(&shell_buffer); // save the system input buffer
 	_set_module_buffer(buf);
 
 	ka_printf("now transfer the module,input 'end' to end the transformation\n");
 	
-	shell_buffer_wait_str("end");  // thread will going to sleep
+	_shell_buffer_wait_str("end");  /* thread will going to sleep*/
 
 	show_get_size();
 
-	change_shell_buffer(sys_shell_buffer_ptr);
+	_change_shell_buffer(sys_shell_buffer_ptr);
 	ka_free(shell_buf_ptr);
 
 	ka_printf("execute module\n");
-	dlmodule_exec(stack_size,prio,name);
+	_dlmodule_exec(stack_size,prio,name);
 	ka_free(buf);
-	clear_module_buffer();
+	_clear_module_buffer();
 	return ;
 out1:
 	ka_free(shell_buf_ptr);

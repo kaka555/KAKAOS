@@ -4,7 +4,7 @@
 #include <TCB.h>
 
 void __init_suspend_list(void);
-int  insert_into_suspend_list(TCB *const TCB_ptr);
-int  remove_from_suspend_list(TCB *const TCB_ptr);
+void  _insert_into_suspend_list(TCB *const TCB_ptr);
+int  _remove_from_suspend_list(TCB *const TCB_ptr);
 
 #endif

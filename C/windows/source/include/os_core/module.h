@@ -22,27 +22,27 @@
 #define module_exit(initfn)                 \
     int exit_module(void) __attribute__((alias(#initfn)))
 
-//===================
-//module state
+/*===================*/
+/*module state*/
 
 #define MODULE_STATE_DEFAULT    0x00
 #define MODULE_STATE_INIT       MODULE_STATE_DEFAULT
 #define MODULE_STATE_LOADED     0x01
 #define MODULE_STATE_RUN        0x02
-//======================================================
+/*======================================================*/
 
 struct dynamic_module
 {
     char name[D_MODULE_NAME_MAX];
-    struct list_head module_list;   //link all modules
+    struct list_head module_list;   /*link all modules*/
     UINT32 module_state;
-    int (*init)(void);              //this function will be called before module execute
-    void (*exit)(void);             //this function will be called after module return 
+    int (*init)(void);              /*this function will be called before module execute*/
+    void (*exit)(void);             /*this function will be called after module return */
     void *module_space;
-    unsigned int module_size;       //the room size that module finally use
-    void *init_space;               // not use
-    void *entry;                    //module entry point
-    UINT32 vstart_addr;            //VMA base address for the first LOAD segment
+    unsigned int module_size;       /*the room size that module finally use*/
+    void *init_space;               /* not use*/
+    void *entry;                    /*module entry point*/
+    UINT32 vstart_addr;             /*VMA base address for the first LOAD segment*/
     struct ka_module_symtab *export_symbols_array;
     unsigned int export_symbols_num;
     unsigned int ref;
@@ -56,9 +56,9 @@ static inline void set_module_state(struct dynamic_module *dynamic_module_ptr,UI
     dynamic_module_ptr->module_state = state;
 }
 
-void put_in_module_buffer(char c);
-void clear_module_buffer(void);
-int dlmodule_exec(
+void _put_in_module_buffer(char c);
+void _clear_module_buffer(void);
+int _dlmodule_exec(
     unsigned int stack_size,
     TASK_PRIO_TYPE prio,
     const char *name);

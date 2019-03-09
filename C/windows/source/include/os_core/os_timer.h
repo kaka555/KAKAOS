@@ -33,7 +33,7 @@ struct timer
 	char *timer_name;
 	void (*fun)(void *para);
 	void *para;
-	unsigned int period; //ticks
+	unsigned int period; /*ticks*/
 	unsigned int heap_position_index;
 	UINT64 wake_time;
 };
@@ -56,11 +56,12 @@ int timer_create(
 	unsigned int period,
 	unsigned int num);
 
-#define ERROR_ACTIVATE_FAIL 1
+int _timer_enable(struct timer *timer_ptr);
 int timer_enable(struct timer *timer_ptr);
+int _timer_disable(struct timer *timer_ptr);
 int timer_disable(struct timer *timer_ptr);
 int timer_delete(struct timer *timer_ptr);
-int get_timer_heap_top(struct timer **timer_ptr);
+int _get_timer_heap_top(struct timer **timer_ptr);
 
 #endif
 

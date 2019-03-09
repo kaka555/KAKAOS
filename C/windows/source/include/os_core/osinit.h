@@ -8,7 +8,7 @@
 #endif
 #define HZ TICK_PER_SEC
 
-void os_start(void);
+void _os_start(void);
 void OSStartHighRdy(void);
 
 #endif

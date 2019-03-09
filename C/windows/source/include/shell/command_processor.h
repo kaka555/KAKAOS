@@ -19,25 +19,25 @@ struct command{
 /**************************
 *insert into corresponding command_processer
 **************************/
-void insert_struct_command_1(struct command *ptr);
-void insert_struct_command_2(struct command *ptr);
-void insert_struct_command_3(struct command *ptr);
-void insert_struct_command_4(struct command *ptr);
-void insert_struct_command_5(struct command *ptr);
-void insert_struct_command_6(struct command *ptr);
-void insert_struct_command_7(struct command *ptr);
-void insert_struct_command_8(struct command *ptr);
+void _insert_struct_command_1(struct command *ptr);
+void _insert_struct_command_2(struct command *ptr);
+void _insert_struct_command_3(struct command *ptr);
+void _insert_struct_command_4(struct command *ptr);
+void _insert_struct_command_5(struct command *ptr);
+void _insert_struct_command_6(struct command *ptr);
+void _insert_struct_command_7(struct command *ptr);
+void _insert_struct_command_8(struct command *ptr);
 
 struct command_processer{
 	const unsigned int command_length;
 	struct singly_list_head *command_list_address;
 };
-int match_and_execute_command(
+int _match_and_execute_command(
 	int num,
 	char const *argv[],
 	struct command_processer * const command_processer_ptr);
 
-struct command_processer *get_command_processer(unsigned int num);
+struct command_processer *_get_command_processer(unsigned int num);
 
 #endif	
 	

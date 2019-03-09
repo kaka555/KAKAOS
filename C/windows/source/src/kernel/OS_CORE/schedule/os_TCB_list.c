@@ -17,25 +17,17 @@ void __init_TCB_list(void)
 	}
 }
 
-//os must set the task_state before using this function
-inline int register_in_TCB_list(TCB *TCB_ptr)
+/*os must set the task_state before using this function*/
+void _register_in_TCB_list(TCB *TCB_ptr)
 {
 	ASSERT(NULL != TCB_ptr);
-#if CONFIG_PARA_CHECK
-	if(NULL == TCB_ptr)
-	{
-		OS_ERROR_PARA_MESSAGE_DISPLAY(register_in_TCB_list,TCB_ptr);
-		return -ERROR_NULL_INPUT_PTR;
-	}
-#endif
 	list_add(&TCB_ptr->same_prio_list,&TCB_list[TCB_ptr->prio].head);
 	++(TCB_list[TCB_ptr->prio].TCB_num);
-	return FUN_EXECUTE_SUCCESSFULLY;
 }
 
 /**
  * This is a system function,if the TCB_ptr state is ready,os should decrease
- * the ready num with function decrease_ready_num() in another place
+ * the ready num with function _decrease_ready_num() in another place
  * which means, this functin do not decrease the ready num
  * @Author      kaka
  * @DateTime    2018-10-01
@@ -43,13 +35,13 @@ inline int register_in_TCB_list(TCB *TCB_ptr)
  * @param       TCB_ptr    [description]
  * @return                 [description]
  */
-int delete_from_TCB_list(TCB *TCB_ptr)
+int _delete_from_TCB_list(TCB *TCB_ptr)
 {
 	ASSERT(NULL != TCB_ptr);
 #if CONFIG_PARA_CHECK
 	if(NULL == TCB_ptr)
 	{
-		OS_ERROR_PARA_MESSAGE_DISPLAY(delete_from_TCB_list,TCB_ptr);
+		OS_ERROR_PARA_MESSAGE_DISPLAY(_delete_from_TCB_list,TCB_ptr);
 		return -ERROR_NULL_INPUT_PTR;
 	}
 #endif
@@ -64,58 +56,44 @@ int delete_from_TCB_list(TCB *TCB_ptr)
 			return FUN_EXECUTE_SUCCESSFULLY;
 		}
 	}
-	//should not go here
+	/*should not go here*/
 	ASSERT(0);
 	return ERROR_VALUELESS_INPUT;
 }
 
-inline struct list_head *get_from_TCB_list(unsigned int index)
+struct list_head *_get_from_TCB_list(unsigned int index)
 {
 	ASSERT(index < PRIO_MAX);
-#if CONFIG_PARA_CHECK
-	if(index >= PRIO_MAX)
-	{
-		OS_ERROR_PARA_MESSAGE_DISPLAY(get_from_TCB_list,index);
-		return NULL;
-	}
-#endif
 	return &TCB_list[index].head;
 }
 
-inline unsigned char get_ready_num_from_TCB_list(unsigned int index)
+unsigned char _get_ready_num_from_TCB_list(unsigned int index)
 {
 	ASSERT(index < PRIO_MAX);
-#if CONFIG_PARA_CHECK
-	if(index >= PRIO_MAX)
-	{
-		OS_ERROR_PARA_MESSAGE_DISPLAY(get_ready_num_from_TCB_list,index);
-		return -1;
-	}
-#endif
 	return TCB_list[index].ready_num;
 }
 
-void decrease_ready_num(unsigned int index)
+void _decrease_ready_num(unsigned int index)
 {
 	ASSERT(index < PRIO_MAX);
 	ASSERT(0 != TCB_list[index].ready_num);
 	--(TCB_list[index].ready_num);
 }
 
-void increase_ready_num(unsigned int index)
+void _increase_ready_num(unsigned int index)
 {
 	ASSERT(index < PRIO_MAX);
 	++(TCB_list[index].ready_num);
 }
 
-void decrease_TCB_num(unsigned int index)
+void _decrease_TCB_num(unsigned int index)
 {
 	ASSERT(index < PRIO_MAX);
 	ASSERT(0 != TCB_list[index].TCB_num);
 	--(TCB_list[index].TCB_num);
 }
 
-void increase_TCB_num(unsigned int index)
+void _increase_TCB_num(unsigned int index)
 {
 	ASSERT(index < PRIO_MAX);
 	++(TCB_list[index].TCB_num);

@@ -1,7 +1,7 @@
 #ifndef _KA_CONFIGURATION_H
 #define _KA_CONFIGURATION_H
 
-// on/off control
+/* on/off control*/
 #define CONFIG_DEBUG_COUNT_INIT				1
 #define CONFIG_PARA_CHECK   			 	1
 #define CONFIG_CPU_USE_RATE_CALCULATION 	0
@@ -15,7 +15,7 @@
 #define CONFIG_POWER_MANAGEMENT 			1
 #define CONFIG_MODULE						1
 
-//parameter control
+/*parameter control*/
 #define CPU_BIT      						32
 #define COUNT_DELAY_NUM   					10
 #define PRECISE_DELAY_NUM   				16

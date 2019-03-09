@@ -5,7 +5,7 @@
 #include <TCB.h>
 
 typedef struct mutex_block{
-	unsigned int mutex_flag; // should be 0 or 1
+	unsigned int mutex_flag; /* should be 0 or 1*/
 	TCB *owner_TCB_ptr;
 	struct insert_sort_entity mutex_insert_sort_TCB_list;
 }MUTEX;
@@ -15,13 +15,15 @@ enum mutex_state{
 	MUTEX_UNLOCK
 };
 
-#define ERROR_MUTEX_LOCK_FAIL 	1
-#define ERROR_MUTEX_UNLOCK_FAIL 2
-
+int _mutex_init(MUTEX *MUTEX_ptr);
 int mutex_init(MUTEX *MUTEX_ptr);
+int _mutex_lock(MUTEX *MUTEX_ptr);
 int mutex_lock(MUTEX *MUTEX_ptr);
+int _mutex_try_lock(MUTEX *MUTEX_ptr);
 int mutex_try_lock(MUTEX *MUTEX_ptr);
+int _mutex_unlock(MUTEX *MUTEX_ptr);
 int mutex_unlock(MUTEX *MUTEX_ptr);
+int _mutex_del(MUTEX *MUTEX_ptr);
 int mutex_del(MUTEX *MUTEX_ptr);
 
 #endif

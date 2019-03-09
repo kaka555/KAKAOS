@@ -44,14 +44,6 @@ int add_page_alloc_record(unsigned int level,void *ptr)
 	return FUN_EXECUTE_SUCCESSFULLY;
 }
 
-//static void copy_data(struct singly_list_head *from,struct singly_list_head *to)
-//{
-//	struct page_alloc_record *record_ptr1 = singly_list_entry(from,struct page_alloc_record,list);
-//	struct page_alloc_record *record_ptr2 = singly_list_entry(to,struct page_alloc_record,list);
-//	record_ptr2->level = record_ptr1->level;
-//	record_ptr2->ptr = record_ptr1->ptr;
-//}
-
 static int find_and_remove_record(void *ptr)
 {
 	struct singly_list_head *pos;
@@ -103,76 +95,76 @@ int get_set_bit_place(unsigned int num)
 static void *_case_alloc_buddy(unsigned int level)
 {
 	struct slab *slab_ptr;
-	struct buddy *buddy_ptr = (struct buddy *)get_os_buddy_ptr_head();
+	struct buddy *buddy_ptr = (struct buddy *)_get_os_buddy_ptr_head();
 	ASSERT(NULL != buddy_ptr);
 	while(NULL != buddy_ptr)
 	{
 		if(buddy_ptr->info.max_level < level)
 		{
-			buddy_ptr = (struct buddy *)get_next_buddy_ptr_head(buddy_ptr);
+			buddy_ptr = (struct buddy *)_get_next_buddy_ptr_head(buddy_ptr);
 			continue;
 		}
 		switch(level)
 		{
 			case 1 :
-				slab_ptr = (struct slab *)alloc_power1_page();
+				slab_ptr = (struct slab *)_alloc_power1_page();
 				if(NULL == slab_ptr)
 				{
-					buddy_ptr = (struct buddy *)get_next_buddy_ptr_head(buddy_ptr);
+					buddy_ptr = (struct buddy *)_get_next_buddy_ptr_head(buddy_ptr);
 					continue ;
 				}
 				slab_ptr->end_ptr = (void *)((unsigned int)slab_ptr + 1 * PAGE_SIZE_BYTE);
 				break;
 			case 2 :
-				slab_ptr = (struct slab *)alloc_power2_page();
+				slab_ptr = (struct slab *)_alloc_power2_page();
 				if(NULL == slab_ptr)
 				{
-					buddy_ptr = (struct buddy *)get_next_buddy_ptr_head(buddy_ptr);
+					buddy_ptr = (struct buddy *)_get_next_buddy_ptr_head(buddy_ptr);
 					continue ;
 				}
 				slab_ptr->end_ptr = (void *)((unsigned int)slab_ptr + 2 * PAGE_SIZE_BYTE);
 				break;
 			case 3 :
-				slab_ptr = (struct slab *)alloc_power3_page();
+				slab_ptr = (struct slab *)_alloc_power3_page();
 				if(NULL == slab_ptr)
 				{
-					buddy_ptr = (struct buddy *)get_next_buddy_ptr_head(buddy_ptr);
+					buddy_ptr = (struct buddy *)_get_next_buddy_ptr_head(buddy_ptr);
 					continue ;
 				}
 				slab_ptr->end_ptr = (void *)((unsigned int)slab_ptr + 4 * PAGE_SIZE_BYTE);
 				break;
 			case 4 :
-				slab_ptr = (struct slab *)alloc_power4_page();
+				slab_ptr = (struct slab *)_alloc_power4_page();
 				if(NULL == slab_ptr)
 				{
-					buddy_ptr = (struct buddy *)get_next_buddy_ptr_head(buddy_ptr);
+					buddy_ptr = (struct buddy *)_get_next_buddy_ptr_head(buddy_ptr);
 					continue ;
 				}
 				slab_ptr->end_ptr = (void *)((unsigned int)slab_ptr + 8 * PAGE_SIZE_BYTE);
 				break;
 			case 5 :
-				slab_ptr = (struct slab *)alloc_power5_page();
+				slab_ptr = (struct slab *)_alloc_power5_page();
 				if(NULL == slab_ptr)
 				{
-					buddy_ptr = (struct buddy *)get_next_buddy_ptr_head(buddy_ptr);
+					buddy_ptr = (struct buddy *)_get_next_buddy_ptr_head(buddy_ptr);
 					continue ;
 				}
 				slab_ptr->end_ptr = (void *)((unsigned int)slab_ptr + 16 * PAGE_SIZE_BYTE);
 				break;
 			case 6 :
-				slab_ptr = (struct slab *)alloc_power6_page();
+				slab_ptr = (struct slab *)_alloc_power6_page();
 				if(NULL == slab_ptr)
 				{
-					buddy_ptr = (struct buddy *)get_next_buddy_ptr_head(buddy_ptr);
+					buddy_ptr = (struct buddy *)_get_next_buddy_ptr_head(buddy_ptr);
 					continue ;
 				}
 				slab_ptr->end_ptr = (void *)((unsigned int)slab_ptr + 32 * PAGE_SIZE_BYTE);
 				break;
 			case 7 :
-				slab_ptr = (struct slab *)alloc_power7_page();
+				slab_ptr = (struct slab *)_alloc_power7_page();
 				if(NULL == slab_ptr)
 				{
-					buddy_ptr = (struct buddy *)get_next_buddy_ptr_head(buddy_ptr);
+					buddy_ptr = (struct buddy *)_get_next_buddy_ptr_head(buddy_ptr);
 					continue ;
 				}
 				slab_ptr->end_ptr = (void *)((unsigned int)slab_ptr + 64 * PAGE_SIZE_BYTE);
@@ -198,27 +190,27 @@ void *ka_malloc(unsigned int size)
 	CPU_CRITICAL_ENTER();
 	if(size <= 512)
 	{
-		IL *IL_ptr = find_first_bigger_IL(&cache_chain_head,size); //find a suitable cache
+		IL *IL_ptr = find_first_bigger_IL(&cache_chain_head,size); /*find a suitable cache*/
 		while(1)
 		{
-			if(NULL != IL_ptr)// this means that there is a slab.size bigger than size
+			if(NULL != IL_ptr)/* this means that there is a slab.size bigger than size*/
 			{
 				struct kmem_cache *kmem_cache_ptr = list_entry(IL_ptr,struct kmem_cache,kmem_cache_insert_chain);
-				//first try to get room from slabs_partial
-				if(!list_empty(&kmem_cache_ptr->slabs_partial)) // if chain "slabs_partial" is not empty
+				/*first try to get room from slabs_partial*/
+				if(!list_empty(&kmem_cache_ptr->slabs_partial)) /* if chain "slabs_partial" is not empty*/
 				{
-					struct slab *slab_ptr = list_entry(kmem_cache_ptr->slabs_partial.next,struct slab,slab_chain); // get slab-ptr
-					ptr = slab_ptr->block_head.next; // ptr is the point of the allocated space
-					list_del(slab_ptr->block_head.next); // delete it from slab chain "block_head"
-					if(0 == --(slab_ptr->current_block_num)) // if this slab has no more space
+					struct slab *slab_ptr = list_entry(kmem_cache_ptr->slabs_partial.next,struct slab,slab_chain); /* get slab-ptr*/
+					ptr = slab_ptr->block_head.next; /* ptr is the point of the allocated space*/
+					list_del(slab_ptr->block_head.next); /* delete it from slab chain "block_head"*/
+					if(0 == --(slab_ptr->current_block_num)) /* if this slab has no more space*/
 					{
 						list_del(&slab_ptr->slab_chain);
-						list_add(&slab_ptr->slab_chain,&kmem_cache_ptr->slabs_full); // put it into the chain "slabs_full"
+						list_add(&slab_ptr->slab_chain,&kmem_cache_ptr->slabs_full); /* put it into the chain "slabs_full"*/
 					}
 					CPU_CRITICAL_EXIT();
 					return ptr;
 				}
-				else if(!list_empty(&kmem_cache_ptr->slabs_empty)) // else if chain "slabs_empty" is not empty
+				else if(!list_empty(&kmem_cache_ptr->slabs_empty)) /* else if chain "slabs_empty" is not empty*/
 				{
 					struct slab *slab_ptr = list_entry(kmem_cache_ptr->slabs_empty.next,struct slab,slab_chain);
 					ptr = slab_ptr->block_head.next;
@@ -229,23 +221,23 @@ void *ka_malloc(unsigned int size)
 					CPU_CRITICAL_EXIT();
 					return ptr;
 				}
-				else // at this case we have to allocate mem from buddy
+				else /* at this case we have to allocate mem from buddy*/
 				{
 					struct slab *slab_ptr;
 					unsigned int level;
 					level = get_set_bit_place((10 * IL_ptr->prio + sizeof(struct slab)) / PAGE_SIZE_BYTE) + 2;
-					//at least allocate 10 times of corresponding space and a room of sizeof(struct slab)
+					/*at least allocate 10 times of corresponding space and a room of sizeof(struct slab)*/
 					slab_ptr = (struct slab *)_case_alloc_buddy(level);
 					if(NULL != slab_ptr)
 					{
 						load_slab((void *)slab_ptr,slab_ptr->end_ptr,IL_ptr->prio,&kmem_cache_ptr->slabs_partial);
-						ptr = slab_ptr->block_head.next; // ptr is the point of the allocated space
-						list_del(slab_ptr->block_head.next); // delete it from slab chain "block_head"
+						ptr = slab_ptr->block_head.next; 	 /* ptr is the point of the allocated space*/
+						list_del(slab_ptr->block_head.next); /* delete it from slab chain "block_head"*/
 						--(slab_ptr->current_block_num);
 						CPU_CRITICAL_EXIT();
 						return ptr;
 					}
-					else // NULL == slab_ptr
+					else /* NULL == slab_ptr*/
 					{
 						IL_ptr = get_next_IL(IL_ptr,&cache_chain_head);
 						if(NULL == IL_ptr)
@@ -257,7 +249,7 @@ void *ka_malloc(unsigned int size)
 					}
 				}
 			}
-			else // NULL == IL_ptr
+			else /* NULL == IL_ptr*/
 			{
 				struct kmem_cache *kmem_cache_ptr = ka_malloc(sizeof(struct kmem_cache));
 				ASSERT(NULL != kmem_cache_ptr);
@@ -272,7 +264,7 @@ void *ka_malloc(unsigned int size)
 			}
 		}
 	}
-	else //size > 512
+	else /*size > 512*/
 	{
 		int level = get_set_bit_place(size/PAGE_SIZE_BYTE) + 2;
 		ptr = _case_alloc_buddy((unsigned int)level);
@@ -296,10 +288,10 @@ void *ka_malloc(unsigned int size)
 	}
 }
 
-// this functin try to free ptr,if ptr is in the scope of one slab in the slab 
-// chain "head",then insert the ptr into corresponding slab and return slab_ptr,
-// or if ptr not belongs to any slab in this slab chain, then return NULL means 
-// that return ptr fail;
+/* this functin try to free ptr,if ptr is in the scope of one slab in the slab 
+** chain "head",then insert the ptr into corresponding slab and return slab_ptr,
+** or if ptr not belongs to any slab in this slab chain, then return NULL means 
+** that return ptr fail;*/
 static struct slab *free_find_in_slab_chain(struct list_head *head,void *ptr)
 {
 	struct list_head *pos;
@@ -321,7 +313,7 @@ static struct slab *free_find_in_slab_chain(struct list_head *head,void *ptr)
 
 int in_os_memory(void *ptr)
 {
-	struct buddy *buddy_ptr = (struct buddy *)get_os_buddy_ptr_head();
+	struct buddy *buddy_ptr = (struct buddy *)_get_os_buddy_ptr_head();
 	ASSERT(NULL != buddy_ptr);
 	while(NULL != buddy_ptr)
 	{
@@ -329,7 +321,7 @@ int in_os_memory(void *ptr)
 		{
 			return FUN_EXECUTE_SUCCESSFULLY;
 		}
-		buddy_ptr = (struct buddy *)get_next_buddy_ptr_head(buddy_ptr);
+		buddy_ptr = (struct buddy *)_get_next_buddy_ptr_head(buddy_ptr);
 	}
 	return -1;
 }
@@ -353,7 +345,7 @@ void ka_free(void *ptr)
 		if(!list_empty(&kmem_cache_ptr->slabs_partial))
 		{
 			slab_ptr = free_find_in_slab_chain(&kmem_cache_ptr->slabs_partial,ptr);
-			if(NULL != slab_ptr) // free success
+			if(NULL != slab_ptr) /* free success*/
 			{
 				if(slab_ptr->current_block_num == slab_ptr->full_block_num)
 				{
@@ -367,7 +359,7 @@ void ka_free(void *ptr)
 		if(!list_empty(&kmem_cache_ptr->slabs_full))
 		{
 			slab_ptr = free_find_in_slab_chain(&kmem_cache_ptr->slabs_full,ptr);
-			if(NULL != slab_ptr) // free success
+			if(NULL != slab_ptr) /* free success*/
 			{
 				list_del(&slab_ptr->slab_chain);
 				list_add(&slab_ptr->slab_chain,&kmem_cache_ptr->slabs_partial);
@@ -382,7 +374,8 @@ void ka_free(void *ptr)
 		return;
 	}
 	ka_printf("not in a slab or record,fatal error\n");
-	ASSERT(0);//should not go here
+	ASSERT(0);/*should not go here*/
+	while(1);
 }
 
 #if CONFIG_SHELL_EN

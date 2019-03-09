@@ -11,7 +11,7 @@
 
 static struct little_heap delay_heap;
 
-//this function is used by delay_heap
+/*this function is used by delay_heap*/
 static int _cmp(Vector *Vector_ptr,unsigned int index1,unsigned int index2)
 {
 	const TCB **a, **b;
@@ -44,41 +44,27 @@ inline void __init_delay_heap(void)
 	{
 		ka_printf("init_delay_heap error!\nstop booting.....\n");
 		while(1);
-		//os stop here
+		/*os stop here*/
 	}
 }
 
-//before inserting action,os should set the delay_reach_time
-//this function do not change the task_state of the TCB,os shoule
-//change it before using this function
-inline int insert_into_delay_heap(TCB *TCB_ptr)
+/*before inserting action,os should set the delay_reach_time
+this function do not change the task_state of the TCB,os shoule
+change it before using this function*/
+int _insert_into_delay_heap(TCB *TCB_ptr)
 {
 	ASSERT(NULL != TCB_ptr);
-#if CONFIG_PARA_CHECK
-	if(NULL == TCB_ptr)
-	{
-		OS_ERROR_PARA_MESSAGE_DISPLAY(insert_into_delay_heap,TCB_ptr);
-		return -ERROR_NULL_INPUT_PTR;
-	}
-#endif
 	return heap_push(&delay_heap,&TCB_ptr);
 }
 
-int remove_from_delay_heap(TCB *TCB_ptr)
+int _remove_from_delay_heap(TCB *TCB_ptr)
 {
 	ASSERT(NULL != TCB_ptr);
-#if CONFIG_PARA_CHECK
-	if(NULL == TCB_ptr)
-	{
-		OS_ERROR_PARA_MESSAGE_DISPLAY(remove_from_delay_heap,TCB_ptr);
-		return -ERROR_NULL_INPUT_PTR;
-	}
-#endif
 	TCB *TCB_ptr_buffer;
 	int i;
 	int ret;
 	int len = heap_get_cur_len(&delay_heap);
-	for(i=1;i<len;++i) // check from first to the end
+	for(i=1;i<len;++i) /* check from first to the end*/
 	{
 		heap_get_index_data(&delay_heap,&TCB_ptr_buffer,i);
 		if(TCB_ptr == TCB_ptr_buffer)
@@ -88,16 +74,15 @@ int remove_from_delay_heap(TCB *TCB_ptr)
 			{
 				return ret;
 			}
-			insert_ready_TCB(TCB_ptr);
+			_insert_ready_TCB(TCB_ptr);
 			return FUN_EXECUTE_SUCCESSFULLY;
 		}
 	}
 	return -ERROR_VALUELESS_INPUT;
 }
 
-inline TCB* delay_heap_get_top_TCB(void)
+TCB* _delay_heap_get_top_TCB(void)
 {
-	//TCB *TCB_ptr;
 	TCB *TCB_ptr;
 	if(0 != heap_get_top_safe(&delay_heap,&TCB_ptr))
 	{
@@ -106,7 +91,7 @@ inline TCB* delay_heap_get_top_TCB(void)
 	return TCB_ptr;
 }
 
-inline TCB* delay_heap_remove_top_TCB(void)
+TCB* _delay_heap_remove_top_TCB(void)
 {
 	TCB *TCB_ptr;
 	if(0 != heap_remove_top(&delay_heap,&TCB_ptr))

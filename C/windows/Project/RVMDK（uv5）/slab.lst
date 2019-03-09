@@ -1,4 +1,4 @@
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cctYJX6P.s 			page 1
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccCttVYs.s 			page 1
 
 
    1              		.cpu cortex-m3
@@ -58,7 +58,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cctYJX6P.s 			page 1
   38              		.cfi_def_cfa_register 7
   39 0006 7860     		str	r0, [r7, #4]
   18:../../source/include/os_lib/double_linked_list.h ****     list->next = list;
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cctYJX6P.s 			page 2
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccCttVYs.s 			page 2
 
 
   40              		.loc 1 18 0
@@ -118,7 +118,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cctYJX6P.s 			page 1
   86              	.LCFI8:
   87              		.cfi_def_cfa_register 7
   88 0024 F860     		str	r0, [r7, #12]
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cctYJX6P.s 			page 3
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccCttVYs.s 			page 3
 
 
   89 0026 B960     		str	r1, [r7, #8]
@@ -178,7 +178,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cctYJX6P.s 			page 1
  134              		@ args = 0, pretend = 0, frame = 8
  135              		@ frame_needed = 1, uses_anonymous_args = 0
  136 004c 80B5     		push	{r7, lr}
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cctYJX6P.s 			page 4
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccCttVYs.s 			page 4
 
 
  137              	.LCFI12:
@@ -232,13 +232,13 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cctYJX6P.s 			page 1
    5:../../source/src/kernel/OS_LIB/slab.c **** void insert_into_cache_chain(
    6:../../source/src/kernel/OS_LIB/slab.c **** 	struct list_head *head,
    7:../../source/src/kernel/OS_LIB/slab.c **** 	struct kmem_cache *kmem_cache_ptr,
-   8:../../source/src/kernel/OS_LIB/slab.c **** 	int block_size//bytes
+   8:../../source/src/kernel/OS_LIB/slab.c **** 	int block_size/*bytes*/
    9:../../source/src/kernel/OS_LIB/slab.c **** 	)
   10:../../source/src/kernel/OS_LIB/slab.c **** {
  179              		.loc 2 10 0
  180              		.cfi_startproc
  181              		@ args = 0, pretend = 0, frame = 16
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cctYJX6P.s 			page 5
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccCttVYs.s 			page 5
 
 
  182              		@ frame_needed = 1, uses_anonymous_args = 0
@@ -298,7 +298,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cctYJX6P.s 			page 1
  230              		.cfi_def_cfa_register 13
  231              		@ sp needed
  232 00b2 80BD     		pop	{r7, pc}
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cctYJX6P.s 			page 6
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccCttVYs.s 			page 6
 
 
  233              		.cfi_endproc
@@ -324,14 +324,13 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cctYJX6P.s 			page 1
  249              	.LFB11:
   17:../../source/src/kernel/OS_LIB/slab.c **** 
   18:../../source/src/kernel/OS_LIB/slab.c **** void load_slab(
-  19:../../source/src/kernel/OS_LIB/slab.c **** //	struct slab *slab_ptr,
-  20:../../source/src/kernel/OS_LIB/slab.c **** 	void *start_ptr,
-  21:../../source/src/kernel/OS_LIB/slab.c **** 	void *end_ptr,
-  22:../../source/src/kernel/OS_LIB/slab.c **** 	unsigned int   block_size,
-  23:../../source/src/kernel/OS_LIB/slab.c **** 	struct list_head *slab_chain_ptr
-  24:../../source/src/kernel/OS_LIB/slab.c **** 	)
-  25:../../source/src/kernel/OS_LIB/slab.c **** {
- 250              		.loc 2 25 0
+  19:../../source/src/kernel/OS_LIB/slab.c **** 	void *start_ptr,
+  20:../../source/src/kernel/OS_LIB/slab.c **** 	void *end_ptr,
+  21:../../source/src/kernel/OS_LIB/slab.c **** 	unsigned int   block_size,
+  22:../../source/src/kernel/OS_LIB/slab.c **** 	struct list_head *slab_chain_ptr
+  23:../../source/src/kernel/OS_LIB/slab.c **** 	)
+  24:../../source/src/kernel/OS_LIB/slab.c **** {
+ 250              		.loc 2 24 0
  251              		.cfi_startproc
  252              		@ args = 0, pretend = 0, frame = 40
  253              		@ frame_needed = 1, uses_anonymous_args = 0
@@ -350,103 +349,103 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cctYJX6P.s 			page 1
  266 00bc B960     		str	r1, [r7, #8]
  267 00be 7A60     		str	r2, [r7, #4]
  268 00c0 3B60     		str	r3, [r7]
-  26:../../source/src/kernel/OS_LIB/slab.c **** #if CONFIG_ASSERT_DEBUG
-  27:../../source/src/kernel/OS_LIB/slab.c **** 	int i = 0;
- 269              		.loc 2 27 0
+  25:../../source/src/kernel/OS_LIB/slab.c **** #if CONFIG_ASSERT_DEBUG
+  26:../../source/src/kernel/OS_LIB/slab.c **** 	int i = 0;
+ 269              		.loc 2 26 0
  270 00c2 0023     		movs	r3, #0
  271 00c4 7B62     		str	r3, [r7, #36]
-  28:../../source/src/kernel/OS_LIB/slab.c **** #endif
-  29:../../source/src/kernel/OS_LIB/slab.c **** 	struct list_head *list_head_ptr;
-  30:../../source/src/kernel/OS_LIB/slab.c **** 	void *boundary_ptr;
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cctYJX6P.s 			page 7
+  27:../../source/src/kernel/OS_LIB/slab.c **** #endif
+  28:../../source/src/kernel/OS_LIB/slab.c **** 	struct list_head *list_head_ptr;
+  29:../../source/src/kernel/OS_LIB/slab.c **** 	void *boundary_ptr;
+  30:../../source/src/kernel/OS_LIB/slab.c **** 	struct slab *slab_ptr = (struct slab *)start_ptr;
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccCttVYs.s 			page 7
 
 
-  31:../../source/src/kernel/OS_LIB/slab.c **** 	struct slab *slab_ptr = (struct slab *)start_ptr;
- 272              		.loc 2 31 0
+ 272              		.loc 2 30 0
  273 00c6 FB68     		ldr	r3, [r7, #12]
  274 00c8 FB61     		str	r3, [r7, #28]
-  32:../../source/src/kernel/OS_LIB/slab.c **** 	list_add(&slab_ptr->slab_chain,slab_chain_ptr);
- 275              		.loc 2 32 0
+  31:../../source/src/kernel/OS_LIB/slab.c **** 	list_add(&slab_ptr->slab_chain,slab_chain_ptr);
+ 275              		.loc 2 31 0
  276 00ca FB69     		ldr	r3, [r7, #28]
  277 00cc 1433     		adds	r3, r3, #20
  278 00ce 3968     		ldr	r1, [r7]
  279 00d0 1846     		mov	r0, r3
  280 00d2 FFF7BBFF 		bl	list_add
-  33:../../source/src/kernel/OS_LIB/slab.c **** 	slab_ptr->start_ptr = start_ptr;
- 281              		.loc 2 33 0
+  32:../../source/src/kernel/OS_LIB/slab.c **** 	slab_ptr->start_ptr = start_ptr;
+ 281              		.loc 2 32 0
  282 00d6 FB69     		ldr	r3, [r7, #28]
  283 00d8 FA68     		ldr	r2, [r7, #12]
  284 00da 1A60     		str	r2, [r3]
-  34:../../source/src/kernel/OS_LIB/slab.c **** 	slab_ptr->end_ptr   = end_ptr;
- 285              		.loc 2 34 0
+  33:../../source/src/kernel/OS_LIB/slab.c **** 	slab_ptr->end_ptr   = end_ptr;
+ 285              		.loc 2 33 0
  286 00dc FB69     		ldr	r3, [r7, #28]
  287 00de BA68     		ldr	r2, [r7, #8]
  288 00e0 5A60     		str	r2, [r3, #4]
-  35:../../source/src/kernel/OS_LIB/slab.c **** 	slab_ptr->block_size = block_size;
- 289              		.loc 2 35 0
+  34:../../source/src/kernel/OS_LIB/slab.c **** 	slab_ptr->block_size = block_size;
+ 289              		.loc 2 34 0
  290 00e2 FB69     		ldr	r3, [r7, #28]
  291 00e4 7A68     		ldr	r2, [r7, #4]
  292 00e6 1A61     		str	r2, [r3, #16]
-  36:../../source/src/kernel/OS_LIB/slab.c **** 	unsigned int room_size = (unsigned int)((unsigned int)end_ptr - (unsigned int)start_ptr);
- 293              		.loc 2 36 0
+  35:../../source/src/kernel/OS_LIB/slab.c **** 	unsigned int room_size = (unsigned int)((unsigned int)end_ptr - (unsigned int)start_ptr);
+ 293              		.loc 2 35 0
  294 00e8 BA68     		ldr	r2, [r7, #8]
  295 00ea FB68     		ldr	r3, [r7, #12]
  296 00ec D31A     		subs	r3, r2, r3
  297 00ee BB61     		str	r3, [r7, #24]
-  37:../../source/src/kernel/OS_LIB/slab.c **** 	slab_ptr->full_block_num = (room_size - sizeof(struct slab)) / block_size;
- 298              		.loc 2 37 0
+  36:../../source/src/kernel/OS_LIB/slab.c **** 	slab_ptr->full_block_num = (room_size - sizeof(struct slab)) / block_size;
+ 298              		.loc 2 36 0
  299 00f0 BB69     		ldr	r3, [r7, #24]
  300 00f2 A3F12402 		sub	r2, r3, #36
  301 00f6 7B68     		ldr	r3, [r7, #4]
  302 00f8 B2FBF3F2 		udiv	r2, r2, r3
  303 00fc FB69     		ldr	r3, [r7, #28]
  304 00fe DA60     		str	r2, [r3, #12]
-  38:../../source/src/kernel/OS_LIB/slab.c **** 	slab_ptr->current_block_num = slab_ptr->full_block_num;
- 305              		.loc 2 38 0
+  37:../../source/src/kernel/OS_LIB/slab.c **** 	slab_ptr->current_block_num = slab_ptr->full_block_num;
+ 305              		.loc 2 37 0
  306 0100 FB69     		ldr	r3, [r7, #28]
  307 0102 DA68     		ldr	r2, [r3, #12]
  308 0104 FB69     		ldr	r3, [r7, #28]
  309 0106 9A60     		str	r2, [r3, #8]
-  39:../../source/src/kernel/OS_LIB/slab.c **** 	INIT_LIST_HEAD(&slab_ptr->block_head);
- 310              		.loc 2 39 0
+  38:../../source/src/kernel/OS_LIB/slab.c **** 	INIT_LIST_HEAD(&slab_ptr->block_head);
+ 310              		.loc 2 38 0
  311 0108 FB69     		ldr	r3, [r7, #28]
  312 010a 1C33     		adds	r3, r3, #28
  313 010c 1846     		mov	r0, r3
  314 010e FFF777FF 		bl	INIT_LIST_HEAD
-  40:../../source/src/kernel/OS_LIB/slab.c **** 	list_head_ptr = (struct list_head *)((int)end_ptr - block_size);
- 315              		.loc 2 40 0
+  39:../../source/src/kernel/OS_LIB/slab.c **** 	list_head_ptr = (struct list_head *)((int)end_ptr - block_size);
+ 315              		.loc 2 39 0
  316 0112 BA68     		ldr	r2, [r7, #8]
  317 0114 7B68     		ldr	r3, [r7, #4]
  318 0116 D31A     		subs	r3, r2, r3
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cctYJX6P.s 			page 8
-
-
  319 0118 3B62     		str	r3, [r7, #32]
-  41:../../source/src/kernel/OS_LIB/slab.c **** 	boundary_ptr = (void *)((unsigned int)start_ptr + sizeof(struct slab));
- 320              		.loc 2 41 0
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccCttVYs.s 			page 8
+
+
+  40:../../source/src/kernel/OS_LIB/slab.c **** 	boundary_ptr = (void *)((unsigned int)start_ptr + sizeof(struct slab));
+ 320              		.loc 2 40 0
  321 011a FB68     		ldr	r3, [r7, #12]
  322 011c 2433     		adds	r3, r3, #36
  323 011e 7B61     		str	r3, [r7, #20]
-  42:../../source/src/kernel/OS_LIB/slab.c **** 	while((unsigned int)list_head_ptr >= (unsigned int)boundary_ptr)
- 324              		.loc 2 42 0
+  41:../../source/src/kernel/OS_LIB/slab.c **** 	while((unsigned int)list_head_ptr >= (unsigned int)boundary_ptr)
+ 324              		.loc 2 41 0
  325 0120 15E0     		b	.L6
  326              	.L7:
-  43:../../source/src/kernel/OS_LIB/slab.c **** 	{
-  44:../../source/src/kernel/OS_LIB/slab.c **** 		list_add(list_head_ptr,&slab_ptr->block_head);
- 327              		.loc 2 44 0
+  42:../../source/src/kernel/OS_LIB/slab.c **** 	{
+  43:../../source/src/kernel/OS_LIB/slab.c **** 		list_add(list_head_ptr,&slab_ptr->block_head);
+ 327              		.loc 2 43 0
  328 0122 FB69     		ldr	r3, [r7, #28]
  329 0124 1C33     		adds	r3, r3, #28
  330 0126 1946     		mov	r1, r3
  331 0128 386A     		ldr	r0, [r7, #32]
  332 012a FFF78FFF 		bl	list_add
-  45:../../source/src/kernel/OS_LIB/slab.c **** 		list_head_ptr = (struct list_head *)((unsigned int)list_head_ptr - block_size);
- 333              		.loc 2 45 0
+  44:../../source/src/kernel/OS_LIB/slab.c **** 		list_head_ptr = (struct list_head *)((unsigned int)list_head_ptr - block_size);
+ 333              		.loc 2 44 0
  334 012e 3A6A     		ldr	r2, [r7, #32]
  335 0130 7B68     		ldr	r3, [r7, #4]
  336 0132 D31A     		subs	r3, r2, r3
  337 0134 3B62     		str	r3, [r7, #32]
-  46:../../source/src/kernel/OS_LIB/slab.c **** 		ASSERT(++i <= slab_ptr->full_block_num);
- 338              		.loc 2 46 0
+  45:../../source/src/kernel/OS_LIB/slab.c **** 		ASSERT(++i <= slab_ptr->full_block_num);
+ 338              		.loc 2 45 0
  339 0136 7B6A     		ldr	r3, [r7, #36]
  340 0138 0133     		adds	r3, r3, #1
  341 013a 7B62     		str	r3, [r7, #36]
@@ -455,20 +454,20 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cctYJX6P.s 			page 1
  344 0140 DB68     		ldr	r3, [r3, #12]
  345 0142 9A42     		cmp	r2, r3
  346 0144 03D9     		bls	.L6
- 347              		.loc 2 46 0 is_stmt 0 discriminator 1
- 348 0146 2E21     		movs	r1, #46
+ 347              		.loc 2 45 0 is_stmt 0 discriminator 1
+ 348 0146 2D21     		movs	r1, #45
  349 0148 0548     		ldr	r0, .L8
  350 014a FFF7FEFF 		bl	_ASSERT
  351              	.L6:
-  42:../../source/src/kernel/OS_LIB/slab.c **** 	{
- 352              		.loc 2 42 0 is_stmt 1
+  41:../../source/src/kernel/OS_LIB/slab.c **** 	{
+ 352              		.loc 2 41 0 is_stmt 1
  353 014e 3A6A     		ldr	r2, [r7, #32]
  354 0150 7B69     		ldr	r3, [r7, #20]
  355 0152 9A42     		cmp	r2, r3
  356 0154 E5D2     		bcs	.L7
-  47:../../source/src/kernel/OS_LIB/slab.c **** 	}
-  48:../../source/src/kernel/OS_LIB/slab.c **** }
- 357              		.loc 2 48 0
+  46:../../source/src/kernel/OS_LIB/slab.c **** 	}
+  47:../../source/src/kernel/OS_LIB/slab.c **** }
+ 357              		.loc 2 47 0
  358 0156 00BF     		nop
  359 0158 2837     		adds	r7, r7, #40
  360              	.LCFI25:
@@ -478,10 +477,10 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cctYJX6P.s 			page 1
  364              		.cfi_def_cfa_register 13
  365              		@ sp needed
  366 015c 80BD     		pop	{r7, pc}
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cctYJX6P.s 			page 9
-
-
  367              	.L9:
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccCttVYs.s 			page 9
+
+
  368 015e 00BF     		.align	2
  369              	.L8:
  370 0160 00000000 		.word	.LC0
@@ -538,10 +537,10 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cctYJX6P.s 			page 1
  421 005a 02       		.uleb128 0x2
  422 005b 04       		.byte	0x4
  423 005c 07       		.byte	0x7
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cctYJX6P.s 			page 10
-
-
  424 005d 2A010000 		.4byte	.LASF5
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccCttVYs.s 			page 10
+
+
  425 0061 02       		.uleb128 0x2
  426 0062 08       		.byte	0x8
  427 0063 07       		.byte	0x7
@@ -598,10 +597,10 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cctYJX6P.s 			page 1
  478 00c3 97000000 		.4byte	0x97
  479 00c7 02       		.byte	0x2
  480 00c8 23       		.byte	0x23
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cctYJX6P.s 			page 11
-
-
  481 00c9 08       		.uleb128 0x8
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccCttVYs.s 			page 11
+
+
  482 00ca 00       		.byte	0
  483 00cb 08       		.uleb128 0x8
  484 00cc 494C00   		.ascii	"IL\000"
@@ -658,10 +657,10 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cctYJX6P.s 			page 1
  535 012b 05       		.byte	0x5
  536 012c 14       		.byte	0x14
  537 012d 89010000 		.4byte	0x189
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cctYJX6P.s 			page 12
-
-
  538 0131 02       		.byte	0x2
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccCttVYs.s 			page 12
+
+
  539 0132 23       		.byte	0x23
  540 0133 00       		.uleb128 0
  541 0134 06       		.uleb128 0x6
@@ -718,10 +717,10 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cctYJX6P.s 			page 1
  592 018b 0A       		.uleb128 0xa
  593 018c 01       		.byte	0x1
  594 018d 2B000000 		.4byte	.LASF33
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cctYJX6P.s 			page 13
-
-
  595 0191 02       		.byte	0x2
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccCttVYs.s 			page 13
+
+
  596 0192 12       		.byte	0x12
  597 0193 01       		.byte	0x1
  598 0194 B4000000 		.4byte	.LFB11
@@ -732,7 +731,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cctYJX6P.s 			page 1
  603 01a5 0B       		.uleb128 0xb
  604 01a6 1B010000 		.4byte	.LASF21
  605 01aa 02       		.byte	0x2
- 606 01ab 14       		.byte	0x14
+ 606 01ab 13       		.byte	0x13
  607 01ac 89010000 		.4byte	0x189
  608 01b0 02       		.byte	0x2
  609 01b1 91       		.byte	0x91
@@ -740,7 +739,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cctYJX6P.s 			page 1
  611 01b3 0B       		.uleb128 0xb
  612 01b4 A0000000 		.4byte	.LASF22
  613 01b8 02       		.byte	0x2
- 614 01b9 15       		.byte	0x15
+ 614 01b9 14       		.byte	0x14
  615 01ba 89010000 		.4byte	0x189
  616 01be 02       		.byte	0x2
  617 01bf 91       		.byte	0x91
@@ -748,7 +747,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cctYJX6P.s 			page 1
  619 01c1 0B       		.uleb128 0xb
  620 01c2 FC000000 		.4byte	.LASF25
  621 01c6 02       		.byte	0x2
- 622 01c7 16       		.byte	0x16
+ 622 01c7 15       		.byte	0x15
  623 01c8 5A000000 		.4byte	0x5a
  624 01cc 02       		.byte	0x2
  625 01cd 91       		.byte	0x91
@@ -756,7 +755,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cctYJX6P.s 			page 1
  627 01cf 0B       		.uleb128 0xb
  628 01d0 9D010000 		.4byte	.LASF28
  629 01d4 02       		.byte	0x2
- 630 01d5 17       		.byte	0x17
+ 630 01d5 16       		.byte	0x16
  631 01d6 91000000 		.4byte	0x91
  632 01da 02       		.byte	0x2
  633 01db 91       		.byte	0x91
@@ -764,7 +763,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cctYJX6P.s 			page 1
  635 01dd 0C       		.uleb128 0xc
  636 01de 6900     		.ascii	"i\000"
  637 01e0 02       		.byte	0x2
- 638 01e1 1B       		.byte	0x1b
+ 638 01e1 1A       		.byte	0x1a
  639 01e2 33000000 		.4byte	0x33
  640 01e6 02       		.byte	0x2
  641 01e7 91       		.byte	0x91
@@ -772,18 +771,18 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cctYJX6P.s 			page 1
  643 01e9 0D       		.uleb128 0xd
  644 01ea D1020000 		.4byte	.LASF29
  645 01ee 02       		.byte	0x2
- 646 01ef 1D       		.byte	0x1d
+ 646 01ef 1C       		.byte	0x1c
  647 01f0 91000000 		.4byte	0x91
  648 01f4 02       		.byte	0x2
  649 01f5 91       		.byte	0x91
  650 01f6 70       		.sleb128 -16
  651 01f7 0D       		.uleb128 0xd
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cctYJX6P.s 			page 14
-
-
  652 01f8 52000000 		.4byte	.LASF30
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccCttVYs.s 			page 14
+
+
  653 01fc 02       		.byte	0x2
- 654 01fd 1E       		.byte	0x1e
+ 654 01fd 1D       		.byte	0x1d
  655 01fe 89010000 		.4byte	0x189
  656 0202 02       		.byte	0x2
  657 0203 91       		.byte	0x91
@@ -791,7 +790,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cctYJX6P.s 			page 1
  659 0205 0D       		.uleb128 0xd
  660 0206 07010000 		.4byte	.LASF31
  661 020a 02       		.byte	0x2
- 662 020b 1F       		.byte	0x1f
+ 662 020b 1E       		.byte	0x1e
  663 020c 22020000 		.4byte	0x222
  664 0210 02       		.byte	0x2
  665 0211 91       		.byte	0x91
@@ -799,7 +798,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cctYJX6P.s 			page 1
  667 0213 0D       		.uleb128 0xd
  668 0214 96000000 		.4byte	.LASF32
  669 0218 02       		.byte	0x2
- 670 0219 24       		.byte	0x24
+ 670 0219 23       		.byte	0x23
  671 021a 5A000000 		.4byte	0x5a
  672 021e 02       		.byte	0x2
  673 021f 91       		.byte	0x91
@@ -838,10 +837,10 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cctYJX6P.s 			page 1
  706 025e 0B       		.uleb128 0xb
  707 025f FC000000 		.4byte	.LASF25
  708 0263 02       		.byte	0x2
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cctYJX6P.s 			page 15
-
-
  709 0264 08       		.byte	0x8
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccCttVYs.s 			page 15
+
+
  710 0265 33000000 		.4byte	0x33
  711 0269 02       		.byte	0x2
  712 026a 91       		.byte	0x91
@@ -898,10 +897,10 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cctYJX6P.s 			page 1
  763 02d0 0B       		.uleb128 0xb
  764 02d1 9E020000 		.4byte	.LASF8
  765 02d5 01       		.byte	0x1
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cctYJX6P.s 			page 16
-
-
  766 02d6 18       		.byte	0x18
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccCttVYs.s 			page 16
+
+
  767 02d7 91000000 		.4byte	0x91
  768 02db 02       		.byte	0x2
  769 02dc 91       		.byte	0x91
@@ -958,10 +957,10 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cctYJX6P.s 			page 1
  820 0013 02       		.uleb128 0x2
  821 0014 24       		.uleb128 0x24
  822 0015 00       		.byte	0
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cctYJX6P.s 			page 17
-
-
  823 0016 0B       		.uleb128 0xb
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccCttVYs.s 			page 17
+
+
  824 0017 0B       		.uleb128 0xb
  825 0018 3E       		.uleb128 0x3e
  826 0019 0B       		.uleb128 0xb
@@ -1018,10 +1017,10 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cctYJX6P.s 			page 1
  877 004c 3B       		.uleb128 0x3b
  878 004d 0B       		.uleb128 0xb
  879 004e 49       		.uleb128 0x49
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cctYJX6P.s 			page 18
-
-
  880 004f 13       		.uleb128 0x13
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccCttVYs.s 			page 18
+
+
  881 0050 38       		.uleb128 0x38
  882 0051 0A       		.uleb128 0xa
  883 0052 00       		.byte	0
@@ -1078,10 +1077,10 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cctYJX6P.s 			page 1
  934 0086 0C       		.uleb128 0xc
  935 0087 01       		.uleb128 0x1
  936 0088 13       		.uleb128 0x13
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cctYJX6P.s 			page 19
-
-
  937 0089 00       		.byte	0
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccCttVYs.s 			page 19
+
+
  938 008a 00       		.byte	0
  939 008b 0B       		.uleb128 0xb
  940 008c 05       		.uleb128 0x5
@@ -1138,10 +1137,10 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cctYJX6P.s 			page 1
  991 00bf 3B       		.uleb128 0x3b
  992 00c0 0B       		.uleb128 0xb
  993 00c1 27       		.uleb128 0x27
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cctYJX6P.s 			page 20
-
-
  994 00c2 0C       		.uleb128 0xc
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccCttVYs.s 			page 20
+
+
  995 00c3 11       		.uleb128 0x11
  996 00c4 01       		.uleb128 0x1
  997 00c5 12       		.uleb128 0x12
@@ -1198,10 +1197,10 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cctYJX6P.s 			page 1
  1048 00fa 03       		.uleb128 0x3
  1049 00fb 0E       		.uleb128 0xe
  1050 00fc 3A       		.uleb128 0x3a
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cctYJX6P.s 			page 21
-
-
  1051 00fd 0B       		.uleb128 0xb
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccCttVYs.s 			page 21
+
+
  1052 00fe 3B       		.uleb128 0x3b
  1053 00ff 0B       		.uleb128 0xb
  1054 0100 27       		.uleb128 0x27
@@ -1258,10 +1257,10 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cctYJX6P.s 			page 1
  1105 0058 0200     		.2byte	0x2
  1106 005a 7D       		.byte	0x7d
  1107 005b 00       		.sleb128 0
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cctYJX6P.s 			page 22
-
-
  1108 005c 6E000000 		.4byte	.LCFI17-.Ltext0
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccCttVYs.s 			page 22
+
+
  1109 0060 70000000 		.4byte	.LCFI18-.Ltext0
  1110 0064 0200     		.2byte	0x2
  1111 0066 7D       		.byte	0x7d
@@ -1318,10 +1317,10 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cctYJX6P.s 			page 1
  1162 00e0 6C000000 		.4byte	.LFE2-.Ltext0
  1163 00e4 0200     		.2byte	0x2
  1164 00e6 7D       		.byte	0x7d
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cctYJX6P.s 			page 23
-
-
  1165 00e7 08       		.sleb128 8
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccCttVYs.s 			page 23
+
+
  1166 00e8 00000000 		.4byte	0
  1167 00ec 00000000 		.4byte	0
  1168              	.LLST1:
@@ -1378,10 +1377,10 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cctYJX6P.s 			page 1
  1219 016c 0200     		.2byte	0x2
  1220 016e 7D       		.byte	0x7d
  1221 016f 10       		.sleb128 16
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cctYJX6P.s 			page 24
-
-
  1222 0170 06000000 		.4byte	.LCFI2-.Ltext0
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccCttVYs.s 			page 24
+
+
  1223 0174 18000000 		.4byte	.LCFI3-.Ltext0
  1224 0178 0200     		.2byte	0x2
  1225 017a 77       		.byte	0x77
@@ -1417,7 +1416,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cctYJX6P.s 			page 1
  1255 001c 00000000 		.4byte	0
  1256              		.section	.debug_line,"",%progbits
  1257              	.Ldebug_line0:
- 1258 0000 01010000 		.section	.debug_str,"MS",%progbits,1
+ 1258 0000 FF000000 		.section	.debug_str,"MS",%progbits,1
  1258      0200B900 
  1258      00000201 
  1258      FB0E0D00 
@@ -1438,10 +1437,10 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cctYJX6P.s 			page 1
  1265              	.LASF7:
  1266 0035 6E657874 		.ascii	"next\000"
  1266      00
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cctYJX6P.s 			page 25
-
-
  1267              	.LASF34:
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccCttVYs.s 			page 25
+
+
  1268 003a 696E7365 		.ascii	"insert_into_cache_chain\000"
  1268      72745F69 
  1268      6E746F5F 
@@ -1498,10 +1497,10 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cctYJX6P.s 			page 1
  1290      6B5F6E75 
  1290      6D00
  1291              	.LASF37:
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cctYJX6P.s 			page 26
-
-
  1292 00e0 6C697374 		.ascii	"list_add\000"
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccCttVYs.s 			page 26
+
+
  1292      5F616464 
  1292      00
  1293              	.LASF4:
@@ -1558,10 +1557,10 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cctYJX6P.s 			page 1
  1317              	.LASF2:
  1318 0173 6C6F6E67 		.ascii	"long long int\000"
  1318      206C6F6E 
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cctYJX6P.s 			page 27
-
-
  1318      6720696E 
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccCttVYs.s 			page 27
+
+
  1318      7400
  1319              	.LASF9:
  1320 0181 55494E54 		.ascii	"UINT32\000"
@@ -1618,10 +1617,10 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cctYJX6P.s 			page 1
  1339      756D00
  1340              	.LASF18:
  1341 0284 736C6162 		.ascii	"slabs_partial\000"
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cctYJX6P.s 			page 28
-
-
  1341      735F7061 
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccCttVYs.s 			page 28
+
+
  1341      72746961 
  1341      6C00
  1342              	.LASF0:
@@ -1645,19 +1644,19 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cctYJX6P.s 			page 1
  1350      645F7074 
  1350      7200
  1351              		.ident	"GCC: (GNU Tools for Arm Embedded Processors 7-2018-q2-update) 7.3.1 20180622 (release) [AR
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\cctYJX6P.s 			page 29
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccCttVYs.s 			page 29
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 slab.c
-G:\Users\Jaxb\AppData\Local\Temp\cctYJX6P.s:15     .text:00000000 $t
-G:\Users\Jaxb\AppData\Local\Temp\cctYJX6P.s:21     .text:00000000 INIT_LIST_HEAD
-G:\Users\Jaxb\AppData\Local\Temp\cctYJX6P.s:71     .text:0000001e __list_add
-G:\Users\Jaxb\AppData\Local\Temp\cctYJX6P.s:130    .text:0000004c list_add
-G:\Users\Jaxb\AppData\Local\Temp\cctYJX6P.s:176    .text:0000006c insert_into_cache_chain
-G:\Users\Jaxb\AppData\Local\Temp\cctYJX6P.s:237    .rodata:00000000 $d
-G:\Users\Jaxb\AppData\Local\Temp\cctYJX6P.s:248    .text:000000b4 load_slab
-G:\Users\Jaxb\AppData\Local\Temp\cctYJX6P.s:370    .text:00000160 $d
+G:\Users\Jaxb\AppData\Local\Temp\ccCttVYs.s:15     .text:00000000 $t
+G:\Users\Jaxb\AppData\Local\Temp\ccCttVYs.s:21     .text:00000000 INIT_LIST_HEAD
+G:\Users\Jaxb\AppData\Local\Temp\ccCttVYs.s:71     .text:0000001e __list_add
+G:\Users\Jaxb\AppData\Local\Temp\ccCttVYs.s:130    .text:0000004c list_add
+G:\Users\Jaxb\AppData\Local\Temp\ccCttVYs.s:176    .text:0000006c insert_into_cache_chain
+G:\Users\Jaxb\AppData\Local\Temp\ccCttVYs.s:237    .rodata:00000000 $d
+G:\Users\Jaxb\AppData\Local\Temp\ccCttVYs.s:248    .text:000000b4 load_slab
+G:\Users\Jaxb\AppData\Local\Temp\ccCttVYs.s:370    .text:00000160 $d
 
 UNDEFINED SYMBOLS
 IL_init

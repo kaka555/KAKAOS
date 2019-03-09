@@ -5,10 +5,10 @@
 #include "TCB.h"
 
 void __init_delay_heap(void);
-int  insert_into_delay_heap(TCB *TCB_ptr);
-int  remove_from_delay_heap(TCB *TCB_ptr);
-TCB* delay_heap_get_top_TCB(void);
-TCB* delay_heap_remove_top_TCB(void);
+int  _insert_into_delay_heap(TCB *TCB_ptr);
+int  _remove_from_delay_heap(TCB *TCB_ptr);
+TCB* _delay_heap_get_top_TCB(void);
+TCB* _delay_heap_remove_top_TCB(void);
 void shell_delay_heap_check(void);
 
 #endif

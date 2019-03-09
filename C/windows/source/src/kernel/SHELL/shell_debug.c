@@ -33,9 +33,9 @@ void insert_break_point(char* file_name,unsigned line,const char* function_name)
 		ka_printf("program stop,now going to file: %s,line %u,function name is %s\n",file_name,line,function_name);
 		ka_printf("%s","kaka_os>>");
 #if CONFIG_ASSERT_DEBUG
-		error = p(&MCB_for_shell_debug,MCB_FLAG_WAIT,0);
+		error = _p(&MCB_for_shell_debug,MCB_FLAG_WAIT,0);
 #else
-		p(&MCB_for_shell_debug,MCB_FLAG_WAIT,0);
+		_p(&MCB_for_shell_debug,MCB_FLAG_WAIT,0);
 #endif
 		ASSERT(FUN_EXECUTE_SUCCESSFULLY == error);
 	}
@@ -45,14 +45,14 @@ inline void shell_debug_next(int argc, char const *argv[])
 {
 	(void)argc;
 	(void)argv;
-	v(&MCB_for_shell_debug);
+	_v(&MCB_for_shell_debug);
 }
 
 inline void shell_debug_run(int argc, char const *argv[])
 {
 	(void)argc;
 	(void)argv;
-	v(&MCB_for_shell_debug);
+	_v(&MCB_for_shell_debug);
 	flag_for_shell_debug = 0;
 }
 
@@ -63,7 +63,7 @@ inline void shell_debug_stop(int argc, char const *argv[])
 	flag_for_shell_debug = 1;
 }
 
-//the following is about shell variable
+/*the following is about shell variable*/
 static struct singly_list_head variable_array[SHELL_V_ARRAY_SIZE];
 
 void shell_debug_info(int argc, char const *argv[])

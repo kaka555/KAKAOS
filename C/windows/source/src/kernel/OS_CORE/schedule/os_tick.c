@@ -46,7 +46,7 @@ inline static void tick_time_handler(void)
 	if(TICK_PER_SEC == time_flag)
 	{
 		time_flag = 0;
-		system_time_increase();
+		_system_time_increase();
 #if CONFIG_CPU_USE_RATE_CALCULATION
 		use_rate = idle_num / (count_max_num/100);
 		idle_num = 0;
@@ -71,14 +71,14 @@ unsigned int get_cpu_use_rate(void)
  */
 static void delay_task_check(void)
 {
-	TCB *TCB_ptr = delay_heap_get_top_TCB();
+	TCB *TCB_ptr = _delay_heap_get_top_TCB();
 	while(NULL != TCB_ptr)
 	{
 		if(TCB_ptr->delay_reach_time == g_time_tick_count)
 		{
-			delay_heap_remove_top_TCB();
-			insert_ready_TCB(TCB_ptr);
-			TCB_ptr = delay_heap_get_top_TCB();
+			_delay_heap_remove_top_TCB();
+			_insert_ready_TCB(TCB_ptr);
+			TCB_ptr = _delay_heap_get_top_TCB();
 			set_rescheduled_flag();
 			continue ;
 		}
@@ -93,17 +93,17 @@ static void delay_task_check(void)
 void timer_task_check(void)
 {
 	struct timer *timer_ptr;
-	if(get_timer_heap_top(&timer_ptr) < 0)
+	if(_get_timer_heap_top(&timer_ptr) < 0)
 	{
 		return ;
 	}
-	if(TIME_FIRST_SMALLER_THAN_SECOND(get_tick(),timer_ptr->wake_time))
+	if(TIME_FIRST_SMALLER_THAN_SECOND(_get_tick(),timer_ptr->wake_time))
 	{
 		return;
 	}
 	else
 	{
-		remove_from_suspend_list(&TCB_timer_task);
+		_remove_from_suspend_list(&TCB_timer_task);
 		set_rescheduled_flag();
 	}
 }
@@ -124,14 +124,14 @@ static void run_task_handler(void)
 		return ;
 	}
 	TCB_ptr->timeslice_rest_time = TCB_ptr->timeslice_hope_time;
-	if(1 == get_ready_num_from_TCB_list(TCB_ptr->prio))
+	if(1 == _get_ready_num_from_TCB_list(TCB_ptr->prio))
 	{
 		return ;
 	}
 	else
 	{
 		struct list_head *head;
-		head = get_from_TCB_list(TCB_ptr->prio);
+		head = _get_from_TCB_list(TCB_ptr->prio);
 		list_del(&TCB_ptr->same_prio_list);
 		list_add_tail(&TCB_ptr->same_prio_list,head);
 		set_rescheduled_flag();

@@ -12,9 +12,9 @@ struct dev_normal{
 };
 
 struct dev_mem_para{
-	unsigned int prio; //1 is internal memory, others is external memory
+	unsigned int prio; /*1 is internal memory, others is external memory*/
 	void *start;
-	UINT32 size; //KB  must be 2^n
+	UINT32 size; /*KB  must be 2^n*/
 };
 
 struct dev_mem{
@@ -25,7 +25,6 @@ struct dev_mem{
 struct device_head{
 	char *dev_name;
 	char *dev_info;
-	//unsigned int struct_size;
 	enum device_type type;
 };
 

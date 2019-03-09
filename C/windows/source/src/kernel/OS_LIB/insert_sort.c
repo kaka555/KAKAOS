@@ -45,7 +45,7 @@ IL *insert_node
 	list_for_each_safe(pos,next,head)
 	{
 		IL_ptr = list_entry(pos,IL,insert);
-		//if(prio < IL_ptr->prio)
+		/*if(prio < IL_ptr->prio)*/
 		if(TIME_FIRST_SMALLER_THAN_SECOND(prio,IL_ptr->prio))
 		{
 			list_add_tail(&insert_node->insert,pos);
@@ -57,7 +57,7 @@ IL *insert_node
 	return ;
 }
 
-IL *find_in_chain(struct list_head *head,COMPARE_TYPE prio) // polymorphic
+IL *find_in_chain(struct list_head *head,COMPARE_TYPE prio) /* polymorphic*/
 {
 	struct list_head *pos, *next;
 	IL *IL_ptr;
@@ -92,7 +92,6 @@ IL *delete_first_in_chain(struct list_head *head)
 {
 	struct list_head *pos;
 	IL *IL_ptr;
-	//ASSERT(!list_empty(head));
 	pos = head->next;
 	if(pos == head)
 	{
@@ -104,7 +103,7 @@ IL *delete_first_in_chain(struct list_head *head)
 	return IL_ptr;
 }
 
-IL *find_first_bigger_IL(struct list_head *head,unsigned int prio)// polymorphic
+IL *find_first_bigger_IL(struct list_head *head,unsigned int prio)/* polymorphic*/
 {
 	struct list_head *pos, *next;
 	IL *IL_ptr;

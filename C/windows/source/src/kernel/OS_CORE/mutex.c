@@ -17,23 +17,11 @@ inline static int value_cmp(void *data1,void *data2)
 	return ((TCB*)data1)->prio - ((TCB*)data2)->prio;
 }
 
-int mutex_init(MUTEX *MUTEX_ptr)
+int _mutex_init(MUTEX *MUTEX_ptr)
 {
 	ASSERT(NULL != MUTEX_ptr);
-#if CONFIG_PARA_CHECK
-	if(NULL == MUTEX_ptr)
-	{
-		OS_ERROR_PARA_MESSAGE_DISPLAY(mutex_init,MUTEX_ptr);
-		return -ERROR_NULL_INPUT_PTR;
-	}
-#endif
 	CPU_SR_ALLOC();
 	CPU_CRITICAL_ENTER();
-	if (g_interrupt_count > 0)
-	{
-		CPU_CRITICAL_EXIT();
-		return -ERROR_FUN_USE_IN_INTER;
-	}
 	MUTEX_ptr->mutex_flag = MUTEX_UNLOCK;
 	MUTEX_ptr->owner_TCB_ptr = NULL;
 	init_insert_sort_entity(
@@ -45,25 +33,27 @@ int mutex_init(MUTEX *MUTEX_ptr)
 	CPU_CRITICAL_EXIT();
 	return FUN_EXECUTE_SUCCESSFULLY;
 }
-EXPORT_SYMBOL(mutex_init);
 
-int mutex_lock(MUTEX *MUTEX_ptr)
+int mutex_init(MUTEX *MUTEX_ptr)
 {
-	ASSERT(NULL != MUTEX_ptr);
-#if CONFIG_PARA_CHECK
 	if(NULL == MUTEX_ptr)
 	{
-		OS_ERROR_PARA_MESSAGE_DISPLAY(mutex_lock,MUTEX_ptr);
+		OS_ERROR_PARA_MESSAGE_DISPLAY(mutex_init,MUTEX_ptr);
 		return -ERROR_NULL_INPUT_PTR;
 	}
-#endif
-	CPU_SR_ALLOC();
-	CPU_CRITICAL_ENTER();//enter critical
 	if (g_interrupt_count > 0)
 	{
-		CPU_CRITICAL_EXIT();
 		return -ERROR_FUN_USE_IN_INTER;
 	}
+	return _mutex_init(MUTEX_ptr);
+}
+EXPORT_SYMBOL(mutex_init);
+
+int _mutex_lock(MUTEX *MUTEX_ptr)
+{
+	ASSERT(NULL != MUTEX_ptr);
+	CPU_SR_ALLOC();
+	CPU_CRITICAL_ENTER();/*enter critical*/
 	if(MUTEX_UNLOCK == MUTEX_ptr->mutex_flag)
 	{
 		MUTEX_ptr->mutex_flag = MUTEX_LOCK;
@@ -91,8 +81,8 @@ int mutex_lock(MUTEX *MUTEX_ptr)
 			task_change_prio(MUTEX_ptr->owner_TCB_ptr,TCB_ptr->prio);
 		}
 		sys_suspend(STATE_WAIT_MUTEX_FOREVER);
-		CPU_CRITICAL_EXIT(); //exit  critical
-		//go back here=========go back here
+		CPU_CRITICAL_EXIT(); 
+		/*go back here=========go back here*/
 		CPU_CRITICAL_ENTER();
 		if(TCB_state_is_bad(OSTCBCurPtr))
 		{
@@ -104,20 +94,27 @@ int mutex_lock(MUTEX *MUTEX_ptr)
 	}
 	return FUN_EXECUTE_SUCCESSFULLY;
 }
-EXPORT_SYMBOL(mutex_lock);
 
-int mutex_try_lock(MUTEX *MUTEX_ptr)
+int mutex_lock(MUTEX *MUTEX_ptr)
 {
-	ASSERT(NULL != MUTEX_ptr);
-#if CONFIG_PARA_CHECK
 	if(NULL == MUTEX_ptr)
 	{
-		OS_ERROR_PARA_MESSAGE_DISPLAY(mutex_try_lock,MUTEX_ptr);
+		OS_ERROR_PARA_MESSAGE_DISPLAY(mutex_lock,MUTEX_ptr);
 		return -ERROR_NULL_INPUT_PTR;
 	}
-#endif
+	if (g_interrupt_count > 0)
+	{
+		return -ERROR_FUN_USE_IN_INTER;
+	}
+	return _mutex_lock(MUTEX_ptr);
+}
+EXPORT_SYMBOL(mutex_lock);
+
+int _mutex_try_lock(MUTEX *MUTEX_ptr)
+{
+	ASSERT(NULL != MUTEX_ptr);
 	CPU_SR_ALLOC();
-	CPU_CRITICAL_ENTER();//enter critical
+	CPU_CRITICAL_ENTER();
 	if(MUTEX_UNLOCK == MUTEX_ptr->mutex_flag)
 	{
 		MUTEX_ptr->mutex_flag = MUTEX_LOCK;
@@ -128,24 +125,27 @@ int mutex_try_lock(MUTEX *MUTEX_ptr)
 	else
 	{
 		ASSERT(MUTEX_LOCK == MUTEX_ptr->mutex_flag);
-		CPU_CRITICAL_EXIT(); //exit  critical
-		return -ERROR_MUTEX_LOCK_FAIL;
+		CPU_CRITICAL_EXIT(); 
+		return -ERROR_SYS;
 	}
+}
+
+int mutex_try_lock(MUTEX *MUTEX_ptr)
+{
+	if(NULL == MUTEX_ptr)
+	{
+		OS_ERROR_PARA_MESSAGE_DISPLAY(mutex_try_lock,MUTEX_ptr);
+		return -ERROR_NULL_INPUT_PTR;
+	}
+	return _mutex_try_lock(MUTEX_ptr);
 }
 EXPORT_SYMBOL(mutex_try_lock);
 
-int mutex_unlock(MUTEX *MUTEX_ptr)
+int _mutex_unlock(MUTEX *MUTEX_ptr)
 {
 	ASSERT(NULL != MUTEX_ptr);
-#if CONFIG_PARA_CHECK
-	if(NULL == MUTEX_ptr)
-	{
-		OS_ERROR_PARA_MESSAGE_DISPLAY(mutex_unlock,MUTEX_ptr);
-		return -ERROR_NULL_INPUT_PTR;
-	}
-#endif
 	CPU_SR_ALLOC();
-	CPU_CRITICAL_ENTER();//enter critical
+	CPU_CRITICAL_ENTER();
 	if(MUTEX_UNLOCK == MUTEX_ptr->mutex_flag)
 	{
 		CPU_CRITICAL_EXIT();
@@ -154,7 +154,7 @@ int mutex_unlock(MUTEX *MUTEX_ptr)
 	else if(MUTEX_ptr->owner_TCB_ptr != OSTCBCurPtr)
 	{
 		CPU_CRITICAL_EXIT();
-		return -ERROR_MUTEX_UNLOCK_FAIL;
+		return -ERROR_SYS;
 	}
 	if(RESERVED_PRIO != OSTCBCurPtr->reserve_prio)
 	{
@@ -163,44 +163,55 @@ int mutex_unlock(MUTEX *MUTEX_ptr)
 		task_change_prio_self(buffer);
 	}
 	struct insert_sort_data *buffer_ptr = insert_sort_delete_head(&MUTEX_ptr->mutex_insert_sort_TCB_list);
-	if(NULL == buffer_ptr) // no task is waiting for the mutex
+	if(NULL == buffer_ptr) /* no task is waiting for the mutex*/
 	{
 		MUTEX_ptr->mutex_flag = MUTEX_UNLOCK;
 		MUTEX_ptr->owner_TCB_ptr = NULL;
-		CPU_CRITICAL_EXIT();
-		return FUN_EXECUTE_SUCCESSFULLY;
 	}
-	else// a task is waiting for the mutex
+	else/* a task is waiting for the mutex*/
 	{
-		remove_from_suspend_list((TCB *)(buffer_ptr->data_ptr));
+		_remove_from_suspend_list((TCB *)(buffer_ptr->data_ptr));
 		MUTEX_ptr->owner_TCB_ptr = (TCB *)(buffer_ptr->data_ptr);
 		schedule();
-		CPU_CRITICAL_EXIT();
-		return FUN_EXECUTE_SUCCESSFULLY;
 	}
+	CPU_CRITICAL_EXIT();
+	return FUN_EXECUTE_SUCCESSFULLY;
+}
+
+int mutex_unlock(MUTEX *MUTEX_ptr)
+{
+	if(NULL == MUTEX_ptr)
+	{
+		OS_ERROR_PARA_MESSAGE_DISPLAY(mutex_unlock,MUTEX_ptr);
+		return -ERROR_NULL_INPUT_PTR;
+	}
+	return _mutex_unlock(MUTEX_ptr);
 }
 EXPORT_SYMBOL(mutex_unlock);
 
-int mutex_del(MUTEX *MUTEX_ptr)
+int _mutex_del(MUTEX *MUTEX_ptr)
 {
 	ASSERT(NULL != MUTEX_ptr);
-#if CONFIG_PARA_CHECK
-	if(NULL == MUTEX_ptr)
-	{
-		OS_ERROR_PARA_MESSAGE_DISPLAY(mutex_del,MUTEX_ptr);
-		return -ERROR_NULL_INPUT_PTR;
-	}
-#endif
 	TCB *TCB_ptr;
 	struct insert_sort_data *insert_sort_data_ptr = insert_sort_delete_head(&MUTEX_ptr->mutex_insert_sort_TCB_list);
 	while(NULL != insert_sort_data_ptr)
 	{
 		TCB_ptr = (TCB *)(insert_sort_data_ptr->data_ptr);
 		ASSERT(STATE_WAIT_MUTEX_FOREVER == TCB_ptr->task_state);
-		remove_from_suspend_list(TCB_ptr);
+		_remove_from_suspend_list(TCB_ptr);
 		set_bad_state(TCB_ptr);
 		insert_sort_data_ptr = insert_sort_delete_head(&MUTEX_ptr->mutex_insert_sort_TCB_list);
 	}
 	return FUN_EXECUTE_SUCCESSFULLY;
+}
+
+int mutex_del(MUTEX *MUTEX_ptr)
+{
+	if(NULL == MUTEX_ptr)
+	{
+		OS_ERROR_PARA_MESSAGE_DISPLAY(mutex_del,MUTEX_ptr);
+		return -ERROR_NULL_INPUT_PTR;
+	}
+	return _mutex_del(MUTEX_ptr);
 }
 EXPORT_SYMBOL(mutex_del);

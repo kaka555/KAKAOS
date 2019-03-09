@@ -1,7 +1,7 @@
 #ifndef   __STDINT_H
 #define   __STDINT_H
 
-//the following is the typedef which help the transplantation
+/*the following is the typedef which help the transplantation*/
 typedef   signed          char INT8;
 typedef   signed short     int INT16;
 typedef   signed           int INT32;

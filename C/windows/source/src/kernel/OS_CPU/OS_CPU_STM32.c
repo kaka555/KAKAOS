@@ -17,22 +17,22 @@
 void set_register(void **stack_ptr,void *entry_ptr,void *return_ptr,void *para)
 {
 	STACK_P stack = *stack_ptr;
-	*stack = (unsigned int)0x01000000uL;		//xPSR
-	*(--stack) = (unsigned int)entry_ptr;  		//R15 PC
-	*(--stack) = (unsigned int)return_ptr;		//R14 LR	
-	*(--stack) = (unsigned int)0x12121212uL;	//R12
-	*(--stack) = (unsigned int)0x03030303uL;	//R3
-	*(--stack) = (unsigned int)0x02020202uL;	//R2
-	*(--stack) = (unsigned int)0x01010101uL;	//R1
-	*(--stack) = (unsigned int)para;			//R0
-	*(--stack) = (unsigned int)0x11111111uL;	//R11
-	*(--stack) = (unsigned int)0x10101010uL;	//R10
-	*(--stack) = (unsigned int)0x09090909uL;	//R9
-	*(--stack) = (unsigned int)0x08080808uL;	//R8
-	*(--stack) = (unsigned int)0x07070707uL;	//R7
-	*(--stack) = (unsigned int)0x06060606uL;	//R6
-	*(--stack) = (unsigned int)0x05050505uL;	//R5
-	*(--stack) = (unsigned int)0x04040404uL;	//R4
+	*stack = (unsigned int)0x01000000uL;		/*xPSR*/
+	*(--stack) = (unsigned int)entry_ptr;  		/*R15 PC*/
+	*(--stack) = (unsigned int)return_ptr;		/*R14 LR*/
+	*(--stack) = (unsigned int)0x12121212uL;	/*R12*/
+	*(--stack) = (unsigned int)0x03030303uL;	/*R3*/
+	*(--stack) = (unsigned int)0x02020202uL;	/*R2*/
+	*(--stack) = (unsigned int)0x01010101uL;	/*R1*/
+	*(--stack) = (unsigned int)para;			/*R0*/
+	*(--stack) = (unsigned int)0x11111111uL;	/*R11*/
+	*(--stack) = (unsigned int)0x10101010uL;	/*R10*/
+	*(--stack) = (unsigned int)0x09090909uL;	/*R9*/
+	*(--stack) = (unsigned int)0x08080808uL;	/*R8*/
+	*(--stack) = (unsigned int)0x07070707uL;	/*R7*/
+	*(--stack) = (unsigned int)0x06060606uL;	/*R6*/
+	*(--stack) = (unsigned int)0x05050505uL;	/*R5*/
+	*(--stack) = (unsigned int)0x04040404uL;	/*R4*/
 	*stack_ptr = stack;
 }
 
@@ -47,10 +47,10 @@ void __init_systick(void)
 
     CPU_REG_NVIC_SHPRI3 = prio; 
 
-                                                            /* Enable timer.                                   */
+                                                            /* Enable timer. */
     CPU_REG_NVIC_ST_CTRL |= CPU_REG_NVIC_ST_CTRL_CLKSOURCE |
                             CPU_REG_NVIC_ST_CTRL_ENABLE;
-                                                            /* Enable timer interrupt.                                */
+                                                            /* Enable timer interrupt. */
     CPU_REG_NVIC_ST_CTRL |= CPU_REG_NVIC_ST_CTRL_TICKINT;
 }
 
@@ -80,7 +80,7 @@ void sys_sleep(void)
 
 	CPU_REG_NVIC_ST_CTRL |= CPU_REG_NVIC_ST_CTRL_CLKSOURCE |
                             CPU_REG_NVIC_ST_CTRL_ENABLE;
-                                                            /* Enable timer interrupt.                                */
+                                                            /* Enable timer interrupt.*/
     CPU_REG_NVIC_ST_CTRL |= CPU_REG_NVIC_ST_CTRL_TICKINT;
 
 }

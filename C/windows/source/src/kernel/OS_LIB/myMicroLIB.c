@@ -51,9 +51,8 @@ void ka_memcpy(void *dest, const void *src, int n)
 	const int *ptr2 = (const int *)src;
 	int num = n>>2;
 	for(i=num-1;i>=0;--i)
-	//while(num--)
 	{
-		*ptr1++ = *ptr2++; // from low to high
+		*ptr1++ = *ptr2++; /* from low to high*/
 	}
 	num = n & 3;
 	if(num)
@@ -91,7 +90,7 @@ int ka_printf(const char *str,...)
 				switch(*str)  
 				{
 					case 'i':
-				 	case 'd': // decimal
+				 	case 'd': /* decimal*/
 				 		val = va_arg(ap, int); 
 				 		if(0 == val) 
 				 		{
@@ -121,7 +120,7 @@ int ka_printf(const char *str,...)
 	                    }  
 	                    break; 
 
-	                case 'f': //float
+	                case 'f': /*float*/
 	                	val_f = va_arg(ap, double);
 	                	if(val_f < 0)
 	                	{
@@ -150,9 +149,9 @@ int ka_printf(const char *str,...)
 	                          ka_putchar(ch + '0');
 	                          count--;  
 	                    }
-	                    // the upper is integer part
+	                    /* the upper is integer part*/
 	                    ka_putchar('.');
-	                    //the following is decimal part
+	                    /*the following is decimal part*/
 	                    count = 6+1;
 	                    while(--count)
 	                    {
@@ -164,7 +163,7 @@ int ka_printf(const char *str,...)
 	                    }
 	                    break ;
 
-	                case 'l': // decimal
+	                case 'l': /* decimal*/
 	                	++str;
 	                	switch(*str)
 	                	{
@@ -228,7 +227,7 @@ int ka_printf(const char *str,...)
 			                    }  
 			                    break;
 
-			                case 'x': // hexadecimal
+			                case 'x': /* hexadecimal*/
 			                 	val_l1 = va_arg(ap, unsigned long); 
 			                 	if(0 == val_l1) 
 						 		{
@@ -239,10 +238,10 @@ int ka_printf(const char *str,...)
 			                    count = 0;  
 			                    while(r_val_l1)  
 			                    {   
-			                         count++; //整数的长度   
+			                         count++; /*整数的长度   */
 			                         r_val_l1 /= 16;   
 			                    }
-			                    res += count;//返回值长度增加​   
+			                    res += count;/*返回值长度增加​   */
 			                    r_val_l1 = val_l1; 
 			                    while(count)   
 			                    {   
@@ -262,7 +261,7 @@ int ka_printf(const char *str,...)
 	                	}
 				 		break;
 
-	                case 'u': // decimal
+	                case 'u': /* decimal*/
 				 		val1 = va_arg(ap,unsigned int);  
 				 		if(0 == val1) 
 				 		{
@@ -287,7 +286,7 @@ int ka_printf(const char *str,...)
 	                    }  
 	                    break;
 
-	                case 'o': // octal
+	                case 'o': /* octal*/
 				 		val1 = va_arg(ap,unsigned int);  
 				 		if(0 == val1) 
 				 		{
@@ -312,7 +311,7 @@ int ka_printf(const char *str,...)
 	                    }  
 	                    break;
 
-	                case 'x': // hexadecimal
+	                case 'x': /* hexadecimal*/
 	                 	val = va_arg(ap, int); 
 	                 	if(0 == val) 
 				 		{
@@ -323,10 +322,10 @@ int ka_printf(const char *str,...)
 	                    count = 0;  
 	                    while(r_val)  
 	                    {   
-	                         count++; //整数的长度   
+	                         count++; /*整数的长度   */
 	                         r_val /= 16;   
 	                    }
-	                    res += count;//返回值长度增加​   
+	                    res += count;/*返回值长度增加​   */
 	                    r_val = val; 
 	                    while(count)   
 	                    {   
@@ -341,14 +340,14 @@ int ka_printf(const char *str,...)
 	                    break;
 
 
-	                case 's': // string
+	                case 's': /* string*/
 	                    s = va_arg(ap, char *);   
 	                    m_putstr(s);  
 	                    res += ka_strlen(s);  
 	                  	break;
 
 
-	                case 'c': // char 
+	                case 'c': /* char */
 	                    ka_putchar( (char)va_arg(ap, int )); 
 	                    res += 1;  
 	                    break; 
@@ -358,16 +357,16 @@ int ka_printf(const char *str,...)
 	                	res += 1;  
 	                    break;
 
-	                case 'p': //pointer
+	                case 'p': /*pointer*/
 	                	val = va_arg(ap, int);   
 	                    r_val = val;   
 	                    count = 0;  
 	                    while(r_val)  
 	                    {   
-	                         count++; //整数的长度   
+	                         count++; /*整数的长度   */
 	                         r_val /= 16;   
 	                    }
-	                    res += count;//返回值长度增加​   
+	                    res += count;/*返回值长度增加​   */
 	                    r_val = val;
 	                    buffer = 8-count;
 	                    while(buffer--)

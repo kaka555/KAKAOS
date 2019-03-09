@@ -5,7 +5,7 @@
 void insert_into_cache_chain(
 	struct list_head *head,
 	struct kmem_cache *kmem_cache_ptr,
-	int block_size//bytes
+	int block_size/*bytes*/
 	)
 {
 	IL_init(&kmem_cache_ptr->kmem_cache_insert_chain,block_size);
@@ -16,7 +16,6 @@ void insert_into_cache_chain(
 }
 
 void load_slab(
-//	struct slab *slab_ptr,
 	void *start_ptr,
 	void *end_ptr,
 	unsigned int   block_size,

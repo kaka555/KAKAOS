@@ -5,9 +5,9 @@
 
 #define FUN_EXECUTE_SUCCESSFULLY 0
 
-//when the following #define, add a ‘-’ before it
-//example:
-//return -ERROR_NULL_INPUT_PTR;
+/*when the following #define, add a ‘-’ before it
+  example:
+  return -ERROR_NULL_INPUT_PTR;*/
 #define ERROR_NULL_INPUT_PTR   		0XFF
 #define ERROR_VALUELESS_INPUT  		0XFE
 #define ERROR_FUN_USE_IN_INTER 		0XFD
@@ -15,6 +15,7 @@
 #define ERROR_NO_MEM				0XFB
 #define ERROR_MODULE_DELETED		0XFA
 #define ERROR_LOGIC					0XF9
+#define ERROR_SYS 					0XF8
 
 #define _must_check 
 #define PUBLIC  

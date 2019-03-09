@@ -228,11 +228,11 @@ void three(void *para)
 	}
 	int ret = sleep(30);
 	ka_printf("task three ret is %d\n",ret);
-	if(0 != remove_from_delay_heap(TCB_ptr5))
+	if(0 != _remove_from_delay_heap(TCB_ptr5))
 	{
 		ka_printf("fatal error\n");
 	}
-	if(0 != remove_from_delay_heap(TCB_ptr4))
+	if(0 != _remove_from_delay_heap(TCB_ptr4))
 	{
 		ka_printf("fatal error\n");
 	}
@@ -405,11 +405,11 @@ void three(void *para)
 {
 	void *ptr[31];
 	int i;
-	get_os_buddy_ptr_head();
-	ka_printf("%p\n",alloc_power2_page());
-	ka_printf("%p\n",alloc_power3_page());
-	ka_printf("%p\n",alloc_power4_page());
-	ka_printf("%p\n",alloc_power6_page());
+	_get_os_buddy_ptr_head();
+	ka_printf("%p\n",_alloc_power2_page());
+	ka_printf("%p\n",_alloc_power3_page());
+	ka_printf("%p\n",_alloc_power4_page());
+	ka_printf("%p\n",_alloc_power6_page());
 	while(1)
 	{
 		for(i=0;i<31;++i)

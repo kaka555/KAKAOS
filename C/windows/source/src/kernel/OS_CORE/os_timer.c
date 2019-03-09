@@ -70,7 +70,6 @@ int timer_init(
 	unsigned int num)
 {
 	ASSERT((NULL != timer_ptr) && (NULL != name) && (NULL != fun));
-#if CONFIG_PARA_CHECK
 	if((NULL == timer_ptr) || (NULL == name) || (NULL == fun))
 	{
 		OS_ERROR_PARA_MESSAGE_DISPLAY(timer_init,timer_ptr);
@@ -78,12 +77,8 @@ int timer_init(
 		OS_ERROR_PARA_MESSAGE_DISPLAY(timer_init,fun);
 		return -ERROR_NULL_INPUT_PTR;
 	}
-#endif
-	CPU_SR_ALLOC();
-	CPU_CRITICAL_ENTER();
 	if (g_interrupt_count > 0)
 	{
-		CPU_CRITICAL_EXIT();
 		return -ERROR_FUN_USE_IN_INTER;
 	}
 	timer_ptr->type  			= type;
@@ -93,7 +88,6 @@ int timer_init(
 	timer_ptr->para 			= para;
 	timer_ptr->period 			= period;
 	timer_ptr->rest_num 		= INIT_REST_NUM(num);
-	CPU_CRITICAL_EXIT();
 	return FUN_EXECUTE_SUCCESSFULLY;
 }
 EXPORT_SYMBOL(timer_init);
@@ -123,11 +117,8 @@ int timer_create(
 	{
 		*timer_ptr = ptr;
 	}
-	CPU_SR_ALLOC();
-	CPU_CRITICAL_ENTER();
 	timer_init(ptr,type,name,fun,para,period,num);
 	ptr->rest_num = CREAT_REST_NUM(num);
-	CPU_CRITICAL_EXIT();
 	return FUN_EXECUTE_SUCCESSFULLY;
 }
 EXPORT_SYMBOL(timer_create);
@@ -141,23 +132,26 @@ EXPORT_SYMBOL(timer_create);
  * @param       timer_ptr  
  * @return      0 means success
  */
-int timer_enable(struct timer *timer_ptr)
+int _timer_enable(struct timer *timer_ptr)
 {
 	ASSERT(NULL != timer_ptr);
-#if CONFIG_PARA_CHECK
+	CPU_SR_ALLOC();
+	CPU_CRITICAL_ENTER();
+	timer_ptr->state = ENABLE;
+	timer_ptr->wake_time = timer_ptr->period + _get_tick();
+	int ret = heap_push(&timer_heap,&timer_ptr);
+	CPU_CRITICAL_EXIT();
+	return ret;
+}
+
+int timer_enable(struct timer *timer_ptr)
+{
 	if(NULL == timer_ptr)
 	{
 		OS_ERROR_PARA_MESSAGE_DISPLAY(timer_enable,timer_ptr);
 		return -ERROR_NULL_INPUT_PTR;
 	}
-#endif	
-	CPU_SR_ALLOC();
-	CPU_CRITICAL_ENTER();
-	timer_ptr->state = ENABLE;
-	timer_ptr->wake_time = timer_ptr->period + get_tick();
-	int ret = heap_push(&timer_heap,&timer_ptr);
-	CPU_CRITICAL_EXIT();
-	return ret;
+	return _timer_enable(timer_ptr);
 }
 EXPORT_SYMBOL(timer_enable);
 
@@ -169,16 +163,9 @@ EXPORT_SYMBOL(timer_enable);
  * @param       timer_ptr  
  * @return      0 means success
  */
-int timer_disable(struct timer *timer_ptr)
+int _timer_disable(struct timer *timer_ptr)
 {
 	ASSERT(NULL != timer_ptr);
-#if CONFIG_PARA_CHECK
-	if(NULL == timer_ptr)
-	{
-		OS_ERROR_PARA_MESSAGE_DISPLAY(timer_disable,timer_ptr);
-		return -ERROR_NULL_INPUT_PTR;
-	}
-#endif
 	CPU_SR_ALLOC();
 	CPU_CRITICAL_ENTER();
 	int ret = heap_remove_index_data(&timer_heap,timer_ptr->heap_position_index,NULL);
@@ -191,6 +178,16 @@ int timer_disable(struct timer *timer_ptr)
 	CPU_CRITICAL_EXIT();
 	return FUN_EXECUTE_SUCCESSFULLY;
 }
+
+int timer_disable(struct timer *timer_ptr)
+{
+	if(NULL == timer_ptr)
+	{
+		OS_ERROR_PARA_MESSAGE_DISPLAY(timer_disable,timer_ptr);
+		return -ERROR_NULL_INPUT_PTR;
+	}
+	return _timer_disable(timer_ptr);
+}
 EXPORT_SYMBOL(timer_disable);
 
 /**
@@ -202,21 +199,14 @@ EXPORT_SYMBOL(timer_disable);
  * @param       timer_ptr  
  * @return                 
  */
-int timer_delete(struct timer *timer_ptr)
+int _timer_delete(struct timer *timer_ptr)
 {
 	ASSERT(NULL != timer_ptr);
-#if CONFIG_PARA_CHECK
-	if(NULL == timer_ptr)
-	{
-		OS_ERROR_PARA_MESSAGE_DISPLAY(timer_delete,timer_ptr);
-		return -ERROR_NULL_INPUT_PTR;
-	}
-#endif
 	CPU_SR_ALLOC();
 	CPU_CRITICAL_ENTER();
 	if(ENABLE == timer_ptr->state)
 	{
-		timer_disable(timer_ptr);
+		_timer_disable(timer_ptr);
 	}
 	if(TIMER_IS_CREAT(timer_ptr))
 	{
@@ -224,6 +214,16 @@ int timer_delete(struct timer *timer_ptr)
 	}
 	CPU_CRITICAL_EXIT();
 	return FUN_EXECUTE_SUCCESSFULLY;
+}
+
+int timer_delete(struct timer *timer_ptr)
+{
+	if(NULL == timer_ptr)
+	{
+		OS_ERROR_PARA_MESSAGE_DISPLAY(timer_delete,timer_ptr);
+		return -ERROR_NULL_INPUT_PTR;
+	}
+	return _timer_delete(timer_ptr);
 }
 EXPORT_SYMBOL(timer_delete);
 
@@ -236,13 +236,13 @@ EXPORT_SYMBOL(timer_delete);
  * @param       timer_ptr  [description]
  * @return                 [description]
  */
-int get_timer_heap_top(struct timer **timer_ptr)
+int _get_timer_heap_top(struct timer **timer_ptr)
 {
 	ASSERT(NULL != timer_ptr);
 #if CONFIG_PARA_CHECK
 	if(NULL == timer_ptr)
 	{
-		OS_ERROR_PARA_MESSAGE_DISPLAY(get_timer_heap_top,timer_ptr);
+		OS_ERROR_PARA_MESSAGE_DISPLAY(_get_timer_heap_top,timer_ptr);
 		return -ERROR_NULL_INPUT_PTR;
 	}
 #endif

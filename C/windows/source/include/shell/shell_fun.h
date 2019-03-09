@@ -6,7 +6,7 @@
 
 #if CONFIG_SHELL_EN
 
-//add corresponding function here
+/*add corresponding function here*/
 void test(int argc, char const *argv[]);
 
 void shell_version(int argc, char const *argv[]);

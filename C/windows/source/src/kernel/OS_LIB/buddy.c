@@ -27,13 +27,13 @@ inline static unsigned int get_max_level(unsigned int page_num)
 	return get_set_bit_place(page_num);
 }
 
-const struct buddy *get_os_buddy_ptr_head(void)
+const struct buddy *_get_os_buddy_ptr_head(void)
 {
 	current_used_buddy_ptr = os_buddy_ptr_head;
 	return (const struct buddy *)os_buddy_ptr_head;
 }
 
-const struct buddy *get_next_buddy_ptr_head(const struct buddy *buddy_ptr)
+const struct buddy *_get_next_buddy_ptr_head(const struct buddy *buddy_ptr)
 {
 	if(NULL == buddy_ptr->next)
 	{
@@ -44,7 +44,7 @@ const struct buddy *get_next_buddy_ptr_head(const struct buddy *buddy_ptr)
 	return (const struct buddy *)current_used_buddy_ptr;
 }
 
-unsigned int get_current_buddy_space(void)
+unsigned int _get_current_buddy_space(void)
 {
 	CPU_SR_ALLOC();
 	CPU_CRITICAL_ENTER();
@@ -53,7 +53,7 @@ unsigned int get_current_buddy_space(void)
 	return buffer;
 }
 
-static struct order_link *_alloc_order_link(void) //allocate a struct order_link entity
+static struct order_link *_alloc_order_link(void) /*allocate a struct order_link entity*/
 {
 	UINT16 buffer = current_used_buddy_ptr->order_link_first;
 	if(NOTHING == buffer)
@@ -65,8 +65,8 @@ static struct order_link *_alloc_order_link(void) //allocate a struct order_link
 	return &current_used_buddy_ptr->link_body[buffer];
 }
 
-//		this function allocate a struct order_link to store the page_num;
-// then, insert the struct order_link into corresponding level's order_array
+/*		this function allocate a struct order_link to store the page_num;
+ then, insert the struct order_link into corresponding level's order_array*/
 static void _add_to_order_array(unsigned int level,Page_Num_Type page_num)
 {
 	ASSERT((level>=1)&&(level<=current_used_buddy_ptr->info.max_level));
@@ -85,15 +85,15 @@ static Page_Num_Type _buddy_page_num(unsigned int level,Page_Num_Type page_num)
 {
 	ASSERT((level>=1)&&(level<=current_used_buddy_ptr->info.max_level));
 	ASSERT(0 == (((0x0001<<(level-1))-1) & page_num));
-	if(page_num & (0x0001<<(level-1))) //it's buddy is ahead of it
+	if(page_num & (0x0001<<(level-1))) /*it's buddy is ahead of it*/
 		return (page_num - sizeof_level(level));
 	else 
-		return (page_num + sizeof_level(level)); //it's buddy fall behind it
+		return (page_num + sizeof_level(level)); /*it's buddy fall behind it*/
 }
 
 static void _add_to_order_array_loop(unsigned int level,Page_Num_Type page_num)
 {
-	//non - recursion
+	/*non - recursion*/
 	unsigned int i;
 	Page_Num_Type buddy_page_num;
 	ASSERT((level>=1)&&(level<=current_used_buddy_ptr->info.max_level));
@@ -102,34 +102,34 @@ static void _add_to_order_array_loop(unsigned int level,Page_Num_Type page_num)
 	{
 		ASSERT((i<=current_used_buddy_ptr->info.max_level)&&(i>=1));
 		ASSERT(0 == (page_num & ((0x0001<<(i-1))-1)));
-		if(current_used_buddy_ptr->info.max_level == i) // if it is the max level, just insert it into chain order_array[max_level]
+		if(current_used_buddy_ptr->info.max_level == i) /* if it is the max level, just insert it into chain order_array[max_level]*/
 		{
 			_add_to_order_array(i,page_num);
 			break ;
 		}
 		else 
 		{
-			buddy_page_num = _buddy_page_num(i,page_num); // get it's buddy page's num
-			if(0 == _check_flag(i,page_num)) // if flag is 0 , means it's buddy is in chain order_array[level]
+			buddy_page_num = _buddy_page_num(i,page_num); /* get it's buddy page's num*/
+			if(0 == _check_flag(i,page_num)) /* if flag is 0 , means it's buddy is in chain order_array[level]*/
 			{
-				ASSERT(0 == assert_in_chain(i,buddy_page_num)); //assert it's buddy is in chain "order_array"
-				_delete_from_chain(i,buddy_page_num); // delete it's buddy from chain order_array[level] so that they can combine into a big block to insert into the next level
+				ASSERT(0 == assert_in_chain(i,buddy_page_num)); /*assert it's buddy is in chain "order_array"*/
+				_delete_from_chain(i,buddy_page_num); /* delete it's buddy from chain order_array[level] so that they can combine into a big block to insert into the next level*/
 				if(page_num < buddy_page_num)
 				{
-					_deal_with_flag_alloc(i+1,page_num); // XOR the corresponding bit
+					_deal_with_flag_alloc(i+1,page_num); /* XOR the corresponding bit*/
 					continue ;
 				}
-				else //if(page_num > buddy_page_num) 
+				else /*if(page_num > buddy_page_num) */
 				{
-					_deal_with_flag_alloc(i+1,buddy_page_num); // XOR the corresponding bit
+					_deal_with_flag_alloc(i+1,buddy_page_num); /* XOR the corresponding bit*/
 					page_num = buddy_page_num;
 					continue ;
 				}
 			}
-			else /*if(1 == _check_flag(i,page_num))*/  // if flag is not 0 , means it's buddy is in chain order_array[level]
+			else /*if(1 == _check_flag(i,page_num))*/  /* if flag is not 0 , means it's buddy is in chain order_array[level]*/
 			{
 				ASSERT(-1 == assert_in_chain(i,buddy_page_num));
-				_add_to_order_array(i,page_num); // insert into chain order_array[level]
+				_add_to_order_array(i,page_num); /* insert into chain order_array[level]*/
 				break ;
 			}
 		}
@@ -142,7 +142,7 @@ static inline void *_add_of_num(UINT16 page_num)
 	return (void *)(&current_used_buddy_ptr->buddy_space_start_ptr[page_num]);
 }
 
-// XOR the corresponding bit
+/* XOR the corresponding bit*/
 static void _deal_with_flag_alloc(unsigned int level,Page_Num_Type page_num)
 {
 	ASSERT((level>=1)&&(level<=current_used_buddy_ptr->info.max_level));
@@ -151,12 +151,12 @@ static void _deal_with_flag_alloc(unsigned int level,Page_Num_Type page_num)
 	current_used_buddy_ptr->flag[(current_used_buddy_ptr->level_flag_base[level-1]+index)/(sizeof(Flag_Type)*8)] ^= (0x80000000>>((current_used_buddy_ptr->level_flag_base[level-1]+index)%(sizeof(Flag_Type)*8)));
 }
 
-static inline void _return_link_body(Page_Num_Type buffer) //return struct order_link "link_body[buffer]"
+static inline void _return_link_body(Page_Num_Type buffer) /*return struct order_link "link_body[buffer]"*/
 {
 	ASSERT(buffer<=current_used_buddy_ptr->info.page_num-1);
 	ASSERT(NOTHING == current_used_buddy_ptr->order_link_flag[buffer]);
 	current_used_buddy_ptr->order_link_flag[buffer] = current_used_buddy_ptr->order_link_first;
-	current_used_buddy_ptr->order_link_first = buffer; //change list's head
+	current_used_buddy_ptr->order_link_first = buffer; /*change list's head*/
 }
 
 int in_buddy_range(void *ptr)
@@ -220,7 +220,7 @@ static void add_to_os(struct buddy *buddy_ptr)
 |		 .						|	V
 |-------------------------------|  high
  */
-void buddy_init(const struct dev_mem_para *dev_mem_para_ptr)
+void __buddy_init(const struct dev_mem_para *dev_mem_para_ptr)
 {
 	unsigned int size;
 	unsigned int i;
@@ -236,7 +236,7 @@ void buddy_init(const struct dev_mem_para *dev_mem_para_ptr)
 		buddy_ptr = (struct buddy *)(&_ebss + 1);
 	}
 	current_used_buddy_ptr = buddy_ptr;
-//1.allocate room for flag[current_used_buddy_ptr->info.flag_array_num]
+/*1.allocate room for flag[current_used_buddy_ptr->info.flag_array_num]*/
 	buddy_ptr->flag = (Flag_Type *)((char *)buddy_ptr + sizeof(struct buddy));
 	size = dev_mem_para_ptr->size / (PAGE_SIZE_KB * 8 * sizeof(Flag_Type));
 	if(dev_mem_para_ptr->size % (PAGE_SIZE_KB * 8 * sizeof(Flag_Type)))
@@ -246,20 +246,20 @@ void buddy_init(const struct dev_mem_para *dev_mem_para_ptr)
 	buddy_ptr->info.flag_array_num = size;
 	size_sum += size*sizeof(Flag_Type);
 	buddy_ptr->link_body = (struct order_link *)((char *)buddy_ptr->flag + size*sizeof(Flag_Type));
-//allocate room for link_body[current_used_buddy_ptr->info.page_num]
+/*allocate room for link_body[current_used_buddy_ptr->info.page_num]*/
 	size = dev_mem_para_ptr->size / PAGE_SIZE_KB;
 	buddy_ptr->info.page_num = size;
 	size_sum += size * sizeof(struct order_link);
 	buddy_ptr->order_link_flag = (Page_Num_Type *)((char *)buddy_ptr->link_body + size * sizeof(struct order_link));
-//allocate room for order_link_flag[current_used_buddy_ptr->info.page_num]	
+/*allocate room for order_link_flag[current_used_buddy_ptr->info.page_num]	*/
 	size_sum += size * sizeof(Page_Num_Type);
 	buddy_ptr->order_array = (Page_Num_Type *)((char *)buddy_ptr->order_link_flag + size * sizeof(Page_Num_Type));
-//allocate room for order_array[current_used_buddy_ptr->info.max_level]	
+/*allocate room for order_array[current_used_buddy_ptr->info.max_level]	*/
 	size = get_max_level(buddy_ptr->info.page_num);
 	buddy_ptr->info.max_level = size;
 	size_sum += size * sizeof(Page_Num_Type);
 	buddy_ptr->level_flag_base = (UINT16 *)((char *)buddy_ptr->order_array + size * sizeof(Page_Num_Type));
-//allocate room for level_flag_base[buddy_ptr->info.level_flag_base_size]
+/*allocate room for level_flag_base[buddy_ptr->info.level_flag_base_size]*/
 	size = buddy_ptr->info.max_level;
 
 	buddy_ptr->info.level_flag_base_size = size;
@@ -269,7 +269,7 @@ void buddy_init(const struct dev_mem_para *dev_mem_para_ptr)
 	buddy_ptr->buddy_space_start_ptr = (Buddy_Space_Type *)(dev_mem_para_ptr->start);
 	buddy_ptr->next = NULL;
 	buddy_ptr->info.prio = dev_mem_para_ptr->prio;
-//init the data
+/*init the data*/
 	for(i=0;i<buddy_ptr->info.flag_array_num;++i)
 		buddy_ptr->flag[i] = 0;
 
@@ -286,11 +286,11 @@ void buddy_init(const struct dev_mem_para *dev_mem_para_ptr)
 	buddy_ptr->level_flag_base[0] = 0;
 	for(i=1;i<buddy_ptr->info.level_flag_base_size;++i,buffer/=2)
 		buddy_ptr->level_flag_base[i] = buddy_ptr->level_flag_base[i-1] + buffer;
-//set the order_array[current_used_buddy_ptr->info.max_level],and then allocate a room for struct buddy's member
-//first deal with the max level
+/*set the order_array[current_used_buddy_ptr->info.max_level],and then allocate a room for struct buddy's member*/
+/*first deal with the max level*/
 	_add_to_order_array(buddy_ptr->info.max_level,sizeof_level(buddy_ptr->info.max_level));
 	_add_to_order_array(buddy_ptr->info.max_level,0);
-//mark the space used by struct buddy
+/*mark the space used by struct buddy*/
 	size = (unsigned int)buddy_ptr - (unsigned int)dev_mem_para_ptr->start + buddy_ptr->buddy_struct_size + sizeof(struct buddy);
 	PRINTF("space used by os is %d\n",size);
 	if(size % PAGE_SIZE_BYTE)
@@ -311,14 +311,14 @@ void buddy_init(const struct dev_mem_para *dev_mem_para_ptr)
 			goto final_step;
 		}
 	}
-	ASSERT(0);//allocation fail
+	ASSERT(0);/*allocation fail*/
 final_step:
-//add the struct buddy to OS
+/*add the struct buddy to OS*/
 	add_to_os(buddy_ptr);
 }
 
-//  if allocation success,get a page num,which scope is 0 to 1023
-//  else, get NOTHING
+/*  if allocation success,get a page num,which scope is 0 to 1023
+**  else, get NOTHING*/
 static Page_Num_Type _alloc_page(unsigned int level)
 {
 	ASSERT((level>=1)&&(level<=current_used_buddy_ptr->info.max_level));
@@ -330,32 +330,32 @@ static Page_Num_Type _alloc_page(unsigned int level)
 		current_used_buddy_ptr->order_array[level-1] = current_used_buddy_ptr->link_body[index].next;
 		_return_link_body(index);
 	}
-	else //if this level doesn't have free page
+	else /*if this level doesn't have free page*/
 	{
 		if(current_used_buddy_ptr->info.max_level == level)
 		{
 			return NOTHING;
 		}
-		buffer = _alloc_page(level+1); //get a free page from the higher level 
+		buffer = _alloc_page(level+1); /*get a free page from the higher level */
 		if(NOTHING == buffer)
 		{
 			return NOTHING;
 		}
-		_add_to_order_array(level,buffer+sizeof_level(level)); // add the second half of the block to present level
+		_add_to_order_array(level,buffer+sizeof_level(level)); /* add the second half of the block to present level*/
 	}
-	_deal_with_flag_alloc(level,buffer); // XOR the corresponding bit
+	_deal_with_flag_alloc(level,buffer); /* XOR the corresponding bit*/
 	return buffer;
 }
 
-//get 1 page
-void *alloc_power1_page(void)
+/*get 1 page*/
+void *_alloc_power1_page(void)
 {
 	CPU_SR_ALLOC();
 	CPU_CRITICAL_ENTER();
 	Page_Num_Type num = _alloc_page(1);
 	if(NOTHING != num)
 	{
-		// decrease the space of this buddy
+		/* decrease the space of this buddy*/
 		current_used_buddy_ptr->current_page_num -= PAGE_SIZE_KB;
 		CPU_CRITICAL_EXIT();
 		return _add_of_num(num);
@@ -364,14 +364,14 @@ void *alloc_power1_page(void)
 	return NULL;
 }
 
-void *alloc_power2_page(void)
+void *_alloc_power2_page(void)
 {
 	CPU_SR_ALLOC();
 	CPU_CRITICAL_ENTER();
 	Page_Num_Type num = _alloc_page(2);
 	if(NOTHING != num)
 	{
-		// decrease the space of this buddy
+		/* decrease the space of this buddy*/
 		current_used_buddy_ptr->current_page_num -= 2 * PAGE_SIZE_KB;
 		CPU_CRITICAL_EXIT();
 		return _add_of_num(num);
@@ -380,14 +380,14 @@ void *alloc_power2_page(void)
 	return NULL;
 }
 
-void *alloc_power3_page(void)
+void *_alloc_power3_page(void)
 {
 	CPU_SR_ALLOC();
 	CPU_CRITICAL_ENTER();
 	Page_Num_Type num = _alloc_page(3);
 	if(NOTHING != num)
 	{
-		// decrease the space of this buddy
+		/* decrease the space of this buddy*/
 		current_used_buddy_ptr->current_page_num -= 4 * PAGE_SIZE_KB;
 		CPU_CRITICAL_EXIT();
 		return _add_of_num(num);
@@ -396,14 +396,14 @@ void *alloc_power3_page(void)
 	return NULL;
 }
 
-void *alloc_power4_page(void)
+void *_alloc_power4_page(void)
 {
 	CPU_SR_ALLOC();
 	CPU_CRITICAL_ENTER();
 	Page_Num_Type num = _alloc_page(4);
 	if(NOTHING != num)
 	{
-		// decrease the space of this buddy
+		/* decrease the space of this buddy*/
 		current_used_buddy_ptr->current_page_num -= 8 * PAGE_SIZE_KB;
 		CPU_CRITICAL_EXIT();
 		return _add_of_num(num);
@@ -412,14 +412,14 @@ void *alloc_power4_page(void)
 	return NULL;
 }
 
-void *alloc_power5_page(void)
+void *_alloc_power5_page(void)
 {
 	CPU_SR_ALLOC();
 	CPU_CRITICAL_ENTER();
 	Page_Num_Type num = _alloc_page(5);
 	if(NOTHING != num)
 	{
-		// decrease the space of this buddy
+		/* decrease the space of this buddy*/
 		current_used_buddy_ptr->current_page_num -= 16 * PAGE_SIZE_KB;
 		CPU_CRITICAL_EXIT();
 		return _add_of_num(num);
@@ -428,14 +428,14 @@ void *alloc_power5_page(void)
 	return NULL;
 }
 
-void *alloc_power6_page(void)
+void *_alloc_power6_page(void)
 {
 	CPU_SR_ALLOC();
 	CPU_CRITICAL_ENTER();
 	Page_Num_Type num = _alloc_page(6);
 	if(NOTHING != num)
 	{
-		// decrease the space of this buddy
+		/* decrease the space of this buddy*/
 		current_used_buddy_ptr->current_page_num -= 32 * PAGE_SIZE_KB;
 		CPU_CRITICAL_EXIT();
 		return _add_of_num(num);
@@ -444,14 +444,14 @@ void *alloc_power6_page(void)
 	return NULL;
 }
 
-void *alloc_power7_page(void)
+void *_alloc_power7_page(void)
 {
 	CPU_SR_ALLOC();
 	CPU_CRITICAL_ENTER();
 	Page_Num_Type num = _alloc_page(7);
 	if(NOTHING != num)
 	{
-		// decrease the space of this buddy
+		/* decrease the space of this buddy*/
 		current_used_buddy_ptr->current_page_num -= 64 * PAGE_SIZE_KB;
 		CPU_CRITICAL_EXIT();
 		return _add_of_num(num);
@@ -460,14 +460,14 @@ void *alloc_power7_page(void)
 	return NULL;
 }
 
-void *alloc_power8_page(void)
+void *_alloc_power8_page(void)
 {
 	CPU_SR_ALLOC();
 	CPU_CRITICAL_ENTER();
 	Page_Num_Type num = _alloc_page(8);
 	if(NOTHING != num)
 	{
-		// decrease the space of this buddy
+		/* decrease the space of this buddy*/
 		current_used_buddy_ptr->current_page_num -= 128 * PAGE_SIZE_KB;
 		CPU_CRITICAL_EXIT();
 		return _add_of_num(num);
@@ -476,14 +476,14 @@ void *alloc_power8_page(void)
 	return NULL;
 }
 
-void *alloc_power9_page(void)
+void *_alloc_power9_page(void)
 {
 	CPU_SR_ALLOC();
 	CPU_CRITICAL_ENTER();
 	Page_Num_Type num = _alloc_page(9);
 	if(NOTHING != num)
 	{
-		// decrease the space of this buddy
+		/* decrease the space of this buddy*/
 		current_used_buddy_ptr->current_page_num -= 256 * PAGE_SIZE_KB;
 		CPU_CRITICAL_EXIT();
 		return _add_of_num(num);
@@ -492,14 +492,14 @@ void *alloc_power9_page(void)
 	return NULL;
 }
 
-void *alloc_power10_page(void)
+void *_alloc_power10_page(void)
 {
 	CPU_SR_ALLOC();
 	CPU_CRITICAL_ENTER();
 	Page_Num_Type num = _alloc_page(10);
 	if(NOTHING != num)
 	{
-		// decrease the space of this buddy
+		/* decrease the space of this buddy*/
 		current_used_buddy_ptr->current_page_num -= 512 * PAGE_SIZE_KB;
 		CPU_CRITICAL_EXIT();
 		return _add_of_num(num);
@@ -509,7 +509,7 @@ void *alloc_power10_page(void)
 }
 
 #if CONFIG_ASSERT_DEBUG
-//if in chain,return 0;else, return -1
+/*if in chain,return 0;else, return -1*/
 static __debug int assert_in_chain(unsigned int level,Page_Num_Type page_num)
 {
 	if(NOTHING == current_used_buddy_ptr->order_array[level-1])
@@ -526,7 +526,7 @@ static __debug int assert_in_chain(unsigned int level,Page_Num_Type page_num)
 }
 #endif
 
-static inline Page_Num_Type _get_page_num(void *ptr) //according to adress
+static inline Page_Num_Type _get_page_num(void *ptr) /*according to adress*/
 {
 	return (Page_Num_Type)(((UINT32)ptr - (UINT32)current_used_buddy_ptr->buddy_space_start_ptr)/PAGE_SIZE_BYTE);
 }
@@ -547,7 +547,7 @@ static void _delete_from_chain(unsigned int level,Page_Num_Type page_num)
 	ASSERT(0 == (((0x0001<<(level-1))-1) & page_num));
 	ASSERT(NOTHING != current_used_buddy_ptr->order_array[level-1]);
 	buffer1 = current_used_buddy_ptr->order_array[level-1];
-	if(page_num == current_used_buddy_ptr->link_body[buffer1].num) //delete from linked-list
+	if(page_num == current_used_buddy_ptr->link_body[buffer1].num) /*delete from linked-list*/
 	{
 		current_used_buddy_ptr->order_array[level-1] = current_used_buddy_ptr->link_body[buffer1].next;
 		_return_link_body(buffer1);
@@ -571,7 +571,7 @@ static void _delete_from_chain(unsigned int level,Page_Num_Type page_num)
 	}
 }
 
-static void _return_page(void *ptr,unsigned int level) //return page to system
+static void _return_page(void *ptr,unsigned int level) /*return page to system*/
 {
 	if(NULL == ptr)
 	{
@@ -584,105 +584,105 @@ static void _return_page(void *ptr,unsigned int level) //return page to system
 		((UINT32)&current_used_buddy_ptr->buddy_space_start_ptr[BUDDY_SPACE_SIZE] >= (UINT32)ptr));
 	ASSERT(0 == in_buddy_range(ptr));
 	Page_Num_Type page_num = _get_page_num(ptr);
-	_deal_with_flag_alloc(level,page_num);  //XOR the flag bit
-	_add_to_order_array_loop(level,page_num); // then going to loop to finish the return
+	_deal_with_flag_alloc(level,page_num);  /*XOR the flag bit*/
+	_add_to_order_array_loop(level,page_num); /* then going to loop to finish the return*/
 }
 
-inline void return_power1_page(void *ptr)
+inline void _return_power1_page(void *ptr)
 {
 	CPU_SR_ALLOC();
 	CPU_CRITICAL_ENTER();
-	//increase the space of the buddy
+	/*increase the space of the buddy*/
 	current_used_buddy_ptr->current_page_num += PAGE_SIZE_KB;
 	_return_page(ptr,1);
 	CPU_CRITICAL_EXIT();
 }
 
-void return_power2_page(void *ptr)
+void _return_power2_page(void *ptr)
 {
 	CPU_SR_ALLOC();
 	CPU_CRITICAL_ENTER();
-	//increase the space of the buddy
+	/*increase the space of the buddy*/
 	current_used_buddy_ptr->current_page_num += 2 * PAGE_SIZE_KB;
 	_return_page(ptr,2);
 	CPU_CRITICAL_EXIT();
 }
 
-void return_power3_page(void *ptr)
+void _return_power3_page(void *ptr)
 {
 	CPU_SR_ALLOC();
 	CPU_CRITICAL_ENTER();
-	//increase the space of the buddy
+	/*increase the space of the buddy*/
 	current_used_buddy_ptr->current_page_num += 4 * PAGE_SIZE_KB;
 	_return_page(ptr,3);
 	CPU_CRITICAL_EXIT();
 }
 
-void return_power4_page(void *ptr)
+void _return_power4_page(void *ptr)
 {
 	CPU_SR_ALLOC();
 	CPU_CRITICAL_ENTER();
-	//increase the space of the buddy
+	/*increase the space of the buddy*/
 	current_used_buddy_ptr->current_page_num += 8 * PAGE_SIZE_KB;
 	_return_page(ptr,4);
 	CPU_CRITICAL_EXIT();
 }
 
-void return_power5_page(void *ptr)
+void _return_power5_page(void *ptr)
 {
 	CPU_SR_ALLOC();
 	CPU_CRITICAL_ENTER();
-	//increase the space of the buddy
+	/*increase the space of the buddy*/
 	current_used_buddy_ptr->current_page_num += 16 * PAGE_SIZE_KB;
 	_return_page(ptr,5);
 	CPU_CRITICAL_EXIT();
 }
 
-void return_power6_page(void *ptr)
+void _return_power6_page(void *ptr)
 {
 	CPU_SR_ALLOC();
 	CPU_CRITICAL_ENTER();
-	//increase the space of the buddy
+	/*increase the space of the buddy*/
 	current_used_buddy_ptr->current_page_num += 32 * PAGE_SIZE_KB;
 	_return_page(ptr,6);
 	CPU_CRITICAL_EXIT();
 }
 
-void return_power7_page(void *ptr)
+void _return_power7_page(void *ptr)
 {
 	CPU_SR_ALLOC();
 	CPU_CRITICAL_ENTER();
-	//increase the space of the buddy
+	/*increase the space of the buddy*/
 	current_used_buddy_ptr->current_page_num += 64 * PAGE_SIZE_KB;
 	_return_page(ptr,7);
 	CPU_CRITICAL_EXIT();
 }
 
-void return_power8_page(void *ptr)
+void _return_power8_page(void *ptr)
 {
 	CPU_SR_ALLOC();
 	CPU_CRITICAL_ENTER();
-	//increase the space of the buddy
+	/*increase the space of the buddy*/
 	current_used_buddy_ptr->current_page_num += 128 * PAGE_SIZE_KB;
 	_return_page(ptr,8);
 	CPU_CRITICAL_EXIT();
 }
 
-void return_power9_page(void *ptr)
+void _return_power9_page(void *ptr)
 {
 	CPU_SR_ALLOC();
 	CPU_CRITICAL_ENTER();
-	//increase the space of the buddy
+	/*increase the space of the buddy*/
 	current_used_buddy_ptr->current_page_num += 256 * PAGE_SIZE_KB;
 	_return_page(ptr,9);
 	CPU_CRITICAL_EXIT();
 }
 
-void return_power10_page(void *ptr)
+void _return_power10_page(void *ptr)
 {
 	CPU_SR_ALLOC();
 	CPU_CRITICAL_ENTER();
-	//increase the space of the buddy
+	/*increase the space of the buddy*/
 	current_used_buddy_ptr->current_page_num += 512 * PAGE_SIZE_KB;
 	_return_page(ptr,10);
 	CPU_CRITICAL_EXIT();
@@ -691,11 +691,10 @@ void return_power10_page(void *ptr)
 #if CONFIG_SHELL_EN
 static int _check_buddy_flag_level(unsigned int level,unsigned int offset)
 {
-	//PRINTF("level is %d,offset is %d\n",level,offset);
+	/*PRINTF("level is %d,offset is %d\n",level,offset);*/
 	ASSERT((level>=1) && (level<=10));
 	ASSERT((offset<((current_used_buddy_ptr->info.page_num>>1)/sizeof_level(level))));
 	unsigned int num = 0;
-	//int page_num = (0x00000001<<(level-1))<<offset -1;
 	unsigned int page_num = sizeof_level(level)*2*offset;
 	if(NOTHING == current_used_buddy_ptr->order_array[level-1])
 	{
@@ -754,7 +753,7 @@ static int _check_buddy_level_flag(void)
 	unsigned int num;
 	struct order_link buffer;
 	unsigned int offset;
-	for(i=0;i<current_used_buddy_ptr->info.max_level;++i) //each level
+	for(i=0;i<current_used_buddy_ptr->info.max_level;++i) /*each level*/
 	{
 		if(NOTHING != current_used_buddy_ptr->order_array[i])
 		{
@@ -766,7 +765,7 @@ static int _check_buddy_level_flag(void)
 					num = buffer.num;
 					offset = num>>(i+1);
 					num = current_used_buddy_ptr->level_flag_base[i] + offset;
-					//PRINTF("num is %d\n",num);
+					/*PRINTF("num is %d\n",num);*/
 					if(!(0x01 & current_used_buddy_ptr->flag[num/(sizeof(Flag_Type)*8)]>>(sizeof(Flag_Type)*8 - num%(sizeof(Flag_Type)*8)-1)))
 					{
 						PRINTF("level %d,page_num %d error\n",i+1,num<<(i+1));
@@ -777,7 +776,7 @@ static int _check_buddy_level_flag(void)
 				num = buffer.num;
 				offset = num>>(i+1);
 				num = current_used_buddy_ptr->level_flag_base[i] + offset;
-				//PRINTF("num is %d\n",num);
+				/*PRINTF("num is %d\n",num);*/
 				if(!(0x01 & current_used_buddy_ptr->flag[num/(sizeof(Flag_Type)*8)]>>(31-(num%(sizeof(Flag_Type)*8)))))
 				{
 					PRINTF("level %d,page_num %d error\n",i+1,num<<(i+1));
@@ -794,20 +793,20 @@ static int _check_buddy_level_flag(void)
 				{
 					if(current_used_buddy_ptr->link_body[buffer.next].num != sizeof_level(current_used_buddy_ptr->info.max_level))
 					{
-						//PRINTF("here\n");
+						/*PRINTF("here\n");*/
 						PRINTF("level %d,page_num %d error\n",i+1,num);
 						return -1;
 					}
 					if(0x01 & current_used_buddy_ptr->flag[num/(sizeof(Flag_Type)*8)]>>(31-(num%(sizeof(Flag_Type)*8))))
 					{
-						//PRINTF("there\n");
+						/*PRINTF("there\n");*/
 						PRINTF("level %d,page_num %d error\n",i+1,num);
 						return -1;
 					}
 				}
 				else
 				{
-					//PRINTF("num is %d\n",num);
+					/*PRINTF("num is %d\n",num);*/
 					if(!(0x01 & current_used_buddy_ptr->flag[num/(sizeof(Flag_Type)*8)]>>(31-(num%(sizeof(Flag_Type)*8)))))
 					{
 						PRINTF("level %d,page_num %d error\n",i+1,num);
@@ -830,7 +829,7 @@ static int check_buddy(void)
 		{
 			for(j=0;j<8*sizeof(Flag_Type);++j)
 			{
-				if(0x01 & (current_used_buddy_ptr->flag[i]>>(31-j))) // corresponding bit is setted
+				if(0x01 & (current_used_buddy_ptr->flag[i]>>(31-j))) /* corresponding bit is setted*/
 				{
 					unsigned int level = _get_level(i,j);
 					if(0 != _check_buddy_flag_level(level,i*sizeof(Flag_Type)*8+j-current_used_buddy_ptr->level_flag_base[level-1]))
@@ -845,7 +844,7 @@ static int check_buddy(void)
 	PRINTF("Inspection step 1:check from flag to level array is completed.Nothing wrong\n");
 	PRINTF("now going to step2:check from level array to flag\n");
 
-	//then check from level to flag
+	/*then check from level to flag*/
 	return _check_buddy_level_flag();
 }
 
@@ -856,7 +855,7 @@ void shell_buddy_debug(int argc, char const *argv[])
 	unsigned int i;
 	unsigned int j;
 	struct order_link buffer;
-	struct buddy *buddy_ptr = (struct buddy *)get_os_buddy_ptr_head();
+	struct buddy *buddy_ptr = (struct buddy *)_get_os_buddy_ptr_head();
 	ASSERT(NULL != buddy_ptr);
 	j = 1;
 	while(NULL != buddy_ptr)
@@ -864,11 +863,11 @@ void shell_buddy_debug(int argc, char const *argv[])
 		PRINTF("NO.%u memory : \n",j++);
 		PRINTF("=====================================================\n");
 		PRINTF("the following informations are the buddy debug infomations\n");
-		PRINTF("rest buddy space is %u\n",get_current_buddy_space());
+		PRINTF("rest buddy space is %u\n",_get_current_buddy_space());
 		PRINTF("the total space is %uKB\n",PAGE_SIZE_KB * current_used_buddy_ptr->info.page_num);
-		PRINTF("now there are %u%% left\n",100*get_current_buddy_space()/(PAGE_SIZE_KB * current_used_buddy_ptr->info.page_num));
-	//==========================================================================	
-	//flag info
+		PRINTF("now there are %u%% left\n",100*_get_current_buddy_space()/(PAGE_SIZE_KB * current_used_buddy_ptr->info.page_num));
+	/*==========================================================================	*/
+	/*flag info*/
 		PRINTF("=====================================================\n");
 		PRINTF("buddy flag infomation :\n");
 		for(i=0;i<current_used_buddy_ptr->info.flag_array_num;++i)
@@ -876,8 +875,8 @@ void shell_buddy_debug(int argc, char const *argv[])
 			PRINTF("flag %d to %d:",i<<5,(i<<5)+31);
 			PRINTF("%x\n",current_used_buddy_ptr->flag[i]);
 		}
-	//==========================================================================		
-	//level info
+	/*==========================================================================*/		
+	/*level info*/
 		PRINTF("=====================================================\n");
 		PRINTF("each level's infomation :\n");
 		for(i=0;i<current_used_buddy_ptr->info.max_level;++i)
@@ -903,8 +902,8 @@ void shell_buddy_debug(int argc, char const *argv[])
 			}
 		}
 		PRINTF("=====================================================\n");
-	//=========================================================================
-	//start check the buddy info
+	/*=========================================================================*/
+	/*start check the buddy info*/
 		PRINTF("\nnow going to check the buddy info.......\n");
 		if(0 == check_buddy())
 		{
@@ -915,7 +914,7 @@ void shell_buddy_debug(int argc, char const *argv[])
 			PRINTF("something wrong!\n");
 		}
 		PRINTF("\n\n");
-		buddy_ptr = (struct buddy *)get_next_buddy_ptr_head(buddy_ptr);
+		buddy_ptr = (struct buddy *)_get_next_buddy_ptr_head(buddy_ptr);
 	}
 	PRINTF("now going to display the page allocation's info\n");
 	dis_page_alloc_record();	

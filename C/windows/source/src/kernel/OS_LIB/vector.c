@@ -119,13 +119,12 @@ int Vector_pop_back(Vector *vector_ptr,void *pop_data_ptr)
 		return -ERROR_NULL_INPUT_PTR;
 	}
 #endif
-//	ASSERT(vector_ptr->cur_len >= 0);
 	if(0 == vector_ptr->cur_len)
 	{
 		return -ERROR_DATA_EMPTY;
 	}
 	--(vector_ptr->cur_len);
-	if(pop_data_ptr) // if NULL != pop_data_ptr
+	if(pop_data_ptr) /* if NULL != pop_data_ptr*/
 		f_memcpy(pop_data_ptr,(char*)(vector_ptr->data_ptr) + vector_ptr->cur_len * vector_ptr->data_size,vector_ptr->data_size);
 	return FUN_EXECUTE_SUCCESSFULLY;
 }
@@ -238,7 +237,7 @@ int Vector_erase_data(Vector *vector_ptr,unsigned int from,unsigned int to)
 		return -ERROR_VALUELESS_INPUT;
 	}
 #endif
-	//else (from <= to)
+	/*else (from <= to)*/
 	ASSERT(to < vector_ptr->cur_len);
 #if CONFIG_PARA_CHECK
 	if(to >= vector_ptr->cur_len)
@@ -251,14 +250,14 @@ int Vector_erase_data(Vector *vector_ptr,unsigned int from,unsigned int to)
 		(char*)(vector_ptr->data_ptr) + (to + 1) * vector_ptr->data_size,
 		(vector_ptr->cur_len - to - 1)*vector_ptr->data_size);
 	vector_ptr->cur_len -= to - from + 1;
-	//add memory management here
+	/*add memory management here*/
 	return FUN_EXECUTE_SUCCESSFULLY;
 }
 
 /*
 remove the data Vector[index] and store it into *data_store_ptrs
  */
-//if data_store_ptr is NULL,do not store
+/*if data_store_ptr is NULL,do not store*/
 int Vector_remove_index_data(Vector *vector_ptr,unsigned int index,void *data_store_ptr)
 {
 	ASSERT(NULL != vector_ptr);
@@ -283,7 +282,7 @@ int Vector_remove_index_data(Vector *vector_ptr,unsigned int index,void *data_st
 		(char*)(vector_ptr->data_ptr) + (index + 1) * vector_ptr->data_size,
 		(vector_ptr->cur_len - index - 1)*vector_ptr->data_size);
 	--vector_ptr->cur_len;
-	//add memory management here
+	/*add memory management here*/
 	return FUN_EXECUTE_SUCCESSFULLY;
 }
 

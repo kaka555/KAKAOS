@@ -19,7 +19,7 @@ const struct ka_module_symtab __rtmsym_##symbol __attribute__((section(".RTMSymT
     .name = __rtmsym_##symbol##_name,                                         \
 }
 
-UINT32 get_sys_export_function_addr(const char *fun_name);
+UINT32 _get_sys_export_function_addr(const char *fun_name);
 void shell_symbol_list_display(int argc, char const *argv[]);
 
 #else

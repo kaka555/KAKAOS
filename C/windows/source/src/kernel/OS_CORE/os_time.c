@@ -7,15 +7,16 @@
 
 volatile UINT64 g_time_tick_count = 0;
 
-UINT64 
-get_tick(void)
+UINT64 _get_tick(void)
 {
 	UINT64 num;
-	CPU_SR_ALLOC();
-	CPU_CRITICAL_ENTER();
 	num = g_time_tick_count;
-	CPU_CRITICAL_EXIT();
 	return num;
+}
+
+UINT64 get_tick(void)
+{
+	return _get_tick();
 }
 EXPORT_SYMBOL(get_tick);
 
@@ -24,18 +25,18 @@ EXPORT_SYMBOL(get_tick);
 static struct time sys_time;
 
 static const UINT8 month_date_table[] = {
-	31, //January
-	28, //Feburary
-	31, //March
-	30, //April
-	31, //May
-	30, //June
-	31, //July
-	31, //August
-	30, //September
-	31, //October
-	30, //November
-	31  //December
+	31, /*January*/
+	28, /*Feburary*/
+	31, /*March*/
+	30, /*April*/
+	31, /*May*/
+	30, /*June*/
+	31, /*July*/
+	31, /*August*/
+	30, /*September*/
+	31, /*October*/
+	30, /*November*/
+	31  /*December*/
 };
 
 void 
@@ -59,7 +60,7 @@ EXPORT_SYMBOL(__init_system_time);
  * @description : this function can only be used by os
  */
 void 
-system_time_increase(void)
+_system_time_increase(void)
 {
 	++sys_time.second;
 	if(60 == sys_time.second)
@@ -94,8 +95,7 @@ system_time_increase(void)
 	}
 }
 
-void 
-system_time_display(void)
+void _system_time_display(void)
 {
 	CPU_SR_ALLOC();
 	CPU_CRITICAL_ENTER();
@@ -103,18 +103,16 @@ system_time_display(void)
 	sys_time.month,sys_time.date,sys_time.hour,sys_time.minute,sys_time.second,sys_time.day);
 	CPU_CRITICAL_EXIT();
 }
+
+void system_time_display(void)
+{
+	_system_time_display();
+}
 EXPORT_SYMBOL(system_time_display);
 
-int set_time(struct time *time_ptr)
+int _set_time(struct time *time_ptr)
 {
 	ASSERT(NULL != time_ptr);
-#if CONFIG_PARA_CHECK
-	if(NULL == time_ptr)
-	{
-		OS_ERROR_PARA_MESSAGE_DISPLAY(set_time,time_ptr);
-		return -ERROR_NULL_INPUT_PTR;
-	}
-#endif
 	CPU_SR_ALLOC();
 	CPU_CRITICAL_ENTER();
 	sys_time.date    =   time_ptr->date;
@@ -126,6 +124,22 @@ int set_time(struct time *time_ptr)
 	sys_time.day     =   time_ptr->day;
 	CPU_CRITICAL_EXIT();
 	return FUN_EXECUTE_SUCCESSFULLY;
+}
+
+int set_time(struct time *time_ptr)
+{
+	if(NULL == time_ptr)
+	{
+		OS_ERROR_PARA_MESSAGE_DISPLAY(set_time,time_ptr);
+		return -ERROR_NULL_INPUT_PTR;
+	}
+	if((time_ptr->second >= 60) || (time_ptr->month >= 13)
+			|| (time_ptr->hour >= 24) || (time_ptr->day > 7)
+			|| (time_ptr->date > month_date_table[time_ptr->month]))
+	{
+		return -ERROR_VALUELESS_INPUT;
+	}
+	return _set_time(time_ptr);
 }
 EXPORT_SYMBOL(set_time);
 

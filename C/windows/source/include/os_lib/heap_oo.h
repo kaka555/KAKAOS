@@ -9,13 +9,12 @@
 
 struct little_heap
 {
-//private
-	Vector data;   // use array to store the data , index start is 1
-	//void *top;     // top data's buffer
-	// return value <0 means data[index1] < data[index2] 
-	int (*cmp)(Vector *Vector_ptr,unsigned int index1,unsigned int index2); // object oriented
-	//auto used by heap_adjust(),if you do not need if,give a empty function to it
-	void (*index_change_record)(Vector *Vector_ptr,int index);// object oriented
+/*private*/
+	Vector data;   /* use array to store the data , index start is 1*/
+	/* return value <0 means data[index1] < data[index2] */
+	int (*cmp)(Vector *Vector_ptr,unsigned int index1,unsigned int index2); /* object oriented*/
+	/*auto used by heap_adjust(),if you do not need if,give a empty function to it*/
+	void (*index_change_record)(Vector *Vector_ptr,int index);/* object oriented*/
 };
 
 int heap_init(struct little_heap *const little_heap_ptr,
@@ -29,7 +28,7 @@ int heap_push(struct little_heap *const little_heap_ptr,void *push_data_ptr);
 int heap_get_index_data(struct little_heap *const little_heap_ptr,void *data_store_ptr,unsigned int index);
 int heap_get_index_data_safe(struct little_heap *const little_heap_ptr,void *data_store_ptr,unsigned int index);
 int heap_set_index_data(struct little_heap *const little_heap_ptr,unsigned int index,void *data_store_ptr);
-//if data_store_ptr is NULL,do not store
+/*if data_store_ptr is NULL,do not store*/
 int heap_remove_index_data(struct little_heap *const little_heap_ptr,unsigned int index,void *data_store_ptr);
 int heap_erase_data(struct little_heap *const little_heap_ptr,unsigned int from,unsigned int to);
 unsigned int heap_get_cur_len(struct little_heap *const little_heap_ptr);

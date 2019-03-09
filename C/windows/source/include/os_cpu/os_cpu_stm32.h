@@ -49,6 +49,7 @@ typedef  CPU_INT32U            CPU_SR;
 
 
 void CPU_IntDis(void);
+void CPU_IntEn(void);
 void set_register(void **stack_ptr,void *entry_ptr,void *return_ptr,void *para);
 void __init_systick(void);
 void __init_svc(void);

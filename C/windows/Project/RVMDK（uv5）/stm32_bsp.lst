@@ -1,4 +1,4 @@
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccy4rLAy.s 			page 1
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccHHaMzl.s 			page 1
 
 
    1              		.cpu cortex-m3
@@ -58,7 +58,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccy4rLAy.s 			page 1
   48              	device_array:
   49 0048 18000000 		.word	.LC0
   50 004c 00000000 		.word	0
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccy4rLAy.s 			page 2
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccHHaMzl.s 			page 2
 
 
   51 0050 00       		.byte	0
@@ -81,13 +81,13 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccy4rLAy.s 			page 1
   68 0088 00000000 		.word	0
   69 008c 01       		.byte	1
   70 008d 000000   		.space	3
-  71 0090 00000000 		.word	buddy_init
+  71 0090 00000000 		.word	__buddy_init
   72 0094 00000000 		.word	para1
   73 0098 3C000000 		.word	.LC4
   74 009c 00000000 		.word	0
   75 00a0 01       		.byte	1
   76 00a1 000000   		.space	3
-  77 00a4 00000000 		.word	buddy_init
+  77 00a4 00000000 		.word	__buddy_init
   78 00a8 0C000000 		.word	para2
   79              		.text
   80              		.align	1
@@ -108,17 +108,17 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccy4rLAy.s 			page 1
    6:../../source/src/kernel/OS_CPU/bsp/stm32_bsp.c **** 
    7:../../source/src/kernel/OS_CPU/bsp/stm32_bsp.c **** static const struct dev_mem_para para1 = {
    8:../../source/src/kernel/OS_CPU/bsp/stm32_bsp.c **** 	.start = (void *)0x20000000,
-   9:../../source/src/kernel/OS_CPU/bsp/stm32_bsp.c **** 	.size = 64, // KB
+   9:../../source/src/kernel/OS_CPU/bsp/stm32_bsp.c **** 	.size = 64, /* KB*/
   10:../../source/src/kernel/OS_CPU/bsp/stm32_bsp.c **** 	.prio = 1,
   11:../../source/src/kernel/OS_CPU/bsp/stm32_bsp.c **** };
   12:../../source/src/kernel/OS_CPU/bsp/stm32_bsp.c **** 
   13:../../source/src/kernel/OS_CPU/bsp/stm32_bsp.c **** static const struct dev_mem_para para2 = {
   14:../../source/src/kernel/OS_CPU/bsp/stm32_bsp.c **** 	.start = (void *)0x68000000,
-  15:../../source/src/kernel/OS_CPU/bsp/stm32_bsp.c **** 	.size = 1024, //KB
+  15:../../source/src/kernel/OS_CPU/bsp/stm32_bsp.c **** 	.size = 1024, /*KB*/
   16:../../source/src/kernel/OS_CPU/bsp/stm32_bsp.c **** 	.prio = 2,
   17:../../source/src/kernel/OS_CPU/bsp/stm32_bsp.c **** };
   18:../../source/src/kernel/OS_CPU/bsp/stm32_bsp.c **** 
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccy4rLAy.s 			page 3
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccHHaMzl.s 			page 3
 
 
   19:../../source/src/kernel/OS_CPU/bsp/stm32_bsp.c **** static const struct device device_array[] = {
@@ -148,7 +148,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccy4rLAy.s 			page 1
   43:../../source/src/kernel/OS_CPU/bsp/stm32_bsp.c **** 		.head.dev_name = "first mem",
   44:../../source/src/kernel/OS_CPU/bsp/stm32_bsp.c **** 		.head.dev_info = NULL,
   45:../../source/src/kernel/OS_CPU/bsp/stm32_bsp.c **** 		.head.type = DEV_MEM,
-  46:../../source/src/kernel/OS_CPU/bsp/stm32_bsp.c **** 		.u.mem.init_fun = buddy_init,
+  46:../../source/src/kernel/OS_CPU/bsp/stm32_bsp.c **** 		.u.mem.init_fun = __buddy_init,
   47:../../source/src/kernel/OS_CPU/bsp/stm32_bsp.c **** 		.u.mem.para = &para1,
   48:../../source/src/kernel/OS_CPU/bsp/stm32_bsp.c **** 	},
   49:../../source/src/kernel/OS_CPU/bsp/stm32_bsp.c **** 
@@ -156,7 +156,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccy4rLAy.s 			page 1
   51:../../source/src/kernel/OS_CPU/bsp/stm32_bsp.c **** 		.head.dev_name = "second mem",
   52:../../source/src/kernel/OS_CPU/bsp/stm32_bsp.c **** 		.head.dev_info = NULL,
   53:../../source/src/kernel/OS_CPU/bsp/stm32_bsp.c **** 		.head.type = DEV_MEM,
-  54:../../source/src/kernel/OS_CPU/bsp/stm32_bsp.c **** 		.u.mem.init_fun = buddy_init,
+  54:../../source/src/kernel/OS_CPU/bsp/stm32_bsp.c **** 		.u.mem.init_fun = __buddy_init,
   55:../../source/src/kernel/OS_CPU/bsp/stm32_bsp.c **** 		.u.mem.para = &para2,
   56:../../source/src/kernel/OS_CPU/bsp/stm32_bsp.c **** 	}
   57:../../source/src/kernel/OS_CPU/bsp/stm32_bsp.c **** 	
@@ -178,7 +178,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccy4rLAy.s 			page 1
  101              		.cfi_def_cfa_offset 16
  102 0004 00AF     		add	r7, sp, #0
  103              	.LCFI2:
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccy4rLAy.s 			page 4
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccHHaMzl.s 			page 4
 
 
  104              		.cfi_def_cfa_register 7
@@ -238,7 +238,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccy4rLAy.s 			page 1
  152              		@ frame_needed = 1, uses_anonymous_args = 0
  153 0034 80B5     		push	{r7, lr}
  154              	.LCFI5:
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccy4rLAy.s 			page 5
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccHHaMzl.s 			page 5
 
 
  155              		.cfi_def_cfa_offset 8
@@ -298,7 +298,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccy4rLAy.s 			page 1
  206 002f A0000000 		.4byte	.LASF1
  207 0033 03       		.uleb128 0x3
  208 0034 04       		.byte	0x4
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccy4rLAy.s 			page 6
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccHHaMzl.s 			page 6
 
 
  209 0035 05       		.byte	0x5
@@ -358,7 +358,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccy4rLAy.s 			page 1
  263 009e A8000000 		.4byte	0xa8
  264 00a2 02       		.byte	0x2
  265 00a3 23       		.byte	0x23
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccy4rLAy.s 			page 7
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccHHaMzl.s 			page 7
 
 
  266 00a4 00       		.uleb128 0
@@ -418,7 +418,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccy4rLAy.s 			page 1
  320 0104 23       		.byte	0x23
  321 0105 00       		.uleb128 0
  322 0106 09       		.uleb128 0x9
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccy4rLAy.s 			page 8
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccHHaMzl.s 			page 8
 
 
  323 0107 90000000 		.4byte	.LASF16
@@ -466,7 +466,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccy4rLAy.s 			page 1
  365 0155 09       		.uleb128 0x9
  366 0156 84010000 		.4byte	.LASF20
  367 015a 02       		.byte	0x2
- 368 015b 1D       		.byte	0x1d
+ 368 015b 1C       		.byte	0x1c
  369 015c 6D000000 		.4byte	0x6d
  370 0160 02       		.byte	0x2
  371 0161 23       		.byte	0x23
@@ -478,7 +478,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccy4rLAy.s 			page 1
  377 016a 02       		.uleb128 0x2
  378 016b 01       		.byte	0x1
  379 016c 08       		.byte	0x8
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccy4rLAy.s 			page 9
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccHHaMzl.s 			page 9
 
 
  380 016d 7F010000 		.4byte	.LASF21
@@ -487,29 +487,29 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccy4rLAy.s 			page 1
  383 0176 10       		.uleb128 0x10
  384 0177 08       		.byte	0x8
  385 0178 02       		.byte	0x2
- 386 0179 23       		.byte	0x23
+ 386 0179 22       		.byte	0x22
  387 017a 95010000 		.4byte	0x195
  388 017e 11       		.uleb128 0x11
  389 017f FE010000 		.4byte	.LASF22
  390 0183 02       		.byte	0x2
- 391 0184 24       		.byte	0x24
+ 391 0184 23       		.byte	0x23
  392 0185 8B000000 		.4byte	0x8b
  393 0189 12       		.uleb128 0x12
  394 018a 6D656D00 		.ascii	"mem\000"
  395 018e 02       		.byte	0x2
- 396 018f 25       		.byte	0x25
+ 396 018f 24       		.byte	0x24
  397 0190 EC000000 		.4byte	0xec
  398 0194 00       		.byte	0
  399 0195 08       		.uleb128 0x8
  400 0196 AA000000 		.4byte	.LASF23
  401 019a 14       		.byte	0x14
  402 019b 02       		.byte	0x2
- 403 019c 20       		.byte	0x20
+ 403 019c 1F       		.byte	0x1f
  404 019d BC010000 		.4byte	0x1bc
  405 01a1 09       		.uleb128 0x9
  406 01a2 75000000 		.4byte	.LASF24
  407 01a6 02       		.byte	0x2
- 408 01a7 22       		.byte	0x22
+ 408 01a7 21       		.byte	0x21
  409 01a8 2D010000 		.4byte	0x12d
  410 01ac 02       		.byte	0x2
  411 01ad 23       		.byte	0x23
@@ -517,7 +517,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccy4rLAy.s 			page 1
  413 01af 13       		.uleb128 0x13
  414 01b0 7500     		.ascii	"u\000"
  415 01b2 02       		.byte	0x2
- 416 01b3 26       		.byte	0x26
+ 416 01b3 25       		.byte	0x25
  417 01b4 76010000 		.4byte	0x176
  418 01b8 02       		.byte	0x2
  419 01b9 23       		.byte	0x23
@@ -538,7 +538,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccy4rLAy.s 			page 1
  434 01d4 44000000 		.4byte	.LASF28
  435 01d8 04       		.byte	0x4
  436 01d9 4F       		.byte	0x4f
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccy4rLAy.s 			page 10
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccHHaMzl.s 			page 10
 
 
  437 01da DE010000 		.4byte	0x1de
@@ -598,7 +598,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccy4rLAy.s 			page 1
  491 0246 F0010000 		.4byte	0x1f0
  492 024a 02       		.byte	0x2
  493 024b 23       		.byte	0x23
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccy4rLAy.s 			page 11
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccHHaMzl.s 			page 11
 
 
  494 024c 00       		.uleb128 0
@@ -658,7 +658,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccy4rLAy.s 			page 1
  548 02b2 02       		.byte	0x2
  549 02b3 23       		.byte	0x23
  550 02b4 0E       		.uleb128 0xe
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccy4rLAy.s 			page 12
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccHHaMzl.s 			page 12
 
 
  551 02b5 19       		.uleb128 0x19
@@ -718,7 +718,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccy4rLAy.s 			page 1
  605 031c 1C       		.uleb128 0x1c
  606 031d 31000000 		.4byte	.LASF44
  607 0321 01       		.byte	0x1
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccy4rLAy.s 			page 13
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccHHaMzl.s 			page 13
 
 
  608 0322 07       		.byte	0x7
@@ -778,7 +778,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccy4rLAy.s 			page 1
  662 0396 71010000 		.4byte	0x171
  663 039a 02       		.byte	0x2
  664 039b 91       		.byte	0x91
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccy4rLAy.s 			page 14
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccHHaMzl.s 			page 14
 
 
  665 039c 77       		.sleb128 -9
@@ -838,7 +838,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccy4rLAy.s 			page 1
  719 0031 16       		.uleb128 0x16
  720 0032 00       		.byte	0
  721 0033 03       		.uleb128 0x3
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccy4rLAy.s 			page 15
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccHHaMzl.s 			page 15
 
 
  722 0034 0E       		.uleb128 0xe
@@ -898,7 +898,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccy4rLAy.s 			page 1
  776 006a 00       		.byte	0
  777 006b 03       		.uleb128 0x3
  778 006c 0E       		.uleb128 0xe
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccy4rLAy.s 			page 16
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccHHaMzl.s 			page 16
 
 
  779 006d 3A       		.uleb128 0x3a
@@ -958,7 +958,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccy4rLAy.s 			page 1
  833 00a3 00       		.byte	0
  834 00a4 00       		.byte	0
  835 00a5 10       		.uleb128 0x10
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccy4rLAy.s 			page 17
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccHHaMzl.s 			page 17
 
 
  836 00a6 17       		.uleb128 0x17
@@ -1018,7 +1018,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccy4rLAy.s 			page 1
  890 00dc 34       		.uleb128 0x34
  891 00dd 00       		.byte	0
  892 00de 03       		.uleb128 0x3
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccy4rLAy.s 			page 18
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccHHaMzl.s 			page 18
 
 
  893 00df 0E       		.uleb128 0xe
@@ -1078,7 +1078,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccy4rLAy.s 			page 1
  947 0115 00       		.byte	0
  948 0116 00       		.byte	0
  949 0117 18       		.uleb128 0x18
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccy4rLAy.s 			page 19
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccHHaMzl.s 			page 19
 
 
  950 0118 13       		.uleb128 0x13
@@ -1138,7 +1138,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccy4rLAy.s 			page 1
  1004 014e 00       		.byte	0
  1005 014f 1C       		.uleb128 0x1c
  1006 0150 34       		.uleb128 0x34
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccy4rLAy.s 			page 20
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccHHaMzl.s 			page 20
 
 
  1007 0151 00       		.byte	0
@@ -1198,7 +1198,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccy4rLAy.s 			page 1
  1061 0188 20       		.uleb128 0x20
  1062 0189 2E       		.uleb128 0x2e
  1063 018a 01       		.byte	0x1
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccy4rLAy.s 			page 21
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccHHaMzl.s 			page 21
 
 
  1064 018b 3F       		.uleb128 0x3f
@@ -1258,7 +1258,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccy4rLAy.s 			page 1
  1118 0024 00000000 		.4byte	0
  1119 0028 00000000 		.4byte	0
  1120              	.LLST0:
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccy4rLAy.s 			page 22
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccHHaMzl.s 			page 22
 
 
  1121 002c 00000000 		.4byte	.LFB33-.Ltext0
@@ -1318,7 +1318,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccy4rLAy.s 			page 1
  1169      00
  1170              	.LASF41:
  1171 0009 47545052 		.ascii	"GTPR\000"
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccy4rLAy.s 			page 23
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccHHaMzl.s 			page 23
 
 
  1171      00
@@ -1378,7 +1378,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccy4rLAy.s 			page 1
  1200              	.LASF7:
  1201 0095 4445565F 		.ascii	"DEV_NORMAL\000"
  1201      4E4F524D 
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccy4rLAy.s 			page 24
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccHHaMzl.s 			page 24
 
 
  1201      414C00
@@ -1438,7 +1438,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccy4rLAy.s 			page 1
  1226      31365F74 
  1226      00
  1227              	.LASF29:
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccy4rLAy.s 			page 25
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccHHaMzl.s 			page 25
 
 
  1228 014b 6C6F6E67 		.ascii	"long unsigned int\000"
@@ -1498,7 +1498,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccy4rLAy.s 			page 1
  1253              	.LASF42:
  1254 01d8 52455345 		.ascii	"RESERVED6\000"
  1254      52564544 
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccy4rLAy.s 			page 26
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccHHaMzl.s 			page 26
 
 
  1254      3600
@@ -1557,27 +1557,27 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccy4rLAy.s 			page 1
  1277      2F737263 
  1277      2F6B6572 
  1278              		.ident	"GCC: (GNU Tools for Arm Embedded Processors 7-2018-q2-update) 7.3.1 20180622 (release) [AR
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccy4rLAy.s 			page 27
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccHHaMzl.s 			page 27
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 stm32_bsp.c
-G:\Users\Jaxb\AppData\Local\Temp\ccy4rLAy.s:16     .rodata:00000000 $d
-G:\Users\Jaxb\AppData\Local\Temp\ccy4rLAy.s:19     .rodata:00000000 para1
-G:\Users\Jaxb\AppData\Local\Temp\ccy4rLAy.s:26     .rodata:0000000c para2
-G:\Users\Jaxb\AppData\Local\Temp\ccy4rLAy.s:48     .rodata:00000048 device_array
-G:\Users\Jaxb\AppData\Local\Temp\ccy4rLAy.s:80     .text:00000000 $t
-G:\Users\Jaxb\AppData\Local\Temp\ccy4rLAy.s:87     .text:00000000 ka_putchar
-G:\Users\Jaxb\AppData\Local\Temp\ccy4rLAy.s:136    .text:00000030 $d
-G:\Users\Jaxb\AppData\Local\Temp\ccy4rLAy.s:140    .text:00000034 $t
-G:\Users\Jaxb\AppData\Local\Temp\ccy4rLAy.s:147    .text:00000034 bsp_init
-G:\Users\Jaxb\AppData\Local\Temp\ccy4rLAy.s:173    .text:00000048 $d
+G:\Users\Jaxb\AppData\Local\Temp\ccHHaMzl.s:16     .rodata:00000000 $d
+G:\Users\Jaxb\AppData\Local\Temp\ccHHaMzl.s:19     .rodata:00000000 para1
+G:\Users\Jaxb\AppData\Local\Temp\ccHHaMzl.s:26     .rodata:0000000c para2
+G:\Users\Jaxb\AppData\Local\Temp\ccHHaMzl.s:48     .rodata:00000048 device_array
+G:\Users\Jaxb\AppData\Local\Temp\ccHHaMzl.s:80     .text:00000000 $t
+G:\Users\Jaxb\AppData\Local\Temp\ccHHaMzl.s:87     .text:00000000 ka_putchar
+G:\Users\Jaxb\AppData\Local\Temp\ccHHaMzl.s:136    .text:00000030 $d
+G:\Users\Jaxb\AppData\Local\Temp\ccHHaMzl.s:140    .text:00000034 $t
+G:\Users\Jaxb\AppData\Local\Temp\ccHHaMzl.s:147    .text:00000034 bsp_init
+G:\Users\Jaxb\AppData\Local\Temp\ccHHaMzl.s:173    .text:00000048 $d
 
 UNDEFINED SYMBOLS
 USART_Config
 FSMC_SRAM_Init
 USART2_Config
-buddy_init
+__buddy_init
 USART_SendData
 USART_GetFlagStatus
 _bsp_init

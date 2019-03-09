@@ -30,13 +30,13 @@ static inline void clear_input_buffer(void)
 	using_shell_buffer_ptr->buffer[0] = '\0';
 }
 
-void shell_buffer_wait_str(const char *str_ptr) // thread will going to sleep
+void _shell_buffer_wait_str(const char *str_ptr) /* thread will going to sleep*/
 {
 	ASSERT(NULL != str_ptr);
 #if CONFIG_PARA_CHECK	
 	if(NULL == str_ptr)
 	{
-		OS_ERROR_PARA_MESSAGE_DISPLAY(shell_buffer_wait_str,str_ptr);
+		OS_ERROR_PARA_MESSAGE_DISPLAY(_shell_buffer_wait_str,str_ptr);
 		return ;
 	}
 #endif
@@ -46,9 +46,9 @@ void shell_buffer_wait_str(const char *str_ptr) // thread will going to sleep
 	while(1)
 	{
 #if CONFIG_ASSERT_DEBUG
-		error = p(&MCB_for_shell,MCB_FLAG_WAIT,0);
+		error = _p(&MCB_for_shell,MCB_FLAG_WAIT,0);
 #else
-		p(&MCB_for_shell,MCB_FLAG_WAIT,0);
+		_p(&MCB_for_shell,MCB_FLAG_WAIT,0);
 #endif
 		ASSERT(FUN_EXECUTE_SUCCESSFULLY == error);
 		if(0 == ka_strncmp(using_shell_buffer_ptr->buffer,str_ptr,ka_strlen(str_ptr)))
@@ -73,13 +73,13 @@ char *get_para_add(int argc, char const *argv[], const char *pre_name)
 	return NULL;
 }
 
-struct shell_buffer *change_shell_buffer(struct shell_buffer *shell_buffer_ptr)
+struct shell_buffer *_change_shell_buffer(struct shell_buffer *shell_buffer_ptr)
 {
 	ASSERT(NULL != shell_buffer_ptr);
 #if CONFIG_PARA_CHECK
 	if(NULL == shell_buffer_ptr)
 	{
-		OS_ERROR_PARA_MESSAGE_DISPLAY(change_shell_buffer,shell_buffer_ptr);
+		OS_ERROR_PARA_MESSAGE_DISPLAY(_change_shell_buffer,shell_buffer_ptr);
 		return NULL;
 	}
 #endif
@@ -93,26 +93,20 @@ struct shell_buffer *change_shell_buffer(struct shell_buffer *shell_buffer_ptr)
 
 int __init_shell_buffer(struct shell_buffer *shell_buffer_ptr,
 	char *buffer_ptr,
-	char *buffer_reserve_ptr) // if buffer_reserve_ptr is NULL,means no reserve buffer
+	char *buffer_reserve_ptr,
+	unsigned int buffer_size) /* if buffer_reserve_ptr is NULL,means no reserve buffer*/
 {
 	ASSERT((shell_buffer_ptr != NULL) 	&& 
-			(shell_buffer_ptr != NULL));
-#if CONFIG_PARA_CHECK
-	if((NULL == shell_buffer_ptr) 	|| 
-		(NULL == shell_buffer_ptr))
-	{
-		OS_ERROR_PARA_MESSAGE_DISPLAY(__init_shell_buffer,three_shell_buffer);
-		return -ERROR_NULL_INPUT_PTR;
-	}
-#endif
+			(buffer_ptr != NULL));
 	shell_buffer_ptr->buffer 			= buffer_ptr;
 	shell_buffer_ptr->buffer_reserve 	= buffer_reserve_ptr;
 	shell_buffer_ptr->index 			= 0;
 	shell_buffer_ptr->index_reserve 	= 0;
+	shell_buffer_ptr->buffer_size 		= buffer_size;
 	return FUN_EXECUTE_SUCCESSFULLY;
 }
 
-void put_in_shell_buffer(char c)  // deal with input layer
+void _put_in_shell_buffer(char c)  /* deal with input layer*/
 {
 	if(c == 0x0a)
 	{
@@ -131,7 +125,7 @@ void put_in_shell_buffer(char c)  // deal with input layer
 	{
 		c += 'a' - 'A'; 
 	}
-	if(0x08 == c) // backspace key
+	if(0x08 == c) /* backspace key*/
 	{
 		if(using_shell_buffer_ptr->index>0)
 		{
@@ -145,7 +139,7 @@ void put_in_shell_buffer(char c)  // deal with input layer
 		}
 		return ;
 	}
-	if(using_shell_buffer_ptr->index < BUFFER_SIZE)
+	if(using_shell_buffer_ptr->index < using_shell_buffer_ptr->buffer_size)
 	{
 		using_shell_buffer_ptr->buffer[(using_shell_buffer_ptr->index)++] = c;
 		using_shell_buffer_ptr->buffer[using_shell_buffer_ptr->index] = '\0';
@@ -162,12 +156,37 @@ void put_in_shell_buffer(char c)  // deal with input layer
 		using_shell_buffer_ptr->buffer[using_shell_buffer_ptr->index-1] = '\0';
 		ka_printf("%s\n",using_shell_buffer_ptr->buffer);
 #endif
-		v(&MCB_for_shell);
+		_v(&MCB_for_shell);
 	}
 }
 
+static int _shell_exec(const char *command)
+{
+	unsigned int len = ka_strlen(command);
+	if(len + 1 > using_shell_buffer_ptr->buffer_size)
+	{
+		OS_ERROR_PARA_MESSAGE_DISPLAY(_shell_exec,command);
+		return -ERROR_VALUELESS_INPUT;
+	}
+	unsigned int i;
+	for(i=0;i<len;++i)
+	{
+		_put_in_shell_buffer(command[i]);
+	}
+	_put_in_shell_buffer(0x0d);
+	return FUN_EXECUTE_SUCCESSFULLY;
+}
 
-//static int process(char *buffer_ptr);
+int shell_exec(const char *command)
+{
+	if(NULL == command)
+	{
+		OS_ERROR_PARA_MESSAGE_DISPLAY(shell_exec,command);
+		return -ERROR_NULL_INPUT_PTR;
+	}
+	return _shell_exec(command);
+}
+
 static void redo(int argc, char const *argv[])
 {
 	(void)argc;
@@ -182,9 +201,9 @@ static void redo(int argc, char const *argv[])
 			ka_puts((const char *)(using_shell_buffer_ptr->argv_reserve)[i]);
 		}
 		ka_putchar('\n');
-		match_and_execute_command(using_shell_buffer_ptr->index_reserve,
+		_match_and_execute_command(using_shell_buffer_ptr->index_reserve,
 			(const char **)(using_shell_buffer_ptr->argv_reserve),
-			get_command_processer(ka_strlen((using_shell_buffer_ptr->argv_reserve)[0])));
+			_get_command_processer(ka_strlen((using_shell_buffer_ptr->argv_reserve)[0])));
 	}
 	else
 	{
@@ -193,8 +212,8 @@ static void redo(int argc, char const *argv[])
 }
 
 
-//struct command -- add command in the corresponding array here(step 2)
-// and write the function to execute
+/*struct command -- add command in the corresponding array here(step 2)
+** and write the function to execute*/
 static struct command resident_command_1[] = 
 {
 	{
@@ -362,35 +381,35 @@ static void shell_init(void)
 	__init_command_n_ptr_hash_array();
 	for(i=0;i<sizeof(resident_command_1)/sizeof(struct command);++i)
 	{
-		insert_struct_command_1(resident_command_1+i);
+		_insert_struct_command_1(resident_command_1+i);
 	}
 	for(i=0;i<sizeof(resident_command_2)/sizeof(struct command);++i)
 	{
-		insert_struct_command_2(resident_command_2+i);
+		_insert_struct_command_2(resident_command_2+i);
 	}
 	for(i=0;i<sizeof(resident_command_3)/sizeof(struct command);++i)
 	{
-		insert_struct_command_3(resident_command_3+i);
+		_insert_struct_command_3(resident_command_3+i);
 	}
 	for(i=0;i<sizeof(resident_command_4)/sizeof(struct command);++i)
 	{
-		insert_struct_command_4(resident_command_4+i);
+		_insert_struct_command_4(resident_command_4+i);
 	}
 	for(i=0;i<sizeof(resident_command_5)/sizeof(struct command);++i)
 	{
-		insert_struct_command_5(resident_command_5+i);
+		_insert_struct_command_5(resident_command_5+i);
 	}
 	for(i=0;i<sizeof(resident_command_6)/sizeof(struct command);++i)
 	{
-		insert_struct_command_6(resident_command_6+i);
+		_insert_struct_command_6(resident_command_6+i);
 	}
 	for(i=0;i<sizeof(resident_command_7)/sizeof(struct command);++i)
 	{
-		insert_struct_command_7(resident_command_7+i);
+		_insert_struct_command_7(resident_command_7+i);
 	}
 	for(i=0;i<sizeof(resident_command_8)/sizeof(struct command);++i)
 	{
-		insert_struct_command_8(resident_command_8+i);
+		_insert_struct_command_8(resident_command_8+i);
 	}
 #if CONFIG_ASSERT_DEBUG
 	error = init_MCB(&MCB_for_shell,0,MCB_TYPE_FLAG_BINARY);
@@ -399,7 +418,7 @@ static void shell_init(void)
 #endif
 	ASSERT(FUN_EXECUTE_SUCCESSFULLY == error);
 #if CONFIG_ASSERT_DEBUG
-	error = __init_shell_buffer(&main_shell_buffer,main_buffer,main_buffer_reserve);
+	error = __init_shell_buffer(&main_shell_buffer,main_buffer,main_buffer_reserve,BUFFER_SIZE);
 #else
 	__init_shell_buffer(&main_shell_buffer,main_buffer,main_buffer_reserve);
 #endif
@@ -407,7 +426,7 @@ static void shell_init(void)
 	using_shell_buffer_ptr = &main_shell_buffer;
 }
 
-//public
+/*public*/
 static int process(char *buffer_ptr)
 {
 	char *ptr = buffer_ptr;
@@ -450,9 +469,9 @@ static int process(char *buffer_ptr)
 	}
 	*ptr = '\0';
 		
-	result = match_and_execute_command(num,
+	result = _match_and_execute_command(num,
 		(const char **)(using_shell_buffer_ptr->argv),
-		get_command_processer(ka_strlen(using_shell_buffer_ptr->argv[0])));
+		_get_command_processer(ka_strlen(using_shell_buffer_ptr->argv[0])));
     if(result == 1)
     {
     	return 0;
@@ -479,9 +498,9 @@ void shell(void *para)
 	while(1)
 	{
 #if CONFIG_ASSERT_DEBUG
-		error = p(&MCB_for_shell,MCB_FLAG_WAIT,0);
+		error = _p(&MCB_for_shell,MCB_FLAG_WAIT,0);
 #else
-		p(&MCB_for_shell,MCB_FLAG_WAIT,0);
+		_p(&MCB_for_shell,MCB_FLAG_WAIT,0);
 #endif
 		ASSERT(FUN_EXECUTE_SUCCESSFULLY == error);
 		result = process(using_shell_buffer_ptr->buffer);

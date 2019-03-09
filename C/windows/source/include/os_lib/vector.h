@@ -30,7 +30,7 @@ int Vector_set_index_data(Vector *const vector_ptr,unsigned int index,void *data
 int Vector_get_index_address(Vector *const vector_ptr,unsigned int index,void **data_store_ptr);
 int Vector_delete(Vector *const vector_ptr);
 int Vector_erase_data(Vector *const vector_ptr,unsigned int from,unsigned int to);
-int Vector_remove_index_data(Vector *const vector_ptr,unsigned int index,void *data_store_ptr);//if data_store_ptr is NULL,do not store
+int Vector_remove_index_data(Vector *const vector_ptr,unsigned int index,void *data_store_ptr);/*if data_store_ptr is NULL,do not store*/
 int Vector_set_inner(Vector *const vector_ptr,unsigned int dest_index,unsigned int src_index);
 int Vector_swap_inner(Vector *const vector_ptr,unsigned int index1,unsigned int index2);
 

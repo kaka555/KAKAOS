@@ -242,7 +242,7 @@ void DEBUG_USART_IRQHandler(void)
 
 	if(USART_GetITStatus(DEBUG_USARTx,USART_IT_RXNE)!=RESET)
 	{
-		put_in_shell_buffer(USART_ReceiveData(DEBUG_USARTx));			
+		_put_in_shell_buffer(USART_ReceiveData(DEBUG_USARTx));			
 	}
 
 	SYS_EXIT_INTERRUPT();
@@ -256,7 +256,7 @@ void USART2_IRQHandler(void)
   if(USART_GetITStatus(USART2,USART_IT_RXNE)!=RESET)
   {
 #if CONFIG_MODULE
-    put_in_module_buffer(USART_ReceiveData(USART2));
+    _put_in_module_buffer(USART_ReceiveData(USART2));
 #endif
   }   
   SYS_EXIT_INTERRUPT();

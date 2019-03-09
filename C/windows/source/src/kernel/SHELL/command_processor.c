@@ -9,7 +9,7 @@
 *if you need to add command:  step 1: add the following three place if necessary
 *                             step 2: add struct command in shell.c
 */
-//1.hash array to store command
+/*1.hash array to store command*/
 static struct singly_list_head command_1_ptr_hash_array[ARRAY_SIZE];
 static struct singly_list_head command_2_ptr_hash_array[ARRAY_SIZE];
 static struct singly_list_head command_3_ptr_hash_array[ARRAY_SIZE];
@@ -18,7 +18,7 @@ static struct singly_list_head command_5_ptr_hash_array[ARRAY_SIZE];
 static struct singly_list_head command_6_ptr_hash_array[ARRAY_SIZE];
 static struct singly_list_head command_7_ptr_hash_array[ARRAY_SIZE];
 static struct singly_list_head command_8_ptr_hash_array[ARRAY_SIZE];
-//2.struct command_processer entity
+/*2.struct command_processer entity*/
 static struct command_processer command_1_processer = {1,command_1_ptr_hash_array};
 static struct command_processer command_2_processer = {2,command_2_ptr_hash_array};
 static struct command_processer command_3_processer = {3,command_3_ptr_hash_array};
@@ -27,12 +27,12 @@ static struct command_processer command_5_processer = {5,command_5_ptr_hash_arra
 static struct command_processer command_6_processer = {6,command_6_ptr_hash_array};
 static struct command_processer command_7_processer = {7,command_7_ptr_hash_array};
 static struct command_processer command_8_processer = {8,command_8_ptr_hash_array};
-//3.array to store command_processor_ptr
+/*3.array to store command_processor_ptr*/
 static struct command_processer* command_processer_ptr_array[] = {&command_1_processer,&command_2_processer,
 	&command_3_processer,&command_4_processer,&command_5_processer,&command_6_processer,&command_7_processer,
 	&command_8_processer};
 
-struct command_processer *get_command_processer(unsigned int num)
+struct command_processer *_get_command_processer(unsigned int num)
 {
 	if(!(num <= sizeof(command_processer_ptr_array)/sizeof(struct command_processer *)) || (num<1))
 	{
@@ -67,7 +67,7 @@ void __init_command_n_ptr_hash_array(void)
 	}
 }
 
-int match_and_execute_command(
+int _match_and_execute_command(
 	int num,
 	char const *argv[],
 	struct command_processer * const command_processer_ptr)
@@ -103,37 +103,37 @@ inline static void insert_struct_command(struct command *command_ptr,struct sing
 	singly_list_add(&command_ptr->list,&hash_array[hash]);
 }
 
-void insert_struct_command_1(struct command *ptr)
+void _insert_struct_command_1(struct command *ptr)
 {
 	insert_struct_command(ptr,command_1_ptr_hash_array);
 }
-void insert_struct_command_2(struct command *ptr)
+void _insert_struct_command_2(struct command *ptr)
 {
 	insert_struct_command(ptr,command_2_ptr_hash_array);
 }
-void insert_struct_command_3(struct command *ptr)
+void _insert_struct_command_3(struct command *ptr)
 {
 	insert_struct_command(ptr,command_3_ptr_hash_array);
 }
-void insert_struct_command_4(struct command *ptr)
+void _insert_struct_command_4(struct command *ptr)
 {
 	insert_struct_command(ptr,command_4_ptr_hash_array);
 }
 
-void insert_struct_command_5(struct command *ptr)
+void _insert_struct_command_5(struct command *ptr)
 {
 	insert_struct_command(ptr,command_5_ptr_hash_array);
 }
 
-void insert_struct_command_6(struct command *ptr)
+void _insert_struct_command_6(struct command *ptr)
 {
 	insert_struct_command(ptr,command_6_ptr_hash_array);
 }
-void insert_struct_command_7(struct command *ptr)
+void _insert_struct_command_7(struct command *ptr)
 {
 	insert_struct_command(ptr,command_7_ptr_hash_array);
 }
-void insert_struct_command_8(struct command *ptr)
+void _insert_struct_command_8(struct command *ptr)
 {
 	insert_struct_command(ptr,command_8_ptr_hash_array);
 }

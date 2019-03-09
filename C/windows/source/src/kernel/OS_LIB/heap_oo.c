@@ -8,14 +8,14 @@
 #define MIN(a,b) ((a) < (b) ? (a) : (b))
 
 int heap_init(struct little_heap *const little_heap_ptr,
-	unsigned int size, // parameter for vector
-	unsigned int len_per_data, // parameter for vector
+	unsigned int size, /* parameter for vector*/
+	unsigned int len_per_data, /* parameter for vector*/
 	int (*cmp)(Vector *Vector_ptr,unsigned int index1,unsigned int index2),
 	void (*index_change_record)(Vector *Vector_ptr,int index))
 {
 	int ret;
 	ASSERT((NULL != little_heap_ptr) && (NULL != cmp));
-	ASSERT(len_per_data <= sizeof(long long));// need consideration
+	ASSERT(len_per_data <= sizeof(long long));/* need consideration*/
 #if CONFIG_PARA_CHECK
 	if((NULL == little_heap_ptr) || (NULL == cmp))
 	{
@@ -23,7 +23,7 @@ int heap_init(struct little_heap *const little_heap_ptr,
 		OS_ERROR_PARA_MESSAGE_DISPLAY(heap_init,cmp);
 		return -ERROR_NULL_INPUT_PTR;
 	}
-	if(len_per_data > sizeof(long long)) // need consideration
+	if(len_per_data > sizeof(long long)) /* need consideration*/
 	{
 		OS_ERROR_PARA_MESSAGE_DISPLAY(heap_init,len_per_data);
 		return -ERROR_VALUELESS_INPUT;
@@ -53,7 +53,7 @@ inline int heap_delete(struct little_heap *little_heap_ptr)
 	return Vector_delete(&little_heap_ptr->data);
 }
 
-//subfunction for heap sort
+/*subfunction for heap sort*/
 static void heap_adjust(struct little_heap *little_heap_ptr,int index,int size)
 {
 	int j;
@@ -79,7 +79,7 @@ static void heap_adjust(struct little_heap *little_heap_ptr,int index,int size)
 	}
 }
 
-//add a data with *push_data_ptr, then adjust the heap 
+/*add a data with *push_data_ptr, then adjust the heap */
 int heap_push(struct little_heap *little_heap_ptr,void *push_data_ptr)
 {
 	ASSERT((NULL != little_heap_ptr) && (NULL != push_data_ptr));
@@ -109,7 +109,7 @@ int heap_push(struct little_heap *little_heap_ptr,void *push_data_ptr)
 }
 
 
-//get the data with index "index" and store it into *data_store_ptr
+/*get the data with index "index" and store it into *data_store_ptr*/
 inline int heap_get_index_data(struct little_heap *little_heap_ptr,void *data_store_ptr,unsigned int index)
 {
 	ASSERT((NULL != little_heap_ptr) && (NULL != data_store_ptr));
@@ -142,7 +142,7 @@ int heap_get_index_data_safe(struct little_heap *little_heap_ptr,void *data_stor
 	return Vector_get_index_data(&little_heap_ptr->data,index,data_store_ptr);
 }
 
-//get the data with index "index" with data *data_store_ptr; then adjust the heap
+/*get the data with index "index" with data *data_store_ptr; then adjust the heap*/
 int heap_set_index_data(struct little_heap *little_heap_ptr,unsigned int index,void *data_store_ptr)
 {
 	ASSERT((NULL != little_heap_ptr) && (NULL != data_store_ptr));
@@ -168,7 +168,7 @@ int heap_set_index_data(struct little_heap *little_heap_ptr,unsigned int index,v
 	return FUN_EXECUTE_SUCCESSFULLY;
 }
 
-//remove the data with index "index" and store it into *data_store_ptr; then adjust the heap
+/*remove the data with index "index" and store it into *data_store_ptr; then adjust the heap*/
 int heap_remove_index_data(struct little_heap *little_heap_ptr,unsigned int index,void *data_store_ptr)
 {
 	ASSERT(NULL != little_heap_ptr);
@@ -190,7 +190,7 @@ int heap_remove_index_data(struct little_heap *little_heap_ptr,unsigned int inde
 	{
 		return ret;
 	}
-	//rebuild heap
+	/*rebuild heap*/
 	int size = get_Vector_cur_len(&little_heap_ptr->data) - 1;
 	for(i=size/2;i>0;--i)
 	{
@@ -199,7 +199,7 @@ int heap_remove_index_data(struct little_heap *little_heap_ptr,unsigned int inde
 	return FUN_EXECUTE_SUCCESSFULLY;
 }
 
-//erase the data between index "from" to "to"; then adjust the heap
+/*erase the data between index "from" to "to"; then adjust the heap*/
 int heap_erase_data(struct little_heap *little_heap_ptr,unsigned int from,unsigned int to)
 {
 	ASSERT(NULL != little_heap_ptr);
@@ -216,7 +216,7 @@ int heap_erase_data(struct little_heap *little_heap_ptr,unsigned int from,unsign
 	{
 		return ret;
 	}
-	//rebuild heap
+	/*rebuild heap*/
 	int size = get_Vector_cur_len(&little_heap_ptr->data) - 1;
 	for(i=size/2;i>0;--i)
 	{

@@ -11,14 +11,14 @@ struct TCB_list{
 };
 
 void __init_TCB_list(void);
-int register_in_TCB_list(TCB *TCB_ptr);
-int delete_from_TCB_list(TCB *TCB_ptr);
-struct list_head *get_from_TCB_list(unsigned int index);
-unsigned char get_ready_num_from_TCB_list(unsigned int index);
-void decrease_ready_num(unsigned int index);
-void increase_ready_num(unsigned int index);
-void decrease_TCB_num(unsigned int index);
-void increase_TCB_num(unsigned int index);
+void _register_in_TCB_list(TCB *TCB_ptr);
+int _delete_from_TCB_list(TCB *TCB_ptr);
+struct list_head *_get_from_TCB_list(unsigned int index);
+unsigned char _get_ready_num_from_TCB_list(unsigned int index);
+void _decrease_ready_num(unsigned int index);
+void _increase_ready_num(unsigned int index);
+void _decrease_TCB_num(unsigned int index);
+void _increase_TCB_num(unsigned int index);
 void shell_check_TCB_list(void);
 void shell_stack_check(int argc, char const *argv[]);
 void shell_show_tasks_registers(int argc, char const *argv[]);
