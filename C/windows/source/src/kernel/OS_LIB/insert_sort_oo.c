@@ -8,14 +8,6 @@ int insert_sort_insert_into(struct insert_sort_data *data_ptr,struct insert_sort
 {
 	ASSERT(NULL != data_ptr);
 	ASSERT(NULL != insert_sort_entity_ptr);
-#if CONFIG_PARA_CHECK
-	if((NULL == data_ptr) || (NULL == insert_sort_entity_ptr))
-	{
-		OS_ERROR_PARA_MESSAGE_DISPLAY(insert_sort_insert_into,data_ptr);
-		OS_ERROR_PARA_MESSAGE_DISPLAY(insert_sort_insert_into,insert_sort_entity_ptr);
-		return -ERROR_NULL_INPUT_PTR;
-	}
-#endif
 	struct insert_sort_data *buffer;
 	struct list_head *pos;
 	/* find a suitable position to insert it*/
@@ -44,14 +36,6 @@ struct insert_sort_data * insert_sort_find_data(struct insert_sort_entity *inser
 {
 	ASSERT(NULL != data_ptr);
 	ASSERT(NULL != insert_sort_entity_ptr);
-#if CONFIG_PARA_CHECK
-	if((NULL == data_ptr) || (NULL == insert_sort_entity_ptr))
-	{
-		OS_ERROR_PARA_MESSAGE_DISPLAY(insert_sort_find_data,data_ptr);
-		OS_ERROR_PARA_MESSAGE_DISPLAY(insert_sort_find_data,insert_sort_entity_ptr);
-		return NULL;
-	}
-#endif
 	struct list_head *pos;
 	struct insert_sort_data *buffer;
 	/*find from start to the end*/
@@ -71,14 +55,6 @@ struct insert_sort_data * insert_sort_find_data_with_id(struct insert_sort_entit
 {
 	ASSERT(NULL != data_ptr);
 	ASSERT(NULL != insert_sort_entity_ptr);
-#if CONFIG_PARA_CHECK
-	if((NULL == data_ptr) || (NULL == insert_sort_entity_ptr))
-	{
-		OS_ERROR_PARA_MESSAGE_DISPLAY(insert_sort_find_data_with_id,data_ptr);
-		OS_ERROR_PARA_MESSAGE_DISPLAY(insert_sort_find_data_with_id,insert_sort_entity_ptr);
-		return NULL;
-	}
-#endif
 	struct list_head *pos;
 	struct insert_sort_data *buffer;
 	list_for_each(pos,&insert_sort_entity_ptr->data_list_head)
@@ -97,13 +73,6 @@ struct insert_sort_data * insert_sort_find_data_with_id(struct insert_sort_entit
 struct insert_sort_data * insert_sort_delete_head(struct insert_sort_entity *insert_sort_entity_ptr)
 {
 	ASSERT(NULL != insert_sort_entity_ptr);
-#if CONFIG_PARA_CHECK
-	if(NULL == insert_sort_entity_ptr)
-	{
-		OS_ERROR_PARA_MESSAGE_DISPLAY(insert_sort_delete_head,insert_sort_entity_ptr);
-		return NULL;
-	}
-#endif
 	if(list_empty(&insert_sort_entity_ptr->data_list_head))
 	{
 		return NULL;
@@ -121,13 +90,6 @@ struct insert_sort_data * insert_sort_delete_head(struct insert_sort_entity *ins
 struct insert_sort_data * insert_sort_delete_data(struct insert_sort_entity *insert_sort_entity_ptr,void *data_ptr)
 {
 	ASSERT(NULL != insert_sort_entity_ptr);
-#if CONFIG_PARA_CHECK
-	if(NULL == insert_sort_entity_ptr)
-	{
-		OS_ERROR_PARA_MESSAGE_DISPLAY(insert_sort_delete_data,insert_sort_entity_ptr);
-		return NULL;
-	}
-#endif
 	struct insert_sort_data *buffer_ptr;
 	buffer_ptr = insert_sort_find_data(insert_sort_entity_ptr,data_ptr);
 	if(NULL == buffer_ptr)/*no such data*/
@@ -150,13 +112,6 @@ struct insert_sort_data * insert_sort_delete_data_with_id(
 	id_type identify_data)
 {
 	ASSERT(NULL != insert_sort_entity_ptr);
-#if CONFIG_PARA_CHECK
-	if(NULL == insert_sort_entity_ptr)
-	{
-		OS_ERROR_PARA_MESSAGE_DISPLAY(insert_sort_delete_data_with_id,insert_sort_entity_ptr);
-		return NULL;
-	}
-#endif
 	struct insert_sort_data *buffer_ptr;
 	buffer_ptr = insert_sort_find_data_with_id(insert_sort_entity_ptr,data_ptr,identify_data);
 	if(NULL == buffer_ptr)/*no such data*/
@@ -198,10 +153,6 @@ int init_insert_sort_entity(
 )
 {
 	ASSERT(NULL != insert_sort_entity_ptr);
-	if(NULL == insert_sort_entity_ptr)
-	{
-		return -ERROR_NULL_INPUT_PTR;
-	}
 PRIVATE
 	insert_sort_entity_ptr->data_num             = 0;
 	insert_sort_entity_ptr->compare              = compare;
@@ -212,16 +163,9 @@ PRIVATE
 }
 
 
-inline struct insert_sort_data * insert_sort_get_first_data_ptr(struct insert_sort_entity *insert_sort_entity_ptr)
+struct insert_sort_data * insert_sort_get_first_data_ptr(struct insert_sort_entity *insert_sort_entity_ptr)
 {
 	ASSERT(NULL != insert_sort_entity_ptr);
-#if CONFIG_PARA_CHECK
-	if(NULL == insert_sort_entity_ptr)
-	{
-		OS_ERROR_PARA_MESSAGE_DISPLAY(insert_sort_get_first_data_ptr,insert_sort_entity_ptr);
-		return NULL;
-	}
-#endif
 	if(list_empty(&insert_sort_entity_ptr->data_list_head))
 	{
 		return NULL;

@@ -43,6 +43,23 @@ static inline int singly_list_empty(struct singly_list_head *head)
     const typeof( ((type *)0)->member ) *__mptr = (ptr);    \
     (type *)( (char *)__mptr - singly_ka_offsetof(type,member) );})
 
+#define singly_list_for_each_entry(pos, head, member)              \
+    for (pos = singly_list_entry((head)->next, typeof(*pos), member);  \
+         &pos->member != (head);    \
+         pos = singly_list_entry(pos->member.next, typeof(*pos), member))
+
+#define singly_list_for_each_entry_safe(pos, n, head, member)          \
+    for (pos = singly_list_entry((head)->next, typeof(*pos), member),  \
+        n = singly_list_entry(pos->member.next, typeof(*pos), member); \
+         &pos->member != (head);                    \
+         pos = n, n = singly_list_entry(n->member.next, typeof(*n), member))
+
+#define singly_list_for_each_entry_safe_n(pos, n, head, member)          \
+    for (pos = singly_list_entry((head)->next, typeof(*pos), member),  \
+        n = singly_list_entry(pos->member.next, typeof(*pos), member); \
+         &n->member != (head);                    \
+         pos = n, n = singly_list_entry(n->member.next, typeof(*n), member))
+
 void singly_list_del(
 	struct singly_list_head *head,
 	struct singly_list_head *entity,

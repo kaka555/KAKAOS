@@ -1,4 +1,4 @@
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccnXWVzh.s 			page 1
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccV5xqmv.s 			page 1
 
 
    1              		.cpu cortex-m3
@@ -30,7 +30,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccnXWVzh.s 			page 1
   27              		.fpu softvfp
   28              		.type	_schedule, %function
   29              	_schedule:
-  30              	.LFB13:
+  30              	.LFB20:
   31              		.file 1 "../../source/src/kernel/OS_CORE/schedule/os_schedule.c"
    1:../../source/src/kernel/OS_CORE/schedule/os_schedule.c **** #include <os_schedule.h>
    2:../../source/src/kernel/OS_CORE/schedule/os_schedule.c **** #include <os_cpu.h>
@@ -58,7 +58,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccnXWVzh.s 			page 1
   24:../../source/src/kernel/OS_CORE/schedule/os_schedule.c **** 
   25:../../source/src/kernel/OS_CORE/schedule/os_schedule.c **** static void _schedule(void)
   26:../../source/src/kernel/OS_CORE/schedule/os_schedule.c **** {
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccnXWVzh.s 			page 2
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccV5xqmv.s 			page 2
 
 
   32              		.loc 1 26 0
@@ -118,7 +118,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccnXWVzh.s 			page 1
   36:../../source/src/kernel/OS_CORE/schedule/os_schedule.c **** 		return ;
   77              		.loc 1 36 0
   78 003c 05E0     		b	.L1
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccnXWVzh.s 			page 3
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccV5xqmv.s 			page 3
 
 
   79              	.L4:
@@ -154,7 +154,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccnXWVzh.s 			page 1
  104 0058 00000000 		.word	OSTCBCurPtr
  105 005c 04ED00E0 		.word	-536810236
  106              		.cfi_endproc
- 107              	.LFE13:
+ 107              	.LFE20:
  108              		.size	_schedule, .-_schedule
  109              		.align	1
  110              		.global	schedule
@@ -164,7 +164,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccnXWVzh.s 			page 1
  114              		.fpu softvfp
  115              		.type	schedule, %function
  116              	schedule:
- 117              	.LFB14:
+ 117              	.LFB21:
   41:../../source/src/kernel/OS_CORE/schedule/os_schedule.c **** 
   42:../../source/src/kernel/OS_CORE/schedule/os_schedule.c **** void schedule(void)
   43:../../source/src/kernel/OS_CORE/schedule/os_schedule.c **** {
@@ -178,7 +178,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccnXWVzh.s 			page 1
  125              		.cfi_offset 7, -8
  126              		.cfi_offset 14, -4
  127 0062 00AF     		add	r7, sp, #0
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccnXWVzh.s 			page 4
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccV5xqmv.s 			page 4
 
 
  128              	.LCFI6:
@@ -191,7 +191,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccnXWVzh.s 			page 1
  133 0068 00BF     		nop
  134 006a 80BD     		pop	{r7, pc}
  135              		.cfi_endproc
- 136              	.LFE14:
+ 136              	.LFE21:
  137              		.size	schedule, .-schedule
  138              		.global	__rtmsym_schedule_name
  139              		.section	.rodata.name,"a",%progbits
@@ -219,7 +219,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccnXWVzh.s 			page 1
  159              		.fpu softvfp
  160              		.type	_sys_delay, %function
  161              	_sys_delay:
- 162              	.LFB15:
+ 162              	.LFB22:
   46:../../source/src/kernel/OS_CORE/schedule/os_schedule.c **** EXPORT_SYMBOL(schedule);
   47:../../source/src/kernel/OS_CORE/schedule/os_schedule.c **** 
   48:../../source/src/kernel/OS_CORE/schedule/os_schedule.c **** int _sys_delay(unsigned int delay_ticks_num,TASK_STATE state)
@@ -238,7 +238,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccnXWVzh.s 			page 1
  174 0070 84B0     		sub	sp, sp, #16
  175              	.LCFI8:
  176              		.cfi_def_cfa_offset 32
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccnXWVzh.s 			page 5
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccV5xqmv.s 			page 5
 
 
  177 0072 00AF     		add	r7, sp, #0
@@ -298,7 +298,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccnXWVzh.s 			page 1
  221 00c4 FFF7FEFF 		bl	_delete_TCB_from_ready
   60:../../source/src/kernel/OS_CORE/schedule/os_schedule.c **** 	_insert_into_delay_heap((TCB *)OSTCBCurPtr);
  222              		.loc 1 60 0
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccnXWVzh.s 			page 6
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccV5xqmv.s 			page 6
 
 
  223 00c8 0F4B     		ldr	r3, .L12+8
@@ -343,7 +343,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccnXWVzh.s 			page 1
  258 0104 00000000 		.word	g_time_tick_count
  259 0108 00000000 		.word	OSTCBCurPtr
  260              		.cfi_endproc
- 261              	.LFE15:
+ 261              	.LFE22:
  262              		.size	_sys_delay, .-_sys_delay
  263              		.section	.rodata
  264              		.align	2
@@ -358,7 +358,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccnXWVzh.s 			page 1
  269              	.LC1:
  270 0038 6572726F 		.ascii	"error fun name : sys_delay\012error para : state\012"
  270      72206675 
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccnXWVzh.s 			page 7
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccV5xqmv.s 			page 7
 
 
  270      6E206E61 
@@ -384,7 +384,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccnXWVzh.s 			page 1
  282              		.fpu softvfp
  283              		.type	sys_delay, %function
  284              	sys_delay:
- 285              	.LFB16:
+ 285              	.LFB23:
   65:../../source/src/kernel/OS_CORE/schedule/os_schedule.c **** 
   66:../../source/src/kernel/OS_CORE/schedule/os_schedule.c **** int sys_delay(unsigned int delay_ticks_num,TASK_STATE state)
   67:../../source/src/kernel/OS_CORE/schedule/os_schedule.c **** {
@@ -418,7 +418,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccnXWVzh.s 			page 1
  312              		.loc 1 68 0 discriminator 2
  313 0124 FB78     		ldrb	r3, [r7, #3]	@ zero_extendqisi2
  314 0126 072B     		cmp	r3, #7
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccnXWVzh.s 			page 8
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccV5xqmv.s 			page 8
 
 
  315 0128 06D0     		beq	.L15
@@ -478,7 +478,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccnXWVzh.s 			page 1
  358 016a 7B68     		ldr	r3, [r7, #4]
  359 016c 002B     		cmp	r3, #0
  360 016e 05D1     		bne	.L19
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccnXWVzh.s 			page 9
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccV5xqmv.s 			page 9
 
 
   80:../../source/src/kernel/OS_CORE/schedule/os_schedule.c **** 	{
@@ -518,7 +518,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccnXWVzh.s 			page 1
  389 0194 38000000 		.word	.LC1
  390 0198 68000000 		.word	.LC2
  391              		.cfi_endproc
- 392              	.LFE16:
+ 392              	.LFE23:
  393              		.size	sys_delay, .-sys_delay
  394              		.global	__rtmsym_sys_delay_name
  395              		.section	.rodata.name
@@ -538,7 +538,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccnXWVzh.s 			page 1
  407 0008 00000000 		.word	sys_delay
  408 000c 00000000 		.word	__rtmsym_sys_delay_name
  409              		.text
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccnXWVzh.s 			page 10
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccV5xqmv.s 			page 10
 
 
  410              		.align	1
@@ -549,7 +549,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccnXWVzh.s 			page 1
  415              		.fpu softvfp
  416              		.type	_sys_suspend, %function
  417              	_sys_suspend:
- 418              	.LFB17:
+ 418              	.LFB24:
   86:../../source/src/kernel/OS_CORE/schedule/os_schedule.c **** EXPORT_SYMBOL(sys_delay);
   87:../../source/src/kernel/OS_CORE/schedule/os_schedule.c **** 
   88:../../source/src/kernel/OS_CORE/schedule/os_schedule.c **** int _sys_suspend(TASK_STATE state)
@@ -598,7 +598,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccnXWVzh.s 			page 1
   96:../../source/src/kernel/OS_CORE/schedule/os_schedule.c **** 	}
   97:../../source/src/kernel/OS_CORE/schedule/os_schedule.c **** 	OSTCBCurPtr->task_state = state;
  454              		.loc 1 97 0
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccnXWVzh.s 			page 11
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccV5xqmv.s 			page 11
 
 
  455 01c4 0C4B     		ldr	r3, .L25+4
@@ -645,7 +645,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccnXWVzh.s 			page 1
  490 01f4 00000000 		.word	g_interrupt_count
  491 01f8 00000000 		.word	OSTCBCurPtr
  492              		.cfi_endproc
- 493              	.LFE17:
+ 493              	.LFE24:
  494              		.size	_sys_suspend, .-_sys_suspend
  495              		.align	1
  496              		.global	sys_suspend
@@ -655,10 +655,10 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccnXWVzh.s 			page 1
  500              		.fpu softvfp
  501              		.type	sys_suspend, %function
  502              	sys_suspend:
- 503              	.LFB18:
+ 503              	.LFB25:
  104:../../source/src/kernel/OS_CORE/schedule/os_schedule.c **** 
  105:../../source/src/kernel/OS_CORE/schedule/os_schedule.c **** int sys_suspend(TASK_STATE state)
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccnXWVzh.s 			page 12
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccV5xqmv.s 			page 12
 
 
  106:../../source/src/kernel/OS_CORE/schedule/os_schedule.c **** {
@@ -718,7 +718,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccnXWVzh.s 			page 1
  551 0232 FB79     		ldrb	r3, [r7, #7]	@ zero_extendqisi2
  552 0234 042B     		cmp	r3, #4
  553 0236 0ED0     		beq	.L29
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccnXWVzh.s 			page 13
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccV5xqmv.s 			page 13
 
 
  113:../../source/src/kernel/OS_CORE/schedule/os_schedule.c **** 		   (STATE_WAIT_MCB_FOREVER == state) 			||
@@ -773,12 +773,12 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccnXWVzh.s 			page 1
  592 0268 00000000 		.word	.LC0
  593 026c 38000000 		.word	.LC1
  594              		.cfi_endproc
- 595              	.LFE18:
+ 595              	.LFE25:
  596              		.size	sys_suspend, .-sys_suspend
  597              		.global	__rtmsym_sys_suspend_name
  598              		.section	.rodata.name
  599 0016 0000     		.align	2
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccnXWVzh.s 			page 14
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccV5xqmv.s 			page 14
 
 
  600              		.type	__rtmsym_sys_suspend_name, %object
@@ -803,7 +803,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccnXWVzh.s 			page 1
  617              		.fpu softvfp
  618              		.type	_task_creat_ready, %function
  619              	_task_creat_ready:
- 620              	.LFB19:
+ 620              	.LFB26:
  123:../../source/src/kernel/OS_CORE/schedule/os_schedule.c **** EXPORT_SYMBOL(sys_suspend);
  124:../../source/src/kernel/OS_CORE/schedule/os_schedule.c **** 
  125:../../source/src/kernel/OS_CORE/schedule/os_schedule.c **** static _must_check int _task_creat_ready(
@@ -838,7 +838,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccnXWVzh.s 			page 1
  135:../../source/src/kernel/OS_CORE/schedule/os_schedule.c **** 	CPU_SR_ALLOC();
  640              		.loc 1 135 0
  641 027e 0023     		movs	r3, #0
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccnXWVzh.s 			page 15
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccV5xqmv.s 			page 15
 
 
  642 0280 FB61     		str	r3, [r7, #28]
@@ -898,7 +898,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccnXWVzh.s 			page 1
  148:../../source/src/kernel/OS_CORE/schedule/os_schedule.c **** 	{
  149:../../source/src/kernel/OS_CORE/schedule/os_schedule.c **** 		return ret;
  684              		.loc 1 149 0
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccnXWVzh.s 			page 16
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccV5xqmv.s 			page 16
 
 
  685 02c8 7B69     		ldr	r3, [r7, #20]
@@ -928,7 +928,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccnXWVzh.s 			page 1
  704              		@ sp needed
  705 02de 80BD     		pop	{r7, pc}
  706              		.cfi_endproc
- 707              	.LFE19:
+ 707              	.LFE26:
  708              		.size	_task_creat_ready, .-_task_creat_ready
  709              		.align	1
  710              		.global	task_creat_ready
@@ -938,7 +938,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccnXWVzh.s 			page 1
  714              		.fpu softvfp
  715              		.type	task_creat_ready, %function
  716              	task_creat_ready:
- 717              	.LFB20:
+ 717              	.LFB27:
  155:../../source/src/kernel/OS_CORE/schedule/os_schedule.c **** 
  156:../../source/src/kernel/OS_CORE/schedule/os_schedule.c **** int _must_check task_creat_ready(
  157:../../source/src/kernel/OS_CORE/schedule/os_schedule.c **** 	unsigned int stack_size,
@@ -958,7 +958,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccnXWVzh.s 			page 1
  724              		.cfi_def_cfa_offset 8
  725              		.cfi_offset 7, -8
  726              		.cfi_offset 14, -4
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccnXWVzh.s 			page 17
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccV5xqmv.s 			page 17
 
 
  727 02e2 88B0     		sub	sp, sp, #32
@@ -1018,7 +1018,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccnXWVzh.s 			page 1
  768 031a 3B6A     		ldr	r3, [r7, #32]
  769 031c 0293     		str	r3, [sp, #8]
  770 031e FB69     		ldr	r3, [r7, #28]
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccnXWVzh.s 			page 18
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccV5xqmv.s 			page 18
 
 
  771 0320 0193     		str	r3, [sp, #4]
@@ -1054,7 +1054,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccnXWVzh.s 			page 1
  793              	.L44:
  794 033c 00000000 		.word	g_interrupt_count
  795              		.cfi_endproc
- 796              	.LFE20:
+ 796              	.LFE27:
  797              		.size	task_creat_ready, .-task_creat_ready
  798              		.global	__rtmsym_task_creat_ready_name
  799              		.section	.rodata.name
@@ -1078,7 +1078,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccnXWVzh.s 			page 1
  813              		.text
  814              		.align	1
  815              		.global	_task_init_ready
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccnXWVzh.s 			page 19
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccV5xqmv.s 			page 19
 
 
  816              		.syntax unified
@@ -1087,7 +1087,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccnXWVzh.s 			page 1
  819              		.fpu softvfp
  820              		.type	_task_init_ready, %function
  821              	_task_init_ready:
- 822              	.LFB21:
+ 822              	.LFB28:
  186:../../source/src/kernel/OS_CORE/schedule/os_schedule.c **** EXPORT_SYMBOL(task_creat_ready);
  187:../../source/src/kernel/OS_CORE/schedule/os_schedule.c **** 
  188:../../source/src/kernel/OS_CORE/schedule/os_schedule.c **** int _must_check _task_init_ready(
@@ -1138,7 +1138,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccnXWVzh.s 			page 1
  855 0364 3B6A     		ldr	r3, [r7, #32]
  856 0366 0093     		str	r3, [sp]
  857 0368 3B68     		ldr	r3, [r7]
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccnXWVzh.s 			page 20
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccV5xqmv.s 			page 20
 
 
  858 036a 7A68     		ldr	r2, [r7, #4]
@@ -1198,7 +1198,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccnXWVzh.s 			page 1
  898              	.LCFI40:
  899              		.cfi_def_cfa_offset 8
  900 03ae BD46     		mov	sp, r7
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccnXWVzh.s 			page 21
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccV5xqmv.s 			page 21
 
 
  901              	.LCFI41:
@@ -1206,7 +1206,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccnXWVzh.s 			page 1
  903              		@ sp needed
  904 03b0 80BD     		pop	{r7, pc}
  905              		.cfi_endproc
- 906              	.LFE21:
+ 906              	.LFE28:
  907              		.size	_task_init_ready, .-_task_init_ready
  908              		.align	1
  909              		.global	task_init_ready
@@ -1216,7 +1216,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccnXWVzh.s 			page 1
  913              		.fpu softvfp
  914              		.type	task_init_ready, %function
  915              	task_init_ready:
- 916              	.LFB22:
+ 916              	.LFB29:
  215:../../source/src/kernel/OS_CORE/schedule/os_schedule.c **** 
  216:../../source/src/kernel/OS_CORE/schedule/os_schedule.c **** int _must_check task_init_ready(
  217:../../source/src/kernel/OS_CORE/schedule/os_schedule.c **** 	TCB *TCB_ptr,
@@ -1258,7 +1258,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccnXWVzh.s 			page 1
  942 03c8 6FF0FC03 		mvn	r3, #252
  943 03cc 1EE0     		b	.L52
  944              	.L51:
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccnXWVzh.s 			page 22
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccV5xqmv.s 			page 22
 
 
  228:../../source/src/kernel/OS_CORE/schedule/os_schedule.c **** 	}
@@ -1318,7 +1318,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccnXWVzh.s 			page 1
  243:../../source/src/kernel/OS_CORE/schedule/os_schedule.c **** 				function,
  244:../../source/src/kernel/OS_CORE/schedule/os_schedule.c **** 				para);
  245:../../source/src/kernel/OS_CORE/schedule/os_schedule.c **** }
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccnXWVzh.s 			page 23
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccV5xqmv.s 			page 23
 
 
  984              		.loc 1 245 0
@@ -1336,7 +1336,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccnXWVzh.s 			page 1
  996              	.L56:
  997 0414 00000000 		.word	g_interrupt_count
  998              		.cfi_endproc
- 999              	.LFE22:
+ 999              	.LFE29:
  1000              		.size	task_init_ready, .-task_init_ready
  1001              		.global	__rtmsym_task_init_ready_name
  1002              		.section	.rodata.name
@@ -1365,7 +1365,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccnXWVzh.s 			page 1
  1022              		.fpu softvfp
  1023              		.type	sys_schedule_lock, %function
  1024              	sys_schedule_lock:
- 1025              	.LFB23:
+ 1025              	.LFB30:
  246:../../source/src/kernel/OS_CORE/schedule/os_schedule.c **** EXPORT_SYMBOL(task_init_ready);
  247:../../source/src/kernel/OS_CORE/schedule/os_schedule.c **** 
  248:../../source/src/kernel/OS_CORE/schedule/os_schedule.c **** void sys_schedule_lock(void)
@@ -1378,7 +1378,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccnXWVzh.s 			page 1
  1031              	.LCFI47:
  1032              		.cfi_def_cfa_offset 8
  1033              		.cfi_offset 7, -8
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccnXWVzh.s 			page 24
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccV5xqmv.s 			page 24
 
 
  1034              		.cfi_offset 14, -4
@@ -1423,7 +1423,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccnXWVzh.s 			page 1
  1068              	.L59:
  1069 0440 00000000 		.word	g_schedule_lock
  1070              		.cfi_endproc
- 1071              	.LFE23:
+ 1071              	.LFE30:
  1072              		.size	sys_schedule_lock, .-sys_schedule_lock
  1073              		.align	1
  1074              		.global	sys_schedule_unlock
@@ -1433,12 +1433,12 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccnXWVzh.s 			page 1
  1078              		.fpu softvfp
  1079              		.type	sys_schedule_unlock, %function
  1080              	sys_schedule_unlock:
- 1081              	.LFB24:
+ 1081              	.LFB31:
  255:../../source/src/kernel/OS_CORE/schedule/os_schedule.c **** 
  256:../../source/src/kernel/OS_CORE/schedule/os_schedule.c **** void sys_schedule_unlock(void)
  257:../../source/src/kernel/OS_CORE/schedule/os_schedule.c **** {
  1082              		.loc 1 257 0
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccnXWVzh.s 			page 25
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccV5xqmv.s 			page 25
 
 
  1083              		.cfi_startproc
@@ -1490,7 +1490,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccnXWVzh.s 			page 1
  1124              	.L62:
  1125 046c 00000000 		.word	g_schedule_lock
  1126              		.cfi_endproc
- 1127              	.LFE24:
+ 1127              	.LFE31:
  1128              		.size	sys_schedule_unlock, .-sys_schedule_unlock
  1129              		.align	1
  1130              		.global	sys_schedule_islock
@@ -1498,12 +1498,12 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccnXWVzh.s 			page 1
  1132              		.thumb
  1133              		.thumb_func
  1134              		.fpu softvfp
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccnXWVzh.s 			page 26
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccV5xqmv.s 			page 26
 
 
  1135              		.type	sys_schedule_islock, %function
  1136              	sys_schedule_islock:
- 1137              	.LFB25:
+ 1137              	.LFB32:
  263:../../source/src/kernel/OS_CORE/schedule/os_schedule.c **** 
  264:../../source/src/kernel/OS_CORE/schedule/os_schedule.c **** int sys_schedule_islock(void)
  265:../../source/src/kernel/OS_CORE/schedule/os_schedule.c **** {
@@ -1545,7 +1545,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccnXWVzh.s 			page 1
  1171              	.L66:
  1172 048c 00000000 		.word	g_schedule_lock
  1173              		.cfi_endproc
- 1174              	.LFE25:
+ 1174              	.LFE32:
  1175              		.size	sys_schedule_islock, .-sys_schedule_islock
  1176              	.Letext0:
  1177              		.file 2 "../../source/include/os_core/task_state.h"
@@ -1558,7 +1558,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccnXWVzh.s 			page 1
  1184              	.Ldebug_info0:
  1185 0000 F2070000 		.4byte	0x7f2
  1186 0004 0200     		.2byte	0x2
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccnXWVzh.s 			page 27
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccV5xqmv.s 			page 27
 
 
  1187 0006 00000000 		.4byte	.Ldebug_abbrev0
@@ -1618,7 +1618,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccnXWVzh.s 			page 1
  1241 007b 14020000 		.4byte	.LASF15
  1242 007f 02       		.byte	0x2
  1243 0080 0F       		.byte	0xf
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccnXWVzh.s 			page 28
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccV5xqmv.s 			page 28
 
 
  1244 0081 25000000 		.4byte	0x25
@@ -1678,7 +1678,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccnXWVzh.s 			page 1
  1298 00ea 00       		.uleb128 0
  1299 00eb 09       		.uleb128 0x9
  1300 00ec D8050000 		.4byte	.LASF21
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccnXWVzh.s 			page 29
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccV5xqmv.s 			page 29
 
 
  1301 00f0 04       		.byte	0x4
@@ -1738,7 +1738,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccnXWVzh.s 			page 1
  1355 015c EC040000 		.4byte	.LASF48
  1356 0160 06       		.byte	0x6
  1357 0161 13       		.byte	0x13
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccnXWVzh.s 			page 30
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccV5xqmv.s 			page 30
 
 
  1358 0162 9A000000 		.4byte	0x9a
@@ -1798,7 +1798,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccnXWVzh.s 			page 1
  1412 01c5 02       		.byte	0x2
  1413 01c6 23       		.byte	0x23
  1414 01c7 14       		.uleb128 0x14
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccnXWVzh.s 			page 31
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccV5xqmv.s 			page 31
 
 
  1415 01c8 09       		.uleb128 0x9
@@ -1858,7 +1858,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccnXWVzh.s 			page 1
  1469 0228 23       		.byte	0x23
  1470 0229 38       		.uleb128 0x38
  1471 022a 09       		.uleb128 0x9
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccnXWVzh.s 			page 32
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccV5xqmv.s 			page 32
 
 
  1472 022b 6F020000 		.4byte	.LASF43
@@ -1918,7 +1918,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccnXWVzh.s 			page 1
  1526 0294 00       		.uleb128 0
  1527 0295 09       		.uleb128 0x9
  1528 0296 43020000 		.4byte	.LASF39
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccnXWVzh.s 			page 33
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccV5xqmv.s 			page 33
 
 
  1529 029a 07       		.byte	0x7
@@ -1978,7 +1978,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccnXWVzh.s 			page 1
  1583 0303 12       		.uleb128 0x12
  1584 0304 4C010000 		.4byte	.LASF53
  1585 0308 01       		.byte	0x1
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccnXWVzh.s 			page 34
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccV5xqmv.s 			page 34
 
 
  1586 0309 2E       		.byte	0x2e
@@ -2038,7 +2038,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccnXWVzh.s 			page 1
  1640 037b 7B       		.byte	0x7b
  1641 037c 70030000 		.4byte	0x370
  1642 0380 01       		.byte	0x1
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccnXWVzh.s 			page 35
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccV5xqmv.s 			page 35
 
 
  1643 0381 05       		.byte	0x5
@@ -2098,7 +2098,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccnXWVzh.s 			page 1
  1697 03f3 05       		.byte	0x5
  1698 03f4 03       		.byte	0x3
  1699 03f5 00000000 		.4byte	__rtmsym_task_init_ready_name
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccnXWVzh.s 			page 36
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccV5xqmv.s 			page 36
 
 
  1700 03f9 12       		.uleb128 0x12
@@ -2117,8 +2117,8 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccnXWVzh.s 			page 1
  1713 0412 0801     		.2byte	0x108
  1714 0414 01       		.byte	0x1
  1715 0415 93000000 		.4byte	0x93
- 1716 0419 70040000 		.4byte	.LFB25
- 1717 041d 90040000 		.4byte	.LFE25
+ 1716 0419 70040000 		.4byte	.LFB32
+ 1717 041d 90040000 		.4byte	.LFE32
  1718 0421 00000000 		.4byte	.LLST12
  1719 0425 01       		.byte	0x1
  1720 0426 16       		.uleb128 0x16
@@ -2127,8 +2127,8 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccnXWVzh.s 			page 1
  1723 042c 01       		.byte	0x1
  1724 042d 0001     		.2byte	0x100
  1725 042f 01       		.byte	0x1
- 1726 0430 44040000 		.4byte	.LFB24
- 1727 0434 70040000 		.4byte	.LFE24
+ 1726 0430 44040000 		.4byte	.LFB31
+ 1727 0434 70040000 		.4byte	.LFE31
  1728 0438 44000000 		.4byte	.LLST11
  1729 043c 01       		.byte	0x1
  1730 043d 51040000 		.4byte	0x451
@@ -2147,8 +2147,8 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccnXWVzh.s 			page 1
  1743 0457 01       		.byte	0x1
  1744 0458 F8       		.byte	0xf8
  1745 0459 01       		.byte	0x1
- 1746 045a 18040000 		.4byte	.LFB23
- 1747 045e 44040000 		.4byte	.LFE23
+ 1746 045a 18040000 		.4byte	.LFB30
+ 1747 045e 44040000 		.4byte	.LFE30
  1748 0462 94000000 		.4byte	.LLST10
  1749 0466 01       		.byte	0x1
  1750 0467 7A040000 		.4byte	0x47a
@@ -2158,7 +2158,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccnXWVzh.s 			page 1
  1754 0471 FA       		.byte	0xfa
  1755 0472 1B010000 		.4byte	0x11b
  1756 0476 02       		.byte	0x2
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccnXWVzh.s 			page 37
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccV5xqmv.s 			page 37
 
 
  1757 0477 91       		.byte	0x91
@@ -2171,8 +2171,8 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccnXWVzh.s 			page 1
  1764 0481 D8       		.byte	0xd8
  1765 0482 01       		.byte	0x1
  1766 0483 93000000 		.4byte	0x93
- 1767 0487 B2030000 		.4byte	.LFB22
- 1768 048b 18040000 		.4byte	.LFE22
+ 1767 0487 B2030000 		.4byte	.LFB29
+ 1768 048b 18040000 		.4byte	.LFE29
  1769 048f E4000000 		.4byte	.LLST9
  1770 0493 01       		.byte	0x1
  1771 0494 FB040000 		.4byte	0x4fb
@@ -2218,7 +2218,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccnXWVzh.s 			page 1
  1811 04dd 00       		.sleb128 0
  1812 04de 1B       		.uleb128 0x1b
  1813 04df 59030000 		.4byte	.LASF67
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccnXWVzh.s 			page 38
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccV5xqmv.s 			page 38
 
 
  1814 04e3 01       		.byte	0x1
@@ -2246,8 +2246,8 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccnXWVzh.s 			page 1
  1836 0508 BC       		.byte	0xbc
  1837 0509 01       		.byte	0x1
  1838 050a 93000000 		.4byte	0x93
- 1839 050e 40030000 		.4byte	.LFB21
- 1840 0512 B2030000 		.4byte	.LFE21
+ 1839 050e 40030000 		.4byte	.LFB28
+ 1840 0512 B2030000 		.4byte	.LFE28
  1841 0516 34010000 		.4byte	.LLST8
  1842 051a 01       		.byte	0x1
  1843 051b 9E050000 		.4byte	0x59e
@@ -2278,7 +2278,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccnXWVzh.s 			page 1
  1868 0549 1B       		.uleb128 0x1b
  1869 054a DD010000 		.4byte	.LASF40
  1870 054e 01       		.byte	0x1
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccnXWVzh.s 			page 39
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccV5xqmv.s 			page 39
 
 
  1871 054f C0       		.byte	0xc0
@@ -2334,11 +2334,11 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccnXWVzh.s 			page 1
  1921 05a5 9C       		.byte	0x9c
  1922 05a6 01       		.byte	0x1
  1923 05a7 93000000 		.4byte	0x93
- 1924 05ab E0020000 		.4byte	.LFB20
- 1925 05af 40030000 		.4byte	.LFE20
+ 1924 05ab E0020000 		.4byte	.LFB27
+ 1925 05af 40030000 		.4byte	.LFE27
  1926 05b3 84010000 		.4byte	.LLST7
  1927 05b7 01       		.byte	0x1
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccnXWVzh.s 			page 40
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccV5xqmv.s 			page 40
 
 
  1928 05b8 1F060000 		.4byte	0x61f
@@ -2398,7 +2398,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccnXWVzh.s 			page 1
  1982 061b 02       		.byte	0x2
  1983 061c 91       		.byte	0x91
  1984 061d 08       		.sleb128 8
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccnXWVzh.s 			page 41
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccV5xqmv.s 			page 41
 
 
  1985 061e 00       		.byte	0
@@ -2411,8 +2411,8 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccnXWVzh.s 			page 1
  1992 062b 7D       		.byte	0x7d
  1993 062c 01       		.byte	0x1
  1994 062d 93000000 		.4byte	0x93
- 1995 0631 70020000 		.4byte	.LFB19
- 1996 0635 E0020000 		.4byte	.LFE19
+ 1995 0631 70020000 		.4byte	.LFB26
+ 1996 0635 E0020000 		.4byte	.LFE26
  1997 0639 D4010000 		.4byte	.LLST6
  1998 063d 01       		.byte	0x1
  1999 063e CF060000 		.4byte	0x6cf
@@ -2458,7 +2458,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccnXWVzh.s 			page 1
  2039 0687 00       		.sleb128 0
  2040 0688 1B       		.uleb128 0x1b
  2041 0689 5B040000 		.4byte	.LASF68
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccnXWVzh.s 			page 42
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccV5xqmv.s 			page 42
 
 
  2042 068d 01       		.byte	0x1
@@ -2507,8 +2507,8 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccnXWVzh.s 			page 1
  2085 06d6 69       		.byte	0x69
  2086 06d7 01       		.byte	0x1
  2087 06d8 93000000 		.4byte	0x93
- 2088 06dc FC010000 		.4byte	.LFB18
- 2089 06e0 70020000 		.4byte	.LFE18
+ 2088 06dc FC010000 		.4byte	.LFB25
+ 2089 06e0 70020000 		.4byte	.LFE25
  2090 06e4 24020000 		.4byte	.LLST5
  2091 06e8 01       		.byte	0x1
  2092 06e9 FC060000 		.4byte	0x6fc
@@ -2518,7 +2518,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccnXWVzh.s 			page 1
  2096 06f3 69       		.byte	0x69
  2097 06f4 7A000000 		.4byte	0x7a
  2098 06f8 02       		.byte	0x2
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccnXWVzh.s 			page 43
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccV5xqmv.s 			page 43
 
 
  2099 06f9 91       		.byte	0x91
@@ -2531,8 +2531,8 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccnXWVzh.s 			page 1
  2106 0703 58       		.byte	0x58
  2107 0704 01       		.byte	0x1
  2108 0705 93000000 		.4byte	0x93
- 2109 0709 9C010000 		.4byte	.LFB17
- 2110 070d FC010000 		.4byte	.LFE17
+ 2109 0709 9C010000 		.4byte	.LFB24
+ 2110 070d FC010000 		.4byte	.LFE24
  2111 0711 74020000 		.4byte	.LLST4
  2112 0715 01       		.byte	0x1
  2113 0716 37070000 		.4byte	0x737
@@ -2560,8 +2560,8 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccnXWVzh.s 			page 1
  2135 073e 42       		.byte	0x42
  2136 073f 01       		.byte	0x1
  2137 0740 93000000 		.4byte	0x93
- 2138 0744 0C010000 		.4byte	.LFB16
- 2139 0748 9C010000 		.4byte	.LFE16
+ 2138 0744 0C010000 		.4byte	.LFB23
+ 2139 0748 9C010000 		.4byte	.LFE23
  2140 074c C4020000 		.4byte	.LLST3
  2141 0750 01       		.byte	0x1
  2142 0751 72070000 		.4byte	0x772
@@ -2578,7 +2578,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccnXWVzh.s 			page 1
  2153 0768 01       		.byte	0x1
  2154 0769 42       		.byte	0x42
  2155 076a 7A000000 		.4byte	0x7a
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccnXWVzh.s 			page 44
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccV5xqmv.s 			page 44
 
 
  2156 076e 02       		.byte	0x2
@@ -2592,8 +2592,8 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccnXWVzh.s 			page 1
  2164 0779 30       		.byte	0x30
  2165 077a 01       		.byte	0x1
  2166 077b 93000000 		.4byte	0x93
- 2167 077f 6C000000 		.4byte	.LFB15
- 2168 0783 0C010000 		.4byte	.LFE15
+ 2167 077f 6C000000 		.4byte	.LFB22
+ 2168 0783 0C010000 		.4byte	.LFE22
  2169 0787 14030000 		.4byte	.LLST2
  2170 078b 01       		.byte	0x1
  2171 078c BB070000 		.4byte	0x7bb
@@ -2628,8 +2628,8 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccnXWVzh.s 			page 1
  2200 07c1 01       		.byte	0x1
  2201 07c2 2A       		.byte	0x2a
  2202 07c3 01       		.byte	0x1
- 2203 07c4 60000000 		.4byte	.LFB14
- 2204 07c8 6C000000 		.4byte	.LFE14
+ 2203 07c4 60000000 		.4byte	.LFB21
+ 2204 07c8 6C000000 		.4byte	.LFE21
  2205 07cc 64030000 		.4byte	.LLST1
  2206 07d0 01       		.byte	0x1
  2207 07d1 20       		.uleb128 0x20
@@ -2637,11 +2637,11 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccnXWVzh.s 			page 1
  2209 07d6 01       		.byte	0x1
  2210 07d7 19       		.byte	0x19
  2211 07d8 01       		.byte	0x1
- 2212 07d9 00000000 		.4byte	.LFB13
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccnXWVzh.s 			page 45
+ 2212 07d9 00000000 		.4byte	.LFB20
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccV5xqmv.s 			page 45
 
 
- 2213 07dd 60000000 		.4byte	.LFE13
+ 2213 07dd 60000000 		.4byte	.LFE20
  2214 07e1 90030000 		.4byte	.LLST0
  2215 07e5 01       		.byte	0x1
  2216 07e6 19       		.uleb128 0x19
@@ -2698,7 +2698,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccnXWVzh.s 			page 1
  2267 0027 28       		.uleb128 0x28
  2268 0028 00       		.byte	0
  2269 0029 03       		.uleb128 0x3
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccnXWVzh.s 			page 46
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccV5xqmv.s 			page 46
 
 
  2270 002a 0E       		.uleb128 0xe
@@ -2758,7 +2758,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccnXWVzh.s 			page 1
  2324 0060 3A       		.uleb128 0x3a
  2325 0061 0B       		.uleb128 0xb
  2326 0062 3B       		.uleb128 0x3b
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccnXWVzh.s 			page 47
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccV5xqmv.s 			page 47
 
 
  2327 0063 0B       		.uleb128 0xb
@@ -2818,7 +2818,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccnXWVzh.s 			page 1
  2381 0099 00       		.byte	0
  2382 009a 03       		.uleb128 0x3
  2383 009b 0E       		.uleb128 0xe
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccnXWVzh.s 			page 48
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccV5xqmv.s 			page 48
 
 
  2384 009c 3A       		.uleb128 0x3a
@@ -2878,7 +2878,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccnXWVzh.s 			page 1
  2438 00d2 02       		.uleb128 0x2
  2439 00d3 0A       		.uleb128 0xa
  2440 00d4 00       		.byte	0
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccnXWVzh.s 			page 49
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccV5xqmv.s 			page 49
 
 
  2441 00d5 00       		.byte	0
@@ -2938,7 +2938,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccnXWVzh.s 			page 1
  2495 010c 05       		.uleb128 0x5
  2496 010d 27       		.uleb128 0x27
  2497 010e 0C       		.uleb128 0xc
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccnXWVzh.s 			page 50
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccV5xqmv.s 			page 50
 
 
  2498 010f 11       		.uleb128 0x11
@@ -2998,7 +2998,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccnXWVzh.s 			page 1
  2552 0147 00       		.byte	0
  2553 0148 03       		.uleb128 0x3
  2554 0149 0E       		.uleb128 0xe
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccnXWVzh.s 			page 51
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccV5xqmv.s 			page 51
 
 
  2555 014a 3A       		.uleb128 0x3a
@@ -3058,7 +3058,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccnXWVzh.s 			page 1
  2609 0181 00       		.byte	0
  2610 0182 03       		.uleb128 0x3
  2611 0183 08       		.uleb128 0x8
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccnXWVzh.s 			page 52
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccV5xqmv.s 			page 52
 
 
  2612 0184 3A       		.uleb128 0x3a
@@ -3118,7 +3118,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccnXWVzh.s 			page 1
  2666 01bb 0C       		.uleb128 0xc
  2667 01bc 03       		.uleb128 0x3
  2668 01bd 0E       		.uleb128 0xe
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccnXWVzh.s 			page 53
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccV5xqmv.s 			page 53
 
 
  2669 01be 3A       		.uleb128 0x3a
@@ -3162,7 +3162,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccnXWVzh.s 			page 1
  2707              		.section	.debug_loc,"",%progbits
  2708              	.Ldebug_loc0:
  2709              	.LLST12:
- 2710 0000 70040000 		.4byte	.LFB25-.Ltext0
+ 2710 0000 70040000 		.4byte	.LFB32-.Ltext0
  2711 0004 72040000 		.4byte	.LCFI57-.Ltext0
  2712 0008 0200     		.2byte	0x2
  2713 000a 7D       		.byte	0x7d
@@ -3178,7 +3178,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccnXWVzh.s 			page 1
  2723 0022 77       		.byte	0x77
  2724 0023 04       		.sleb128 4
  2725 0024 86040000 		.4byte	.LCFI59-.Ltext0
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccnXWVzh.s 			page 54
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccV5xqmv.s 			page 54
 
 
  2726 0028 88040000 		.4byte	.LCFI60-.Ltext0
@@ -3186,14 +3186,14 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccnXWVzh.s 			page 1
  2728 002e 7D       		.byte	0x7d
  2729 002f 04       		.sleb128 4
  2730 0030 88040000 		.4byte	.LCFI60-.Ltext0
- 2731 0034 90040000 		.4byte	.LFE25-.Ltext0
+ 2731 0034 90040000 		.4byte	.LFE32-.Ltext0
  2732 0038 0200     		.2byte	0x2
  2733 003a 7D       		.byte	0x7d
  2734 003b 00       		.sleb128 0
  2735 003c 00000000 		.4byte	0
  2736 0040 00000000 		.4byte	0
  2737              	.LLST11:
- 2738 0044 44040000 		.4byte	.LFB24-.Ltext0
+ 2738 0044 44040000 		.4byte	.LFB31-.Ltext0
  2739 0048 46040000 		.4byte	.LCFI52-.Ltext0
  2740 004c 0200     		.2byte	0x2
  2741 004e 7D       		.byte	0x7d
@@ -3219,14 +3219,14 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccnXWVzh.s 			page 1
  2761 007e 77       		.byte	0x77
  2762 007f 08       		.sleb128 8
  2763 0080 6A040000 		.4byte	.LCFI56-.Ltext0
- 2764 0084 70040000 		.4byte	.LFE24-.Ltext0
+ 2764 0084 70040000 		.4byte	.LFE31-.Ltext0
  2765 0088 0200     		.2byte	0x2
  2766 008a 7D       		.byte	0x7d
  2767 008b 08       		.sleb128 8
  2768 008c 00000000 		.4byte	0
  2769 0090 00000000 		.4byte	0
  2770              	.LLST10:
- 2771 0094 18040000 		.4byte	.LFB23-.Ltext0
+ 2771 0094 18040000 		.4byte	.LFB30-.Ltext0
  2772 0098 1A040000 		.4byte	.LCFI47-.Ltext0
  2773 009c 0200     		.2byte	0x2
  2774 009e 7D       		.byte	0x7d
@@ -3238,7 +3238,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccnXWVzh.s 			page 1
  2780 00ab 08       		.sleb128 8
  2781 00ac 1C040000 		.4byte	.LCFI48-.Ltext0
  2782 00b0 1E040000 		.4byte	.LCFI49-.Ltext0
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccnXWVzh.s 			page 55
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccV5xqmv.s 			page 55
 
 
  2783 00b4 0200     		.2byte	0x2
@@ -3255,14 +3255,14 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccnXWVzh.s 			page 1
  2794 00ce 77       		.byte	0x77
  2795 00cf 08       		.sleb128 8
  2796 00d0 3E040000 		.4byte	.LCFI51-.Ltext0
- 2797 00d4 44040000 		.4byte	.LFE23-.Ltext0
+ 2797 00d4 44040000 		.4byte	.LFE30-.Ltext0
  2798 00d8 0200     		.2byte	0x2
  2799 00da 7D       		.byte	0x7d
  2800 00db 08       		.sleb128 8
  2801 00dc 00000000 		.4byte	0
  2802 00e0 00000000 		.4byte	0
  2803              	.LLST9:
- 2804 00e4 B2030000 		.4byte	.LFB22-.Ltext0
+ 2804 00e4 B2030000 		.4byte	.LFB29-.Ltext0
  2805 00e8 B4030000 		.4byte	.LCFI42-.Ltext0
  2806 00ec 0200     		.2byte	0x2
  2807 00ee 7D       		.byte	0x7d
@@ -3288,17 +3288,17 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccnXWVzh.s 			page 1
  2827 011e 77       		.byte	0x77
  2828 011f 08       		.sleb128 8
  2829 0120 12040000 		.4byte	.LCFI46-.Ltext0
- 2830 0124 18040000 		.4byte	.LFE22-.Ltext0
+ 2830 0124 18040000 		.4byte	.LFE29-.Ltext0
  2831 0128 0200     		.2byte	0x2
  2832 012a 7D       		.byte	0x7d
  2833 012b 08       		.sleb128 8
  2834 012c 00000000 		.4byte	0
  2835 0130 00000000 		.4byte	0
  2836              	.LLST8:
- 2837 0134 40030000 		.4byte	.LFB21-.Ltext0
+ 2837 0134 40030000 		.4byte	.LFB28-.Ltext0
  2838 0138 42030000 		.4byte	.LCFI37-.Ltext0
  2839 013c 0200     		.2byte	0x2
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccnXWVzh.s 			page 56
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccV5xqmv.s 			page 56
 
 
  2840 013e 7D       		.byte	0x7d
@@ -3324,14 +3324,14 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccnXWVzh.s 			page 1
  2860 016e 77       		.byte	0x77
  2861 016f 08       		.sleb128 8
  2862 0170 B0030000 		.4byte	.LCFI41-.Ltext0
- 2863 0174 B2030000 		.4byte	.LFE21-.Ltext0
+ 2863 0174 B2030000 		.4byte	.LFE28-.Ltext0
  2864 0178 0200     		.2byte	0x2
  2865 017a 7D       		.byte	0x7d
  2866 017b 08       		.sleb128 8
  2867 017c 00000000 		.4byte	0
  2868 0180 00000000 		.4byte	0
  2869              	.LLST7:
- 2870 0184 E0020000 		.4byte	.LFB20-.Ltext0
+ 2870 0184 E0020000 		.4byte	.LFB27-.Ltext0
  2871 0188 E2020000 		.4byte	.LCFI32-.Ltext0
  2872 018c 0200     		.2byte	0x2
  2873 018e 7D       		.byte	0x7d
@@ -3357,8 +3357,8 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccnXWVzh.s 			page 1
  2893 01be 77       		.byte	0x77
  2894 01bf 08       		.sleb128 8
  2895 01c0 3A030000 		.4byte	.LCFI36-.Ltext0
- 2896 01c4 40030000 		.4byte	.LFE20-.Ltext0
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccnXWVzh.s 			page 57
+ 2896 01c4 40030000 		.4byte	.LFE27-.Ltext0
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccV5xqmv.s 			page 57
 
 
  2897 01c8 0200     		.2byte	0x2
@@ -3367,7 +3367,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccnXWVzh.s 			page 1
  2900 01cc 00000000 		.4byte	0
  2901 01d0 00000000 		.4byte	0
  2902              	.LLST6:
- 2903 01d4 70020000 		.4byte	.LFB19-.Ltext0
+ 2903 01d4 70020000 		.4byte	.LFB26-.Ltext0
  2904 01d8 72020000 		.4byte	.LCFI27-.Ltext0
  2905 01dc 0200     		.2byte	0x2
  2906 01de 7D       		.byte	0x7d
@@ -3393,14 +3393,14 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccnXWVzh.s 			page 1
  2926 020e 77       		.byte	0x77
  2927 020f 08       		.sleb128 8
  2928 0210 DE020000 		.4byte	.LCFI31-.Ltext0
- 2929 0214 E0020000 		.4byte	.LFE19-.Ltext0
+ 2929 0214 E0020000 		.4byte	.LFE26-.Ltext0
  2930 0218 0200     		.2byte	0x2
  2931 021a 7D       		.byte	0x7d
  2932 021b 08       		.sleb128 8
  2933 021c 00000000 		.4byte	0
  2934 0220 00000000 		.4byte	0
  2935              	.LLST5:
- 2936 0224 FC010000 		.4byte	.LFB18-.Ltext0
+ 2936 0224 FC010000 		.4byte	.LFB25-.Ltext0
  2937 0228 FE010000 		.4byte	.LCFI22-.Ltext0
  2938 022c 0200     		.2byte	0x2
  2939 022e 7D       		.byte	0x7d
@@ -3418,7 +3418,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccnXWVzh.s 			page 1
  2951 0248 02020000 		.4byte	.LCFI24-.Ltext0
  2952 024c 64020000 		.4byte	.LCFI25-.Ltext0
  2953 0250 0200     		.2byte	0x2
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccnXWVzh.s 			page 58
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccV5xqmv.s 			page 58
 
 
  2954 0252 77       		.byte	0x77
@@ -3429,14 +3429,14 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccnXWVzh.s 			page 1
  2959 025e 77       		.byte	0x77
  2960 025f 08       		.sleb128 8
  2961 0260 66020000 		.4byte	.LCFI26-.Ltext0
- 2962 0264 70020000 		.4byte	.LFE18-.Ltext0
+ 2962 0264 70020000 		.4byte	.LFE25-.Ltext0
  2963 0268 0200     		.2byte	0x2
  2964 026a 7D       		.byte	0x7d
  2965 026b 08       		.sleb128 8
  2966 026c 00000000 		.4byte	0
  2967 0270 00000000 		.4byte	0
  2968              	.LLST4:
- 2969 0274 9C010000 		.4byte	.LFB17-.Ltext0
+ 2969 0274 9C010000 		.4byte	.LFB24-.Ltext0
  2970 0278 9E010000 		.4byte	.LCFI17-.Ltext0
  2971 027c 0200     		.2byte	0x2
  2972 027e 7D       		.byte	0x7d
@@ -3462,14 +3462,14 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccnXWVzh.s 			page 1
  2992 02ae 77       		.byte	0x77
  2993 02af 08       		.sleb128 8
  2994 02b0 F2010000 		.4byte	.LCFI21-.Ltext0
- 2995 02b4 FC010000 		.4byte	.LFE17-.Ltext0
+ 2995 02b4 FC010000 		.4byte	.LFE24-.Ltext0
  2996 02b8 0200     		.2byte	0x2
  2997 02ba 7D       		.byte	0x7d
  2998 02bb 08       		.sleb128 8
  2999 02bc 00000000 		.4byte	0
  3000 02c0 00000000 		.4byte	0
  3001              	.LLST3:
- 3002 02c4 0C010000 		.4byte	.LFB16-.Ltext0
+ 3002 02c4 0C010000 		.4byte	.LFB23-.Ltext0
  3003 02c8 0E010000 		.4byte	.LCFI12-.Ltext0
  3004 02cc 0200     		.2byte	0x2
  3005 02ce 7D       		.byte	0x7d
@@ -3478,7 +3478,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccnXWVzh.s 			page 1
  3008 02d4 10010000 		.4byte	.LCFI13-.Ltext0
  3009 02d8 0200     		.2byte	0x2
  3010 02da 7D       		.byte	0x7d
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccnXWVzh.s 			page 59
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccV5xqmv.s 			page 59
 
 
  3011 02db 08       		.sleb128 8
@@ -3498,14 +3498,14 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccnXWVzh.s 			page 1
  3025 02fe 77       		.byte	0x77
  3026 02ff 08       		.sleb128 8
  3027 0300 8E010000 		.4byte	.LCFI16-.Ltext0
- 3028 0304 9C010000 		.4byte	.LFE16-.Ltext0
+ 3028 0304 9C010000 		.4byte	.LFE23-.Ltext0
  3029 0308 0200     		.2byte	0x2
  3030 030a 7D       		.byte	0x7d
  3031 030b 08       		.sleb128 8
  3032 030c 00000000 		.4byte	0
  3033 0310 00000000 		.4byte	0
  3034              	.LLST2:
- 3035 0314 6C000000 		.4byte	.LFB15-.Ltext0
+ 3035 0314 6C000000 		.4byte	.LFB22-.Ltext0
  3036 0318 70000000 		.4byte	.LCFI7-.Ltext0
  3037 031c 0200     		.2byte	0x2
  3038 031e 7D       		.byte	0x7d
@@ -3531,17 +3531,17 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccnXWVzh.s 			page 1
  3058 034e 77       		.byte	0x77
  3059 034f 10       		.sleb128 16
  3060 0350 FC000000 		.4byte	.LCFI11-.Ltext0
- 3061 0354 0C010000 		.4byte	.LFE15-.Ltext0
+ 3061 0354 0C010000 		.4byte	.LFE22-.Ltext0
  3062 0358 0200     		.2byte	0x2
  3063 035a 7D       		.byte	0x7d
  3064 035b 10       		.sleb128 16
  3065 035c 00000000 		.4byte	0
  3066 0360 00000000 		.4byte	0
  3067              	.LLST1:
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccnXWVzh.s 			page 60
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccV5xqmv.s 			page 60
 
 
- 3068 0364 60000000 		.4byte	.LFB14-.Ltext0
+ 3068 0364 60000000 		.4byte	.LFB21-.Ltext0
  3069 0368 62000000 		.4byte	.LCFI5-.Ltext0
  3070 036c 0200     		.2byte	0x2
  3071 036e 7D       		.byte	0x7d
@@ -3552,14 +3552,14 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccnXWVzh.s 			page 1
  3076 037a 7D       		.byte	0x7d
  3077 037b 08       		.sleb128 8
  3078 037c 64000000 		.4byte	.LCFI6-.Ltext0
- 3079 0380 6C000000 		.4byte	.LFE14-.Ltext0
+ 3079 0380 6C000000 		.4byte	.LFE21-.Ltext0
  3080 0384 0200     		.2byte	0x2
  3081 0386 77       		.byte	0x77
  3082 0387 08       		.sleb128 8
  3083 0388 00000000 		.4byte	0
  3084 038c 00000000 		.4byte	0
  3085              	.LLST0:
- 3086 0390 00000000 		.4byte	.LFB13-.Ltext0
+ 3086 0390 00000000 		.4byte	.LFB20-.Ltext0
  3087 0394 02000000 		.4byte	.LCFI0-.Ltext0
  3088 0398 0200     		.2byte	0x2
  3089 039a 7D       		.byte	0x7d
@@ -3585,7 +3585,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccnXWVzh.s 			page 1
  3109 03ca 77       		.byte	0x77
  3110 03cb 08       		.sleb128 8
  3111 03cc 4E000000 		.4byte	.LCFI4-.Ltext0
- 3112 03d0 60000000 		.4byte	.LFE13-.Ltext0
+ 3112 03d0 60000000 		.4byte	.LFE20-.Ltext0
  3113 03d4 0200     		.2byte	0x2
  3114 03d6 7D       		.byte	0x7d
  3115 03d7 08       		.sleb128 8
@@ -3598,7 +3598,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccnXWVzh.s 			page 1
  3122 000a 04       		.byte	0x4
  3123 000b 00       		.byte	0
  3124 000c 0000     		.2byte	0
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccnXWVzh.s 			page 61
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccV5xqmv.s 			page 61
 
 
  3125 000e 0000     		.2byte	0
@@ -3658,7 +3658,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccnXWVzh.s 			page 1
  3149              	.LASF16:
  3150 009a 55494E54 		.ascii	"UINT32\000"
  3150      333200
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccnXWVzh.s 			page 62
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccV5xqmv.s 			page 62
 
 
  3151              	.LASF57:
@@ -3718,7 +3718,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccnXWVzh.s 			page 1
  3173      49545F4D 
  3173      43425F54 
  3173      494D454F 
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccnXWVzh.s 			page 63
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccV5xqmv.s 			page 63
 
 
  3174              	.LASF76:
@@ -3778,7 +3778,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccnXWVzh.s 			page 1
  3196 0237 7379735F 		.ascii	"sys_suspend\000"
  3196      73757370 
  3196      656E6400 
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccnXWVzh.s 			page 64
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccV5xqmv.s 			page 64
 
 
  3197              	.LASF39:
@@ -3838,7 +3838,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccnXWVzh.s 			page 1
  3220 02e8 5F737973 		.ascii	"_sys_delay\000"
  3220      5F64656C 
  3220      617900
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccnXWVzh.s 			page 65
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccV5xqmv.s 			page 65
 
 
  3221              	.LASF30:
@@ -3898,7 +3898,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccnXWVzh.s 			page 1
  3244      6D73796D 
  3244      5F737973 
  3244      5F737573 
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccnXWVzh.s 			page 66
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccV5xqmv.s 			page 66
 
 
  3244      70656E64 
@@ -3958,7 +3958,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccnXWVzh.s 			page 1
  3266 045b 70617261 		.ascii	"para\000"
  3266      00
  3267              	.LASF3:
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccnXWVzh.s 			page 67
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccV5xqmv.s 			page 67
 
 
  3268 0460 53544154 		.ascii	"STATE_WAIT_MCB_FOREVER\000"
@@ -4018,7 +4018,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccnXWVzh.s 			page 1
  3289 0538 616E6368 		.ascii	"anch revision 261907] -mcpu=cortex-m3 -mthumb -mapc"
  3289      20726576 
  3289      6973696F 
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccnXWVzh.s 			page 68
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccV5xqmv.s 			page 68
 
 
  3289      6E203236 
@@ -4075,59 +4075,59 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccnXWVzh.s 			page 1
  3311      745F7265 
  3311      61647900 
  3312              		.ident	"GCC: (GNU Tools for Arm Embedded Processors 7-2018-q2-update) 7.3.1 20180622 (release) [AR
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccnXWVzh.s 			page 69
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccV5xqmv.s 			page 69
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 os_schedule.c
-G:\Users\Jaxb\AppData\Local\Temp\ccnXWVzh.s:20     .bss:00000000 g_schedule_lock
-G:\Users\Jaxb\AppData\Local\Temp\ccnXWVzh.s:17     .bss:00000000 $d
-G:\Users\Jaxb\AppData\Local\Temp\ccnXWVzh.s:23     .text:00000000 $t
-G:\Users\Jaxb\AppData\Local\Temp\ccnXWVzh.s:29     .text:00000000 _schedule
-G:\Users\Jaxb\AppData\Local\Temp\ccnXWVzh.s:102    .text:00000050 $d
-G:\Users\Jaxb\AppData\Local\Temp\ccnXWVzh.s:109    .text:00000060 $t
-G:\Users\Jaxb\AppData\Local\Temp\ccnXWVzh.s:116    .text:00000060 schedule
-G:\Users\Jaxb\AppData\Local\Temp\ccnXWVzh.s:143    .rodata.name:00000000 __rtmsym_schedule_name
-G:\Users\Jaxb\AppData\Local\Temp\ccnXWVzh.s:140    .rodata.name:00000000 $d
-G:\Users\Jaxb\AppData\Local\Temp\ccnXWVzh.s:150    .RTMSymTab:00000000 __rtmsym_schedule
-G:\Users\Jaxb\AppData\Local\Temp\ccnXWVzh.s:147    .RTMSymTab:00000000 $d
-G:\Users\Jaxb\AppData\Local\Temp\ccnXWVzh.s:161    .text:0000006c _sys_delay
-G:\Users\Jaxb\AppData\Local\Temp\ccnXWVzh.s:257    .text:00000100 $d
-G:\Users\Jaxb\AppData\Local\Temp\ccnXWVzh.s:264    .rodata:00000000 $d
-G:\Users\Jaxb\AppData\Local\Temp\ccnXWVzh.s:277    .text:0000010c $t
-G:\Users\Jaxb\AppData\Local\Temp\ccnXWVzh.s:284    .text:0000010c sys_delay
-G:\Users\Jaxb\AppData\Local\Temp\ccnXWVzh.s:388    .text:00000190 $d
-G:\Users\Jaxb\AppData\Local\Temp\ccnXWVzh.s:399    .rodata.name:0000000c __rtmsym_sys_delay_name
-G:\Users\Jaxb\AppData\Local\Temp\ccnXWVzh.s:406    .RTMSymTab:00000008 __rtmsym_sys_delay
-G:\Users\Jaxb\AppData\Local\Temp\ccnXWVzh.s:410    .text:0000019c $t
-G:\Users\Jaxb\AppData\Local\Temp\ccnXWVzh.s:417    .text:0000019c _sys_suspend
-G:\Users\Jaxb\AppData\Local\Temp\ccnXWVzh.s:490    .text:000001f4 $d
-G:\Users\Jaxb\AppData\Local\Temp\ccnXWVzh.s:495    .text:000001fc $t
-G:\Users\Jaxb\AppData\Local\Temp\ccnXWVzh.s:502    .text:000001fc sys_suspend
-G:\Users\Jaxb\AppData\Local\Temp\ccnXWVzh.s:592    .text:00000268 $d
-G:\Users\Jaxb\AppData\Local\Temp\ccnXWVzh.s:602    .rodata.name:00000018 __rtmsym_sys_suspend_name
-G:\Users\Jaxb\AppData\Local\Temp\ccnXWVzh.s:609    .RTMSymTab:00000010 __rtmsym_sys_suspend
-G:\Users\Jaxb\AppData\Local\Temp\ccnXWVzh.s:613    .text:00000270 $t
-G:\Users\Jaxb\AppData\Local\Temp\ccnXWVzh.s:619    .text:00000270 _task_creat_ready
-G:\Users\Jaxb\AppData\Local\Temp\ccnXWVzh.s:716    .text:000002e0 task_creat_ready
-G:\Users\Jaxb\AppData\Local\Temp\ccnXWVzh.s:794    .text:0000033c $d
-G:\Users\Jaxb\AppData\Local\Temp\ccnXWVzh.s:803    .rodata.name:00000024 __rtmsym_task_creat_ready_name
-G:\Users\Jaxb\AppData\Local\Temp\ccnXWVzh.s:810    .RTMSymTab:00000018 __rtmsym_task_creat_ready
-G:\Users\Jaxb\AppData\Local\Temp\ccnXWVzh.s:814    .text:00000340 $t
-G:\Users\Jaxb\AppData\Local\Temp\ccnXWVzh.s:821    .text:00000340 _task_init_ready
-G:\Users\Jaxb\AppData\Local\Temp\ccnXWVzh.s:915    .text:000003b2 task_init_ready
-G:\Users\Jaxb\AppData\Local\Temp\ccnXWVzh.s:997    .text:00000414 $d
-G:\Users\Jaxb\AppData\Local\Temp\ccnXWVzh.s:1006   .rodata.name:00000038 __rtmsym_task_init_ready_name
-G:\Users\Jaxb\AppData\Local\Temp\ccnXWVzh.s:1013   .RTMSymTab:00000020 __rtmsym_task_init_ready
-G:\Users\Jaxb\AppData\Local\Temp\ccnXWVzh.s:1017   .text:00000418 $t
-G:\Users\Jaxb\AppData\Local\Temp\ccnXWVzh.s:1024   .text:00000418 sys_schedule_lock
-G:\Users\Jaxb\AppData\Local\Temp\ccnXWVzh.s:1069   .text:00000440 $d
-G:\Users\Jaxb\AppData\Local\Temp\ccnXWVzh.s:1073   .text:00000444 $t
-G:\Users\Jaxb\AppData\Local\Temp\ccnXWVzh.s:1080   .text:00000444 sys_schedule_unlock
-G:\Users\Jaxb\AppData\Local\Temp\ccnXWVzh.s:1125   .text:0000046c $d
-G:\Users\Jaxb\AppData\Local\Temp\ccnXWVzh.s:1129   .text:00000470 $t
-G:\Users\Jaxb\AppData\Local\Temp\ccnXWVzh.s:1136   .text:00000470 sys_schedule_islock
-G:\Users\Jaxb\AppData\Local\Temp\ccnXWVzh.s:1172   .text:0000048c $d
+G:\Users\Jaxb\AppData\Local\Temp\ccV5xqmv.s:20     .bss:00000000 g_schedule_lock
+G:\Users\Jaxb\AppData\Local\Temp\ccV5xqmv.s:17     .bss:00000000 $d
+G:\Users\Jaxb\AppData\Local\Temp\ccV5xqmv.s:23     .text:00000000 $t
+G:\Users\Jaxb\AppData\Local\Temp\ccV5xqmv.s:29     .text:00000000 _schedule
+G:\Users\Jaxb\AppData\Local\Temp\ccV5xqmv.s:102    .text:00000050 $d
+G:\Users\Jaxb\AppData\Local\Temp\ccV5xqmv.s:109    .text:00000060 $t
+G:\Users\Jaxb\AppData\Local\Temp\ccV5xqmv.s:116    .text:00000060 schedule
+G:\Users\Jaxb\AppData\Local\Temp\ccV5xqmv.s:143    .rodata.name:00000000 __rtmsym_schedule_name
+G:\Users\Jaxb\AppData\Local\Temp\ccV5xqmv.s:140    .rodata.name:00000000 $d
+G:\Users\Jaxb\AppData\Local\Temp\ccV5xqmv.s:150    .RTMSymTab:00000000 __rtmsym_schedule
+G:\Users\Jaxb\AppData\Local\Temp\ccV5xqmv.s:147    .RTMSymTab:00000000 $d
+G:\Users\Jaxb\AppData\Local\Temp\ccV5xqmv.s:161    .text:0000006c _sys_delay
+G:\Users\Jaxb\AppData\Local\Temp\ccV5xqmv.s:257    .text:00000100 $d
+G:\Users\Jaxb\AppData\Local\Temp\ccV5xqmv.s:264    .rodata:00000000 $d
+G:\Users\Jaxb\AppData\Local\Temp\ccV5xqmv.s:277    .text:0000010c $t
+G:\Users\Jaxb\AppData\Local\Temp\ccV5xqmv.s:284    .text:0000010c sys_delay
+G:\Users\Jaxb\AppData\Local\Temp\ccV5xqmv.s:388    .text:00000190 $d
+G:\Users\Jaxb\AppData\Local\Temp\ccV5xqmv.s:399    .rodata.name:0000000c __rtmsym_sys_delay_name
+G:\Users\Jaxb\AppData\Local\Temp\ccV5xqmv.s:406    .RTMSymTab:00000008 __rtmsym_sys_delay
+G:\Users\Jaxb\AppData\Local\Temp\ccV5xqmv.s:410    .text:0000019c $t
+G:\Users\Jaxb\AppData\Local\Temp\ccV5xqmv.s:417    .text:0000019c _sys_suspend
+G:\Users\Jaxb\AppData\Local\Temp\ccV5xqmv.s:490    .text:000001f4 $d
+G:\Users\Jaxb\AppData\Local\Temp\ccV5xqmv.s:495    .text:000001fc $t
+G:\Users\Jaxb\AppData\Local\Temp\ccV5xqmv.s:502    .text:000001fc sys_suspend
+G:\Users\Jaxb\AppData\Local\Temp\ccV5xqmv.s:592    .text:00000268 $d
+G:\Users\Jaxb\AppData\Local\Temp\ccV5xqmv.s:602    .rodata.name:00000018 __rtmsym_sys_suspend_name
+G:\Users\Jaxb\AppData\Local\Temp\ccV5xqmv.s:609    .RTMSymTab:00000010 __rtmsym_sys_suspend
+G:\Users\Jaxb\AppData\Local\Temp\ccV5xqmv.s:613    .text:00000270 $t
+G:\Users\Jaxb\AppData\Local\Temp\ccV5xqmv.s:619    .text:00000270 _task_creat_ready
+G:\Users\Jaxb\AppData\Local\Temp\ccV5xqmv.s:716    .text:000002e0 task_creat_ready
+G:\Users\Jaxb\AppData\Local\Temp\ccV5xqmv.s:794    .text:0000033c $d
+G:\Users\Jaxb\AppData\Local\Temp\ccV5xqmv.s:803    .rodata.name:00000024 __rtmsym_task_creat_ready_name
+G:\Users\Jaxb\AppData\Local\Temp\ccV5xqmv.s:810    .RTMSymTab:00000018 __rtmsym_task_creat_ready
+G:\Users\Jaxb\AppData\Local\Temp\ccV5xqmv.s:814    .text:00000340 $t
+G:\Users\Jaxb\AppData\Local\Temp\ccV5xqmv.s:821    .text:00000340 _task_init_ready
+G:\Users\Jaxb\AppData\Local\Temp\ccV5xqmv.s:915    .text:000003b2 task_init_ready
+G:\Users\Jaxb\AppData\Local\Temp\ccV5xqmv.s:997    .text:00000414 $d
+G:\Users\Jaxb\AppData\Local\Temp\ccV5xqmv.s:1006   .rodata.name:00000038 __rtmsym_task_init_ready_name
+G:\Users\Jaxb\AppData\Local\Temp\ccV5xqmv.s:1013   .RTMSymTab:00000020 __rtmsym_task_init_ready
+G:\Users\Jaxb\AppData\Local\Temp\ccV5xqmv.s:1017   .text:00000418 $t
+G:\Users\Jaxb\AppData\Local\Temp\ccV5xqmv.s:1024   .text:00000418 sys_schedule_lock
+G:\Users\Jaxb\AppData\Local\Temp\ccV5xqmv.s:1069   .text:00000440 $d
+G:\Users\Jaxb\AppData\Local\Temp\ccV5xqmv.s:1073   .text:00000444 $t
+G:\Users\Jaxb\AppData\Local\Temp\ccV5xqmv.s:1080   .text:00000444 sys_schedule_unlock
+G:\Users\Jaxb\AppData\Local\Temp\ccV5xqmv.s:1125   .text:0000046c $d
+G:\Users\Jaxb\AppData\Local\Temp\ccV5xqmv.s:1129   .text:00000470 $t
+G:\Users\Jaxb\AppData\Local\Temp\ccV5xqmv.s:1136   .text:00000470 sys_schedule_islock
+G:\Users\Jaxb\AppData\Local\Temp\ccV5xqmv.s:1172   .text:0000048c $d
 
 UNDEFINED SYMBOLS
 CPU_SR_Save
@@ -4135,7 +4135,7 @@ _get_highest_prio_ready_TCB
 CPU_SR_Restore
 OSTCBHighRdyPtr
 OSTCBCurPtr
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccnXWVzh.s 			page 70
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccV5xqmv.s 			page 70
 
 
 _delete_TCB_from_ready

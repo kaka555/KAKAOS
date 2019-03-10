@@ -3,16 +3,49 @@
 
 
 void insert_into_cache_chain(
-	struct list_head *head,
+	struct singly_list_head *head,
 	struct kmem_cache *kmem_cache_ptr,
-	int block_size/*bytes*/
+	unsigned int block_size/*bytes*/
 	)
 {
-	IL_init(&kmem_cache_ptr->kmem_cache_insert_chain,block_size);
-	insert_chain(head,&kmem_cache_ptr->kmem_cache_insert_chain);
+	struct kmem_cache *pos,*n;
+	INIT_SINGLY_LIST_HEAD(&kmem_cache_ptr->node);
+	kmem_cache_ptr->kmem_cache_slab_size = block_size;
+	pos = singly_list_entry(head->next,struct kmem_cache,node);
+	if((singly_list_empty(head)) || 
+			(singly_list_entry(head->next,struct kmem_cache,node)->kmem_cache_slab_size > block_size))
+	{
+		singly_list_add(&kmem_cache_ptr->node,head);
+	}
+	else
+	{
+		singly_list_for_each_entry_safe_n(pos,n,head,node)
+		{
+			if(n->kmem_cache_slab_size > block_size)
+			{
+				singly_list_add(&kmem_cache_ptr->node,&pos->node);
+				goto outside ;
+			}
+		}
+		singly_list_add(&kmem_cache_ptr->node,&pos->node);
+	}
+outside:
 	INIT_LIST_HEAD(&kmem_cache_ptr->slabs_full);
 	INIT_LIST_HEAD(&kmem_cache_ptr->slabs_partial);
 	INIT_LIST_HEAD(&kmem_cache_ptr->slabs_empty);
+}
+
+struct kmem_cache *find_first_bigger_cache(struct singly_list_head *head,unsigned int size)/* polymorphic*/
+{
+	struct kmem_cache *kmem_cache_ptr;
+	singly_list_for_each_entry(kmem_cache_ptr, head ,node)
+	{
+      if(size <= kmem_cache_ptr->kmem_cache_slab_size)
+      {
+      	return kmem_cache_ptr;
+      }
+	}
+	return NULL;
 }
 
 void load_slab(

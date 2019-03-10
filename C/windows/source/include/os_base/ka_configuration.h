@@ -3,7 +3,6 @@
 
 /* on/off control*/
 #define CONFIG_DEBUG_COUNT_INIT				1
-#define CONFIG_PARA_CHECK   			 	1
 #define CONFIG_CPU_USE_RATE_CALCULATION 	0
 #define CONFIG_ASSERT_DEBUG        			1
 #define CONFIG_TIMER_EN						1

@@ -40,7 +40,7 @@ extern UINT64 g_time_tick_count;
 extern volatile int g_interrupt_count;
 extern TCB *OSTCBCurPtr;
 extern TCB *OSTCBHighRdyPtr;
-extern struct list_head *const cache_chain_head_ptr;
+extern struct singly_list_head *const cache_chain_head_ptr;
 
 #if CONFIG_TIMER_EN
 	extern void __init_timer(void);
@@ -258,13 +258,11 @@ void _case_slab_free_buddy(void *ptr,void *end_ptr)
 		return ;
 	}
 	ASSERT(0 == in_os_memory(ptr));
-#if CONFIG_PARA_CHECK
 	if(0 != in_os_memory(ptr))
 	{
 		OS_ERROR_PARA_MESSAGE_DISPLAY(_case_free_buddy,ptr);
 		return ;
 	}
-#endif
 	unsigned int level = ((unsigned int)end_ptr - (unsigned int)ptr) / PAGE_SIZE_BYTE;
 	ASSERT(0 == (level & (level-1)));
 	level = FastLog2(level) + 1;
@@ -316,17 +314,13 @@ void _case_slab_free_buddy(void *ptr,void *end_ptr)
 static void thread_init(void *para)	
 {
 	(void)para;
-	struct list_head *pos;
-	IL *IL_ptr;
 	struct kmem_cache *kmem_cache_ptr;
 	while(1)
 	{
 		sleep(THREAD_INIT_PERIOD * HZ); /*period*/
 		/*free the memory */
-		list_for_each(pos,cache_chain_head_ptr)
+		singly_list_for_each_entry(kmem_cache_ptr,cache_chain_head_ptr,node)
 		{
-			IL_ptr = list_entry(pos,IL,insert);
-			kmem_cache_ptr = list_entry(IL_ptr,struct kmem_cache,kmem_cache_insert_chain);
 			if(!list_empty(&kmem_cache_ptr->slabs_empty))
 			{
 				struct list_head *pos1,*pos2;
@@ -334,7 +328,7 @@ static void thread_init(void *para)
 				{
 					struct slab *slab_ptr = list_entry(pos1,struct slab,slab_chain);
 					ASSERT(slab_ptr->current_block_num == slab_ptr->full_block_num);
-					ASSERT(slab_ptr->block_size == kmem_cache_ptr->kmem_cache_insert_chain.prio);
+					ASSERT(slab_ptr->block_size == kmem_cache_ptr->kmem_cache_slab_size);
 					list_del(pos1);
 					_case_slab_free_buddy(slab_ptr,slab_ptr->end_ptr);
 				}

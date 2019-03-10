@@ -607,7 +607,6 @@ struct dynamic_module* dlmodule_load(void)
     return module;
 
 __exit:
-    if (module_ptr) ka_free(module_ptr);
 		
 	if(module) 
     {

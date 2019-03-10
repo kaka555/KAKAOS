@@ -96,7 +96,7 @@ int _match_and_execute_command(
 	return -1;
 }
 
-inline static void insert_struct_command(struct command *command_ptr,struct singly_list_head *hash_array)
+static inline void insert_struct_command(struct command *command_ptr,struct singly_list_head *hash_array)
 {
 	ASSERT(NULL != command_ptr);
 	unsigned int hash = command_list_hash(command_ptr->command_name);

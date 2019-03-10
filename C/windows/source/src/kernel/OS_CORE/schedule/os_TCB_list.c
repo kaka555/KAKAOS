@@ -38,13 +38,6 @@ void _register_in_TCB_list(TCB *TCB_ptr)
 int _delete_from_TCB_list(TCB *TCB_ptr)
 {
 	ASSERT(NULL != TCB_ptr);
-#if CONFIG_PARA_CHECK
-	if(NULL == TCB_ptr)
-	{
-		OS_ERROR_PARA_MESSAGE_DISPLAY(_delete_from_TCB_list,TCB_ptr);
-		return -ERROR_NULL_INPUT_PTR;
-	}
-#endif
 	struct list_head *pos;
 	list_for_each(pos,&TCB_list[TCB_ptr->prio].head)
 	{
@@ -144,11 +137,11 @@ void shell_check_TCB_list(void)
 			}
 			if(TCB_num != TCB_list[i].TCB_num)
 			{
-				ka_printf("prio %d TCB_num error!\n",i);
+				ka_printf("prio %u TCB_num error!\n",i);
 			}
 			if(ready_num != TCB_list[i].ready_num)
 			{
-				ka_printf("prio %d ready_num error!\n",i);
+				ka_printf("prio %u ready_num error!\n",i);
 			}
 			ready_num = 0;
 			TCB_num = 0;
@@ -222,21 +215,21 @@ void shell_show_tasks_registers(int argc, char const *argv[])
 					ka_printf("now show task shell's register is volatile\n");
 					continue;
 				}
-				ka_printf("R4 	= 	%x\n",*reg++);
-				ka_printf("R5 	= 	%x\n",*reg++);
-				ka_printf("R6 	= 	%x\n",*reg++);
-				ka_printf("R7 	= 	%x\n",*reg++);
-				ka_printf("R8 	= 	%x\n",*reg++);
-				ka_printf("R9 	= 	%x\n",*reg++);
-				ka_printf("R10 	= 	%x\n",*reg++);
-				ka_printf("R11 	= 	%x\n",*reg++);
-				ka_printf("xPSR	=	%x\n",*reg++);
-				ka_printf("PC 	= 	%x\n",*reg++);
-				ka_printf("R12 	= 	%x\n",*reg++);
-				ka_printf("R3 	= 	%x\n",*reg++);
-				ka_printf("R2 	= 	%x\n",*reg++);
-				ka_printf("R1 	= 	%x\n",*reg++);
-				ka_printf("R0 	= 	%x\n",*reg);
+				ka_printf("R4 	= 	0x%x\n",*reg++);
+				ka_printf("R5 	= 	0x%x\n",*reg++);
+				ka_printf("R6 	= 	0x%x\n",*reg++);
+				ka_printf("R7 	= 	0x%x\n",*reg++);
+				ka_printf("R8 	= 	0x%x\n",*reg++);
+				ka_printf("R9 	= 	0x%x\n",*reg++);
+				ka_printf("R10 	= 	0x%x\n",*reg++);
+				ka_printf("R11 	= 	0x%x\n",*reg++);
+				ka_printf("xPSR	=	0x%x\n",*reg++);
+				ka_printf("PC 	= 	0x%x\n",*reg++);
+				ka_printf("R12 	= 	0x%x\n",*reg++);
+				ka_printf("R3 	= 	0x%x\n",*reg++);
+				ka_printf("R2 	= 	0x%x\n",*reg++);
+				ka_printf("R1 	= 	0x%x\n",*reg++);
+				ka_printf("R0 	= 	0x%x\n",*reg);
 				ka_printf("=====================================================\n");
 			}
 		}

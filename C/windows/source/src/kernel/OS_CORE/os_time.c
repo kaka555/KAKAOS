@@ -50,7 +50,6 @@ __init_system_time(void)
 	sys_time.year    =  OS_YEAR;
 	sys_time.day     =  OS_DAY;
 }
-EXPORT_SYMBOL(__init_system_time);
 
 
 /**

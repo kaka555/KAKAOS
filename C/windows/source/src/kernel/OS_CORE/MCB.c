@@ -12,12 +12,12 @@
 
 extern TCB * OSTCBCurPtr;
 
-inline static int compare(struct insert_sort_data *data1,struct insert_sort_data *data2)
+static int compare(struct insert_sort_data *data1,struct insert_sort_data *data2)
 {
 	return ((TCB*)(data1->data_ptr))->prio - ((TCB*)(data2->data_ptr))->prio;
 }
 
-inline static int value_cmp(void *data1,void *data2)
+static int value_cmp(void *data1,void *data2)
 {
 	return ((TCB*)data1)->prio - ((TCB*)data2)->prio;
 }

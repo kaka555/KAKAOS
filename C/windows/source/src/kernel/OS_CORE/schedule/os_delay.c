@@ -38,7 +38,7 @@ static inline void index_change_record(Vector *Vector_ptr,int index)
 	TCB_ptr->delay_heap_position = index;
 }
 	
-inline void __init_delay_heap(void)
+void __init_delay_heap(void)
 {
 	if(0 != heap_init(&delay_heap,PRIO_MAX/4,sizeof(TCB *),_cmp,index_change_record))
 	{

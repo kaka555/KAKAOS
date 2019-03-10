@@ -1,18 +1,22 @@
 #ifndef _SLAB_H
 #define _SLAB_H
 
-#include "insert_sort.h"
+#include <kakaosstdint.h>
+#include <singly_linked_list.h>
+#include <double_linked_list.h>
 
 struct kmem_cache
 {
-	IL kmem_cache_insert_chain;		/*used for sort*/
+	//IL kmem_cache_insert_chain;		/*used for sort*/
+	struct singly_list_head node;
+	unsigned int kmem_cache_slab_size;	/*used for sort*/
 	struct list_head slabs_full; 	/* which space is fully exhausted*/
 	struct list_head slabs_partial;  
 	struct list_head slabs_empty; 	/* which space is not used */
 };
 
-void insert_into_cache_chain(struct list_head *head,struct kmem_cache *kmem_cache_ptr,int block_size);
-
+void insert_into_cache_chain(struct singly_list_head *head,struct kmem_cache *kmem_cache_ptr,unsigned int block_size);
+struct kmem_cache *find_first_bigger_cache(struct singly_list_head *head,unsigned int size);
 
 /*sizeof(struct slab)=36*/
 struct slab

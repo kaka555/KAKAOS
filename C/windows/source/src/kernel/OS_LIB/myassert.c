@@ -7,7 +7,6 @@ void my_abort(void)
 	ka_printf("os stop\n");
 	while(1);
 }
-	
 
 void _ASSERT(char* strFile,unsigned uLine)
 {

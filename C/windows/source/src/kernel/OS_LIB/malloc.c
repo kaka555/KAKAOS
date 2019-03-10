@@ -8,23 +8,21 @@
 extern int in_buddy_range(void *ptr);
 extern void _case_slab_free_buddy(void *ptr,void *end_ptr);
 
-static struct list_head cache_chain_head;
+static struct singly_list_head cache_chain_head;
 static struct kmem_cache kmem_cache16;
 static struct kmem_cache kmem_cache32;
 static struct kmem_cache kmem_cache_kmem_cache;
 static struct kmem_cache kmem_cache_TCB;
-struct list_head *const cache_chain_head_ptr = &cache_chain_head;
+struct singly_list_head *const cache_chain_head_ptr = &cache_chain_head;
 
 static struct singly_list_head page_alloc_record_head;
 
 void dis_page_alloc_record(void)
 {
 	unsigned int i = 0;
-	struct singly_list_head *pos;
 	struct page_alloc_record *record_ptr;
-	singly_list_for_each(pos,&page_alloc_record_head)
+	singly_list_for_each_entry(record_ptr,&page_alloc_record_head,list)
 	{
-		record_ptr = singly_list_entry(pos,struct page_alloc_record,list);
 		ka_printf("num.%u\n",++i);
 		ka_printf("level is %u\n",record_ptr->level);
 		ka_printf("address is %p\n",record_ptr->ptr);
@@ -64,7 +62,7 @@ static int find_and_remove_record(void *ptr)
 
 void init_malloc(void)
 {
-	INIT_LIST_HEAD(&cache_chain_head);
+	INIT_SINGLY_LIST_HEAD(&cache_chain_head);
 	insert_into_cache_chain(&cache_chain_head,&kmem_cache_TCB,sizeof(TCB));
 	insert_into_cache_chain(&cache_chain_head,&kmem_cache_kmem_cache,sizeof(struct kmem_cache));
 	insert_into_cache_chain(&cache_chain_head,&kmem_cache32,32);
@@ -182,6 +180,7 @@ static void *_case_alloc_buddy(unsigned int level)
 void *ka_malloc(unsigned int size)
 {
 	void *ptr;
+	struct kmem_cache *kmem_cache_ptr;
 	CPU_SR_ALLOC();
 	if(0 == size)
 	{
@@ -190,12 +189,11 @@ void *ka_malloc(unsigned int size)
 	CPU_CRITICAL_ENTER();
 	if(size <= 512)
 	{
-		IL *IL_ptr = find_first_bigger_IL(&cache_chain_head,size); /*find a suitable cache*/
+		kmem_cache_ptr = find_first_bigger_cache(&cache_chain_head,size); /*find a suitable cache*/
 		while(1)
 		{
-			if(NULL != IL_ptr)/* this means that there is a slab.size bigger than size*/
+			if(NULL != kmem_cache_ptr)/* this means that there is a slab.size bigger than size*/
 			{
-				struct kmem_cache *kmem_cache_ptr = list_entry(IL_ptr,struct kmem_cache,kmem_cache_insert_chain);
 				/*first try to get room from slabs_partial*/
 				if(!list_empty(&kmem_cache_ptr->slabs_partial)) /* if chain "slabs_partial" is not empty*/
 				{
@@ -225,12 +223,12 @@ void *ka_malloc(unsigned int size)
 				{
 					struct slab *slab_ptr;
 					unsigned int level;
-					level = get_set_bit_place((10 * IL_ptr->prio + sizeof(struct slab)) / PAGE_SIZE_BYTE) + 2;
+					level = get_set_bit_place((10 * kmem_cache_ptr->kmem_cache_slab_size + sizeof(struct slab)) / PAGE_SIZE_BYTE) + 2;
 					/*at least allocate 10 times of corresponding space and a room of sizeof(struct slab)*/
 					slab_ptr = (struct slab *)_case_alloc_buddy(level);
 					if(NULL != slab_ptr)
 					{
-						load_slab((void *)slab_ptr,slab_ptr->end_ptr,IL_ptr->prio,&kmem_cache_ptr->slabs_partial);
+						load_slab((void *)slab_ptr,slab_ptr->end_ptr,kmem_cache_ptr->kmem_cache_slab_size,&kmem_cache_ptr->slabs_partial);
 						ptr = slab_ptr->block_head.next; 	 /* ptr is the point of the allocated space*/
 						list_del(slab_ptr->block_head.next); /* delete it from slab chain "block_head"*/
 						--(slab_ptr->current_block_num);
@@ -239,19 +237,20 @@ void *ka_malloc(unsigned int size)
 					}
 					else /* NULL == slab_ptr*/
 					{
-						IL_ptr = get_next_IL(IL_ptr,&cache_chain_head);
-						if(NULL == IL_ptr)
+						struct singly_list_head *pos = kmem_cache_ptr->node.next;
+						if(cache_chain_head_ptr == pos)
 						{
 							CPU_CRITICAL_EXIT();
 							return NULL;
 						}
+						kmem_cache_ptr = singly_list_entry(pos,struct kmem_cache,node);
 						continue ;
 					}
 				}
 			}
 			else /* NULL == IL_ptr*/
 			{
-				struct kmem_cache *kmem_cache_ptr = ka_malloc(sizeof(struct kmem_cache));
+				kmem_cache_ptr = ka_malloc(sizeof(struct kmem_cache));
 				ASSERT(NULL != kmem_cache_ptr);
 				if(NULL == kmem_cache_ptr)
 				{
@@ -259,7 +258,7 @@ void *ka_malloc(unsigned int size)
 					return NULL;
 				}
 				insert_into_cache_chain(&cache_chain_head,kmem_cache_ptr,size);
-				IL_ptr = find_first_bigger_IL(&cache_chain_head,size);
+				kmem_cache_ptr = find_first_bigger_cache(&cache_chain_head,size);
 				continue ;
 			}
 		}
@@ -328,9 +327,7 @@ int in_os_memory(void *ptr)
 
 void ka_free(void *ptr)
 {
-	struct list_head *pos;
 	struct kmem_cache *kmem_cache_ptr;
-	IL *IL_ptr;
 	struct slab *slab_ptr;
 	CPU_SR_ALLOC();
 	if(FUN_EXECUTE_SUCCESSFULLY != in_os_memory(ptr))
@@ -338,10 +335,8 @@ void ka_free(void *ptr)
 		return ;
 	}
 	CPU_CRITICAL_ENTER();
-	list_for_each(pos, &cache_chain_head)
+	singly_list_for_each_entry(kmem_cache_ptr, &cache_chain_head, node)
 	{
-		IL_ptr = list_entry(pos,IL,insert);
-		kmem_cache_ptr =  list_entry(IL_ptr,struct kmem_cache,kmem_cache_insert_chain);
 		if(!list_empty(&kmem_cache_ptr->slabs_partial))
 		{
 			slab_ptr = free_find_in_slab_chain(&kmem_cache_ptr->slabs_partial,ptr);
@@ -383,18 +378,14 @@ void shell_check_kmem(int argc, char const *argv[])
 {
 	(void)argc;
 	(void)argv;
-	struct list_head *pos;
-	IL *IL_ptr;
 	struct kmem_cache *kmem_cache_ptr;
 	int i = 0;
 	CPU_SR_ALLOC();
 	CPU_CRITICAL_ENTER();
-	list_for_each(pos,&cache_chain_head)
+	singly_list_for_each_entry(kmem_cache_ptr, &cache_chain_head, node)
 	{
 		ka_printf("===========get NO.%d kmem===========\n",++i);
-		IL_ptr = list_entry(pos,IL,insert);
-		ka_printf("the size of this kmem_cache is %u\n",IL_ptr->prio);
-		kmem_cache_ptr = list_entry(IL_ptr,struct kmem_cache,kmem_cache_insert_chain);
+		ka_printf("the size of this kmem_cache is %u\n",kmem_cache_ptr->kmem_cache_slab_size);
 		if(!list_empty(&kmem_cache_ptr->slabs_full))
 		{
 			struct list_head *buffer;
@@ -448,19 +439,15 @@ void shell_check_slab(int argc, char const *argv[])
 {
 	(void)argc;
 	(void)argv;
-	struct list_head *pos;
-	IL *IL_ptr;
 	struct kmem_cache *kmem_cache_ptr;
 	int i = 0;
 	struct slab *slab_ptr;
 	CPU_SR_ALLOC();
 	CPU_CRITICAL_ENTER();
-	list_for_each(pos,&cache_chain_head)
+	singly_list_for_each_entry(kmem_cache_ptr, &cache_chain_head, node)
 	{
 		ka_printf("===========get NO.%d kmem===========\n",++i);
-		IL_ptr = list_entry(pos,IL,insert);
-		ka_printf("the size of this kmem_cache is %u\n",IL_ptr->prio);
-		kmem_cache_ptr = list_entry(IL_ptr,struct kmem_cache,kmem_cache_insert_chain);
+		ka_printf("the size of this kmem_cache is %u\n",kmem_cache_ptr->kmem_cache_slab_size);
 		if(!list_empty(&kmem_cache_ptr->slabs_full))
 		{
 			struct list_head *buffer;

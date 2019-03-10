@@ -239,13 +239,6 @@ EXPORT_SYMBOL(timer_delete);
 int _get_timer_heap_top(struct timer **timer_ptr)
 {
 	ASSERT(NULL != timer_ptr);
-#if CONFIG_PARA_CHECK
-	if(NULL == timer_ptr)
-	{
-		OS_ERROR_PARA_MESSAGE_DISPLAY(_get_timer_heap_top,timer_ptr);
-		return -ERROR_NULL_INPUT_PTR;
-	}
-#endif
 	CPU_SR_ALLOC();
 	CPU_CRITICAL_ENTER();
 	int ret = heap_get_top_safe(&timer_heap,(void *)timer_ptr);

@@ -1,4 +1,4 @@
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s 			page 1
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccOXefrF.s 			page 1
 
 
    1              		.cpu cortex-m3
@@ -58,7 +58,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s 			page 1
   38              		.cfi_def_cfa_register 7
   39 0006 7860     		str	r0, [r7, #4]
   18:../../source/include/os_lib/double_linked_list.h ****     list->next = list;
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s 			page 2
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccOXefrF.s 			page 2
 
 
   40              		.loc 1 18 0
@@ -118,7 +118,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s 			page 1
   86              	.LCFI8:
   87              		.cfi_def_cfa_register 7
   88 0024 F860     		str	r0, [r7, #12]
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s 			page 3
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccOXefrF.s 			page 3
 
 
   89 0026 B960     		str	r1, [r7, #8]
@@ -178,7 +178,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s 			page 1
   38:../../source/include/os_lib/double_linked_list.h **** 
   39:../../source/include/os_lib/double_linked_list.h **** 
   40:../../source/include/os_lib/double_linked_list.h **** static inline void list_add_tail(struct list_head *new, struct list_head *head)
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s 			page 4
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccOXefrF.s 			page 4
 
 
   41:../../source/include/os_lib/double_linked_list.h **** {
@@ -238,7 +238,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s 			page 1
  179              		@ args = 0, pretend = 0, frame = 8
  180              		@ frame_needed = 1, uses_anonymous_args = 0
  181              		@ link register save eliminated.
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s 			page 5
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccOXefrF.s 			page 5
 
 
  182 006c 80B4     		push	{r7}
@@ -298,7 +298,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s 			page 1
  229              		@ args = 0, pretend = 0, frame = 8
  230              		@ frame_needed = 1, uses_anonymous_args = 0
  231 008c 80B5     		push	{r7, lr}
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s 			page 6
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccOXefrF.s 			page 6
 
 
  232              	.LCFI23:
@@ -342,7 +342,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s 			page 1
  268              		.fpu softvfp
  269              		.type	compare, %function
  270              	compare:
- 271              	.LFB13:
+ 271              	.LFB20:
  272              		.file 2 "../../source/src/kernel/OS_CORE/message_queue.c"
    1:../../source/src/kernel/OS_CORE/message_queue.c **** #include <message_queue.h>
    2:../../source/src/kernel/OS_CORE/message_queue.c **** #include <myassert.h>
@@ -355,10 +355,10 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s 			page 1
    9:../../source/src/kernel/OS_CORE/message_queue.c **** 
   10:../../source/src/kernel/OS_CORE/message_queue.c **** extern TCB * OSTCBCurPtr;
   11:../../source/src/kernel/OS_CORE/message_queue.c **** 
-  12:../../source/src/kernel/OS_CORE/message_queue.c **** inline static int compare(struct insert_sort_data *data1,struct insert_sort_data *data2)
+  12:../../source/src/kernel/OS_CORE/message_queue.c **** static int compare(struct insert_sort_data *data1,struct insert_sort_data *data2)
   13:../../source/src/kernel/OS_CORE/message_queue.c **** {
  273              		.loc 2 13 0
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s 			page 7
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccOXefrF.s 			page 7
 
 
  274              		.cfi_startproc
@@ -402,7 +402,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s 			page 1
  310              		.cfi_def_cfa_offset 0
  311 00cc 7047     		bx	lr
  312              		.cfi_endproc
- 313              	.LFE13:
+ 313              	.LFE20:
  314              		.size	compare, .-compare
  315              		.align	1
  316              		.syntax unified
@@ -411,14 +411,14 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s 			page 1
  319              		.fpu softvfp
  320              		.type	value_cmp, %function
  321              	value_cmp:
- 322              	.LFB14:
+ 322              	.LFB21:
   16:../../source/src/kernel/OS_CORE/message_queue.c **** 
-  17:../../source/src/kernel/OS_CORE/message_queue.c **** inline static int value_cmp(void *data1,void *data2)
+  17:../../source/src/kernel/OS_CORE/message_queue.c **** static int value_cmp(void *data1,void *data2)
   18:../../source/src/kernel/OS_CORE/message_queue.c **** {
  323              		.loc 2 18 0
  324              		.cfi_startproc
  325              		@ args = 0, pretend = 0, frame = 8
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s 			page 8
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccOXefrF.s 			page 8
 
 
  326              		@ frame_needed = 1, uses_anonymous_args = 0
@@ -458,7 +458,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s 			page 1
  358              		.cfi_def_cfa_offset 0
  359 00ea 7047     		bx	lr
  360              		.cfi_endproc
- 361              	.LFE14:
+ 361              	.LFE21:
  362              		.size	value_cmp, .-value_cmp
  363              		.section	.rodata
  364              		.align	2
@@ -477,8 +477,8 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s 			page 1
  373              		.fpu softvfp
  374              		.type	_msg_init, %function
  375              	_msg_init:
- 376              	.LFB15:
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s 			page 9
+ 376              	.LFB22:
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccOXefrF.s 			page 9
 
 
   21:../../source/src/kernel/OS_CORE/message_queue.c **** 
@@ -538,7 +538,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s 			page 1
   29:../../source/src/kernel/OS_CORE/message_queue.c **** 	init_insert_sort_entity(
  423              		.loc 2 29 0
  424 0126 FB68     		ldr	r3, [r7, #12]
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s 			page 10
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccOXefrF.s 			page 10
 
 
  425 0128 03F10800 		add	r0, r3, #8
@@ -598,7 +598,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s 			page 1
  462              		.loc 2 46 0
  463 016c 1846     		mov	r0, r3
  464 016e 1837     		adds	r7, r7, #24
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s 			page 11
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccOXefrF.s 			page 11
 
 
  465              	.LCFI43:
@@ -615,7 +615,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s 			page 1
  476 0178 00000000 		.word	value_cmp
  477 017c 00000000 		.word	compare
  478              		.cfi_endproc
- 479              	.LFE15:
+ 479              	.LFE22:
  480              		.size	_msg_init, .-_msg_init
  481              		.section	.rodata
  482              		.align	2
@@ -651,14 +651,14 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s 			page 1
  499              		.fpu softvfp
  500              		.type	msg_init, %function
  501              	msg_init:
- 502              	.LFB16:
+ 502              	.LFB23:
   47:../../source/src/kernel/OS_CORE/message_queue.c **** 
   48:../../source/src/kernel/OS_CORE/message_queue.c **** int msg_init(MQB *MQB_ptr,char *name,unsigned int max_message_num)
   49:../../source/src/kernel/OS_CORE/message_queue.c **** {
  503              		.loc 2 49 0
  504              		.cfi_startproc
  505              		@ args = 0, pretend = 0, frame = 16
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s 			page 12
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccOXefrF.s 			page 12
 
 
  506              		@ frame_needed = 1, uses_anonymous_args = 0
@@ -718,7 +718,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s 			page 1
  550              	.L20:
   60:../../source/src/kernel/OS_CORE/message_queue.c **** 	}
   61:../../source/src/kernel/OS_CORE/message_queue.c **** 	if (g_interrupt_count > 0)
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s 			page 13
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccOXefrF.s 			page 13
 
 
  551              		.loc 2 61 0
@@ -760,7 +760,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s 			page 1
  582 01e8 90000000 		.word	.LC3
  583 01ec 00000000 		.word	g_interrupt_count
  584              		.cfi_endproc
- 585              	.LFE16:
+ 585              	.LFE23:
  586              		.size	msg_init, .-msg_init
  587              		.global	__rtmsym_msg_init_name
  588              		.section	.rodata.name,"a",%progbits
@@ -778,7 +778,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s 			page 1
  598              		.size	__rtmsym_msg_init, 8
  599              	__rtmsym_msg_init:
  600 0000 00000000 		.word	msg_init
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s 			page 14
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccOXefrF.s 			page 14
 
 
  601 0004 00000000 		.word	__rtmsym_msg_init_name
@@ -791,7 +791,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s 			page 1
  608              		.fpu softvfp
  609              		.type	_msg_send, %function
  610              	_msg_send:
- 611              	.LFB17:
+ 611              	.LFB24:
   67:../../source/src/kernel/OS_CORE/message_queue.c **** EXPORT_SYMBOL(msg_init);
   68:../../source/src/kernel/OS_CORE/message_queue.c **** 
   69:../../source/src/kernel/OS_CORE/message_queue.c **** int _msg_send(MQB *MQB_ptr,struct message *message_ptr,MSG_FLAG flag,unsigned int time)
@@ -838,7 +838,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s 			page 1
  649              	.L26:
   73:../../source/src/kernel/OS_CORE/message_queue.c **** 	CPU_SR_ALLOC();
  650              		.loc 2 73 0 is_stmt 1
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s 			page 15
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccOXefrF.s 			page 15
 
 
  651 021c 0023     		movs	r3, #0
@@ -898,7 +898,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s 			page 1
  692 0262 5621     		movs	r1, #86
  693 0264 5748     		ldr	r0, .L41
  694 0266 FFF7FEFF 		bl	_ASSERT
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s 			page 16
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccOXefrF.s 			page 16
 
 
  695              	.L29:
@@ -958,7 +958,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s 			page 1
  101:../../source/src/kernel/OS_CORE/message_queue.c **** 	}
  102:../../source/src/kernel/OS_CORE/message_queue.c **** 	/* else : MQB_ptr->current_message_num == MQB_ptr->max_message_num*/
  103:../../source/src/kernel/OS_CORE/message_queue.c **** 	ASSERT(MQB_ptr->current_message_num == MQB_ptr->max_message_num);
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s 			page 17
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccOXefrF.s 			page 17
 
 
  735              		.loc 2 103 0
@@ -1018,7 +1018,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s 			page 1
  778              		.loc 2 114 0
  779 02f6 3B68     		ldr	r3, [r7]
  780 02f8 002B     		cmp	r3, #0
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s 			page 18
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccOXefrF.s 			page 18
 
 
  781 02fa 09D1     		bne	.L36
@@ -1078,7 +1078,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s 			page 1
  819 033e 1B68     		ldr	r3, [r3]
  820 0340 1946     		mov	r1, r3
  821 0342 1046     		mov	r0, r2
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s 			page 19
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccOXefrF.s 			page 19
 
 
  822 0344 FFF7FEFF 		bl	insert_sort_delete_data
@@ -1138,7 +1138,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s 			page 1
  863 038e 1846     		mov	r0, r3
  864 0390 FFF75CFE 		bl	list_add_tail
  144:../../source/src/kernel/OS_CORE/message_queue.c **** 	++(MQB_ptr->current_message_num);
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s 			page 20
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccOXefrF.s 			page 20
 
 
  865              		.loc 2 144 0
@@ -1185,7 +1185,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s 			page 1
  902 03c4 00000000 		.word	.LC0
  903 03c8 00000000 		.word	OSTCBCurPtr
  904              		.cfi_endproc
- 905              	.LFE17:
+ 905              	.LFE24:
  906              		.size	_msg_send, .-_msg_send
  907              		.section	.rodata
  908              		.align	2
@@ -1198,7 +1198,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s 			page 1
  911 00f7 00       		.ascii	"\000"
  912              		.align	2
  913              	.LC5:
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s 			page 21
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccOXefrF.s 			page 21
 
 
  914 00f8 6572726F 		.ascii	"error fun name : msg_send\012error para : max_messa"
@@ -1217,7 +1217,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s 			page 1
  922              		.fpu softvfp
  923              		.type	msg_send, %function
  924              	msg_send:
- 925              	.LFB18:
+ 925              	.LFB25:
  149:../../source/src/kernel/OS_CORE/message_queue.c **** 
  150:../../source/src/kernel/OS_CORE/message_queue.c **** int msg_send(MQB *MQB_ptr,struct message *message_ptr,MSG_FLAG flag,unsigned int time)
  151:../../source/src/kernel/OS_CORE/message_queue.c **** {
@@ -1258,7 +1258,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s 			page 1
  957 03ea FFF7FEFF 		bl	ka_printf
  155:../../source/src/kernel/OS_CORE/message_queue.c **** 		OS_ERROR_PARA_MESSAGE_DISPLAY(msg_send,max_message_num);
  958              		.loc 2 155 0
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s 			page 22
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccOXefrF.s 			page 22
 
 
  959 03ee 0948     		ldr	r0, .L47+4
@@ -1295,7 +1295,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s 			page 1
  986 0410 C8000000 		.word	.LC4
  987 0414 F8000000 		.word	.LC5
  988              		.cfi_endproc
- 989              	.LFE18:
+ 989              	.LFE25:
  990              		.size	msg_send, .-msg_send
  991              		.global	__rtmsym_msg_send_name
  992              		.section	.rodata.name
@@ -1318,7 +1318,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s 			page 1
  1007              		.align	1
  1008              		.global	_msg_receive
  1009              		.syntax unified
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s 			page 23
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccOXefrF.s 			page 23
 
 
  1010              		.thumb
@@ -1326,7 +1326,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s 			page 1
  1012              		.fpu softvfp
  1013              		.type	_msg_receive, %function
  1014              	_msg_receive:
- 1015              	.LFB19:
+ 1015              	.LFB26:
  160:../../source/src/kernel/OS_CORE/message_queue.c **** EXPORT_SYMBOL(msg_send);
  161:../../source/src/kernel/OS_CORE/message_queue.c **** 
  162:../../source/src/kernel/OS_CORE/message_queue.c **** int _msg_receive(MQB *MQB_ptr,struct message **message_ptr,MSG_FLAG flag,unsigned int time)
@@ -1378,7 +1378,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s 			page 1
  167:../../source/src/kernel/OS_CORE/message_queue.c **** 	CPU_CRITICAL_ENTER();
  1057              		.loc 2 167 0
  1058 0448 FFF7FEFF 		bl	CPU_SR_Save
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s 			page 24
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccOXefrF.s 			page 24
 
 
  1059 044c F863     		str	r0, [r7, #60]
@@ -1438,7 +1438,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s 			page 1
  1099 048c 002B     		cmp	r3, #0
  1100 048e 03D1     		bne	.L54
  1101              		.loc 2 181 0 is_stmt 0 discriminator 1
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s 			page 25
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccOXefrF.s 			page 25
 
 
  1102 0490 B521     		movs	r1, #181
@@ -1498,7 +1498,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s 			page 1
  1142 04ce 0023     		movs	r3, #0
  1143 04d0 8BE0     		b	.L65
  1144              	.L52:
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s 			page 26
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccOXefrF.s 			page 26
 
 
  196:../../source/src/kernel/OS_CORE/message_queue.c **** 	}
@@ -1558,7 +1558,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s 			page 1
  209:../../source/src/kernel/OS_CORE/message_queue.c **** 	if(0 == time)
  1186              		.loc 2 209 0
  1187 0520 3B68     		ldr	r3, [r7]
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s 			page 27
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccOXefrF.s 			page 27
 
 
  1188 0522 002B     		cmp	r3, #0
@@ -1618,7 +1618,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s 			page 1
  1226 0566 244B     		ldr	r3, .L66+4
  1227 0568 1B68     		ldr	r3, [r3]
  1228 056a 1946     		mov	r1, r3
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s 			page 28
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccOXefrF.s 			page 28
 
 
  1229 056c 1046     		mov	r0, r2
@@ -1678,7 +1678,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s 			page 1
  1271 05b8 03D1     		bne	.L64
  1272              		.loc 2 237 0 is_stmt 0 discriminator 1
  1273 05ba ED21     		movs	r1, #237
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s 			page 29
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccOXefrF.s 			page 29
 
 
  1274 05bc 0D48     		ldr	r0, .L66
@@ -1734,11 +1734,11 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s 			page 1
  1316 05f4 00000000 		.word	.LC0
  1317 05f8 00000000 		.word	OSTCBCurPtr
  1318              		.cfi_endproc
- 1319              	.LFE19:
+ 1319              	.LFE26:
  1320              		.size	_msg_receive, .-_msg_receive
  1321              		.section	.rodata
  1322              		.align	2
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s 			page 30
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccOXefrF.s 			page 30
 
 
  1323              	.LC6:
@@ -1767,7 +1767,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s 			page 1
  1336              		.fpu softvfp
  1337              		.type	msg_receive, %function
  1338              	msg_receive:
- 1339              	.LFB20:
+ 1339              	.LFB27:
  246:../../source/src/kernel/OS_CORE/message_queue.c **** 
  247:../../source/src/kernel/OS_CORE/message_queue.c **** int msg_receive(MQB *MQB_ptr,struct message **message_ptr,MSG_FLAG flag,unsigned int time)
  248:../../source/src/kernel/OS_CORE/message_queue.c **** {
@@ -1798,7 +1798,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s 			page 1
  1363 0610 02D0     		beq	.L69
  1364              		.loc 2 249 0 is_stmt 0 discriminator 1
  1365 0612 BB68     		ldr	r3, [r7, #8]
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s 			page 31
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccOXefrF.s 			page 31
 
 
  1366 0614 002B     		cmp	r3, #0
@@ -1858,11 +1858,11 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s 			page 1
  1409 0650 30010000 		.word	.LC6
  1410 0654 64010000 		.word	.LC7
  1411 0658 00000000 		.word	g_interrupt_count
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s 			page 32
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccOXefrF.s 			page 32
 
 
  1412              		.cfi_endproc
- 1413              	.LFE20:
+ 1413              	.LFE27:
  1414              		.size	msg_receive, .-msg_receive
  1415              		.global	__rtmsym_msg_receive_name
  1416              		.section	.rodata.name
@@ -1890,7 +1890,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s 			page 1
  1436              		.fpu softvfp
  1437              		.type	_msg_del, %function
  1438              	_msg_del:
- 1439              	.LFB21:
+ 1439              	.LFB28:
  261:../../source/src/kernel/OS_CORE/message_queue.c **** EXPORT_SYMBOL(msg_receive);
  262:../../source/src/kernel/OS_CORE/message_queue.c **** 
  263:../../source/src/kernel/OS_CORE/message_queue.c **** int _msg_del(MQB *MQB_ptr)
@@ -1918,7 +1918,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s 			page 1
  1459 0668 04D1     		bne	.L76
  1460              		.loc 2 265 0 is_stmt 0 discriminator 1
  1461 066a 40F20911 		movw	r1, #265
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s 			page 33
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccOXefrF.s 			page 33
 
 
  1462 066e 3148     		ldr	r0, .L88
@@ -1978,7 +1978,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s 			page 1
  280:../../source/src/kernel/OS_CORE/message_queue.c **** 		set_bad_state(TCB_ptr);
  1502              		.loc 2 280 0
  1503 06b0 BB68     		ldr	r3, [r7, #8]
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s 			page 34
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccOXefrF.s 			page 34
 
 
  1504 06b2 9B6B     		ldr	r3, [r3, #56]
@@ -2038,7 +2038,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s 			page 1
  1544 06f4 1B7C     		ldrb	r3, [r3, #16]	@ zero_extendqisi2
  1545 06f6 092B     		cmp	r3, #9
  1546 06f8 04D0     		beq	.L85
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s 			page 35
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccOXefrF.s 			page 35
 
 
  1547              		.loc 2 293 0 is_stmt 0 discriminator 1
@@ -2092,13 +2092,13 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s 			page 1
  1587              	.L88:
  1588 0734 00000000 		.word	.LC0
  1589              		.cfi_endproc
- 1590              	.LFE21:
+ 1590              	.LFE28:
  1591              		.size	_msg_del, .-_msg_del
  1592              		.section	.rodata
  1593 019f 00       		.align	2
  1594              	.LC8:
  1595 01a0 6572726F 		.ascii	"error fun name : msg_del\012error para : MQB_ptr\012"
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s 			page 36
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccOXefrF.s 			page 36
 
 
  1595      72206675 
@@ -2115,7 +2115,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s 			page 1
  1603              		.fpu softvfp
  1604              		.type	msg_del, %function
  1605              	msg_del:
- 1606              	.LFB22:
+ 1606              	.LFB29:
  301:../../source/src/kernel/OS_CORE/message_queue.c **** 
  302:../../source/src/kernel/OS_CORE/message_queue.c **** int msg_del(MQB *MQB_ptr)
  303:../../source/src/kernel/OS_CORE/message_queue.c **** {
@@ -2158,7 +2158,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s 			page 1
  1637 0758 0346     		mov	r3, r0
  1638              	.L92:
  310:../../source/src/kernel/OS_CORE/message_queue.c **** }
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s 			page 37
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccOXefrF.s 			page 37
 
 
  1639              		.loc 2 310 0
@@ -2176,7 +2176,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s 			page 1
  1651              	.L93:
  1652 0764 A0010000 		.word	.LC8
  1653              		.cfi_endproc
- 1654              	.LFE22:
+ 1654              	.LFE29:
  1655              		.size	msg_del, .-msg_del
  1656              		.global	__rtmsym_msg_del_name
  1657              		.section	.rodata.name
@@ -2213,12 +2213,12 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s 			page 1
  1682              		.fpu softvfp
  1683              		.type	message_init, %function
  1684              	message_init:
- 1685              	.LFB23:
+ 1685              	.LFB30:
  311:../../source/src/kernel/OS_CORE/message_queue.c **** EXPORT_SYMBOL(msg_del);
  312:../../source/src/kernel/OS_CORE/message_queue.c **** 
  313:../../source/src/kernel/OS_CORE/message_queue.c **** int message_init(struct message *message_ptr,unsigned int message_size,void *data)
  314:../../source/src/kernel/OS_CORE/message_queue.c **** {
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s 			page 38
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccOXefrF.s 			page 38
 
 
  1686              		.loc 2 314 0
@@ -2278,7 +2278,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s 			page 1
  1732 07a2 9A60     		str	r2, [r3, #8]
  323:../../source/src/kernel/OS_CORE/message_queue.c **** 	message_ptr->message_data_ptr = data;
  1733              		.loc 2 323 0
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s 			page 39
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccOXefrF.s 			page 39
 
 
  1734 07a4 FB68     		ldr	r3, [r7, #12]
@@ -2312,7 +2312,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s 			page 1
  1759 07c4 00000000 		.word	.LC0
  1760 07c8 D0010000 		.word	.LC9
  1761              		.cfi_endproc
- 1762              	.LFE23:
+ 1762              	.LFE30:
  1763              		.size	message_init, .-message_init
  1764              		.global	__rtmsym_message_init_name
  1765              		.section	.rodata.name
@@ -2338,7 +2338,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s 			page 1
  1782              		.file 4 "../../source/include/os_lib/insert_sort_oo.h"
  1783              		.file 5 "../../source/include/os_core/message_queue.h"
  1784              		.file 6 "../../source/include/os_core/task_state.h"
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s 			page 40
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccOXefrF.s 			page 40
 
 
  1785              		.file 7 "../../source/include/os_cpu/os_cpu_stm32.h"
@@ -2398,7 +2398,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s 			page 1
  1839 0068 04       		.byte	0x4
  1840 0069 05       		.byte	0x5
  1841 006a 696E7400 		.ascii	"int\000"
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s 			page 41
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccOXefrF.s 			page 41
 
 
  1842 006e 08       		.uleb128 0x8
@@ -2458,7 +2458,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s 			page 1
  1896 00da 23       		.byte	0x23
  1897 00db 00       		.uleb128 0
  1898 00dc 03       		.uleb128 0x3
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s 			page 42
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccOXefrF.s 			page 42
 
 
  1899 00dd C0000000 		.4byte	.LASF16
@@ -2518,7 +2518,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s 			page 1
  1953 013d 23       		.byte	0x23
  1954 013e 10       		.uleb128 0x10
  1955 013f 03       		.uleb128 0x3
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s 			page 43
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccOXefrF.s 			page 43
 
 
  1956 0140 43040000 		.4byte	.LASF23
@@ -2578,7 +2578,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s 			page 1
  2010 01b2 C3010000 		.4byte	0x1c3
  2011 01b6 0E       		.uleb128 0xe
  2012 01b7 CA020000 		.4byte	.LASF24
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s 			page 44
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccOXefrF.s 			page 44
 
 
  2013 01bb 00       		.byte	0
@@ -2638,7 +2638,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s 			page 1
  2067 021b 90020000 		.4byte	0x290
  2068 021f 03       		.uleb128 0x3
  2069 0220 8A060000 		.4byte	.LASF28
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s 			page 45
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccOXefrF.s 			page 45
 
 
  2070 0224 05       		.byte	0x5
@@ -2698,7 +2698,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s 			page 1
  2124 0281 03       		.uleb128 0x3
  2125 0282 E1010000 		.4byte	.LASF39
  2126 0286 05       		.byte	0x5
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s 			page 46
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccOXefrF.s 			page 46
 
 
  2127 0287 1C       		.byte	0x1c
@@ -2758,7 +2758,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s 			page 1
  2181 02f3 09       		.byte	0x9
  2182 02f4 0E       		.uleb128 0xe
  2183 02f5 97060000 		.4byte	.LASF52
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s 			page 47
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccOXefrF.s 			page 47
 
 
  2184 02f9 0A       		.byte	0xa
@@ -2818,7 +2818,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s 			page 1
  2238 0365 23       		.byte	0x23
  2239 0366 04       		.uleb128 0x4
  2240 0367 03       		.uleb128 0x3
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s 			page 48
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccOXefrF.s 			page 48
 
 
  2241 0368 C0010000 		.4byte	.LASF61
@@ -2878,7 +2878,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s 			page 1
  2295 03c8 24       		.uleb128 0x24
  2296 03c9 03       		.uleb128 0x3
  2297 03ca 0B030000 		.4byte	.LASF37
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s 			page 49
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccOXefrF.s 			page 49
 
 
  2298 03ce 08       		.byte	0x8
@@ -2938,7 +2938,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s 			page 1
  2352 042b 04       		.byte	0x4
  2353 042c 24040000 		.4byte	0x424
  2354 0430 0F       		.uleb128 0xf
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s 			page 50
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccOXefrF.s 			page 50
 
 
  2355 0431 54434200 		.ascii	"TCB\000"
@@ -2998,7 +2998,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s 			page 1
  2409 049d 43       		.byte	0x43
  2410 049e 92040000 		.4byte	0x492
  2411 04a2 01       		.byte	0x1
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s 			page 51
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccOXefrF.s 			page 51
 
 
  2412 04a3 05       		.byte	0x5
@@ -3058,7 +3058,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s 			page 1
  2466 0514 05       		.byte	0x5
  2467 0515 03       		.byte	0x3
  2468 0516 00000000 		.4byte	__rtmsym_msg_receive
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s 			page 52
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccOXefrF.s 			page 52
 
 
  2469 051a 12       		.uleb128 0x12
@@ -3118,15 +3118,15 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s 			page 1
  2523 0590 16       		.uleb128 0x16
  2524 0591 01       		.byte	0x1
  2525 0592 4A010000 		.4byte	.LASF89
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s 			page 53
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccOXefrF.s 			page 53
 
 
  2526 0596 02       		.byte	0x2
  2527 0597 3901     		.2byte	0x139
  2528 0599 01       		.byte	0x1
  2529 059a 67000000 		.4byte	0x67
- 2530 059e 68070000 		.4byte	.LFB23
- 2531 05a2 CC070000 		.4byte	.LFE23
+ 2530 059e 68070000 		.4byte	.LFB30
+ 2531 05a2 CC070000 		.4byte	.LFE30
  2532 05a6 00000000 		.4byte	.LLST15
  2533 05aa 01       		.byte	0x1
  2534 05ab DD050000 		.4byte	0x5dd
@@ -3165,8 +3165,8 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s 			page 1
  2567 05ea 2E01     		.2byte	0x12e
  2568 05ec 01       		.byte	0x1
  2569 05ed 67000000 		.4byte	0x67
- 2570 05f1 38070000 		.4byte	.LFB22
- 2571 05f5 68070000 		.4byte	.LFE22
+ 2570 05f1 38070000 		.4byte	.LFB29
+ 2571 05f5 68070000 		.4byte	.LFE29
  2572 05f9 50000000 		.4byte	.LLST14
  2573 05fd 01       		.byte	0x1
  2574 05fe 12060000 		.4byte	0x612
@@ -3178,7 +3178,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s 			page 1
  2580 060e 02       		.byte	0x2
  2581 060f 91       		.byte	0x91
  2582 0610 74       		.sleb128 -12
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s 			page 54
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccOXefrF.s 			page 54
 
 
  2583 0611 00       		.byte	0
@@ -3192,8 +3192,8 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s 			page 1
  2591 061f 0701     		.2byte	0x107
  2592 0621 01       		.byte	0x1
  2593 0622 67000000 		.4byte	0x67
- 2594 0626 5C060000 		.4byte	.LFB21
- 2595 062a 38070000 		.4byte	.LFE21
+ 2594 0626 5C060000 		.4byte	.LFB28
+ 2595 062a 38070000 		.4byte	.LFE28
  2596 062e A0000000 		.4byte	.LLST13
  2597 0632 01       		.byte	0x1
  2598 0633 65060000 		.4byte	0x665
@@ -3229,8 +3229,8 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s 			page 1
  2628 066c F7       		.byte	0xf7
  2629 066d 01       		.byte	0x1
  2630 066e 67000000 		.4byte	0x67
- 2631 0672 FC050000 		.4byte	.LFB20
- 2632 0676 5C060000 		.4byte	.LFE20
+ 2631 0672 FC050000 		.4byte	.LFB27
+ 2632 0676 5C060000 		.4byte	.LFE27
  2633 067a F0000000 		.4byte	.LLST12
  2634 067e 01       		.byte	0x1
  2635 067f BC060000 		.4byte	0x6bc
@@ -3238,7 +3238,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s 			page 1
  2637 0684 38070000 		.4byte	.LASF91
  2638 0688 02       		.byte	0x2
  2639 0689 F7       		.byte	0xf7
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s 			page 55
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccOXefrF.s 			page 55
 
 
  2640 068a 12060000 		.4byte	0x612
@@ -3280,8 +3280,8 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s 			page 1
  2676 06c9 A2       		.byte	0xa2
  2677 06ca 01       		.byte	0x1
  2678 06cb 67000000 		.4byte	0x67
- 2679 06cf 18040000 		.4byte	.LFB19
- 2680 06d3 FC050000 		.4byte	.LFE19
+ 2679 06cf 18040000 		.4byte	.LFB26
+ 2680 06d3 FC050000 		.4byte	.LFE26
  2681 06d7 40010000 		.4byte	.LLST11
  2682 06db 01       		.byte	0x1
  2683 06dc B1070000 		.4byte	0x7b1
@@ -3298,7 +3298,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s 			page 1
  2694 06f3 02       		.byte	0x2
  2695 06f4 A2       		.byte	0xa2
  2696 06f5 BC060000 		.4byte	0x6bc
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s 			page 56
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccOXefrF.s 			page 56
 
 
  2697 06f9 02       		.byte	0x2
@@ -3358,7 +3358,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s 			page 1
  2751 0764 02       		.byte	0x2
  2752 0765 B2       		.byte	0xb2
  2753 0766 63010000 		.4byte	0x163
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s 			page 57
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccOXefrF.s 			page 57
 
 
  2754 076a 02       		.byte	0x2
@@ -3409,8 +3409,8 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s 			page 1
  2799 07be 96       		.byte	0x96
  2800 07bf 01       		.byte	0x1
  2801 07c0 67000000 		.4byte	0x67
- 2802 07c4 CC030000 		.4byte	.LFB18
- 2803 07c8 18040000 		.4byte	.LFE18
+ 2802 07c4 CC030000 		.4byte	.LFB25
+ 2803 07c8 18040000 		.4byte	.LFE25
  2804 07cc 92010000 		.4byte	.LLST10
  2805 07d0 01       		.byte	0x1
  2806 07d1 0E080000 		.4byte	0x80e
@@ -3418,7 +3418,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s 			page 1
  2808 07d6 38070000 		.4byte	.LASF91
  2809 07da 02       		.byte	0x2
  2810 07db 96       		.byte	0x96
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s 			page 58
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccOXefrF.s 			page 58
 
 
  2811 07dc 12060000 		.4byte	0x612
@@ -3457,8 +3457,8 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s 			page 1
  2844 0815 45       		.byte	0x45
  2845 0816 01       		.byte	0x1
  2846 0817 67000000 		.4byte	0x67
- 2847 081b F0010000 		.4byte	.LFB17
- 2848 081f CC030000 		.4byte	.LFE17
+ 2847 081b F0010000 		.4byte	.LFB24
+ 2848 081f CC030000 		.4byte	.LFE24
  2849 0823 E2010000 		.4byte	.LLST9
  2850 0827 01       		.byte	0x1
  2851 0828 C3080000 		.4byte	0x8c3
@@ -3478,7 +3478,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s 			page 1
  2865 0845 02       		.byte	0x2
  2866 0846 91       		.byte	0x91
  2867 0847 48       		.sleb128 -56
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s 			page 59
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccOXefrF.s 			page 59
 
 
  2868 0848 1A       		.uleb128 0x1a
@@ -3538,7 +3538,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s 			page 1
  2922 08ab 10030000 		.4byte	.LBB3
  2923 08af 54030000 		.4byte	.LBE3
  2924 08b3 1D       		.uleb128 0x1d
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s 			page 60
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccOXefrF.s 			page 60
 
 
  2925 08b4 6E756D00 		.ascii	"num\000"
@@ -3557,8 +3557,8 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s 			page 1
  2938 08ca 30       		.byte	0x30
  2939 08cb 01       		.byte	0x1
  2940 08cc 67000000 		.4byte	0x67
- 2941 08d0 80010000 		.4byte	.LFB16
- 2942 08d4 F0010000 		.4byte	.LFE16
+ 2941 08d0 80010000 		.4byte	.LFB23
+ 2942 08d4 F0010000 		.4byte	.LFE23
  2943 08d8 34020000 		.4byte	.LLST8
  2944 08dc 01       		.byte	0x1
  2945 08dd 0C090000 		.4byte	0x90c
@@ -3594,11 +3594,11 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s 			page 1
  2975 0913 16       		.byte	0x16
  2976 0914 01       		.byte	0x1
  2977 0915 67000000 		.4byte	0x67
- 2978 0919 EC000000 		.4byte	.LFB15
- 2979 091d 80010000 		.4byte	.LFE15
+ 2978 0919 EC000000 		.4byte	.LFB22
+ 2979 091d 80010000 		.4byte	.LFE22
  2980 0921 84020000 		.4byte	.LLST7
  2981 0925 01       		.byte	0x1
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s 			page 61
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccOXefrF.s 			page 61
 
 
  2982 0926 63090000 		.4byte	0x963
@@ -3641,8 +3641,8 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s 			page 1
  3019 0969 11       		.byte	0x11
  3020 096a 01       		.byte	0x1
  3021 096b 67000000 		.4byte	0x67
- 3022 096f CE000000 		.4byte	.LFB14
- 3023 0973 EC000000 		.4byte	.LFE14
+ 3022 096f CE000000 		.4byte	.LFB21
+ 3023 0973 EC000000 		.4byte	.LFE21
  3024 0977 D4020000 		.4byte	.LLST6
  3025 097b 01       		.byte	0x1
  3026 097c 9D090000 		.4byte	0x99d
@@ -3658,7 +3658,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s 			page 1
  3036 098f C4020000 		.4byte	.LASF106
  3037 0993 02       		.byte	0x2
  3038 0994 11       		.byte	0x11
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s 			page 62
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccOXefrF.s 			page 62
 
 
  3039 0995 F9000000 		.4byte	0xf9
@@ -3672,8 +3672,8 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s 			page 1
  3047 09a3 0C       		.byte	0xc
  3048 09a4 01       		.byte	0x1
  3049 09a5 67000000 		.4byte	0x67
- 3050 09a9 AC000000 		.4byte	.LFB13
- 3051 09ad CE000000 		.4byte	.LFE13
+ 3050 09a9 AC000000 		.4byte	.LFB20
+ 3051 09ad CE000000 		.4byte	.LFE20
  3052 09b1 30030000 		.4byte	.LLST5
  3053 09b5 01       		.byte	0x1
  3054 09b6 D7090000 		.4byte	0x9d7
@@ -3718,7 +3718,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s 			page 1
  3093 0a04 01       		.byte	0x1
  3094 0a05 2E       		.byte	0x2e
  3095 0a06 01       		.byte	0x1
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s 			page 63
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccOXefrF.s 			page 63
 
 
  3096 0a07 6C000000 		.4byte	.LFB4
@@ -3778,7 +3778,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s 			page 1
  3150 0a73 1E000000 		.4byte	.LFB1
  3151 0a77 4C000000 		.4byte	.LFE1
  3152 0a7b 88040000 		.4byte	.LLST1
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s 			page 64
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccOXefrF.s 			page 64
 
 
  3153 0a7f 01       		.byte	0x1
@@ -3838,7 +3838,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s 			page 1
  3207 0006 0B       		.uleb128 0xb
  3208 0007 03       		.uleb128 0x3
  3209 0008 0E       		.uleb128 0xe
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s 			page 65
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccOXefrF.s 			page 65
 
 
  3210 0009 1B       		.uleb128 0x1b
@@ -3898,7 +3898,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s 			page 1
  3264 003f 00       		.byte	0
  3265 0040 00       		.byte	0
  3266 0041 06       		.uleb128 0x6
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s 			page 66
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccOXefrF.s 			page 66
 
 
  3267 0042 24       		.uleb128 0x24
@@ -3958,7 +3958,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s 			page 1
  3321 0078 13       		.uleb128 0x13
  3322 0079 01       		.uleb128 0x1
  3323 007a 13       		.uleb128 0x13
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s 			page 67
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccOXefrF.s 			page 67
 
 
  3324 007b 00       		.byte	0
@@ -4018,7 +4018,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s 			page 1
  3378 00b1 0E       		.uleb128 0xe
  3379 00b2 3A       		.uleb128 0x3a
  3380 00b3 0B       		.uleb128 0xb
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s 			page 68
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccOXefrF.s 			page 68
 
 
  3381 00b4 3B       		.uleb128 0x3b
@@ -4078,7 +4078,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s 			page 1
  3435 00ea 15       		.uleb128 0x15
  3436 00eb 34       		.uleb128 0x34
  3437 00ec 00       		.byte	0
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s 			page 69
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccOXefrF.s 			page 69
 
 
  3438 00ed 03       		.uleb128 0x3
@@ -4138,7 +4138,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s 			page 1
  3492 0124 00       		.byte	0
  3493 0125 00       		.byte	0
  3494 0126 18       		.uleb128 0x18
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s 			page 70
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccOXefrF.s 			page 70
 
 
  3495 0127 34       		.uleb128 0x34
@@ -4198,7 +4198,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s 			page 1
  3549 015e 00       		.byte	0
  3550 015f 00       		.byte	0
  3551 0160 1B       		.uleb128 0x1b
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s 			page 71
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccOXefrF.s 			page 71
 
 
  3552 0161 34       		.uleb128 0x34
@@ -4258,7 +4258,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s 			page 1
  3606 0197 3A       		.uleb128 0x3a
  3607 0198 0B       		.uleb128 0xb
  3608 0199 3B       		.uleb128 0x3b
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s 			page 72
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccOXefrF.s 			page 72
 
 
  3609 019a 0B       		.uleb128 0xb
@@ -4318,7 +4318,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s 			page 1
  3663 01d2 01       		.uleb128 0x1
  3664 01d3 40       		.uleb128 0x40
  3665 01d4 06       		.uleb128 0x6
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s 			page 73
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccOXefrF.s 			page 73
 
 
  3666 01d5 9742     		.uleb128 0x2117
@@ -4367,7 +4367,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s 			page 1
  3709              		.section	.debug_loc,"",%progbits
  3710              	.Ldebug_loc0:
  3711              	.LLST15:
- 3712 0000 68070000 		.4byte	.LFB23-.Ltext0
+ 3712 0000 68070000 		.4byte	.LFB30-.Ltext0
  3713 0004 6A070000 		.4byte	.LCFI80-.Ltext0
  3714 0008 0200     		.2byte	0x2
  3715 000a 7D       		.byte	0x7d
@@ -4378,7 +4378,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s 			page 1
  3720 0016 7D       		.byte	0x7d
  3721 0017 0C       		.sleb128 12
  3722 0018 6C070000 		.4byte	.LCFI81-.Ltext0
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s 			page 74
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccOXefrF.s 			page 74
 
 
  3723 001c 6E070000 		.4byte	.LCFI82-.Ltext0
@@ -4396,14 +4396,14 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s 			page 1
  3735 003a 77       		.byte	0x77
  3736 003b 0C       		.sleb128 12
  3737 003c C0070000 		.4byte	.LCFI84-.Ltext0
- 3738 0040 CC070000 		.4byte	.LFE23-.Ltext0
+ 3738 0040 CC070000 		.4byte	.LFE30-.Ltext0
  3739 0044 0200     		.2byte	0x2
  3740 0046 7D       		.byte	0x7d
  3741 0047 0C       		.sleb128 12
  3742 0048 00000000 		.4byte	0
  3743 004c 00000000 		.4byte	0
  3744              	.LLST14:
- 3745 0050 38070000 		.4byte	.LFB22-.Ltext0
+ 3745 0050 38070000 		.4byte	.LFB29-.Ltext0
  3746 0054 3A070000 		.4byte	.LCFI75-.Ltext0
  3747 0058 0200     		.2byte	0x2
  3748 005a 7D       		.byte	0x7d
@@ -4429,16 +4429,16 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s 			page 1
  3768 008a 77       		.byte	0x77
  3769 008b 08       		.sleb128 8
  3770 008c 60070000 		.4byte	.LCFI79-.Ltext0
- 3771 0090 68070000 		.4byte	.LFE22-.Ltext0
+ 3771 0090 68070000 		.4byte	.LFE29-.Ltext0
  3772 0094 0200     		.2byte	0x2
  3773 0096 7D       		.byte	0x7d
  3774 0097 08       		.sleb128 8
  3775 0098 00000000 		.4byte	0
  3776 009c 00000000 		.4byte	0
  3777              	.LLST13:
- 3778 00a0 5C060000 		.4byte	.LFB21-.Ltext0
+ 3778 00a0 5C060000 		.4byte	.LFB28-.Ltext0
  3779 00a4 5E060000 		.4byte	.LCFI70-.Ltext0
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s 			page 75
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccOXefrF.s 			page 75
 
 
  3780 00a8 0200     		.2byte	0x2
@@ -4465,14 +4465,14 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s 			page 1
  3801 00da 77       		.byte	0x77
  3802 00db 08       		.sleb128 8
  3803 00dc 30070000 		.4byte	.LCFI74-.Ltext0
- 3804 00e0 38070000 		.4byte	.LFE21-.Ltext0
+ 3804 00e0 38070000 		.4byte	.LFE28-.Ltext0
  3805 00e4 0200     		.2byte	0x2
  3806 00e6 7D       		.byte	0x7d
  3807 00e7 08       		.sleb128 8
  3808 00e8 00000000 		.4byte	0
  3809 00ec 00000000 		.4byte	0
  3810              	.LLST12:
- 3811 00f0 FC050000 		.4byte	.LFB20-.Ltext0
+ 3811 00f0 FC050000 		.4byte	.LFB27-.Ltext0
  3812 00f4 FE050000 		.4byte	.LCFI65-.Ltext0
  3813 00f8 0200     		.2byte	0x2
  3814 00fa 7D       		.byte	0x7d
@@ -4498,17 +4498,17 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s 			page 1
  3834 012a 77       		.byte	0x77
  3835 012b 08       		.sleb128 8
  3836 012c 4C060000 		.4byte	.LCFI69-.Ltext0
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s 			page 76
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccOXefrF.s 			page 76
 
 
- 3837 0130 5C060000 		.4byte	.LFE20-.Ltext0
+ 3837 0130 5C060000 		.4byte	.LFE27-.Ltext0
  3838 0134 0200     		.2byte	0x2
  3839 0136 7D       		.byte	0x7d
  3840 0137 08       		.sleb128 8
  3841 0138 00000000 		.4byte	0
  3842 013c 00000000 		.4byte	0
  3843              	.LLST11:
- 3844 0140 18040000 		.4byte	.LFB19-.Ltext0
+ 3844 0140 18040000 		.4byte	.LFB26-.Ltext0
  3845 0144 1A040000 		.4byte	.LCFI60-.Ltext0
  3846 0148 0200     		.2byte	0x2
  3847 014a 7D       		.byte	0x7d
@@ -4534,14 +4534,14 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s 			page 1
  3867 017c 77       		.byte	0x77
  3868 017d 08       		.sleb128 8
  3869 017e F0050000 		.4byte	.LCFI64-.Ltext0
- 3870 0182 FC050000 		.4byte	.LFE19-.Ltext0
+ 3870 0182 FC050000 		.4byte	.LFE26-.Ltext0
  3871 0186 0200     		.2byte	0x2
  3872 0188 7D       		.byte	0x7d
  3873 0189 08       		.sleb128 8
  3874 018a 00000000 		.4byte	0
  3875 018e 00000000 		.4byte	0
  3876              	.LLST10:
- 3877 0192 CC030000 		.4byte	.LFB18-.Ltext0
+ 3877 0192 CC030000 		.4byte	.LFB25-.Ltext0
  3878 0196 CE030000 		.4byte	.LCFI55-.Ltext0
  3879 019a 0200     		.2byte	0x2
  3880 019c 7D       		.byte	0x7d
@@ -4558,7 +4558,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s 			page 1
  3891 01b5 18       		.sleb128 24
  3892 01b6 D2030000 		.4byte	.LCFI57-.Ltext0
  3893 01ba 0C040000 		.4byte	.LCFI58-.Ltext0
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s 			page 77
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccOXefrF.s 			page 77
 
 
  3894 01be 0200     		.2byte	0x2
@@ -4570,14 +4570,14 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s 			page 1
  3900 01cc 77       		.byte	0x77
  3901 01cd 08       		.sleb128 8
  3902 01ce 0E040000 		.4byte	.LCFI59-.Ltext0
- 3903 01d2 18040000 		.4byte	.LFE18-.Ltext0
+ 3903 01d2 18040000 		.4byte	.LFE25-.Ltext0
  3904 01d6 0200     		.2byte	0x2
  3905 01d8 7D       		.byte	0x7d
  3906 01d9 08       		.sleb128 8
  3907 01da 00000000 		.4byte	0
  3908 01de 00000000 		.4byte	0
  3909              	.LLST9:
- 3910 01e2 F0010000 		.4byte	.LFB17-.Ltext0
+ 3910 01e2 F0010000 		.4byte	.LFB24-.Ltext0
  3911 01e6 F2010000 		.4byte	.LCFI50-.Ltext0
  3912 01ea 0200     		.2byte	0x2
  3913 01ec 7D       		.byte	0x7d
@@ -4603,14 +4603,14 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s 			page 1
  3933 021e 77       		.byte	0x77
  3934 021f 08       		.sleb128 8
  3935 0220 C0030000 		.4byte	.LCFI54-.Ltext0
- 3936 0224 CC030000 		.4byte	.LFE17-.Ltext0
+ 3936 0224 CC030000 		.4byte	.LFE24-.Ltext0
  3937 0228 0200     		.2byte	0x2
  3938 022a 7D       		.byte	0x7d
  3939 022b 08       		.sleb128 8
  3940 022c 00000000 		.4byte	0
  3941 0230 00000000 		.4byte	0
  3942              	.LLST8:
- 3943 0234 80010000 		.4byte	.LFB16-.Ltext0
+ 3943 0234 80010000 		.4byte	.LFB23-.Ltext0
  3944 0238 82010000 		.4byte	.LCFI45-.Ltext0
  3945 023c 0200     		.2byte	0x2
  3946 023e 7D       		.byte	0x7d
@@ -4618,7 +4618,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s 			page 1
  3948 0240 82010000 		.4byte	.LCFI45-.Ltext0
  3949 0244 84010000 		.4byte	.LCFI46-.Ltext0
  3950 0248 0200     		.2byte	0x2
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s 			page 78
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccOXefrF.s 			page 78
 
 
  3951 024a 7D       		.byte	0x7d
@@ -4639,14 +4639,14 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s 			page 1
  3966 026e 77       		.byte	0x77
  3967 026f 08       		.sleb128 8
  3968 0270 DC010000 		.4byte	.LCFI49-.Ltext0
- 3969 0274 F0010000 		.4byte	.LFE16-.Ltext0
+ 3969 0274 F0010000 		.4byte	.LFE23-.Ltext0
  3970 0278 0200     		.2byte	0x2
  3971 027a 7D       		.byte	0x7d
  3972 027b 08       		.sleb128 8
  3973 027c 00000000 		.4byte	0
  3974 0280 00000000 		.4byte	0
  3975              	.LLST7:
- 3976 0284 EC000000 		.4byte	.LFB15-.Ltext0
+ 3976 0284 EC000000 		.4byte	.LFB22-.Ltext0
  3977 0288 EE000000 		.4byte	.LCFI40-.Ltext0
  3978 028c 0200     		.2byte	0x2
  3979 028e 7D       		.byte	0x7d
@@ -4672,17 +4672,17 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s 			page 1
  3999 02be 77       		.byte	0x77
  4000 02bf 08       		.sleb128 8
  4001 02c0 72010000 		.4byte	.LCFI44-.Ltext0
- 4002 02c4 80010000 		.4byte	.LFE15-.Ltext0
+ 4002 02c4 80010000 		.4byte	.LFE22-.Ltext0
  4003 02c8 0200     		.2byte	0x2
  4004 02ca 7D       		.byte	0x7d
  4005 02cb 08       		.sleb128 8
  4006 02cc 00000000 		.4byte	0
  4007 02d0 00000000 		.4byte	0
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s 			page 79
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccOXefrF.s 			page 79
 
 
  4008              	.LLST6:
- 4009 02d4 CE000000 		.4byte	.LFB14-.Ltext0
+ 4009 02d4 CE000000 		.4byte	.LFB21-.Ltext0
  4010 02d8 D0000000 		.4byte	.LCFI34-.Ltext0
  4011 02dc 0200     		.2byte	0x2
  4012 02de 7D       		.byte	0x7d
@@ -4713,14 +4713,14 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s 			page 1
  4037 031a 7D       		.byte	0x7d
  4038 031b 04       		.sleb128 4
  4039 031c EA000000 		.4byte	.LCFI39-.Ltext0
- 4040 0320 EC000000 		.4byte	.LFE14-.Ltext0
+ 4040 0320 EC000000 		.4byte	.LFE21-.Ltext0
  4041 0324 0200     		.2byte	0x2
  4042 0326 7D       		.byte	0x7d
  4043 0327 00       		.sleb128 0
  4044 0328 00000000 		.4byte	0
  4045 032c 00000000 		.4byte	0
  4046              	.LLST5:
- 4047 0330 AC000000 		.4byte	.LFB13-.Ltext0
+ 4047 0330 AC000000 		.4byte	.LFB20-.Ltext0
  4048 0334 AE000000 		.4byte	.LCFI28-.Ltext0
  4049 0338 0200     		.2byte	0x2
  4050 033a 7D       		.byte	0x7d
@@ -4738,7 +4738,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s 			page 1
  4062 0354 B2000000 		.4byte	.LCFI30-.Ltext0
  4063 0358 C8000000 		.4byte	.LCFI31-.Ltext0
  4064 035c 0200     		.2byte	0x2
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s 			page 80
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccOXefrF.s 			page 80
 
 
  4065 035e 77       		.byte	0x77
@@ -4754,7 +4754,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s 			page 1
  4075 0376 7D       		.byte	0x7d
  4076 0377 04       		.sleb128 4
  4077 0378 CC000000 		.4byte	.LCFI33-.Ltext0
- 4078 037c CE000000 		.4byte	.LFE13-.Ltext0
+ 4078 037c CE000000 		.4byte	.LFE20-.Ltext0
  4079 0380 0200     		.2byte	0x2
  4080 0382 7D       		.byte	0x7d
  4081 0383 00       		.sleb128 0
@@ -4798,7 +4798,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s 			page 1
  4119 03e0 6E000000 		.4byte	.LCFI17-.Ltext0
  4120 03e4 0200     		.2byte	0x2
  4121 03e6 7D       		.byte	0x7d
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s 			page 81
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccOXefrF.s 			page 81
 
 
  4122 03e7 00       		.sleb128 0
@@ -4858,7 +4858,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s 			page 1
  4176 0468 68000000 		.4byte	.LCFI15-.Ltext0
  4177 046c 6A000000 		.4byte	.LCFI16-.Ltext0
  4178 0470 0200     		.2byte	0x2
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s 			page 82
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccOXefrF.s 			page 82
 
 
  4179 0472 77       		.byte	0x77
@@ -4918,7 +4918,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s 			page 1
  4233 04f4 04000000 		.4byte	.LCFI1-.Ltext0
  4234 04f8 0200     		.2byte	0x2
  4235 04fa 7D       		.byte	0x7d
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s 			page 83
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccOXefrF.s 			page 83
 
 
  4236 04fb 04       		.sleb128 4
@@ -4978,7 +4978,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s 			page 1
  4282      4F5F5459 
  4282      504500
  4283              	.LASF68:
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s 			page 84
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccOXefrF.s 			page 84
 
 
  4284 001b 74696D65 		.ascii	"timeslice_hope_time\000"
@@ -5038,7 +5038,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s 			page 1
  4304      6100
  4305              	.LASF17:
  4306 00ce 64617461 		.ascii	"data_list\000"
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s 			page 85
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccOXefrF.s 			page 85
 
 
  4306      5F6C6973 
@@ -5098,7 +5098,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s 			page 1
  4328      656C00
  4329              	.LASF73:
  4330 0193 6B615F6D 		.ascii	"ka_module_symtab\000"
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s 			page 86
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccOXefrF.s 			page 86
 
 
  4330      6F64756C 
@@ -5158,7 +5158,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s 			page 1
  4350              	.LASF77:
  4351 0264 5F5F7274 		.ascii	"__rtmsym_msg_init_name\000"
  4351      6D73796D 
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s 			page 87
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccOXefrF.s 			page 87
 
 
  4351      5F6D7367 
@@ -5218,7 +5218,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s 			page 1
  4374              	.LASF37:
  4375 030b 6E616D65 		.ascii	"name\000"
  4375      00
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s 			page 88
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccOXefrF.s 			page 88
 
 
  4376              	.LASF76:
@@ -5278,7 +5278,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s 			page 1
  4400              	.LASF10:
  4401 03ac 6C6F6E67 		.ascii	"long long unsigned int\000"
  4401      206C6F6E 
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s 			page 89
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccOXefrF.s 			page 89
 
 
  4401      6720756E 
@@ -5338,7 +5338,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s 			page 1
  4425 0460 53544154 		.ascii	"STATE_READY\000"
  4425      455F5245 
  4425      41445900 
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s 			page 90
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccOXefrF.s 			page 90
 
 
  4426              	.LASF40:
@@ -5398,7 +5398,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s 			page 1
  4453      6F72745F 
  4453      656E7469 
  4453      747900
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s 			page 91
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccOXefrF.s 			page 91
 
 
  4454              	.LASF46:
@@ -5458,7 +5458,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s 			page 1
  4477      00
  4478              	.LASF75:
  4479 05c6 675F696E 		.ascii	"g_interrupt_count\000"
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s 			page 92
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccOXefrF.s 			page 92
 
 
  4479      74657272 
@@ -5518,7 +5518,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s 			page 1
  4500 06ed 4350555F 		.ascii	"CPU_SR\000"
  4500      535200
  4501              	.LASF31:
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s 			page 93
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccOXefrF.s 			page 93
 
 
  4502 06f4 7469636B 		.ascii	"tick\000"
@@ -5562,58 +5562,58 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s 			page 1
  4520 075b 6E657874 		.ascii	"next\000"
  4520      00
  4521              		.ident	"GCC: (GNU Tools for Arm Embedded Processors 7-2018-q2-update) 7.3.1 20180622 (release) [AR
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s 			page 94
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccOXefrF.s 			page 94
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 message_queue.c
-G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s:15     .text:00000000 $t
-G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s:21     .text:00000000 INIT_LIST_HEAD
-G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s:71     .text:0000001e __list_add
-G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s:130    .text:0000004c list_add_tail
-G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s:175    .text:0000006c __list_del
-G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s:225    .text:0000008c list_del
-G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s:270    .text:000000ac compare
-G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s:321    .text:000000ce value_cmp
-G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s:364    .rodata:00000000 $d
-G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s:375    .text:000000ec _msg_init
-G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s:475    .text:00000174 $d
-G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s:494    .text:00000180 $t
-G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s:501    .text:00000180 msg_init
-G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s:580    .text:000001e0 $d
-G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s:592    .rodata.name:00000000 __rtmsym_msg_init_name
-G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s:589    .rodata.name:00000000 $d
-G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s:599    .RTMSymTab:00000000 __rtmsym_msg_init
-G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s:596    .RTMSymTab:00000000 $d
-G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s:603    .text:000001f0 $t
-G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s:610    .text:000001f0 _msg_send
-G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s:902    .text:000003c4 $d
-G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s:917    .text:000003cc $t
-G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s:924    .text:000003cc msg_send
-G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s:986    .text:00000410 $d
-G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s:996    .rodata.name:0000000c __rtmsym_msg_send_name
-G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s:1003   .RTMSymTab:00000008 __rtmsym_msg_send
-G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s:1007   .text:00000418 $t
-G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s:1014   .text:00000418 _msg_receive
-G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s:1316   .text:000005f4 $d
-G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s:1331   .text:000005fc $t
-G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s:1338   .text:000005fc msg_receive
-G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s:1409   .text:00000650 $d
-G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s:1420   .rodata.name:00000018 __rtmsym_msg_receive_name
-G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s:1427   .RTMSymTab:00000010 __rtmsym_msg_receive
-G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s:1431   .text:0000065c $t
-G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s:1438   .text:0000065c _msg_del
-G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s:1588   .text:00000734 $d
-G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s:1598   .text:00000738 $t
-G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s:1605   .text:00000738 msg_del
-G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s:1652   .text:00000764 $d
-G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s:1661   .rodata.name:00000024 __rtmsym_msg_del_name
-G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s:1668   .RTMSymTab:00000018 __rtmsym_msg_del
-G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s:1677   .text:00000768 $t
-G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s:1684   .text:00000768 message_init
-G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s:1759   .text:000007c4 $d
-G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s:1769   .rodata.name:0000002c __rtmsym_message_init_name
-G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s:1776   .RTMSymTab:00000020 __rtmsym_message_init
+G:\Users\Jaxb\AppData\Local\Temp\ccOXefrF.s:15     .text:00000000 $t
+G:\Users\Jaxb\AppData\Local\Temp\ccOXefrF.s:21     .text:00000000 INIT_LIST_HEAD
+G:\Users\Jaxb\AppData\Local\Temp\ccOXefrF.s:71     .text:0000001e __list_add
+G:\Users\Jaxb\AppData\Local\Temp\ccOXefrF.s:130    .text:0000004c list_add_tail
+G:\Users\Jaxb\AppData\Local\Temp\ccOXefrF.s:175    .text:0000006c __list_del
+G:\Users\Jaxb\AppData\Local\Temp\ccOXefrF.s:225    .text:0000008c list_del
+G:\Users\Jaxb\AppData\Local\Temp\ccOXefrF.s:270    .text:000000ac compare
+G:\Users\Jaxb\AppData\Local\Temp\ccOXefrF.s:321    .text:000000ce value_cmp
+G:\Users\Jaxb\AppData\Local\Temp\ccOXefrF.s:364    .rodata:00000000 $d
+G:\Users\Jaxb\AppData\Local\Temp\ccOXefrF.s:375    .text:000000ec _msg_init
+G:\Users\Jaxb\AppData\Local\Temp\ccOXefrF.s:475    .text:00000174 $d
+G:\Users\Jaxb\AppData\Local\Temp\ccOXefrF.s:494    .text:00000180 $t
+G:\Users\Jaxb\AppData\Local\Temp\ccOXefrF.s:501    .text:00000180 msg_init
+G:\Users\Jaxb\AppData\Local\Temp\ccOXefrF.s:580    .text:000001e0 $d
+G:\Users\Jaxb\AppData\Local\Temp\ccOXefrF.s:592    .rodata.name:00000000 __rtmsym_msg_init_name
+G:\Users\Jaxb\AppData\Local\Temp\ccOXefrF.s:589    .rodata.name:00000000 $d
+G:\Users\Jaxb\AppData\Local\Temp\ccOXefrF.s:599    .RTMSymTab:00000000 __rtmsym_msg_init
+G:\Users\Jaxb\AppData\Local\Temp\ccOXefrF.s:596    .RTMSymTab:00000000 $d
+G:\Users\Jaxb\AppData\Local\Temp\ccOXefrF.s:603    .text:000001f0 $t
+G:\Users\Jaxb\AppData\Local\Temp\ccOXefrF.s:610    .text:000001f0 _msg_send
+G:\Users\Jaxb\AppData\Local\Temp\ccOXefrF.s:902    .text:000003c4 $d
+G:\Users\Jaxb\AppData\Local\Temp\ccOXefrF.s:917    .text:000003cc $t
+G:\Users\Jaxb\AppData\Local\Temp\ccOXefrF.s:924    .text:000003cc msg_send
+G:\Users\Jaxb\AppData\Local\Temp\ccOXefrF.s:986    .text:00000410 $d
+G:\Users\Jaxb\AppData\Local\Temp\ccOXefrF.s:996    .rodata.name:0000000c __rtmsym_msg_send_name
+G:\Users\Jaxb\AppData\Local\Temp\ccOXefrF.s:1003   .RTMSymTab:00000008 __rtmsym_msg_send
+G:\Users\Jaxb\AppData\Local\Temp\ccOXefrF.s:1007   .text:00000418 $t
+G:\Users\Jaxb\AppData\Local\Temp\ccOXefrF.s:1014   .text:00000418 _msg_receive
+G:\Users\Jaxb\AppData\Local\Temp\ccOXefrF.s:1316   .text:000005f4 $d
+G:\Users\Jaxb\AppData\Local\Temp\ccOXefrF.s:1331   .text:000005fc $t
+G:\Users\Jaxb\AppData\Local\Temp\ccOXefrF.s:1338   .text:000005fc msg_receive
+G:\Users\Jaxb\AppData\Local\Temp\ccOXefrF.s:1409   .text:00000650 $d
+G:\Users\Jaxb\AppData\Local\Temp\ccOXefrF.s:1420   .rodata.name:00000018 __rtmsym_msg_receive_name
+G:\Users\Jaxb\AppData\Local\Temp\ccOXefrF.s:1427   .RTMSymTab:00000010 __rtmsym_msg_receive
+G:\Users\Jaxb\AppData\Local\Temp\ccOXefrF.s:1431   .text:0000065c $t
+G:\Users\Jaxb\AppData\Local\Temp\ccOXefrF.s:1438   .text:0000065c _msg_del
+G:\Users\Jaxb\AppData\Local\Temp\ccOXefrF.s:1588   .text:00000734 $d
+G:\Users\Jaxb\AppData\Local\Temp\ccOXefrF.s:1598   .text:00000738 $t
+G:\Users\Jaxb\AppData\Local\Temp\ccOXefrF.s:1605   .text:00000738 msg_del
+G:\Users\Jaxb\AppData\Local\Temp\ccOXefrF.s:1652   .text:00000764 $d
+G:\Users\Jaxb\AppData\Local\Temp\ccOXefrF.s:1661   .rodata.name:00000024 __rtmsym_msg_del_name
+G:\Users\Jaxb\AppData\Local\Temp\ccOXefrF.s:1668   .RTMSymTab:00000018 __rtmsym_msg_del
+G:\Users\Jaxb\AppData\Local\Temp\ccOXefrF.s:1677   .text:00000768 $t
+G:\Users\Jaxb\AppData\Local\Temp\ccOXefrF.s:1684   .text:00000768 message_init
+G:\Users\Jaxb\AppData\Local\Temp\ccOXefrF.s:1759   .text:000007c4 $d
+G:\Users\Jaxb\AppData\Local\Temp\ccOXefrF.s:1769   .rodata.name:0000002c __rtmsym_message_init_name
+G:\Users\Jaxb\AppData\Local\Temp\ccOXefrF.s:1776   .RTMSymTab:00000020 __rtmsym_message_init
 
 UNDEFINED SYMBOLS
 _ASSERT
@@ -5622,7 +5622,7 @@ init_insert_sort_entity
 CPU_SR_Restore
 ka_printf
 g_interrupt_count
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJF3iZh.s 			page 95
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccOXefrF.s 			page 95
 
 
 insert_sort_delete_head

@@ -33,23 +33,10 @@ static inline void clear_input_buffer(void)
 void _shell_buffer_wait_str(const char *str_ptr) /* thread will going to sleep*/
 {
 	ASSERT(NULL != str_ptr);
-#if CONFIG_PARA_CHECK	
-	if(NULL == str_ptr)
-	{
-		OS_ERROR_PARA_MESSAGE_DISPLAY(_shell_buffer_wait_str,str_ptr);
-		return ;
-	}
-#endif
-#if CONFIG_ASSERT_DEBUG
 	int error;
-#endif
 	while(1)
 	{
-#if CONFIG_ASSERT_DEBUG
 		error = _p(&MCB_for_shell,MCB_FLAG_WAIT,0);
-#else
-		_p(&MCB_for_shell,MCB_FLAG_WAIT,0);
-#endif
 		ASSERT(FUN_EXECUTE_SUCCESSFULLY == error);
 		if(0 == ka_strncmp(using_shell_buffer_ptr->buffer,str_ptr,ka_strlen(str_ptr)))
 		{
@@ -76,13 +63,6 @@ char *get_para_add(int argc, char const *argv[], const char *pre_name)
 struct shell_buffer *_change_shell_buffer(struct shell_buffer *shell_buffer_ptr)
 {
 	ASSERT(NULL != shell_buffer_ptr);
-#if CONFIG_PARA_CHECK
-	if(NULL == shell_buffer_ptr)
-	{
-		OS_ERROR_PARA_MESSAGE_DISPLAY(_change_shell_buffer,shell_buffer_ptr);
-		return NULL;
-	}
-#endif
 	CPU_SR_ALLOC();
 	CPU_CRITICAL_ENTER();
 	struct shell_buffer *buffer = using_shell_buffer_ptr;

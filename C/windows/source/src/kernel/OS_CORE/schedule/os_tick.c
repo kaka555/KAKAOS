@@ -35,7 +35,7 @@ extern volatile UINT64 g_time_tick_count;
  * @DateTime 2018-09-24
  * @description : change the infomation about time
  */
-inline static void tick_time_handler(void)
+static inline void tick_time_handler(void)
 {
 #if CONFIG_TIME_EN
 	static volatile int time_flag = 0;

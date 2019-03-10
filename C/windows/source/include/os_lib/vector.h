@@ -1,6 +1,8 @@
 #ifndef _VECTOR_H
 #define _VECTOR_H
 
+#include <myMicroLIB.h>
+
 #define f_free(ptr)				ka_free(ptr)
 #define f_memcpy(des,src,size)	ka_memcpy(des,src,size)
 #define f_malloc(size)			ka_malloc(size)
@@ -22,17 +24,43 @@ typedef struct vector
 #define ERROR_ALLOCATE_ROOM 1
 #define ERROR_DATA_EMPTY    2
 
-int Vector_init(Vector *const vector_ptr,unsigned int size,int len_per_data,unsigned int extension_factor);
-int Vector_push_back(Vector *const vector_ptr,void *push_data_ptr);
-int Vector_pop_back(Vector *const vector_ptr,void *pop_data_ptr);
-int Vector_get_index_data(Vector *const vector_ptr,unsigned int index,void *data_store_ptr);
-int Vector_set_index_data(Vector *const vector_ptr,unsigned int index,void *data_store_ptr);
-int Vector_get_index_address(Vector *const vector_ptr,unsigned int index,void **data_store_ptr);
-int Vector_delete(Vector *const vector_ptr);
-int Vector_erase_data(Vector *const vector_ptr,unsigned int from,unsigned int to);
-int Vector_remove_index_data(Vector *const vector_ptr,unsigned int index,void *data_store_ptr);/*if data_store_ptr is NULL,do not store*/
-int Vector_set_inner(Vector *const vector_ptr,unsigned int dest_index,unsigned int src_index);
-int Vector_swap_inner(Vector *const vector_ptr,unsigned int index1,unsigned int index2);
+/*
+get vector[index] data into *data_store_ptr
+ */
+static inline void Vector_get_index_data(Vector *vector_ptr,unsigned int index,void *data_store_ptr)
+{
+	f_memcpy(data_store_ptr,(char*)(vector_ptr->data_ptr) + index * vector_ptr->data_size,vector_ptr->data_size);
+}
+
+/*
+set vector[index] data with *data_store_ptr
+ */
+static inline void Vector_set_index_data(Vector *vector_ptr,unsigned int index,void *data_store_ptr)
+{
+	f_memcpy((char*)(vector_ptr->data_ptr) + index * vector_ptr->data_size,data_store_ptr,vector_ptr->data_size);
+}
+
+/*
+delete vector
+ */
+static inline void Vector_delete(Vector *vector_ptr)
+{
+	f_free(vector_ptr->data_ptr);
+}
+
+static inline void Vector_get_index_address(Vector *vector_ptr,unsigned int index,void **data_add_ptr)
+{
+	*data_add_ptr = (void *)((char*)(vector_ptr->data_ptr) + index * vector_ptr->data_size);
+}
+
+int Vector_init(Vector *vector_ptr,unsigned int size,int len_per_data,unsigned int extension_factor);
+int Vector_push_back(Vector *vector_ptr,void *push_data_ptr);
+int Vector_pop_back(Vector *vector_ptr,void *pop_data_ptr);
+void Vector_set_index_data(Vector *vector_ptr,unsigned int index,void *data_store_ptr);
+int Vector_erase_data(Vector *vector_ptr,unsigned int from,unsigned int to);
+int Vector_remove_index_data(Vector *vector_ptr,unsigned int index,void *data_store_ptr);/*if data_store_ptr is NULL,do not store*/
+int Vector_set_inner(Vector *vector_ptr,unsigned int dest_index,unsigned int src_index);
+int Vector_swap_inner(Vector *vector_ptr,unsigned int index1,unsigned int index2);
 
 
 #define MKVFMUL(x) (0x80000000 | (x))

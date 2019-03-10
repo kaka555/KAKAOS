@@ -2,7 +2,6 @@
 #include <myassert.h>
 #include <os_cpu.h>
 #include <myMicroLIB.h>
-#include <printf_debug.h>
 
 static struct buddy *os_buddy_ptr_head = NULL;
 static struct buddy *current_used_buddy_ptr;
@@ -22,7 +21,7 @@ static inline int _check_flag(unsigned int level,Page_Num_Type page_num);
 static void _deal_with_flag_alloc(unsigned int level,Page_Num_Type page_num);
 static Page_Num_Type _alloc_page(unsigned int level);
 
-inline static unsigned int get_max_level(unsigned int page_num)
+static inline unsigned int get_max_level(unsigned int page_num)
 {
 	return get_set_bit_place(page_num);
 }
@@ -292,7 +291,7 @@ void __buddy_init(const struct dev_mem_para *dev_mem_para_ptr)
 	_add_to_order_array(buddy_ptr->info.max_level,0);
 /*mark the space used by struct buddy*/
 	size = (unsigned int)buddy_ptr - (unsigned int)dev_mem_para_ptr->start + buddy_ptr->buddy_struct_size + sizeof(struct buddy);
-	PRINTF("space used by os is %d\n",size);
+	ka_printf("space used by os is %d\n",size);
 	if(size % PAGE_SIZE_BYTE)
 	{
 		size = size/PAGE_SIZE_BYTE + 1;
@@ -305,7 +304,7 @@ void __buddy_init(const struct dev_mem_para *dev_mem_para_ptr)
 	{
 		if(((0x01u)<<i) >= size)
 		{
-			PRINTF("allocate level %d\n",i+1);
+			ka_printf("allocate level %d\n",i+1);
 			_alloc_page(i+1);
 			current_used_buddy_ptr->current_page_num -= 0x01<<i;
 			goto final_step;
@@ -588,7 +587,7 @@ static void _return_page(void *ptr,unsigned int level) /*return page to system*/
 	_add_to_order_array_loop(level,page_num); /* then going to loop to finish the return*/
 }
 
-inline void _return_power1_page(void *ptr)
+void _return_power1_page(void *ptr)
 {
 	CPU_SR_ALLOC();
 	CPU_CRITICAL_ENTER();
@@ -691,7 +690,7 @@ void _return_power10_page(void *ptr)
 #if CONFIG_SHELL_EN
 static int _check_buddy_flag_level(unsigned int level,unsigned int offset)
 {
-	/*PRINTF("level is %d,offset is %d\n",level,offset);*/
+	/*ka_printf("level is %d,offset is %d\n",level,offset);*/
 	ASSERT((level>=1) && (level<=10));
 	ASSERT((offset<((current_used_buddy_ptr->info.page_num>>1)/sizeof_level(level))));
 	unsigned int num = 0;
@@ -765,10 +764,10 @@ static int _check_buddy_level_flag(void)
 					num = buffer.num;
 					offset = num>>(i+1);
 					num = current_used_buddy_ptr->level_flag_base[i] + offset;
-					/*PRINTF("num is %d\n",num);*/
+					/*ka_printf("num is %d\n",num);*/
 					if(!(0x01 & current_used_buddy_ptr->flag[num/(sizeof(Flag_Type)*8)]>>(sizeof(Flag_Type)*8 - num%(sizeof(Flag_Type)*8)-1)))
 					{
-						PRINTF("level %d,page_num %d error\n",i+1,num<<(i+1));
+						ka_printf("level %d,page_num %d error\n",i+1,num<<(i+1));
 						return -1;
 					}
 					buffer = current_used_buddy_ptr->link_body[buffer.next];
@@ -776,10 +775,10 @@ static int _check_buddy_level_flag(void)
 				num = buffer.num;
 				offset = num>>(i+1);
 				num = current_used_buddy_ptr->level_flag_base[i] + offset;
-				/*PRINTF("num is %d\n",num);*/
+				/*ka_printf("num is %d\n",num);*/
 				if(!(0x01 & current_used_buddy_ptr->flag[num/(sizeof(Flag_Type)*8)]>>(31-(num%(sizeof(Flag_Type)*8)))))
 				{
-					PRINTF("level %d,page_num %d error\n",i+1,num<<(i+1));
+					ka_printf("level %d,page_num %d error\n",i+1,num<<(i+1));
 					return -1;
 				}
 			}
@@ -793,23 +792,23 @@ static int _check_buddy_level_flag(void)
 				{
 					if(current_used_buddy_ptr->link_body[buffer.next].num != sizeof_level(current_used_buddy_ptr->info.max_level))
 					{
-						/*PRINTF("here\n");*/
-						PRINTF("level %d,page_num %d error\n",i+1,num);
+						/*ka_printf("here\n");*/
+						ka_printf("level %d,page_num %d error\n",i+1,num);
 						return -1;
 					}
 					if(0x01 & current_used_buddy_ptr->flag[num/(sizeof(Flag_Type)*8)]>>(31-(num%(sizeof(Flag_Type)*8))))
 					{
-						/*PRINTF("there\n");*/
-						PRINTF("level %d,page_num %d error\n",i+1,num);
+						/*ka_printf("there\n");*/
+						ka_printf("level %d,page_num %d error\n",i+1,num);
 						return -1;
 					}
 				}
 				else
 				{
-					/*PRINTF("num is %d\n",num);*/
+					/*ka_printf("num is %d\n",num);*/
 					if(!(0x01 & current_used_buddy_ptr->flag[num/(sizeof(Flag_Type)*8)]>>(31-(num%(sizeof(Flag_Type)*8)))))
 					{
-						PRINTF("level %d,page_num %d error\n",i+1,num);
+						ka_printf("level %d,page_num %d error\n",i+1,num);
 						return -1;
 					}
 				}
@@ -822,7 +821,7 @@ static int _check_buddy_level_flag(void)
 static int check_buddy(void)
 {
 	unsigned int i,j;
-	PRINTF("now going to step1:check from flag to level array\n");
+	ka_printf("now going to step1:check from flag to level array\n");
 	for(i=0;i<current_used_buddy_ptr->info.flag_array_num;++i)
 	{
 		if(0 != current_used_buddy_ptr->flag[i])
@@ -834,15 +833,15 @@ static int check_buddy(void)
 					unsigned int level = _get_level(i,j);
 					if(0 != _check_buddy_flag_level(level,i*sizeof(Flag_Type)*8+j-current_used_buddy_ptr->level_flag_base[level-1]))
 					{
-						PRINTF("num %d,level %d error!\n",i*8*sizeof(Flag_Type)+j,level);
+						ka_printf("num %d,level %d error!\n",i*8*sizeof(Flag_Type)+j,level);
 						return -1;
 					}
 				}
 			}
 		}
 	}
-	PRINTF("Inspection step 1:check from flag to level array is completed.Nothing wrong\n");
-	PRINTF("now going to step2:check from level array to flag\n");
+	ka_printf("Inspection step 1:check from flag to level array is completed.Nothing wrong\n");
+	ka_printf("now going to step2:check from level array to flag\n");
 
 	/*then check from level to flag*/
 	return _check_buddy_level_flag();
@@ -860,63 +859,63 @@ void shell_buddy_debug(int argc, char const *argv[])
 	j = 1;
 	while(NULL != buddy_ptr)
 	{
-		PRINTF("NO.%u memory : \n",j++);
-		PRINTF("=====================================================\n");
-		PRINTF("the following informations are the buddy debug infomations\n");
-		PRINTF("rest buddy space is %u\n",_get_current_buddy_space());
-		PRINTF("the total space is %uKB\n",PAGE_SIZE_KB * current_used_buddy_ptr->info.page_num);
-		PRINTF("now there are %u%% left\n",100*_get_current_buddy_space()/(PAGE_SIZE_KB * current_used_buddy_ptr->info.page_num));
+		ka_printf("NO.%u memory : \n",j++);
+		ka_printf("=====================================================\n");
+		ka_printf("the following informations are the buddy debug infomations\n");
+		ka_printf("rest buddy space is %uKB\n",_get_current_buddy_space());
+		ka_printf("the total space is %uKB\n",PAGE_SIZE_KB * current_used_buddy_ptr->info.page_num);
+		ka_printf("now there are %u%% left\n",100*_get_current_buddy_space()/(PAGE_SIZE_KB * current_used_buddy_ptr->info.page_num));
 	/*==========================================================================	*/
 	/*flag info*/
-		PRINTF("=====================================================\n");
-		PRINTF("buddy flag infomation :\n");
+		ka_printf("=====================================================\n");
+		ka_printf("buddy flag infomation :\n");
 		for(i=0;i<current_used_buddy_ptr->info.flag_array_num;++i)
 		{
-			PRINTF("flag %d to %d:",i<<5,(i<<5)+31);
-			PRINTF("%x\n",current_used_buddy_ptr->flag[i]);
+			ka_printf("flag %d to %d:",i<<5,(i<<5)+31);
+			ka_printf("0x%x\n",current_used_buddy_ptr->flag[i]);
 		}
 	/*==========================================================================*/		
 	/*level info*/
-		PRINTF("=====================================================\n");
-		PRINTF("each level's infomation :\n");
+		ka_printf("=====================================================\n");
+		ka_printf("each level's infomation :\n");
 		for(i=0;i<current_used_buddy_ptr->info.max_level;++i)
 		{
-			PRINTF("level %d : ---",i+1);
+			ka_printf("level %d : ---",i+1);
 			if(NOTHING == current_used_buddy_ptr->order_array[i])
 			{
-				PRINTF("nothing here\n");
+				ka_printf("nothing here\n");
 			}
 			else
 			{
 				buffer = current_used_buddy_ptr->link_body[current_used_buddy_ptr->order_array[i]];
 				while(1)
 				{
-					PRINTF("num-%d--->",buffer.num);
+					ka_printf("num-%d--->",buffer.num);
 					if(NOTHING == buffer.next)
 					{
-						PRINTF("end\n");
+						ka_printf("end\n");
 						break ;
 					}
 					buffer = current_used_buddy_ptr->link_body[buffer.next];
 				}
 			}
 		}
-		PRINTF("=====================================================\n");
+		ka_printf("=====================================================\n");
 	/*=========================================================================*/
 	/*start check the buddy info*/
-		PRINTF("\nnow going to check the buddy info.......\n");
+		ka_printf("\nnow going to check the buddy info.......\n");
 		if(0 == check_buddy())
 		{
-			PRINTF("correct!\n");
+			ka_printf("correct!\n");
 		}
 		else
 		{
-			PRINTF("something wrong!\n");
+			ka_printf("something wrong!\n");
 		}
-		PRINTF("\n\n");
+		ka_printf("\n\n");
 		buddy_ptr = (struct buddy *)_get_next_buddy_ptr_head(buddy_ptr);
 	}
-	PRINTF("now going to display the page allocation's info\n");
+	ka_printf("now going to display the page allocation's info\n");
 	dis_page_alloc_record();	
 }
 #endif

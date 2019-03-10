@@ -11,7 +11,7 @@ static int flag_for_shell_debug = 1;
 
 static void __init_shell_variable_array(void);
 
-inline void __init_shell_debug(void)
+void __init_shell_debug(void)
 {
 #if CONFIG_ASSERT_DEBUG
 	int error;
@@ -41,14 +41,14 @@ void insert_break_point(char* file_name,unsigned line,const char* function_name)
 	}
 }
 
-inline void shell_debug_next(int argc, char const *argv[])
+void shell_debug_next(int argc, char const *argv[])
 {
 	(void)argc;
 	(void)argv;
 	_v(&MCB_for_shell_debug);
 }
 
-inline void shell_debug_run(int argc, char const *argv[])
+void shell_debug_run(int argc, char const *argv[])
 {
 	(void)argc;
 	(void)argv;
@@ -56,7 +56,7 @@ inline void shell_debug_run(int argc, char const *argv[])
 	flag_for_shell_debug = 0;
 }
 
-inline void shell_debug_stop(int argc, char const *argv[])
+void shell_debug_stop(int argc, char const *argv[])
 {
 	(void)argc;
 	(void)argv;
@@ -181,7 +181,7 @@ void shell_v_display(struct shell_variable *shell_variable_ptr)
 	}
 }
 
-inline void shell_v_display_addr(struct shell_variable *shell_variable_ptr)
+void shell_v_display_addr(struct shell_variable *shell_variable_ptr)
 {
 	ASSERT(shell_variable_ptr != NULL);
 	ka_printf("variable %s address is %p\n",shell_variable_ptr->shell_v_name,shell_variable_ptr->data_ptr);

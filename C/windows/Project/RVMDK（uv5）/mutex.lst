@@ -1,4 +1,4 @@
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJ3fYWf.s 			page 1
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccFImDCu.s 			page 1
 
 
    1              		.cpu cortex-m3
@@ -33,7 +33,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJ3fYWf.s 			page 1
    7:../../source/src/kernel/OS_CORE/mutex.c **** 
    8:../../source/src/kernel/OS_CORE/mutex.c **** extern volatile TCB * OSTCBCurPtr;
    9:../../source/src/kernel/OS_CORE/mutex.c **** 
-  10:../../source/src/kernel/OS_CORE/mutex.c **** inline static int compare(struct insert_sort_data *data1,struct insert_sort_data *data2)
+  10:../../source/src/kernel/OS_CORE/mutex.c **** static int compare(struct insert_sort_data *data1,struct insert_sort_data *data2)
   11:../../source/src/kernel/OS_CORE/mutex.c **** {
   24              		.loc 1 11 0
   25              		.cfi_startproc
@@ -58,7 +58,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJ3fYWf.s 			page 1
   43 000c 1B68     		ldr	r3, [r3]
   44 000e 5A69     		ldr	r2, [r3, #20]
   45 0010 3B68     		ldr	r3, [r7]
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJ3fYWf.s 			page 2
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccFImDCu.s 			page 2
 
 
   46 0012 1B68     		ldr	r3, [r3]
@@ -91,7 +91,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJ3fYWf.s 			page 1
   72              	value_cmp:
   73              	.LFB12:
   14:../../source/src/kernel/OS_CORE/mutex.c **** 
-  15:../../source/src/kernel/OS_CORE/mutex.c **** inline static int value_cmp(void *data1,void *data2)
+  15:../../source/src/kernel/OS_CORE/mutex.c **** static int value_cmp(void *data1,void *data2)
   16:../../source/src/kernel/OS_CORE/mutex.c **** {
   74              		.loc 1 16 0
   75              		.cfi_startproc
@@ -118,7 +118,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJ3fYWf.s 			page 1
   95 0032 5B69     		ldr	r3, [r3, #20]
   96 0034 D31A     		subs	r3, r2, r3
   18:../../source/src/kernel/OS_CORE/mutex.c **** }
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJ3fYWf.s 			page 3
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccFImDCu.s 			page 3
 
 
   97              		.loc 1 18 0
@@ -178,7 +178,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJ3fYWf.s 			page 1
   22:../../source/src/kernel/OS_CORE/mutex.c **** 	ASSERT(NULL != MUTEX_ptr);
  144              		.loc 1 22 0
  145 0048 7B68     		ldr	r3, [r7, #4]
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJ3fYWf.s 			page 4
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccFImDCu.s 			page 4
 
 
  146 004a 002B     		cmp	r3, #0
@@ -238,7 +238,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJ3fYWf.s 			page 1
  187              		@ sp needed
  188 008a 80BD     		pop	{r7, pc}
  189              	.L9:
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJ3fYWf.s 			page 5
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccFImDCu.s 			page 5
 
 
  190              		.align	2
@@ -298,7 +298,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJ3fYWf.s 			page 1
  234 00a6 0A48     		ldr	r0, .L14
  235 00a8 FFF7FEFF 		bl	ka_printf
   42:../../source/src/kernel/OS_CORE/mutex.c **** 		return -ERROR_NULL_INPUT_PTR;
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJ3fYWf.s 			page 6
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccFImDCu.s 			page 6
 
 
  236              		.loc 1 42 0
@@ -358,7 +358,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJ3fYWf.s 			page 1
  281              		.align	2
  282              		.type	__rtmsym_mutex_init, %object
  283              		.size	__rtmsym_mutex_init, 8
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJ3fYWf.s 			page 7
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccFImDCu.s 			page 7
 
 
  284              	__rtmsym_mutex_init:
@@ -418,7 +418,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJ3fYWf.s 			page 1
  330 00fa 1B68     		ldr	r3, [r3]
  331 00fc 012B     		cmp	r3, #1
  332 00fe 0AD1     		bne	.L18
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJ3fYWf.s 			page 8
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccFImDCu.s 			page 8
 
 
   58:../../source/src/kernel/OS_CORE/mutex.c **** 	{
@@ -478,7 +478,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJ3fYWf.s 			page 1
  372              		.loc 1 72 0
  373 013c 2D4B     		ldr	r3, .L27+4
  374 013e 1A68     		ldr	r2, [r3]
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJ3fYWf.s 			page 9
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccFImDCu.s 			page 9
 
 
  375 0140 07F10803 		add	r3, r7, #8
@@ -538,7 +538,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJ3fYWf.s 			page 1
  420 0198 5B69     		ldr	r3, [r3, #20]
  421 019a 1946     		mov	r1, r3
  422 019c 1046     		mov	r0, r2
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJ3fYWf.s 			page 10
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccFImDCu.s 			page 10
 
 
  423 019e FFF7FEFF 		bl	task_change_prio
@@ -598,7 +598,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJ3fYWf.s 			page 1
  463              	.L26:
   96:../../source/src/kernel/OS_CORE/mutex.c **** }
  464              		.loc 1 96 0
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJ3fYWf.s 			page 11
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccFImDCu.s 			page 11
 
 
  465 01e6 1846     		mov	r0, r3
@@ -658,7 +658,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJ3fYWf.s 			page 1
  512 01fe 7860     		str	r0, [r7, #4]
  100:../../source/src/kernel/OS_CORE/mutex.c **** 	if(NULL == MUTEX_ptr)
  513              		.loc 1 100 0
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJ3fYWf.s 			page 12
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccFImDCu.s 			page 12
 
 
  514 0200 7B68     		ldr	r3, [r7, #4]
@@ -718,7 +718,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJ3fYWf.s 			page 1
  558 000b 00       		.align	2
  559              		.type	__rtmsym_mutex_lock_name, %object
  560              		.size	__rtmsym_mutex_lock_name, 11
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJ3fYWf.s 			page 13
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccFImDCu.s 			page 13
 
 
  561              	__rtmsym_mutex_lock_name:
@@ -778,7 +778,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJ3fYWf.s 			page 1
  607 024e 0023     		movs	r3, #0
  608 0250 FB60     		str	r3, [r7, #12]
  117:../../source/src/kernel/OS_CORE/mutex.c **** 	CPU_CRITICAL_ENTER();
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJ3fYWf.s 			page 14
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccFImDCu.s 			page 14
 
 
  609              		.loc 1 117 0
@@ -838,7 +838,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJ3fYWf.s 			page 1
  649              		.loc 1 131 0
  650 0292 1846     		mov	r0, r3
  651 0294 1037     		adds	r7, r7, #16
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJ3fYWf.s 			page 15
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccFImDCu.s 			page 15
 
 
  652              	.LCFI35:
@@ -898,7 +898,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJ3fYWf.s 			page 1
  135:../../source/src/kernel/OS_CORE/mutex.c **** 	if(NULL == MUTEX_ptr)
  698              		.loc 1 135 0
  699 02ac 7B68     		ldr	r3, [r7, #4]
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJ3fYWf.s 			page 16
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccFImDCu.s 			page 16
 
 
  700 02ae 002B     		cmp	r3, #0
@@ -958,7 +958,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJ3fYWf.s 			page 1
  745 0014 00000000 		.word	__rtmsym_mutex_try_lock_name
  746              		.text
  747              		.align	1
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJ3fYWf.s 			page 17
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccFImDCu.s 			page 17
 
 
  748              		.global	_mutex_unlock
@@ -1018,7 +1018,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJ3fYWf.s 			page 1
  792              		.loc 1 151 0
  793 02fc 7869     		ldr	r0, [r7, #20]
  794 02fe FFF7FEFF 		bl	CPU_SR_Restore
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJ3fYWf.s 			page 18
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccFImDCu.s 			page 18
 
 
  152:../../source/src/kernel/OS_CORE/mutex.c **** 		return FUN_EXECUTE_SUCCESSFULLY;
@@ -1078,7 +1078,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJ3fYWf.s 			page 1
  837              	.LBE3:
  164:../../source/src/kernel/OS_CORE/mutex.c **** 	}
  165:../../source/src/kernel/OS_CORE/mutex.c **** 	struct insert_sort_data *buffer_ptr = insert_sort_delete_head(&MUTEX_ptr->mutex_insert_sort_TCB_li
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJ3fYWf.s 			page 19
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccFImDCu.s 			page 19
 
 
  838              		.loc 1 165 0
@@ -1138,7 +1138,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJ3fYWf.s 			page 1
  878 0382 1846     		mov	r0, r3
  879 0384 1837     		adds	r7, r7, #24
  880              	.LCFI45:
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJ3fYWf.s 			page 20
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccFImDCu.s 			page 20
 
 
  881              		.cfi_def_cfa_offset 8
@@ -1198,7 +1198,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJ3fYWf.s 			page 1
  926              		.loc 1 183 0
  927 039c 7B68     		ldr	r3, [r7, #4]
  928 039e 002B     		cmp	r3, #0
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJ3fYWf.s 			page 21
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccFImDCu.s 			page 21
 
 
  929 03a0 05D1     		bne	.L58
@@ -1258,7 +1258,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJ3fYWf.s 			page 1
  974              		.text
  975              		.align	1
  976              		.global	_mutex_del
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJ3fYWf.s 			page 22
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccFImDCu.s 			page 22
 
 
  977              		.syntax unified
@@ -1318,7 +1318,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJ3fYWf.s 			page 1
  1021 03ec BB60     		str	r3, [r7, #8]
  200:../../source/src/kernel/OS_CORE/mutex.c **** 		ASSERT(STATE_WAIT_MUTEX_FOREVER == TCB_ptr->task_state);
  1022              		.loc 1 200 0
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJ3fYWf.s 			page 23
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccFImDCu.s 			page 23
 
 
  1023 03ee BB68     		ldr	r3, [r7, #8]
@@ -1378,7 +1378,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJ3fYWf.s 			page 1
  1070              		.size	_mutex_del, .-_mutex_del
  1071              		.section	.rodata
  1072 00fe 0000     		.align	2
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJ3fYWf.s 			page 24
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccFImDCu.s 			page 24
 
 
  1073              	.LC5:
@@ -1438,7 +1438,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJ3fYWf.s 			page 1
  1114 044a 7868     		ldr	r0, [r7, #4]
  1115 044c FFF7FEFF 		bl	_mutex_del
  1116 0450 0346     		mov	r3, r0
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJ3fYWf.s 			page 25
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccFImDCu.s 			page 25
 
 
  1117              	.L72:
@@ -1498,7 +1498,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJ3fYWf.s 			page 1
  1168 0010 0C       		.byte	0xc
  1169 0011 39040000 		.4byte	.LASF98
  1170 0015 FF010000 		.4byte	.LASF99
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJ3fYWf.s 			page 26
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccFImDCu.s 			page 26
 
 
  1171 0019 00000000 		.4byte	.Ltext0
@@ -1558,7 +1558,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJ3fYWf.s 			page 1
  1225 007f 7E030000 		.4byte	.LASF6
  1226 0083 08       		.uleb128 0x8
  1227 0084 2E010000 		.4byte	.LASF8
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJ3fYWf.s 			page 27
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccFImDCu.s 			page 27
 
 
  1228 0088 03       		.byte	0x3
@@ -1618,7 +1618,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJ3fYWf.s 			page 1
  1282 00eb 02       		.uleb128 0x2
  1283 00ec B1040000 		.4byte	.LASF17
  1284 00f0 18       		.byte	0x18
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJ3fYWf.s 			page 28
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccFImDCu.s 			page 28
 
 
  1285 00f1 04       		.byte	0x4
@@ -1678,7 +1678,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJ3fYWf.s 			page 1
  1339 0154 04       		.byte	0x4
  1340 0155 B2000000 		.4byte	0xb2
  1341 0159 04       		.uleb128 0x4
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJ3fYWf.s 			page 29
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccFImDCu.s 			page 29
 
 
  1342 015a 04       		.byte	0x4
@@ -1738,7 +1738,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJ3fYWf.s 			page 1
  1396 01cf 07       		.byte	0x7
  1397 01d0 0D       		.uleb128 0xd
  1398 01d1 4B010000 		.4byte	.LASF30
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJ3fYWf.s 			page 30
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccFImDCu.s 			page 30
 
 
  1399 01d5 08       		.byte	0x8
@@ -1798,7 +1798,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJ3fYWf.s 			page 1
  1453 0241 03       		.uleb128 0x3
  1454 0242 0C050000 		.4byte	.LASF40
  1455 0246 07       		.byte	0x7
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJ3fYWf.s 			page 31
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccFImDCu.s 			page 31
 
 
  1456 0247 39       		.byte	0x39
@@ -1858,7 +1858,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJ3fYWf.s 			page 1
  1510 02a4 3A050000 		.4byte	.LASF47
  1511 02a8 07       		.byte	0x7
  1512 02a9 40       		.byte	0x40
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJ3fYWf.s 			page 32
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccFImDCu.s 			page 32
 
 
  1513 02aa 25000000 		.4byte	0x25
@@ -1918,7 +1918,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJ3fYWf.s 			page 1
  1567 0307 04       		.byte	0x4
  1568 0308 04020000 		.4byte	0x204
  1569 030c 04       		.uleb128 0x4
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJ3fYWf.s 			page 33
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccFImDCu.s 			page 33
 
 
  1570 030d 04       		.byte	0x4
@@ -1978,7 +1978,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJ3fYWf.s 			page 1
  1624 0373 2A030000 		.4byte	0x32a
  1625 0377 08       		.uleb128 0x8
  1626 0378 7C010000 		.4byte	.LASF59
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJ3fYWf.s 			page 34
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccFImDCu.s 			page 34
 
 
  1627 037c 08       		.byte	0x8
@@ -2038,7 +2038,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJ3fYWf.s 			page 1
  1681 03e2 04       		.byte	0x4
  1682 03e3 35030000 		.4byte	0x335
  1683 03e7 12       		.uleb128 0x12
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJ3fYWf.s 			page 35
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccFImDCu.s 			page 35
 
 
  1684 03e8 19030000 		.4byte	0x319
@@ -2098,7 +2098,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJ3fYWf.s 			page 1
  1738 045a 92000000 		.4byte	.LASF72
  1739 045e 01       		.byte	0x1
  1740 045f 8E       		.byte	0x8e
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJ3fYWf.s 			page 36
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccFImDCu.s 			page 36
 
 
  1741 0460 54040000 		.4byte	0x454
@@ -2158,7 +2158,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJ3fYWf.s 			page 1
  1795 04d2 C6040000 		.4byte	0x4c6
  1796 04d6 01       		.byte	0x1
  1797 04d7 05       		.byte	0x5
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJ3fYWf.s 			page 37
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccFImDCu.s 			page 37
 
 
  1798 04d8 03       		.byte	0x3
@@ -2218,7 +2218,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJ3fYWf.s 			page 1
  1852 054d 6C       		.sleb128 -20
  1853 054e 17       		.uleb128 0x17
  1854 054f 25050000 		.4byte	.LASF81
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJ3fYWf.s 			page 38
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccFImDCu.s 			page 38
 
 
  1855 0553 01       		.byte	0x1
@@ -2278,7 +2278,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJ3fYWf.s 			page 1
  1909 05c2 91       		.byte	0x91
  1910 05c3 64       		.sleb128 -28
  1911 05c4 17       		.uleb128 0x17
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJ3fYWf.s 			page 39
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccFImDCu.s 			page 39
 
 
  1912 05c5 59050000 		.4byte	.LASF85
@@ -2338,7 +2338,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJ3fYWf.s 			page 1
  1966 062e 01       		.byte	0x1
  1967 062f 62000000 		.4byte	0x62
  1968 0633 38020000 		.4byte	.LFB17
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJ3fYWf.s 			page 40
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccFImDCu.s 			page 40
 
 
  1969 0637 A4020000 		.4byte	.LFE17
@@ -2398,7 +2398,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJ3fYWf.s 			page 1
  2023 06ac 16       		.uleb128 0x16
  2024 06ad 03010000 		.4byte	.LASF80
  2025 06b1 01       		.byte	0x1
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJ3fYWf.s 			page 41
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccFImDCu.s 			page 41
 
 
  2026 06b2 34       		.byte	0x34
@@ -2458,7 +2458,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJ3fYWf.s 			page 1
  2080 071b 00       		.byte	0
  2081 071c 15       		.uleb128 0x15
  2082 071d 01       		.byte	0x1
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJ3fYWf.s 			page 42
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccFImDCu.s 			page 42
 
 
  2083 071e AF000000 		.4byte	.LASF94
@@ -2518,7 +2518,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJ3fYWf.s 			page 1
  2137 0790 00       		.byte	0
  2138 0791 1A       		.uleb128 0x1a
  2139 0792 DB040000 		.4byte	.LASF20
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJ3fYWf.s 			page 43
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccFImDCu.s 			page 43
 
 
  2140 0796 01       		.byte	0x1
@@ -2578,7 +2578,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJ3fYWf.s 			page 1
  2194 001a 3A       		.uleb128 0x3a
  2195 001b 0B       		.uleb128 0xb
  2196 001c 3B       		.uleb128 0x3b
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJ3fYWf.s 			page 44
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccFImDCu.s 			page 44
 
 
  2197 001d 0B       		.uleb128 0xb
@@ -2638,7 +2638,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJ3fYWf.s 			page 1
  2251 0053 49       		.uleb128 0x49
  2252 0054 13       		.uleb128 0x13
  2253 0055 00       		.byte	0
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJ3fYWf.s 			page 45
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccFImDCu.s 			page 45
 
 
  2254 0056 00       		.byte	0
@@ -2698,7 +2698,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJ3fYWf.s 			page 1
  2308 008c 01       		.uleb128 0x1
  2309 008d 13       		.uleb128 0x13
  2310 008e 00       		.byte	0
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJ3fYWf.s 			page 46
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccFImDCu.s 			page 46
 
 
  2311 008f 00       		.byte	0
@@ -2758,7 +2758,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJ3fYWf.s 			page 1
  2365 00c5 00       		.byte	0
  2366 00c6 00       		.byte	0
  2367 00c7 12       		.uleb128 0x12
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJ3fYWf.s 			page 47
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccFImDCu.s 			page 47
 
 
  2368 00c8 01       		.uleb128 0x1
@@ -2818,7 +2818,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJ3fYWf.s 			page 1
  2422 00fe 06       		.uleb128 0x6
  2423 00ff 9642     		.uleb128 0x2116
  2424 0101 0C       		.uleb128 0xc
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJ3fYWf.s 			page 48
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccFImDCu.s 			page 48
 
 
  2425 0102 01       		.uleb128 0x1
@@ -2878,7 +2878,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJ3fYWf.s 			page 1
  2479 0138 49       		.uleb128 0x49
  2480 0139 13       		.uleb128 0x13
  2481 013a 11       		.uleb128 0x11
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJ3fYWf.s 			page 49
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccFImDCu.s 			page 49
 
 
  2482 013b 01       		.uleb128 0x1
@@ -2938,7 +2938,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJ3fYWf.s 			page 1
  2536 0028 56040000 		.4byte	.LCFI60-.Ltext0
  2537 002c 0200     		.2byte	0x2
  2538 002e 77       		.byte	0x77
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJ3fYWf.s 			page 50
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccFImDCu.s 			page 50
 
 
  2539 002f 10       		.sleb128 16
@@ -2998,7 +2998,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJ3fYWf.s 			page 1
  2593 00b4 0200     		.2byte	0x2
  2594 00b6 7D       		.byte	0x7d
  2595 00b7 08       		.sleb128 8
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJ3fYWf.s 			page 51
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccFImDCu.s 			page 51
 
 
  2596 00b8 98030000 		.4byte	.LCFI48-.Ltext0
@@ -3058,7 +3058,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJ3fYWf.s 			page 1
  2650 013c 00000000 		.4byte	0
  2651              	.LLST7:
  2652 0140 A4020000 		.4byte	.LFB18-.Ltext0
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJ3fYWf.s 			page 52
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccFImDCu.s 			page 52
 
 
  2653 0144 A6020000 		.4byte	.LCFI37-.Ltext0
@@ -3118,7 +3118,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJ3fYWf.s 			page 1
  2707 01c8 0200     		.2byte	0x2
  2708 01ca 77       		.byte	0x77
  2709 01cb 08       		.sleb128 8
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJ3fYWf.s 			page 53
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccFImDCu.s 			page 53
 
 
  2710 01cc 98020000 		.4byte	.LCFI36-.Ltext0
@@ -3178,7 +3178,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJ3fYWf.s 			page 1
  2764 0252 7D       		.byte	0x7d
  2765 0253 30       		.sleb128 48
  2766 0254 DE000000 		.4byte	.LCFI24-.Ltext0
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJ3fYWf.s 			page 54
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccFImDCu.s 			page 54
 
 
  2767 0258 EA010000 		.4byte	.LCFI25-.Ltext0
@@ -3238,7 +3238,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJ3fYWf.s 			page 1
  2821 02db 00       		.sleb128 0
  2822 02dc 42000000 		.4byte	.LCFI12-.Ltext0
  2823 02e0 44000000 		.4byte	.LCFI13-.Ltext0
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJ3fYWf.s 			page 55
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccFImDCu.s 			page 55
 
 
  2824 02e4 0200     		.2byte	0x2
@@ -3298,7 +3298,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJ3fYWf.s 			page 1
  2878 0366 7D       		.byte	0x7d
  2879 0367 04       		.sleb128 4
  2880 0368 3E000000 		.4byte	.LCFI11-.Ltext0
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJ3fYWf.s 			page 56
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccFImDCu.s 			page 56
 
 
  2881 036c 40000000 		.4byte	.LFE12-.Ltext0
@@ -3358,7 +3358,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJ3fYWf.s 			page 1
  2935 0018 00000000 		.4byte	0
  2936 001c 00000000 		.4byte	0
  2937              		.section	.debug_line,"",%progbits
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJ3fYWf.s 			page 57
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccFImDCu.s 			page 57
 
 
  2938              	.Ldebug_line0:
@@ -3418,7 +3418,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJ3fYWf.s 			page 1
  2957      72795F6C 
  2958              	.LASF94:
  2959 00af 5F6D7574 		.ascii	"_mutex_init\000"
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJ3fYWf.s 			page 58
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccFImDCu.s 			page 58
 
 
  2959      65785F69 
@@ -3478,7 +3478,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJ3fYWf.s 			page 1
  2983      455F5155 
  2984              	.LASF64:
  2985 016b 6B615F6D 		.ascii	"ka_module_symtab\000"
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJ3fYWf.s 			page 59
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccFImDCu.s 			page 59
 
 
  2985      6F64756C 
@@ -3538,7 +3538,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJ3fYWf.s 			page 1
  3007              	.LASF49:
  3008 023b 74696D65 		.ascii	"timeslice_hope_time\000"
  3008      736C6963 
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJ3fYWf.s 			page 60
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccFImDCu.s 			page 60
 
 
  3008      655F686F 
@@ -3598,7 +3598,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJ3fYWf.s 			page 1
  3032      7200
  3033              	.LASF24:
  3034 02d9 53544154 		.ascii	"STATE_DELAY\000"
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJ3fYWf.s 			page 61
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccFImDCu.s 			page 61
 
 
  3034      455F4445 
@@ -3658,7 +3658,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJ3fYWf.s 			page 1
  3058      7420756E 
  3058      7369676E 
  3058      65642069 
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJ3fYWf.s 			page 62
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccFImDCu.s 			page 62
 
 
  3058      6E7400
@@ -3718,7 +3718,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJ3fYWf.s 			page 1
  3082      75726365 
  3082      2F737263 
  3082      2F6B6572 
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJ3fYWf.s 			page 63
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccFImDCu.s 			page 63
 
 
  3083              	.LASF63:
@@ -3778,7 +3778,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJ3fYWf.s 			page 1
  3104      6B5F7369 
  3104      7A6500
  3105              	.LASF57:
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJ3fYWf.s 			page 64
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccFImDCu.s 			page 64
 
 
  3106 0517 6F776E65 		.ascii	"owner_TCB_ptr\000"
@@ -3838,7 +3838,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJ3fYWf.s 			page 1
  3125      455F5741 
  3125      49545F4D 
  3125      55544558 
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJ3fYWf.s 			page 65
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccFImDCu.s 			page 65
 
 
  3125      5F464F52 
@@ -3880,56 +3880,56 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJ3fYWf.s 			page 1
  3145      6C6F636B 
  3145      00
  3146              		.ident	"GCC: (GNU Tools for Arm Embedded Processors 7-2018-q2-update) 7.3.1 20180622 (release) [AR
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJ3fYWf.s 			page 66
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccFImDCu.s 			page 66
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 mutex.c
-G:\Users\Jaxb\AppData\Local\Temp\ccJ3fYWf.s:15     .text:00000000 $t
-G:\Users\Jaxb\AppData\Local\Temp\ccJ3fYWf.s:21     .text:00000000 compare
-G:\Users\Jaxb\AppData\Local\Temp\ccJ3fYWf.s:72     .text:00000022 value_cmp
-G:\Users\Jaxb\AppData\Local\Temp\ccJ3fYWf.s:115    .rodata:00000000 $d
-G:\Users\Jaxb\AppData\Local\Temp\ccJ3fYWf.s:126    .text:00000040 _mutex_init
-G:\Users\Jaxb\AppData\Local\Temp\ccJ3fYWf.s:192    .text:0000008c $d
-G:\Users\Jaxb\AppData\Local\Temp\ccJ3fYWf.s:204    .text:00000098 $t
-G:\Users\Jaxb\AppData\Local\Temp\ccJ3fYWf.s:211    .text:00000098 mutex_init
-G:\Users\Jaxb\AppData\Local\Temp\ccJ3fYWf.s:267    .text:000000d0 $d
-G:\Users\Jaxb\AppData\Local\Temp\ccJ3fYWf.s:277    .rodata.name:00000000 __rtmsym_mutex_init_name
-G:\Users\Jaxb\AppData\Local\Temp\ccJ3fYWf.s:274    .rodata.name:00000000 $d
-G:\Users\Jaxb\AppData\Local\Temp\ccJ3fYWf.s:284    .RTMSymTab:00000000 __rtmsym_mutex_init
-G:\Users\Jaxb\AppData\Local\Temp\ccJ3fYWf.s:281    .RTMSymTab:00000000 $d
-G:\Users\Jaxb\AppData\Local\Temp\ccJ3fYWf.s:288    .text:000000d8 $t
-G:\Users\Jaxb\AppData\Local\Temp\ccJ3fYWf.s:295    .text:000000d8 _mutex_lock
-G:\Users\Jaxb\AppData\Local\Temp\ccJ3fYWf.s:477    .text:000001f0 $d
-G:\Users\Jaxb\AppData\Local\Temp\ccJ3fYWf.s:488    .text:000001f8 $t
-G:\Users\Jaxb\AppData\Local\Temp\ccJ3fYWf.s:495    .text:000001f8 mutex_lock
-G:\Users\Jaxb\AppData\Local\Temp\ccJ3fYWf.s:551    .text:00000230 $d
-G:\Users\Jaxb\AppData\Local\Temp\ccJ3fYWf.s:561    .rodata.name:0000000c __rtmsym_mutex_lock_name
-G:\Users\Jaxb\AppData\Local\Temp\ccJ3fYWf.s:568    .RTMSymTab:00000008 __rtmsym_mutex_lock
-G:\Users\Jaxb\AppData\Local\Temp\ccJ3fYWf.s:572    .text:00000238 $t
-G:\Users\Jaxb\AppData\Local\Temp\ccJ3fYWf.s:579    .text:00000238 _mutex_try_lock
-G:\Users\Jaxb\AppData\Local\Temp\ccJ3fYWf.s:662    .text:0000029c $d
-G:\Users\Jaxb\AppData\Local\Temp\ccJ3fYWf.s:673    .text:000002a4 $t
-G:\Users\Jaxb\AppData\Local\Temp\ccJ3fYWf.s:680    .text:000002a4 mutex_try_lock
-G:\Users\Jaxb\AppData\Local\Temp\ccJ3fYWf.s:727    .text:000002d0 $d
-G:\Users\Jaxb\AppData\Local\Temp\ccJ3fYWf.s:736    .rodata.name:00000018 __rtmsym_mutex_try_lock_name
-G:\Users\Jaxb\AppData\Local\Temp\ccJ3fYWf.s:743    .RTMSymTab:00000010 __rtmsym_mutex_try_lock
-G:\Users\Jaxb\AppData\Local\Temp\ccJ3fYWf.s:747    .text:000002d4 $t
-G:\Users\Jaxb\AppData\Local\Temp\ccJ3fYWf.s:754    .text:000002d4 _mutex_unlock
-G:\Users\Jaxb\AppData\Local\Temp\ccJ3fYWf.s:890    .text:0000038c $d
-G:\Users\Jaxb\AppData\Local\Temp\ccJ3fYWf.s:901    .text:00000394 $t
-G:\Users\Jaxb\AppData\Local\Temp\ccJ3fYWf.s:908    .text:00000394 mutex_unlock
-G:\Users\Jaxb\AppData\Local\Temp\ccJ3fYWf.s:955    .text:000003c0 $d
-G:\Users\Jaxb\AppData\Local\Temp\ccJ3fYWf.s:964    .rodata.name:00000028 __rtmsym_mutex_unlock_name
-G:\Users\Jaxb\AppData\Local\Temp\ccJ3fYWf.s:971    .RTMSymTab:00000018 __rtmsym_mutex_unlock
-G:\Users\Jaxb\AppData\Local\Temp\ccJ3fYWf.s:975    .text:000003c4 $t
-G:\Users\Jaxb\AppData\Local\Temp\ccJ3fYWf.s:982    .text:000003c4 _mutex_del
-G:\Users\Jaxb\AppData\Local\Temp\ccJ3fYWf.s:1067   .text:0000042c $d
-G:\Users\Jaxb\AppData\Local\Temp\ccJ3fYWf.s:1077   .text:00000430 $t
-G:\Users\Jaxb\AppData\Local\Temp\ccJ3fYWf.s:1084   .text:00000430 mutex_del
-G:\Users\Jaxb\AppData\Local\Temp\ccJ3fYWf.s:1131   .text:0000045c $d
-G:\Users\Jaxb\AppData\Local\Temp\ccJ3fYWf.s:1140   .rodata.name:00000038 __rtmsym_mutex_del_name
-G:\Users\Jaxb\AppData\Local\Temp\ccJ3fYWf.s:1147   .RTMSymTab:00000020 __rtmsym_mutex_del
+G:\Users\Jaxb\AppData\Local\Temp\ccFImDCu.s:15     .text:00000000 $t
+G:\Users\Jaxb\AppData\Local\Temp\ccFImDCu.s:21     .text:00000000 compare
+G:\Users\Jaxb\AppData\Local\Temp\ccFImDCu.s:72     .text:00000022 value_cmp
+G:\Users\Jaxb\AppData\Local\Temp\ccFImDCu.s:115    .rodata:00000000 $d
+G:\Users\Jaxb\AppData\Local\Temp\ccFImDCu.s:126    .text:00000040 _mutex_init
+G:\Users\Jaxb\AppData\Local\Temp\ccFImDCu.s:192    .text:0000008c $d
+G:\Users\Jaxb\AppData\Local\Temp\ccFImDCu.s:204    .text:00000098 $t
+G:\Users\Jaxb\AppData\Local\Temp\ccFImDCu.s:211    .text:00000098 mutex_init
+G:\Users\Jaxb\AppData\Local\Temp\ccFImDCu.s:267    .text:000000d0 $d
+G:\Users\Jaxb\AppData\Local\Temp\ccFImDCu.s:277    .rodata.name:00000000 __rtmsym_mutex_init_name
+G:\Users\Jaxb\AppData\Local\Temp\ccFImDCu.s:274    .rodata.name:00000000 $d
+G:\Users\Jaxb\AppData\Local\Temp\ccFImDCu.s:284    .RTMSymTab:00000000 __rtmsym_mutex_init
+G:\Users\Jaxb\AppData\Local\Temp\ccFImDCu.s:281    .RTMSymTab:00000000 $d
+G:\Users\Jaxb\AppData\Local\Temp\ccFImDCu.s:288    .text:000000d8 $t
+G:\Users\Jaxb\AppData\Local\Temp\ccFImDCu.s:295    .text:000000d8 _mutex_lock
+G:\Users\Jaxb\AppData\Local\Temp\ccFImDCu.s:477    .text:000001f0 $d
+G:\Users\Jaxb\AppData\Local\Temp\ccFImDCu.s:488    .text:000001f8 $t
+G:\Users\Jaxb\AppData\Local\Temp\ccFImDCu.s:495    .text:000001f8 mutex_lock
+G:\Users\Jaxb\AppData\Local\Temp\ccFImDCu.s:551    .text:00000230 $d
+G:\Users\Jaxb\AppData\Local\Temp\ccFImDCu.s:561    .rodata.name:0000000c __rtmsym_mutex_lock_name
+G:\Users\Jaxb\AppData\Local\Temp\ccFImDCu.s:568    .RTMSymTab:00000008 __rtmsym_mutex_lock
+G:\Users\Jaxb\AppData\Local\Temp\ccFImDCu.s:572    .text:00000238 $t
+G:\Users\Jaxb\AppData\Local\Temp\ccFImDCu.s:579    .text:00000238 _mutex_try_lock
+G:\Users\Jaxb\AppData\Local\Temp\ccFImDCu.s:662    .text:0000029c $d
+G:\Users\Jaxb\AppData\Local\Temp\ccFImDCu.s:673    .text:000002a4 $t
+G:\Users\Jaxb\AppData\Local\Temp\ccFImDCu.s:680    .text:000002a4 mutex_try_lock
+G:\Users\Jaxb\AppData\Local\Temp\ccFImDCu.s:727    .text:000002d0 $d
+G:\Users\Jaxb\AppData\Local\Temp\ccFImDCu.s:736    .rodata.name:00000018 __rtmsym_mutex_try_lock_name
+G:\Users\Jaxb\AppData\Local\Temp\ccFImDCu.s:743    .RTMSymTab:00000010 __rtmsym_mutex_try_lock
+G:\Users\Jaxb\AppData\Local\Temp\ccFImDCu.s:747    .text:000002d4 $t
+G:\Users\Jaxb\AppData\Local\Temp\ccFImDCu.s:754    .text:000002d4 _mutex_unlock
+G:\Users\Jaxb\AppData\Local\Temp\ccFImDCu.s:890    .text:0000038c $d
+G:\Users\Jaxb\AppData\Local\Temp\ccFImDCu.s:901    .text:00000394 $t
+G:\Users\Jaxb\AppData\Local\Temp\ccFImDCu.s:908    .text:00000394 mutex_unlock
+G:\Users\Jaxb\AppData\Local\Temp\ccFImDCu.s:955    .text:000003c0 $d
+G:\Users\Jaxb\AppData\Local\Temp\ccFImDCu.s:964    .rodata.name:00000028 __rtmsym_mutex_unlock_name
+G:\Users\Jaxb\AppData\Local\Temp\ccFImDCu.s:971    .RTMSymTab:00000018 __rtmsym_mutex_unlock
+G:\Users\Jaxb\AppData\Local\Temp\ccFImDCu.s:975    .text:000003c4 $t
+G:\Users\Jaxb\AppData\Local\Temp\ccFImDCu.s:982    .text:000003c4 _mutex_del
+G:\Users\Jaxb\AppData\Local\Temp\ccFImDCu.s:1067   .text:0000042c $d
+G:\Users\Jaxb\AppData\Local\Temp\ccFImDCu.s:1077   .text:00000430 $t
+G:\Users\Jaxb\AppData\Local\Temp\ccFImDCu.s:1084   .text:00000430 mutex_del
+G:\Users\Jaxb\AppData\Local\Temp\ccFImDCu.s:1131   .text:0000045c $d
+G:\Users\Jaxb\AppData\Local\Temp\ccFImDCu.s:1140   .rodata.name:00000038 __rtmsym_mutex_del_name
+G:\Users\Jaxb\AppData\Local\Temp\ccFImDCu.s:1147   .RTMSymTab:00000020 __rtmsym_mutex_del
 
 UNDEFINED SYMBOLS
 _ASSERT
@@ -3940,7 +3940,7 @@ ka_printf
 g_interrupt_count
 init_insert_sort_data
 insert_sort_insert_into
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccJ3fYWf.s 			page 67
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccFImDCu.s 			page 67
 
 
 insert_sort_get_first_data_ptr

@@ -16,19 +16,6 @@ int heap_init(struct little_heap *const little_heap_ptr,
 	int ret;
 	ASSERT((NULL != little_heap_ptr) && (NULL != cmp));
 	ASSERT(len_per_data <= sizeof(long long));/* need consideration*/
-#if CONFIG_PARA_CHECK
-	if((NULL == little_heap_ptr) || (NULL == cmp))
-	{
-		OS_ERROR_PARA_MESSAGE_DISPLAY(heap_init,little_heap_ptr);
-		OS_ERROR_PARA_MESSAGE_DISPLAY(heap_init,cmp);
-		return -ERROR_NULL_INPUT_PTR;
-	}
-	if(len_per_data > sizeof(long long)) /* need consideration*/
-	{
-		OS_ERROR_PARA_MESSAGE_DISPLAY(heap_init,len_per_data);
-		return -ERROR_VALUELESS_INPUT;
-	}
-#endif
 	ret = Vector_init(&little_heap_ptr->data,size,len_per_data,MKVFMUL(2));
 	if(ret < 0)
 	{
@@ -38,19 +25,6 @@ int heap_init(struct little_heap *const little_heap_ptr,
 	little_heap_ptr->cmp = cmp;
 	little_heap_ptr->index_change_record = index_change_record;
 	return FUN_EXECUTE_SUCCESSFULLY;
-}
-
-inline int heap_delete(struct little_heap *little_heap_ptr)
-{
-	ASSERT(NULL != little_heap_ptr);
-#if CONFIG_PARA_CHECK
-	if(NULL == little_heap_ptr)
-	{
-		OS_ERROR_PARA_MESSAGE_DISPLAY(heap_delete,little_heap_ptr);
-		return -ERROR_NULL_INPUT_PTR;
-	}
-#endif
-	return Vector_delete(&little_heap_ptr->data);
 }
 
 /*subfunction for heap sort*/
@@ -83,14 +57,6 @@ static void heap_adjust(struct little_heap *little_heap_ptr,int index,int size)
 int heap_push(struct little_heap *little_heap_ptr,void *push_data_ptr)
 {
 	ASSERT((NULL != little_heap_ptr) && (NULL != push_data_ptr));
-#if CONFIG_PARA_CHECK
-	if((NULL == little_heap_ptr) || (NULL == push_data_ptr))
-	{
-		OS_ERROR_PARA_MESSAGE_DISPLAY(heap_push,little_heap_ptr);
-		OS_ERROR_PARA_MESSAGE_DISPLAY(heap_push,push_data_ptr);
-		return -ERROR_NULL_INPUT_PTR;
-	}
-#endif
 	int ret,i,size;
 	ret = Vector_push_back(&little_heap_ptr->data,push_data_ptr);
 	if(little_heap_ptr->index_change_record)
@@ -108,57 +74,22 @@ int heap_push(struct little_heap *little_heap_ptr,void *push_data_ptr)
 	return FUN_EXECUTE_SUCCESSFULLY;
 }
 
-
-/*get the data with index "index" and store it into *data_store_ptr*/
-inline int heap_get_index_data(struct little_heap *little_heap_ptr,void *data_store_ptr,unsigned int index)
-{
-	ASSERT((NULL != little_heap_ptr) && (NULL != data_store_ptr));
-#if CONFIG_PARA_CHECK
-	if((NULL == little_heap_ptr) || (NULL == data_store_ptr))
-	{
-		OS_ERROR_PARA_MESSAGE_DISPLAY(heap_get_index_data,little_heap_ptr);
-		OS_ERROR_PARA_MESSAGE_DISPLAY(heap_get_index_data,data_store_ptr);
-		return -ERROR_NULL_INPUT_PTR;
-	}
-#endif
-	return Vector_get_index_data(&little_heap_ptr->data,index,data_store_ptr);
-}
-
 int heap_get_index_data_safe(struct little_heap *little_heap_ptr,void *data_store_ptr,unsigned int index)
 {
 	ASSERT((NULL != little_heap_ptr) && (NULL != data_store_ptr));
-#if CONFIG_PARA_CHECK
-	if((NULL == little_heap_ptr) || (NULL == data_store_ptr))
-	{
-		OS_ERROR_PARA_MESSAGE_DISPLAY(heap_get_index_data_safe,little_heap_ptr);
-		OS_ERROR_PARA_MESSAGE_DISPLAY(heap_get_index_data_safe,data_store_ptr);
-		return -ERROR_NULL_INPUT_PTR;
-	}
-#endif
 	if(get_Vector_cur_len(&little_heap_ptr->data) <= index)
 	{
 		return -ERROR_VALUELESS_INPUT;
 	}
-	return Vector_get_index_data(&little_heap_ptr->data,index,data_store_ptr);
+	Vector_get_index_data(&little_heap_ptr->data,index,data_store_ptr);
+	return FUN_EXECUTE_SUCCESSFULLY;
 }
 
 /*get the data with index "index" with data *data_store_ptr; then adjust the heap*/
 int heap_set_index_data(struct little_heap *little_heap_ptr,unsigned int index,void *data_store_ptr)
 {
 	ASSERT((NULL != little_heap_ptr) && (NULL != data_store_ptr));
-#if CONFIG_PARA_CHECK
-	if((NULL == little_heap_ptr) || (NULL == data_store_ptr))
-	{
-		OS_ERROR_PARA_MESSAGE_DISPLAY(heap_set_index_data,little_heap_ptr);
-		OS_ERROR_PARA_MESSAGE_DISPLAY(heap_set_index_data,data_store_ptr);
-		return -ERROR_NULL_INPUT_PTR;
-	}
-#endif
-	int ret =  Vector_set_index_data(&little_heap_ptr->data,index,data_store_ptr);
-	if(ret < 0)
-	{
-		return ret;
-	}
+	Vector_set_index_data(&little_heap_ptr->data,index,data_store_ptr);
 	unsigned int size = get_Vector_cur_len(&little_heap_ptr->data) - 1;
 	unsigned int i;
 	for(i=MIN(index,size/2);i>0;--i)
@@ -172,18 +103,7 @@ int heap_set_index_data(struct little_heap *little_heap_ptr,unsigned int index,v
 int heap_remove_index_data(struct little_heap *little_heap_ptr,unsigned int index,void *data_store_ptr)
 {
 	ASSERT(NULL != little_heap_ptr);
-#if CONFIG_PARA_CHECK
-	if(NULL == little_heap_ptr)
-	{
-		OS_ERROR_PARA_MESSAGE_DISPLAY(heap_remove_index_data,little_heap_ptr);
-		return -ERROR_NULL_INPUT_PTR;
-	}
-	if(0 == index)
-	{
-		OS_ERROR_PARA_MESSAGE_DISPLAY(heap_remove_index_data,index);
-		return -ERROR_VALUELESS_INPUT;
-	}
-#endif
+	ASSERT(0 != index);
 	int ret,i;
 	ret = Vector_remove_index_data(&little_heap_ptr->data,index,data_store_ptr);
 	if(ret < 0)
@@ -203,13 +123,6 @@ int heap_remove_index_data(struct little_heap *little_heap_ptr,unsigned int inde
 int heap_erase_data(struct little_heap *little_heap_ptr,unsigned int from,unsigned int to)
 {
 	ASSERT(NULL != little_heap_ptr);
-#if CONFIG_PARA_CHECK
-	if(NULL == little_heap_ptr)
-	{
-		OS_ERROR_PARA_MESSAGE_DISPLAY(heap_erase_data,little_heap_ptr);
-		return -ERROR_NULL_INPUT_PTR;
-	}
-#endif
 	int ret,i;
 	ret = Vector_erase_data(&little_heap_ptr->data,from,to);
 	if(ret < 0)
@@ -223,10 +136,5 @@ int heap_erase_data(struct little_heap *little_heap_ptr,unsigned int from,unsign
 		heap_adjust(little_heap_ptr,i,size);
 	}
 	return FUN_EXECUTE_SUCCESSFULLY;
-}
-
-inline unsigned int heap_get_cur_len(struct little_heap *little_heap_ptr)
-{
-	return get_Vector_cur_len(&little_heap_ptr->data);
 }
 

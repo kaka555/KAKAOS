@@ -30,7 +30,7 @@ void shell_version(int argc, char const *argv[])
 {
 	(void)argc;
 	(void)argv;
-	ka_printf("VERSION : KAKAOS--0.07\n");
+	ka_printf("VERSION : KAKAOS--0.09\n");
 }
 #if CONFIG_TIME_EN
 void shell_time(int argc, char const *argv[])
@@ -248,6 +248,7 @@ out1:
 	ka_free(shell_buf_ptr);
 out:
 	ka_free(buf);
+	return ;
 }
 #endif
 
@@ -275,7 +276,7 @@ void shell_shutdown(int argc, char const *argv[])
 
 #if CONFIG_CPU_USE_RATE_CALCULATION
 extern unsigned int get_cpu_use_rate(void);
-inline void cpu_rate(int argc, char const *argv[])
+void cpu_rate(int argc, char const *argv[])
 {
 	(void)argc;
 	(void)argv;

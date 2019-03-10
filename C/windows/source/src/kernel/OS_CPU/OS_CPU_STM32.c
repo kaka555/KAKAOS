@@ -100,7 +100,7 @@ void __init_svc(void)
 	CPU_REG_NVIC_SHPRI2 = prio;
 }
 
-inline void set_return_value(unsigned int *stack_ptr,unsigned int value)
+void set_return_value(unsigned int *stack_ptr,unsigned int value)
 {
 	stack_ptr[8] = value;
 }
