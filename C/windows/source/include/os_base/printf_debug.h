@@ -8,4 +8,12 @@
 	#define PRINTF(format, ...)  
 #endif
 
+#define KA_DEBUG_LOG(type, format, ...)                                       \
+do                                                                            \
+{                                                                             \
+    if (type)                                                                 \
+        rt_kprintf (format, ##__VA_ARGS__);                                   \
+}                                                                             \
+while (0)
+
 #endif
