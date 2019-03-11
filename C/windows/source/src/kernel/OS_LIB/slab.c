@@ -21,6 +21,10 @@ void insert_into_cache_chain(
 	{
 		singly_list_for_each_entry_safe_n(pos,n,head,node)
 		{
+			if(pos->kmem_cache_slab_size == block_size)
+			{
+				goto outside ;
+			}
 			if(n->kmem_cache_slab_size > block_size)
 			{
 				singly_list_add(&kmem_cache_ptr->node,&pos->node);

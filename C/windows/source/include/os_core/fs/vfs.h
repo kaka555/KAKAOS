@@ -1,5 +1,6 @@
 #ifndef _VFS_H
 #define _VFS_H
+#include <kakaosstdint.h>
 
 #include <double_linked_list.h>
 
@@ -31,9 +32,11 @@ struct dentry
 	struct dentry *d_parent;
 	struct list_head subdirs;
 	struct list_head child;
-	const struct dentry_operations *d_op;
+	const struct dentry_operations *d_op; //realize by bottom file system
 	struct inode *d_inode;
 	const char *name;
+	UINT32 flag;
+	unsigned int ref;
 };
 
 struct file
@@ -42,6 +45,12 @@ struct file
 	unsigned int offset;
 	struct dentry *f_den;
 	unsigned long f_mode;
+};
+
+struct inode
+{
+	unsigned long file_size;
+	unsigned int ref;
 };
 
 #endif
