@@ -1,4 +1,4 @@
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccMGezEI.s 			page 1
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccRxvwjH.s 			page 1
 
 
    1              		.cpu cortex-m3
@@ -18,7 +18,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccMGezEI.s 			page 1
   15              		.section	.rodata
   16              		.align	2
   17              	.LC0:
-  18 0000 2E2E2F2E 		.ascii	"../../source/src/kernel/OS_CORE/export.c\000"
+  18 0000 2E2E2F2E 		.ascii	"../../source/src/kernel/OS_CORE/dmodule/export.c\000"
   18      2E2F736F 
   18      75726365 
   18      2F737263 
@@ -33,19 +33,19 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccMGezEI.s 			page 1
   26              		.type	_get_sys_export_function_addr, %function
   27              	_get_sys_export_function_addr:
   28              	.LFB0:
-  29              		.file 1 "../../source/src/kernel/OS_CORE/export.c"
-   1:../../source/src/kernel/OS_CORE/export.c **** #include <export.h>
-   2:../../source/src/kernel/OS_CORE/export.c **** #include <myMicroLIB.h>
-   3:../../source/src/kernel/OS_CORE/export.c **** #include <myassert.h>
-   4:../../source/src/kernel/OS_CORE/export.c **** #include <ka_configuration.h>
-   5:../../source/src/kernel/OS_CORE/export.c **** 
-   6:../../source/src/kernel/OS_CORE/export.c **** #if CONFIG_MODULE
-   7:../../source/src/kernel/OS_CORE/export.c **** 
-   8:../../source/src/kernel/OS_CORE/export.c **** extern unsigned long _ka_module_symtab_begin;
-   9:../../source/src/kernel/OS_CORE/export.c **** extern unsigned long _ka_module_symtab_end;
-  10:../../source/src/kernel/OS_CORE/export.c **** 
-  11:../../source/src/kernel/OS_CORE/export.c **** UINT32 _get_sys_export_function_addr(const char *fun_name)
-  12:../../source/src/kernel/OS_CORE/export.c **** {
+  29              		.file 1 "../../source/src/kernel/OS_CORE/dmodule/export.c"
+   1:../../source/src/kernel/OS_CORE/dmodule/export.c **** #include <export.h>
+   2:../../source/src/kernel/OS_CORE/dmodule/export.c **** #include <myMicroLIB.h>
+   3:../../source/src/kernel/OS_CORE/dmodule/export.c **** #include <myassert.h>
+   4:../../source/src/kernel/OS_CORE/dmodule/export.c **** #include <ka_configuration.h>
+   5:../../source/src/kernel/OS_CORE/dmodule/export.c **** 
+   6:../../source/src/kernel/OS_CORE/dmodule/export.c **** #if CONFIG_MODULE
+   7:../../source/src/kernel/OS_CORE/dmodule/export.c **** 
+   8:../../source/src/kernel/OS_CORE/dmodule/export.c **** extern unsigned long _ka_module_symtab_begin;
+   9:../../source/src/kernel/OS_CORE/dmodule/export.c **** extern unsigned long _ka_module_symtab_end;
+  10:../../source/src/kernel/OS_CORE/dmodule/export.c **** 
+  11:../../source/src/kernel/OS_CORE/dmodule/export.c **** UINT32 _get_sys_export_function_addr(const char *fun_name)
+  12:../../source/src/kernel/OS_CORE/dmodule/export.c **** {
   30              		.loc 1 12 0
   31              		.cfi_startproc
   32              		@ args = 0, pretend = 0, frame = 16
@@ -58,14 +58,14 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccMGezEI.s 			page 1
   39 0002 84B0     		sub	sp, sp, #16
   40              	.LCFI1:
   41              		.cfi_def_cfa_offset 24
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccMGezEI.s 			page 2
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccRxvwjH.s 			page 2
 
 
   42 0004 00AF     		add	r7, sp, #0
   43              	.LCFI2:
   44              		.cfi_def_cfa_register 7
   45 0006 7860     		str	r0, [r7, #4]
-  13:../../source/src/kernel/OS_CORE/export.c **** 	ASSERT(NULL != fun_name);
+  13:../../source/src/kernel/OS_CORE/dmodule/export.c **** 	ASSERT(NULL != fun_name);
   46              		.loc 1 13 0
   47 0008 7B68     		ldr	r3, [r7, #4]
   48 000a 002B     		cmp	r3, #0
@@ -75,17 +75,17 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccMGezEI.s 			page 1
   52 0010 0E48     		ldr	r0, .L7
   53 0012 FFF7FEFF 		bl	_ASSERT
   54              	.L2:
-  14:../../source/src/kernel/OS_CORE/export.c **** 	struct ka_module_symtab *index;
-  15:../../source/src/kernel/OS_CORE/export.c **** 
-  16:../../source/src/kernel/OS_CORE/export.c ****     for (index = (struct ka_module_symtab *)(&_ka_module_symtab_begin);
+  14:../../source/src/kernel/OS_CORE/dmodule/export.c **** 	struct ka_module_symtab *index;
+  15:../../source/src/kernel/OS_CORE/dmodule/export.c **** 
+  16:../../source/src/kernel/OS_CORE/dmodule/export.c ****     for (index = (struct ka_module_symtab *)(&_ka_module_symtab_begin);
   55              		.loc 1 16 0 is_stmt 1
   56 0016 0E4B     		ldr	r3, .L7+4
   57 0018 FB60     		str	r3, [r7, #12]
   58 001a 0EE0     		b	.L3
   59              	.L6:
-  17:../../source/src/kernel/OS_CORE/export.c ****             index != (struct ka_module_symtab *)(&_ka_module_symtab_end); index++)
-  18:../../source/src/kernel/OS_CORE/export.c ****     {
-  19:../../source/src/kernel/OS_CORE/export.c ****         if (0 == ka_strcmp(index->name, fun_name))
+  17:../../source/src/kernel/OS_CORE/dmodule/export.c ****             index != (struct ka_module_symtab *)(&_ka_module_symtab_end); index++)
+  18:../../source/src/kernel/OS_CORE/dmodule/export.c ****     {
+  19:../../source/src/kernel/OS_CORE/dmodule/export.c ****         if (0 == ka_strcmp(index->name, fun_name))
   60              		.loc 1 19 0
   61 001c FB68     		ldr	r3, [r7, #12]
   62 001e 5B68     		ldr	r3, [r3, #4]
@@ -95,34 +95,34 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccMGezEI.s 			page 1
   66 0028 0346     		mov	r3, r0
   67 002a 002B     		cmp	r3, #0
   68 002c 02D1     		bne	.L4
-  20:../../source/src/kernel/OS_CORE/export.c ****             return (UINT32)index->addr;
+  20:../../source/src/kernel/OS_CORE/dmodule/export.c ****             return (UINT32)index->addr;
   69              		.loc 1 20 0
   70 002e FB68     		ldr	r3, [r7, #12]
   71 0030 1B68     		ldr	r3, [r3]
   72 0032 07E0     		b	.L5
   73              	.L4:
-  17:../../source/src/kernel/OS_CORE/export.c ****             index != (struct ka_module_symtab *)(&_ka_module_symtab_end); index++)
+  17:../../source/src/kernel/OS_CORE/dmodule/export.c ****             index != (struct ka_module_symtab *)(&_ka_module_symtab_end); index++)
   74              		.loc 1 17 0
   75 0034 FB68     		ldr	r3, [r7, #12]
   76 0036 0833     		adds	r3, r3, #8
   77 0038 FB60     		str	r3, [r7, #12]
   78              	.L3:
-  16:../../source/src/kernel/OS_CORE/export.c ****             index != (struct ka_module_symtab *)(&_ka_module_symtab_end); index++)
+  16:../../source/src/kernel/OS_CORE/dmodule/export.c ****             index != (struct ka_module_symtab *)(&_ka_module_symtab_end); index++)
   79              		.loc 1 16 0 discriminator 1
   80 003a FB68     		ldr	r3, [r7, #12]
   81 003c 054A     		ldr	r2, .L7+8
   82 003e 9342     		cmp	r3, r2
   83 0040 ECD1     		bne	.L6
-  21:../../source/src/kernel/OS_CORE/export.c ****     }
-  22:../../source/src/kernel/OS_CORE/export.c **** 
-  23:../../source/src/kernel/OS_CORE/export.c ****     return 0;
+  21:../../source/src/kernel/OS_CORE/dmodule/export.c ****     }
+  22:../../source/src/kernel/OS_CORE/dmodule/export.c **** 
+  23:../../source/src/kernel/OS_CORE/dmodule/export.c ****     return 0;
   84              		.loc 1 23 0
   85 0042 0023     		movs	r3, #0
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccMGezEI.s 			page 3
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccRxvwjH.s 			page 3
 
 
   86              	.L5:
-  24:../../source/src/kernel/OS_CORE/export.c **** }
+  24:../../source/src/kernel/OS_CORE/dmodule/export.c **** }
   87              		.loc 1 24 0
   88 0044 1846     		mov	r0, r3
   89 0046 1037     		adds	r7, r7, #16
@@ -143,16 +143,16 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccMGezEI.s 			page 1
  104              	.LFE0:
  105              		.size	_get_sys_export_function_addr, .-_get_sys_export_function_addr
  106              		.section	.rodata
- 107 0029 000000   		.align	2
+ 107 0031 000000   		.align	2
  108              	.LC1:
- 109 002c 6578706F 		.ascii	"export symbol list:\012\000"
+ 109 0034 6578706F 		.ascii	"export symbol list:\012\000"
  109      72742073 
  109      796D626F 
  109      6C206C69 
  109      73743A0A 
- 110 0041 000000   		.align	2
+ 110 0049 000000   		.align	2
  111              	.LC2:
- 112 0044 25730A00 		.ascii	"%s\012\000"
+ 112 004c 25730A00 		.ascii	"%s\012\000"
  113              		.text
  114              		.align	1
  115              		.global	shell_symbol_list_display
@@ -163,9 +163,9 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccMGezEI.s 			page 1
  120              		.type	shell_symbol_list_display, %function
  121              	shell_symbol_list_display:
  122              	.LFB1:
-  25:../../source/src/kernel/OS_CORE/export.c **** 
-  26:../../source/src/kernel/OS_CORE/export.c **** void shell_symbol_list_display(int argc, char const *argv[])
-  27:../../source/src/kernel/OS_CORE/export.c **** {
+  25:../../source/src/kernel/OS_CORE/dmodule/export.c **** 
+  26:../../source/src/kernel/OS_CORE/dmodule/export.c **** void shell_symbol_list_display(int argc, char const *argv[])
+  27:../../source/src/kernel/OS_CORE/dmodule/export.c **** {
  123              		.loc 1 27 0
  124              		.cfi_startproc
  125              		@ args = 0, pretend = 0, frame = 16
@@ -178,7 +178,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccMGezEI.s 			page 1
  132 005a 84B0     		sub	sp, sp, #16
  133              	.LCFI6:
  134              		.cfi_def_cfa_offset 24
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccMGezEI.s 			page 4
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccRxvwjH.s 			page 4
 
 
  135 005c 00AF     		add	r7, sp, #0
@@ -186,42 +186,42 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccMGezEI.s 			page 1
  137              		.cfi_def_cfa_register 7
  138 005e 7860     		str	r0, [r7, #4]
  139 0060 3960     		str	r1, [r7]
-  28:../../source/src/kernel/OS_CORE/export.c **** 	(void)argc;
-  29:../../source/src/kernel/OS_CORE/export.c **** 	(void)argv;
-  30:../../source/src/kernel/OS_CORE/export.c **** 	struct ka_module_symtab *index;
-  31:../../source/src/kernel/OS_CORE/export.c **** 	ka_printf("export symbol list:\n");
+  28:../../source/src/kernel/OS_CORE/dmodule/export.c **** 	(void)argc;
+  29:../../source/src/kernel/OS_CORE/dmodule/export.c **** 	(void)argv;
+  30:../../source/src/kernel/OS_CORE/dmodule/export.c **** 	struct ka_module_symtab *index;
+  31:../../source/src/kernel/OS_CORE/dmodule/export.c **** 	ka_printf("export symbol list:\n");
  140              		.loc 1 31 0
  141 0062 0B48     		ldr	r0, .L12
  142 0064 FFF7FEFF 		bl	ka_printf
-  32:../../source/src/kernel/OS_CORE/export.c **** 	for (index = (struct ka_module_symtab *)(&_ka_module_symtab_begin);
+  32:../../source/src/kernel/OS_CORE/dmodule/export.c **** 	for (index = (struct ka_module_symtab *)(&_ka_module_symtab_begin);
  143              		.loc 1 32 0
  144 0068 0A4B     		ldr	r3, .L12+4
  145 006a FB60     		str	r3, [r7, #12]
  146 006c 08E0     		b	.L10
  147              	.L11:
-  33:../../source/src/kernel/OS_CORE/export.c ****             index != (struct ka_module_symtab *)(&_ka_module_symtab_end); index++)
-  34:../../source/src/kernel/OS_CORE/export.c **** 	{
-  35:../../source/src/kernel/OS_CORE/export.c **** 		ka_printf("%s\n",index->name);
+  33:../../source/src/kernel/OS_CORE/dmodule/export.c ****             index != (struct ka_module_symtab *)(&_ka_module_symtab_end); index++)
+  34:../../source/src/kernel/OS_CORE/dmodule/export.c **** 	{
+  35:../../source/src/kernel/OS_CORE/dmodule/export.c **** 		ka_printf("%s\n",index->name);
  148              		.loc 1 35 0
  149 006e FB68     		ldr	r3, [r7, #12]
  150 0070 5B68     		ldr	r3, [r3, #4]
  151 0072 1946     		mov	r1, r3
  152 0074 0848     		ldr	r0, .L12+8
  153 0076 FFF7FEFF 		bl	ka_printf
-  33:../../source/src/kernel/OS_CORE/export.c ****             index != (struct ka_module_symtab *)(&_ka_module_symtab_end); index++)
+  33:../../source/src/kernel/OS_CORE/dmodule/export.c ****             index != (struct ka_module_symtab *)(&_ka_module_symtab_end); index++)
  154              		.loc 1 33 0
  155 007a FB68     		ldr	r3, [r7, #12]
  156 007c 0833     		adds	r3, r3, #8
  157 007e FB60     		str	r3, [r7, #12]
  158              	.L10:
-  32:../../source/src/kernel/OS_CORE/export.c **** 	for (index = (struct ka_module_symtab *)(&_ka_module_symtab_begin);
+  32:../../source/src/kernel/OS_CORE/dmodule/export.c **** 	for (index = (struct ka_module_symtab *)(&_ka_module_symtab_begin);
  159              		.loc 1 32 0 discriminator 1
  160 0080 FB68     		ldr	r3, [r7, #12]
  161 0082 064A     		ldr	r2, .L12+12
  162 0084 9342     		cmp	r3, r2
  163 0086 F2D1     		bne	.L11
-  36:../../source/src/kernel/OS_CORE/export.c **** 	}
-  37:../../source/src/kernel/OS_CORE/export.c **** }
+  36:../../source/src/kernel/OS_CORE/dmodule/export.c **** 	}
+  37:../../source/src/kernel/OS_CORE/dmodule/export.c **** }
  164              		.loc 1 37 0
  165 0088 00BF     		nop
  166 008a 1037     		adds	r7, r7, #16
@@ -235,10 +235,10 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccMGezEI.s 			page 1
  174              	.L13:
  175              		.align	2
  176              	.L12:
- 177 0090 2C000000 		.word	.LC1
+ 177 0090 34000000 		.word	.LC1
  178 0094 00000000 		.word	_ka_module_symtab_begin
- 179 0098 44000000 		.word	.LC2
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccMGezEI.s 			page 5
+ 179 0098 4C000000 		.word	.LC2
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccRxvwjH.s 			page 5
 
 
  180 009c 00000000 		.word	_ka_module_symtab_end
@@ -246,7 +246,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccMGezEI.s 			page 1
  182              	.LFE1:
  183              		.size	shell_symbol_list_display, .-shell_symbol_list_display
  184              	.Letext0:
- 185              		.file 2 "../../source/include/os_core/export.h"
+ 185              		.file 2 "../../source/include/os_core/dmodule/export.h"
  186              		.file 3 "../../source/include/os_cpu/kakaosstdint.h"
  187              		.section	.debug_info,"",%progbits
  188              	.Ldebug_info0:
@@ -255,21 +255,21 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccMGezEI.s 			page 1
  191 0006 00000000 		.4byte	.Ldebug_abbrev0
  192 000a 04       		.byte	0x4
  193 000b 01       		.uleb128 0x1
- 194 000c 78010000 		.4byte	.LASF19
+ 194 000c 80010000 		.4byte	.LASF19
  195 0010 0C       		.byte	0xc
- 196 0011 D4000000 		.4byte	.LASF20
- 197 0015 65000000 		.4byte	.LASF21
+ 196 0011 65000000 		.4byte	.LASF20
+ 197 0015 D7000000 		.4byte	.LASF21
  198 0019 00000000 		.4byte	.Ltext0
  199 001d A0000000 		.4byte	.Letext0
  200 0021 00000000 		.4byte	.Ldebug_line0
  201 0025 02       		.uleb128 0x2
  202 0026 01       		.byte	0x1
  203 0027 06       		.byte	0x6
- 204 0028 47010000 		.4byte	.LASF0
+ 204 0028 4F010000 		.4byte	.LASF0
  205 002c 02       		.uleb128 0x2
  206 002d 02       		.byte	0x2
  207 002e 05       		.byte	0x5
- 208 002f 6E010000 		.4byte	.LASF1
+ 208 002f 76010000 		.4byte	.LASF1
  209 0033 03       		.uleb128 0x3
  210 0034 04       		.byte	0x4
  211 0035 05       		.byte	0x5
@@ -281,11 +281,11 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccMGezEI.s 			page 1
  217 0041 02       		.uleb128 0x2
  218 0042 01       		.byte	0x1
  219 0043 08       		.byte	0x8
- 220 0044 C1000000 		.4byte	.LASF3
+ 220 0044 C4000000 		.4byte	.LASF3
  221 0048 02       		.uleb128 0x2
  222 0049 02       		.byte	0x2
  223 004a 07       		.byte	0x7
- 224 004b 34010000 		.4byte	.LASF4
+ 224 004b 3C010000 		.4byte	.LASF4
  225 004f 04       		.uleb128 0x4
  226 0050 1B000000 		.4byte	.LASF22
  227 0054 03       		.byte	0x3
@@ -298,7 +298,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccMGezEI.s 			page 1
  234 0061 02       		.uleb128 0x2
  235 0062 08       		.byte	0x8
  236 0063 07       		.byte	0x7
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccMGezEI.s 			page 6
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccRxvwjH.s 			page 6
 
 
  237 0064 4E000000 		.4byte	.LASF6
@@ -309,7 +309,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccMGezEI.s 			page 1
  242 006f 08       		.byte	0x8
  243 0070 91000000 		.4byte	0x91
  244 0074 06       		.uleb128 0x6
- 245 0075 93000000 		.4byte	.LASF7
+ 245 0075 96000000 		.4byte	.LASF7
  246 0079 02       		.byte	0x2
  247 007a 0A       		.byte	0xa
  248 007b 91000000 		.4byte	0x91
@@ -317,7 +317,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccMGezEI.s 			page 1
  250 0080 23       		.byte	0x23
  251 0081 00       		.uleb128 0
  252 0082 06       		.uleb128 0x6
- 253 0083 BC000000 		.4byte	.LASF8
+ 253 0083 BF000000 		.4byte	.LASF8
  254 0087 02       		.byte	0x2
  255 0088 0B       		.byte	0xb
  256 0089 93000000 		.4byte	0x93
@@ -333,11 +333,11 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccMGezEI.s 			page 1
  266 0099 02       		.uleb128 0x2
  267 009a 01       		.byte	0x1
  268 009b 08       		.byte	0x8
- 269 009c CF000000 		.4byte	.LASF9
+ 269 009c D2000000 		.4byte	.LASF9
  270 00a0 09       		.uleb128 0x9
  271 00a1 99000000 		.4byte	0x99
  272 00a5 0A       		.uleb128 0xa
- 273 00a6 17010000 		.4byte	.LASF11
+ 273 00a6 1F010000 		.4byte	.LASF11
  274 00aa 01       		.byte	0x1
  275 00ab 08       		.byte	0x8
  276 00ac B2000000 		.4byte	0xb2
@@ -348,7 +348,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccMGezEI.s 			page 1
  281 00b4 07       		.byte	0x7
  282 00b5 2B000000 		.4byte	.LASF10
  283 00b9 0A       		.uleb128 0xa
- 284 00ba 53010000 		.4byte	.LASF12
+ 284 00ba 5B010000 		.4byte	.LASF12
  285 00be 01       		.byte	0x1
  286 00bf 09       		.byte	0x9
  287 00c0 B2000000 		.4byte	0xb2
@@ -356,9 +356,9 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccMGezEI.s 			page 1
  289 00c5 01       		.byte	0x1
  290 00c6 0B       		.uleb128 0xb
  291 00c7 01       		.byte	0x1
- 292 00c8 FD000000 		.4byte	.LASF15
+ 292 00c8 05010000 		.4byte	.LASF15
  293 00cc 01       		.byte	0x1
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccMGezEI.s 			page 7
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccRxvwjH.s 			page 7
 
 
  294 00cd 1A       		.byte	0x1a
@@ -369,7 +369,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccMGezEI.s 			page 1
  299 00db 01       		.byte	0x1
  300 00dc 0B010000 		.4byte	0x10b
  301 00e0 0C       		.uleb128 0xc
- 302 00e1 2F010000 		.4byte	.LASF13
+ 302 00e1 37010000 		.4byte	.LASF13
  303 00e5 01       		.byte	0x1
  304 00e6 1A       		.byte	0x1a
  305 00e7 33000000 		.4byte	0x33
@@ -377,7 +377,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccMGezEI.s 			page 1
  307 00ec 91       		.byte	0x91
  308 00ed 6C       		.sleb128 -20
  309 00ee 0C       		.uleb128 0xc
- 310 00ef 69010000 		.4byte	.LASF14
+ 310 00ef 71010000 		.4byte	.LASF14
  311 00f3 01       		.byte	0x1
  312 00f4 1A       		.byte	0x1a
  313 00f5 0B010000 		.4byte	0x10b
@@ -385,7 +385,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccMGezEI.s 			page 1
  315 00fa 91       		.byte	0x91
  316 00fb 68       		.sleb128 -24
  317 00fc 0D       		.uleb128 0xd
- 318 00fd B6000000 		.4byte	.LASF18
+ 318 00fd B9000000 		.4byte	.LASF18
  319 0101 01       		.byte	0x1
  320 0102 1E       		.byte	0x1e
  321 0103 11010000 		.4byte	0x111
@@ -401,7 +401,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccMGezEI.s 			page 1
  331 0113 68000000 		.4byte	0x68
  332 0117 0E       		.uleb128 0xe
  333 0118 01       		.byte	0x1
- 334 0119 98000000 		.4byte	.LASF16
+ 334 0119 9B000000 		.4byte	.LASF16
  335 011d 01       		.byte	0x1
  336 011e 0B       		.byte	0xb
  337 011f 01       		.byte	0x1
@@ -418,11 +418,11 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccMGezEI.s 			page 1
  348 013c 02       		.byte	0x2
  349 013d 91       		.byte	0x91
  350 013e 6C       		.sleb128 -20
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccMGezEI.s 			page 8
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccRxvwjH.s 			page 8
 
 
  351 013f 0D       		.uleb128 0xd
- 352 0140 B6000000 		.4byte	.LASF18
+ 352 0140 B9000000 		.4byte	.LASF18
  353 0144 01       		.byte	0x1
  354 0145 0E       		.byte	0xe
  355 0146 11010000 		.4byte	0x111
@@ -478,7 +478,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccMGezEI.s 			page 1
  405 002a 16       		.uleb128 0x16
  406 002b 00       		.byte	0
  407 002c 03       		.uleb128 0x3
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccMGezEI.s 			page 9
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccRxvwjH.s 			page 9
 
 
  408 002d 0E       		.uleb128 0xe
@@ -538,7 +538,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccMGezEI.s 			page 1
  462 0063 00       		.byte	0
  463 0064 09       		.uleb128 0x9
  464 0065 26       		.uleb128 0x26
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccMGezEI.s 			page 10
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccRxvwjH.s 			page 10
 
 
  465 0066 00       		.byte	0
@@ -598,7 +598,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccMGezEI.s 			page 1
  519 009d 3B       		.uleb128 0x3b
  520 009e 0B       		.uleb128 0xb
  521 009f 49       		.uleb128 0x49
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccMGezEI.s 			page 11
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccRxvwjH.s 			page 11
 
 
  522 00a0 13       		.uleb128 0x13
@@ -658,7 +658,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccMGezEI.s 			page 1
  576 000c 5A000000 		.4byte	.LCFI5-.Ltext0
  577 0010 5C000000 		.4byte	.LCFI6-.Ltext0
  578 0014 0200     		.2byte	0x2
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccMGezEI.s 			page 12
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccRxvwjH.s 			page 12
 
 
  579 0016 7D       		.byte	0x7d
@@ -718,7 +718,7 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccMGezEI.s 			page 1
  633 0097 08       		.sleb128 8
  634 0098 00000000 		.4byte	0
  635 009c 00000000 		.4byte	0
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccMGezEI.s 			page 13
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccRxvwjH.s 			page 13
 
 
  636              		.section	.debug_aranges,"",%progbits
@@ -735,8 +735,8 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccMGezEI.s 			page 1
  647 001c 00000000 		.4byte	0
  648              		.section	.debug_line,"",%progbits
  649              	.Ldebug_line0:
- 650 0000 C9000000 		.section	.debug_str,"MS",%progbits,1
- 650      02009600 
+ 650 0000 D9000000 		.section	.debug_str,"MS",%progbits,1
+ 650      0200A600 
  650      00000201 
  650      FB0E0D00 
  650      01010101 
@@ -775,120 +775,120 @@ ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccMGezEI.s 			page 1
  664      6720756E 
  664      7369676E 
  664      65642069 
- 665              	.LASF21:
- 666 0065 463A5C6B 		.ascii	"F:\\kaka\\KAKAOS\\C\\windows\\Project\\RVMDK\243\250"
- 666      616B615C 
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccMGezEI.s 			page 14
+ 665              	.LASF20:
+ 666 0065 2E2E2F2E 		.ascii	"../../source/src/kernel/OS_CORE/dmodule/export.c\000"
+ 666      2E2F736F 
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccRxvwjH.s 			page 14
 
 
- 666      4B414B41 
- 666      4F535C43 
- 666      5C77696E 
- 667 008d 757635A3 		.ascii	"uv5\243\251\000"
- 667      A900
- 668              	.LASF7:
- 669 0093 61646472 		.ascii	"addr\000"
- 669      00
- 670              	.LASF16:
- 671 0098 5F676574 		.ascii	"_get_sys_export_function_addr\000"
- 671      5F737973 
- 671      5F657870 
- 671      6F72745F 
- 671      66756E63 
- 672              	.LASF18:
- 673 00b6 696E6465 		.ascii	"index\000"
- 673      7800
- 674              	.LASF8:
- 675 00bc 6E616D65 		.ascii	"name\000"
- 675      00
- 676              	.LASF3:
- 677 00c1 756E7369 		.ascii	"unsigned char\000"
- 677      676E6564 
- 677      20636861 
- 677      7200
- 678              	.LASF9:
- 679 00cf 63686172 		.ascii	"char\000"
- 679      00
- 680              	.LASF20:
- 681 00d4 2E2E2F2E 		.ascii	"../../source/src/kernel/OS_CORE/export.c\000"
- 681      2E2F736F 
- 681      75726365 
- 681      2F737263 
- 681      2F6B6572 
+ 666      75726365 
+ 666      2F737263 
+ 666      2F6B6572 
+ 667              	.LASF7:
+ 668 0096 61646472 		.ascii	"addr\000"
+ 668      00
+ 669              	.LASF16:
+ 670 009b 5F676574 		.ascii	"_get_sys_export_function_addr\000"
+ 670      5F737973 
+ 670      5F657870 
+ 670      6F72745F 
+ 670      66756E63 
+ 671              	.LASF18:
+ 672 00b9 696E6465 		.ascii	"index\000"
+ 672      7800
+ 673              	.LASF8:
+ 674 00bf 6E616D65 		.ascii	"name\000"
+ 674      00
+ 675              	.LASF3:
+ 676 00c4 756E7369 		.ascii	"unsigned char\000"
+ 676      676E6564 
+ 676      20636861 
+ 676      7200
+ 677              	.LASF9:
+ 678 00d2 63686172 		.ascii	"char\000"
+ 678      00
+ 679              	.LASF21:
+ 680 00d7 463A5C6B 		.ascii	"F:\\kaka\\KAKAOS\\C\\windows\\Project\\RVMDK\243\250"
+ 680      616B615C 
+ 680      4B414B41 
+ 680      4F535C43 
+ 680      5C77696E 
+ 681 00ff 757635A3 		.ascii	"uv5\243\251\000"
+ 681      A900
  682              	.LASF15:
- 683 00fd 7368656C 		.ascii	"shell_symbol_list_display\000"
+ 683 0105 7368656C 		.ascii	"shell_symbol_list_display\000"
  683      6C5F7379 
  683      6D626F6C 
  683      5F6C6973 
  683      745F6469 
  684              	.LASF11:
- 685 0117 5F6B615F 		.ascii	"_ka_module_symtab_begin\000"
+ 685 011f 5F6B615F 		.ascii	"_ka_module_symtab_begin\000"
  685      6D6F6475 
  685      6C655F73 
  685      796D7461 
  685      625F6265 
  686              	.LASF13:
- 687 012f 61726763 		.ascii	"argc\000"
+ 687 0137 61726763 		.ascii	"argc\000"
  687      00
  688              	.LASF4:
- 689 0134 73686F72 		.ascii	"short unsigned int\000"
+ 689 013c 73686F72 		.ascii	"short unsigned int\000"
  689      7420756E 
  689      7369676E 
  689      65642069 
  689      6E7400
  690              	.LASF0:
- 691 0147 7369676E 		.ascii	"signed char\000"
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccMGezEI.s 			page 15
+ 691 014f 7369676E 		.ascii	"signed char\000"
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccRxvwjH.s 			page 15
 
 
  691      65642063 
  691      68617200 
  692              	.LASF12:
- 693 0153 5F6B615F 		.ascii	"_ka_module_symtab_end\000"
+ 693 015b 5F6B615F 		.ascii	"_ka_module_symtab_end\000"
  693      6D6F6475 
  693      6C655F73 
  693      796D7461 
  693      625F656E 
  694              	.LASF14:
- 695 0169 61726776 		.ascii	"argv\000"
+ 695 0171 61726776 		.ascii	"argv\000"
  695      00
  696              	.LASF1:
- 697 016e 73686F72 		.ascii	"short int\000"
+ 697 0176 73686F72 		.ascii	"short int\000"
  697      7420696E 
  697      7400
  698              	.LASF19:
- 699 0178 474E5520 		.ascii	"GNU C11 7.3.1 20180622 (release) [ARM/embedded-7-br"
+ 699 0180 474E5520 		.ascii	"GNU C11 7.3.1 20180622 (release) [ARM/embedded-7-br"
  699      43313120 
  699      372E332E 
  699      31203230 
  699      31383036 
- 700 01ab 616E6368 		.ascii	"anch revision 261907] -mcpu=cortex-m3 -mthumb -mapc"
+ 700 01b3 616E6368 		.ascii	"anch revision 261907] -mcpu=cortex-m3 -mthumb -mapc"
  700      20726576 
  700      6973696F 
  700      6E203236 
  700      31393037 
- 701 01de 732D6672 		.ascii	"s-frame -mthumb-interwork -mcpu=cortex-m3 -mthumb -"
+ 701 01e6 732D6672 		.ascii	"s-frame -mthumb-interwork -mcpu=cortex-m3 -mthumb -"
  701      616D6520 
  701      2D6D7468 
  701      756D622D 
  701      696E7465 
- 702 0211 67647761 		.ascii	"gdwarf-2 -O0\000"
+ 702 0219 67647761 		.ascii	"gdwarf-2 -O0\000"
  702      72662D32 
  702      202D4F30 
  702      00
  703              		.ident	"GCC: (GNU Tools for Arm Embedded Processors 7-2018-q2-update) 7.3.1 20180622 (release) [AR
-ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccMGezEI.s 			page 16
+ARM GAS  G:\Users\Jaxb\AppData\Local\Temp\ccRxvwjH.s 			page 16
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 export.c
-G:\Users\Jaxb\AppData\Local\Temp\ccMGezEI.s:16     .rodata:00000000 $d
-G:\Users\Jaxb\AppData\Local\Temp\ccMGezEI.s:20     .text:00000000 $t
-G:\Users\Jaxb\AppData\Local\Temp\ccMGezEI.s:27     .text:00000000 _get_sys_export_function_addr
-G:\Users\Jaxb\AppData\Local\Temp\ccMGezEI.s:100    .text:0000004c $d
-G:\Users\Jaxb\AppData\Local\Temp\ccMGezEI.s:114    .text:00000058 $t
-G:\Users\Jaxb\AppData\Local\Temp\ccMGezEI.s:121    .text:00000058 shell_symbol_list_display
-G:\Users\Jaxb\AppData\Local\Temp\ccMGezEI.s:177    .text:00000090 $d
+G:\Users\Jaxb\AppData\Local\Temp\ccRxvwjH.s:16     .rodata:00000000 $d
+G:\Users\Jaxb\AppData\Local\Temp\ccRxvwjH.s:20     .text:00000000 $t
+G:\Users\Jaxb\AppData\Local\Temp\ccRxvwjH.s:27     .text:00000000 _get_sys_export_function_addr
+G:\Users\Jaxb\AppData\Local\Temp\ccRxvwjH.s:100    .text:0000004c $d
+G:\Users\Jaxb\AppData\Local\Temp\ccRxvwjH.s:114    .text:00000058 $t
+G:\Users\Jaxb\AppData\Local\Temp\ccRxvwjH.s:121    .text:00000058 shell_symbol_list_display
+G:\Users\Jaxb\AppData\Local\Temp\ccRxvwjH.s:177    .text:00000090 $d
 
 UNDEFINED SYMBOLS
 _ASSERT

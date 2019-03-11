@@ -278,7 +278,7 @@
               <MiscControls>-mcpu=cortex-m3 -mthumb</MiscControls>
               <Define>STM32F10X_HD, USE_STDPERIPH_DRIVER</Define>
               <Undefine></Undefine>
-              <IncludePath>..\..\source\include;..\..\source\include\os_base;..\..\source\include\os_core;..\..\source\include\os_core\schedule;..\..\source\include\os_cpu;..\..\source\include\os_cpu\bsp;..\..\source\include\shell;..\..\source\include\os_lib;..\..\source\main;..\..\source\src\CMSIS\startup;..\..\source\src\CMSIS;..\..\source\src\FWlib\inc;..\..\source\src\FWlib\src;..\..\source\src\kernel\OS_CORE;..\..\source\src\kernel\OS_CORE\schedule;..\..\source\src\kernel\OS_CPU;..\..\source\src\kernel\OS_CPU\bsp;..\..\source\src\kernel\OS_LIB;..\..\source\src\kernel\shell;..\..\source\include</IncludePath>
+              <IncludePath>..\..\source\include;..\..\source\include\os_base;..\..\source\include\os_core;..\..\source\include\os_core\schedule;..\..\source\include\os_cpu;..\..\source\include\os_cpu\bsp;..\..\source\include\shell;..\..\source\include\os_lib;..\..\source\main;..\..\source\src\CMSIS\startup;..\..\source\src\CMSIS;..\..\source\src\FWlib\inc;..\..\source\src\FWlib\src;..\..\source\src\kernel\OS_CORE;..\..\source\src\kernel\OS_CORE\schedule;..\..\source\src\kernel\OS_CPU;..\..\source\src\kernel\OS_CPU\bsp;..\..\source\src\kernel\OS_LIB;..\..\source\src\kernel\shell;..\..\source\include;..\..\source\include\os_core\dmodule;..\..\source\include\os_core\ipc;..\..\source\include\os_core\time</IncludePath>
             </VariousControls>
           </Carm>
           <Aarm>
@@ -737,44 +737,9 @@
           <GroupName>OS_CORE</GroupName>
           <Files>
             <File>
-              <FileName>MCB.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\source\src\kernel\OS_CORE\MCB.c</FilePath>
-            </File>
-            <File>
-              <FileName>message_queue.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\source\src\kernel\OS_CORE\message_queue.c</FilePath>
-            </File>
-            <File>
-              <FileName>module.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\source\src\kernel\OS_CORE\module.c</FilePath>
-            </File>
-            <File>
-              <FileName>mutex.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\source\src\kernel\OS_CORE\mutex.c</FilePath>
-            </File>
-            <File>
-              <FileName>os_time.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\source\src\kernel\OS_CORE\os_time.c</FilePath>
-            </File>
-            <File>
-              <FileName>os_timer.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\source\src\kernel\OS_CORE\os_timer.c</FilePath>
-            </File>
-            <File>
               <FileName>osinit.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\source\src\kernel\OS_CORE\osinit.c</FilePath>
-            </File>
-            <File>
-              <FileName>TCB.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\source\src\kernel\OS_CORE\TCB.c</FilePath>
             </File>
             <File>
               <FileName>os_delay.c</FileName>
@@ -807,14 +772,49 @@
               <FilePath>..\..\source\src\kernel\OS_CORE\schedule\os_tick.c</FilePath>
             </File>
             <File>
-              <FileName>export.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\source\src\kernel\OS_CORE\export.c</FilePath>
-            </File>
-            <File>
               <FileName>bsp.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\source\src\kernel\OS_CORE\bsp.c</FilePath>
+            </File>
+            <File>
+              <FileName>export.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\source\src\kernel\OS_CORE\dmodule\export.c</FilePath>
+            </File>
+            <File>
+              <FileName>module.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\source\src\kernel\OS_CORE\dmodule\module.c</FilePath>
+            </File>
+            <File>
+              <FileName>MCB.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\source\src\kernel\OS_CORE\ipc\MCB.c</FilePath>
+            </File>
+            <File>
+              <FileName>message_queue.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\source\src\kernel\OS_CORE\ipc\message_queue.c</FilePath>
+            </File>
+            <File>
+              <FileName>mutex.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\source\src\kernel\OS_CORE\ipc\mutex.c</FilePath>
+            </File>
+            <File>
+              <FileName>TCB.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\source\src\kernel\OS_CORE\schedule\TCB.c</FilePath>
+            </File>
+            <File>
+              <FileName>os_time.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\source\src\kernel\OS_CORE\time\os_time.c</FilePath>
+            </File>
+            <File>
+              <FileName>os_timer.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\source\src\kernel\OS_CORE\time\os_timer.c</FilePath>
             </File>
           </Files>
         </Group>

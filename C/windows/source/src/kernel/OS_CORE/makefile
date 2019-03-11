@@ -2,7 +2,7 @@ SRCS = ${shell ls *.c}
 
 ASM_SRCS = 
 
-SUB_DIR = schedule
+SUB_DIR = schedule dmodule ipc time
 
 $(SUB_TGT): $(SRCS:.c=.o) $(ASM_SRCS:.s=.o) $(SUB_DIR)
 	$(LD) $(SRCS:.c=.o) $(ASM_SRCS:.s=.o) $(SUB_DIR:=/$(SUB_TGT)) $(LDFLAG)  -r -o $@
