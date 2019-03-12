@@ -10,7 +10,7 @@
 #include "shell.h"
 #include "shell_debug.h"
 #include "os_schedule.h"
-//#include <os_timer.h>
+#include <os_timer.h>
 #include <message_queue.h>
 #include <mutex.h>
 

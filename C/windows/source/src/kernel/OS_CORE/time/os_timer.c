@@ -14,14 +14,14 @@ static struct little_heap timer_heap;
 
 static int cmp(Vector *Vector_ptr,unsigned int index1,unsigned int index2)
 {
-	const struct timer **a, **b;
-	Vector_get_index_address (Vector_ptr, index1, (void **)&a);
-	Vector_get_index_address (Vector_ptr, index2, (void **)&b);
-	if (TIME_FIRST_SMALLER_THAN_SECOND((*a)->wake_time,(*b)->wake_time))
+	const struct timer *a, *b;
+	a = Vector_get_index_address (Vector_ptr, index1);
+	b = Vector_get_index_address (Vector_ptr, index2);
+	if (TIME_FIRST_SMALLER_THAN_SECOND(a->wake_time,b->wake_time))
 	{
 	  return -1;
 	}
-	else if (TIME_FIRST_BIGGER_THAN_SECOND((*a)->wake_time,(*b)->wake_time))
+	else if (TIME_FIRST_BIGGER_THAN_SECOND(a->wake_time,b->wake_time))
 	{
 	  return 1;
 	}
@@ -34,7 +34,7 @@ static int cmp(Vector *Vector_ptr,unsigned int index1,unsigned int index2)
 static inline void index_change_record(Vector *Vector_ptr,int index)
 {
 	struct timer *timer_ptr;
-	Vector_get_index_data(Vector_ptr,index,&timer_ptr);
+	timer_ptr = Vector_get_index_data(Vector_ptr,index);
 	timer_ptr->heap_position_index = index;
 }
 
@@ -46,7 +46,7 @@ static inline void index_change_record(Vector *Vector_ptr,int index)
  */
 void __init_timer(void)
 {
-	if(0 != heap_init(&timer_heap,16,sizeof(struct timer *),cmp,index_change_record))
+	if(0 != heap_init(&timer_heap,16,cmp,index_change_record))
 	{
 		ka_printf("init_delay_heap error!\nstop booting.....\n");
 		while(1);
@@ -139,7 +139,7 @@ int _timer_enable(struct timer *timer_ptr)
 	CPU_CRITICAL_ENTER();
 	timer_ptr->state = ENABLE;
 	timer_ptr->wake_time = timer_ptr->period + _get_tick();
-	int ret = heap_push(&timer_heap,&timer_ptr);
+	int ret = heap_push(&timer_heap,timer_ptr);
 	CPU_CRITICAL_EXIT();
 	return ret;
 }
@@ -259,7 +259,7 @@ void timer_task(void *para)
 	(void)para;
 	UINT64 tick;
 	struct timer *timer_ptr;
-	int ret = heap_get_top_safe(&timer_heap,&timer_ptr);
+	int ret = heap_get_top_safe(&timer_heap,(void **)&timer_ptr);
 	while(1)
 	{
 		if(ret < 0)
@@ -297,7 +297,7 @@ void timer_task(void *para)
 						}
 					case TIMER_PERIODIC:
 						timer_ptr->wake_time += timer_ptr->period;
-						heap_push(&timer_heap,&timer_ptr);
+						heap_push(&timer_heap,timer_ptr);
 						break;
 					default:
 						ASSERT(0);
@@ -305,7 +305,7 @@ void timer_task(void *para)
 				}
 			}
 		}
-		ret = heap_get_top_safe(&timer_heap,&timer_ptr);
+		ret = heap_get_top_safe(&timer_heap,(void **)&timer_ptr);
 	}
 }
 

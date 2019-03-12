@@ -93,18 +93,17 @@ static void delay_task_check(void)
 void timer_task_check(void)
 {
 	struct timer *timer_ptr;
-	if(_get_timer_heap_top(&timer_ptr) < 0)
+	while(FUN_EXECUTE_SUCCESSFULLY == _get_timer_heap_top(&timer_ptr))
 	{
-		return ;
-	}
-	if(TIME_FIRST_SMALLER_THAN_SECOND(_get_tick(),timer_ptr->wake_time))
-	{
-		return;
-	}
-	else
-	{
-		_remove_from_suspend_list(&TCB_timer_task);
-		set_rescheduled_flag();
+		if(TIME_FIRST_SMALLER_THAN_SECOND(_get_tick(),timer_ptr->wake_time))
+		{
+			return;
+		}
+		else
+		{
+			_remove_from_suspend_list(&TCB_timer_task);
+			set_rescheduled_flag();
+		}
 	}
 }
 #endif

@@ -18,6 +18,12 @@ struct file_operations
 	int (*ioctl)(struct file *file_ptr,int cmd,int args);
 };
 
+struct dentry_operations
+{
+	int (*release_inode)(struct dentry *dentry_ptr);
+	int (*change_name)(struct dentry *dentry_ptr);
+}；
+
 
 /*
 The word dentry is short for 'directory entry'. 
@@ -32,10 +38,10 @@ struct dentry
 	struct dentry *d_parent;
 	struct list_head subdirs;
 	struct list_head child;
-	const struct dentry_operations *d_op; //realize by bottom file system
+	const struct dentry_operations *d_op; /*realize by bottom file system*/
 	struct inode *d_inode;
 	const char *name;
-	UINT32 flag;
+	UINT32 flag; //allocated? sysfs? normal? release?
 	unsigned int ref;
 };
 
@@ -52,5 +58,16 @@ struct inode
 	unsigned long file_size;
 	unsigned int ref;
 };
+
+/* add the ref of dentry,means that a task use this dentry,
+ os should not release it. */
+int dget(struct dentry *d_parent); 
+
+int dput(struct dentry *d_parent); 
+
+struct dentry *dentry_alloc_and_init(
+	struct dentry *parent,
+	struct inode *d_inode,
+	const char *name);
 
 #endif
