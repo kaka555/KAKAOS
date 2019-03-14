@@ -111,7 +111,7 @@ void three(void *para)
 void four(void *para)
 {
 	ka_printf("task four\n");
-	timer_init(&timer1, TIMER_TIME, "T2", kb, 0, 100, 8);
+	timer_init(&timer1, TIMER_TIME, "T2", kb, 0, 15, 8);
 	timer_enable(&timer1);
 	suspend();
 }

@@ -8,6 +8,7 @@
 #include <printf_debug.h>
 #include <shell.h>
 #include <os_cpu.h>
+#include <sys_init_fun.h>
 
 #if CONFIG_MODULE
 
@@ -17,10 +18,11 @@ static char *module_buffer = NULL;
 static unsigned int num = 0;
 static struct list_head module_list_head;
 
-void __init_module(void)
+static void __INIT __init_module(void)
 {
     INIT_LIST_HEAD(&module_list_head);
 }
+INIT_FUN(__init_module);
 
 void shell_modinfo(int argc, char const *argv[])
 {

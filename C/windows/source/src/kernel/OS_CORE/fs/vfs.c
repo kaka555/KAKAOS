@@ -2,6 +2,7 @@
 #include <myMicroLIB.h>
 #include <myassert.h>
 #include <os_error.h>
+#include <export.h>
 
 static struct dentry_operations default_dentry_file_operations = {};
 #define default_dentry_file_op_ptr (&default_dentry_file_operations)
@@ -9,9 +10,13 @@ static struct dentry_operations default_dentry_file_operations = {};
 static struct dentry_operations default_dentry_folder_operations = {};
 #define default_dentry_folder_op_ptr (&default_dentry_folder_operations)
 
+static struct file_operations default_file_operations = {};
+#define defalut_file_operations_ptr (&default_file_operations)
+
 /* the statement of basic dentry */
 static struct dentry root_dentry;
 static struct dentry dev_dentry;
+static struct dentry *current_dentry_ptr = NULL;
 
 static void _init_dentry(
 	struct dentry *dentry_ptr,
@@ -57,12 +62,14 @@ static void _init_dentry(
 	{
 		set_dentry_flag(dentry_ptr,FLAG_DENTRY_HARD);
 	}
+	_mutex_init(&dentry_ptr->d_mutex);
 }
 
 void __init_vfs(void)
 {
 	_init_dentry(&root_dentry,NULL,default_dentry_file_op_ptr,NULL,"/",FLAG_FOLDER);
 	_init_dentry(&dev_dentry,&root_dentry,default_dentry_file_op_ptr,NULL,"dev",FLAG_FOLDER);
+	current_dentry_ptr = &root_dentry; // set pwd
 }
 
 struct dentry *_dentry_alloc_and_init(
@@ -83,3 +90,48 @@ struct dentry *_dentry_alloc_and_init(
 	_init_dentry(dentry_ptr,parent_ptr,dentry_operations_ptr,inode_ptr,name,flag);
 	return dentry_ptr;
 }
+
+struct file *_file_alloc_and_init(
+	struct file_operations *file_operations_ptr,
+	struct dentry *dentry_ptr)
+{
+	ASSERT(NULL != dentry_ptr);
+	struct file *file_ptr = ka_malloc(sizeof(struct file));
+	if(NULL == file_ptr)
+	{
+		return NULL;
+	}
+	file_ptr->f_op = file_operations_ptr;
+	if(!file_operations_ptr)
+	{
+		file_ptr->f_op = defalut_file_operations_ptr;
+	}
+	file_ptr->offset = 0;
+	file_ptr->f_den = dentry_ptr;
+	file_ptr->f_mode = FILE_MODE_DEFAULT;
+	return file_ptr;
+}
+
+struct inode *_inode_alloc_and_init(
+	unsigned long file_size)
+{
+	struct inode *inode_ptr = ka_malloc(sizeof(struct inode));
+	if(NULL == inode_ptr)
+	{
+		return NULL;
+	}
+	inode_ptr->file_size = file_size;
+	inode_ptr->ref = 0;
+}
+
+int add_folder(const char *path,const char *folder_name)
+{
+
+}
+EXPORT_SYMBOL(add_folder);
+
+int add_file(const char *path,struct file_operations *f_op,const char *file_name)
+{
+
+}
+EXPORT_SYMBOL(add_file);

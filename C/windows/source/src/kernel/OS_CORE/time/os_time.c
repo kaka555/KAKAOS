@@ -4,6 +4,7 @@
 #include <myassert.h>
 #include <os_error.h>
 #include <export.h>
+#include <sys_init_fun.h>
 
 volatile UINT64 g_time_tick_count = 0;
 
@@ -39,8 +40,7 @@ static const UINT8 month_date_table[] = {
 	31  /*December*/
 };
 
-void 
-__init_system_time(void)
+static void __INIT __init_system_time(void)
 {
 	sys_time.date    =  OS_DATE;
 	sys_time.hour    =  OS_HOUR;
@@ -50,7 +50,7 @@ __init_system_time(void)
 	sys_time.year    =  OS_YEAR;
 	sys_time.day     =  OS_DAY;
 }
-
+INIT_FUN(__init_system_time);
 
 /**
  * This is a system function

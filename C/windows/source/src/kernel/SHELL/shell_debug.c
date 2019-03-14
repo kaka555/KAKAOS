@@ -3,6 +3,7 @@
 #include <myassert.h>
 #include <myMicroLIB.h>
 #include <kakaosstdint.h>
+#include <sys_init_fun.h>
 
 #if CONFIG_SHELL_DEBUG_EN && CONFIG_SHELL_EN
 
@@ -11,7 +12,7 @@ static int flag_for_shell_debug = 1;
 
 static void __init_shell_variable_array(void);
 
-void __init_shell_debug(void)
+static void __INIT __init_shell_debug(void)
 {
 #if CONFIG_ASSERT_DEBUG
 	int error;
@@ -22,6 +23,7 @@ void __init_shell_debug(void)
 	ASSERT(FUN_EXECUTE_SUCCESSFULLY == error);
 	__init_shell_variable_array();
 }
+INIT_FUN(__init_shell_debug);
 
 void insert_break_point(char* file_name,unsigned line,const char* function_name)
 {

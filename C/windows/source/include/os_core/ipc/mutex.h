@@ -2,7 +2,7 @@
 #define _MUTEX_H
 
 #include <insert_sort_oo.h>
-#include <TCB.h>
+typedef struct task_control_block_struct TCB;
 
 typedef struct mutex_block{
 	unsigned int mutex_flag; /* should be 0 or 1*/

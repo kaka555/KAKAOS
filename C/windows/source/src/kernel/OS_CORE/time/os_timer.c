@@ -7,6 +7,7 @@
 #include <os_time.h>
 #include <os_cpu.h>
 #include <export.h>
+#include <sys_init_fun.h>
 
 #if CONFIG_TIMER_EN
 
@@ -44,7 +45,7 @@ static inline void index_change_record(Vector *Vector_ptr,int index)
  * @DateTime    2018-10-03
  * @description : used while os's initialization
  */
-void __init_timer(void)
+static void __INIT __init_timer(void)
 {
 	if(0 != heap_init(&timer_heap,16,cmp,index_change_record))
 	{
@@ -53,6 +54,7 @@ void __init_timer(void)
 		//os stop here
 	}
 }
+INIT_FUN(__init_timer);
 
 /**
  * This is a system function
@@ -241,7 +243,7 @@ int _get_timer_heap_top(struct timer **timer_ptr)
 	ASSERT(NULL != timer_ptr);
 	CPU_SR_ALLOC();
 	CPU_CRITICAL_ENTER();
-	int ret = heap_get_top_safe(&timer_heap,(void *)timer_ptr);
+	int ret = heap_get_top_safe(&timer_heap,(void **)timer_ptr);
 	CPU_CRITICAL_EXIT();
 	return ret;
 }

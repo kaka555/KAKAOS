@@ -1,10 +1,11 @@
-#include "os_ready.h"
-#include "heap_oo.h"
-#include "myassert.h"
-#include "os_TCB_list.h"
-#include "os_error.h"
-#include "myMicroLIB.h"
-#include "task_state.h"
+#include <os_ready.h>
+#include <heap_oo.h>
+#include <myassert.h>
+#include <os_TCB_list.h>
+#include <os_error.h>
+#include <myMicroLIB.h>
+#include <task_state.h>
+#include <sys_init_fun.h>
 
 /*==============================================*/
 /*this typedef associate with macro PRIO_MAX in TCB.h*/
@@ -44,7 +45,7 @@ static READY_GROUP_TYPE ready_group;
 static READY_TABLE_TYPE ready_table[PRIO_MAX/(sizeof(READY_TABLE_TYPE)*8)];
 /*==============================================*/
 
-void __init_ready_group(void)
+static void __INIT __init_ready_group(void)
 {
 	unsigned int i;
 	ready_group = 0;
@@ -53,6 +54,7 @@ void __init_ready_group(void)
 		ready_table[i] = 0;
 	}
 }
+INIT_FUN(__init_ready_group);
 
 int _insert_ready_TCB(TCB *TCB_ptr)
 {

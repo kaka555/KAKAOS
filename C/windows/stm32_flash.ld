@@ -74,6 +74,10 @@ SECTIONS
 	KEEP(*(.RTMSymTab))
 	_ka_module_symtab_end = .;
 	
+	_ka_init_fun_begin = .;
+	KEEP(*(.INIT_FUN))
+	_ka_init_fun_end = .;
+	
 	KEEP (*(.init))
     KEEP (*(.fini))
 

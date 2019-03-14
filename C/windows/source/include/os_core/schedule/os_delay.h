@@ -4,7 +4,6 @@
 #include "heap_oo.h"
 #include "TCB.h"
 
-void __init_delay_heap(void);
 int  _insert_into_delay_heap(TCB *TCB_ptr);
 int  _remove_from_delay_heap(TCB *TCB_ptr);
 TCB* _delay_heap_get_top_TCB(void);

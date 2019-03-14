@@ -27,7 +27,6 @@ struct time{
 	UINT16  year; /* >2018*/
 };
 
-void __init_system_time(void);
 void _system_time_increase(void);
 void _system_time_display(void);
 void system_time_display(void);

@@ -41,10 +41,6 @@ int mutex_init(MUTEX *MUTEX_ptr)
 		OS_ERROR_PARA_MESSAGE_DISPLAY(mutex_init,MUTEX_ptr);
 		return -ERROR_NULL_INPUT_PTR;
 	}
-	if (g_interrupt_count > 0)
-	{
-		return -ERROR_FUN_USE_IN_INTER;
-	}
 	return _mutex_init(MUTEX_ptr);
 }
 EXPORT_SYMBOL(mutex_init);

@@ -63,7 +63,6 @@ int _dlmodule_exec(
     TASK_PRIO_TYPE prio,
     const char *name);
 void _set_module_buffer(void *add);
-void __init_module(void);
 int remove_module(struct dynamic_module *dynamic_module_ptr);
 void shell_modinfo(int argc, char const *argv[]);
 void shell_list_module(int argc, char const *argv[]);

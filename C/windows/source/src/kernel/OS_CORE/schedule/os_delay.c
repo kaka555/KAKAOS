@@ -1,10 +1,11 @@
-#include "os_delay.h"
-#include "TCB.h"
-#include "ka_configuration.h"
-#include "heap_oo.h"
-#include "myassert.h"
+#include <os_delay.h>
+#include <TCB.h>
+#include <ka_configuration.h>
+#include <heap_oo.h>
+#include <myassert.h>
 #include <os_ready.h>
-#include "myMicroLIB.h"
+#include <myMicroLIB.h>
+#include <sys_init_fun.h>
 
 #define TIME_FIRST_SMALLER_THAN_SECOND(first,second) ((INT64)(first)-(INT64)(second) < 0)
 #define TIME_FIRST_BIGGER_THAN_SECOND(first,second)  ((INT64)(first)-(INT64)(second) > 0)
@@ -38,7 +39,7 @@ static inline void index_change_record(Vector *Vector_ptr,int index)
 	TCB_ptr->delay_heap_position = index;
 }
 	
-void __init_delay_heap(void)
+static void __INIT __init_delay_heap(void)
 {
 	if(0 != heap_init(&delay_heap,PRIO_MAX/4,_cmp,index_change_record))
 	{
@@ -47,6 +48,7 @@ void __init_delay_heap(void)
 		/*os stop here*/
 	}
 }
+INIT_FUN(__init_delay_heap);
 
 /*before inserting action,os should set the delay_reach_time
 this function do not change the task_state of the TCB,os shoule

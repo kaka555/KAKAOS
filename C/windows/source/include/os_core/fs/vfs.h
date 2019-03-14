@@ -2,6 +2,7 @@
 #define _VFS_H
 #include <kakaosstdint.h>
 #include <double_linked_list.h>
+#include <mutex.h>
 
 struct file;
 struct dentry_operations;
@@ -56,6 +57,7 @@ struct dentry
 	unsigned int ref;
 	struct list_head subdirs; /* this is the list head of it's subdirs */
 	struct list_head child;	/* this is the node of the subdirs's list */
+	MUTEX d_mutex;
 };
 
 static inline void set_dentry_flag(struct dentry *dentry_ptr,UINT32 flag)
@@ -64,6 +66,12 @@ static inline void set_dentry_flag(struct dentry *dentry_ptr,UINT32 flag)
 }
 
 typedef UINT32 f_mode_t;
+/*************the element 'f_mode' of struct file*************/
+#define FILE_MODE_DEFAULT (FILE_MODE_READ | FILE_MODE_WRITE)
+#define FILE_MODE_READ    0x01
+#define FILE_MODE_WRITE   0x02
+#define FILE_MODE_EXE     0x04
+/*************************************************************/
 
 struct file
 {
@@ -73,16 +81,30 @@ struct file
 	f_mode_t f_mode;
 };
 
+static inline void set_file_mode(struct file *file_ptr,f_mode_t mode)
+{
+	file_ptr->f_mode |= mode;
+}
+
+static inline void clear_file_mode(struct file *file_ptr,f_mode_t mode)
+{
+	file_ptr->f_mode &= ~mode;
+}
+
 struct inode
 {
-	unsigned long file_size;
+	unsigned long file_size; //bytes
 	unsigned int ref;
 };
 
 /* add the ref of dentry,means that a task use this dentry,
  os should not release it. */
-int dget(struct dentry *d_parent); 
+void dget(struct dentry *d_parent); 
+int dput(struct dentry *d_parent); 
 
+/* add the ref of inode,means that a task use this inode,
+ os should not release it. */
+int dget(struct dentry *d_parent); 
 int dput(struct dentry *d_parent); 
 
 enum DENTRY_INIT_FLAG {
@@ -103,6 +125,13 @@ struct dentry *_dentry_alloc_and_init(
 
 #define _folder_dentry_alloc_and_init(parent_ptr,inode_ptr,name) \
 	_dentry_alloc_and_init(parent_ptr,inode_ptr,name,FLAG_FOLDER)
+
+struct file *_file_alloc_and_init(
+	struct file_operations *file_operations_ptr,
+	struct dentry *dentry_ptr);
+
+struct inode *_inode_alloc_and_init(
+	unsigned long file_size);
 
 void __init_vfs(void);
 

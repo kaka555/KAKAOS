@@ -15,7 +15,7 @@
 #include <slab.h>
 #include <double_linked_list.h>
 #include <module.h>
-
+#include <sys_init_fun.h>
 
 #if CONFIG_SHELL_EN
 	static TCB TCB_shell;
@@ -30,10 +30,6 @@ TCB TCB_count_init;
 
 UINT64 idle_num = 0;
 unsigned int  count_max_num = 0;/*used for counting cpu used rate*/
-#if PRECISE_TIME_DELAY
-	UINT64 num_pre_tick = 0;/*used for precise timing*/
-	TCB TCB_precise_timing;
-#endif
 
 extern int g_schedule_lock;
 extern UINT64 g_time_tick_count;
@@ -43,12 +39,16 @@ extern TCB *OSTCBHighRdyPtr;
 extern struct singly_list_head *const cache_chain_head_ptr;
 
 #if CONFIG_TIMER_EN
-	extern void __init_timer(void);
 	extern void timer_task(void *para);
 #endif
 
 static void thread_init(void *para);
+static void count_init(void *para);
+static void idle(void *para);
+static void set_inter_stack(void);
 
+extern unsigned long _ka_init_fun_begin;
+extern unsigned long _ka_init_fun_end;
 static void __INIT os_init(void)
 {
 	bsp_init();
@@ -59,27 +59,50 @@ static void __INIT os_init(void)
 /*===========C_lib==========================*/
 	__init_my_micro_lib();
 
-/*===========TCB=======schedule==============*/
-	__init_ready_group();
-	__init_delay_heap();
-	__init_TCB_list();
-	__init_suspend_list();
+	struct init_fun *struct_init_fun_ptr;
+	for(struct_init_fun_ptr=(struct init_fun *)(&_ka_init_fun_begin);
+		struct_init_fun_ptr != (struct init_fun *)(&_ka_init_fun_end);++struct_init_fun_ptr)
+	{
+		(*(struct_init_fun_ptr->fun))(); /* execute all the init function */
+	}
+}
 
-#if CONFIG_TIME_EN
-	__init_system_time();
-#endif	
+void __INIT _os_start(void)
+{
+/*===========init all module==================*/
+	os_init();
+/*============================================*/
 
-#if CONFIG_TIMER_EN
-	__init_timer();
+/*==============register initialization task===================*/
+	if(0 != task_init_ready(&TCB_count_init,256,PRIO_MAX-2,5,"count_init",count_init,NULL))
+	{
+		ka_printf("os_init_fail...stop booting...\n");
+		while(1);
+	}
+	if(0 != task_init_ready(&TCB_idle,128,PRIO_MAX-1,HZ,"idle",idle,NULL))
+	{
+		ka_printf("os_init_fail...stop booting...\n");
+		while(1);
+	}
+#if PRECISE_TIME_DELAY
+	if(0 != task_init_ready(&TCB_precise_timing,128,PRIO_MAX-2,HZ,"precise timing",precise_timing,NULL))
+	{
+		ka_printf("os_init_fail...stop booting...\n");
+		while(1);
+	}
 #endif
+/*==================================================================*/
 
-#if CONFIG_SHELL_DEBUG_EN && CONFIG_SHELL_EN
-	__init_shell_debug();
-#endif
+	OSTCBCurPtr = _get_highest_prio_ready_TCB();
+	OSTCBHighRdyPtr = OSTCBCurPtr;
 
-#if CONFIG_MODULE
-	__init_module();
-#endif
+/*===========system_tick====================*/
+	__init_systick();
+/*==========================================*/
+	set_inter_stack();
+	OSStartHighRdy();
+	ASSERT(0);
+	while(1);/*should no go here*/
 }
 
 void start_kernel(void)
@@ -165,7 +188,7 @@ static void count_init(void *para)
 	schedule();
 }
 
-static void  idle(void *para)
+static void idle(void *para)
 {
 	CPU_SR_ALLOC();
 	(void)para;
@@ -188,6 +211,7 @@ static void precise_timing(void *para)
 }
 #endif
 
+/* set the stack for interrupt */
 static void set_inter_stack(void)
 {
 	unsigned int MSP_top = (unsigned int)_alloc_power1_page(); /* allocate one page for interrupt stack*/
@@ -197,44 +221,6 @@ static void set_inter_stack(void)
 		:
 		:"r"(MSP_top)
 		);
-}
-
-void __INIT _os_start(void)
-{
-/*===========init all module==================*/
-	os_init();
-/*============================================*/
-
-/*==============register initialization task===================*/
-	if(0 != task_init_ready(&TCB_count_init,256,PRIO_MAX-2,5,"count_init",count_init,NULL))
-	{
-		ka_printf("os_init_fail...stop booting...\n");
-		while(1);
-	}
-	if(0 != task_init_ready(&TCB_idle,128,PRIO_MAX-1,HZ,"idle",idle,NULL))
-	{
-		ka_printf("os_init_fail...stop booting...\n");
-		while(1);
-	}
-#if PRECISE_TIME_DELAY
-	if(0 != task_init_ready(&TCB_precise_timing,128,PRIO_MAX-2,HZ,"precise timing",precise_timing,NULL))
-	{
-		ka_printf("os_init_fail...stop booting...\n");
-		while(1);
-	}
-#endif
-/*==================================================================*/
-
-	OSTCBCurPtr = _get_highest_prio_ready_TCB();
-	OSTCBHighRdyPtr = OSTCBCurPtr;
-
-/*===========system_tick====================*/
-	__init_systick();
-/*==========================================*/
-	set_inter_stack();
-	OSStartHighRdy();
-	ASSERT(0);
-	while(1);/*should no go here*/
 }
 
 static int __attribute__((optimize("O1"))) FastLog2(int x)
