@@ -124,6 +124,12 @@ struct inode *_inode_alloc_and_init(
 	inode_ptr->ref = 0;
 }
 
+int change_name(struct file *file_ptr,const char *name)
+{
+
+}
+EXPORT_SYMBOL(change_name);
+
 int add_folder(const char *path,const char *folder_name)
 {
 
@@ -135,3 +141,39 @@ int add_file(const char *path,struct file_operations *f_op,const char *file_name
 
 }
 EXPORT_SYMBOL(add_file);
+
+struct file *open(const char *path,enum FILE_FLAG flag)
+{
+
+}
+EXPORT_SYMBOL(open);
+
+int close(struct file *file_ptr)
+{
+
+}
+EXPORT_SYMBOL(close);
+
+int read(struct file *file_ptr,void *buffer,unsigned int len)
+{
+
+}
+EXPORT_SYMBOL(read);
+
+int write(struct file *file_ptr,void *buffer,unsigned int len)
+{
+
+}
+EXPORT_SYMBOL(write);
+
+int lseek(struct file *file_ptr,int offset)
+{
+
+}
+EXPORT_SYMBOL(lseek);
+
+int ioctl(struct file *file_ptr,int cmd,int args)
+{
+
+}
+EXPORT_SYMBOL(ioctl);

@@ -14,11 +14,11 @@ HEAD_DIR9 = ${HOME}/include/shell
 
 INCLUDE = -I$(HEAD_DIR1) -I$(HEAD_DIR2) -I$(HEAD_DIR3) -I$(HEAD_DIR4) -I$(HEAD_DIR5) -I$(HEAD_DIR6) -I$(HEAD_DIR7) -I$(HEAD_DIR8) -I$(HEAD_DIR9) 
 
-FLAGS = -W -Wall $(INCLUDE) -mcpu=cortex-m3 -mthumb -fno-builtin -ffunction-sections -fdata-sections  
+FLAGS = -W -Wall $(INCLUDE) -mcpu=cortex-m3 -mthumb -fno-builtin 
 
 LIBPATH = /home/ka/stm32/gcc-arm-none-eabi-5_4-2016q3/arm-none-eabi/lib/armv7-m/ -L/home/ka/stm32/gcc-arm-none-eabi-5_4-2016q3/lib/gcc/arm-none-eabi/5.4.1/armv7-m/
 
-LFLAGS = -z max-page-size=0x4 -Bsymbolic -fno-common -nostartfiles -nostdlib -shared -L$(LIBPATH) -T stm32_flash.ld -e main -static -lgcc
+LFLAGS = -z max-page-size=0x4 -Bsymbolic -fno-common -nodefaultlibs -nostartfiles -nostdlib -shared -L$(LIBPATH) -T stm32_flash.ld -e main -static -lgcc
 
 all:module.so
 

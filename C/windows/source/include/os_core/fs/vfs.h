@@ -18,13 +18,12 @@ struct file_operations
 	int (*ioctl)(struct file *file_ptr,int cmd,int args);
 };
 
-struct dentry_operations
+struct inode_operations
 {
-	int (*release_inode)(struct dentry *dentry_ptr);
-	int (*change_name)(struct dentry *dentry_ptr);
-	int (*del_dentry)(struct dentry *dentry_ptr);
-	int (*cmp_name)(struct dentry *dentry_ptr,const char *name);
-}；
+	int (*change_name)(struct inode *inode_ptr,struct dentry *dentry_ptr);
+	int (*refresh)(struct inode *inode_ptr);
+	int (*cmp_name)(struct inode *inode_ptr,const char *name);
+};
 
 /*************the element 'flag' of struct dentry*************/
 #define FLAG_DENTRY_DEFAULT 0X00
@@ -50,7 +49,6 @@ A directory entry is used to describe the properties, size, creation time,
 struct dentry
 {
 	struct dentry *d_parent; /* if NULL, means it is the dentry '/' */
-	struct dentry_operations *d_op; /*realize by bottom file system*/
 	struct inode *d_inode; /* if NULL, means that this dentry not exists in hardware */
 	char *name;
 	UINT32 flag; /* allocated? sysfs? normal? release? */
@@ -93,8 +91,9 @@ static inline void clear_file_mode(struct file *file_ptr,f_mode_t mode)
 
 struct inode
 {
-	unsigned long file_size; //bytes
+	unsigned long file_size; /* bytes */
 	unsigned int ref;
+	struct inode_operations *inode_ops; /*realize by bottom file system*/
 };
 
 /* add the ref of dentry,means that a task use this dentry,
@@ -135,7 +134,21 @@ struct inode *_inode_alloc_and_init(
 
 void __init_vfs(void);
 
+int change_name(struct file *file_ptr,const char *name);
+
 int add_folder(const char *path,const char *folder_name);
 int add_file(const char *path,struct file_operations *f_op,const char *file_name);
+
+enum FILE_FLAG {
+	FLAG_READONLY = 0,
+	FLAG_WRITEONLY,
+	FLAG_READ_WRITE
+};
+struct file *open(const char *path,enum FILE_FLAG flag);
+int close(struct file *file_ptr);
+int read(struct file *file_ptr,void *buffer,unsigned int len);
+int write(struct file *file_ptr,void *buffer,unsigned int len);
+int lseek(struct file *file_ptr,int offset);
+int ioctl(struct file *file_ptr,int cmd,int args);
 
 #endif

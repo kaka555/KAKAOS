@@ -1,5 +1,8 @@
+#define module_init(initfn)                 \
+    int init_module(void) __attribute__((alias(#initfn)))
 
-
+#define module_exit(initfn)                 \
+    int exit_module(void) __attribute__((alias(#initfn)))
 
 #include <myMicroLIB.h>
 #include <os_schedule.h>
@@ -8,6 +11,25 @@
 extern void led(void);
 
 int a = 5;
+
+static int init(void)
+{
+	ka_printf("init fun\n");
+	a = 6;
+	return 0;
+}
+
+module_init(init);
+
+
+static void exit(void)
+{
+	ka_printf("byebye module\n");
+}
+
+
+module_exit(exit);
+
 int main()
 {
 	
@@ -17,7 +39,6 @@ int main()
 	a = 66;
 
 	led();
-        //while(1);
 	return 0;
 }
 
