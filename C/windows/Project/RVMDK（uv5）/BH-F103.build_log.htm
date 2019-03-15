@@ -4,54 +4,152 @@
 <h1>µVision Build Log</h1>
 <h2>Project:</h2>
 F:\kaka\KAKAOS\C\windows\Project\RVMDK£¨uv5£©\BH-F103.uvprojx
-Project File Date:  03/11/2019
+Project File Date:  03/15/2019
 
 <h2>Output:</h2>
-Rebuild target 'KAKAOS'
-compiling core_cm3.c...
-compiling system_stm32f10x.c...
-assembling startup_stm32f10x_hd.s...
-compiling misc.c...
-compiling stm32f10x_adc.c...
-compiling stm32f10x_bkp.c...
-compiling stm32f10x_can.c...
-compiling stm32f10x_cec.c...
-compiling stm32f10x_crc.c...
-compiling stm32f10x_dac.c...
-compiling stm32f10x_dbgmcu.c...
-compiling stm32f10x_dma.c...
-compiling stm32f10x_exti.c...
-compiling stm32f10x_flash.c...
-compiling stm32f10x_fsmc.c...
-compiling stm32f10x_gpio.c...
-compiling stm32f10x_i2c.c...
-compiling stm32f10x_iwdg.c...
-compiling stm32f10x_pwr.c...
-compiling stm32f10x_rcc.c...
-compiling stm32f10x_rtc.c...
-compiling stm32f10x_sdio.c...
-compiling stm32f10x_spi.c...
-compiling stm32f10x_tim.c...
-compiling stm32f10x_usart.c...
-compiling stm32f10x_wwdg.c...
-compiling osinit.c...
-compiling os_delay.c...
-compiling os_ready.c...
-compiling os_schedule.c...
-compiling os_suspend.c...
-compiling os_TCB_list.c...
-compiling os_tick.c...
-compiling bsp.c...
-compiling export.c...
-compiling module.c...
-compiling MCB.c...
-compiling message_queue.c...
-compiling mutex.c...
-compiling TCB.c...
-compiling os_time.c...
-compiling os_timer.c...
-assembling CPU_A.s...
-assembling OS_CPU_A.s...
+Build target 'KAKAOS'
+compiling vfs.c...
+../../source/include/os_core/fs/vfs.h(23): warning: 'struct dentry' declared inside parameter list will not be visible outside of this definition or declaration
+../../source/include/os_core/fs/vfs.h: In function '_inode_alloc_and_init':
+../../source/include/os_core/fs/vfs.h(191): warning: empty declaration
+../../source/include/os_core/fs/vfs.h(197): error: expected '=', ',', ';', 'asm' or '__attribute__' before 'int'
+../../source/include/os_core/dmodule/export.h(8): warning: empty declaration
+../../source/include/os_cpu/os_cpu_stm32.h(6): error: storage class specified for parameter 'CPU_INT32U'
+../../source/include/os_cpu/os_cpu_stm32.h(7): error: expected '=', ',', ';', 'asm' or '__attribute__' before 'CPU_REG32'
+../../source/include/os_cpu/os_cpu_stm32.h(8): error: expected '=', ',', ';', 'asm' or '__attribute__' before 'CPU_SR'
+../../source/include/os_cpu/os_cpu_stm32.h(56): error: unknown type name 'CPU_SR'; did you mean '_CPU_H'?
+../../source/include/os_cpu/os_cpu_stm32.h(57): error: unknown type name 'CPU_SR'; did you mean '_CPU_H'?
+../../source/src/kernel/OS_CORE/fs/vfs.c(8): error: storage class specified for parameter 'default_file_operations'
+../../source/src/kernel/OS_CORE/fs/vfs.c(8): error: parameter 'default_file_operations' is initialized
+../../source/src/kernel/OS_CORE/fs/vfs.c(12): error: storage class specified for parameter 'root_dentry'
+../../source/src/kernel/OS_CORE/fs/vfs.c(13): error: storage class specified for parameter 'dev_dentry'
+../../source/src/kernel/OS_CORE/fs/vfs.c(14): error: storage class specified for parameter 'current_dentry_ptr'
+../../source/src/kernel/OS_CORE/fs/vfs.c(14): error: parameter 'current_dentry_ptr' is initialized
+../../source/src/kernel/OS_CORE/fs/vfs.c(15): error: storage class specified for parameter 'root_inode'
+../../source/src/kernel/OS_CORE/fs/vfs.c(16): error: storage class specified for parameter 'dev_inode'
+../../source/src/kernel/OS_CORE/fs/vfs.c(25): error: expected '=', ',', ';', 'asm' or '__attribute__' before '{' token
+../../source/src/kernel/OS_CORE/fs/vfs.c(65): error: expected '=', ',', ';', 'asm' or '__attribute__' before '{' token
+../../source/src/kernel/OS_CORE/fs/vfs.c(77): error: expected '=', ',', ';', 'asm' or '__attribute__' before '{' token
+../../source/src/kernel/OS_CORE/fs/vfs.c(92): error: expected '=', ',', ';', 'asm' or '__attribute__' before '{' token
+../../source/src/kernel/OS_CORE/fs/vfs.c(113): error: expected '=', ',', ';', 'asm' or '__attribute__' before '{' token
+../../source/src/kernel/OS_CORE/fs/vfs.c(135): error: expected '=', ',', ';', 'asm' or '__attribute__' before '{' token
+../../source/src/kernel/OS_CORE/fs/vfs.c(146): error: expected '=', ',', ';', 'asm' or '__attribute__' before '{' token
+../../source/src/kernel/OS_CORE/fs/vfs.c(169): error: expected '=', ',', ';', 'asm' or '__attribute__' before '{' token
+../../source/src/kernel/OS_CORE/fs/vfs.c(176): error: parameter '__rtmsym_change_name_name' is initialized
+../../source/include/os_core/dmodule/export.h(15): error: section attribute not allowed for '__rtmsym_change_name_name'
+../../source/src/kernel/OS_CORE/fs/vfs.c(176): error: note: in expansion of macro 'EXPORT_SYMBOL'
+../../source/include/os_core/dmodule/export.h(16): error: parameter '__rtmsym_change_name' is initialized
+../../source/src/kernel/OS_CORE/fs/vfs.c(176): error: note: in expansion of macro 'EXPORT_SYMBOL'
+../../source/include/os_core/dmodule/export.h(16): error: section attribute not allowed for '__rtmsym_change_name'
+../../source/src/kernel/OS_CORE/fs/vfs.c(176): error: note: in expansion of macro 'EXPORT_SYMBOL'
+../../source/src/kernel/OS_CORE/fs/vfs.c(179): error: expected '=', ',', ';', 'asm' or '__attribute__' before '{' token
+../../source/src/kernel/OS_CORE/fs/vfs.c(197): error: expected '=', ',', ';', 'asm' or '__attribute__' before '{' token
+../../source/src/kernel/OS_CORE/fs/vfs.c(213): error: expected '=', ',', ';', 'asm' or '__attribute__' before '{' token
+../../source/src/kernel/OS_CORE/fs/vfs.c(244): error: expected '=', ',', ';', 'asm' or '__attribute__' before '{' token
+../../source/src/kernel/OS_CORE/fs/vfs.c(261): error: expected '=', ',', ';', 'asm' or '__attribute__' before '{' token
+../../source/src/kernel/OS_CORE/fs/vfs.c(268): error: parameter '__rtmsym_add_folder_name' is initialized
+../../source/include/os_core/dmodule/export.h(15): error: section attribute not allowed for '__rtmsym_add_folder_name'
+../../source/src/kernel/OS_CORE/fs/vfs.c(268): error: note: in expansion of macro 'EXPORT_SYMBOL'
+../../source/include/os_core/dmodule/export.h(16): error: parameter '__rtmsym_add_folder' is initialized
+../../source/src/kernel/OS_CORE/fs/vfs.c(268): error: note: in expansion of macro 'EXPORT_SYMBOL'
+../../source/include/os_core/dmodule/export.h(16): error: section attribute not allowed for '__rtmsym_add_folder'
+../../source/src/kernel/OS_CORE/fs/vfs.c(268): error: note: in expansion of macro 'EXPORT_SYMBOL'
+../../source/src/kernel/OS_CORE/fs/vfs.c(271): error: expected '=', ',', ';', 'asm' or '__attribute__' before '{' token
+../../source/src/kernel/OS_CORE/fs/vfs.c(288): error: expected '=', ',', ';', 'asm' or '__attribute__' before '{' token
+../../source/src/kernel/OS_CORE/fs/vfs.c(295): error: parameter '__rtmsym_add_file_name' is initialized
+../../source/include/os_core/dmodule/export.h(15): error: section attribute not allowed for '__rtmsym_add_file_name'
+../../source/src/kernel/OS_CORE/fs/vfs.c(295): error: note: in expansion of macro 'EXPORT_SYMBOL'
+../../source/include/os_core/dmodule/export.h(16): error: parameter '__rtmsym_add_file' is initialized
+../../source/src/kernel/OS_CORE/fs/vfs.c(295): error: note: in expansion of macro 'EXPORT_SYMBOL'
+../../source/include/os_core/dmodule/export.h(16): error: section attribute not allowed for '__rtmsym_add_file'
+../../source/src/kernel/OS_CORE/fs/vfs.c(295): error: note: in expansion of macro 'EXPORT_SYMBOL'
+../../source/src/kernel/OS_CORE/fs/vfs.c(298): error: expected '=', ',', ';', 'asm' or '__attribute__' before '{' token
+../../source/src/kernel/OS_CORE/fs/vfs.c(306): error: expected '=', ',', ';', 'asm' or '__attribute__' before '{' token
+../../source/include/os_core/fs/vfs.h(176): error: old-style parameter declarations in prototyped function definition
+../../source/src/kernel/OS_CORE/fs/vfs.c(311): error: expected '{' at end of input
+../../source/src/kernel/OS_CORE/fs/vfs.c(311): warning: control reaches end of non-void function [-Wreturn-type]
+compiling vfsio.c...
+../../source/include/os_core/fs/vfs.h(23): warning: 'struct dentry' declared inside parameter list will not be visible outside of this definition or declaration
+../../source/include/os_core/fs/vfs.h: In function '_inode_alloc_and_init':
+../../source/include/os_core/fs/vfs.h(191): warning: empty declaration
+../../source/include/os_core/fs/vfs.h(197): error: expected '=', ',', ';', 'asm' or '__attribute__' before 'int'
+../../source/include/os_core/dmodule/export.h(8): warning: empty declaration
+../../source/src/kernel/OS_CORE/fs/vfsio.c(7): error: expected '=', ',', ';', 'asm' or '__attribute__' before '{' token
+../../source/src/kernel/OS_CORE/fs/vfsio.c(100): error: expected '=', ',', ';', 'asm' or '__attribute__' before '{' token
+../../source/src/kernel/OS_CORE/fs/vfsio.c(108): error: parameter '__rtmsym_open_name' is initialized
+../../source/include/os_core/dmodule/export.h(15): error: section attribute not allowed for '__rtmsym_open_name'
+../../source/src/kernel/OS_CORE/fs/vfsio.c(108): error: note: in expansion of macro 'EXPORT_SYMBOL'
+../../source/include/os_core/dmodule/export.h(16): error: parameter '__rtmsym_open' is initialized
+../../source/src/kernel/OS_CORE/fs/vfsio.c(108): error: note: in expansion of macro 'EXPORT_SYMBOL'
+../../source/include/os_core/dmodule/export.h(16): error: section attribute not allowed for '__rtmsym_open'
+../../source/src/kernel/OS_CORE/fs/vfsio.c(108): error: note: in expansion of macro 'EXPORT_SYMBOL'
+../../source/src/kernel/OS_CORE/fs/vfsio.c(108): error: 'open' undeclared (first use in this function)
+../../source/include/os_core/dmodule/export.h(18): error: note: in definition of macro 'EXPORT_SYMBOL'
+../../source/src/kernel/OS_CORE/fs/vfsio.c(108): error: note: each undeclared identifier is reported only once for each function it appears in
+../../source/include/os_core/dmodule/export.h(18): error: note: in definition of macro 'EXPORT_SYMBOL'
+../../source/src/kernel/OS_CORE/fs/vfsio.c(111): error: expected '=', ',', ';', 'asm' or '__attribute__' before '{' token
+../../source/src/kernel/OS_CORE/fs/vfsio.c(116): error: expected '=', ',', ';', 'asm' or '__attribute__' before '{' token
+../../source/src/kernel/OS_CORE/fs/vfsio.c(124): error: parameter '__rtmsym_close_name' is initialized
+../../source/include/os_core/dmodule/export.h(15): error: section attribute not allowed for '__rtmsym_close_name'
+../../source/src/kernel/OS_CORE/fs/vfsio.c(124): error: note: in expansion of macro 'EXPORT_SYMBOL'
+../../source/include/os_core/dmodule/export.h(16): error: parameter '__rtmsym_close' is initialized
+../../source/src/kernel/OS_CORE/fs/vfsio.c(124): error: note: in expansion of macro 'EXPORT_SYMBOL'
+../../source/include/os_core/dmodule/export.h(16): error: section attribute not allowed for '__rtmsym_close'
+../../source/src/kernel/OS_CORE/fs/vfsio.c(124): error: note: in expansion of macro 'EXPORT_SYMBOL'
+../../source/src/kernel/OS_CORE/fs/vfsio.c(124): error: 'close' undeclared (first use in this function)
+../../source/include/os_core/dmodule/export.h(18): error: note: in definition of macro 'EXPORT_SYMBOL'
+../../source/src/kernel/OS_CORE/fs/vfsio.c(127): error: expected '=', ',', ';', 'asm' or '__attribute__' before '{' token
+../../source/src/kernel/OS_CORE/fs/vfsio.c(130): error: parameter '__rtmsym_read_name' is initialized
+../../source/include/os_core/dmodule/export.h(15): error: section attribute not allowed for '__rtmsym_read_name'
+../../source/src/kernel/OS_CORE/fs/vfsio.c(130): error: note: in expansion of macro 'EXPORT_SYMBOL'
+../../source/include/os_core/dmodule/export.h(16): error: parameter '__rtmsym_read' is initialized
+../../source/src/kernel/OS_CORE/fs/vfsio.c(130): error: note: in expansion of macro 'EXPORT_SYMBOL'
+../../source/include/os_core/dmodule/export.h(16): error: section attribute not allowed for '__rtmsym_read'
+../../source/src/kernel/OS_CORE/fs/vfsio.c(130): error: note: in expansion of macro 'EXPORT_SYMBOL'
+../../source/src/kernel/OS_CORE/fs/vfsio.c(133): error: expected '=', ',', ';', 'asm' or '__attribute__' before '{' token
+../../source/src/kernel/OS_CORE/fs/vfsio.c(136): error: parameter '__rtmsym_write_name' is initialized
+../../source/include/os_core/dmodule/export.h(15): error: section attribute not allowed for '__rtmsym_write_name'
+../../source/src/kernel/OS_CORE/fs/vfsio.c(136): error: note: in expansion of macro 'EXPORT_SYMBOL'
+../../source/include/os_core/dmodule/export.h(16): error: parameter '__rtmsym_write' is initialized
+../../source/src/kernel/OS_CORE/fs/vfsio.c(136): error: note: in expansion of macro 'EXPORT_SYMBOL'
+../../source/include/os_core/dmodule/export.h(16): error: section attribute not allowed for '__rtmsym_write'
+../../source/src/kernel/OS_CORE/fs/vfsio.c(136): error: note: in expansion of macro 'EXPORT_SYMBOL'
+../../source/src/kernel/OS_CORE/fs/vfsio.c(139): error: expected '=', ',', ';', 'asm' or '__attribute__' before '{' token
+../../source/src/kernel/OS_CORE/fs/vfsio.c(142): error: parameter '__rtmsym_lseek_name' is initialized
+../../source/include/os_core/dmodule/export.h(15): error: section attribute not allowed for '__rtmsym_lseek_name'
+../../source/src/kernel/OS_CORE/fs/vfsio.c(142): error: note: in expansion of macro 'EXPORT_SYMBOL'
+../../source/include/os_core/dmodule/export.h(16): error: parameter '__rtmsym_lseek' is initialized
+../../source/src/kernel/OS_CORE/fs/vfsio.c(142): error: note: in expansion of macro 'EXPORT_SYMBOL'
+../../source/include/os_core/dmodule/export.h(16): error: section attribute not allowed for '__rtmsym_lseek'
+../../source/src/kernel/OS_CORE/fs/vfsio.c(142): error: note: in expansion of macro 'EXPORT_SYMBOL'
+../../source/src/kernel/OS_CORE/fs/vfsio.c(145): error: expected '=', ',', ';', 'asm' or '__attribute__' before '{' token
+../../source/src/kernel/OS_CORE/fs/vfsio.c(148): error: parameter '__rtmsym_ioctl_name' is initialized
+../../source/include/os_core/dmodule/export.h(15): error: section attribute not allowed for '__rtmsym_ioctl_name'
+../../source/src/kernel/OS_CORE/fs/vfsio.c(148): error: note: in expansion of macro 'EXPORT_SYMBOL'
+../../source/include/os_core/dmodule/export.h(16): error: parameter '__rtmsym_ioctl' is initialized
+../../source/src/kernel/OS_CORE/fs/vfsio.c(148): error: note: in expansion of macro 'EXPORT_SYMBOL'
+../../source/include/os_core/dmodule/export.h(16): error: section attribute not allowed for '__rtmsym_ioctl'
+../../source/src/kernel/OS_CORE/fs/vfsio.c(148): error: note: in expansion of macro 'EXPORT_SYMBOL'
+../../source/include/os_core/fs/vfs.h(176): error: old-style parameter declarations in prototyped function definition
+../../source/include/os_core/dmodule/export.h(16): error: expected '{' at end of input
+../../source/src/kernel/OS_CORE/fs/vfsio.c(148): error: note: in expansion of macro 'EXPORT_SYMBOL'
+../../source/include/os_core/dmodule/export.h(16): warning: control reaches end of non-void function [-Wreturn-type]
+../../source/src/kernel/OS_CORE/fs/vfsio.c(148): error: note: in expansion of macro 'EXPORT_SYMBOL'
+".\BH-F103.elf" - 115 Error(s), 8 Warning(s).
+Target not created
+</pre>
+</body>
+</html>
+n.c...
+compiling user.c...
+".\BH-F103.elf" - 113 Error(s), 8 Warning(s).
+Target not created
+'
+../../source/include/os_core/fs/vfs.h(176): error: old-style parameter declarations in prototyped function definition
+../../source/include/os_core/dmodule/export.h(16): error: expected '{' at end of input
+../../source/src/kernel/OS_CORE/fs/vfsio.c(144): error: note: in expansion of macro 'EXPORT_SYMBOL'
+../../source/include/os_core/dmodule/export.h(16): warning: control reaches end of non-void function [-Wreturn-type]
+../../source/src/kernel/OS_CORE/fs/vfsio.c(144): error: note: in expansion of macro 'EXPORT_SYMBOL'
 compiling OS_CPU_STM32.c...
 compiling stm32f10x_it.c...
 compiling bsp_usart.c...
@@ -72,8 +170,5 @@ compiling shell_debug.c...
 compiling shell_fun.c...
 compiling bsp_led.c...
 compiling user.c...
-linking...
-".\BH-F103.elf" - 0 Error(s), 0 Warning(s).
-d line option '--gc-sections'; did you mean '--data-sections'?
-".\BH-F103.elf" - 1 Error(s), 0 Warning(s).
+".\BH-F103.elf" - 113 Error(s), 8 Warning(s).
 Target not created

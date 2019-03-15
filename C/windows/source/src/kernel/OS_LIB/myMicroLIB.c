@@ -425,6 +425,7 @@ int ka_strncmp(const char * str1, const char * str2, int num)
 	}
 	return *str1 - *str2;
 }
+EXPORT_SYMBOL(ka_strncmp);
 
 void ka_memset(void *s,const int ch, int n)
 {
@@ -435,6 +436,7 @@ void ka_memset(void *s,const int ch, int n)
 		*ptr++ = buffer;
 	}
 }
+EXPORT_SYMBOL(ka_memset);
 
 void ka_strcpy(char *strDest, const char *strSrc)
 {
@@ -442,6 +444,7 @@ void ka_strcpy(char *strDest, const char *strSrc)
 		return;
 	while((*strDest++ = *strSrc++));
 }
+EXPORT_SYMBOL(ka_strcpy);
 
 int ka_atoi(const char *char_ptr)
 {
@@ -524,6 +527,7 @@ int ka_strcmp(const char * str1, const char * str2)
 	}
 	return (*str1 - *str2);
 }
+EXPORT_SYMBOL(ka_strcmp);
 
 extern void init_malloc(void);
 void __init_my_micro_lib(void)

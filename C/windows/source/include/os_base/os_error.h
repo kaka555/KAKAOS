@@ -3,7 +3,7 @@
 
 #include <myMicroLIB.h>
 
-#define FUN_EXECUTE_SUCCESSFULLY 0
+#define FUN_EXECUTE_SUCCESSFULLY 	0x00
 
 /*when the following #define, add a ‘-’ before it
   example:
