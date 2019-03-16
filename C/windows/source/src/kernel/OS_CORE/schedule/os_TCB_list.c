@@ -53,7 +53,7 @@ int _delete_from_TCB_list(TCB *TCB_ptr)
 	}
 	/*should not go here*/
 	ASSERT(0);
-	return ERROR_VALUELESS_INPUT;
+	return ERROR_USELESS_INPUT;
 }
 
 struct list_head *_get_from_TCB_list(unsigned int index)

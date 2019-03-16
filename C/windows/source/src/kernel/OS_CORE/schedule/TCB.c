@@ -143,7 +143,7 @@ int task_change_prio(TCB *TCB_ptr,TASK_PRIO_TYPE prio)
 	if(prio >= PRIO_MAX)
 	{
 		OS_ERROR_PARA_MESSAGE_DISPLAY(task_change_prio,prio);
-		return -ERROR_VALUELESS_INPUT;
+		return -ERROR_USELESS_INPUT;
 	}
 	if(NULL == TCB_ptr)
 	{

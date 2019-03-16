@@ -4,25 +4,42 @@
 #include <double_linked_list.h>
 #include <mutex.h>
 
+#define BLOCK_SIZE 1024 /* bytes */
+
 struct file;
 struct dentry_operations;
 struct inode;
+struct dentry;
+
+enum llseek_from{
+	FILE_START,
+	FILE_CURRENT,
+	FILE_TAIL
+};
 
 struct file_operations
 {
 	int (*open)(struct file *file_ptr);
 	int (*close)(struct file *file_ptr);
-	int (*read)(struct file *file_ptr,void *buffer,unsigned int len);
-	int (*write)(struct file *file_ptr,void *buffer,unsigned int len);
-	int (*lseek)(struct file *file_ptr,int offset);
+	int (*read)(struct file *file_ptr,void *buffer,unsigned int len,unsigned int offset);
+	int (*write)(struct file *file_ptr,void *buffer,unsigned int len,unsigned int offset);
+	int (*llseek)(struct file *file_ptr,int offset,enum llseek_from from);
 	int (*ioctl)(struct file *file_ptr,int cmd,int args);
 };
-
-struct inode_operations
+/*
+	realize by bottom file system
+	if the file system does not support some operation,just give
+	the corresponding element a empty function pointer
+ */
+struct inode_operations 
 {
 	int (*change_name)(struct inode *inode_ptr,struct dentry *dentry_ptr);
 	int (*refresh)(struct inode *inode_ptr);
-	int (*cmp_name)(struct inode *inode_ptr,const char *name);
+	int (*floader_cmp_file_name)(struct inode *inode_ptr,const char *name);
+	int (*add_sub_file)(struct inode *inode_ptr,const char *file_name);
+	int (*add_sub_folder)(struct inode *inode_ptr,const char *folder_name);
+	int (*read_data)(struct inode *inode_ptr,void *store_ptr,unsigned int len,unsigned int offset);
+	int (*write_data)(struct inode *inode_ptr,void *data_ptr,unsigned int len,unsigned int offset);
 };
 
 /*************the element 'flag' of struct dentry*************/
@@ -58,12 +75,16 @@ struct dentry
 	struct list_head subdirs; /* this is the list head of it's subdirs */
 	struct list_head child;	/* this is the node of the subdirs's list */
 	MUTEX d_mutex;
-	struct file *file_ptr;
 };
 
 static inline void set_dentry_flag(struct dentry *dentry_ptr,UINT32 flag)
 {
 	dentry_ptr->flag |= flag;
+}
+
+static inline UINT32 get_dentry_flag(struct dentry *dentry_ptr)
+{
+	return dentry_ptr->flag;
 }
 
 typedef UINT32 f_mode_t;
@@ -81,7 +102,19 @@ struct file
 	struct dentry *f_den;
 	f_mode_t f_mode;
 	unsigned int ref;
+	void *private_data;
 };
+
+static inline void _fget(struct file *file_ptr)
+{
+	++(file_ptr->ref);
+}
+/* add the ref of file,means that a task use this file,
+ os should not release it. */
+static inline void _fput(struct file *file_ptr)
+{
+	--(file_ptr->ref);
+}
 
 static inline unsigned int get_file_ref(struct file *file_ptr)
 {
@@ -132,11 +165,6 @@ static inline void set_inode_flag(struct inode *inode_ptr,UINT32 flag)
 	inode_ptr->flag |= flag;
 }
 
-/* add the ref of file,means that a task use this file,
- os should not release it. */
-void _fget(struct file *file_ptr); 
-int _fput(struct file *file_ptr);
-
 /* add the ref of inode,means that a task use this inode,
  os should not release it. */
 int _iget(struct dentry *d_parent); 
@@ -154,7 +182,6 @@ int _iput(struct dentry *d_parent);
 
 struct dentry *_dentry_alloc_and_init(
 	struct dentry *parent_ptr,  
-	struct dentry_operations *dentry_operations_ptr,
 	struct inode *inode_ptr,
 	const char *name,
 	UINT32 flag
@@ -177,27 +204,33 @@ struct inode *_inode_alloc_and_init(
 	unsigned long file_size,
 	struct inode_operations *inode_operations_ptr,
 	struct file_operations *file_operations_ptr,
-	UINT32 flag)
+	UINT32 flag);
 
-void __init_vfs(void);
-
-int change_name(struct file *file_ptr,const char *name);
+int rename(struct file *file_ptr,const char *name);
 
 struct dentry *_find_dentry(const char *path);
-int add_folder(const char *path,const char *folder_name);
-int add_file(const char *path,struct file_operations *f_op,const char *file_name);
+int add_folder(const char *path,const char *folder_name,struct file_operations *file_operations_ptr);
+int add_file(const char *path,const char *file_name,struct file_operations *file_operations_ptr);
 
-
-enum FILE_FLAG {
-	FLAG_READONLY = FILE_MODE_READ,
-	FLAG_WRITEONLY = FILE_MODE_WRITE,
-	FLAG_READ_WRITE = FILE_MODE_READ | FILE_MODE_WRITE
+enum FILE_FLAG{
+	FILE_FLAG_READONLY = FILE_MODE_READ,
+	FILE_FLAG_WRITEONLY = FILE_MODE_WRITE,
+	FILE_FLAG_READ_WRITE = (FILE_MODE_READ | FILE_MODE_WRITE)
 };
-int open(const char *path,enum FILE_FLAG flag,struct file **file_store_ptr)
-int close(struct file *file_ptr);
-int read(struct file *file_ptr,void *buffer,unsigned int len);
-int write(struct file *file_ptr,void *buffer,unsigned int len);
-int lseek(struct file *file_ptr,int offset);
-int ioctl(struct file *file_ptr,int cmd,int args);
+
+int ka_open(const char *path,enum FILE_FLAG flag,struct file **file_store_ptr); /* open a file */
+int ka_close(struct file *file_ptr);
+int ka_read(struct file *file_ptr,void *buffer,unsigned int len);
+int ka_write(struct file *file_ptr,void *buffer,unsigned int len);
+int ka_lseek(struct file *file_ptr,int offset,enum llseek_from from);
+int ka_ioctl(struct file *file_ptr,int cmd,int args);
+
+struct directory
+{
+	struct dentry *dir;
+};
+
+struct directory opendir(const char *path);
+int closedir(struct directory *directory_ptr);
 
 #endif

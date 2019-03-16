@@ -56,7 +56,7 @@ int msg_init(MQB *MQB_ptr,char *name,unsigned int max_message_num)
 	if(0 == max_message_num)
 	{
 		OS_ERROR_PARA_MESSAGE_DISPLAY(msg_init,max_message_num);
-		return -ERROR_VALUELESS_INPUT;
+		return -ERROR_USELESS_INPUT;
 	}
 	if (g_interrupt_count > 0)
 	{

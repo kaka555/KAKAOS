@@ -74,12 +74,12 @@ int sys_delay(unsigned int delay_ticks_num,TASK_STATE state)
 		(STATE_WAIT_MESSAGE_QUEUE_TIMEOUT == state) || (STATE_PUT_MESSAGE_QUEUE_TIMEOUT == state)))
 	{
 		OS_ERROR_PARA_MESSAGE_DISPLAY(sys_delay,state);
-		return -ERROR_VALUELESS_INPUT;
+		return -ERROR_USELESS_INPUT;
 	}
 	if(0 == delay_ticks_num)
 	{
 		OS_ERROR_PARA_MESSAGE_DISPLAY(sys_delay,delay_ticks_num);
-		return -ERROR_VALUELESS_INPUT;
+		return -ERROR_USELESS_INPUT;
 	}
 	return _sys_delay(delay_ticks_num,state);
 }
@@ -116,7 +116,7 @@ int sys_suspend(TASK_STATE state)
 		   (STATE_WAIT_MUTEX_FOREVER == state)))
 	{
 		OS_ERROR_PARA_MESSAGE_DISPLAY(sys_delay,state);
-		return -ERROR_VALUELESS_INPUT;
+		return -ERROR_USELESS_INPUT;
 	} 
 	return _sys_suspend(state);
 }

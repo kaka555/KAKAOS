@@ -2,6 +2,8 @@
 #include <myassert.h>
 #include <os_error.h>
 #include <export.h>
+#include <printf_debug.h>
+#include <os_cpu.h>
 
 int _open(const char *path,enum FILE_FLAG flag,struct file **file_store_ptr)
 {
@@ -9,110 +11,98 @@ int _open(const char *path,enum FILE_FLAG flag,struct file **file_store_ptr)
 	struct dentry *dentry_ptr = _find_dentry(path);
 	if(NULL == dentry_ptr)
 	{
-		if(NULL != error_ptr)
-			*error_ptr = -ERROR_LOGIC;
-		return NULL;
+		return -ERROR_LOGIC;
+	}
+	if(get_dentry_flag(dentry_ptr) & FLAG_DENTRY_FOLDER)
+	{
+		KA_DEBUG_LOG(DEBUG_TYPE_VFS,"the path '%s' is not a file\n",path);
+		return -ERROR_LOGIC;
 	}
 	struct file *file_ptr;
 	switch(flag)
 	{
-		case FLAG_READONLY:
-			if(!(dentry_ptr->d_inode.flag & FLAG_INODE_READ))
+		case FILE_FLAG_READONLY:
+			if(!(dentry_ptr->d_inode->flag & FLAG_INODE_READ))
 			{
-				if(NULL != error_ptr)
-					*error_ptr = -ERROR_SYS;
-				return NULL;
-			}
-			if(dentry_ptr->file_ptr)
-			{
-				file_ptr = dentry_ptr->file_ptr;
-				set_file_mode(file_ptr,FILE_MODE_READ);
-				break ;
+				return -ERROR_SYS;
 			}
 			file_ptr = _file_alloc_and_init_READONLY(dentry_ptr);
 			if(NULL == file_ptr)
 			{
-				if(NULL != error_ptr)
-					*error_ptr = -ERROR_NO_MEM;
-				return NULL;
+				return -ERROR_NO_MEM;
 			}
 			break;
-		case FLAG_WRITEONLY:
-			if(!(dentry_ptr->d_inode.flag & FLAG_INODE_WRITE))
+		case FILE_FLAG_WRITEONLY:
+			if(!(dentry_ptr->d_inode->flag & FLAG_INODE_WRITE))
 			{
-				if(NULL != error_ptr)
-					*error_ptr = -ERROR_SYS;
-				return NULL;
-			}
-			if(dentry_ptr->file_ptr)
-			{
-				file_ptr = dentry_ptr->file_ptr;
-				set_file_mode(file_ptr,FILE_MODE_WRITE);
-				break ;
+				return -ERROR_SYS;
 			}
 			file_ptr = _file_alloc_and_init_WRITEONLY(dentry_ptr);
 			if(NULL == file_ptr)
 			{
-				if(NULL != error_ptr)
-					*error_ptr = -ERROR_NO_MEM;
-				return NULL;
+				return -ERROR_NO_MEM;
 			}
 			break;
-		case FLAG_READ_WRITE:
-			if(!(dentry_ptr->d_inode.flag & (FLAG_INODE_WRITE | FLAG_INODE_READ)))
+		case FILE_FLAG_READ_WRITE:
+			if(!(dentry_ptr->d_inode->flag & (FLAG_INODE_WRITE | FLAG_INODE_READ)))
 			{
-				if(NULL != error_ptr)
-					*error_ptr = -ERROR_SYS;
-				return NULL;
-			}
-			if(dentry_ptr->file_ptr)
-			{
-				file_ptr = dentry_ptr->file_ptr;
-				set_file_mode(file_ptr,FILE_MODE_WRITE | FILE_MODE_READ);
-				break ;
+				return -ERROR_SYS;
 			}
 			file_ptr = _file_alloc_and_init_WRITEONLY(dentry_ptr);
 			if(NULL == file_ptr)
 			{
-				if(NULL != error_ptr)
-					*error_ptr = -ERROR_NO_MEM;
-				return NULL;
+				return -ERROR_NO_MEM;
 			}
 			break;
 		default:
+			KA_DEBUG_LOG(DEBUG_TYPE_VFS,"function open flag error\n");
 			ASSERT(0);
-			if(NULL != error_ptr)
-				*error_ptr = -ERROR_LOGIC;
-			return NULL;
+			return -ERROR_LOGIC;
 	}
-	dentry_ptr->file_ptr = file_ptr;
+	CPU_SR_ALLOC();
+	CPU_CRITICAL_ENTER();
 	_fget(file_ptr);
+	CPU_CRITICAL_EXIT();
 	if(file_ptr->f_op->open)
 	{
 		return file_ptr->f_op->open(file_ptr);
 	}
-	if(NULL != error_ptr)
-		*error_ptr = FUN_EXECUTE_SUCCESSFULLY;
-	return file_ptr;
+	*file_store_ptr = file_ptr;
+	return FUN_EXECUTE_SUCCESSFULLY;
 }
 
-int open(const char *path,enum FILE_FLAG flag,struct file **file_store_ptr)
+/* open a file */
+int ka_open(const char *path,enum FILE_FLAG flag,struct file **file_store_ptr)
 {
-	if(NULL == path)
+	if((NULL == path) || (NULL == file_store_ptr))
 	{
 		OS_ERROR_PARA_MESSAGE_DISPLAY(open,path);
+		OS_ERROR_PARA_MESSAGE_DISPLAY(open,file_store_ptr);
 		return NULL;
 	}
-	return _open(path,flag,error_ptr);
+	return _open(path,flag,file_store_ptr);
 }
-EXPORT_SYMBOL(open);
+EXPORT_SYMBOL(ka_open);
 
 int _close(struct file *file_ptr)
 {
 	ASSERT(NULL != file_ptr);
+	if(file_ptr->f_op->close)
+	{
+		file_ptr->f_op->close(file_ptr);
+	}
+	CPU_SR_ALLOC();
+	CPU_CRITICAL_ENTER();
+	_fput(file_ptr);
+	if(0 == get_file_ref(file_ptr))
+	{
+		ka_free(file_ptr);
+	}
+	CPU_CRITICAL_EXIT();
+	return FUN_EXECUTE_SUCCESSFULLY;
 }
 
-int close(struct file *file_ptr)
+int ka_close(struct file *file_ptr)
 {
 	if(NULL == file_ptr)
 	{
@@ -121,28 +111,120 @@ int close(struct file *file_ptr)
 	}
 	return _close(file_ptr);
 }
-EXPORT_SYMBOL(close);
+EXPORT_SYMBOL(ka_close);
 
-int read(struct file *file_ptr,void *buffer,unsigned int len)
+int _read(struct file *file_ptr,void *buffer,unsigned int len)
 {
-
+	ASSERT((NULL != file_ptr) && (NULL != buffer) && (len > 0));
+	if(!(file_ptr->f_mode & FILE_MODE_READ))
+	{
+		return -ERROR_LOGIC;
+	}
+	if(file_ptr->f_op->read)
+	{
+		int offset = file_ptr->f_op->read(file_ptr,buffer,len,file_ptr->offset);
+		if(offset < 0)
+		{
+			return offset;
+		}
+		file_ptr->offset += offset;
+		return offset;
+	}
+	else
+	{
+		file_ptr->offset += len;  /* a bug here of file->offset */
+		return len;
+	}
 }
-EXPORT_SYMBOL(read);
 
-int write(struct file *file_ptr,void *buffer,unsigned int len)
+int ka_read(struct file *file_ptr,void *buffer,unsigned int len)
 {
-
+	if((NULL == file_ptr) || (NULL == buffer))
+	{
+		return -ERROR_NULL_INPUT_PTR;
+	}
+	if(0 == len)
+	{
+		return -ERROR_USELESS_INPUT;
+	}
+	return _read(file_ptr,buffer,len);
 }
-EXPORT_SYMBOL(write);
+EXPORT_SYMBOL(ka_read);
 
-int lseek(struct file *file_ptr,int offset)
+int _write(struct file *file_ptr,void *buffer,unsigned int len)
 {
-
+	ASSERT((NULL != file_ptr) && (NULL != buffer) && (len > 0));
+	if(!(file_ptr->f_mode & FILE_MODE_WRITE))
+	{
+		return -ERROR_LOGIC;
+	}
+	if(file_ptr->f_op->write)
+	{
+		int offset = file_ptr->f_op->write(file_ptr,buffer,len,file_ptr->offset);
+		if(offset < 0)
+		{
+			return offset;
+		}
+		file_ptr->offset += offset;
+		return offset;
+	}
+	else
+	{
+		file_ptr->offset += len; /* a bug here of file->offset */
+		return len;
+	}
 }
-EXPORT_SYMBOL(lseek);
 
-int ioctl(struct file *file_ptr,int cmd,int args)
+int ka_write(struct file *file_ptr,void *buffer,unsigned int len)
 {
-
+	if((NULL == file_ptr) || (NULL == buffer))
+	{
+		return -ERROR_NULL_INPUT_PTR;
+	}
+	if(0 == len)
+	{
+		return -ERROR_USELESS_INPUT;
+	}
+	return _write(file_ptr,buffer,len);
 }
-EXPORT_SYMBOL(ioctl);
+EXPORT_SYMBOL(ka_write);
+
+int _llseek(struct file *file_ptr,int offset,enum llseek_from from)
+{
+	ASSERT(NULL != file_ptr);
+	if(file_ptr->f_op->llseek)
+	{
+		return file_ptr->f_op->llseek(file_ptr,offset,from);
+	}
+	return FUN_EXECUTE_SUCCESSFULLY;
+}
+
+int ka_llseek(struct file *file_ptr,int offset,enum llseek_from from)
+{
+	if(NULL == file_ptr)
+	{
+		return -ERROR_NULL_INPUT_PTR;
+	}
+	return _llseek(file_ptr,offset,from);
+}
+EXPORT_SYMBOL(ka_llseek);
+
+int _ioctl(struct file *file_ptr,int cmd,int args)
+{
+	ASSERT(NULL != file_ptr);
+	if(file_ptr->f_op->ioctl)
+	{
+		return file_ptr->f_op->ioctl(file_ptr,cmd,args);
+	}
+	return FUN_EXECUTE_SUCCESSFULLY;
+}
+
+int ka_ioctl(struct file *file_ptr,int cmd,int args)
+{
+	if(NULL == file_ptr)
+	{
+		return -ERROR_NULL_INPUT_PTR;
+	}
+	return _ioctl(file_ptr,cmd,args);
+}
+EXPORT_SYMBOL(ka_ioctl);

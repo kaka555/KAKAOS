@@ -146,7 +146,7 @@ static int _shell_exec(const char *command)
 	if(len + 1 > using_shell_buffer_ptr->buffer_size)
 	{
 		OS_ERROR_PARA_MESSAGE_DISPLAY(_shell_exec,command);
-		return -ERROR_VALUELESS_INPUT;
+		return -ERROR_USELESS_INPUT;
 	}
 	unsigned int i;
 	for(i=0;i<len;++i)

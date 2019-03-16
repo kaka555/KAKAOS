@@ -32,5 +32,5 @@ int _remove_from_suspend_list(TCB *TCB_ptr)
 			return FUN_EXECUTE_SUCCESSFULLY;
 		}
 	}
-	return -ERROR_VALUELESS_INPUT;
+	return -ERROR_USELESS_INPUT;
 }

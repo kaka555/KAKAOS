@@ -12,8 +12,10 @@
 do                                                                            \
 {                                                                             \
     if (type)                                                                 \
-        rt_kprintf (format, ##__VA_ARGS__);                                   \
+        ka_printf (format, ##__VA_ARGS__);                                   \
 }                                                                             \
-while (0)
+while(0)
+
+#define DEBUG_TYPE_VFS 1
 
 #endif

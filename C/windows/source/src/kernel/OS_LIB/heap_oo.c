@@ -77,7 +77,7 @@ int heap_get_index_data_safe(struct little_heap *little_heap_ptr,void **data_sto
 	ASSERT((NULL != little_heap_ptr) && (NULL != data_store_ptr));
 	if(get_Vector_cur_len(&little_heap_ptr->data) <= index)
 	{
-		return -ERROR_VALUELESS_INPUT;
+		return -ERROR_USELESS_INPUT;
 	}
 	*data_store_ptr = Vector_get_index_data(&little_heap_ptr->data,index);
 	return FUN_EXECUTE_SUCCESSFULLY;

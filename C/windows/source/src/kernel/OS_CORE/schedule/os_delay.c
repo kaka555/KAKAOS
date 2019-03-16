@@ -80,7 +80,7 @@ int _remove_from_delay_heap(TCB *TCB_ptr)
 			return FUN_EXECUTE_SUCCESSFULLY;
 		}
 	}
-	return -ERROR_VALUELESS_INPUT;
+	return -ERROR_USELESS_INPUT;
 }
 
 TCB* _delay_heap_get_top_TCB(void)

@@ -136,7 +136,7 @@ int set_time(struct time *time_ptr)
 			|| (time_ptr->hour >= 24) || (time_ptr->day > 7)
 			|| (time_ptr->date > month_date_table[time_ptr->month]))
 	{
-		return -ERROR_VALUELESS_INPUT;
+		return -ERROR_USELESS_INPUT;
 	}
 	return _set_time(time_ptr);
 }
