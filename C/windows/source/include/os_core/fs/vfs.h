@@ -87,6 +87,16 @@ static inline UINT32 get_dentry_flag(struct dentry *dentry_ptr)
 	return dentry_ptr->flag;
 }
 
+static inline int is_folder(struct dentry *dentry_ptr)
+{
+	return ((dentry_ptr->flag) & FLAG_DENTRY_FOLDER);
+}
+
+static inline int is_file(struct dentry *dentry_ptr)
+{
+	return (!((dentry_ptr->flag) & FLAG_DENTRY_FOLDER));
+}
+
 typedef UINT32 f_mode_t;
 /*************the element 'f_mode' of struct file*************/
 #define FILE_MODE_DEFAULT 0x00
@@ -211,6 +221,8 @@ int rename(struct file *file_ptr,const char *name);
 struct dentry *_find_dentry(const char *path);
 int add_folder(const char *path,const char *folder_name,struct file_operations *file_operations_ptr);
 int add_file(const char *path,const char *file_name,struct file_operations *file_operations_ptr);
+int delete_file(const char *path);
+int delete_folder(const char *path);
 
 enum FILE_FLAG{
 	FILE_FLAG_READONLY = FILE_MODE_READ,
@@ -232,5 +244,11 @@ struct directory
 
 struct directory opendir(const char *path);
 int closedir(struct directory *directory_ptr);
+
+void shell_pwd(int argc, char const *argv[]);
+void shell_ls(int argc, char const *argv[]);
+void shell_cd(int argc, char const *argv[]);
+void shell_touch(int argc, char const *argv[]);
+void shell_mkdir(int argc, char const *argv[]);
 
 #endif

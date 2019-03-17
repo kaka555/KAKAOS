@@ -13,6 +13,7 @@
 #include <os_cpu.h>
 #include <export.h>
 #include <module.h>
+#include <vfs.h>
 
 #if CONFIG_SHELL_EN
 
@@ -95,7 +96,7 @@ void _put_in_shell_buffer(char c)  /* deal with input layer*/
 	if( ! (	IS_LOWER(c) || IS_UPPER(c) || (0x0d == c) || 
 			(0x03 == c) || (0x08 == c) || (' ' == c)  || 
 			IS_NUM(c) 	|| IS_DOT(c)   || ('-' == c)  || 
-			('+' == c)	|| ('=' == c)))
+			('+' == c)	|| ('=' == c)  || ('/' == c)))
 	{
 		ka_printf("\nerror input\n");
 		ka_printf("%s",using_shell_buffer_ptr->buffer);
@@ -203,6 +204,16 @@ static struct command resident_command_1[] =
 };
 static struct command resident_command_2[] = 
 {
+#if CONFIG_VFS
+	{
+		.command_name = "ls",
+		.f = shell_ls,
+	},
+	{
+		.command_name = "cd",
+		.f = shell_cd,
+	},
+#endif
 	{
 		.command_name = "ka",
 		.f = test,
@@ -228,6 +239,12 @@ static struct command resident_command_3[] =
 	{
 		.command_name = "cpu",
 		.f = cpu_rate,
+	},
+#endif
+#if CONFIG_VFS
+	{
+		.command_name = "pwd",
+		.f = shell_pwd,
 	},
 #endif
 	{
@@ -298,6 +315,16 @@ static struct command resident_command_5[] =
 	,{
 		.command_name = "rmmod",
 		.f = shell_remove_module,
+	}
+#endif
+#if CONFIG_VFS
+	,{
+		.command_name = "touch",
+		.f = shell_touch,
+	}
+	,{
+		.command_name = "mkdir",
+		.f = shell_mkdir,
 	}
 #endif
 };

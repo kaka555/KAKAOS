@@ -4,179 +4,57 @@
 <h1>µVision Build Log</h1>
 <h2>Project:</h2>
 F:\kaka\KAKAOS\C\windows\Project\RVMDK£¨uv5£©\BH-F103.uvprojx
-Project File Date:  03/15/2019
+Project File Date:  03/16/2019
 
 <h2>Output:</h2>
 Build target 'KAKAOS'
-compiling vfs_default_fun.c...
+compiling vfs.c...
 linking...
 ".\BH-F103.elf" - 0 Error(s), 0 Warning(s).
+Load "F:\\kaka\\KAKAOS\\C\\windows\\Project\\RVMDK£¨uv5£©\\BH-F103.elf" 
+Set JLink Project File to "F:\kaka\KAKAOS\C\windows\Project\RVMDK£¨uv5£©\JLinkSettings.ini"
+* JLink Info: Device "STM32F103ZE" selected (512 KB flash, 64 KB RAM).
+ 
+JLink info:
+------------
+DLL: V4.80g, compiled Feb 13 2014 20:50:02
+Firmware: J-Link V9 compiled Mar  2 2018 17:07:57
+Hardware: V9.40
+S/N : 59402926 
+Feature(s) : RDI, GDB, FlashDL, FlashBP, JFlash 
+ 
+* JLink Info: TotalIRLen = 9, IRPrint = 0x0011
+* JLink Info: TotalIRLen = 9, IRPrint = 0x0011
+* JLink Info: Found Cortex-M3 r1p1, Little endian.
+* JLink Info: FPUnit: 6 code (BP) slots and 2 literal slots
+* JLink Info: TPIU fitted.
+* JLink Info: ETM fitted.
+ROMTableAddr = 0xE00FF003
+ 
+Target info:
+------------
+Device: STM32F103ZE
+VTarget = 3.324V
+State of Pins: 
+TCK: 1, TDI: 0, TDO: 1, TMS: 0, TRES: 1, TRST: 1
+Hardware-Breakpoints: 6
+Software-Breakpoints: 8192
+Watchpoints:          4
+JTAG speed: 2000 kHz
+ 
+Erase Done.
+Programming Done.
+Verify OK.
+Application running ...
 </pre>
 </body>
 </html>
-RE/fs/vfs.c:33: undefined reference to `default_change_name'
-./vfs.o:(.data+0x1c): undefined reference to `default_refresh'
-./vfs.o:(.data+0x20): undefined reference to `default_floader_cmp_file_name'
-./vfs.o:(.data+0x24): undefined reference to `default_add_sub_file'
-./vfs.o:(.data+0x28): undefined reference to `add_sub_folder'
-./vfs.o:(.data+0x2c): undefined reference to `default_read_data'
-./vfs.o:(.data+0x30): undefined reference to `default_write_data'
-collect2.exe: error: ld returned 1 exit status
-".\BH-F103.elf" - 1 Error(s), 0 Warning(s).
-Target not created
-s
-".\BH-F103.elf" - 1 Error(s), 1 Warning(s).
-Target not created
-c(182): error: 'write' undeclared here (not in a function); did you mean '_write'?
-../../source/include/os_core/dmodule/export.h(18): error: note: in definition of macro 'EXPORT_SYMBOL'
-../../source/src/kernel/OS_CORE/fs/vfsio.c(202): error: 'lseek' undeclared here (not in a function); did you mean '_llseek'?
-../../source/include/os_core/dmodule/export.h(18): error: note: in definition of macro 'EXPORT_SYMBOL'
-../../source/src/kernel/OS_CORE/fs/vfsio.c(222): error: 'ioctl' undeclared here (not in a function); did you mean '_ioctl'?
-../../source/include/os_core/dmodule/export.h(18): error: note: in definition of macro 'EXPORT_SYMBOL'
+mming Done.
+Verify OK.
+Application running ...
+ling vfsio.c...
+compiling sysfs.c...
 compiling vfs_default_fun.c...
-../../source/src/kernel/OS_CORE/fs/vfs_default_fun.c: In function 'default_read':
-../../source/src/kernel/OS_CORE/fs/vfs_default_fun.c(25): warning: control reaches end of non-void function [-Wreturn-type]
-../../source/src/kernel/OS_CORE/fs/vfs_default_fun.c: In function 'default_write':
-../../source/src/kernel/OS_CORE/fs/vfs_default_fun.c(30): warning: control reaches end of non-void function [-Wreturn-type]
-../../source/src/kernel/OS_CORE/fs/vfs_default_fun.c: In function 'default_llseek':
-../../source/src/kernel/OS_CORE/fs/vfs_default_fun.c(69): warning: control reaches end of non-void function [-Wreturn-type]
-".\BH-F103.elf" - 12 Error(s), 3 Warning(s).
-Target not created
->f_op->ioctl'
-".\BH-F103.elf" - 10 Error(s), 3 Warning(s).
-Target not created
-source/src/kernel/OS_CORE/fs/vfsio.c(189): error: 'struct file_operations' has no member named 'lseek'; did you mean 'llseek'?
-../../source/src/kernel/OS_CORE/fs/vfsio.c: In function '_ioctl':
-../../source/src/kernel/OS_CORE/fs/vfsio.c(209): error: 'offset' undeclared (first use in this function); did you mean '_fget'?
-../../source/src/kernel/OS_CORE/fs/vfsio.c(209): error: too few arguments to function 'file_ptr->f_op->ioctl'
-".\BH-F103.elf" - 12 Error(s), 5 Warning(s).
-Target not created
-seek'; did you mean 'llseek'?
-../../source/src/kernel/OS_CORE/fs/vfsio.c: In function '_ioctl':
-../../source/src/kernel/OS_CORE/fs/vfsio.c(209): error: 'offset' undeclared (first use in this function); did you mean '_fget'?
-../../source/src/kernel/OS_CORE/fs/vfsio.c(209): error: too few arguments to function 'file_ptr->f_op->ioctl'
-compiling stm32f10x_it.c...
-compiling heap_oo.c...
-compiling insert_sort_oo.c...
-compiling malloc.c...
-compiling vector.c...
-compiling shell.c...
-compiling shell_debug.c...
-compiling shell_fun.c...
-compiling user.c...
-".\BH-F103.elf" - 14 Error(s), 4 Warning(s).
-Target not created
-octl':
-../../source/src/kernel/OS_CORE/fs/vfsio.c(116): warning: control reaches end of non-void function [-Wreturn-type]
-".\BH-F103.elf" - 13 Error(s), 9 Warning(s).
-Target not created
-ol reaches end of non-void function [-Wreturn-type]
-../../source/src/kernel/OS_CORE/fs/vfsio.c: In function 'lseek':
-../../source/src/kernel/OS_CORE/fs/vfsio.c(110): warning: control reaches end of non-void function [-Wreturn-type]
-../../source/src/kernel/OS_CORE/fs/vfsio.c: In function 'ioctl':
-../../source/src/kernel/OS_CORE/fs/vfsio.c(116): warning: control reaches end of non-void function [-Wreturn-type]
-".\BH-F103.elf" - 16 Error(s), 9 Warning(s).
-Target not created
-ed
-for '__rtmsym_change_name_name'
-../../source/src/kernel/OS_CORE/fs/vfs.c(185): error: note: in expansion of macro 'EXPORT_SYMBOL'
-../../source/include/os_core/dmodule/export.h(16): error: parameter '__rtmsym_change_name' is initialized
-../../source/src/kernel/OS_CORE/fs/vfs.c(185): error: note: in expansion of macro 'EXPORT_SYMBOL'
-../../source/include/os_core/dmodule/export.h(16): error: section attribute not allowed for '__rtmsym_change_name'
-../../source/src/kernel/OS_CORE/fs/vfs.c(185): error: note: in expansion of macro 'EXPORT_SYMBOL'
-../../source/src/kernel/OS_CORE/fs/vfs.c(188): error: expected '=', ',', ';', 'asm' or '__attribute__' before '{' token
-../../source/src/kernel/OS_CORE/fs/vfs.c(206): error: expected '=', ',', ';', 'asm' or '__attribute__' before '{' token
-../../source/src/kernel/OS_CORE/fs/vfs.c(222): error: expected '=', ',', ';', 'asm' or '__attribute__' before '{' token
-../../source/src/kernel/OS_CORE/fs/vfs.c(253): error: expected '=', ',', ';', 'asm' or '__attribute__' before '{' token
-../../source/src/kernel/OS_CORE/fs/vfs.c(288): error: expected '=', ',', ';', 'asm' or '__attribute__' before '{' token
-../../source/src/kernel/OS_CORE/fs/vfs.c(295): error: parameter '__rtmsym_add_folder_name' is initialized
-../../source/include/os_core/dmodule/export.h(15): error: section attribute not allowed for '__rtmsym_add_folder_name'
-../../source/src/kernel/OS_CORE/fs/vfs.c(295): error: note: in expansion of macro 'EXPORT_SYMBOL'
-../../source/include/os_core/dmodule/export.h(16): error: parameter '__rtmsym_add_folder' is initialized
-../../source/src/kernel/OS_CORE/fs/vfs.c(295): error: note: in expansion of macro 'EXPORT_SYMBOL'
-../../source/include/os_core/dmodule/export.h(16): error: section attribute not allowed for '__rtmsym_add_folder'
-../../source/src/kernel/OS_CORE/fs/vfs.c(295): error: note: in expansion of macro 'EXPORT_SYMBOL'
-../../source/src/kernel/OS_CORE/fs/vfs.c(298): error: expected '=', ',', ';', 'asm' or '__attribute__' before '{' token
-../../source/src/kernel/OS_CORE/fs/vfs.c(333): error: expected '=', ',', ';', 'asm' or '__attribute__' before '{' token
-../../source/src/kernel/OS_CORE/fs/vfs.c(340): error: parameter '__rtmsym_add_file_name' is initialized
-../../source/include/os_core/dmodule/export.h(15): error: section attribute not allowed for '__rtmsym_add_file_name'
-../../source/src/kernel/OS_CORE/fs/vfs.c(340): error: note: in expansion of macro 'EXPORT_SYMBOL'
-../../source/include/os_core/dmodule/export.h(16): error: parameter '__rtmsym_add_file' is initialized
-../../source/src/kernel/OS_CORE/fs/vfs.c(340): error: note: in expansion of macro 'EXPORT_SYMBOL'
-../../source/include/os_core/dmodule/export.h(16): error: section attribute not allowed for '__rtmsym_add_file'
-../../source/src/kernel/OS_CORE/fs/vfs.c(340): error: note: in expansion of macro 'EXPORT_SYMBOL'
-../../source/src/kernel/OS_CORE/fs/vfs.c(343): error: expected '=', ',', ';', 'asm' or '__attribute__' before '{' token
-../../source/src/kernel/OS_CORE/fs/vfs.c(351): error: expected '=', ',', ';', 'asm' or '__attribute__' before '{' token
-../../source/src/kernel/OS_CORE/fs/vfs.c(359): error: expected '=', ',', ';', 'asm' or '__attribute__' before '{' token
-../../source/include/os_core/fs/vfs.h(192): error: old-style parameter declarations in prototyped function definition
-../../source/src/kernel/OS_CORE/fs/vfs.c(365): error: expected '{' at end of input
-../../source/src/kernel/OS_CORE/fs/vfs.c(365): warning: control reaches end of non-void function [-Wreturn-type]
-compiling vfsio.c...
-../../source/include/os_core/fs/vfs.h: In function 'add_folder':
-../../source/include/os_core/fs/vfs.h(195): warning: empty declaration
-../../source/include/os_core/dmodule/export.h(8): warning: empty declaration
-../../source/src/kernel/OS_CORE/fs/vfsio.c(8): error: expected '=', ',', ';', 'asm' or '__attribute__' before '{' token
-../../source/src/kernel/OS_CORE/fs/vfsio.c(68): error: expected '=', ',', ';', 'asm' or '__attribute__' before '{' token
-../../source/src/kernel/OS_CORE/fs/vfsio.c(77): error: parameter '__rtmsym_open_name' is initialized
-../../source/include/os_core/dmodule/export.h(15): error: section attribute not allowed for '__rtmsym_open_name'
-../../source/src/kernel/OS_CORE/fs/vfsio.c(77): error: note: in expansion of macro 'EXPORT_SYMBOL'
-../../source/include/os_core/dmodule/export.h(16): error: parameter '__rtmsym_open' is initialized
-../../source/src/kernel/OS_CORE/fs/vfsio.c(77): error: note: in expansion of macro 'EXPORT_SYMBOL'
-../../source/include/os_core/dmodule/export.h(16): error: section attribute not allowed for '__rtmsym_open'
-../../source/src/kernel/OS_CORE/fs/vfsio.c(77): error: note: in expansion of macro 'EXPORT_SYMBOL'
-../../source/src/kernel/OS_CORE/fs/vfsio.c(80): error: expected '=', ',', ';', 'asm' or '__attribute__' before '{' token
-../../source/src/kernel/OS_CORE/fs/vfsio.c(85): error: expected '=', ',', ';', 'asm' or '__attribute__' before '{' token
-../../source/src/kernel/OS_CORE/fs/vfsio.c(93): error: parameter '__rtmsym_close_name' is initialized
-../../source/include/os_core/dmodule/export.h(15): error: section attribute not allowed for '__rtmsym_close_name'
-../../source/src/kernel/OS_CORE/fs/vfsio.c(93): error: note: in expansion of macro 'EXPORT_SYMBOL'
-../../source/include/os_core/dmodule/export.h(16): error: parameter '__rtmsym_close' is initialized
-../../source/src/kernel/OS_CORE/fs/vfsio.c(93): error: note: in expansion of macro 'EXPORT_SYMBOL'
-../../source/include/os_core/dmodule/export.h(16): error: section attribute not allowed for '__rtmsym_close'
-../../source/src/kernel/OS_CORE/fs/vfsio.c(93): error: note: in expansion of macro 'EXPORT_SYMBOL'
-../../source/src/kernel/OS_CORE/fs/vfsio.c(96): error: expected '=', ',', ';', 'asm' or '__attribute__' before '{' token
-../../source/src/kernel/OS_CORE/fs/vfsio.c(99): error: parameter '__rtmsym_read_name' is initialized
-../../source/include/os_core/dmodule/export.h(15): error: section attribute not allowed for '__rtmsym_read_name'
-../../source/src/kernel/OS_CORE/fs/vfsio.c(99): error: note: in expansion of macro 'EXPORT_SYMBOL'
-../../source/include/os_core/dmodule/export.h(16): error: parameter '__rtmsym_read' is initialized
-../../source/src/kernel/OS_CORE/fs/vfsio.c(99): error: note: in expansion of macro 'EXPORT_SYMBOL'
-../../source/include/os_core/dmodule/export.h(16): error: section attribute not allowed for '__rtmsym_read'
-../../source/src/kernel/OS_CORE/fs/vfsio.c(99): error: note: in expansion of macro 'EXPORT_SYMBOL'
-../../source/src/kernel/OS_CORE/fs/vfsio.c(102): error: expected '=', ',', ';', 'asm' or '__attribute__' before '{' token
-../../source/src/kernel/OS_CORE/fs/vfsio.c(105): error: parameter '__rtmsym_write_name' is initialized
-../../source/include/os_core/dmodule/export.h(15): error: section attribute not allowed for '__rtmsym_write_name'
-../../source/src/kernel/OS_CORE/fs/vfsio.c(105): error: note: in expansion of macro 'EXPORT_SYMBOL'
-../../source/include/os_core/dmodule/export.h(16): error: parameter '__rtmsym_write' is initialized
-../../source/src/kernel/OS_CORE/fs/vfsio.c(105): error: note: in expansion of macro 'EXPORT_SYMBOL'
-../../source/include/os_core/dmodule/export.h(16): error: section attribute not allowed for '__rtmsym_write'
-../../source/src/kernel/OS_CORE/fs/vfsio.c(105): error: note: in expansion of macro 'EXPORT_SYMBOL'
-../../source/src/kernel/OS_CORE/fs/vfsio.c(108): error: expected '=', ',', ';', 'asm' or '__attribute__' before '{' token
-../../source/src/kernel/OS_CORE/fs/vfsio.c(111): error: parameter '__rtmsym_lseek_name' is initialized
-../../source/include/os_core/dmodule/export.h(15): error: section attribute not allowed for '__rtmsym_lseek_name'
-../../source/src/kernel/OS_CORE/fs/vfsio.c(111): error: note: in expansion of macro 'EXPORT_SYMBOL'
-../../source/include/os_core/dmodule/export.h(16): error: parameter '__rtmsym_lseek' is initialized
-../../source/src/kernel/OS_CORE/fs/vfsio.c(111): error: note: in expansion of macro 'EXPORT_SYMBOL'
-../../source/include/os_core/dmodule/export.h(16): error: section attribute not allowed for '__rtmsym_lseek'
-../../source/src/kernel/OS_CORE/fs/vfsio.c(111): error: note: in expansion of macro 'EXPORT_SYMBOL'
-../../source/src/kernel/OS_CORE/fs/vfsio.c(114): error: expected '=', ',', ';', 'asm' or '__attribute__' before '{' token
-../../source/src/kernel/OS_CORE/fs/vfsio.c(117): error: parameter '__rtmsym_ioctl_name' is initialized
-../../source/include/os_core/dmodule/export.h(15): error: section attribute not allowed for '__rtmsym_ioctl_name'
-../../source/src/kernel/OS_CORE/fs/vfsio.c(117): error: note: in expansion of macro 'EXPORT_SYMBOL'
-../../source/include/os_core/dmodule/export.h(16): error: parameter '__rtmsym_ioctl' is initialized
-../../source/src/kernel/OS_CORE/fs/vfsio.c(117): error: note: in expansion of macro 'EXPORT_SYMBOL'
-../../source/include/os_core/dmodule/export.h(16): error: section attribute not allowed for '__rtmsym_ioctl'
-../../source/src/kernel/OS_CORE/fs/vfsio.c(117): error: note: in expansion of macro 'EXPORT_SYMBOL'
-../../source/include/os_core/fs/vfs.h(192): error: old-style parameter declarations in prototyped function definition
-../../source/include/os_core/dmodule/export.h(16): error: expected '{' at end of input
-../../source/src/kernel/OS_CORE/fs/vfsio.c(117): error: note: in expansion of macro 'EXPORT_SYMBOL'
-../../source/include/os_core/dmodule/export.h(16): warning: control reaches end of non-void function [-Wreturn-type]
-../../source/src/kernel/OS_CORE/fs/vfsio.c(117): error: note: in expansion of macro 'EXPORT_SYMBOL'
-".\BH-F103.elf" - 119 Error(s), 6 Warning(s).
-Target not created
-ns in prototyped function definition
-../../source/include/os_core/dmodule/export.h(16): error: expected '{' at end of input
-../../source/src/kernel/OS_CORE/fs/vfsio.c(117): error: note: in expansion of macro 'EXPORT_SYMBOL'
-../../source/include/os_core/dmodule/export.h(16): warning: control reaches end of non-void function [-Wreturn-type]
-../../source/src/kernel/OS_CORE/fs/vfsio.c(117): error: note: in expansion of macro 'EXPORT_SYMBOL'
 assembling CPU_A.s...
 assembling OS_CPU_A.s...
 compiling OS_CPU_STM32.c...
@@ -199,5 +77,40 @@ compiling shell_debug.c...
 compiling shell_fun.c...
 compiling bsp_led.c...
 compiling user.c...
-".\BH-F103.elf" - 113 Error(s), 6 Warning(s).
-Target not created
+linking...
+".\BH-F103.elf" - 0 Error(s), 0 Warning(s).
+Load "F:\\kaka\\KAKAOS\\C\\windows\\Project\\RVMDK£¨uv5£©\\BH-F103.elf" 
+Set JLink Project File to "F:\kaka\KAKAOS\C\windows\Project\RVMDK£¨uv5£©\JLinkSettings.ini"
+* JLink Info: Device "STM32F103ZE" selected (512 KB flash, 64 KB RAM).
+ 
+JLink info:
+------------
+DLL: V4.80g, compiled Feb 13 2014 20:50:02
+Firmware: J-Link V9 compiled Mar  2 2018 17:07:57
+Hardware: V9.40
+S/N : 59402926 
+Feature(s) : RDI, GDB, FlashDL, FlashBP, JFlash 
+ 
+* JLink Info: TotalIRLen = 9, IRPrint = 0x0011
+* JLink Info: TotalIRLen = 9, IRPrint = 0x0011
+* JLink Info: Found Cortex-M3 r1p1, Little endian.
+* JLink Info: FPUnit: 6 code (BP) slots and 2 literal slots
+* JLink Info: TPIU fitted.
+* JLink Info: ETM fitted.
+ROMTableAddr = 0xE00FF003
+ 
+Target info:
+------------
+Device: STM32F103ZE
+VTarget = 3.320V
+State of Pins: 
+TCK: 1, TDI: 0, TDO: 1, TMS: 0, TRES: 1, TRST: 1
+Hardware-Breakpoints: 6
+Software-Breakpoints: 8192
+Watchpoints:          4
+JTAG speed: 2000 kHz
+ 
+Erase Done.
+Programming Done.
+Verify OK.
+Application running ...
