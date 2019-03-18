@@ -284,6 +284,10 @@ int __add_folder(struct dentry *target_dentry_ptr,const char *folder_name,struct
 	{
 		return -ERROR_LOGIC;
 	}
+	if(target_dentry_ptr->d_inode->inode_ops->add_sub_folder(target_dentry_ptr->d_inode,folder_name) < 0)
+	{
+		return -ERROR_DISK;
+	}
 	unsigned int len = ka_strlen(folder_name)+1;
 	char *name_buffer = ka_malloc(len);
 	if(NULL == name_buffer)
@@ -292,11 +296,6 @@ int __add_folder(struct dentry *target_dentry_ptr,const char *folder_name,struct
 	}
 	ka_strcpy(name_buffer,folder_name);
 	name_buffer[len-1] = '\0';
-	if(target_dentry_ptr->d_inode->inode_ops->add_sub_folder(target_dentry_ptr->d_inode,folder_name) < 0)
-	{
-		ka_free(name_buffer);
-		return -ERROR_DISK;
-	}
 	struct inode *inode_ptr;
 	if(file_operations_ptr)
 	{
@@ -351,6 +350,10 @@ static int __add_file(struct dentry *target_dentry_ptr,const char *file_name,str
 	{
 		return -ERROR_LOGIC;
 	}
+	if(target_dentry_ptr->d_inode->inode_ops->add_sub_file(target_dentry_ptr->d_inode,file_name) < 0)
+	{
+		return -ERROR_DISK;
+	}
 	unsigned int len = ka_strlen(file_name)+1;
 	char *name_buffer = ka_malloc(len);
 	if(NULL == name_buffer)
@@ -359,11 +362,6 @@ static int __add_file(struct dentry *target_dentry_ptr,const char *file_name,str
 	}
 	ka_strcpy(name_buffer,file_name);
 	name_buffer[len-1] = '\0';
-	if(target_dentry_ptr->d_inode->inode_ops->add_sub_file(target_dentry_ptr->d_inode,file_name) < 0)
-	{
-		ka_free(name_buffer);
-		return -ERROR_DISK;
-	}
 	struct inode *inode_ptr;
 	if(file_operations_ptr)
 	{
