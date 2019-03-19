@@ -41,7 +41,7 @@ struct command_processer *_get_command_processer(unsigned int num)
 	return command_processer_ptr_array[num-1];
 }
 
-static unsigned int command_list_hash(const char *command_ptr)
+unsigned int command_list_hash(const char *command_ptr)
 {
 	unsigned int sum = 0;
 	ASSERT(NULL != command_ptr);
@@ -70,7 +70,7 @@ void __init_command_n_ptr_hash_array(void)
 int _match_and_execute_command(
 	int num,
 	char const *argv[],
-	struct command_processer * const command_processer_ptr)
+	struct command_processer *command_processer_ptr)
 {
 	if(NULL == command_processer_ptr)
 	{

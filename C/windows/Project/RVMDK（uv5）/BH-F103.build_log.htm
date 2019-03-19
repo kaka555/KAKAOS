@@ -1,0 +1,134 @@
+<html>
+<body>
+<pre>
+<h1>µVision Build Log</h1>
+<h2>Project:</h2>
+F:\kaka\KAKAOS\C\windows\Project\RVMDK£¨uv5£©\BH-F103.uvprojx
+Project File Date:  03/16/2019
+
+<h2>Output:</h2>
+Build target 'KAKAOS'
+compiling os_TCB_list.c...
+linking...
+".\BH-F103.elf" - 0 Error(s), 0 Warning(s).
+Load "F:\\kaka\\KAKAOS\\C\\windows\\Project\\RVMDK£¨uv5£©\\BH-F103.elf" 
+Set JLink Project File to "F:\kaka\KAKAOS\C\windows\Project\RVMDK£¨uv5£©\JLinkSettings.ini"
+* JLink Info: Device "STM32F103ZE" selected (512 KB flash, 64 KB RAM).
+ 
+JLink info:
+------------
+DLL: V4.80g, compiled Feb 13 2014 20:50:02
+Firmware: J-Link V9 compiled Mar  2 2018 17:07:57
+Hardware: V9.40
+S/N : 59402926 
+Feature(s) : RDI, GDB, FlashDL, FlashBP, JFlash 
+ 
+* JLink Info: TotalIRLen = 9, IRPrint = 0x0011
+* JLink Info: TotalIRLen = 9, IRPrint = 0x0011
+* JLink Info: Found Cortex-M3 r1p1, Little endian.
+* JLink Info: FPUnit: 6 code (BP) slots and 2 literal slots
+* JLink Info: TPIU fitted.
+* JLink Info: ETM fitted.
+ROMTableAddr = 0xE00FF003
+ 
+Target info:
+------------
+Device: STM32F103ZE
+VTarget = 3.322V
+State of Pins: 
+TCK: 1, TDI: 0, TDO: 1, TMS: 0, TRES: 1, TRST: 1
+Hardware-Breakpoints: 6
+Software-Breakpoints: 8192
+Watchpoints:          4
+JTAG speed: 2000 kHz
+ 
+Erase Done.
+Programming Done.
+Verify OK.
+Application running ...
+</pre>
+</body>
+</html>
+g os_timer.c...
+compiling vfs.c...
+compiling vfsio.c...
+compiling sysfs.c...
+compiling vfs_default_fun.c...
+assembling CPU_A.s...
+assembling OS_CPU_A.s...
+compiling OS_CPU_STM32.c...
+compiling stm32f10x_it.c...
+compiling bsp_usart.c...
+compiling sram.c...
+compiling stm32_bsp.c...
+compiling buddy.c...
+compiling heap_oo.c...
+compiling insert_sort_oo.c...
+compiling malloc.c...
+compiling myassert.c...
+compiling myMicroLIB.c...
+compiling singly_linked_list.c...
+compiling slab.c...
+compiling vector.c...
+compiling command_processor.c...
+compiling shell.c...
+compiling shell_debug.c...
+compiling shell_fun.c...
+compiling bsp_led.c...
+compiling user.c...
+linking...
+".\BH-F103.elf" - 0 Error(s), 0 Warning(s).
+Load "F:\\kaka\\KAKAOS\\C\\windows\\Project\\RVMDK£¨uv5£©\\BH-F103.elf" 
+Set JLink Project File to "F:\kaka\KAKAOS\C\windows\Project\RVMDK£¨uv5£©\JLinkSettings.ini"
+* JLink Info: Device "STM32F103ZE" selected (512 KB flash, 64 KB RAM).
+ 
+JLink info:
+------------
+DLL: V4.80g, compiled Feb 13 2014 20:50:02
+Firmware: J-Link V9 compiled Mar  2 2018 17:07:57
+Hardware: V9.40
+S/N : 59402926 
+Feature(s) : RDI, GDB, FlashDL, FlashBP, JFlash 
+ 
+* JLink Info: TotalIRLen = 9, IRPrint = 0x0011
+* JLink Info: TotalIRLen = 9, IRPrint = 0x0011
+* JLink Info: Found Cortex-M3 r1p1, Little endian.
+* JLink Info: FPUnit: 6 code (BP) slots and 2 literal slots
+* JLink Info: TPIU fitted.
+* JLink Info: ETM fitted.
+ROMTableAddr = 0xE00FF003
+ 
+Target info:
+------------
+Device: STM32F103ZE
+VTarget = 3.333V
+State of Pins: 
+TCK: 1, TDI: 0, TDO: 1, TMS: 0, TRES: 1, TRST: 1
+Hardware-Breakpoints: 6
+Software-Breakpoints: 8192
+Watchpoints:          4
+JTAG speed: 2000 kHz
+ 
+Erase Done.
+Programming Done.
+Verify OK.
+Application running ...
+1): error: note: in expansion of macro 'singly_list_for_each_entry'
+../../source/include/os_lib/singly_linked_list.h(49): error: expected statement before ')' token
+../../source/src/kernel/SHELL/shell.c(111): error: note: in expansion of macro 'singly_list_for_each_entry'
+../../source/src/kernel/SHELL/shell.c(113): error: 'argv' undeclared (first use in this function)
+../../source/src/kernel/SHELL/shell.c(113): error: note: each undeclared identifier is reported only once for each function it appears in
+../../source/src/kernel/SHELL/shell.c(94): warning: unused variable 'pointer' [-Wunused-variable]
+../../source/src/kernel/SHELL/shell.c: At top level:
+../../source/src/kernel/SHELL/shell.c(510): error: conflicting types for '_process'
+../../source/src/kernel/SHELL/shell.c(95): error: note: previous implicit declaration of '_process' was here
+../../source/src/kernel/SHELL/shell.c: In function '_process':
+../../source/src/kernel/SHELL/shell.c(514): warning: unused variable 'result' [-Wunused-variable]
+../../source/src/kernel/SHELL/shell.c: In function 'process':
+../../source/src/kernel/SHELL/shell.c(561): error: 'result' undeclared (first use in this function); did you mean 'test'?
+compiling shell_debug.c...
+compiling shell_fun.c...
+compiling bsp_led.c...
+compiling user.c...
+".\BH-F103.elf" - 15 Error(s), 5 Warning(s).
+Target not created
