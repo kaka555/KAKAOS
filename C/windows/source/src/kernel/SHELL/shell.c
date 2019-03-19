@@ -16,6 +16,8 @@
 #include <vfs.h>
 #include <printf_debug.h>
 
+static unsigned int _process(char *buffer_ptr);
+
 #if CONFIG_SHELL_EN
 
 static MCB MCB_for_shell;
@@ -88,15 +90,17 @@ int __init_shell_buffer(struct shell_buffer *shell_buffer_ptr,
 	return FUN_EXECUTE_SUCCESSFULLY;
 }
 
+extern unsigned int command_list_hash(const char *command_ptr);
 static void deal_with_tab(void)
 {
 	ASSERT(using_shell_buffer_ptr->buffer != NULL);
-	char *pointer = using_shell_buffer_ptr->buffer;
 	unsigned int num = _process(using_shell_buffer_ptr->buffer);
 	if((num <= 1) || (num >= ARGV_SIZE)) /* useless input */
 	{
+		KA_DEBUG_LOG(DEBUG_TYPE_SHELL_TAB,"invalid num\n");
 		return ;
 	}
+	KA_DEBUG_LOG(DEBUG_TYPE_SHELL_TAB,"get num is %u\n",num);
 	unsigned int len = ka_strlen(using_shell_buffer_ptr->argv[num-1]);
 	unsigned int index = 0;
 	unsigned int same = 0;
@@ -106,11 +110,12 @@ static void deal_with_tab(void)
 		ka_printf("command not found\n");
 		return ;
 	}
+	KA_DEBUG_LOG(DEBUG_TYPE_SHELL_TAB,"command_processer length is %u\n",command_processer_ptr->command_length);
 	struct command *struct_command_ptr;
-	struct singly_list_head *head = &command_processer_ptr->command_list_address[command_list_hash(using_shell_buffer_ptr->argv[0])]
+	struct singly_list_head *head = &command_processer_ptr->command_list_address[command_list_hash(using_shell_buffer_ptr->argv[0])];
 	singly_list_for_each_entry(struct_command_ptr,head,list)
 	{
-		if(0 == ka_strncmp(argv[0],struct_command_ptr->command_name,command_processer_ptr->command_length))
+		if(0 == ka_strncmp(using_shell_buffer_ptr->argv[0],struct_command_ptr->command_name,command_processer_ptr->command_length))
 		{
 			/* get command */
 			if(NULL == struct_command_ptr->para_arv)
@@ -142,12 +147,26 @@ static void deal_with_tab(void)
 				ka_strcpy(using_shell_buffer_ptr->buffer + using_shell_buffer_ptr->index,
 						struct_command_ptr->para_arv[index] + len);
 				using_shell_buffer_ptr->index += len;
+				ka_printf("%s\n",struct_command_ptr->para_arv[index] + len);
 			}
 			return ;
 		}
 	}
 	KA_DEBUG_LOG(DEBUG_TYPE_SHELL_TAB,"command not found\n");
 	return ;
+}
+
+static void recover_shell_buffer(void)
+{
+	unsigned int i;
+	char *buffer = using_shell_buffer_ptr->buffer;
+	for(i=0;i<using_shell_buffer_ptr->index;++i)
+	{
+		if('\0' == *(buffer + i))
+		{
+			*(buffer + i) = ' ';
+		}
+	}
 }
 
 void _put_in_shell_buffer(char c)  /* deal with input layer*/
@@ -186,7 +205,9 @@ void _put_in_shell_buffer(char c)  /* deal with input layer*/
 	}
 	else if(0x09 == c) /* tab */
 	{
+		using_shell_buffer_ptr->buffer[(using_shell_buffer_ptr->index)] = 0x0d;
 		deal_with_tab();
+		recover_shell_buffer();
 		return ;
 	}
 	if(using_shell_buffer_ptr->index < using_shell_buffer_ptr->buffer_size)
@@ -511,7 +532,6 @@ static unsigned int _process(char *buffer_ptr)
 {
 	char *ptr = buffer_ptr;
 	unsigned int num = 0;
-	int result;
 	while(*ptr == ' ')
 	{
 		++ptr;
@@ -558,7 +578,7 @@ static int process(char *buffer_ptr)
 	{
 		return 0;
 	}
-	result = _match_and_execute_command(num,
+	int result = _match_and_execute_command(num,
 		(const char **)(using_shell_buffer_ptr->argv),
 		_get_command_processer(ka_strlen(using_shell_buffer_ptr->argv[0])));
     if(result == 1)

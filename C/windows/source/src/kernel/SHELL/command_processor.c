@@ -41,7 +41,7 @@ struct command_processer *_get_command_processer(unsigned int num)
 	return command_processer_ptr_array[num-1];
 }
 
-static unsigned int command_list_hash(const char *command_ptr)
+unsigned int command_list_hash(const char *command_ptr)
 {
 	unsigned int sum = 0;
 	ASSERT(NULL != command_ptr);
