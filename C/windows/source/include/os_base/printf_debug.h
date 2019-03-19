@@ -17,6 +17,7 @@ do                                                                            \
 while(0)
 
 #define DEBUG_TYPE_VFS 			1
-#define DEBUG_TYPE_SHELL_TAB 	1
+#define DEBUG_TYPE_SHELL_TAB 	0
+#define DEBUG_TYPE_MODULE 		1
 
 #endif

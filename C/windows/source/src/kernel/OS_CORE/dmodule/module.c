@@ -44,7 +44,7 @@ void shell_modinfo(int argc, char const *argv[])
             case MODULE_STATE_RUN:
                 ka_printf("MODULE_STATE_RUN\n"); break;
         }
-        ka_printf("module_space : %p\n",dynamic_module_ptr->module_space);
+        ka_printf("module_space : 0x%p\n",dynamic_module_ptr->module_space);
         ka_printf("module_size : %u\n",dynamic_module_ptr->module_size);
         ka_printf("export symbols : \n");
         for(i=0;i<dynamic_module_ptr->export_symbols_num;++i)

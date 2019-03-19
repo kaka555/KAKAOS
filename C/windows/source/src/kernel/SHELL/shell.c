@@ -146,8 +146,8 @@ static void deal_with_tab(void)
 				ASSERT(1 == same);
 				ka_strcpy(using_shell_buffer_ptr->buffer + using_shell_buffer_ptr->index,
 						struct_command_ptr->para_arv[index] + len);
-				using_shell_buffer_ptr->index += len;
-				ka_printf("%s\n",struct_command_ptr->para_arv[index] + len);
+				using_shell_buffer_ptr->index += ka_strlen(struct_command_ptr->para_arv[index]) - len;
+				ka_printf("%s",struct_command_ptr->para_arv[index] + len);
 			}
 			return ;
 		}
@@ -206,6 +206,10 @@ void _put_in_shell_buffer(char c)  /* deal with input layer*/
 	else if(0x09 == c) /* tab */
 	{
 		using_shell_buffer_ptr->buffer[(using_shell_buffer_ptr->index)] = 0x0d;
+		ka_putchar(0x08);
+		ka_putchar(0x08);
+		ka_putchar(0x08);
+		ka_putchar(0x08);
 		deal_with_tab();
 		recover_shell_buffer();
 		return ;
