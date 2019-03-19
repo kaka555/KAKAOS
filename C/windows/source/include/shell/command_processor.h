@@ -14,6 +14,8 @@ struct command{
 	const char *command_name;
 	void (* const f)(int argc, char const *argv[]);
 	struct singly_list_head list;
+	char **para_arv;  /* parament list,used for 'TAB' */
+	unsigned int para_len;
 };
 
 /**************************
@@ -35,7 +37,7 @@ struct command_processer{
 int _match_and_execute_command(
 	int num,
 	char const *argv[],
-	struct command_processer * const command_processer_ptr);
+	struct command_processer *command_processer_ptr);
 
 struct command_processer *_get_command_processer(unsigned int num);
 

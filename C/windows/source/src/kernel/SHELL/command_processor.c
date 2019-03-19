@@ -70,7 +70,7 @@ void __init_command_n_ptr_hash_array(void)
 int _match_and_execute_command(
 	int num,
 	char const *argv[],
-	struct command_processer * const command_processer_ptr)
+	struct command_processer *command_processer_ptr)
 {
 	if(NULL == command_processer_ptr)
 	{
