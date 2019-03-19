@@ -141,21 +141,25 @@ void task_start(void)
 		ka_printf("os_init_fail...stop booting...\n");
 		while(1);
 	}
+/*
 	if(0 != task_creat_ready(256,5,5,"four",four,NULL,NULL))
 	{
 		ka_printf("os_init_fail...stop booting...\n");
 		while(1);
 	}
-//	if(0 != task_creat_ready(256,6,5,"five",five,NULL,NULL))
-//	{
-//		ka_printf("os_init_fail...stop booting...\n");
-//		while(1);
-//	}
-//	if(0 != task_creat_ready(256,7,3,"six",six,NULL,NULL))
-//	{
-//		ka_printf("os_init_fail...stop booting...\n");
-//		while(1);
-//	}
+*/
+/*
+	if(0 != task_creat_ready(256,6,5,"five",five,NULL,NULL))
+	{
+		ka_printf("os_init_fail...stop booting...\n");
+		while(1);
+	}
+	if(0 != task_creat_ready(256,7,3,"six",six,NULL,NULL))
+	{
+		ka_printf("os_init_fail...stop booting...\n");
+		while(1);
+	}
+*/
 }
 
 static void count_init(void *para)	

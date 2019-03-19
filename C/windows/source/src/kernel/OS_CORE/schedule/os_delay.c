@@ -16,8 +16,8 @@ static struct little_heap delay_heap;
 static int _cmp(Vector *Vector_ptr,unsigned int index1,unsigned int index2)
 {
 	const TCB *a, *b;
-	a = Vector_get_index_address (Vector_ptr, index1);
-	b = Vector_get_index_address (Vector_ptr, index2);
+	a = Vector_get_index_data(Vector_ptr, index1);
+	b = Vector_get_index_data(Vector_ptr, index2);
 	if (TIME_FIRST_SMALLER_THAN_SECOND(a->delay_reach_time,b->delay_reach_time))
 	{
 	  return -1;

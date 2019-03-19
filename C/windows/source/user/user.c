@@ -55,7 +55,7 @@ int i,j;
 }
 #endif
 
-#if 0
+#if 0 /* test timer */
 static void ka(void *para)
 {
 	ka_printf("task three timer test\n");
@@ -88,7 +88,7 @@ void four(void *para)
 }
 #endif
 
-#if 1 //test timer
+#if 0 //test timer
 static void ka(void *para)
 {
 	ka_printf("task three timer test ka\n");
@@ -214,7 +214,7 @@ int i;
 }
 #endif
 
-#if 0 // test int sleep(unsigned int)
+#if 1 // test int sleep(unsigned int)
 void three(void *para)
 {
 	TCB *TCB_ptr4,*TCB_ptr5;
@@ -228,7 +228,10 @@ void three(void *para)
 		ka_printf("os_init_fail...stop booting...\n");
 		while(1);
 	}
-	int ret = sleep(30);
+	ka_printf("now task three going to sleep\n");
+	int ret = sleep(3*HZ);
+	ka_printf("task three ret is %d\n",ret);
+/*
 	ka_printf("task three ret is %d\n",ret);
 	if(0 != _remove_from_delay_heap(TCB_ptr5))
 	{
@@ -240,18 +243,19 @@ void three(void *para)
 	}
 	suspend();
 	while(1);
+*/
 }
 
 void five(void *para)
 {
-	int ret = sleep(58);
+	int ret = sleep(5*HZ);
 	ka_printf("task five ret is %d\n",ret);
 	suspend();
 	while(1);
 }
 void four(void *para)
 {
-	int ret = sleep(40);
+	int ret = sleep(4*HZ);
 	ka_printf("task four ret is %d\n",ret);
 	suspend();
 	while(1);
