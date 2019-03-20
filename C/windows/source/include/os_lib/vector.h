@@ -84,6 +84,12 @@ static inline unsigned int get_Vector_cur_len(Vector *vector_ptr)
 	return vector_ptr->cur_len;
 }
 
+static inline int Vector_clean_up(Vector *vector_ptr)
+{
+	vector_ptr->cur_len = 0;  /* do nothing about memory management */
+	return 0;
+}
+
 /*
 description: you can put a Vector into a struct,then use Vector_init() to initialize it
 

@@ -10,8 +10,8 @@ struct init_fun
 	init_fun_type fun;
 };
 
-#define INIT_FUN(function)	\
-const struct init_fun __init_fun_##function __attribute__((section(".INIT_FUN"))) = \
+#define INIT_FUN(function,level)	\
+const struct init_fun __init_fun_##function __attribute__((section(".INIT_FUN" #level))) = \
 {	\
 	.fun = function,\
 }

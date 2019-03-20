@@ -50,7 +50,7 @@ static void __INIT __init_system_time(void)
 	sys_time.year    =  OS_YEAR;
 	sys_time.day     =  OS_DAY;
 }
-INIT_FUN(__init_system_time);
+INIT_FUN(__init_system_time,1);
 
 /**
  * This is a system function

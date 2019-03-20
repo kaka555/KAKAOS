@@ -47,10 +47,12 @@ static void count_init(void *para);
 static void idle(void *para);
 static void set_inter_stack(void);
 
-extern unsigned long _ka_init_fun_begin;
-extern unsigned long _ka_init_fun_end;
+extern unsigned long _ka_init_fun_begin1;
+extern unsigned long _ka_init_fun_end1;
+extern unsigned long _ka_init_fun_begin2;
+extern unsigned long _ka_init_fun_end2;
 static void __INIT os_init(void)
-{
+{	
 	bsp_init();
 
 	g_time_tick_count = 0;
@@ -60,8 +62,13 @@ static void __INIT os_init(void)
 	__init_my_micro_lib();
 
 	struct init_fun *struct_init_fun_ptr;
-	for(struct_init_fun_ptr=(struct init_fun *)(&_ka_init_fun_begin);
-		struct_init_fun_ptr != (struct init_fun *)(&_ka_init_fun_end);++struct_init_fun_ptr)
+	for(struct_init_fun_ptr=(struct init_fun *)(&_ka_init_fun_begin1);
+		struct_init_fun_ptr != (struct init_fun *)(&_ka_init_fun_end1);++struct_init_fun_ptr)
+	{
+		(*(struct_init_fun_ptr->fun))(); /* execute all the init function */
+	}
+	for(struct_init_fun_ptr=(struct init_fun *)(&_ka_init_fun_begin2);
+		struct_init_fun_ptr != (struct init_fun *)(&_ka_init_fun_end2);++struct_init_fun_ptr)
 	{
 		(*(struct_init_fun_ptr->fun))(); /* execute all the init function */
 	}

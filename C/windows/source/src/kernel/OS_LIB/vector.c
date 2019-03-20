@@ -3,6 +3,7 @@
 #include <myMicroLIB.h>
 #include <myassert.h>
 #include <kakaosstdint.h>
+#include <printf_debug.h>
 
 /*
 initilize the Vector entity with vector_ptr->max_len = size,vector_ptr->cur_len = 0,
@@ -94,6 +95,27 @@ int Vector_pop_back(Vector *vector_ptr,void **pop_data_ptr)
 	return FUN_EXECUTE_SUCCESSFULLY;
 }
 
+static void shrink_memory(Vector *vector_ptr)
+{
+	ASSERT(NULL != vector_ptr);
+	if((vector_ptr->cur_len * 4 < vector_ptr->max_len) 
+			&& (vector_ptr->cur_len + 24 < vector_ptr->max_len))
+	{
+		KA_DEBUG_LOG(DEBUG_TYPE_VECTOR,
+			"shrink vector,now cur_len is %u,max_len is %u\n",
+			vector_ptr->cur_len,vector_ptr->max_len);
+		void *buffer = f_malloc(sizeof(void *) * (vector_ptr->max_len / 2));
+		if(NULL == buffer)
+		{
+			KA_DEBUG_LOG(DEBUG_TYPE_VECTOR,"malloc fail\n");
+			return ;
+		}
+		f_free(vector_ptr->data_ptr);
+		vector_ptr->data_ptr = (void **)buffer;
+		vector_ptr->max_len = vector_ptr->max_len / 2;
+	}
+}
+
 /*
 delete the data between index "from" to "to"
  */
@@ -105,8 +127,10 @@ int Vector_erase_data(Vector *vector_ptr,unsigned int from,unsigned int to)
 	f_memcpy((char*)(vector_ptr->data_ptr) + from * VECTOR_DATA_SIZE,
 		(char*)(vector_ptr->data_ptr) + (to + 1) * VECTOR_DATA_SIZE,
 		(vector_ptr->cur_len - to - 1) * VECTOR_DATA_SIZE);
+	ASSERT(vector_ptr->cur_len >= to - from + 1);
 	vector_ptr->cur_len -= to - from + 1;
-	/*add memory management here*/
+	/* memory management */
+	shrink_memory(vector_ptr);
 	return FUN_EXECUTE_SUCCESSFULLY;
 }
 
@@ -126,7 +150,8 @@ int Vector_remove_index_data(Vector *vector_ptr,unsigned int index,void **data_s
 		(char*)(vector_ptr->data_ptr) + (index + 1) * VECTOR_DATA_SIZE,
 		(vector_ptr->cur_len - index - 1) * VECTOR_DATA_SIZE);
 	--vector_ptr->cur_len;
-	/*add memory management here*/
+	/* memory management */
+	shrink_memory(vector_ptr);
 	return FUN_EXECUTE_SUCCESSFULLY;
 }
 

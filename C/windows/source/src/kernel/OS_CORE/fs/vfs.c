@@ -6,6 +6,9 @@
 #include <os_cpu.h>
 #include <sys_init_fun.h>
 #include <printf_debug.h>
+#include <vector.h>
+#include <command_processor.h>
+#include <shell.h>
 
 extern int default_open(struct file *file_ptr);
 extern int default_close(struct file *file_ptr);
@@ -48,6 +51,8 @@ static struct dentry dev_dentry;
 static struct dentry *current_dentry_ptr = NULL;
 static struct inode root_inode;
 static struct inode dev_inode;
+
+static void update_para_arv_vector(void);
 
 static void _init_dentry(
 	struct dentry *dentry_ptr,
@@ -408,16 +413,10 @@ int add_file(const char *path,const char *file_name,struct file_operations *file
 }
 EXPORT_SYMBOL(add_file);
 
-static void __init_vfs(void)
-{
-	_inode_init(0,NULL,NULL,FLAG_INODE_SOFT|FLAG_INODE_READ|FLAG_INODE_WRITE,&root_inode);
-	_inode_init(0,NULL,NULL,FLAG_INODE_SOFT|FLAG_INODE_READ|FLAG_INODE_WRITE,&dev_inode);
-	_init_dentry(&root_dentry,NULL,&root_inode,"/",FLAG_FOLDER|FLAG_NAME_CHANGE_DIS);
-	root_dentry.d_parent = &root_dentry;
-	_init_dentry(&dev_dentry,&root_dentry,&dev_inode,"dev",FLAG_FOLDER|FLAG_NAME_CHANGE_DIS);
-	current_dentry_ptr = &root_dentry; // set pwd
-}
-INIT_FUN(__init_vfs);
+#if CONFIG_SHELL_EN
+
+static Vector para_arv_vector;
+struct command *command_cd_ptr = NULL;
 
 static void pwd(struct dentry *dentry_ptr)
 {
@@ -472,6 +471,7 @@ void shell_cd(int argc, char const *argv[])
 	if(0 == ka_strcmp("..",argv[1]))
 	{
 		current_dentry_ptr = current_dentry_ptr->d_parent;
+		update_para_arv_vector();
 		return ;
 	}
 	else if(0 == ka_strcmp(".",argv[1]))
@@ -485,6 +485,7 @@ void shell_cd(int argc, char const *argv[])
 		return ;
 	}
 	current_dentry_ptr = dentry_ptr;
+	update_para_arv_vector();
 	return ;
 }
 
@@ -518,7 +519,48 @@ void shell_mkdir(int argc, char const *argv[])
 	int ret = __add_folder(current_dentry_ptr,argv[1],NULL);
 	if((ret < 0) && (-ERROR_LOGIC != ret))
 	{
-		ka_printf("create file fail\n");
+		ka_printf("create folder fail\n");
+		return ;
 	}
+	update_para_arv_vector();
 }
 
+static void update_para_arv_vector(void)
+{
+	ASSERT(NULL != current_dentry_ptr);
+	Vector_clean_up(&para_arv_vector);
+	struct dentry *dentry_ptr;
+	list_for_each_entry(dentry_ptr,&current_dentry_ptr->subdirs,child)
+	{
+		Vector_push_back(&para_arv_vector,dentry_ptr->name);
+	}
+	_set_command_para_list(command_cd_ptr,(char **)para_arv_vector.data_ptr,para_arv_vector.cur_len);
+}
+
+#endif
+
+static void __init_vfs(void)
+{
+#if CONFIG_SHELL_EN
+	int error;
+	error = Vector_init(&para_arv_vector,16,MKVFADD(16));
+	if(error < 0)
+	{
+		ka_printf("vfs init fail\n");
+		while(1);
+	}
+	ASSERT(FUN_EXECUTE_SUCCESSFULLY == error);
+#endif
+	_inode_init(0,NULL,NULL,FLAG_INODE_SOFT|FLAG_INODE_READ|FLAG_INODE_WRITE,&root_inode);
+	_inode_init(0,NULL,NULL,FLAG_INODE_SOFT|FLAG_INODE_READ|FLAG_INODE_WRITE,&dev_inode);
+	_init_dentry(&root_dentry,NULL,&root_inode,"/",FLAG_FOLDER|FLAG_NAME_CHANGE_DIS);
+	root_dentry.d_parent = &root_dentry;
+	_init_dentry(&dev_dentry,&root_dentry,&dev_inode,"dev",FLAG_FOLDER|FLAG_NAME_CHANGE_DIS);
+	current_dentry_ptr = &root_dentry; /* set pwd */
+#if CONFIG_SHELL_EN
+	command_cd_ptr = _get_command_ptr("cd");
+	ASSERT(NULL != command_cd_ptr);
+	update_para_arv_vector(); /* set tab list */
+#endif
+}
+INIT_FUN(__init_vfs,2);

@@ -12,7 +12,7 @@
 
 struct command{
 	const char *command_name;
-	void (* const f)(int argc, char const *argv[]);
+	void (*f)(int argc, char const *argv[]);
 	struct singly_list_head list;
 	char **para_arv;  /* parament list,used for 'TAB' */
 	unsigned int para_len;
@@ -40,6 +40,15 @@ int _match_and_execute_command(
 	struct command_processer *command_processer_ptr);
 
 struct command_processer *_get_command_processer(unsigned int num);
+
+static inline void _set_command_para_list(struct command *command_ptr,char **para_arv,unsigned int para_len)
+{
+	if(para_arv)
+	{
+		command_ptr->para_arv = para_arv;
+	}
+	command_ptr->para_len = para_len;
+}
 
 #endif	
 	

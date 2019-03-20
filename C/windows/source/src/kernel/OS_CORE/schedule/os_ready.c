@@ -54,7 +54,7 @@ static void __INIT __init_ready_group(void)
 		ready_table[i] = 0;
 	}
 }
-INIT_FUN(__init_ready_group);
+INIT_FUN(__init_ready_group,1);
 
 int _insert_ready_TCB(TCB *TCB_ptr)
 {

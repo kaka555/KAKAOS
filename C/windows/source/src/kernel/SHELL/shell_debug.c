@@ -23,7 +23,7 @@ static void __INIT __init_shell_debug(void)
 	ASSERT(FUN_EXECUTE_SUCCESSFULLY == error);
 	__init_shell_variable_array();
 }
-INIT_FUN(__init_shell_debug);
+INIT_FUN(__init_shell_debug,1);
 
 void insert_break_point(char* file_name,unsigned line,const char* function_name)
 {

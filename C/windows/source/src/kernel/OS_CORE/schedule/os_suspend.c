@@ -11,7 +11,7 @@ static void __INIT __init_suspend_list(void)
 {
 	INIT_LIST_HEAD(&suspend_list_head);
 }
-INIT_FUN(__init_suspend_list);
+INIT_FUN(__init_suspend_list,1);
 
 void _insert_into_suspend_list(TCB *const TCB_ptr)
 {

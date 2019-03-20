@@ -48,7 +48,7 @@ static void __INIT __init_delay_heap(void)
 		/*os stop here*/
 	}
 }
-INIT_FUN(__init_delay_heap);
+INIT_FUN(__init_delay_heap,1);
 
 /*before inserting action,os should set the delay_reach_time
 this function do not change the task_state of the TCB,os shoule

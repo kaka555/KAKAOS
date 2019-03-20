@@ -54,7 +54,7 @@ static void __INIT __init_timer(void)
 		//os stop here
 	}
 }
-INIT_FUN(__init_timer);
+INIT_FUN(__init_timer,1);
 
 /**
  * This is a system function

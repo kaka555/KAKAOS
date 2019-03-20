@@ -15,6 +15,7 @@
 #include <module.h>
 #include <vfs.h>
 #include <printf_debug.h>
+#include <sys_init_fun.h>
 
 static unsigned int _process(char *buffer_ptr);
 
@@ -206,10 +207,6 @@ void _put_in_shell_buffer(char c)  /* deal with input layer*/
 	else if(0x09 == c) /* tab */
 	{
 		using_shell_buffer_ptr->buffer[(using_shell_buffer_ptr->index)] = 0x0d;
-		ka_putchar(0x08);
-		ka_putchar(0x08);
-		ka_putchar(0x08);
-		ka_putchar(0x08);
 		deal_with_tab();
 		recover_shell_buffer();
 		return ;
@@ -476,13 +473,51 @@ static struct command resident_command_8[] =
 #endif
 };
 
-extern void __init_command_n_ptr_hash_array(void);
-static void shell_init(void)
+struct command *_get_command_ptr(const char *command_name)
 {
-	unsigned int i;
+	unsigned int len = ka_strlen(command_name);
+	struct command_processer *command_processer_ptr = _get_command_processer(len);
+	if(NULL == command_processer_ptr)
+	{
+		return NULL;
+	}
+	struct singly_list_head *pos;
+	struct command *struct_command_ptr;
+	singly_list_for_each(pos,&command_processer_ptr->command_list_address[command_list_hash(command_name)])
+	{
+		struct_command_ptr = singly_list_entry(pos,struct command,list);
+		if(0 == ka_strcmp(command_name,struct_command_ptr->command_name))
+		{
+			return struct_command_ptr;
+		}
+	}
+	return NULL;
+}
+
+static void shell_pre(void)
+{
 #if CONFIG_ASSERT_DEBUG
 	int error;
 #endif
+#if CONFIG_ASSERT_DEBUG
+	error = init_MCB(&MCB_for_shell,0,MCB_TYPE_FLAG_BINARY);
+#else
+	init_MCB(&MCB_for_shell,0,MCB_TYPE_FLAG_BINARY);
+#endif
+	ASSERT(FUN_EXECUTE_SUCCESSFULLY == error);
+#if CONFIG_ASSERT_DEBUG
+	error = __init_shell_buffer(&main_shell_buffer,main_buffer,main_buffer_reserve,BUFFER_SIZE);
+#else
+	__init_shell_buffer(&main_shell_buffer,main_buffer,main_buffer_reserve);
+#endif
+	ASSERT(FUN_EXECUTE_SUCCESSFULLY == error);
+	using_shell_buffer_ptr = &main_shell_buffer;
+}
+
+extern void __init_command_n_ptr_hash_array(void);
+static void __init_shell(void)
+{
+	unsigned int i;
 	__init_command_n_ptr_hash_array();
 	for(i=0;i<sizeof(resident_command_1)/sizeof(struct command);++i)
 	{
@@ -516,20 +551,8 @@ static void shell_init(void)
 	{
 		_insert_struct_command_8(resident_command_8+i);
 	}
-#if CONFIG_ASSERT_DEBUG
-	error = init_MCB(&MCB_for_shell,0,MCB_TYPE_FLAG_BINARY);
-#else
-	init_MCB(&MCB_for_shell,0,MCB_TYPE_FLAG_BINARY);
-#endif
-	ASSERT(FUN_EXECUTE_SUCCESSFULLY == error);
-#if CONFIG_ASSERT_DEBUG
-	error = __init_shell_buffer(&main_shell_buffer,main_buffer,main_buffer_reserve,BUFFER_SIZE);
-#else
-	__init_shell_buffer(&main_shell_buffer,main_buffer,main_buffer_reserve);
-#endif
-	ASSERT(FUN_EXECUTE_SUCCESSFULLY == error);
-	using_shell_buffer_ptr = &main_shell_buffer;
 }
+INIT_FUN(__init_shell,1);
 
 /* return argc */
 static unsigned int _process(char *buffer_ptr)
@@ -601,7 +624,7 @@ void shell(void *para)
 	(void)para;
 	int result;
 	task_delete(&TCB_count_init);
-	shell_init();
+	shell_pre();
 	ka_printf("%s\n","/*************************");
 	ka_printf("%s\n","*");
 	ka_printf("%s\n","*   kaka_os  shell");

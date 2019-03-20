@@ -17,7 +17,7 @@ static void __INIT __init_TCB_list(void)
 		TCB_list[i].TCB_num = 0;
 	}
 }
-INIT_FUN(__init_TCB_list);
+INIT_FUN(__init_TCB_list,1);
 
 /*os must set the task_state before using this function*/
 void _register_in_TCB_list(TCB *TCB_ptr)

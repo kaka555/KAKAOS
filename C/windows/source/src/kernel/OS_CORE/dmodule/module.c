@@ -22,7 +22,7 @@ static void __INIT __init_module(void)
 {
     INIT_LIST_HEAD(&module_list_head);
 }
-INIT_FUN(__init_module);
+INIT_FUN(__init_module,1);
 
 void shell_modinfo(int argc, char const *argv[])
 {
