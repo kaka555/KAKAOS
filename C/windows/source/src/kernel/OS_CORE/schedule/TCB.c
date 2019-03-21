@@ -187,6 +187,10 @@ int _task_delete(TCB *TCB_ptr)
 		ASSERT(TCB_ptr->dynamic_module_ptr);
 		set_module_state(TCB_ptr->dynamic_module_ptr,MODULE_STATE_LOADED);
 	}
+	if(TCB_ptr == OSTCBCurPtr)
+	{
+		OSTCBCurPtr = NULL;
+	}
 	CPU_CRITICAL_EXIT();
 	schedule();
 	return FUN_EXECUTE_SUCCESSFULLY;

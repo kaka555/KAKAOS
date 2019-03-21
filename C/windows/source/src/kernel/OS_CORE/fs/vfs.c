@@ -77,7 +77,7 @@ static void _init_dentry(
 	{
 		set_dentry_flag(dentry_ptr,FLAG_DENTRY_NAME_CHANGE_DIS);
 	}
-	if(!parent_ptr) /* root */
+	if(dentry_ptr == parent_ptr) /* root */
 	{
 		set_dentry_flag(dentry_ptr,FLAG_DENTRY_ROOT);
 	}
@@ -297,6 +297,7 @@ int __add_folder(struct dentry *target_dentry_ptr,const char *folder_name,struct
 	char *name_buffer = ka_malloc(len);
 	if(NULL == name_buffer)
 	{
+		KA_DEBUG_LOG(DEBUG_TYPE_VFS,"name_buffer malloc fail\n");
 		return -ERROR_NO_MEM;
 	}
 	ka_strcpy(name_buffer,folder_name);
@@ -312,6 +313,7 @@ int __add_folder(struct dentry *target_dentry_ptr,const char *folder_name,struct
 	}
 	if(NULL == inode_ptr)
 	{
+		KA_DEBUG_LOG(DEBUG_TYPE_VFS,"inode malloc fail\n");
 		ka_free(name_buffer);
 		return -ERROR_NO_MEM;
 	}
@@ -553,7 +555,7 @@ static void __init_vfs(void)
 #endif
 	_inode_init(0,NULL,NULL,FLAG_INODE_SOFT|FLAG_INODE_READ|FLAG_INODE_WRITE,&root_inode);
 	_inode_init(0,NULL,NULL,FLAG_INODE_SOFT|FLAG_INODE_READ|FLAG_INODE_WRITE,&dev_inode);
-	_init_dentry(&root_dentry,NULL,&root_inode,"/",FLAG_FOLDER|FLAG_NAME_CHANGE_DIS);
+	_init_dentry(&root_dentry,&root_dentry,&root_inode,"/",FLAG_FOLDER|FLAG_NAME_CHANGE_DIS);
 	root_dentry.d_parent = &root_dentry;
 	_init_dentry(&dev_dentry,&root_dentry,&dev_inode,"dev",FLAG_FOLDER|FLAG_NAME_CHANGE_DIS);
 	current_dentry_ptr = &root_dentry; /* set pwd */

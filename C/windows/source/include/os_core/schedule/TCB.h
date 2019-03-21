@@ -59,7 +59,7 @@ typedef struct task_control_block_struct{
 	TASK_PRIO_TYPE reserve_prio;			/*used for Priority inversion problem*/
 	TASK_STATE task_state;					/*priority 0-PRIO_MAX-1*/
 	TASK_PRIO_TYPE prio;
-	int delay_heap_position;
+	unsigned int delay_heap_position;
 	struct list_head same_prio_list;
 	struct list_head suspend_list;
 	char *name;
