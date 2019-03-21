@@ -101,7 +101,7 @@ int default_change_name(struct inode *inode_ptr,struct dentry *dentry_ptr)
 	return FUN_EXECUTE_SUCCESSFULLY;
 }
 
-int default_refresh(struct inode *inode_ptr)
+int default_refresh(struct inode *inode_ptr,struct dentry *dentry_ptr)
 {
 	return FUN_EXECUTE_SUCCESSFULLY;
 }

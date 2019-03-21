@@ -339,6 +339,10 @@ static struct command resident_command_3[] =
 		.command_name = "pwd",
 		.f = shell_pwd,
 	},
+	{
+		.command_name = "cat",
+		.f = shell_cat,
+	},
 #endif
 	{
 		.command_name = "tcb",
@@ -458,6 +462,10 @@ static struct command resident_command_7[] =
 		.f = shell_modinfo,
 	}
 #endif
+	,{
+		.command_name = "checkmm",
+		.f = shell_check_memory,
+	}
 	,{
 		.command_name = "showreg",
 		.f = shell_show_tasks_registers,

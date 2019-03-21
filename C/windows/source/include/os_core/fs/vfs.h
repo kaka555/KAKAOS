@@ -34,7 +34,7 @@ struct file_operations
 struct inode_operations 
 {
 	int (*change_name)(struct inode *inode_ptr,struct dentry *dentry_ptr);
-	int (*refresh)(struct inode *inode_ptr);
+	int (*refresh)(struct inode *inode_ptr,struct dentry *dentry_ptr);
 	int (*floader_cmp_file_name)(struct inode *inode_ptr,const char *name);
 	int (*add_sub_file)(struct inode *inode_ptr,const char *file_name);
 	int (*add_sub_folder)(struct inode *inode_ptr,const char *folder_name);
@@ -51,7 +51,7 @@ struct inode_operations
 #define FLAG_DENTRY_FILE 				0X00
 #define FLAG_DENTRY_FOLDER 				0X02
 /* bit 2 */ 			
-
+#define FLAG_NEED_REFLASH				0X04
 /* bit 3 */	
 #define FLAG_DENTRY_NAME_CHANGE_EN 		0X00
 #define FLAG_DENTRY_NAME_CHANGE_DIS 	0X08
@@ -95,6 +95,16 @@ static inline int is_folder(struct dentry *dentry_ptr)
 static inline int is_file(struct dentry *dentry_ptr)
 {
 	return (!((dentry_ptr->flag) & FLAG_DENTRY_FOLDER));
+}
+
+static inline int dentry_name_not_changable(struct dentry *dentry_ptr)
+{
+	return (FLAG_DENTRY_NAME_CHANGE_DIS & dentry_ptr->flag);
+}
+
+static inline int dentry_need_refresh(struct dentry *dentry_ptr)
+{
+	return (FLAG_NEED_REFLASH & dentry_ptr->flag);
 }
 
 typedef UINT32 f_mode_t;
@@ -155,6 +165,9 @@ static inline void clear_file_mode(struct file *file_ptr,f_mode_t mode)
 /* bit 3 */	
 #define FLAG_INODE_NOT_WRITE 		0X00
 #define FLAG_INODE_WRITE 			0X08
+/* bit 4 */
+#define FLAG_NOT_DIRTY				0X00
+#define FLAG_DIRTY					0X10
 /************************************************************/
 
 /*
@@ -168,6 +181,7 @@ struct inode
 	struct inode_operations *inode_ops; /*realize by bottom file system*/
 	struct file_operations *i_f_ops;
 	UINT32 flag;
+	/* struct list_head file_list; string the data block together */
 };
 
 static inline void set_inode_flag(struct inode *inode_ptr,UINT32 flag)
@@ -248,6 +262,7 @@ int closedir(struct directory *directory_ptr);
 void shell_pwd(int argc, char const *argv[]);
 void shell_ls(int argc, char const *argv[]);
 void shell_cd(int argc, char const *argv[]);
+void shell_cat(int argc, char const *argv[]);
 void shell_touch(int argc, char const *argv[]);
 void shell_mkdir(int argc, char const *argv[]);
 

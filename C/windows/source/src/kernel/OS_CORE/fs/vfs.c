@@ -28,7 +28,7 @@ static struct file_operations default_file_operations = {
 #define defalut_file_operations_ptr (&default_file_operations)
 
 extern int default_change_name(struct inode *inode_ptr,struct dentry *dentry_ptr);
-extern int default_refresh(struct inode *inode_ptr);
+extern int default_refresh(struct inode *inode_ptr,struct dentry *dentry_ptr);
 extern int default_floader_cmp_file_name(struct inode *inode_ptr,const char *name);
 extern int default_add_sub_file(struct inode *inode_ptr,const char *name);
 extern int add_sub_folder(struct inode *inode_ptr,const char *folder_name);
@@ -73,7 +73,7 @@ static void _init_dentry(
 	{
 		set_dentry_flag(dentry_ptr,FLAG_DENTRY_FOLDER);
 	}
-	if((FLAG_NAME_CHANGE_DIS & flag) == FLAG_NAME_CHANGE_DIS)
+	if(dentry_name_not_changable(dentry_ptr))
 	{
 		set_dentry_flag(dentry_ptr,FLAG_DENTRY_NAME_CHANGE_DIS);
 	}
@@ -267,6 +267,14 @@ struct dentry *_find_dentry(const char *path)
 	{
 		dentry_ptr = current_dentry_ptr;
 		cur_path = (char *)(path);
+	}
+	if(dentry_need_refresh(dentry_ptr))
+	{
+		if(dentry_ptr->d_inode->inode_ops->refresh(dentry_ptr->d_inode,dentry_ptr) < 0)
+		{
+			ka_printf("disk error\n");
+			return NULL;
+		}
 	}
 	unsigned int name_len = _get_subdir_name_len(cur_path);
 	while(0 != name_len) /* not the last dentry */
@@ -506,6 +514,11 @@ void shell_touch(int argc, char const *argv[])
 	{
 		ka_printf("create file fail\n");
 	}
+}
+
+void shell_cat(int argc, char const *argv[])
+{
+
 }
 
 /*

@@ -5,6 +5,7 @@
 #define IS_UPPER(x) (x>='A' && x<='Z')
 #define IS_LOWER(x) (x>='a' && x<='z')
 #define IS_NUM(x)   (x>='0' && x<='9')
+#define IS_HEX(x)	(x>='a' && x<='f')
 #define IS_DOT(x)   ('.' == x)
 
 

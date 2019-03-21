@@ -286,5 +286,16 @@ void cpu_rate(int argc, char const *argv[])
 }
 #endif
 
+void shell_check_memory(int argc, char const *argv[])
+{
+	if(2 != argc)
+	{
+		ka_printf("parameter error\n");
+		return ;
+	}
+	unsigned int num = ka_atoi(argv[1]);
+	ka_printf("value of add %p is %d\n",(void *)num,*(int *)num);
+}
+
 #endif
 
