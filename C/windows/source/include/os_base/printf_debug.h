@@ -20,5 +20,6 @@ while(0)
 #define DEBUG_TYPE_SHELL_TAB 	0
 #define DEBUG_TYPE_MODULE 		1
 #define DEBUG_TYPE_VECTOR 		1	
+#define DEBUG_TYPE_SHELL 		0
 
 #endif

@@ -192,10 +192,10 @@ void _put_in_shell_buffer(char c)  /* deal with input layer*/
 	}
 	else if(0x08 == c) /* backspace key*/
 	{
-		if(using_shell_buffer_ptr->index>0)
+		if(using_shell_buffer_ptr->index > 0)
 		{
 			--(using_shell_buffer_ptr->index);
-			ka_printf(" \b");
+			ka_printf("\b");
 		}
 		else
 		{
@@ -211,8 +211,18 @@ void _put_in_shell_buffer(char c)  /* deal with input layer*/
 		recover_shell_buffer();
 		return ;
 	}
+	else if(0x0d == c) /* enter */
+	{
+		ka_printf("\n");
+		using_shell_buffer_ptr->buffer[(using_shell_buffer_ptr->index)++] = 0x0d;
+		using_shell_buffer_ptr->buffer[using_shell_buffer_ptr->index] = '\0';
+		KA_WARN(DEBUG_TYPE_SHELL,"%s\n",using_shell_buffer_ptr->buffer);
+		_v(&MCB_for_shell);
+		return ;
+	}
 	if(using_shell_buffer_ptr->index < using_shell_buffer_ptr->buffer_size)
 	{
+		ka_putchar(c);
 		using_shell_buffer_ptr->buffer[(using_shell_buffer_ptr->index)++] = c;
 		using_shell_buffer_ptr->buffer[using_shell_buffer_ptr->index] = '\0';
 	}
@@ -221,14 +231,6 @@ void _put_in_shell_buffer(char c)  /* deal with input layer*/
 		ka_printf("\ntoo long,invalid input,clear buffer...\n");
 		using_shell_buffer_ptr->index = 0;
 		return ;
-	}
-	if(0x0d == c)
-	{
-#if DEBUG_SHELL
-		using_shell_buffer_ptr->buffer[using_shell_buffer_ptr->index-1] = '\0';
-		ka_printf("%s\n",using_shell_buffer_ptr->buffer);
-#endif
-		_v(&MCB_for_shell);
 	}
 }
 
