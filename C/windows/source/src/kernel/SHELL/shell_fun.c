@@ -165,7 +165,7 @@ void shell_module(int argc, char const *argv[])
 	if(NULL != value_ptr)
 	{
 		stack_size = ka_atoi(value_ptr);
-		KA_DEBUG_LOG(DEBUG_TYPE_MODULE,"get stacksize %u\n",stack_size);
+		KA_WARN(DEBUG_TYPE_MODULE,"get stacksize %u\n",stack_size);
 	}
 	value_ptr = get_para_add(argc,argv,"-prio=");
 	if(NULL != value_ptr)
@@ -178,7 +178,7 @@ void shell_module(int argc, char const *argv[])
 	if(NULL != value_ptr)
 	{
 		name = value_ptr;
-		KA_DEBUG_LOG(DEBUG_TYPE_MODULE,"get name %s\n",name);
+		KA_WARN(DEBUG_TYPE_MODULE,"get name %s\n",name);
 	}
 
 	value_ptr = get_para_add(argc,argv,"-r");

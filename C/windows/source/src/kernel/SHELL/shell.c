@@ -98,10 +98,10 @@ static void deal_with_tab(void)
 	unsigned int num = _process(using_shell_buffer_ptr->buffer);
 	if((num <= 1) || (num >= ARGV_SIZE)) /* useless input */
 	{
-		KA_DEBUG_LOG(DEBUG_TYPE_SHELL_TAB,"invalid num\n");
+		KA_WARN(DEBUG_TYPE_SHELL_TAB,"invalid num\n");
 		return ;
 	}
-	KA_DEBUG_LOG(DEBUG_TYPE_SHELL_TAB,"get num is %u\n",num);
+	KA_WARN(DEBUG_TYPE_SHELL_TAB,"get num is %u\n",num);
 	unsigned int len = ka_strlen(using_shell_buffer_ptr->argv[num-1]);
 	unsigned int index = 0;
 	unsigned int same = 0;
@@ -111,7 +111,7 @@ static void deal_with_tab(void)
 		ka_printf("command not found\n");
 		return ;
 	}
-	KA_DEBUG_LOG(DEBUG_TYPE_SHELL_TAB,"command_processer length is %u\n",command_processer_ptr->command_length);
+	KA_WARN(DEBUG_TYPE_SHELL_TAB,"command_processer length is %u\n",command_processer_ptr->command_length);
 	struct command *struct_command_ptr;
 	struct singly_list_head *head = &command_processer_ptr->command_list_address[command_list_hash(using_shell_buffer_ptr->argv[0])];
 	singly_list_for_each_entry(struct_command_ptr,head,list)
@@ -121,7 +121,7 @@ static void deal_with_tab(void)
 			/* get command */
 			if(NULL == struct_command_ptr->para_arv)
 			{
-				KA_DEBUG_LOG(DEBUG_TYPE_SHELL_TAB,"command %s has no parament\n",struct_command_ptr->command_name);
+				KA_WARN(DEBUG_TYPE_SHELL_TAB,"command %s has no parament\n",struct_command_ptr->command_name);
 				return ;
 			}
 			unsigned int i;
@@ -132,7 +132,7 @@ static void deal_with_tab(void)
 					++same;
 					if(same > 1)
 					{
-						KA_DEBUG_LOG(DEBUG_TYPE_SHELL_TAB,"more than one parament\n");
+						KA_WARN(DEBUG_TYPE_SHELL_TAB,"more than one parament\n");
 						return ;
 					}
 					index = i;
@@ -140,7 +140,7 @@ static void deal_with_tab(void)
 			}
 			if(0 == same)
 			{
-				KA_DEBUG_LOG(DEBUG_TYPE_SHELL_TAB,"no same parament\n");
+				KA_WARN(DEBUG_TYPE_SHELL_TAB,"no same parament\n");
 			}
 			else
 			{
@@ -153,7 +153,7 @@ static void deal_with_tab(void)
 			return ;
 		}
 	}
-	KA_DEBUG_LOG(DEBUG_TYPE_SHELL_TAB,"command not found\n");
+	KA_WARN(DEBUG_TYPE_SHELL_TAB,"command not found\n");
 	return ;
 }
 
@@ -306,6 +306,10 @@ static struct command resident_command_2[] =
 		.command_name = "cd",
 		.f = shell_cd,
 	},
+	{
+		.command_name = "rm",
+		.f = shell_rm,
+	},
 #endif
 	{
 		.command_name = "ka",
@@ -422,6 +426,10 @@ static struct command resident_command_5[] =
 	,{
 		.command_name = "mkdir",
 		.f = shell_mkdir,
+	}
+	,{
+		.command_name = "rmdir",
+		.f = shell_rmdir,
 	}
 #endif
 };

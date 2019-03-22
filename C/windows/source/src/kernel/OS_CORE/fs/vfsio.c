@@ -15,7 +15,7 @@ int _open(const char *path,enum FILE_FLAG flag,struct file **file_store_ptr)
 	}
 	if(get_dentry_flag(dentry_ptr) & FLAG_DENTRY_FOLDER)
 	{
-		KA_DEBUG_LOG(DEBUG_TYPE_VFS,"the path '%s' is not a file\n",path);
+		KA_WARN(DEBUG_TYPE_VFS,"the path '%s' is not a file\n",path);
 		return -ERROR_LOGIC;
 	}
 	struct file *file_ptr;
@@ -55,13 +55,13 @@ int _open(const char *path,enum FILE_FLAG flag,struct file **file_store_ptr)
 			}
 			break;
 		default:
-			KA_DEBUG_LOG(DEBUG_TYPE_VFS,"function open flag error\n");
+			KA_WARN(DEBUG_TYPE_VFS,"function open flag error\n");
 			ASSERT(0);
 			return -ERROR_LOGIC;
 	}
 	CPU_SR_ALLOC();
 	CPU_CRITICAL_ENTER();
-	_fget(file_ptr);
+	_dget(file_ptr->f_den);
 	CPU_CRITICAL_EXIT();
 	if(file_ptr->f_op->open)
 	{
@@ -93,11 +93,9 @@ int _close(struct file *file_ptr)
 	}
 	CPU_SR_ALLOC();
 	CPU_CRITICAL_ENTER();
-	_fput(file_ptr);
-	if(0 == get_file_ref(file_ptr))
-	{
-		ka_free(file_ptr);
-	}
+	ASSERT(_dref(file_ptr->f_den) > 0);
+	_dput(file_ptr->f_den);
+	ka_free(file_ptr);
 	CPU_CRITICAL_EXIT();
 	return FUN_EXECUTE_SUCCESSFULLY;
 }

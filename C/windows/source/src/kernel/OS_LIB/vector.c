@@ -101,13 +101,13 @@ static void shrink_memory(Vector *vector_ptr)
 	if((vector_ptr->cur_len * 4 < vector_ptr->max_len) 
 			&& (vector_ptr->cur_len + 24 < vector_ptr->max_len))
 	{
-		KA_DEBUG_LOG(DEBUG_TYPE_VECTOR,
+		KA_WARN(DEBUG_TYPE_VECTOR,
 			"shrink vector,now cur_len is %u,max_len is %u\n",
 			vector_ptr->cur_len,vector_ptr->max_len);
 		void *buffer = f_malloc(sizeof(void *) * (vector_ptr->max_len / 2));
 		if(NULL == buffer)
 		{
-			KA_DEBUG_LOG(DEBUG_TYPE_VECTOR,"malloc fail\n");
+			KA_WARN(DEBUG_TYPE_VECTOR,"malloc fail\n");
 			return ;
 		}
 		f_free(vector_ptr->data_ptr);

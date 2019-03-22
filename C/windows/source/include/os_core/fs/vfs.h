@@ -77,6 +77,21 @@ struct dentry
 	MUTEX d_mutex;
 };
 
+static inline void _dget(struct dentry *dentry_ptr)
+{
+	++(dentry_ptr->ref);
+}
+
+static inline void _dput(struct dentry *dentry_ptr)
+{
+	--(dentry_ptr->ref);
+}
+
+static inline unsigned int _dref(struct dentry *dentry_ptr)
+{
+	return dentry_ptr->ref;
+}
+
 static inline void set_dentry_flag(struct dentry *dentry_ptr,UINT32 flag)
 {
 	dentry_ptr->flag |= flag;
@@ -121,26 +136,30 @@ struct file
 	unsigned int offset;
 	struct dentry *f_den;
 	f_mode_t f_mode;
-	unsigned int ref;
+	/*unsigned int ref;*/
 	void *private_data;
 };
 
+/*
 static inline void _fget(struct file *file_ptr)
 {
 	++(file_ptr->ref);
 }
+*/
 /* add the ref of file,means that a task use this file,
  os should not release it. */
+/*
 static inline void _fput(struct file *file_ptr)
 {
 	--(file_ptr->ref);
 }
-
+*/
+/*
 static inline unsigned int get_file_ref(struct file *file_ptr)
 {
 	return file_ptr->ref;
 }
-
+*/
 static inline void set_file_mode(struct file *file_ptr,f_mode_t mode)
 {
 	file_ptr->f_mode |= mode;
@@ -265,5 +284,7 @@ void shell_cd(int argc, char const *argv[]);
 void shell_cat(int argc, char const *argv[]);
 void shell_touch(int argc, char const *argv[]);
 void shell_mkdir(int argc, char const *argv[]);
+void shell_rm(int argc, char const *argv[]);
+void shell_rmdir(int argc, char const *argv[]);
 
 #endif

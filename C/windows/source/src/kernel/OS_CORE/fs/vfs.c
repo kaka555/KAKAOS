@@ -66,6 +66,7 @@ static void _init_dentry(
 	dentry_ptr->d_parent = parent_ptr;
 	dentry_ptr->d_inode = inode_ptr;
 	dentry_ptr->name = (char *)name;
+	dentry_ptr->ref = 0;
 	INIT_LIST_HEAD(&dentry_ptr->subdirs);
 	INIT_LIST_HEAD(&dentry_ptr->child);
 	dentry_ptr->flag = FLAG_DENTRY_DEFAULT;
@@ -121,7 +122,7 @@ struct file *_file_alloc_and_init(
 	file_ptr->offset = 0;
 	file_ptr->f_den = dentry_ptr;
 	file_ptr->f_mode = FILE_MODE_DEFAULT | flag;
-	file_ptr->ref = 0;
+	/*file_ptr->ref = 0;*/
 	return file_ptr;
 }
 
@@ -305,7 +306,7 @@ int __add_folder(struct dentry *target_dentry_ptr,const char *folder_name,struct
 	char *name_buffer = ka_malloc(len);
 	if(NULL == name_buffer)
 	{
-		KA_DEBUG_LOG(DEBUG_TYPE_VFS,"name_buffer malloc fail\n");
+		KA_WARN(DEBUG_TYPE_VFS,"name_buffer malloc fail\n");
 		return -ERROR_NO_MEM;
 	}
 	ka_strcpy(name_buffer,folder_name);
@@ -321,7 +322,7 @@ int __add_folder(struct dentry *target_dentry_ptr,const char *folder_name,struct
 	}
 	if(NULL == inode_ptr)
 	{
-		KA_DEBUG_LOG(DEBUG_TYPE_VFS,"inode malloc fail\n");
+		KA_WARN(DEBUG_TYPE_VFS,"inode malloc fail\n");
 		ka_free(name_buffer);
 		return -ERROR_NO_MEM;
 	}
@@ -360,7 +361,7 @@ EXPORT_SYMBOL(add_folder);
 static int __add_file(struct dentry *target_dentry_ptr,const char *file_name,struct file_operations *file_operations_ptr)
 {
 	ASSERT(is_folder(target_dentry_ptr));
-	KA_DEBUG_LOG(DEBUG_TYPE_VFS,"__add_file() get dentry name is %s\nfile name is %s\n",target_dentry_ptr->name,file_name);
+	KA_WARN(DEBUG_TYPE_VFS,"__add_file() get dentry name is %s\nfile name is %s\n",target_dentry_ptr->name,file_name);
 	if(has_same_name_file(target_dentry_ptr,file_name))
 	{
 		return -ERROR_LOGIC;
@@ -423,10 +424,105 @@ int add_file(const char *path,const char *file_name,struct file_operations *file
 }
 EXPORT_SYMBOL(add_file);
 
+static int __delete_file(struct dentry *dentry_ptr)
+{
+	ASSERT(NULL != dentry_ptr);
+	ASSERT(list_empty(&dentry_ptr->subdirs));
+	ASSERT(is_file(dentry_ptr));
+	if(0 == _dref(dentry_ptr))
+	{
+		list_del(&dentry_ptr->child);
+		ka_free(dentry_ptr);
+		KA_WARN(DEBUG_TYPE_VFS,"remove file %s\n",dentry_ptr->name);
+		return FUN_EXECUTE_SUCCESSFULLY;
+	}
+	else
+	{
+		ka_printf("file is currently used by task\n");
+		return -ERROR_SYS;
+	}
+}
+
+int _delete_file(const char *path)
+{
+	ASSERT((NULL != path) && (0 != ka_strcmp("/",path)));
+	struct dentry *target_dentry_ptr = _find_dentry(path);
+	if((NULL == target_dentry_ptr) || (!is_file(target_dentry_ptr)))
+	{
+		ka_printf("file path error\n");
+		return -ERROR_LOGIC;
+	}
+	return __delete_file(target_dentry_ptr);
+}
+
+int delete_file(const char *path)
+{
+	if((NULL == path) || (0 == ka_strcmp("/",path)))
+	{
+		return -ERROR_NULL_INPUT_PTR;
+	}
+	return _delete_file(path);
+}
+EXPORT_SYMBOL(delete_file);
+
+static int remove_all_dentry(struct dentry *root_dentry_ptr)
+{
+	ASSERT(NULL != root_dentry_ptr);
+	struct dentry *dentry_buffer_ptr,*n;
+	list_for_each_entry_safe(dentry_buffer_ptr,n,&root_dentry_ptr->subdirs,child)
+	{
+		if(is_folder(dentry_buffer_ptr))
+		{
+			if(remove_all_dentry(dentry_buffer_ptr) < 0)
+			{
+				return -ERROR_SYS;
+			}
+			list_del(&dentry_buffer_ptr->child);
+			ka_free(dentry_buffer_ptr);
+			KA_WARN(DEBUG_TYPE_VFS,"remove floder %s\n",dentry_buffer_ptr->name);
+		}
+		else
+		{
+			ASSERT(is_file(dentry_buffer_ptr));
+			if(__delete_file(dentry_buffer_ptr) < 0)
+			{
+				return -ERROR_SYS;
+			}
+		}
+	}
+	list_del(&root_dentry_ptr->child);
+	ka_free(root_dentry_ptr);
+	return FUN_EXECUTE_SUCCESSFULLY;
+}
+
+int _delete_folder(const char *path)
+{
+	ASSERT((NULL != path) && (0 != ka_strcmp("/",path)));
+	struct dentry *target_dentry_ptr = _find_dentry(path);
+	if((NULL == target_dentry_ptr) || (!is_folder(target_dentry_ptr)))
+	{
+		ka_printf("folder path error\n");
+		return -ERROR_LOGIC;
+	}
+	return remove_all_dentry(target_dentry_ptr);
+}
+
+int delete_folder(const char *path)
+{
+	if((NULL == path) || (0 == ka_strcmp("/",path)))
+	{
+		return -ERROR_NULL_INPUT_PTR;
+	}
+	return _delete_folder(path);
+}
+EXPORT_SYMBOL(delete_folder);
+
 #if CONFIG_SHELL_EN
 
 static Vector para_arv_vector;
-struct command *command_cd_ptr = NULL;
+static struct command *command_cd_ptr = NULL;
+static struct command *command_rm_ptr = NULL;
+static struct command *command_rmdir_ptr = NULL;
 
 static void pwd(struct dentry *dentry_ptr)
 {
@@ -500,7 +596,8 @@ void shell_cd(int argc, char const *argv[])
 }
 
 /*
-	touch filename
+	touch filename;
+	create a file
  */
 void shell_touch(int argc, char const *argv[])
 {
@@ -513,7 +610,9 @@ void shell_touch(int argc, char const *argv[])
 	if((ret < 0) && (-ERROR_LOGIC != ret))
 	{
 		ka_printf("create file fail\n");
+		return ;
 	}
+	update_para_arv_vector();
 }
 
 void shell_cat(int argc, char const *argv[])
@@ -540,6 +639,28 @@ void shell_mkdir(int argc, char const *argv[])
 	update_para_arv_vector();
 }
 
+void shell_rm(int argc, char const *argv[])
+{
+	if(2 != argc)
+	{
+		ka_printf("command error\n");
+		return ;
+	}
+	delete_file(argv[1]);
+	return ;
+}
+
+void shell_rmdir(int argc, char const *argv[])
+{
+	if(2 != argc)
+	{
+		ka_printf("command error\n");
+		return ;
+	}
+	delete_folder(argv[1]);
+	return ;
+}
+
 static void update_para_arv_vector(void)
 {
 	ASSERT(NULL != current_dentry_ptr);
@@ -550,6 +671,8 @@ static void update_para_arv_vector(void)
 		Vector_push_back(&para_arv_vector,dentry_ptr->name);
 	}
 	_set_command_para_list(command_cd_ptr,(char **)para_arv_vector.data_ptr,para_arv_vector.cur_len);
+	_set_command_para_list(command_rm_ptr,(char **)para_arv_vector.data_ptr,para_arv_vector.cur_len);
+	_set_command_para_list(command_rmdir_ptr,(char **)para_arv_vector.data_ptr,para_arv_vector.cur_len);
 }
 
 #endif
@@ -573,8 +696,17 @@ static void __init_vfs(void)
 	_init_dentry(&dev_dentry,&root_dentry,&dev_inode,"dev",FLAG_FOLDER|FLAG_NAME_CHANGE_DIS);
 	current_dentry_ptr = &root_dentry; /* set pwd */
 #if CONFIG_SHELL_EN
+/* add tab feature */
+/* command cd */
 	command_cd_ptr = _get_command_ptr("cd");
 	ASSERT(NULL != command_cd_ptr);
+/* command rm */
+	command_rm_ptr = _get_command_ptr("rm");
+	ASSERT(NULL != command_rm_ptr);
+/* command rmdir */
+	command_rmdir_ptr = _get_command_ptr("rmdir");
+	ASSERT(NULL != command_rmdir_ptr);	
+/* finally */
 	update_para_arv_vector(); /* set tab list */
 #endif
 }

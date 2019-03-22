@@ -9,7 +9,7 @@ int default_open(struct file *file_ptr)
 {
 	ASSERT(NULL != file_ptr);
 	(void)file_ptr;
-	KA_DEBUG_LOG(DEBUG_TYPE_VFS,"open file %s\n",file_ptr->f_den->name);
+	KA_WARN(DEBUG_TYPE_VFS,"open file %s\n",file_ptr->f_den->name);
 	return FUN_EXECUTE_SUCCESSFULLY;
 }
 
@@ -17,7 +17,7 @@ int default_close(struct file *file_ptr)
 {
 	ASSERT(NULL != file_ptr);
 	(void)file_ptr;
-	KA_DEBUG_LOG(DEBUG_TYPE_VFS,"close file %s\n",file_ptr->f_den->name);
+	KA_WARN(DEBUG_TYPE_VFS,"close file %s\n",file_ptr->f_den->name);
 	return FUN_EXECUTE_SUCCESSFULLY;
 }
 
@@ -77,7 +77,7 @@ int default_llseek(struct file *file_ptr,int offset,enum llseek_from from)
 			ASSERT((file_ptr->offset >=0) && (file_ptr->offset <= BLOCK_SIZE));
 			return FUN_EXECUTE_SUCCESSFULLY;
 		default :
-			KA_DEBUG_LOG(DEBUG_TYPE_VFS,"llseek flag error\n");
+			KA_WARN(DEBUG_TYPE_VFS,"llseek flag error\n");
 			ASSERT(0);
 	}
 	return -ERROR_LOGIC;

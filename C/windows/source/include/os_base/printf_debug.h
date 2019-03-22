@@ -8,7 +8,7 @@
 	#define PRINTF(format, ...)  
 #endif
 
-#define KA_DEBUG_LOG(type, format, ...)                                       \
+#define KA_WARN(type, format, ...)                                       \
 do                                                                            \
 {                                                                             \
     if (type)                                                                 \
