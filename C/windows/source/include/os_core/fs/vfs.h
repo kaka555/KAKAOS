@@ -122,6 +122,11 @@ static inline int dentry_need_refresh(struct dentry *dentry_ptr)
 	return (FLAG_NEED_REFLASH & dentry_ptr->flag);
 }
 
+static inline void dentry_clear_refresh_flag(struct dentry *dentry_ptr)
+{
+	dentry_ptr->flag &= ~FLAG_NEED_REFLASH;
+}
+
 typedef UINT32 f_mode_t;
 /*************the element 'f_mode' of struct file*************/
 #define FILE_MODE_DEFAULT 0x00
@@ -134,6 +139,7 @@ struct file
 {
 	struct file_operations *f_op;
 	unsigned int offset;
+	unsigned int file_len;
 	struct dentry *f_den;
 	f_mode_t f_mode;
 	/*unsigned int ref;*/
@@ -263,12 +269,16 @@ enum FILE_FLAG{
 	FILE_FLAG_READ_WRITE = (FILE_MODE_READ | FILE_MODE_WRITE)
 };
 
-int ka_open(const char *path,enum FILE_FLAG flag,struct file **file_store_ptr); /* open a file */
+int ka_open(const char *path,enum FILE_FLAG flag,const struct file **file_store_ptr); /* open a file */
 int ka_close(struct file *file_ptr);
-int ka_read(struct file *file_ptr,void *buffer,unsigned int len);
-int ka_write(struct file *file_ptr,void *buffer,unsigned int len);
+int ka_read(struct file *file_ptr,void *buffer,unsigned int len,enum llseek_from offset_flag);
+int ka_write(struct file *file_ptr,void *buffer,unsigned int len,enum llseek_from offset_flag);
 int ka_lseek(struct file *file_ptr,int offset,enum llseek_from from);
 int ka_ioctl(struct file *file_ptr,int cmd,int args);
+
+int __open(struct dentry *dentry_ptr,enum FILE_FLAG flag,const struct file **file_store_ptr);
+int _write(struct file *file_ptr,void *buffer,unsigned int len,enum llseek_from offset_flag);
+int _close(struct file *file_ptr);
 
 struct directory
 {
@@ -286,5 +296,6 @@ void shell_touch(int argc, char const *argv[]);
 void shell_mkdir(int argc, char const *argv[]);
 void shell_rm(int argc, char const *argv[]);
 void shell_rmdir(int argc, char const *argv[]);
+void shell_vfs_echo(char const *argv[]); /* argc == 4 argc[3] == ">" or ">>" */
 
 #endif

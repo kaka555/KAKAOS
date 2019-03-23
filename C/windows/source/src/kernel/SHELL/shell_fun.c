@@ -12,6 +12,7 @@
 #include <buddy.h>
 #include <osinit.h>
 #include <module.h>
+#include <vfs.h>
 
 #if CONFIG_SHELL_EN
 
@@ -77,13 +78,24 @@ void shell_echo(int argc, char const *argv[])
 		ka_printf("too few arguments!\n");
 		return ;
 	}
-	struct shell_variable *shell_variable_ptr = find_in_variable_array(argv[1]);
-	if(NULL == shell_variable_ptr)
+	if(2 == argc)
 	{
-		ka_printf("no such variable\n");
-		return ;
+		struct shell_variable *shell_variable_ptr = find_in_variable_array(argv[1]);
+		if(NULL == shell_variable_ptr)
+		{
+			ka_printf("no such variable\n");
+			return ;
+		}
+		shell_v_display(shell_variable_ptr);
 	}
-	shell_v_display(shell_variable_ptr);
+	else if(4 == argc)
+	{
+		shell_vfs_echo(argv);
+	}
+	else
+	{
+		ka_printf("command error\n");
+	}
 	return ;
 }
 

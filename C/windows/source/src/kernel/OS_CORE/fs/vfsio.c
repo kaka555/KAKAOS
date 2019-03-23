@@ -5,17 +5,11 @@
 #include <printf_debug.h>
 #include <os_cpu.h>
 
-int _open(const char *path,enum FILE_FLAG flag,struct file **file_store_ptr)
+int __open(struct dentry *dentry_ptr,enum FILE_FLAG flag,const struct file **file_store_ptr)
 {
-	ASSERT(NULL != path);
-	struct dentry *dentry_ptr = _find_dentry(path);
-	if(NULL == dentry_ptr)
-	{
-		return -ERROR_LOGIC;
-	}
 	if(get_dentry_flag(dentry_ptr) & FLAG_DENTRY_FOLDER)
 	{
-		KA_WARN(DEBUG_TYPE_VFS,"the path '%s' is not a file\n",path);
+		KA_WARN(DEBUG_TYPE_VFS,"'%s' is not a file\n",dentry_ptr->name);
 		return -ERROR_LOGIC;
 	}
 	struct file *file_ptr;
@@ -71,8 +65,19 @@ int _open(const char *path,enum FILE_FLAG flag,struct file **file_store_ptr)
 	return FUN_EXECUTE_SUCCESSFULLY;
 }
 
+int _open(const char *path,enum FILE_FLAG flag,const struct file **file_store_ptr)
+{
+	ASSERT(NULL != path);
+	struct dentry *dentry_ptr = _find_dentry(path);
+	if(NULL == dentry_ptr)
+	{
+		return -ERROR_LOGIC;
+	}
+	return __open(dentry_ptr,flag,file_store_ptr);
+}
+
 /* open a file */
-int ka_open(const char *path,enum FILE_FLAG flag,struct file **file_store_ptr)
+int ka_open(const char *path,enum FILE_FLAG flag,const struct file **file_store_ptr)
 {
 	if((NULL == path) || (NULL == file_store_ptr))
 	{
@@ -111,7 +116,7 @@ int ka_close(struct file *file_ptr)
 }
 EXPORT_SYMBOL(ka_close);
 
-int _read(struct file *file_ptr,void *buffer,unsigned int len)
+int _read(struct file *file_ptr,void *buffer,unsigned int len,enum llseek_from offset_flag)
 {
 	ASSERT((NULL != file_ptr) && (NULL != buffer) && (len > 0));
 	if(!(file_ptr->f_mode & FILE_MODE_READ))
@@ -120,22 +125,45 @@ int _read(struct file *file_ptr,void *buffer,unsigned int len)
 	}
 	if(file_ptr->f_op->read)
 	{
+		unsigned int offset_backup = file_ptr->offset;
+		switch (offset_flag)
+		{
+			case FILE_START :
+				file_ptr->offset = 0;
+				break ;
+			case FILE_TAIL :
+				file_ptr->offset = file_ptr->file_len;
+				break ;
+			default :
+				ASSERT(FILE_CURRENT == offset_flag);
+				break ;
+		}
 		int offset = file_ptr->f_op->read(file_ptr,buffer,len,file_ptr->offset);
 		if(offset < 0)
 		{
+			file_ptr->offset = offset_backup;
 			return offset;
 		}
 		file_ptr->offset += offset;
+		ASSERT(file_ptr->offset <= file_ptr->file_len);
 		return offset;
 	}
 	else
 	{
-		file_ptr->offset += len;  /* a bug here of file->offset */
+		if(file_ptr->offset + len < file_ptr->file_len)
+		{
+			file_ptr->offset += len; 
+		}
+		else
+		{
+			len = file_ptr->file_len - file_ptr->offset;
+			file_ptr->offset = file_ptr->file_len;
+		}
 		return len;
 	}
 }
 
-int ka_read(struct file *file_ptr,void *buffer,unsigned int len)
+int ka_read(struct file *file_ptr,void *buffer,unsigned int len,enum llseek_from offset_flag)
 {
 	if((NULL == file_ptr) || (NULL == buffer))
 	{
@@ -145,11 +173,11 @@ int ka_read(struct file *file_ptr,void *buffer,unsigned int len)
 	{
 		return -ERROR_USELESS_INPUT;
 	}
-	return _read(file_ptr,buffer,len);
+	return _read(file_ptr,buffer,len,offset_flag);
 }
 EXPORT_SYMBOL(ka_read);
 
-int _write(struct file *file_ptr,void *buffer,unsigned int len)
+int _write(struct file *file_ptr,void *buffer,unsigned int len,enum llseek_from offset_flag)
 {
 	ASSERT((NULL != file_ptr) && (NULL != buffer) && (len > 0));
 	if(!(file_ptr->f_mode & FILE_MODE_WRITE))
@@ -158,22 +186,45 @@ int _write(struct file *file_ptr,void *buffer,unsigned int len)
 	}
 	if(file_ptr->f_op->write)
 	{
+		unsigned int offset_backup = file_ptr->offset;
+		switch (offset_flag)
+		{
+			case FILE_START :
+				file_ptr->offset = 0;
+				break ;
+			case FILE_TAIL :
+				file_ptr->offset = file_ptr->file_len;
+				break ;
+			default :
+				ASSERT(FILE_CURRENT == offset_flag);
+				break ;
+		}
 		int offset = file_ptr->f_op->write(file_ptr,buffer,len,file_ptr->offset);
 		if(offset < 0)
 		{
+			file_ptr->offset = offset_backup;
 			return offset;
 		}
 		file_ptr->offset += offset;
+		ASSERT(file_ptr->offset <= file_ptr->file_len);
 		return offset;
 	}
 	else
 	{
-		file_ptr->offset += len; /* a bug here of file->offset */
+		if(file_ptr->offset + len < file_ptr->file_len)
+		{
+			file_ptr->offset += len; 
+		}
+		else
+		{
+			len = file_ptr->file_len - file_ptr->offset;
+			file_ptr->offset = file_ptr->file_len;
+		}
 		return len;
 	}
 }
 
-int ka_write(struct file *file_ptr,void *buffer,unsigned int len)
+int ka_write(struct file *file_ptr,void *buffer,unsigned int len,enum llseek_from offset_flag)
 {
 	if((NULL == file_ptr) || (NULL == buffer))
 	{
@@ -183,7 +234,7 @@ int ka_write(struct file *file_ptr,void *buffer,unsigned int len)
 	{
 		return -ERROR_USELESS_INPUT;
 	}
-	return _write(file_ptr,buffer,len);
+	return _write(file_ptr,buffer,len,offset_flag);
 }
 EXPORT_SYMBOL(ka_write);
 

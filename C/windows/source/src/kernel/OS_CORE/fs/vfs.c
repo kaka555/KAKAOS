@@ -276,6 +276,7 @@ struct dentry *_find_dentry(const char *path)
 			ka_printf("disk error\n");
 			return NULL;
 		}
+		dentry_clear_refresh_flag(dentry_ptr);
 	}
 	unsigned int name_len = _get_subdir_name_len(cur_path);
 	while(0 != name_len) /* not the last dentry */
@@ -673,6 +674,49 @@ static void update_para_arv_vector(void)
 	_set_command_para_list(command_cd_ptr,(char **)para_arv_vector.data_ptr,para_arv_vector.cur_len);
 	_set_command_para_list(command_rm_ptr,(char **)para_arv_vector.data_ptr,para_arv_vector.cur_len);
 	_set_command_para_list(command_rmdir_ptr,(char **)para_arv_vector.data_ptr,para_arv_vector.cur_len);
+}
+
+void shell_vfs_echo(char const *argv[])
+{
+	int error;
+	struct file *file_ptr = NULL;
+	if((0 != ka_strcmp(">",argv[2])) && (0 != ka_strcmp(">>",argv[2])))
+	{
+		ka_printf("command error\n");
+		return ;
+	}
+	if(0 == ka_strlen(argv[1]))
+	{
+		ka_printf("parameter error\n");
+		return ;
+	}
+	struct dentry *dentry_ptr = _find_dentry(argv[1]);
+	if(NULL == dentry_ptr)
+	{
+		ka_printf("path error\n");
+		return ;
+	}
+	error = __open(dentry_ptr,FILE_FLAG_WRITEONLY,(const struct file **)&file_ptr);
+	if(error < 0)
+	{
+		ka_printf("open file fail\n");
+		return ;
+	}
+	ASSERT(NULL != file_ptr);
+	if(0 == ka_strcmp(">",argv[2]))
+	{
+		error = _write(file_ptr,(void *)argv[1],ka_strlen(argv[1]),FILE_CURRENT);
+	}
+	else
+	{
+		ASSERT(0 == ka_strcmp(">>",argv[2]));
+		error = _write(file_ptr,(void *)argv[1],ka_strlen(argv[1]),FILE_TAIL);
+	}
+	if(error < 0)
+	{
+		ka_printf("write fail\n");
+	}
+	_close(file_ptr);
 }
 
 #endif
