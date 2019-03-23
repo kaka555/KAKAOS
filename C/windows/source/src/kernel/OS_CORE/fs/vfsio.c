@@ -53,13 +53,19 @@ int __open(struct dentry *dentry_ptr,enum FILE_FLAG flag,const struct file **fil
 			ASSERT(0);
 			return -ERROR_LOGIC;
 	}
+	ASSERT(NULL != file_ptr);
+	ASSERT(file_ptr->offset <= file_ptr->file_len);
 	CPU_SR_ALLOC();
 	CPU_CRITICAL_ENTER();
 	_dget(file_ptr->f_den);
 	CPU_CRITICAL_EXIT();
 	if(file_ptr->f_op->open)
 	{
-		return file_ptr->f_op->open(file_ptr);
+		int error = file_ptr->f_op->open(file_ptr);
+		if(error < 0)
+		{
+			return error;
+		}
 	}
 	*file_store_ptr = file_ptr;
 	return FUN_EXECUTE_SUCCESSFULLY;
@@ -92,6 +98,7 @@ EXPORT_SYMBOL(ka_open);
 int _close(struct file *file_ptr)
 {
 	ASSERT(NULL != file_ptr);
+	ASSERT(file_ptr->offset <= file_ptr->file_len);
 	if(file_ptr->f_op->close)
 	{
 		file_ptr->f_op->close(file_ptr);
@@ -119,8 +126,10 @@ EXPORT_SYMBOL(ka_close);
 int _read(struct file *file_ptr,void *buffer,unsigned int len,enum llseek_from offset_flag)
 {
 	ASSERT((NULL != file_ptr) && (NULL != buffer) && (len > 0));
+	ASSERT(file_ptr->offset <= file_ptr->file_len);
 	if(!(file_ptr->f_mode & FILE_MODE_READ))
 	{
+		KA_WARN(CONFIG_VFS,"file %s cannot be read\n",file_ptr->f_den->name);
 		return -ERROR_LOGIC;
 	}
 	if(file_ptr->f_op->read)
@@ -142,23 +151,35 @@ int _read(struct file *file_ptr,void *buffer,unsigned int len,enum llseek_from o
 		if(offset < 0)
 		{
 			file_ptr->offset = offset_backup;
+			KA_WARN(CONFIG_VFS,"f_op->read fail\n");
 			return offset;
 		}
-		file_ptr->offset += offset;
+		if(!inode_is_soft(file_ptr->f_den->d_inode))
+		{
+			file_ptr->offset += offset;
+		}
 		ASSERT(file_ptr->offset <= file_ptr->file_len);
 		return offset;
 	}
 	else
 	{
-		if(file_ptr->offset + len < file_ptr->file_len)
+		if(!inode_is_soft(file_ptr->f_den->d_inode))
 		{
-			file_ptr->offset += len; 
+			if(file_ptr->offset + len < file_ptr->file_len)
+			{
+				file_ptr->offset += len; 
+			}
+			else
+			{
+				len = file_ptr->file_len - file_ptr->offset;
+				file_ptr->offset = file_ptr->file_len;
+			}
 		}
 		else
 		{
-			len = file_ptr->file_len - file_ptr->offset;
-			file_ptr->offset = file_ptr->file_len;
+			ASSERT((0 == file_ptr->file_len) && (0 == file_ptr->offset));
 		}
+		ASSERT(file_ptr->offset <= file_ptr->file_len);
 		return len;
 	}
 }
@@ -180,8 +201,10 @@ EXPORT_SYMBOL(ka_read);
 int _write(struct file *file_ptr,void *buffer,unsigned int len,enum llseek_from offset_flag)
 {
 	ASSERT((NULL != file_ptr) && (NULL != buffer) && (len > 0));
+	ASSERT(file_ptr->offset <= file_ptr->file_len);
 	if(!(file_ptr->f_mode & FILE_MODE_WRITE))
 	{
+		KA_WARN(CONFIG_VFS,"file %s cannot be written\n",file_ptr->f_den->name);
 		return -ERROR_LOGIC;
 	}
 	if(file_ptr->f_op->write)
@@ -202,24 +225,37 @@ int _write(struct file *file_ptr,void *buffer,unsigned int len,enum llseek_from 
 		int offset = file_ptr->f_op->write(file_ptr,buffer,len,file_ptr->offset);
 		if(offset < 0)
 		{
+			KA_WARN(CONFIG_VFS,"f_op->write fail\n");
 			file_ptr->offset = offset_backup;
+
 			return offset;
 		}
-		file_ptr->offset += offset;
+		if(!inode_is_soft(file_ptr->f_den->d_inode))
+		{
+			file_ptr->offset += offset;
+		}
 		ASSERT(file_ptr->offset <= file_ptr->file_len);
 		return offset;
 	}
 	else
 	{
-		if(file_ptr->offset + len < file_ptr->file_len)
+		if(!inode_is_soft(file_ptr->f_den->d_inode))
 		{
-			file_ptr->offset += len; 
+			if(file_ptr->offset + len < file_ptr->file_len)
+			{
+				file_ptr->offset += len; 
+			}
+			else
+			{
+				len = file_ptr->file_len - file_ptr->offset;
+				file_ptr->offset = file_ptr->file_len;
+			}
 		}
 		else
 		{
-			len = file_ptr->file_len - file_ptr->offset;
-			file_ptr->offset = file_ptr->file_len;
+			ASSERT((0 == file_ptr->file_len) && (0 == file_ptr->offset));
 		}
+		ASSERT(file_ptr->offset <= file_ptr->file_len);
 		return len;
 	}
 }

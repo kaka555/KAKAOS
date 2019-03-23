@@ -120,6 +120,7 @@ struct file *_file_alloc_and_init(
 	ASSERT(NULL != dentry_ptr->d_inode->i_f_ops);
 	file_ptr->f_op = dentry_ptr->d_inode->i_f_ops;
 	file_ptr->offset = 0;
+	file_ptr->file_len = 0;
 	file_ptr->f_den = dentry_ptr;
 	file_ptr->f_mode = FILE_MODE_DEFAULT | flag;
 	/*file_ptr->ref = 0;*/
@@ -127,14 +128,12 @@ struct file *_file_alloc_and_init(
 }
 
 static void _inode_init(
-	unsigned long file_size, /* 0 means that this is a recently created file or a special device */
 	struct inode_operations *inode_operations_ptr,
 	struct file_operations *file_operations_ptr,
 	UINT32 flag,
 	struct inode *inode_ptr)
 {
 	ASSERT(NULL != inode_ptr);
-	inode_ptr->file_size = file_size;
 	inode_ptr->ref = 0;
 	inode_ptr->inode_ops = inode_operations_ptr;
 	inode_ptr->i_f_ops = file_operations_ptr;
@@ -151,7 +150,6 @@ static void _inode_init(
 }
 
 struct inode *_inode_alloc_and_init(
-	unsigned long file_size,
 	struct inode_operations *inode_operations_ptr,
 	struct file_operations *file_operations_ptr,
 	UINT32 flag)
@@ -161,7 +159,7 @@ struct inode *_inode_alloc_and_init(
 	{
 		return NULL;
 	}
-	_inode_init(file_size,inode_operations_ptr,file_operations_ptr,flag,inode_ptr);
+	_inode_init(inode_operations_ptr,file_operations_ptr,flag,inode_ptr);
 	return inode_ptr;
 }
 
@@ -315,11 +313,11 @@ int __add_folder(struct dentry *target_dentry_ptr,const char *folder_name,struct
 	struct inode *inode_ptr;
 	if(file_operations_ptr)
 	{
-		inode_ptr = _inode_alloc_and_init(0,target_dentry_ptr->d_inode->inode_ops,file_operations_ptr,target_dentry_ptr->d_inode->flag);
+		inode_ptr = _inode_alloc_and_init(target_dentry_ptr->d_inode->inode_ops,file_operations_ptr,target_dentry_ptr->d_inode->flag);
 	}
 	else
 	{
-		inode_ptr = _inode_alloc_and_init(0,target_dentry_ptr->d_inode->inode_ops,target_dentry_ptr->d_inode->i_f_ops,target_dentry_ptr->d_inode->flag);
+		inode_ptr = _inode_alloc_and_init(target_dentry_ptr->d_inode->inode_ops,target_dentry_ptr->d_inode->i_f_ops,target_dentry_ptr->d_inode->flag);
 	}
 	if(NULL == inode_ptr)
 	{
@@ -382,11 +380,11 @@ static int __add_file(struct dentry *target_dentry_ptr,const char *file_name,str
 	struct inode *inode_ptr;
 	if(file_operations_ptr)
 	{
-		inode_ptr = _inode_alloc_and_init(0,target_dentry_ptr->d_inode->inode_ops,file_operations_ptr,target_dentry_ptr->d_inode->flag);
+		inode_ptr = _inode_alloc_and_init(target_dentry_ptr->d_inode->inode_ops,file_operations_ptr,target_dentry_ptr->d_inode->flag);
 	}
 	else
 	{
-		inode_ptr = _inode_alloc_and_init(0,target_dentry_ptr->d_inode->inode_ops,target_dentry_ptr->d_inode->i_f_ops,target_dentry_ptr->d_inode->flag);
+		inode_ptr = _inode_alloc_and_init(target_dentry_ptr->d_inode->inode_ops,target_dentry_ptr->d_inode->i_f_ops,target_dentry_ptr->d_inode->flag);
 	}
 	if(NULL == inode_ptr)
 	{
@@ -524,6 +522,9 @@ static Vector para_arv_vector;
 static struct command *command_cd_ptr = NULL;
 static struct command *command_rm_ptr = NULL;
 static struct command *command_rmdir_ptr = NULL;
+static struct command *command_ls_ptr = NULL;
+static struct command *command_cat_ptr = NULL;
+static struct command *command_echo_ptr = NULL;
 
 static void pwd(struct dentry *dentry_ptr)
 {
@@ -554,16 +555,55 @@ void shell_pwd(int argc, char const *argv[])
 	return ;
 }
 
+/* if the input >0, return 1, else, return 0 */
+static inline unsigned int shell_ls_helper(unsigned int para)
+{
+	return (para>0)?1:0;
+}
+
+/*
+	ls
+	ls filename
+output:
+	filename ref is_root is_folder need_refresh name_not_changable is_soft is_dev \
+	read wirte dirty
+ */
 void shell_ls(int argc, char const *argv[])
 {
-	(void)argc;
-	(void)argv;
 	ASSERT(NULL != current_dentry_ptr);
 	struct dentry *dentry_ptr;
 	struct list_head *head = &current_dentry_ptr->subdirs;
-	list_for_each_entry(dentry_ptr,head,child)
+	if(1 == argc)
 	{
-		ka_printf("%s\t",dentry_ptr->name);
+		list_for_each_entry(dentry_ptr,head,child)
+		{
+			ka_printf("%s\t",dentry_ptr->name);
+		}
+	}
+	else if(2 == argc)
+	{
+		list_for_each_entry(dentry_ptr,head,child)
+		{
+			if(0 == ka_strcmp(argv[1],dentry_ptr->name))
+			{
+				ka_printf("%s\t%u|%u|%u|%u|%u|%u|%u\t%u|%u\t%u",dentry_ptr->name,dentry_ptr->ref,
+					shell_ls_helper(is_root(dentry_ptr)),
+					shell_ls_helper(is_folder(dentry_ptr)),
+					shell_ls_helper(dentry_need_refresh(dentry_ptr)),
+					shell_ls_helper(dentry_name_not_changable(dentry_ptr)),
+					shell_ls_helper(inode_is_soft(dentry_ptr->d_inode)),
+					shell_ls_helper(inode_is_dev(dentry_ptr->d_inode)),
+					shell_ls_helper(inode_readable(dentry_ptr->d_inode)),
+					shell_ls_helper(inode_readable(dentry_ptr->d_inode)),
+					shell_ls_helper(inode_is_dirty(dentry_ptr->d_inode))
+					);
+				break ;
+			}
+		}
+	}
+	else
+	{
+		ka_printf("parameter error");
 	}
 	ka_printf("\n");
 }
@@ -616,9 +656,38 @@ void shell_touch(int argc, char const *argv[])
 	update_para_arv_vector();
 }
 
+/*
+	cat filename
+ */
 void shell_cat(int argc, char const *argv[])
 {
-
+	if(2 != argc)
+	{
+		ka_printf("command error\n");
+		return ;
+	}
+	struct file *file_ptr = NULL;
+	struct dentry *dentry_ptr = _find_dentry(argv[1]);
+	if(NULL == dentry_ptr)
+	{
+		ka_printf("path error\n");
+		return ;
+	}
+	int error = __open(dentry_ptr,FILE_FLAG_READONLY,(const struct file **)&file_ptr);
+	if(error < 0)
+	{
+		ka_printf("open file fail\n");
+		return ;
+	}
+	ASSERT(NULL != file_ptr);
+	int buffer;
+	error = _read(file_ptr,&buffer,sizeof(int),FILE_CURRENT);
+	if(error < 0)
+	{
+		ka_printf("read fail\n");
+	}
+	_close(file_ptr);
+	ka_printf("%d\n",buffer);
 }
 
 /*
@@ -674,6 +743,9 @@ static void update_para_arv_vector(void)
 	_set_command_para_list(command_cd_ptr,(char **)para_arv_vector.data_ptr,para_arv_vector.cur_len);
 	_set_command_para_list(command_rm_ptr,(char **)para_arv_vector.data_ptr,para_arv_vector.cur_len);
 	_set_command_para_list(command_rmdir_ptr,(char **)para_arv_vector.data_ptr,para_arv_vector.cur_len);
+	_set_command_para_list(command_ls_ptr,(char **)para_arv_vector.data_ptr,para_arv_vector.cur_len);
+	_set_command_para_list(command_cat_ptr,(char **)para_arv_vector.data_ptr,para_arv_vector.cur_len);
+	_set_command_para_list(command_echo_ptr,(char **)para_arv_vector.data_ptr,para_arv_vector.cur_len);
 }
 
 void shell_vfs_echo(char const *argv[])
@@ -690,7 +762,7 @@ void shell_vfs_echo(char const *argv[])
 		ka_printf("parameter error\n");
 		return ;
 	}
-	struct dentry *dentry_ptr = _find_dentry(argv[1]);
+	struct dentry *dentry_ptr = _find_dentry(argv[3]);
 	if(NULL == dentry_ptr)
 	{
 		ka_printf("path error\n");
@@ -733,8 +805,8 @@ static void __init_vfs(void)
 	}
 	ASSERT(FUN_EXECUTE_SUCCESSFULLY == error);
 #endif
-	_inode_init(0,NULL,NULL,FLAG_INODE_SOFT|FLAG_INODE_READ|FLAG_INODE_WRITE,&root_inode);
-	_inode_init(0,NULL,NULL,FLAG_INODE_SOFT|FLAG_INODE_READ|FLAG_INODE_WRITE,&dev_inode);
+	_inode_init(NULL,NULL,FLAG_INODE_SOFT|FLAG_INODE_READ|FLAG_INODE_WRITE,&root_inode);
+	_inode_init(NULL,NULL,FLAG_INODE_SOFT|FLAG_INODE_READ|FLAG_INODE_WRITE,&dev_inode);
 	_init_dentry(&root_dentry,&root_dentry,&root_inode,"/",FLAG_FOLDER|FLAG_NAME_CHANGE_DIS);
 	root_dentry.d_parent = &root_dentry;
 	_init_dentry(&dev_dentry,&root_dentry,&dev_inode,"dev",FLAG_FOLDER|FLAG_NAME_CHANGE_DIS);
@@ -750,7 +822,16 @@ static void __init_vfs(void)
 /* command rmdir */
 	command_rmdir_ptr = _get_command_ptr("rmdir");
 	ASSERT(NULL != command_rmdir_ptr);	
-/* finally */
+/* command ls */
+	command_ls_ptr = _get_command_ptr("ls");
+	ASSERT(NULL != command_ls_ptr);
+/* command cat */
+	command_cat_ptr = _get_command_ptr("cat");
+	ASSERT(NULL != command_cat_ptr);
+/* command echo */
+	command_echo_ptr = _get_command_ptr("echo");
+	ASSERT(NULL != command_echo_ptr);	
+/* last step */
 	update_para_arv_vector(); /* set tab list */
 #endif
 }

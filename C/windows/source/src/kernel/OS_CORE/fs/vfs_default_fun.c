@@ -28,6 +28,7 @@ int default_read(struct file *file_ptr,void *buffer,unsigned int len,unsigned in
 	{
 		len = BLOCK_SIZE - offset;
 	}
+	ka_memset(buffer,0,len);
 	struct inode *inode_ptr = file_ptr->f_den->d_inode;
 	return inode_ptr->inode_ops->read_data(inode_ptr,buffer,len,offset);
 }

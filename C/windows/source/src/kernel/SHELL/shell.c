@@ -180,7 +180,7 @@ void _put_in_shell_buffer(char c)  /* deal with input layer*/
 			(0x03 == c) || (0x08 == c) || (' ' == c)  || 
 			IS_NUM(c) 	|| IS_DOT(c)   || ('-' == c)  || 
 			('+' == c)	|| ('=' == c)  || ('/' == c)  ||
-			(0x09 == c)))
+			(0x09 == c) || ('>' == c)))
 	{
 		ka_printf("\nerror input\n");
 		ka_printf("%s",using_shell_buffer_ptr->buffer);
@@ -195,12 +195,11 @@ void _put_in_shell_buffer(char c)  /* deal with input layer*/
 		if(using_shell_buffer_ptr->index > 0)
 		{
 			--(using_shell_buffer_ptr->index);
-			ka_printf("\b");
+			ka_printf("\b \b");
 		}
 		else
 		{
 			ASSERT(0 == using_shell_buffer_ptr->index);
-			ka_putchar('>');
 		}
 		return ;
 	}

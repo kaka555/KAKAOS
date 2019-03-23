@@ -102,14 +102,19 @@ static inline UINT32 get_dentry_flag(struct dentry *dentry_ptr)
 	return dentry_ptr->flag;
 }
 
+static inline int is_root(struct dentry *dentry_ptr)
+{
+	return (get_dentry_flag(dentry_ptr) & FLAG_DENTRY_ROOT);
+}
+
 static inline int is_folder(struct dentry *dentry_ptr)
 {
-	return ((dentry_ptr->flag) & FLAG_DENTRY_FOLDER);
+	return (get_dentry_flag(dentry_ptr) & FLAG_DENTRY_FOLDER);
 }
 
 static inline int is_file(struct dentry *dentry_ptr)
 {
-	return (!((dentry_ptr->flag) & FLAG_DENTRY_FOLDER));
+	return (!(get_dentry_flag(dentry_ptr)& FLAG_DENTRY_FOLDER));
 }
 
 static inline int dentry_name_not_changable(struct dentry *dentry_ptr)
@@ -139,7 +144,7 @@ struct file
 {
 	struct file_operations *f_op;
 	unsigned int offset;
-	unsigned int file_len;
+	unsigned int file_len; /* bytes */
 	struct dentry *f_den;
 	f_mode_t f_mode;
 	/*unsigned int ref;*/
@@ -201,7 +206,6 @@ inode用来存储关于这个文件的静态信息(不变的信息)，
  */
 struct inode
 {
-	unsigned long file_size; /* bytes */
 	unsigned int ref;
 	struct inode_operations *inode_ops; /*realize by bottom file system*/
 	struct file_operations *i_f_ops;
@@ -212,6 +216,31 @@ struct inode
 static inline void set_inode_flag(struct inode *inode_ptr,UINT32 flag)
 {
 	inode_ptr->flag |= flag;
+}
+
+static inline int inode_is_soft(struct inode *inode_ptr)
+{
+	return (inode_ptr->flag & FLAG_INODE_SOFT);
+}
+
+static inline int inode_is_dev(struct inode *inode_ptr)
+{
+	return (inode_ptr->flag & FLAG_INODE_DEVICE);
+}
+
+static inline int inode_readable(struct inode *inode_ptr)
+{
+	return (inode_ptr->flag & FLAG_INODE_READ);
+}
+
+static inline int inode_writable(struct inode *inode_ptr)
+{
+	return (inode_ptr->flag & FLAG_INODE_WRITE);
+}
+
+static inline int inode_is_dirty(struct inode *inode_ptr)
+{
+	return (inode_ptr->flag & FLAG_DIRTY);
 }
 
 /* add the ref of inode,means that a task use this inode,
@@ -250,7 +279,6 @@ struct file *_file_alloc_and_init(
 	_file_alloc_and_init(dentry_ptr,FILE_MODE_READ | FILE_MODE_WRITE)
 
 struct inode *_inode_alloc_and_init(
-	unsigned long file_size,
 	struct inode_operations *inode_operations_ptr,
 	struct file_operations *file_operations_ptr,
 	UINT32 flag);
@@ -279,6 +307,7 @@ int ka_ioctl(struct file *file_ptr,int cmd,int args);
 int __open(struct dentry *dentry_ptr,enum FILE_FLAG flag,const struct file **file_store_ptr);
 int _write(struct file *file_ptr,void *buffer,unsigned int len,enum llseek_from offset_flag);
 int _close(struct file *file_ptr);
+int _read(struct file *file_ptr,void *buffer,unsigned int len,enum llseek_from offset_flag);
 
 struct directory
 {
