@@ -42,7 +42,7 @@ int __open(struct dentry *dentry_ptr,enum FILE_FLAG flag,const struct file **fil
 			{
 				return -ERROR_SYS;
 			}
-			file_ptr = _file_alloc_and_init_WRITEONLY(dentry_ptr);
+			file_ptr = _file_alloc_and_init_RDWR(dentry_ptr);
 			if(NULL == file_ptr)
 			{
 				return -ERROR_NO_MEM;

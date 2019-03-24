@@ -214,9 +214,11 @@ int i;
 }
 #endif
 
-#if 1 // test int sleep(unsigned int)
+#if 0 // test int sleep(unsigned int)
+
 void three(void *para)
 {
+
 	TCB *TCB_ptr4,*TCB_ptr5;
 	if(0 != task_creat_ready(256,5,5,"five",five,NULL,&TCB_ptr5))
 	{
@@ -595,6 +597,63 @@ void three(void *para)
 	}
 	INSERT_BREAK_POINT();
 	ka_printf("end\n");
+}
+
+#endif
+
+#if 1 /* test vfs */
+
+#include <bsp_usart.h>
+static int open(struct file *file_ptr)
+{
+	ka_printf("open file %s\n",file_ptr->f_den->name);
+	USART2_Config();
+	return 0;
+}
+
+static int close(struct file *file_ptr)
+{
+	ka_printf("bye bye file %s\n",file_ptr->f_den->name);
+	return 0;
+}
+
+static int write(struct file *file_ptr,void *buffer,unsigned int len,unsigned int offset)
+{
+	char *data = (char *)buffer;
+	unsigned int i;
+	for(i=0;i<len;++i)
+	{
+		ka_printf("round %u,write %c\n",i,data[i]);
+		Usart_SendByte(USART2,data[i]);
+	}
+	return len;
+}
+
+static struct file_operations fop = {
+	.open = open,
+	.close = close,
+	.write = write,
+};
+
+void three(void *para)
+{
+	if(writeonly_device_register("usart2",&fop) < 0)
+	{
+		ka_printf("device register error\n");
+	}
+	else
+	{
+		ka_printf("device register successfully\n");
+	}
+	sleep(20 * HZ);
+	if(device_unregister("usart2") < 0)
+	{
+		ka_printf("unregister fail\n");
+	}
+	else
+	{
+		ka_printf("unregister success\n");
+	}
 }
 
 #endif

@@ -84,7 +84,7 @@ int timer_init(
 		return -ERROR_FUN_USE_IN_INTER;
 	}
 	timer_ptr->type  			= type;
-	timer_ptr->state 			= DISABLE;
+	timer_ptr->state 			= TIMER_DISABLE;
 	timer_ptr->timer_name 		= name;
 	timer_ptr->fun 				= fun;
 	timer_ptr->para 			= para;
@@ -139,7 +139,7 @@ int _timer_enable(struct timer *timer_ptr)
 	ASSERT(NULL != timer_ptr);
 	CPU_SR_ALLOC();
 	CPU_CRITICAL_ENTER();
-	timer_ptr->state = ENABLE;
+	timer_ptr->state = TIMER_ENABLE;
 	timer_ptr->wake_time = timer_ptr->period + _get_tick();
 	int ret = heap_push(&timer_heap,timer_ptr);
 	CPU_CRITICAL_EXIT();
@@ -176,7 +176,7 @@ int _timer_disable(struct timer *timer_ptr)
 		CPU_CRITICAL_EXIT();
 		return ret;
 	}
-	timer_ptr->state = DISABLE;
+	timer_ptr->state = TIMER_DISABLE;
 	CPU_CRITICAL_EXIT();
 	return FUN_EXECUTE_SUCCESSFULLY;
 }
@@ -206,7 +206,7 @@ int _timer_delete(struct timer *timer_ptr)
 	ASSERT(NULL != timer_ptr);
 	CPU_SR_ALLOC();
 	CPU_CRITICAL_ENTER();
-	if(ENABLE == timer_ptr->state)
+	if(TIMER_ENABLE == timer_ptr->state)
 	{
 		_timer_disable(timer_ptr);
 	}

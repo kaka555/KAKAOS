@@ -196,7 +196,7 @@ int rename(struct file *file_ptr,const char *name)
 }
 EXPORT_SYMBOL(rename);
 
-static int has_same_name_file(struct dentry *dentry_ptr,const char *file_name)
+int has_same_name_file(struct dentry *dentry_ptr,const char *file_name)
 {
 	struct dentry *buffer_ptr;
 	struct list_head *head = &dentry_ptr->subdirs;
@@ -423,7 +423,7 @@ int add_file(const char *path,const char *file_name,struct file_operations *file
 }
 EXPORT_SYMBOL(add_file);
 
-static int __delete_file(struct dentry *dentry_ptr)
+int __delete_file(struct dentry *dentry_ptr)
 {
 	ASSERT(NULL != dentry_ptr);
 	ASSERT(list_empty(&dentry_ptr->subdirs));
@@ -444,19 +444,24 @@ static int __delete_file(struct dentry *dentry_ptr)
 
 int _delete_file(const char *path)
 {
-	ASSERT((NULL != path) && (0 != ka_strcmp("/",path)));
+	ASSERT(NULL != path);
 	struct dentry *target_dentry_ptr = _find_dentry(path);
 	if((NULL == target_dentry_ptr) || (!is_file(target_dentry_ptr)))
 	{
 		ka_printf("file path error\n");
 		return -ERROR_LOGIC;
 	}
+	if(dentry_not_releasse(target_dentry_ptr))
+	{
+		ka_printf("remove refused\n");
+		return -ERROR_SYS;
+	}
 	return __delete_file(target_dentry_ptr);
 }
 
 int delete_file(const char *path)
 {
-	if((NULL == path) || (0 == ka_strcmp("/",path)))
+	if(NULL == path)
 	{
 		return -ERROR_NULL_INPUT_PTR;
 	}
@@ -496,19 +501,24 @@ static int remove_all_dentry(struct dentry *root_dentry_ptr)
 
 int _delete_folder(const char *path)
 {
-	ASSERT((NULL != path) && (0 != ka_strcmp("/",path)));
+	ASSERT(NULL != path);
 	struct dentry *target_dentry_ptr = _find_dentry(path);
 	if((NULL == target_dentry_ptr) || (!is_folder(target_dentry_ptr)))
 	{
 		ka_printf("folder path error\n");
 		return -ERROR_LOGIC;
 	}
+	if(dentry_not_releasse(target_dentry_ptr))
+	{
+		ka_printf("remove refused\n");
+		return -ERROR_SYS;
+	}
 	return remove_all_dentry(target_dentry_ptr);
 }
 
 int delete_folder(const char *path)
 {
-	if((NULL == path) || (0 == ka_strcmp("/",path)))
+	if(NULL == path)
 	{
 		return -ERROR_NULL_INPUT_PTR;
 	}
@@ -565,7 +575,7 @@ static inline unsigned int shell_ls_helper(unsigned int para)
 	ls
 	ls filename
 output:
-	filename ref is_root is_folder need_refresh name_not_changable is_soft is_dev \
+	filename ref not_release is_folder need_refresh name_not_changable is_soft is_dev \
 	read wirte dirty
  */
 void shell_ls(int argc, char const *argv[])
@@ -587,14 +597,14 @@ void shell_ls(int argc, char const *argv[])
 			if(0 == ka_strcmp(argv[1],dentry_ptr->name))
 			{
 				ka_printf("%s\t%u|%u|%u|%u|%u|%u|%u\t%u|%u\t%u",dentry_ptr->name,dentry_ptr->ref,
-					shell_ls_helper(is_root(dentry_ptr)),
+					shell_ls_helper(dentry_not_releasse(dentry_ptr)),
 					shell_ls_helper(is_folder(dentry_ptr)),
 					shell_ls_helper(dentry_need_refresh(dentry_ptr)),
 					shell_ls_helper(dentry_name_not_changable(dentry_ptr)),
 					shell_ls_helper(inode_is_soft(dentry_ptr->d_inode)),
 					shell_ls_helper(inode_is_dev(dentry_ptr->d_inode)),
 					shell_ls_helper(inode_readable(dentry_ptr->d_inode)),
-					shell_ls_helper(inode_readable(dentry_ptr->d_inode)),
+					shell_ls_helper(inode_writable(dentry_ptr->d_inode)),
 					shell_ls_helper(inode_is_dirty(dentry_ptr->d_inode))
 					);
 				break ;
@@ -807,9 +817,13 @@ static void __init_vfs(void)
 #endif
 	_inode_init(NULL,NULL,FLAG_INODE_SOFT|FLAG_INODE_READ|FLAG_INODE_WRITE,&root_inode);
 	_inode_init(NULL,NULL,FLAG_INODE_SOFT|FLAG_INODE_READ|FLAG_INODE_WRITE,&dev_inode);
-	_init_dentry(&root_dentry,&root_dentry,&root_inode,"/",FLAG_FOLDER|FLAG_NAME_CHANGE_DIS);
+	_init_dentry(&root_dentry,&root_dentry,
+		&root_inode,"/",
+		FLAG_FOLDER|FLAG_NAME_CHANGE_DIS|FLAG_DENTRY_NOT_RELEASED);
 	root_dentry.d_parent = &root_dentry;
-	_init_dentry(&dev_dentry,&root_dentry,&dev_inode,"dev",FLAG_FOLDER|FLAG_NAME_CHANGE_DIS);
+	_init_dentry(&dev_dentry,&root_dentry,
+		&dev_inode,"dev",
+		FLAG_FOLDER|FLAG_NAME_CHANGE_DIS|FLAG_DENTRY_NOT_RELEASED);
 	current_dentry_ptr = &root_dentry; /* set pwd */
 #if CONFIG_SHELL_EN
 /* add tab feature */

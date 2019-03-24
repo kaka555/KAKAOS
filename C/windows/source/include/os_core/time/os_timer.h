@@ -21,8 +21,8 @@ typedef enum Timer_Type {
 }TIMER_TYPE;
 
 typedef enum Timer_State {
-	DISABLE = 0,
-	ENABLE = 1
+	TIMER_DISABLE = 0,
+	TIMER_ENABLE = 1
 }TIMER_STATE;
 
 struct timer

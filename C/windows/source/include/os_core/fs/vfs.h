@@ -46,7 +46,7 @@ struct inode_operations
 #define FLAG_DENTRY_DEFAULT 			0X00
 /* bit 0 */ 			
 #define FLAG_DENTRY_NORMAL 				0X00
-#define FLAG_DENTRY_ROOT 				0X01
+#define FLAG_DENTRY_NOT_RELEASED 		0X01
 /* bit 1 */ 			
 #define FLAG_DENTRY_FILE 				0X00
 #define FLAG_DENTRY_FOLDER 				0X02
@@ -55,6 +55,8 @@ struct inode_operations
 /* bit 3 */	
 #define FLAG_DENTRY_NAME_CHANGE_EN 		0X00
 #define FLAG_DENTRY_NAME_CHANGE_DIS 	0X08
+/* bit 4 */
+#define FLAG_DENTRY_ROOT 				0X10
 /*************************************************************/
 
 /*
@@ -102,9 +104,9 @@ static inline UINT32 get_dentry_flag(struct dentry *dentry_ptr)
 	return dentry_ptr->flag;
 }
 
-static inline int is_root(struct dentry *dentry_ptr)
+static inline int dentry_not_releasse(struct dentry *dentry_ptr)
 {
-	return (get_dentry_flag(dentry_ptr) & FLAG_DENTRY_ROOT);
+	return (get_dentry_flag(dentry_ptr) & FLAG_DENTRY_NOT_RELEASED);
 }
 
 static inline int is_folder(struct dentry *dentry_ptr)
@@ -285,11 +287,13 @@ struct inode *_inode_alloc_and_init(
 
 int rename(struct file *file_ptr,const char *name);
 
+int has_same_name_file(struct dentry *dentry_ptr,const char *file_name);
 struct dentry *_find_dentry(const char *path);
 int add_folder(const char *path,const char *folder_name,struct file_operations *file_operations_ptr);
 int add_file(const char *path,const char *file_name,struct file_operations *file_operations_ptr);
 int delete_file(const char *path);
 int delete_folder(const char *path);
+int __delete_file(struct dentry *dentry_ptr);
 
 enum FILE_FLAG{
 	FILE_FLAG_READONLY = FILE_MODE_READ,
@@ -308,14 +312,6 @@ int __open(struct dentry *dentry_ptr,enum FILE_FLAG flag,const struct file **fil
 int _write(struct file *file_ptr,void *buffer,unsigned int len,enum llseek_from offset_flag);
 int _close(struct file *file_ptr);
 int _read(struct file *file_ptr,void *buffer,unsigned int len,enum llseek_from offset_flag);
-
-struct directory
-{
-	struct dentry *dir;
-};
-
-struct directory opendir(const char *path);
-int closedir(struct directory *directory_ptr);
 
 void shell_pwd(int argc, char const *argv[]);
 void shell_ls(int argc, char const *argv[]);
