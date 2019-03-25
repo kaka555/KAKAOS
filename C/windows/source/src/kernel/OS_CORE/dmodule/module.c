@@ -253,14 +253,6 @@ static int dlmodule_relocate(struct dynamic_module *module, Elf32_Rel *rel, Elf3
         /*ka_printf("R_ARM_JUMP_SLOT: 0x%x -> 0x%x 0x%x\n",
                   where, *where, sym_val);*/
         break;
-#if 0        /* To do */
-    case R_ARM_GOT_BREL:
-        temp   = (Elf32_Addr)sym_val;
-        *where = (Elf32_Addr)&temp;
-        RT_DEBUG_LOG(RT_DEBUG_MODULE, ("R_ARM_GOT_BREL: 0x%x -> 0x%x 0x%x\n",
-                                       where, *where, sym_val));
-        break;
-#endif
 
     case R_ARM_RELATIVE:
         *where = (Elf32_Addr)sym_val + *where;
@@ -419,7 +411,7 @@ int dlmodule_load_relocated_object(struct dynamic_module* module, void *module_p
         Elf32_Sym *symtab;
         Elf32_Rel *rel;
 
-        if (!IS_REL(shdr[index]))
+        if (!IS_REL(shdr[index])) /* P78 */
             continue;
 
         /* get relocate item */
@@ -434,12 +426,14 @@ int dlmodule_load_relocated_object(struct dynamic_module* module, void *module_p
                    shdr[elf_module->e_shstrndx].sh_offset;
         nr_reloc = (UINT32)(shdr[index].sh_size / sizeof(Elf32_Rel));
 
+        KA_WARN(DEBUG_TYPE_MODULE,"symbol: %s\n", strtab + (&symtab[ELF32_R_SYM(rel->r_info)])->st_name);
+
         /* relocate every items */
         for (i = 0; i < nr_reloc; i ++)
         {
             Elf32_Sym *sym = &symtab[ELF32_R_SYM(rel->r_info)];
 
-            KA_WARN(DEBUG_TYPE_MODULE,"relocate symbol: %s\n", strtab + sym->st_name);
+            KA_WARN(DEBUG_TYPE_MODULE,"round %u relocate symbol: %s\n", i,strtab + sym->st_name);
 
             if (sym->st_shndx != STN_UNDEF)
             {
@@ -471,24 +465,40 @@ int dlmodule_load_relocated_object(struct dynamic_module* module, void *module_p
                         KA_WARN(DEBUG_TYPE_MODULE,"target addr is 0x%p\n",(void *)addr);
                     }
 
-                    if (addr != 0) dlmodule_relocate(module, rel, addr);
+                    if (addr != 0)
+                    {
+                        if(dlmodule_relocate(module, rel, addr) < 0)
+                        {
+                            KA_WARN(DEBUG_TYPE_MODULE,"dlmodule_relocate fail\n");
+                            return -ERROR_LOGIC;
+                        }
+                    } 
                 }
                 else if (ELF_ST_TYPE(sym->st_info) == STT_FUNC)
                 {
                     addr = (Elf32_Addr)((UINT8 *) module->module_space - module_addr + sym->st_value);
 
                     /* relocate function */
-                    dlmodule_relocate(module, rel, addr);
+                    if(dlmodule_relocate(module, rel, addr) < 0)
+                    {
+                        KA_WARN(DEBUG_TYPE_MODULE,"dlmodule_relocate fail\n");
+                        return -ERROR_LOGIC;
+                    }
                 }
             }
-            else if (ELF_ST_TYPE(sym->st_info) == STT_FUNC)
+            else if (ELF_ST_TYPE(sym->st_info) == STT_FUNC) /* P83 */
             {
+                KA_WARN(DEBUG_TYPE_MODULE,"relocate STT_FUNC symbol: %s\n", strtab + sym->st_name);
                 /* relocate function */
-                dlmodule_relocate(module, rel,
+                if(dlmodule_relocate(module, rel,
                                        (Elf32_Addr)((UINT8 *)
                                                     module->module_space
                                                     - module_addr
-                                                    + sym->st_value));
+                                                    + sym->st_value)) < 0)
+                {
+                    KA_WARN(DEBUG_TYPE_MODULE,"STT_FUNC dlmodule_relocate fail\n");
+                    return -ERROR_LOGIC;
+                }
             }
             else
             {
@@ -512,14 +522,54 @@ int dlmodule_load_relocated_object(struct dynamic_module* module, void *module_p
                 else
                 {
                     addr = (Elf32_Addr)((UINT8 *) module->module_space - module_addr + sym->st_value);
-                    dlmodule_relocate(module, rel, addr);
+                    if(dlmodule_relocate(module, rel, addr) < 0)
+                    {
+                        KA_WARN(DEBUG_TYPE_MODULE,"dlmodule_relocate fail\n");
+                        return -ERROR_LOGIC;
+                    }
                 }
             }
 
             rel ++;
         }
     }
+    for (index = 0; index < elf_module->e_shnum; index ++)
+    {
+        /* find .dynsym section */
+        UINT8 *shstrab;
+        shstrab = (UINT8 *)module_ptr +
+                  shdr[elf_module->e_shstrndx].sh_offset;
+        if (ka_strcmp((const char *)(shstrab + shdr[index].sh_name), ELF_SYMTAB) == 0)
+            break;
+    }
+    /* found ELF_SYMTAB section */
+    if (index != elf_module->e_shnum)
+    {
+        unsigned int i;
+        Elf32_Sym  *symtab = NULL;
+        UINT8 *strtab = NULL;
+        KA_WARN(DEBUG_TYPE_MODULE,"found ELF_SYMTAB section\n");
 
+        symtab = (Elf32_Sym *)((UINT8 *)module_ptr + shdr[index].sh_offset);
+        strtab = (UINT8 *)module_ptr + shdr[shdr[index].sh_link].sh_offset;
+
+        for (i = 0; i < shdr[index].sh_size / sizeof(Elf32_Sym); i++)
+        {
+            if ((ELF_ST_TYPE(symtab[i].st_info) == STT_FUNC))
+            {
+                if(0 == ka_strcmp("init_module",(const char *)(strtab + symtab[i].st_name)))
+                {
+                    KA_WARN(DEBUG_TYPE_MODULE,"get init_module\n");
+                    module->init = module->module_space + symtab[i].st_value - module->vstart_addr;
+                }
+                else if(0 == ka_strcmp("exit_module",(const char *)(strtab + symtab[i].st_name)))
+                {
+                    KA_WARN(DEBUG_TYPE_MODULE,"get exit_module\n");
+                    module->exit = module->module_space + symtab[i].st_value - module->vstart_addr;
+                }
+            }
+        }
+    }
     return FUN_EXECUTE_SUCCESSFULLY;
 }
 
@@ -707,7 +757,7 @@ int dlmodule_load_shared_object(struct dynamic_module* module, void *module_ptr)
         for (i = 0; i < shdr[index].sh_size / sizeof(Elf32_Sym); i++)
         {
             if ((ELF_ST_BIND(symtab[i].st_info) == STB_GLOBAL) &&
-                (ELF_ST_TYPE(symtab[i].st_info) == STT_FUNC))   //export function only
+                (ELF_ST_TYPE(symtab[i].st_info) == STT_FUNC))   /*export function only*/
             {
                 ++count;
                 if(0 == ka_strcmp("init_module",(const char *)(strtab + symtab[i].st_name)))

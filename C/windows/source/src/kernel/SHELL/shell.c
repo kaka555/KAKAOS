@@ -286,6 +286,7 @@ static void redo(int argc, char const *argv[])
 
 /* parament list */
 static char *insmod_list[] = {"-name=","-prio=","-stacksize=","-filesize="};
+static char *rmmod_list[] = {"-name="};
 
 /*struct command -- add command in the corresponding array here(step 2)
 ** and write the function to execute*/
@@ -417,6 +418,8 @@ static struct command resident_command_5[] =
 	,{
 		.command_name = "rmmod",
 		.f = shell_remove_module,
+		.para_arv = rmmod_list,
+		.para_len = sizeof(rmmod_list)/sizeof(*rmmod_list),
 	}
 #endif
 #if CONFIG_VFS
