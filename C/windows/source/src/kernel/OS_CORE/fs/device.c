@@ -49,7 +49,7 @@ int _device_unregister(const char *dev_name)
 	struct list_head *head = &dev_dentry_ptr->subdirs;
 	list_for_each_entry(buffer_ptr,head,child)
 	{
-		if(0 == ka_strcmp(dev_name,buffer_ptr->name))
+		if(0 == ka_strcmp(dev_name,buffer_ptr->name)) /* check every dentry's name */
 		{
 			ASSERT((!dentry_not_releasse(buffer_ptr)) && is_file(buffer_ptr)
 							&& inode_is_soft(buffer_ptr->d_inode) && inode_is_dev(buffer_ptr->d_inode));
