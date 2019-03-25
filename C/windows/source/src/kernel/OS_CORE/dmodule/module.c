@@ -306,12 +306,223 @@ static int dlmodule_relocate(struct dynamic_module *module, Elf32_Rel *rel, Elf3
         lower = *(UINT16 *)((Elf32_Addr)where + 2);
         break;
     default:
-        /*ka_printf("do nothing\n");*/
+        KA_WARN(DEBUG_TYPE_MODULE,"do nothing\n");
         return -1;
     }
 
     return 0;
 }
+
+int dlmodule_load_relocated_object(struct dynamic_module* module, void *module_ptr)
+{
+    UINT32 index, rodata_addr = 0, bss_addr = 0, data_addr = 0;
+    UINT32 module_addr = 0, module_size = 0;
+    UINT8 *ptr, *strtab, *shstrab;
+
+    /* get the ELF image size */
+    for (index = 0; index < elf_module->e_shnum; index ++)
+    {
+        /* text */
+        if (IS_PROG(shdr[index]) && IS_AX(shdr[index]))
+        {
+            module_size += shdr[index].sh_size;
+            module_addr = shdr[index].sh_addr;
+        }
+        /* rodata */
+        if (IS_PROG(shdr[index]) && IS_ALLOC(shdr[index]))
+        {
+            module_size += shdr[index].sh_size;
+        }
+        /* data */
+        if (IS_PROG(shdr[index]) && IS_AW(shdr[index]))
+        {
+            module_size += shdr[index].sh_size;
+        }
+        /* bss */
+        if (IS_NOPROG(shdr[index]) && IS_AW(shdr[index]))
+        {
+            module_size += shdr[index].sh_size;
+        }
+    }
+
+    /* no text, data and bss on image */
+    if (module_size == 0) return NULL;
+
+    module->vstart_addr = 0;
+
+    /* allocate module space */
+    module->module_space = ka_malloc(module_size);
+    if (module->module_space == NULL)
+    {
+        ka_printf("Module: allocate space failed.\n");
+        return -ERROR_NO_MEM;
+    }
+    module->module_size = module_size;
+
+    /* zero all space */
+    ptr = module->module_space;
+    ka_memset(ptr, 0, module_size);
+
+    /* load text and data section */
+    for (index = 0; index < elf_module->e_shnum; index ++)
+    {
+        /* load text section */
+        if (IS_PROG(shdr[index]) && IS_AX(shdr[index]))
+        {
+            ka_memcpy(ptr,
+                      (UINT8 *)elf_module + shdr[index].sh_offset,
+                      shdr[index].sh_size);
+            KA_WARN(DEBUG_TYPE_MODULE,"load text 0x%p, size %d\n", ptr, shdr[index].sh_size);
+            ptr += shdr[index].sh_size;
+        }
+
+        /* load rodata section */
+        if (IS_PROG(shdr[index]) && IS_ALLOC(shdr[index]))
+        {
+            ka_memcpy(ptr,
+                      (UINT8 *)elf_module + shdr[index].sh_offset,
+                      shdr[index].sh_size);
+            rodata_addr = (UINT32)ptr;
+            KA_WARN(DEBUG_TYPE_MODULE,"load rodata 0x%p, size %d, rodata 0x%x\n", ptr, 
+                shdr[index].sh_size, *(UINT32 *)data_addr);
+            ptr += shdr[index].sh_size;
+        }
+
+        /* load data section */
+        if (IS_PROG(shdr[index]) && IS_AW(shdr[index]))
+        {
+            ka_memcpy(ptr,
+                      (UINT8 *)elf_module + shdr[index].sh_offset,
+                      shdr[index].sh_size);
+            data_addr = (UINT32)ptr;
+            KA_WARN(DEBUG_TYPE_MODULE,"load data 0x%p, size %d, data 0x%x\n", ptr, 
+                shdr[index].sh_size, *(UINT32 *)data_addr);
+            ptr += shdr[index].sh_size;
+        }
+
+        /* load bss section */
+        if (IS_NOPROG(shdr[index]) && IS_AW(shdr[index]))
+        {
+            ka_memset(ptr, 0, shdr[index].sh_size);
+            bss_addr = (UINT32)ptr;
+            KA_WARN(DEBUG_TYPE_MODULE,"load bss 0x%p, size %d\n", ptr, shdr[index].sh_size);
+        }
+    }
+
+    /* set module entry */
+    module->entry = module->module_space + elf_module->e_entry - module_addr;
+
+    /* handle relocation section */
+    for (index = 0; index < elf_module->e_shnum; index ++)
+    {
+        UINT32 i, nr_reloc;
+        Elf32_Sym *symtab;
+        Elf32_Rel *rel;
+
+        if (!IS_REL(shdr[index]))
+            continue;
+
+        /* get relocate item */
+        rel = (Elf32_Rel *)((UINT8 *)module_ptr + shdr[index].sh_offset);
+
+        /* locate .dynsym and .dynstr */
+        symtab   = (Elf32_Sym *)((UINT8 *)module_ptr +
+                                 shdr[shdr[index].sh_link].sh_offset);
+        strtab   = (UINT8 *)module_ptr +
+                   shdr[shdr[shdr[index].sh_link].sh_link].sh_offset;
+        shstrab  = (UINT8 *)module_ptr +
+                   shdr[elf_module->e_shstrndx].sh_offset;
+        nr_reloc = (UINT32)(shdr[index].sh_size / sizeof(Elf32_Rel));
+
+        /* relocate every items */
+        for (i = 0; i < nr_reloc; i ++)
+        {
+            Elf32_Sym *sym = &symtab[ELF32_R_SYM(rel->r_info)];
+
+            KA_WARN(DEBUG_TYPE_MODULE,"relocate symbol: %s\n", strtab + sym->st_name);
+
+            if (sym->st_shndx != STN_UNDEF)
+            {
+                Elf32_Addr addr = 0;
+                
+                if ((ELF_ST_TYPE(sym->st_info) == STT_SECTION) ||
+                    (ELF_ST_TYPE(sym->st_info) == STT_OBJECT))
+                {
+                    if (ka_strncmp((const char *)(shstrab +
+                                                  shdr[sym->st_shndx].sh_name), ELF_RODATA, 8) == 0)
+                    {
+                        /* relocate rodata section */
+                        KA_WARN(DEBUG_TYPE_MODULE,"rodata\n");
+                        addr = (Elf32_Addr)(rodata_addr + sym->st_value);
+                    }
+                    else if (ka_strncmp((const char *)
+                                        (shstrab + shdr[sym->st_shndx].sh_name), ELF_BSS, 5) == 0)
+                    {
+                        /* relocate bss section */
+                        KA_WARN(DEBUG_TYPE_MODULE,"bss\n");
+                        addr = (Elf32_Addr)bss_addr + sym->st_value;
+                    }
+                    else if (ka_strncmp((const char *)(shstrab + shdr[sym->st_shndx].sh_name),
+                                        ELF_DATA, 6) == 0)
+                    {
+                        /* relocate data section */
+                        KA_WARN(DEBUG_TYPE_MODULE,"data\n");
+                        addr = (Elf32_Addr)data_addr + sym->st_value;
+                        KA_WARN(DEBUG_TYPE_MODULE,"target addr is 0x%p\n",(void *)addr);
+                    }
+
+                    if (addr != 0) dlmodule_relocate(module, rel, addr);
+                }
+                else if (ELF_ST_TYPE(sym->st_info) == STT_FUNC)
+                {
+                    addr = (Elf32_Addr)((UINT8 *) module->module_space - module_addr + sym->st_value);
+
+                    /* relocate function */
+                    dlmodule_relocate(module, rel, addr);
+                }
+            }
+            else if (ELF_ST_TYPE(sym->st_info) == STT_FUNC)
+            {
+                /* relocate function */
+                dlmodule_relocate(module, rel,
+                                       (Elf32_Addr)((UINT8 *)
+                                                    module->module_space
+                                                    - module_addr
+                                                    + sym->st_value));
+            }
+            else
+            {
+                Elf32_Addr addr;
+
+                if (ELF32_R_TYPE(rel->r_info) != R_ARM_V4BX)
+                {
+                    KA_WARN(DEBUG_TYPE_MODULE,"relocate symbol: %s\n", strtab + sym->st_name);
+
+                    /* need to resolve symbol in kernel symbol table */
+                    addr = _get_sys_export_function_addr((const char *)(strtab + sym->st_name));
+                    if (addr != (Elf32_Addr)NULL)
+                    {
+                        dlmodule_relocate(module, rel, addr);
+                        KA_WARN(DEBUG_TYPE_MODULE,"symbol addr 0x%x\n", addr);
+                    }
+                    else
+                        KA_WARN(DEBUG_TYPE_MODULE,"Module: can't find %s in kernel symbol table\n",
+                                   strtab + sym->st_name);
+                }
+                else
+                {
+                    addr = (Elf32_Addr)((UINT8 *) module->module_space - module_addr + sym->st_value);
+                    dlmodule_relocate(module, rel, addr);
+                }
+            }
+
+            rel ++;
+        }
+    }
+
+    return FUN_EXECUTE_SUCCESSFULLY;
+}
+
 
 int dlmodule_load_shared_object(struct dynamic_module* module, void *module_ptr)
 {
@@ -586,7 +797,12 @@ struct dynamic_module* dlmodule_load(void)
     if (!module) goto __exit;
     __init_d_module(module);
 
-    if (elf_module->e_type == ET_DYN)
+    if (elf_module->e_type == ET_REL)
+    {
+				ka_printf("load relocated file\n");
+        error = dlmodule_load_relocated_object(module, module_ptr);
+    }
+    else if (elf_module->e_type == ET_DYN)
     {
         ka_printf("load shared file\n");
         error = dlmodule_load_shared_object(module, module_ptr);

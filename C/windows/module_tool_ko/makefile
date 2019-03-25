@@ -18,18 +18,16 @@ FLAGS = -W -Wall $(INCLUDE) -mcpu=cortex-m3 -mthumb -fno-builtin
 
 LIBPATH = /home/ka/stm32/gcc-arm-none-eabi-5_4-2016q3/arm-none-eabi/lib/armv7-m/ -L/home/ka/stm32/gcc-arm-none-eabi-5_4-2016q3/lib/gcc/arm-none-eabi/5.4.1/armv7-m/
 
-LFLAGS = -z max-page-size=0x4 -Bsymbolic -fno-common -nodefaultlibs -nostartfiles -nostdlib -shared -L$(LIBPATH) -T stm32_flash.ld -e main -static -lgcc
+LFLAGS = -z max-page-size=0x4 -Bsymbolic  -nodefaultlibs -nostartfiles -nostdlib -r -L$(LIBPATH) -T stm32_flash.ld -e main -static -lgcc
 
-all:module.so
+all:module.ko
 
-module.so : $(src:.c=.o)
+module.ko : $(src:.c=.o)
 	arm-none-eabi-ld $(LFLAGS) $^ -o $@
-	arm-none-eabi-strip -R .hash $@
 
 %.o : %.c
-	arm-none-eabi-gcc $(FLAGS)  -fPIC -mlong-calls -c $< -o $@
-	#arm-none-eabi-gcc $(FLAGS)  -mword-relocations -mlong-calls -c $< -o $@
+	arm-none-eabi-gcc $(FLAGS)  -mword-relocations -mlong-calls -c $< -o $@
 
 clean:
-	rm -rf *.o *.so
+	rm -rf *.o *.ko
 

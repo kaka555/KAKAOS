@@ -88,7 +88,7 @@ void four(void *para)
 }
 #endif
 
-#if 0 //test timer
+#if 1 //test timer
 static void ka(void *para)
 {
 	ka_printf("task three timer test ka\n");
@@ -601,7 +601,7 @@ void three(void *para)
 
 #endif
 
-#if 1 /* test vfs */
+#if 0 /* test vfs */
 
 #include <bsp_usart.h>
 static int open(struct file *file_ptr)
