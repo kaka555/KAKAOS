@@ -52,7 +52,9 @@ static struct dentry *current_dentry_ptr = NULL;
 static struct inode root_inode;
 static struct inode dev_inode;
 
+#if CONFIG_SHELL_EN
 static void update_para_arv_vector(void);
+#endif
 
 static void _init_dentry(
 	struct dentry *dentry_ptr,

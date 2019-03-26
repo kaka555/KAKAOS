@@ -137,6 +137,7 @@ void _restart_module(
     }
 }
 
+#if CONFIG_SHELL_EN
 /******************
 * 
 *   rmmod -name=dmodule
@@ -168,6 +169,7 @@ out:
     ka_printf("please input module name\n");
     return ;
 }
+#endif
 
 static int _remove_a_module(struct dynamic_module *dynamic_module_ptr)
 {
@@ -365,6 +367,9 @@ int dlmodule_load_relocated_object(struct dynamic_module* module, void *module_p
                       (UINT8 *)elf_module + shdr[index].sh_offset,
                       shdr[index].sh_size);
             KA_WARN(DEBUG_TYPE_MODULE,"load text 0x%p, size %d\n", ptr, shdr[index].sh_size);
+            KA_WARN(DEBUG_TYPE_MODULE,"load text name is %s\n",
+                (const char *)((UINT8 *)module_ptr +
+                   shdr[elf_module->e_shstrndx].sh_offset +shdr[index].sh_name));
             ptr += shdr[index].sh_size;
         }
 
@@ -467,12 +472,17 @@ int dlmodule_load_relocated_object(struct dynamic_module* module, void *module_p
 
                     if (addr != 0)
                     {
+                        KA_WARN(DEBUG_TYPE_MODULE,"rel is 0x%p\n",(void *)rel);
                         if(dlmodule_relocate(module, rel, addr) < 0)
                         {
                             KA_WARN(DEBUG_TYPE_MODULE,"dlmodule_relocate fail\n");
                             return -ERROR_LOGIC;
                         }
-                    } 
+                    }
+                    else
+                    {
+                        KA_WARN(DEBUG_TYPE_MODULE,"addr is 0\n");
+                    }
                 }
                 else if (ELF_ST_TYPE(sym->st_info) == STT_FUNC)
                 {

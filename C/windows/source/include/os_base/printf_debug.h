@@ -1,5 +1,5 @@
-#ifndef _USER_DEBUG
-#define _USER_DEBUG
+#ifndef _PRINTF_DEBUG_DEBUG
+#define _PRINTF_DEBUG_DEBUG
 #include <ka_configuration.h>
 
 #if CONFIG_PRINTF_DEBUG
@@ -22,9 +22,9 @@
 	#define DEBUG_TYPE_MODULE 		1
 	#define DEBUG_TYPE_VECTOR 		1	
 	#define DEBUG_TYPE_SHELL 		0
-
-	#endif
 #else
-	#define KA_WARN(type, format, ...)  
+	#define KA_WARN(type, format, ...)   
+#endif
+
 #endif
 		

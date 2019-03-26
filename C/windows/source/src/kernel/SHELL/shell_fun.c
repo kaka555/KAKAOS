@@ -50,13 +50,13 @@ void shell_memory(int argc, char const *argv[])
 	unsigned int j = 0;
 	while(NULL != buddy_ptr)
 	{
-		PRINTF("NO.%u memory : \n",j++);
-		PRINTF("=====================================================\n");
-		PRINTF("start address is %p\n",buddy_ptr->buddy_space_start_ptr);
-		PRINTF("rest buddy space is %u\n",_get_current_buddy_space());
-		PRINTF("the total space is %uKB\n",PAGE_SIZE_KB * buddy_ptr->info.page_num);
-		PRINTF("now there are %u%% left\n",100*_get_current_buddy_space()/(PAGE_SIZE_KB * buddy_ptr->info.page_num));
-		PRINTF("\n\n");
+		ka_printf("NO.%u memory : \n",j++);
+		ka_printf("=====================================================\n");
+		ka_printf("start address is %p\n",buddy_ptr->buddy_space_start_ptr);
+		ka_printf("rest buddy space is %u\n",_get_current_buddy_space());
+		ka_printf("the total space is %uKB\n",PAGE_SIZE_KB * buddy_ptr->info.page_num);
+		ka_printf("now there are %u%% left\n",100*_get_current_buddy_space()/(PAGE_SIZE_KB * buddy_ptr->info.page_num));
+		ka_printf("\n\n");
 		buddy_ptr = (struct buddy *)_get_next_buddy_ptr_head(buddy_ptr);
 	}
 }

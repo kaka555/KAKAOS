@@ -88,7 +88,7 @@ void four(void *para)
 }
 #endif
 
-#if 1 //test timer
+#if 0 //test timer
 static void ka(void *para)
 {
 	ka_printf("task three timer test ka\n");
@@ -118,7 +118,7 @@ void four(void *para)
 
 #endif
 
-#if 0 /* test breakpoint */
+#if 1 /* test breakpoint */
 void three(void *para)
 {
 	int i = 5;
@@ -127,9 +127,9 @@ void three(void *para)
 	shell_insert_variable_INT("i",&i);
 	shell_insert_variable_INT("ia",&ia);
 	shell_insert_variable_FLOAT("kaka",&kaka);
-	ka_printf("address of i is %x\n",&i);
-	ka_printf("address of ia is %x\n",&ia);
-	ka_printf("address of kaka is %x\n",&kaka);
+	ka_printf("address of i is 0x%p\n",&i);
+	ka_printf("address of ia is 0x%p\n",&ia);
+	ka_printf("address of kaka is 0x%p\n",&kaka);
 	ka_printf("i is %d\n",i);
 	ka_printf("ia is %d\n",ia);
 	ka_printf("kaka is %f\n",kaka);

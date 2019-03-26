@@ -17,9 +17,9 @@
 #include <printf_debug.h>
 #include <sys_init_fun.h>
 
-static unsigned int _process(char *buffer_ptr);
-
 #if CONFIG_SHELL_EN
+
+static unsigned int _process(char *buffer_ptr);
 
 static MCB MCB_for_shell;
 
@@ -38,10 +38,16 @@ static inline void clear_input_buffer(void)
 void _shell_buffer_wait_str(const char *str_ptr) /* thread will going to sleep*/
 {
 	ASSERT(NULL != str_ptr);
+#if CONFIG_ASSERT_DEBUG
 	int error;
+#endif
 	while(1)
 	{
+#if CONFIG_ASSERT_DEBUG
 		error = _p(&MCB_for_shell,MCB_FLAG_WAIT,0);
+#else 
+		_p(&MCB_for_shell,MCB_FLAG_WAIT,0);
+#endif
 		ASSERT(FUN_EXECUTE_SUCCESSFULLY == error);
 		if(0 == ka_strncmp(using_shell_buffer_ptr->buffer,str_ptr,ka_strlen(str_ptr)))
 		{
@@ -284,9 +290,11 @@ static void redo(int argc, char const *argv[])
 	}
 }
 
+#if CONFIG_MODULE
 /* parament list */
 static char *insmod_list[] = {"-name=","-prio=","-stacksize=","-filesize="};
 static char *rmmod_list[] = {"-name="};
+#endif
 
 /*struct command -- add command in the corresponding array here(step 2)
 ** and write the function to execute*/
@@ -528,7 +536,7 @@ static void shell_pre(void)
 #if CONFIG_ASSERT_DEBUG
 	error = __init_shell_buffer(&main_shell_buffer,main_buffer,main_buffer_reserve,BUFFER_SIZE);
 #else
-	__init_shell_buffer(&main_shell_buffer,main_buffer,main_buffer_reserve);
+	__init_shell_buffer(&main_shell_buffer,main_buffer,main_buffer_reserve,BUFFER_SIZE);
 #endif
 	ASSERT(FUN_EXECUTE_SUCCESSFULLY == error);
 	using_shell_buffer_ptr = &main_shell_buffer;
