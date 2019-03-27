@@ -139,6 +139,7 @@ void shell_check_TCB_list(void)
 				}
 				ka_printf("/*****************************************************/\n");
 			}
+#if CONFIG_DEBUG_ON
 			if(TCB_num != TCB_list[i].TCB_num)
 			{
 				ka_printf("prio %u TCB_num error!\n",i);
@@ -147,6 +148,7 @@ void shell_check_TCB_list(void)
 			{
 				ka_printf("prio %u ready_num error!\n",i);
 			}
+#endif
 			ready_num = 0;
 			TCB_num = 0;
 		}
@@ -174,11 +176,13 @@ void shell_stack_check(int argc, char const *argv[])
 				ka_printf("=====================================================\n");
 				ka_printf("task name : %s\n",TCB_ptr->name);
 				ka_printf("The stack space is from %p to %p\n",TCB_ptr->stack_end,(STACK_TYPE *)TCB_ptr->stack_end + TCB_ptr->stack_size/4);
+#if CONFIG_DEBUG_ON
 				if(0 != *(unsigned int *)(TCB_ptr->stack_end))
 				{
 					ka_printf("stack full!!!!\n");
 					ASSERT(0);
 				}
+#endif
 				while(0 == *ptr)
 				{
 					++num;

@@ -139,8 +139,10 @@ void shell_TCB_check(int argc, char const *argv[])
 	(void)argc;
 	(void)argv;
 	shell_check_TCB_list();
+#if CONFIG_DEBUG_ON
 	shell_check_os_ready();
 	shell_delay_heap_check();
+#endif
 }
 
 extern void ReBoot();
@@ -298,6 +300,7 @@ void cpu_rate(int argc, char const *argv[])
 }
 #endif
 
+#if CONFIG_DEBUG_ON
 void shell_check_memory(int argc, char const *argv[])
 {
 	if(2 != argc)
@@ -308,6 +311,7 @@ void shell_check_memory(int argc, char const *argv[])
 	unsigned int num = ka_atoi(argv[1]);
 	ka_printf("value of add %p is %d\n",(void *)num,*(int *)num);
 }
+#endif
 
 #endif
 

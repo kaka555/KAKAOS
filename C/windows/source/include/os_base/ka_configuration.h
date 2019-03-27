@@ -14,6 +14,7 @@
 #define CONFIG_POWER_MANAGEMENT 			1
 #define CONFIG_MODULE						1
 #define CONFIG_VFS							1
+#define CONFIG_DEBUG_ON 					1
 
 /*parameter control*/
 #define CPU_BIT      						32

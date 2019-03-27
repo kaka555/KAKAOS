@@ -321,10 +321,12 @@ static struct command resident_command_2[] =
 		.f = shell_rm,
 	},
 #endif
+#if CONFIG_DEBUG_ON
 	{
 		.command_name = "ka",
 		.f = test,
 	},
+#endif
 	{
 		.command_name = "mm",
 		.f = shell_memory,
@@ -482,10 +484,12 @@ static struct command resident_command_7[] =
 		.f = shell_modinfo,
 	}
 #endif
+#if CONFIG_DEBUG_ON
 	,{
 		.command_name = "checkmm",
 		.f = shell_check_memory,
 	}
+#endif
 	,{
 		.command_name = "showreg",
 		.f = shell_show_tasks_registers,
