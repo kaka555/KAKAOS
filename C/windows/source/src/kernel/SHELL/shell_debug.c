@@ -25,7 +25,7 @@ static void __INIT __init_shell_debug(void)
 }
 INIT_FUN(__init_shell_debug,1);
 
-void insert_break_point(char* file_name,unsigned line,const char* function_name)
+void insert_break_point(const char* file_name,unsigned line,const char* function_name)
 {
 #if CONFIG_ASSERT_DEBUG
 	int error;
@@ -130,7 +130,7 @@ void shell_insert_variable(char *name,void *data_ptr,Shell_V_Type type)
 			(SHELL_V_TYPE_FLOAT  == type)  ||
 			(SHELL_V_TYPE_DOUBLE == type)  ||
 			(SHELL_V_TYPE_CHAR   == type)   ) ;
-	struct shell_variable *ptr = ka_malloc(sizeof(struct shell_variable));
+	struct shell_variable *ptr = KA_MALLOC(sizeof(struct shell_variable));
 	ASSERT(NULL != ptr);
 	ptr->shell_v_name = name;
 	ptr->shell_v_type = type;

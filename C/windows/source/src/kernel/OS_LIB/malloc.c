@@ -4,6 +4,7 @@
 #include <myassert.h>
 #include <os_cpu.h>
 #include <TCB.h>
+#include <printf_debug.h>
 
 extern int in_buddy_range(void *ptr);
 extern void _case_slab_free_buddy(void *ptr,void *end_ptr);
@@ -31,7 +32,7 @@ void dis_page_alloc_record(void)
 
 int add_page_alloc_record(unsigned int level,void *ptr)
 {
-	struct page_alloc_record *recoed_ptr = (struct page_alloc_record *)ka_malloc(sizeof(struct page_alloc_record));
+	struct page_alloc_record *recoed_ptr = (struct page_alloc_record *)KA_MALLOC(sizeof(struct page_alloc_record));
 	if(NULL == recoed_ptr)
 	{
 		return -1;
@@ -53,13 +54,18 @@ static int find_and_remove_record(void *ptr)
 		{
 			_case_slab_free_buddy(ptr,(void *)((unsigned int)ptr + ka_pow(2,record_ptr->level-1) * PAGE_SIZE_BYTE));
 			singly_list_del_safe(&page_alloc_record_head,pos);
-			ka_free(record_ptr);
+			KA_FREE(record_ptr);
 			return FUN_EXECUTE_SUCCESSFULLY;
 		}
 	}
 	return -1;
 }
 
+/**
+ * @Author      kaka
+ * @DateTime    2019-03-27
+ * @description : initialization for malloc
+ */
 void init_malloc(void)
 {
 	INIT_SINGLY_LIST_HEAD(&cache_chain_head);
@@ -177,6 +183,21 @@ static void *_case_alloc_buddy(unsigned int level)
 	return NULL;
 }
 
+int in_os_memory(void *ptr)
+{
+	struct buddy *buddy_ptr = (struct buddy *)_get_os_buddy_ptr_head();
+	ASSERT(NULL != buddy_ptr);
+	while(NULL != buddy_ptr)
+	{
+		if(FUN_EXECUTE_SUCCESSFULLY == in_buddy_range(ptr))
+		{
+			return FUN_EXECUTE_SUCCESSFULLY;
+		}
+		buddy_ptr = (struct buddy *)_get_next_buddy_ptr_head(buddy_ptr);
+	}
+	return -1;
+}
+
 void *ka_malloc(unsigned int size)
 {
 	void *ptr;
@@ -250,7 +271,7 @@ void *ka_malloc(unsigned int size)
 			}
 			else /* NULL == IL_ptr*/
 			{
-				kmem_cache_ptr = ka_malloc(sizeof(struct kmem_cache));
+				kmem_cache_ptr = KA_MALLOC(sizeof(struct kmem_cache));
 				ASSERT(NULL != kmem_cache_ptr);
 				if(NULL == kmem_cache_ptr)
 				{
@@ -287,6 +308,24 @@ void *ka_malloc(unsigned int size)
 	}
 }
 
+#if CONFIG_MALLOC && CONFIG_ASSERT_DEBUG
+void *KA_MALLOC(unsigned int size)
+{
+	void *return_ptr = ka_malloc(size);
+	if(NULL == return_ptr)
+	{
+		return NULL;
+	}
+	if(in_os_memory(return_ptr) < 0)
+	{
+		ka_printf("fatal error of malloc: not in scope\n");
+		ASSERT(0);
+	}
+	ka_memset(return_ptr,0xff,size);
+	return return_ptr;
+}
+#endif
+
 /* this functin try to free ptr,if ptr is in the scope of one slab in the slab 
 ** chain "head",then insert the ptr into corresponding slab and return slab_ptr,
 ** or if ptr not belongs to any slab in this slab chain, then return NULL means 
@@ -310,21 +349,6 @@ static struct slab *free_find_in_slab_chain(struct list_head *head,void *ptr)
 	return NULL;
 }
 
-int in_os_memory(void *ptr)
-{
-	struct buddy *buddy_ptr = (struct buddy *)_get_os_buddy_ptr_head();
-	ASSERT(NULL != buddy_ptr);
-	while(NULL != buddy_ptr)
-	{
-		if(FUN_EXECUTE_SUCCESSFULLY == in_buddy_range(ptr))
-		{
-			return FUN_EXECUTE_SUCCESSFULLY;
-		}
-		buddy_ptr = (struct buddy *)_get_next_buddy_ptr_head(buddy_ptr);
-	}
-	return -1;
-}
-
 void ka_free(void *ptr)
 {
 	struct kmem_cache *kmem_cache_ptr;
@@ -332,6 +356,7 @@ void ka_free(void *ptr)
 	CPU_SR_ALLOC();
 	if(FUN_EXECUTE_SUCCESSFULLY != in_os_memory(ptr))
 	{
+		KA_WARN(DEBUG_TYPE_MALLOC,"addr %p not in os legal scope\n",ptr);
 		return ;
 	}
 	CPU_CRITICAL_ENTER();
@@ -372,6 +397,23 @@ void ka_free(void *ptr)
 	ASSERT(0);/*should not go here*/
 	while(1);
 }
+
+#if CONFIG_MALLOC && CONFIG_ASSERT_DEBUG
+
+void _KA_FREE(void *ptr,const char* file_name,unsigned line,const char* function_name)
+{
+	if(FUN_EXECUTE_SUCCESSFULLY != in_os_memory(ptr))
+	{
+		ka_printf(
+			"free addr not in os legal scope. Error file: %s,line :%u, function name: %s\n",
+			file_name,line,function_name);
+		ASSERT(0);
+		return ;
+	}
+	ka_free(ptr);
+}
+
+#endif
 
 #if CONFIG_SHELL_EN
 void shell_check_kmem(int argc, char const *argv[])
@@ -434,6 +476,78 @@ void shell_check_kmem(int argc, char const *argv[])
 }
 #endif
 
+#if CONFIG_DEBUG_ON
+
+static void slab_list_check(const struct slab *slab_ptr)
+{
+	ASSERT(NULL != slab_ptr);
+	unsigned int i = 0;
+	struct list_head *node;
+	list_for_each(node,&slab_ptr->block_head)
+	{
+		++i;
+		if(node->next != &slab_ptr->block_head)
+		{
+			if((unsigned int)node->next > (unsigned int)node)
+			{
+				if(((unsigned int)node->next - (unsigned int)node) % slab_ptr->block_size)
+				{
+					ka_printf("round %u,error node addr is 0x%p,error next addr is 0x%p\n",i,node,node->next);
+					ASSERT(0);
+				}
+			}
+			else
+			{
+				ASSERT((unsigned int)node->next != (unsigned int)node);
+				if(((unsigned int)node - (unsigned int)node->next) % slab_ptr->block_size)
+				{
+					ka_printf("round %u,error node addr is 0x%p,error next addr is 0x%p\n",i,node,node->next);
+					ASSERT(0);
+				}
+			}
+			
+		}
+	}
+	if(i != slab_ptr->current_block_num)
+	{
+		ka_printf("current_block_num error\n");
+		goto error;
+	}
+	if(slab_ptr->current_block_num > slab_ptr->full_block_num)
+	{
+		ka_printf("current_block_num or full_block_num error\n");
+		goto error;
+	}
+	if((unsigned int)(slab_ptr->start_ptr) & (PAGE_SIZE_BYTE-1))
+	{
+		ka_printf("start_ptr error\n");
+		goto error;
+	}
+	if((unsigned int)(slab_ptr->end_ptr) & (PAGE_SIZE_BYTE-1))
+	{
+		ka_printf("end_ptr error\n");
+		goto error;
+	}
+	if(((unsigned int)slab_ptr->end_ptr - (unsigned int)slab_ptr->start_ptr - sizeof(struct slab)) / slab_ptr->block_size != slab_ptr->full_block_num)
+	{
+		ka_printf("full_block_num error\n");
+		goto error;
+	}
+	return ;
+error:
+	ka_printf("slab addr is 0x%p\n",slab_ptr);
+	ka_printf("slab start_ptr is 0x%p\n",slab_ptr->start_ptr);
+	ka_printf("slab end_ptr is 0x%p\n",slab_ptr->end_ptr);
+	ka_printf("slab current_block_num is %u\n",slab_ptr->current_block_num);
+	ka_printf("slab full_block_num is %u\n",slab_ptr->full_block_num);
+	ka_printf("slab block_size is %u\n",slab_ptr->block_size);
+	ka_printf("slab addr is 0x%p\n",slab_ptr->block_head.next);
+	ASSERT(0);
+	return ;
+}
+
+#endif
+
 #if CONFIG_SHELL_EN
 void shell_check_slab(int argc, char const *argv[])
 {
@@ -441,7 +555,6 @@ void shell_check_slab(int argc, char const *argv[])
 	(void)argv;
 	struct kmem_cache *kmem_cache_ptr;
 	int i = 0;
-	struct slab *slab_ptr;
 	CPU_SR_ALLOC();
 	CPU_CRITICAL_ENTER();
 	singly_list_for_each_entry(kmem_cache_ptr, &cache_chain_head, node)
@@ -456,13 +569,16 @@ void shell_check_slab(int argc, char const *argv[])
 			list_for_each(buffer,&kmem_cache_ptr->slabs_full)
 			{
 				ka_printf("the NO.%d slab information:\n",++num);
-				slab_ptr = list_entry(buffer,struct slab,slab_chain);
+				const struct slab *slab_ptr = list_entry(buffer,struct slab,slab_chain);
 				ka_printf("start_ptr is %x\n",(int)slab_ptr->start_ptr);
 				ka_printf("end_ptr is %x\n",(int)slab_ptr->end_ptr);
 				ka_printf("current_block_num is %d\n",slab_ptr->current_block_num);
 				ka_printf("full_block_num is %d\n",slab_ptr->full_block_num);
 				ka_printf("block_size is %d\n",slab_ptr->block_size);
 				ka_printf("\n");
+#if CONFIG_DEBUG_ON
+				slab_list_check(slab_ptr);
+#endif
 			}
 			ka_printf("chain slabs_full has %d slab\n",num);
 		}
@@ -479,13 +595,16 @@ void shell_check_slab(int argc, char const *argv[])
 			list_for_each(buffer,&kmem_cache_ptr->slabs_partial)
 			{
 				ka_printf("the NO.%d slab information:\n",++num);
-				slab_ptr = list_entry(buffer,struct slab,slab_chain);
+				const struct slab *slab_ptr = list_entry(buffer,struct slab,slab_chain);
 				ka_printf("start_ptr is %x\n",(int)slab_ptr->start_ptr);
 				ka_printf("end_ptr is %x\n",(int)slab_ptr->end_ptr);
 				ka_printf("current_block_num is %d\n",slab_ptr->current_block_num);
 				ka_printf("full_block_num is %d\n",slab_ptr->full_block_num);
 				ka_printf("block_size is %d\n",slab_ptr->block_size);
 				ka_printf("\n");
+#if CONFIG_DEBUG_ON
+				slab_list_check(slab_ptr);
+#endif
 			}
 			ka_printf("chain slabs_partial has %d slab\n",num);
 		}
@@ -502,13 +621,16 @@ void shell_check_slab(int argc, char const *argv[])
 			list_for_each(buffer,&kmem_cache_ptr->slabs_empty)
 			{
 				ka_printf("the NO.%d slab information:\n",++num);
-				slab_ptr = list_entry(buffer,struct slab,slab_chain);
+				const struct slab *slab_ptr = list_entry(buffer,struct slab,slab_chain);
 				ka_printf("start_ptr is %x\n",(int)slab_ptr->start_ptr);
 				ka_printf("end_ptr is %x\n",(int)slab_ptr->end_ptr);
 				ka_printf("current_block_num is %d\n",slab_ptr->current_block_num);
 				ka_printf("full_block_num is %d\n",slab_ptr->full_block_num);
 				ka_printf("block_size is %d\n",slab_ptr->block_size);
 				ka_printf("\n");
+#if CONFIG_DEBUG_ON
+				slab_list_check(slab_ptr);
+#endif
 			}
 			ka_printf("chain slabs_empty has %d slab\n",num);
 		}

@@ -150,7 +150,7 @@ static void _deal_with_flag_alloc(unsigned int level,Page_Num_Type page_num)
 	current_used_buddy_ptr->flag[(current_used_buddy_ptr->level_flag_base[level-1]+index)/(sizeof(Flag_Type)*8)] ^= (0x80000000>>((current_used_buddy_ptr->level_flag_base[level-1]+index)%(sizeof(Flag_Type)*8)));
 }
 
-static inline void _return_link_body(Page_Num_Type buffer) /*return struct order_link "link_body[buffer]"*/
+static void _return_link_body(Page_Num_Type buffer) /*return struct order_link "link_body[buffer]"*/
 {
 	ASSERT(buffer<=current_used_buddy_ptr->info.page_num-1);
 	ASSERT(NOTHING == current_used_buddy_ptr->order_link_flag[buffer]);
@@ -692,7 +692,6 @@ void _return_power10_page(void *ptr)
 #if CONFIG_DEBUG_ON
 static int _check_buddy_flag_level(unsigned int level,unsigned int offset)
 {
-	/*ka_printf("level is %d,offset is %d\n",level,offset);*/
 	ASSERT((level>=1) && (level<=10));
 	ASSERT((offset<((current_used_buddy_ptr->info.page_num>>1)/sizeof_level(level))));
 	unsigned int num = 0;

@@ -23,7 +23,7 @@ int _device_register(const char *dev_name,struct file_operations *file_operation
 	struct dentry *buffer = _file_dentry_alloc_and_init(dev_dentry_ptr,inode_ptr,dev_name,FLAG_DEFAULT);
 	if(NULL == buffer)
 	{
-		ka_free(inode_ptr);
+		KA_FREE(inode_ptr);
 		return -ERROR_NO_MEM;
 	}
 	return FUN_EXECUTE_SUCCESSFULLY;

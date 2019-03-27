@@ -81,7 +81,7 @@ void __INIT _os_start(void)
 /*============================================*/
 
 /*==============register initialization task===================*/
-	if(0 != task_init_ready(&TCB_count_init,256,PRIO_MAX-2,5,"count_init",count_init,NULL))
+	if(0 != task_init_ready(&TCB_count_init,500,PRIO_MAX-2,5,"count_init",count_init,NULL))
 	{
 		ka_printf("os_init_fail...stop booting...\n");
 		while(1);

@@ -101,7 +101,7 @@ struct dentry *_dentry_alloc_and_init(
 	ASSERT(NULL != parent_ptr);
 	ASSERT(NULL != name);
 	ASSERT(NULL != inode_ptr);
-	struct dentry *dentry_ptr = ka_malloc(sizeof(struct dentry));
+	struct dentry *dentry_ptr = KA_MALLOC(sizeof(struct dentry));
 	if(NULL == dentry_ptr)
 	{
 		return NULL;
@@ -114,7 +114,7 @@ struct file *_file_alloc_and_init(
 	struct dentry *dentry_ptr,UINT32 flag)
 {
 	ASSERT(NULL != dentry_ptr);
-	struct file *file_ptr = ka_malloc(sizeof(struct file));
+	struct file *file_ptr = KA_MALLOC(sizeof(struct file));
 	if(NULL == file_ptr)
 	{
 		return NULL;
@@ -156,7 +156,7 @@ struct inode *_inode_alloc_and_init(
 	struct file_operations *file_operations_ptr,
 	UINT32 flag)
 {
-	struct inode *inode_ptr = ka_malloc(sizeof(struct inode));
+	struct inode *inode_ptr = KA_MALLOC(sizeof(struct inode));
 	if(NULL == inode_ptr)
 	{
 		return NULL;
@@ -173,13 +173,13 @@ int _rename(struct file *file_ptr,const char *name)
 	{
 		return -ERROR_SYS;
 	}
-	char *buffer = (char *)ka_malloc(ka_strlen(name));
+	char *buffer = (char *)KA_MALLOC(ka_strlen(name));
 	if(NULL == buffer)
 	{
 		return -ERROR_NO_MEM;
 	}
 	ka_strcpy(buffer,name);
-	ka_free(dentry_ptr->name);
+	KA_FREE(dentry_ptr->name);
 	dentry_ptr->name = buffer;
 	if(dentry_ptr->d_inode->inode_ops->change_name(dentry_ptr->d_inode,dentry_ptr) < 0)
 	{
@@ -304,7 +304,7 @@ int __add_folder(struct dentry *target_dentry_ptr,const char *folder_name,struct
 		return -ERROR_DISK;
 	}
 	unsigned int len = ka_strlen(folder_name)+1;
-	char *name_buffer = ka_malloc(len);
+	char *name_buffer = KA_MALLOC(len);
 	if(NULL == name_buffer)
 	{
 		KA_WARN(DEBUG_TYPE_VFS,"name_buffer malloc fail\n");
@@ -324,14 +324,14 @@ int __add_folder(struct dentry *target_dentry_ptr,const char *folder_name,struct
 	if(NULL == inode_ptr)
 	{
 		KA_WARN(DEBUG_TYPE_VFS,"inode malloc fail\n");
-		ka_free(name_buffer);
+		KA_FREE(name_buffer);
 		return -ERROR_NO_MEM;
 	}
 	struct dentry *buffer = _folder_dentry_alloc_and_init(target_dentry_ptr,inode_ptr,name_buffer,FLAG_DEFAULT);
 	if(NULL == buffer)
 	{
-		ka_free(name_buffer);
-		ka_free(inode_ptr);
+		KA_FREE(name_buffer);
+		KA_FREE(inode_ptr);
 		return -ERROR_NO_MEM;
 	}
 	return FUN_EXECUTE_SUCCESSFULLY;
@@ -372,7 +372,7 @@ static int __add_file(struct dentry *target_dentry_ptr,const char *file_name,str
 		return -ERROR_DISK;
 	}
 	unsigned int len = ka_strlen(file_name)+1;
-	char *name_buffer = ka_malloc(len);
+	char *name_buffer = KA_MALLOC(len);
 	if(NULL == name_buffer)
 	{
 		return -ERROR_NO_MEM;
@@ -390,14 +390,14 @@ static int __add_file(struct dentry *target_dentry_ptr,const char *file_name,str
 	}
 	if(NULL == inode_ptr)
 	{
-		ka_free(name_buffer);
+		KA_FREE(name_buffer);
 		return -ERROR_NO_MEM;
 	}
 	struct dentry *buffer = _file_dentry_alloc_and_init(target_dentry_ptr,inode_ptr,name_buffer,FLAG_DEFAULT);
 	if(NULL == buffer)
 	{
-		ka_free(name_buffer);
-		ka_free(inode_ptr);
+		KA_FREE(name_buffer);
+		KA_FREE(inode_ptr);
 		return -ERROR_NO_MEM;
 	}
 	return FUN_EXECUTE_SUCCESSFULLY;
@@ -433,7 +433,7 @@ int __delete_file(struct dentry *dentry_ptr)
 	if(0 == _dref(dentry_ptr))
 	{
 		list_del(&dentry_ptr->child);
-		ka_free(dentry_ptr);
+		KA_FREE(dentry_ptr);
 		KA_WARN(DEBUG_TYPE_VFS,"remove file %s\n",dentry_ptr->name);
 		return FUN_EXECUTE_SUCCESSFULLY;
 	}
@@ -484,7 +484,7 @@ static int remove_all_dentry(struct dentry *root_dentry_ptr)
 				return -ERROR_SYS;
 			}
 			list_del(&dentry_buffer_ptr->child);
-			ka_free(dentry_buffer_ptr);
+			KA_FREE(dentry_buffer_ptr);
 			KA_WARN(DEBUG_TYPE_VFS,"remove floder %s\n",dentry_buffer_ptr->name);
 		}
 		else
@@ -497,7 +497,7 @@ static int remove_all_dentry(struct dentry *root_dentry_ptr)
 		}
 	}
 	list_del(&root_dentry_ptr->child);
-	ka_free(root_dentry_ptr);
+	KA_FREE(root_dentry_ptr);
 	return FUN_EXECUTE_SUCCESSFULLY;
 }
 

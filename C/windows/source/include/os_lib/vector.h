@@ -3,9 +3,9 @@
 
 #include <myMicroLIB.h>
 
-#define f_free(ptr)				ka_free(ptr)
+#define f_free(ptr)				KA_FREE(ptr)
 #define f_memcpy(des,src,size)	ka_memcpy(des,src,size)
-#define f_malloc(size)			ka_malloc(size)
+#define f_malloc(size)			KA_MALLOC(size)
 
 
 #define VECTOR_DATA_SIZE sizeof(void *)

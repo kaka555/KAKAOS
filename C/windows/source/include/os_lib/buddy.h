@@ -5,7 +5,7 @@
 #include <kakaosstdint.h>
 #include <singly_linked_list.h>
 
-#define PAGE_SIZE_BYTE 	1024 /*bytes*/
+#define PAGE_SIZE_BYTE 	1024u /*bytes*/
 #define PAGE_SIZE_KB	(PAGE_SIZE_BYTE/1024) /*KB*/
 #define NOTHING 		OS_UINT16_MAX
 
