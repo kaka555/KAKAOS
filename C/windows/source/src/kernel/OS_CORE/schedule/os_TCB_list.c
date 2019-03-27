@@ -3,10 +3,11 @@
 #include <kakaosstdint.h>
 #include <myassert.h>
 #include <myMicroLIB.h>
+#include <sys_init_fun.h>
 
 static struct TCB_list TCB_list[PRIO_MAX];
 
-void __init_TCB_list(void)
+static void __INIT __init_TCB_list(void)
 {
 	int i;
 	for(i=0;i<PRIO_MAX;++i)
@@ -16,6 +17,7 @@ void __init_TCB_list(void)
 		TCB_list[i].TCB_num = 0;
 	}
 }
+INIT_FUN(__init_TCB_list,1);
 
 /*os must set the task_state before using this function*/
 void _register_in_TCB_list(TCB *TCB_ptr)
@@ -51,7 +53,7 @@ int _delete_from_TCB_list(TCB *TCB_ptr)
 	}
 	/*should not go here*/
 	ASSERT(0);
-	return ERROR_VALUELESS_INPUT;
+	return ERROR_USELESS_INPUT;
 }
 
 struct list_head *_get_from_TCB_list(unsigned int index)
@@ -125,7 +127,9 @@ void shell_check_TCB_list(void)
 					case STATE_WAIT_MCB_TIMEOUT:
 					case STATE_WAIT_MESSAGE_QUEUE_TIMEOUT:
 					case STATE_PUT_MESSAGE_QUEUE_TIMEOUT:
-						ka_printf("STATE_DELAY\n");break;
+						ka_printf("STATE_DELAY\n");
+						ka_printf("delay reach time is %lu\n",(unsigned long)TCB_ptr->delay_reach_time);
+						break;
 					case STATE_SUSPEND_NORMAL:
 					case STATE_WAIT_MCB_FOREVER:
 					case STATE_WAIT_MESSAGE_QUEUE_FOREVER:
@@ -135,6 +139,7 @@ void shell_check_TCB_list(void)
 				}
 				ka_printf("/*****************************************************/\n");
 			}
+#if CONFIG_DEBUG_ON
 			if(TCB_num != TCB_list[i].TCB_num)
 			{
 				ka_printf("prio %u TCB_num error!\n",i);
@@ -143,6 +148,7 @@ void shell_check_TCB_list(void)
 			{
 				ka_printf("prio %u ready_num error!\n",i);
 			}
+#endif
 			ready_num = 0;
 			TCB_num = 0;
 		}
@@ -170,11 +176,13 @@ void shell_stack_check(int argc, char const *argv[])
 				ka_printf("=====================================================\n");
 				ka_printf("task name : %s\n",TCB_ptr->name);
 				ka_printf("The stack space is from %p to %p\n",TCB_ptr->stack_end,(STACK_TYPE *)TCB_ptr->stack_end + TCB_ptr->stack_size/4);
+#if CONFIG_DEBUG_ON
 				if(0 != *(unsigned int *)(TCB_ptr->stack_end))
 				{
 					ka_printf("stack full!!!!\n");
 					ASSERT(0);
 				}
+#endif
 				while(0 == *ptr)
 				{
 					++num;

@@ -28,6 +28,9 @@ void _put_in_shell_buffer(char c);
 char *get_para_add(int argc, char const *argv[], const char *pre_name);
 int shell_exec(const char *command);
 
+struct command;
+struct command *_get_command_ptr(const char *command_name);
+
 #endif
 
 #endif

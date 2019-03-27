@@ -425,6 +425,7 @@ int ka_strncmp(const char * str1, const char * str2, int num)
 	}
 	return *str1 - *str2;
 }
+EXPORT_SYMBOL(ka_strncmp);
 
 void ka_memset(void *s,const int ch, int n)
 {
@@ -435,6 +436,7 @@ void ka_memset(void *s,const int ch, int n)
 		*ptr++ = buffer;
 	}
 }
+EXPORT_SYMBOL(ka_memset);
 
 void ka_strcpy(char *strDest, const char *strSrc)
 {
@@ -442,6 +444,7 @@ void ka_strcpy(char *strDest, const char *strSrc)
 		return;
 	while((*strDest++ = *strSrc++));
 }
+EXPORT_SYMBOL(ka_strcpy);
 
 int ka_atoi(const char *char_ptr)
 {
@@ -463,10 +466,28 @@ int ka_atoi(const char *char_ptr)
 	{
 		++char_ptr;
 	}
-	while(IS_NUM(*char_ptr))
+	if((ka_strlen(char_ptr) > 2) && (ka_strncmp("0x",char_ptr,2)))
 	{
-		num = 10 * num + *char_ptr - '0';
-		++char_ptr;
+		while(IS_NUM(*char_ptr) || IS_HEX(*char_ptr))
+		{
+			if(IS_NUM(*char_ptr))
+			{
+				num = 16 * num + *char_ptr - '0';
+			}
+			else
+			{
+				num = 16 * num + *char_ptr - 'a' + 10;
+			}
+			++char_ptr;
+		}
+	}
+	else
+	{
+		while(IS_NUM(*char_ptr))
+		{
+			num = 10 * num + *char_ptr - '0';
+			++char_ptr;
+		}
 	}
 	return (sign*num);
 }
@@ -524,6 +545,7 @@ int ka_strcmp(const char * str1, const char * str2)
 	}
 	return (*str1 - *str2);
 }
+EXPORT_SYMBOL(ka_strcmp);
 
 extern void init_malloc(void);
 void __init_my_micro_lib(void)

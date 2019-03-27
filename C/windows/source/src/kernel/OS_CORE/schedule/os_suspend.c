@@ -3,13 +3,15 @@
 #include <ka_configuration.h>
 #include <myassert.h>
 #include <os_ready.h>
+#include <sys_init_fun.h>
 
 static struct list_head suspend_list_head;
 
-void __init_suspend_list(void)
+static void __INIT __init_suspend_list(void)
 {
 	INIT_LIST_HEAD(&suspend_list_head);
 }
+INIT_FUN(__init_suspend_list,1);
 
 void _insert_into_suspend_list(TCB *const TCB_ptr)
 {
@@ -30,5 +32,5 @@ int _remove_from_suspend_list(TCB *TCB_ptr)
 			return FUN_EXECUTE_SUCCESSFULLY;
 		}
 	}
-	return -ERROR_VALUELESS_INPUT;
+	return -ERROR_USELESS_INPUT;
 }

@@ -21,6 +21,10 @@ void insert_into_cache_chain(
 	{
 		singly_list_for_each_entry_safe_n(pos,n,head,node)
 		{
+			if(pos->kmem_cache_slab_size == block_size)
+			{
+				goto outside ;
+			}
 			if(n->kmem_cache_slab_size > block_size)
 			{
 				singly_list_add(&kmem_cache_ptr->node,&pos->node);
@@ -69,7 +73,7 @@ void load_slab(
 	slab_ptr->full_block_num = (room_size - sizeof(struct slab)) / block_size;
 	slab_ptr->current_block_num = slab_ptr->full_block_num;
 	INIT_LIST_HEAD(&slab_ptr->block_head);
-	list_head_ptr = (struct list_head *)((int)end_ptr - block_size);
+	list_head_ptr = (struct list_head *)((unsigned int)end_ptr - block_size);
 	boundary_ptr = (void *)((unsigned int)start_ptr + sizeof(struct slab));
 	while((unsigned int)list_head_ptr >= (unsigned int)boundary_ptr)
 	{

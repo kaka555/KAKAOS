@@ -1,5 +1,5 @@
-#include "user.h"
-#include "osinit.h"
+#include <user.h>
+#include <osinit.h>
 #include <os_delay.h>
 
 
@@ -55,7 +55,7 @@ int i,j;
 }
 #endif
 
-#if 0
+#if 0 /* test timer */
 static void ka(void *para)
 {
 	ka_printf("task three timer test\n");
@@ -96,12 +96,13 @@ static void ka(void *para)
 
 static void kb(void *para)
 {
-	ka_printf("task three timer test kb\n");
+	ka_printf("task four timer test kb\n");
 }
 struct timer timer1;
 struct timer timer0;
 void three(void *para)
 {
+	ka_printf("task three\n");
 	timer_init(&timer0, TIMER_ONE_TIME, "T1", ka, 0, 15, 8);
 	timer_enable(&timer0);
 	suspend();
@@ -109,14 +110,15 @@ void three(void *para)
 
 void four(void *para)
 {
-	timer_init(&timer1, TIMER_TIME, "T2", kb, 0, 20, 8);
+	ka_printf("task four\n");
+	timer_init(&timer1, TIMER_TIME, "T2", kb, 0, 15, 8);
 	timer_enable(&timer1);
 	suspend();
 }
 
 #endif
 
-#if 0
+#if 1 /* test breakpoint */
 void three(void *para)
 {
 	int i = 5;
@@ -125,9 +127,9 @@ void three(void *para)
 	shell_insert_variable_INT("i",&i);
 	shell_insert_variable_INT("ia",&ia);
 	shell_insert_variable_FLOAT("kaka",&kaka);
-	ka_printf("address of i is %x\n",&i);
-	ka_printf("address of ia is %x\n",&ia);
-	ka_printf("address of kaka is %x\n",&kaka);
+	ka_printf("address of i is 0x%p\n",&i);
+	ka_printf("address of ia is 0x%p\n",&ia);
+	ka_printf("address of kaka is 0x%p\n",&kaka);
 	ka_printf("i is %d\n",i);
 	ka_printf("ia is %d\n",ia);
 	ka_printf("kaka is %f\n",kaka);
@@ -213,8 +215,10 @@ int i;
 #endif
 
 #if 0 // test int sleep(unsigned int)
+
 void three(void *para)
 {
+
 	TCB *TCB_ptr4,*TCB_ptr5;
 	if(0 != task_creat_ready(256,5,5,"five",five,NULL,&TCB_ptr5))
 	{
@@ -226,7 +230,10 @@ void three(void *para)
 		ka_printf("os_init_fail...stop booting...\n");
 		while(1);
 	}
-	int ret = sleep(30);
+	ka_printf("now task three going to sleep\n");
+	int ret = sleep(3*HZ);
+	ka_printf("task three ret is %d\n",ret);
+/*
 	ka_printf("task three ret is %d\n",ret);
 	if(0 != _remove_from_delay_heap(TCB_ptr5))
 	{
@@ -238,18 +245,19 @@ void three(void *para)
 	}
 	suspend();
 	while(1);
+*/
 }
 
 void five(void *para)
 {
-	int ret = sleep(58);
+	int ret = sleep(5*HZ);
 	ka_printf("task five ret is %d\n",ret);
 	suspend();
 	while(1);
 }
 void four(void *para)
 {
-	int ret = sleep(40);
+	int ret = sleep(4*HZ);
 	ka_printf("task four ret is %d\n",ret);
 	suspend();
 	while(1);
@@ -569,7 +577,7 @@ void five(void *para)
 
 #endif
 
-#if 1//test malloc
+#if 0//test malloc
 void three(void *para)
 {
 	void *ptr[10];
@@ -589,6 +597,63 @@ void three(void *para)
 	}
 	INSERT_BREAK_POINT();
 	ka_printf("end\n");
+}
+
+#endif
+
+#if 0 /* test vfs */
+
+#include <bsp_usart.h>
+static int open(struct file *file_ptr)
+{
+	ka_printf("open file %s\n",file_ptr->f_den->name);
+	USART2_Config();
+	return 0;
+}
+
+static int close(struct file *file_ptr)
+{
+	ka_printf("bye bye file %s\n",file_ptr->f_den->name);
+	return 0;
+}
+
+static int write(struct file *file_ptr,void *buffer,unsigned int len,unsigned int offset)
+{
+	char *data = (char *)buffer;
+	unsigned int i;
+	for(i=0;i<len;++i)
+	{
+		ka_printf("round %u,write %c\n",i,data[i]);
+		Usart_SendByte(USART2,data[i]);
+	}
+	return len;
+}
+
+static struct file_operations fop = {
+	.open = open,
+	.close = close,
+	.write = write,
+};
+
+void three(void *para)
+{
+	if(writeonly_device_register("usart2",&fop) < 0)
+	{
+		ka_printf("device register error\n");
+	}
+	else
+	{
+		ka_printf("device register successfully\n");
+	}
+	sleep(20 * HZ);
+	if(device_unregister("usart2") < 0)
+	{
+		ka_printf("unregister fail\n");
+	}
+	else
+	{
+		ka_printf("unregister success\n");
+	}
 }
 
 #endif

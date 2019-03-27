@@ -12,6 +12,7 @@
 #include <buddy.h>
 #include <osinit.h>
 #include <module.h>
+#include <vfs.h>
 
 #if CONFIG_SHELL_EN
 
@@ -49,13 +50,13 @@ void shell_memory(int argc, char const *argv[])
 	unsigned int j = 0;
 	while(NULL != buddy_ptr)
 	{
-		PRINTF("NO.%u memory : \n",j++);
-		PRINTF("=====================================================\n");
-		PRINTF("start address is %p\n",buddy_ptr->buddy_space_start_ptr);
-		PRINTF("rest buddy space is %u\n",_get_current_buddy_space());
-		PRINTF("the total space is %uKB\n",PAGE_SIZE_KB * buddy_ptr->info.page_num);
-		PRINTF("now there are %u%% left\n",100*_get_current_buddy_space()/(PAGE_SIZE_KB * buddy_ptr->info.page_num));
-		PRINTF("\n\n");
+		ka_printf("NO.%u memory : \n",j++);
+		ka_printf("=====================================================\n");
+		ka_printf("start address is %p\n",buddy_ptr->buddy_space_start_ptr);
+		ka_printf("rest buddy space is %u\n",_get_current_buddy_space());
+		ka_printf("the total space is %uKB\n",PAGE_SIZE_KB * buddy_ptr->info.page_num);
+		ka_printf("now there are %u%% left\n",100*_get_current_buddy_space()/(PAGE_SIZE_KB * buddy_ptr->info.page_num));
+		ka_printf("\n\n");
 		buddy_ptr = (struct buddy *)_get_next_buddy_ptr_head(buddy_ptr);
 	}
 }
@@ -77,13 +78,24 @@ void shell_echo(int argc, char const *argv[])
 		ka_printf("too few arguments!\n");
 		return ;
 	}
-	struct shell_variable *shell_variable_ptr = find_in_variable_array(argv[1]);
-	if(NULL == shell_variable_ptr)
+	if(2 == argc)
 	{
-		ka_printf("no such variable\n");
-		return ;
+		struct shell_variable *shell_variable_ptr = find_in_variable_array(argv[1]);
+		if(NULL == shell_variable_ptr)
+		{
+			ka_printf("no such variable\n");
+			return ;
+		}
+		shell_v_display(shell_variable_ptr);
 	}
-	shell_v_display(shell_variable_ptr);
+	else if(4 == argc)
+	{
+		shell_vfs_echo(argv);
+	}
+	else
+	{
+		ka_printf("command error\n");
+	}
 	return ;
 }
 
@@ -127,8 +139,10 @@ void shell_TCB_check(int argc, char const *argv[])
 	(void)argc;
 	(void)argv;
 	shell_check_TCB_list();
+#if CONFIG_DEBUG_ON
 	shell_check_os_ready();
 	shell_delay_heap_check();
+#endif
 }
 
 extern void ReBoot();
@@ -165,6 +179,7 @@ void shell_module(int argc, char const *argv[])
 	if(NULL != value_ptr)
 	{
 		stack_size = ka_atoi(value_ptr);
+		KA_WARN(DEBUG_TYPE_MODULE,"get stacksize %u\n",stack_size);
 	}
 	value_ptr = get_para_add(argc,argv,"-prio=");
 	if(NULL != value_ptr)
@@ -177,6 +192,7 @@ void shell_module(int argc, char const *argv[])
 	if(NULL != value_ptr)
 	{
 		name = value_ptr;
+		KA_WARN(DEBUG_TYPE_MODULE,"get name %s\n",name);
 	}
 
 	value_ptr = get_para_add(argc,argv,"-r");
@@ -281,6 +297,19 @@ void cpu_rate(int argc, char const *argv[])
 	(void)argc;
 	(void)argv;
 	ka_printf("cpu use rate is %u%%\n",get_cpu_use_rate());
+}
+#endif
+
+#if CONFIG_DEBUG_ON
+void shell_check_memory(int argc, char const *argv[])
+{
+	if(2 != argc)
+	{
+		ka_printf("parameter error\n");
+		return ;
+	}
+	unsigned int num = ka_atoi(argv[1]);
+	ka_printf("value of add %p is %d\n",(void *)num,*(int *)num);
 }
 #endif
 

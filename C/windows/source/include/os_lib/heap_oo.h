@@ -19,7 +19,6 @@ struct little_heap
 
 int heap_init(struct little_heap *const little_heap_ptr,
 	unsigned int size,
-	unsigned int len_per_data,
 	int (*cmp)(Vector *Vector_ptr,unsigned int index1,unsigned int index2),
 	void (*index_change_record)(Vector *Vector_ptr,int index));
 
@@ -29,9 +28,9 @@ static inline void heap_delete(struct little_heap *little_heap_ptr)
 }
 
 /*get the data with index "index" and store it into *data_store_ptr*/
-static inline void heap_get_index_data(struct little_heap *little_heap_ptr,void *data_store_ptr,unsigned int index)
+static inline void * heap_get_index_data(struct little_heap *little_heap_ptr,unsigned int index)
 {
-	Vector_get_index_data(&little_heap_ptr->data,index,data_store_ptr);
+	return Vector_get_index_data(&little_heap_ptr->data,index);
 }
 
 static inline unsigned int heap_get_cur_len(struct little_heap *little_heap_ptr)
@@ -39,11 +38,11 @@ static inline unsigned int heap_get_cur_len(struct little_heap *little_heap_ptr)
 	return get_Vector_cur_len(&little_heap_ptr->data);
 }
 
-int heap_push(struct little_heap *const little_heap_ptr,void *push_data_ptr);
-int heap_get_index_data_safe(struct little_heap *const little_heap_ptr,void *data_store_ptr,unsigned int index);
-int heap_set_index_data(struct little_heap *const little_heap_ptr,unsigned int index,void *data_store_ptr);
+int heap_push(struct little_heap *little_heap_ptr,void *push_data_ptr);
+int heap_get_index_data_safe(struct little_heap *little_heap_ptr,void **data_store_ptr,unsigned int index);
+int heap_set_index_data(struct little_heap *little_heap_ptr,unsigned int index,void *data_store_ptr);
 /*if data_store_ptr is NULL,do not store*/
-int heap_remove_index_data(struct little_heap *const little_heap_ptr,unsigned int index,void *data_store_ptr);
-int heap_erase_data(struct little_heap *const little_heap_ptr,unsigned int from,unsigned int to);
+int heap_remove_index_data(struct little_heap *little_heap_ptr,unsigned int index,void *data_store_ptr);
+int heap_erase_data(struct little_heap *little_heap_ptr,unsigned int from,unsigned int to);
 
 #endif

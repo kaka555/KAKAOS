@@ -13,8 +13,13 @@
 #include <os_cpu.h>
 #include <export.h>
 #include <module.h>
+#include <vfs.h>
+#include <printf_debug.h>
+#include <sys_init_fun.h>
 
 #if CONFIG_SHELL_EN
+
+static unsigned int _process(char *buffer_ptr);
 
 static MCB MCB_for_shell;
 
@@ -33,10 +38,16 @@ static inline void clear_input_buffer(void)
 void _shell_buffer_wait_str(const char *str_ptr) /* thread will going to sleep*/
 {
 	ASSERT(NULL != str_ptr);
+#if CONFIG_ASSERT_DEBUG
 	int error;
+#endif
 	while(1)
 	{
+#if CONFIG_ASSERT_DEBUG
 		error = _p(&MCB_for_shell,MCB_FLAG_WAIT,0);
+#else 
+		_p(&MCB_for_shell,MCB_FLAG_WAIT,0);
+#endif
 		ASSERT(FUN_EXECUTE_SUCCESSFULLY == error);
 		if(0 == ka_strncmp(using_shell_buffer_ptr->buffer,str_ptr,ka_strlen(str_ptr)))
 		{
@@ -86,6 +97,85 @@ int __init_shell_buffer(struct shell_buffer *shell_buffer_ptr,
 	return FUN_EXECUTE_SUCCESSFULLY;
 }
 
+extern unsigned int command_list_hash(const char *command_ptr);
+static void deal_with_tab(void)
+{
+	ASSERT(using_shell_buffer_ptr->buffer != NULL);
+	unsigned int num = _process(using_shell_buffer_ptr->buffer);
+	if((num <= 1) || (num >= ARGV_SIZE)) /* useless input */
+	{
+		KA_WARN(DEBUG_TYPE_SHELL_TAB,"invalid num\n");
+		return ;
+	}
+	KA_WARN(DEBUG_TYPE_SHELL_TAB,"get num is %u\n",num);
+	unsigned int len = ka_strlen(using_shell_buffer_ptr->argv[num-1]);
+	unsigned int index = 0;
+	unsigned int same = 0;
+	struct command_processer *command_processer_ptr = _get_command_processer(ka_strlen(using_shell_buffer_ptr->argv[0]));
+	if(NULL == command_processer_ptr)
+	{
+		ka_printf("command not found\n");
+		return ;
+	}
+	KA_WARN(DEBUG_TYPE_SHELL_TAB,"command_processer length is %u\n",command_processer_ptr->command_length);
+	struct command *struct_command_ptr;
+	struct singly_list_head *head = &command_processer_ptr->command_list_address[command_list_hash(using_shell_buffer_ptr->argv[0])];
+	singly_list_for_each_entry(struct_command_ptr,head,list)
+	{
+		if(0 == ka_strncmp(using_shell_buffer_ptr->argv[0],struct_command_ptr->command_name,command_processer_ptr->command_length))
+		{
+			/* get command */
+			if(NULL == struct_command_ptr->para_arv)
+			{
+				KA_WARN(DEBUG_TYPE_SHELL_TAB,"command %s has no parament\n",struct_command_ptr->command_name);
+				return ;
+			}
+			unsigned int i;
+			for(i=0;i<struct_command_ptr->para_len;++i)
+			{
+				if(0 == ka_strncmp(struct_command_ptr->para_arv[i],using_shell_buffer_ptr->argv[num-1],len))
+				{
+					++same;
+					if(same > 1)
+					{
+						KA_WARN(DEBUG_TYPE_SHELL_TAB,"more than one parament\n");
+						return ;
+					}
+					index = i;
+				}
+			}
+			if(0 == same)
+			{
+				KA_WARN(DEBUG_TYPE_SHELL_TAB,"no same parament\n");
+			}
+			else
+			{
+				ASSERT(1 == same);
+				ka_strcpy(using_shell_buffer_ptr->buffer + using_shell_buffer_ptr->index,
+						struct_command_ptr->para_arv[index] + len);
+				using_shell_buffer_ptr->index += ka_strlen(struct_command_ptr->para_arv[index]) - len;
+				ka_printf("%s",struct_command_ptr->para_arv[index] + len);
+			}
+			return ;
+		}
+	}
+	KA_WARN(DEBUG_TYPE_SHELL_TAB,"command not found\n");
+	return ;
+}
+
+static void recover_shell_buffer(void)
+{
+	unsigned int i;
+	char *buffer = using_shell_buffer_ptr->buffer;
+	for(i=0;i<using_shell_buffer_ptr->index;++i)
+	{
+		if('\0' == *(buffer + i))
+		{
+			*(buffer + i) = ' ';
+		}
+	}
+}
+
 void _put_in_shell_buffer(char c)  /* deal with input layer*/
 {
 	if(c == 0x0a)
@@ -95,7 +185,8 @@ void _put_in_shell_buffer(char c)  /* deal with input layer*/
 	if( ! (	IS_LOWER(c) || IS_UPPER(c) || (0x0d == c) || 
 			(0x03 == c) || (0x08 == c) || (' ' == c)  || 
 			IS_NUM(c) 	|| IS_DOT(c)   || ('-' == c)  || 
-			('+' == c)	|| ('=' == c)))
+			('+' == c)	|| ('=' == c)  || ('/' == c)  ||
+			(0x09 == c) || ('>' == c)))
 	{
 		ka_printf("\nerror input\n");
 		ka_printf("%s",using_shell_buffer_ptr->buffer);
@@ -105,22 +196,38 @@ void _put_in_shell_buffer(char c)  /* deal with input layer*/
 	{
 		c += 'a' - 'A'; 
 	}
-	if(0x08 == c) /* backspace key*/
+	else if(0x08 == c) /* backspace key*/
 	{
-		if(using_shell_buffer_ptr->index>0)
+		if(using_shell_buffer_ptr->index > 0)
 		{
 			--(using_shell_buffer_ptr->index);
-			ka_printf(" \b");
+			ka_printf("\b \b");
 		}
 		else
 		{
 			ASSERT(0 == using_shell_buffer_ptr->index);
-			ka_putchar('>');
 		}
+		return ;
+	}
+	else if(0x09 == c) /* tab */
+	{
+		using_shell_buffer_ptr->buffer[(using_shell_buffer_ptr->index)] = 0x0d;
+		deal_with_tab();
+		recover_shell_buffer();
+		return ;
+	}
+	else if(0x0d == c) /* enter */
+	{
+		ka_printf("\n");
+		using_shell_buffer_ptr->buffer[(using_shell_buffer_ptr->index)++] = 0x0d;
+		using_shell_buffer_ptr->buffer[using_shell_buffer_ptr->index] = '\0';
+		KA_WARN(DEBUG_TYPE_SHELL,"%s\n",using_shell_buffer_ptr->buffer);
+		_v(&MCB_for_shell);
 		return ;
 	}
 	if(using_shell_buffer_ptr->index < using_shell_buffer_ptr->buffer_size)
 	{
+		ka_putchar(c);
 		using_shell_buffer_ptr->buffer[(using_shell_buffer_ptr->index)++] = c;
 		using_shell_buffer_ptr->buffer[using_shell_buffer_ptr->index] = '\0';
 	}
@@ -130,14 +237,6 @@ void _put_in_shell_buffer(char c)  /* deal with input layer*/
 		using_shell_buffer_ptr->index = 0;
 		return ;
 	}
-	if(0x0d == c)
-	{
-#if DEBUG_SHELL
-		using_shell_buffer_ptr->buffer[using_shell_buffer_ptr->index-1] = '\0';
-		ka_printf("%s\n",using_shell_buffer_ptr->buffer);
-#endif
-		_v(&MCB_for_shell);
-	}
 }
 
 static int _shell_exec(const char *command)
@@ -146,7 +245,7 @@ static int _shell_exec(const char *command)
 	if(len + 1 > using_shell_buffer_ptr->buffer_size)
 	{
 		OS_ERROR_PARA_MESSAGE_DISPLAY(_shell_exec,command);
-		return -ERROR_VALUELESS_INPUT;
+		return -ERROR_USELESS_INPUT;
 	}
 	unsigned int i;
 	for(i=0;i<len;++i)
@@ -191,6 +290,11 @@ static void redo(int argc, char const *argv[])
 	}
 }
 
+#if CONFIG_MODULE
+/* parament list */
+static char *insmod_list[] = {"-name=","-prio=","-stacksize=","-filesize="};
+static char *rmmod_list[] = {"-name="};
+#endif
 
 /*struct command -- add command in the corresponding array here(step 2)
 ** and write the function to execute*/
@@ -203,10 +307,26 @@ static struct command resident_command_1[] =
 };
 static struct command resident_command_2[] = 
 {
+#if CONFIG_VFS
+	{
+		.command_name = "ls",
+		.f = shell_ls,
+	},
+	{
+		.command_name = "cd",
+		.f = shell_cd,
+	},
+	{
+		.command_name = "rm",
+		.f = shell_rm,
+	},
+#endif
+#if CONFIG_DEBUG_ON
 	{
 		.command_name = "ka",
 		.f = test,
 	},
+#endif
 	{
 		.command_name = "mm",
 		.f = shell_memory,
@@ -228,6 +348,16 @@ static struct command resident_command_3[] =
 	{
 		.command_name = "cpu",
 		.f = cpu_rate,
+	},
+#endif
+#if CONFIG_VFS
+	{
+		.command_name = "pwd",
+		.f = shell_pwd,
+	},
+	{
+		.command_name = "cat",
+		.f = shell_cat,
 	},
 #endif
 	{
@@ -298,6 +428,22 @@ static struct command resident_command_5[] =
 	,{
 		.command_name = "rmmod",
 		.f = shell_remove_module,
+		.para_arv = rmmod_list,
+		.para_len = sizeof(rmmod_list)/sizeof(*rmmod_list),
+	}
+#endif
+#if CONFIG_VFS
+	,{
+		.command_name = "touch",
+		.f = shell_touch,
+	}
+	,{
+		.command_name = "mkdir",
+		.f = shell_mkdir,
+	}
+	,{
+		.command_name = "rmdir",
+		.f = shell_rmdir,
 	}
 #endif
 };
@@ -311,6 +457,8 @@ static struct command resident_command_6[] =
 	,{
 		.command_name = "insmod",
 		.f = shell_module,
+		.para_arv = insmod_list,
+		.para_len = sizeof(insmod_list)/sizeof(*insmod_list),
 	}
 #endif
 };
@@ -336,6 +484,12 @@ static struct command resident_command_7[] =
 		.f = shell_modinfo,
 	}
 #endif
+#if CONFIG_DEBUG_ON
+	,{
+		.command_name = "checkmm",
+		.f = shell_check_memory,
+	}
+#endif
 	,{
 		.command_name = "showreg",
 		.f = shell_show_tasks_registers,
@@ -351,13 +505,51 @@ static struct command resident_command_8[] =
 #endif
 };
 
-extern void __init_command_n_ptr_hash_array(void);
-static void shell_init(void)
+struct command *_get_command_ptr(const char *command_name)
 {
-	unsigned int i;
+	unsigned int len = ka_strlen(command_name);
+	struct command_processer *command_processer_ptr = _get_command_processer(len);
+	if(NULL == command_processer_ptr)
+	{
+		return NULL;
+	}
+	struct singly_list_head *pos;
+	struct command *struct_command_ptr;
+	singly_list_for_each(pos,&command_processer_ptr->command_list_address[command_list_hash(command_name)])
+	{
+		struct_command_ptr = singly_list_entry(pos,struct command,list);
+		if(0 == ka_strcmp(command_name,struct_command_ptr->command_name))
+		{
+			return struct_command_ptr;
+		}
+	}
+	return NULL;
+}
+
+static void shell_pre(void)
+{
 #if CONFIG_ASSERT_DEBUG
 	int error;
 #endif
+#if CONFIG_ASSERT_DEBUG
+	error = init_MCB(&MCB_for_shell,0,MCB_TYPE_FLAG_BINARY);
+#else
+	init_MCB(&MCB_for_shell,0,MCB_TYPE_FLAG_BINARY);
+#endif
+	ASSERT(FUN_EXECUTE_SUCCESSFULLY == error);
+#if CONFIG_ASSERT_DEBUG
+	error = __init_shell_buffer(&main_shell_buffer,main_buffer,main_buffer_reserve,BUFFER_SIZE);
+#else
+	__init_shell_buffer(&main_shell_buffer,main_buffer,main_buffer_reserve,BUFFER_SIZE);
+#endif
+	ASSERT(FUN_EXECUTE_SUCCESSFULLY == error);
+	using_shell_buffer_ptr = &main_shell_buffer;
+}
+
+extern void __init_command_n_ptr_hash_array(void);
+static void __init_shell(void)
+{
+	unsigned int i;
 	__init_command_n_ptr_hash_array();
 	for(i=0;i<sizeof(resident_command_1)/sizeof(struct command);++i)
 	{
@@ -391,27 +583,14 @@ static void shell_init(void)
 	{
 		_insert_struct_command_8(resident_command_8+i);
 	}
-#if CONFIG_ASSERT_DEBUG
-	error = init_MCB(&MCB_for_shell,0,MCB_TYPE_FLAG_BINARY);
-#else
-	init_MCB(&MCB_for_shell,0,MCB_TYPE_FLAG_BINARY);
-#endif
-	ASSERT(FUN_EXECUTE_SUCCESSFULLY == error);
-#if CONFIG_ASSERT_DEBUG
-	error = __init_shell_buffer(&main_shell_buffer,main_buffer,main_buffer_reserve,BUFFER_SIZE);
-#else
-	__init_shell_buffer(&main_shell_buffer,main_buffer,main_buffer_reserve);
-#endif
-	ASSERT(FUN_EXECUTE_SUCCESSFULLY == error);
-	using_shell_buffer_ptr = &main_shell_buffer;
 }
+INIT_FUN(__init_shell,1);
 
-/*public*/
-static int process(char *buffer_ptr)
+/* return argc */
+static unsigned int _process(char *buffer_ptr)
 {
 	char *ptr = buffer_ptr;
 	unsigned int num = 0;
-	int result;
 	while(*ptr == ' ')
 	{
 		++ptr;
@@ -442,14 +621,23 @@ static int process(char *buffer_ptr)
 				if(ARGV_SIZE+1 == num)
 				{
 					ka_printf("too many argument\n");
-					return 0;
+					return ARGV_SIZE;
 				}
 			}
 		}
 	}
 	*ptr = '\0';
-		
-	result = _match_and_execute_command(num,
+	return num;
+}
+
+static int process(char *buffer_ptr)
+{
+	unsigned int num = _process(buffer_ptr);
+	if((0 == num) || (num >= ARGV_SIZE))
+	{
+		return 0;
+	}
+	int result = _match_and_execute_command(num,
 		(const char **)(using_shell_buffer_ptr->argv),
 		_get_command_processer(ka_strlen(using_shell_buffer_ptr->argv[0])));
     if(result == 1)
@@ -468,7 +656,7 @@ void shell(void *para)
 	(void)para;
 	int result;
 	task_delete(&TCB_count_init);
-	shell_init();
+	shell_pre();
 	ka_printf("%s\n","/*************************");
 	ka_printf("%s\n","*");
 	ka_printf("%s\n","*   kaka_os  shell");

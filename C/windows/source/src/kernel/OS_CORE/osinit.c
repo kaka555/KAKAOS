@@ -15,7 +15,7 @@
 #include <slab.h>
 #include <double_linked_list.h>
 #include <module.h>
-
+#include <sys_init_fun.h>
 
 #if CONFIG_SHELL_EN
 	static TCB TCB_shell;
@@ -30,10 +30,6 @@ TCB TCB_count_init;
 
 UINT64 idle_num = 0;
 unsigned int  count_max_num = 0;/*used for counting cpu used rate*/
-#if PRECISE_TIME_DELAY
-	UINT64 num_pre_tick = 0;/*used for precise timing*/
-	TCB TCB_precise_timing;
-#endif
 
 extern int g_schedule_lock;
 extern UINT64 g_time_tick_count;
@@ -43,14 +39,20 @@ extern TCB *OSTCBHighRdyPtr;
 extern struct singly_list_head *const cache_chain_head_ptr;
 
 #if CONFIG_TIMER_EN
-	extern void __init_timer(void);
 	extern void timer_task(void *para);
 #endif
 
 static void thread_init(void *para);
+static void count_init(void *para);
+static void idle(void *para);
+static void set_inter_stack(void);
 
+extern unsigned long _ka_init_fun_begin1;
+extern unsigned long _ka_init_fun_end1;
+extern unsigned long _ka_init_fun_begin2;
+extern unsigned long _ka_init_fun_end2;
 static void __INIT os_init(void)
-{
+{	
 	bsp_init();
 
 	g_time_tick_count = 0;
@@ -59,144 +61,17 @@ static void __INIT os_init(void)
 /*===========C_lib==========================*/
 	__init_my_micro_lib();
 
-/*===========TCB=======schedule==============*/
-	__init_ready_group();
-	__init_delay_heap();
-	__init_TCB_list();
-	__init_suspend_list();
-
-#if CONFIG_TIME_EN
-	__init_system_time();
-#endif	
-
-#if CONFIG_TIMER_EN
-	__init_timer();
-#endif
-
-#if CONFIG_SHELL_DEBUG_EN && CONFIG_SHELL_EN
-	__init_shell_debug();
-#endif
-
-#if CONFIG_MODULE
-	__init_module();
-#endif
-}
-
-void start_kernel(void)
-{
-	CPU_IntDis();
-	_os_start();
-	while(1)
+	struct init_fun *struct_init_fun_ptr;
+	for(struct_init_fun_ptr=(struct init_fun *)(&_ka_init_fun_begin1);
+		struct_init_fun_ptr != (struct init_fun *)(&_ka_init_fun_end1);++struct_init_fun_ptr)
 	{
-		;/*should never go here;*/
+		(*(struct_init_fun_ptr->fun))(); /* execute all the init function */
 	}
-}
-
-void task_start(void)
-{
-	if(0 != task_init_ready(&TCB_init,500,0,3,"init",thread_init,NULL))
+	for(struct_init_fun_ptr=(struct init_fun *)(&_ka_init_fun_begin2);
+		struct_init_fun_ptr != (struct init_fun *)(&_ka_init_fun_end2);++struct_init_fun_ptr)
 	{
-		ka_printf("os_init_fail...stop booting...\n");
-		while(1);
+		(*(struct_init_fun_ptr->fun))(); /* execute all the init function */
 	}
-#if CONFIG_SHELL_EN
-	if(0 != task_init_ready(&TCB_shell,1000,0,3,"shell",shell,NULL))
-	{
-		ka_printf("os_init_fail...stop booting...\n");
-		while(1);
-	}
-	#endif
-#if CONFIG_TIMER_EN
-	if(0 != task_init_ready(&TCB_timer_task,256,0,3,"timer_task",timer_task,NULL))
-	{
-		ka_printf("os_init_fail...stop booting...\n");
-		while(1);
-	}
-#endif
-	if(0 != task_creat_ready(500,4,5,"three",three,NULL,NULL))
-	{
-		ka_printf("os_init_fail...stop booting...\n");
-		while(1);
-	}
-//	if(0 != task_creat_ready(256,5,5,"four",four,NULL,NULL))
-//	{
-//		ka_printf("os_init_fail...stop booting...\n");
-//		while(1);
-//	}
-//	if(0 != task_creat_ready(256,6,5,"five",five,NULL,NULL))
-//	{
-//		ka_printf("os_init_fail...stop booting...\n");
-//		while(1);
-//	}
-//	if(0 != task_creat_ready(256,7,3,"six",six,NULL,NULL))
-//	{
-//		ka_printf("os_init_fail...stop booting...\n");
-//		while(1);
-//	}
-}
-
-static void count_init(void *para)	
-{
-	(void)para;
-#if PRECISE_TIME_DELAY
-	sleep(2); /* for synchronization*/
-	num_pre_tick = 0;
-	sleep(PRECISE_DELAY_NUM);
-	num_pre_tick /= PRECISE_DELAY_NUM;
-#if CONFIG_DEBUG_COUNT_INIT
-	ka_printf("succeed to get num_pre_tick = %l \n",num_pre_tick);
-#endif
-	task_delete(&TCB_precise_timing);
-#endif
-	
-	sleep(2); /* for synchronization*/
-	idle_num = 0;
-	sleep(COUNT_DELAY_NUM);
-	count_max_num = idle_num / COUNT_DELAY_NUM; /* COUNT_DELAY_NUM;*/
-	idle_num = 0;
-	
-#if CONFIG_DEBUG_COUNT_INIT
-	ka_printf("succeed to get count_max_num = %u\n",count_max_num);
-#endif
-
-	SYS_ENTER_CRITICAL();
-	task_start();
-	SYS_EXIT_CRITICAL();
-	schedule();
-}
-
-static void  idle(void *para)
-{
-	CPU_SR_ALLOC();
-	(void)para;
-	while(1)
-	{
-		CPU_CRITICAL_ENTER();
-		++idle_num;
-		CPU_CRITICAL_EXIT();
-	}
-}
-
-#if PRECISE_TIME_DELAY
-static void precise_timing(void *para)
-{
-	(void)para;
-	while(1)
-	{
-		++num_pre_tick;
-	}
-}
-#endif
-
-static void set_inter_stack(void)
-{
-	unsigned int MSP_top = (unsigned int)_alloc_power1_page(); /* allocate one page for interrupt stack*/
-	MSP_top += PAGE_SIZE_BYTE;
-	asm("MOVS R0, %0\t\n"
-		"MSR MSP, R0\t\n"
-		:
-		:"r"(MSP_top)
-		);
 }
 
 void __INIT _os_start(void)
@@ -235,6 +110,128 @@ void __INIT _os_start(void)
 	OSStartHighRdy();
 	ASSERT(0);
 	while(1);/*should no go here*/
+}
+
+void start_kernel(void)
+{
+	CPU_IntDis();
+	_os_start();
+	while(1)
+	{
+		;/*should never go here;*/
+	}
+}
+
+void task_start(void)
+{
+	if(0 != task_init_ready(&TCB_init,500,0,3,"init",thread_init,NULL))
+	{
+		ka_printf("os_init_fail...stop booting...\n");
+		while(1);
+	}
+#if CONFIG_SHELL_EN
+	if(0 != task_init_ready(&TCB_shell,1000,0,3,"shell",shell,NULL))
+	{
+		ka_printf("os_init_fail...stop booting...\n");
+		while(1);
+	}
+	#endif
+#if CONFIG_TIMER_EN
+	if(0 != task_init_ready(&TCB_timer_task,256,0,3,"timer_task",timer_task,NULL))
+	{
+		ka_printf("os_init_fail...stop booting...\n");
+		while(1);
+	}
+#endif
+	if(0 != task_creat_ready(500,4,5,"three",three,NULL,NULL))
+	{
+		ka_printf("os_init_fail...stop booting...\n");
+		while(1);
+	}
+/*
+	if(0 != task_creat_ready(256,5,5,"four",four,NULL,NULL))
+	{
+		ka_printf("os_init_fail...stop booting...\n");
+		while(1);
+	}
+*/
+/*
+	if(0 != task_creat_ready(256,6,5,"five",five,NULL,NULL))
+	{
+		ka_printf("os_init_fail...stop booting...\n");
+		while(1);
+	}
+	if(0 != task_creat_ready(256,7,3,"six",six,NULL,NULL))
+	{
+		ka_printf("os_init_fail...stop booting...\n");
+		while(1);
+	}
+*/
+}
+
+static void count_init(void *para)	
+{
+	(void)para;
+#if PRECISE_TIME_DELAY
+	sleep(2); /* for synchronization*/
+	num_pre_tick = 0;
+	sleep(PRECISE_DELAY_NUM);
+	num_pre_tick /= PRECISE_DELAY_NUM;
+#if CONFIG_DEBUG_COUNT_INIT
+	ka_printf("succeed to get num_pre_tick = %l \n",num_pre_tick);
+#endif
+	task_delete(&TCB_precise_timing);
+#endif
+	
+	sleep(2); /* for synchronization*/
+	idle_num = 0;
+	sleep(COUNT_DELAY_NUM);
+	count_max_num = idle_num / COUNT_DELAY_NUM; /* COUNT_DELAY_NUM;*/
+	idle_num = 0;
+	
+#if CONFIG_DEBUG_COUNT_INIT
+	ka_printf("succeed to get count_max_num = %u\n",count_max_num);
+#endif
+
+	SYS_ENTER_CRITICAL();
+	task_start();
+	SYS_EXIT_CRITICAL();
+	schedule();
+}
+
+static void idle(void *para)
+{
+	CPU_SR_ALLOC();
+	(void)para;
+	while(1)
+	{
+		CPU_CRITICAL_ENTER();
+		++idle_num;
+		CPU_CRITICAL_EXIT();
+	}
+}
+
+#if PRECISE_TIME_DELAY
+static void precise_timing(void *para)
+{
+	(void)para;
+	while(1)
+	{
+		++num_pre_tick;
+	}
+}
+#endif
+
+/* set the stack for interrupt */
+static void set_inter_stack(void)
+{
+	unsigned int MSP_top = (unsigned int)_alloc_power1_page(); /* allocate one page for interrupt stack*/
+	MSP_top += PAGE_SIZE_BYTE;
+	asm("MOVS R0, %0\t\n"
+		"MSR MSP, R0\t\n"
+		:
+		:"r"(MSP_top)
+		);
 }
 
 static int __attribute__((optimize("O1"))) FastLog2(int x)

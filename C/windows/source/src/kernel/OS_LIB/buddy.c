@@ -688,6 +688,8 @@ void _return_power10_page(void *ptr)
 }
 
 #if CONFIG_SHELL_EN
+
+#if CONFIG_DEBUG_ON
 static int _check_buddy_flag_level(unsigned int level,unsigned int offset)
 {
 	/*ka_printf("level is %d,offset is %d\n",level,offset);*/
@@ -847,6 +849,8 @@ static int check_buddy(void)
 	return _check_buddy_level_flag();
 }
 
+#endif
+
 void shell_buddy_debug(int argc, char const *argv[])
 {
 	(void)argc;
@@ -902,6 +906,7 @@ void shell_buddy_debug(int argc, char const *argv[])
 		}
 		ka_printf("=====================================================\n");
 	/*=========================================================================*/
+#if CONFIG_DEBUG_ON
 	/*start check the buddy info*/
 		ka_printf("\nnow going to check the buddy info.......\n");
 		if(0 == check_buddy())
@@ -912,6 +917,7 @@ void shell_buddy_debug(int argc, char const *argv[])
 		{
 			ka_printf("something wrong!\n");
 		}
+#endif
 		ka_printf("\n\n");
 		buddy_ptr = (struct buddy *)_get_next_buddy_ptr_head(buddy_ptr);
 	}

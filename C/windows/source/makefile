@@ -29,16 +29,17 @@ export HEAD_DIR9 = ${HOME}/include/shell
 export INCLUDE = -I$(HEAD_DIR1) -I$(HEAD_DIR2) -I$(HEAD_DIR3) -I$(HEAD_DIR4) -I$(HEAD_DIR5) -I$(HEAD_DIR6) -I$(HEAD_DIR7) -I$(HEAD_DIR8) -I$(HEAD_DIR9)
 
 OPTIMIZE = O2
-export FLAGS = -W -Wall -$(OPTIMIZE) $(INCLUDE) -g -mcpu=cortex-m3 -mthumb --specs=nosys.specs -nostartfiles 
 
-export ASFLAGS = -W -Wall -g -mcpu=cortex-m3 -mthumb --specs=nosys.specs
+export FLAGS = -W -Wall -$(OPTIMIZE) $(INCLUDE) -g -mcpu=cortex-m3 -mthumb -ffunction-sections -fdata-sections
+
+export ASFLAGS = -W -Wall -g -mcpu=cortex-m3 -mthumb
 
 export SUB_TGT = built-in.o
 ########################################################################
 SUB_DIR = user src
 
 $(TARGET): $(SUB_DIR)
-	$(LD)  $(^:=/$(SUB_TGT)) -T $(SCRIPT)  -nodefaultlibs -nostdlib -o $@ -static $(LIBPATH) -lgcc -lc
+	$(LD)  $(^:=/$(SUB_TGT)) -T $(SCRIPT) -nostartfiles --specs=nosys.specs -nodefaultlibs -nostdlib --gc-sections -o $@ -static $(LIBPATH) -lgcc -lc
 	$(OBJCOPY) $(TARGET)  $(TARGET:.elf=.bin) -Obinary
 	$(OBJCOPY) $(TARGET)  $(TARGET:.elf=.hex) -Oihex
 

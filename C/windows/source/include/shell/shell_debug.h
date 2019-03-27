@@ -48,7 +48,6 @@ struct shell_variable *find_in_variable_array(const char *name);
 
 void shell_debug_info(int argc, char const *argv[]);
 void insert_break_point(char* file_name,unsigned line,const char* function_name);
-void __init_shell_debug(void);
 void shell_debug_next(int argc, char const *argv[]);
 void shell_debug_run(int argc, char const *argv[]);
 void shell_debug_stop(int argc, char const *argv[]);

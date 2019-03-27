@@ -37,7 +37,7 @@ _estack = 0x20010000;    /* end of 64K RAM */
 
 /* Generate a link error if heap and stack don't fit into RAM */
 _Min_Heap_Size = 0;      /* required amount of heap  */
-_Min_Stack_Size = 0x200; /* required amount of stack */
+_Min_Stack_Size = 0x100; /* required amount of stack */
 
 /* Specify the memory areas */
 MEMORY
@@ -73,6 +73,14 @@ SECTIONS
     _ka_module_symtab_begin = .;
 	KEEP(*(.RTMSymTab))
 	_ka_module_symtab_end = .;
+	
+	_ka_init_fun_begin1 = .;
+	KEEP(*(.INIT_FUN1))
+	_ka_init_fun_end1 = .;
+	
+	_ka_init_fun_begin2 = .;
+	KEEP(*(.INIT_FUN2))
+	_ka_init_fun_end2 = .;
 	
 	KEEP (*(.init))
     KEEP (*(.fini))
