@@ -189,11 +189,11 @@ static int _remove_a_module(struct dynamic_module *dynamic_module_ptr)
     unsigned int i;
     for(i=0;i<dynamic_module_ptr->export_symbols_num;++i)
     {
-        KA_FREE((void *)dynamic_module_ptr->export_symbols_array[i].name);
+        ka_free((void *)dynamic_module_ptr->export_symbols_array[i].name);
     }
-    KA_FREE(dynamic_module_ptr->module_space);
+    ka_free(dynamic_module_ptr->module_space);
     list_del(&dynamic_module_ptr->module_list);
-    KA_FREE(dynamic_module_ptr);
+    ka_free(dynamic_module_ptr);
     CPU_CRITICAL_EXIT();
     return FUN_EXECUTE_SUCCESSFULLY;
 }
@@ -345,7 +345,7 @@ int dlmodule_load_relocated_object(struct dynamic_module* module, void *module_p
     module->vstart_addr = 0;
 
     /* allocate module space */
-    module->module_space = KA_MALLOC(module_size);
+    module->module_space = ka_malloc(module_size);
     if (module->module_space == NULL)
     {
         ka_printf("Module: allocate space failed.\n");
@@ -655,7 +655,7 @@ int dlmodule_load_shared_object(struct dynamic_module* module, void *module_ptr)
     module->ref = 0;
 
     /* allocate module space */
-    module->module_space = KA_MALLOC(module_size);
+    module->module_space = ka_malloc(module_size);
     if (NULL == module->module_space)
     {
         ka_printf("Module: allocate space failed.\n");
@@ -783,7 +783,7 @@ int dlmodule_load_shared_object(struct dynamic_module* module, void *module_ptr)
             }
         }
 
-        module->export_symbols_array = (struct ka_module_symtab *)KA_MALLOC
+        module->export_symbols_array = (struct ka_module_symtab *)ka_malloc
                                         (count * sizeof(struct ka_module_symtab));
         module->export_symbols_num = count;
         for (i = 0, count = 0; i < shdr[index].sh_size / sizeof(Elf32_Sym); i++)
@@ -800,7 +800,7 @@ int dlmodule_load_shared_object(struct dynamic_module* module, void *module_ptr)
 
             module->export_symbols_array[count].addr =
                 (void *)(module->module_space + symtab[i].st_value - module->vstart_addr);
-            module->export_symbols_array[count].name = KA_MALLOC(length);
+            module->export_symbols_array[count].name = ka_malloc(length);
             ka_memset((void *)module->export_symbols_array[count].name, 0, length);
             ka_memcpy((void *)module->export_symbols_array[count].name,
                       strtab + symtab[i].st_name,
@@ -853,7 +853,7 @@ struct dynamic_module* dlmodule_load(void)
         goto __exit;
     }
 
-    module = (struct dynamic_module *)KA_MALLOC(sizeof(struct dynamic_module));
+    module = (struct dynamic_module *)ka_malloc(sizeof(struct dynamic_module));
     if (!module) goto __exit;
     __init_d_module(module);
 
@@ -892,7 +892,7 @@ __exit:
         {
             list_del(&module->module_list);
         }
-        KA_FREE(module);
+        ka_free(module);
     }
 
     _clear_module_buffer();

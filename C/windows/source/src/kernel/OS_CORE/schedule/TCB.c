@@ -34,7 +34,7 @@ int _must_check _task_init(
 	ASSERT(prio < PRIO_MAX);
 	ASSERT((NULL != name) && (NULL != TCB_ptr) && (NULL != function));
 	stack_size &= (~0x03);/* according to CPU : 32bit?64bit*/
-	TCB_ptr->stack_end = (STACK_TYPE *)KA_MALLOC(stack_size);
+	TCB_ptr->stack_end = (STACK_TYPE *)ka_malloc(stack_size);
 	if(NULL == TCB_ptr->stack_end)
 	{
 		return -ERROR_ALLOCATE_STACK;
@@ -71,7 +71,7 @@ TCB *_must_check _task_creat(
 {
 	ASSERT((prio < PRIO_MAX));
 	ASSERT((NULL != name) && (NULL != function));
-	TCB *TCB_ptr = KA_MALLOC(sizeof(TCB));
+	TCB *TCB_ptr = ka_malloc(sizeof(TCB));
 	if(NULL == TCB_ptr)
 	{
 		return NULL;
@@ -87,7 +87,7 @@ TCB *_must_check _task_creat(
 					state)
 	  )
 	{
-		KA_FREE(TCB_ptr);
+		ka_free(TCB_ptr);
 		return NULL;
 	}
 	TCB_ptr->attribution = DEFAULT_ATTRIBUTION | TCB_ATTRIBUTION_CREATE;
@@ -160,7 +160,7 @@ int _task_delete(TCB *TCB_ptr)
 	CPU_SR_ALLOC();
 	CPU_CRITICAL_ENTER();
 	_delete_from_TCB_list(TCB_ptr);
-	KA_FREE(TCB_ptr->stack_end);
+	ka_free(TCB_ptr->stack_end);
 	switch(TCB_ptr->task_state)
 	{
 		case STATE_SUSPEND_NORMAL:
@@ -180,7 +180,7 @@ int _task_delete(TCB *TCB_ptr)
 	}
 	if(TCB_IS_CREATED(TCB_ptr))
 	{
-		KA_FREE(TCB_ptr);
+		ka_free(TCB_ptr);
 	}
 	if(is_module(TCB_ptr))
 	{

@@ -1,6 +1,7 @@
 #ifndef _MYMICROLIB_H
 #define _MYMICROLIB_H
 #include <ka_configuration.h>
+#include <kakaosstdint.h>
 
 #define IS_UPPER(x) (x>='A' && x<='Z')
 #define IS_LOWER(x) (x>='a' && x<='z')
@@ -24,14 +25,23 @@ double ka_atof(const char *char_ptr);
 int ka_strcmp(const char * str1, const char * str2);
 
 #if CONFIG_MALLOC && CONFIG_ASSERT_DEBUG
-	void *KA_MALLOC(unsigned int size);
-	void _KA_FREE(void *ptr,const char* file_name,unsigned line,const char* function_name);
-	#define KA_FREE(ptr)    _KA_FREE(ptr,__FILE__,__LINE__,__FUNCTION__)
-#else
 	void *ka_malloc(unsigned int size);
-	void ka_free(void *ptr);
-	#define KA_MALLOC(size) ka_malloc(size)
-	#define KA_FREE(ptr) ka_free(ptr)
+	void KA_FREE(void *ptr,const char* file_name,unsigned line,const char* function_name);
+	#define ka_free(ptr)    KA_FREE(ptr,__FILE__,__LINE__,__FUNCTION__)
+
+#define DEBUG_MAGIC "bug"
+struct malloc_debug_record
+{
+	UINT32 req_size;
+	UINT32 provide_size;
+	char magic[4];
+};
+void add_debug_info(unsigned int req_size,unsigned int provide_size,void *ptr);
+#else
+	void *_ka_malloc(unsigned int size);
+	void _ka_free(void *ptr);
+	#define ka_malloc(size) _ka_malloc(size)
+	#define ka_free(ptr) _ka_free(ptr)
 #endif
 
 #endif

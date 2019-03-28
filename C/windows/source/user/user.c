@@ -176,36 +176,36 @@ void three(void *para)
 int i;
 	for(i=0;i<64;++i)
 	{
-		ptr[i] = KA_MALLOC(sizeof(int));
+		ptr[i] = ka_malloc(sizeof(int));
 		ka_printf("%d get ptr address is %x \n",i,(int)ptr[i]);
 		ka_printf("value %d is %x\n",i,*(int *)ptr[i]);
 		*(int *)ptr[i] = 66;
 	}
 	
-	void *kaka = KA_MALLOC(48);
+	void *kaka = ka_malloc(48);
 	ka_printf("ptr--kaka get ptr address is %x \n",(int)kaka);
 	
 	//sleep(300);
 	
-	KA_FREE(kaka);
+	ka_free(kaka);
 	ka_printf("free complete\n");
-	KA_FREE(ptr[24]);
-	ka_printf("free complete\n");
-	
-	KA_FREE(ptr[31]);
-	ka_printf("free complete\n");
-	KA_FREE(ptr[7]);
-	
-	KA_FREE(ptr[62]);
-	
+	ka_free(ptr[24]);
 	ka_printf("free complete\n");
 	
-	kaka = KA_MALLOC(120);
+	ka_free(ptr[31]);
+	ka_printf("free complete\n");
+	ka_free(ptr[7]);
+	
+	ka_free(ptr[62]);
+	
+	ka_printf("free complete\n");
+	
+	kaka = ka_malloc(120);
 	ka_printf("ptr--kaka get ptr address is %x \n",(int)kaka);
 	
 	//sleep(300);
 	
-	KA_FREE(kaka);
+	ka_free(kaka);
 	ka_printf("free kaka complete\n");
 	
 	while(1)
@@ -422,13 +422,13 @@ void three(void *para)
 	{
 		for(i=0;i<31;++i)
 		{
-			ptr[i] = KA_MALLOC(500);
+			ptr[i] = ka_malloc(500);
 			ka_printf("ptr[%d] is %p\n",i,ptr[i]);
 		}
 		sleep(200 * HZ);
 		for(i=0;i<31;++i)
 		{
-			KA_FREE(ptr[i]);
+			ka_free(ptr[i]);
 		}
 		ka_printf("free complete\n");
 		sleep(500 * HZ);
@@ -585,14 +585,14 @@ void three(void *para)
 	ka_printf("going to task three\n");
 	for(i=0;i<10;++i)
 	{
-		ptr[i] = KA_MALLOC(700);
+		ptr[i] = ka_malloc(700);
 		ka_printf("i is %u,address is %p\n",i,ptr[i]);
 	}
 	INSERT_BREAK_POINT();
 	ka_printf("release address\n");
 	for(i=0;i<10;++i)
 	{
-		KA_FREE(ptr[i]);
+		ka_free(ptr[i]);
 		INSERT_BREAK_POINT();
 	}
 	INSERT_BREAK_POINT();

@@ -32,7 +32,7 @@ void dis_page_alloc_record(void)
 
 int add_page_alloc_record(unsigned int level,void *ptr)
 {
-	struct page_alloc_record *recoed_ptr = (struct page_alloc_record *)KA_MALLOC(sizeof(struct page_alloc_record));
+	struct page_alloc_record *recoed_ptr = (struct page_alloc_record *)ka_malloc(sizeof(struct page_alloc_record));
 	if(NULL == recoed_ptr)
 	{
 		return -1;
@@ -43,6 +43,24 @@ int add_page_alloc_record(unsigned int level,void *ptr)
 	return FUN_EXECUTE_SUCCESSFULLY;
 }
 
+#if CONFIG_MALLOC && CONFIG_ASSERT_DEBUG
+
+static void check_debug_record(const void *ptr,unsigned int size)
+{
+	struct malloc_debug_record *record_ptr = (struct malloc_debug_record *)((unsigned int)ptr + size - sizeof(struct malloc_debug_record));
+	if(0 == ka_strcmp(record_ptr->magic,DEBUG_MAGIC))
+	{
+		if(size != record_ptr->provide_size)
+		{
+			ka_printf("provide_size is %u\n",record_ptr->provide_size);
+			ka_printf("debug info broken,addr is %p,size is %u,req_size maybe %u\n",ptr,size,record_ptr->req_size);
+			ASSERT(0);
+		}
+		return ;
+	}
+}
+#endif
+
 static int find_and_remove_record(void *ptr)
 {
 	struct singly_list_head *pos;
@@ -52,9 +70,12 @@ static int find_and_remove_record(void *ptr)
 		record_ptr = singly_list_entry(pos,struct page_alloc_record,list);
 		if(record_ptr->ptr == ptr)
 		{
+#if CONFIG_MALLOC && CONFIG_ASSERT_DEBUG
+			check_debug_record(ptr,ka_pow(2,record_ptr->level-1) * PAGE_SIZE_BYTE);
+#endif
 			_case_slab_free_buddy(ptr,(void *)((unsigned int)ptr + ka_pow(2,record_ptr->level-1) * PAGE_SIZE_BYTE));
 			singly_list_del_safe(&page_alloc_record_head,pos);
-			KA_FREE(record_ptr);
+			ka_free(record_ptr);
 			return FUN_EXECUTE_SUCCESSFULLY;
 		}
 	}
@@ -198,7 +219,27 @@ int in_os_memory(void *ptr)
 	return -1;
 }
 
-void *ka_malloc(unsigned int size)
+#if CONFIG_MALLOC && CONFIG_ASSERT_DEBUG
+
+void add_debug_info(unsigned int req_size,unsigned int provide_size,void *ptr)
+{
+	ASSERT((NULL != ptr) &&(req_size <= provide_size));
+	ka_memset(ptr,0,provide_size);
+	if(sizeof(struct malloc_debug_record) > (provide_size - req_size))
+	{
+		return ;
+	}
+	struct malloc_debug_record *install_debug_info_ptr = 
+	(struct malloc_debug_record *)((unsigned int)ptr + provide_size - sizeof(struct malloc_debug_record));
+	install_debug_info_ptr->provide_size = provide_size;
+	install_debug_info_ptr->req_size = req_size;
+	ka_strcpy(install_debug_info_ptr->magic,DEBUG_MAGIC);
+	return ;
+}
+
+#endif
+
+void *_ka_malloc(unsigned int size)
 {
 	void *ptr;
 	struct kmem_cache *kmem_cache_ptr;
@@ -227,6 +268,9 @@ void *ka_malloc(unsigned int size)
 						list_add(&slab_ptr->slab_chain,&kmem_cache_ptr->slabs_full); /* put it into the chain "slabs_full"*/
 					}
 					CPU_CRITICAL_EXIT();
+#if CONFIG_MALLOC && CONFIG_ASSERT_DEBUG
+					add_debug_info(size,slab_ptr->block_size,ptr);
+#endif
 					return ptr;
 				}
 				else if(!list_empty(&kmem_cache_ptr->slabs_empty)) /* else if chain "slabs_empty" is not empty*/
@@ -238,6 +282,9 @@ void *ka_malloc(unsigned int size)
 					list_add(&slab_ptr->slab_chain,&kmem_cache_ptr->slabs_partial);
 					--(slab_ptr->current_block_num);
 					CPU_CRITICAL_EXIT();
+#if CONFIG_MALLOC && CONFIG_ASSERT_DEBUG
+					add_debug_info(size,slab_ptr->block_size,ptr);
+#endif
 					return ptr;
 				}
 				else /* at this case we have to allocate mem from buddy*/
@@ -254,6 +301,9 @@ void *ka_malloc(unsigned int size)
 						list_del(slab_ptr->block_head.next); /* delete it from slab chain "block_head"*/
 						--(slab_ptr->current_block_num);
 						CPU_CRITICAL_EXIT();
+#if CONFIG_MALLOC && CONFIG_ASSERT_DEBUG
+						add_debug_info(size,slab_ptr->block_size,ptr);
+#endif
 						return ptr;
 					}
 					else /* NULL == slab_ptr*/
@@ -271,7 +321,7 @@ void *ka_malloc(unsigned int size)
 			}
 			else /* NULL == IL_ptr*/
 			{
-				kmem_cache_ptr = KA_MALLOC(sizeof(struct kmem_cache));
+				kmem_cache_ptr = ka_malloc(sizeof(struct kmem_cache));
 				ASSERT(NULL != kmem_cache_ptr);
 				if(NULL == kmem_cache_ptr)
 				{
@@ -296,6 +346,9 @@ void *ka_malloc(unsigned int size)
 		if(FUN_EXECUTE_SUCCESSFULLY == add_page_alloc_record(level,ptr))
 		{
 			CPU_CRITICAL_EXIT();
+#if CONFIG_MALLOC && CONFIG_ASSERT_DEBUG
+			add_debug_info(size,ka_pow(2,level-1) * PAGE_SIZE_BYTE,ptr);
+#endif
 			return ptr;
 		}
 		else
@@ -309,9 +362,9 @@ void *ka_malloc(unsigned int size)
 }
 
 #if CONFIG_MALLOC && CONFIG_ASSERT_DEBUG
-void *KA_MALLOC(unsigned int size)
+void *ka_malloc(unsigned int size)
 {
-	void *return_ptr = ka_malloc(size);
+	void *return_ptr = _ka_malloc(size);
 	if(NULL == return_ptr)
 	{
 		return NULL;
@@ -337,11 +390,15 @@ static struct slab *free_find_in_slab_chain(struct list_head *head,void *ptr)
 	list_for_each(pos, head)
 	{
 		slab_ptr = list_entry(pos,struct slab,slab_chain);
-		if(((int)ptr > (int)slab_ptr->start_ptr) && ((int)ptr < (int)slab_ptr->end_ptr))
+		if(((unsigned int)ptr > (unsigned int)slab_ptr->start_ptr) && ((unsigned int)ptr < (unsigned int)slab_ptr->end_ptr))
 		{
 			ASSERT(0 == (((unsigned int)slab_ptr->end_ptr - (unsigned int)ptr) % (slab_ptr->block_size)));
 			++(slab_ptr->current_block_num);
 			ASSERT(slab_ptr->current_block_num <= slab_ptr->full_block_num);
+#if CONFIG_MALLOC && CONFIG_ASSERT_DEBUG
+			check_debug_record(ptr,slab_ptr->block_size);
+			barrier();
+#endif
 			list_add((struct list_head *)ptr,&slab_ptr->block_head);	
 			return slab_ptr;
 		}
@@ -349,7 +406,7 @@ static struct slab *free_find_in_slab_chain(struct list_head *head,void *ptr)
 	return NULL;
 }
 
-void ka_free(void *ptr)
+void _ka_free(void *ptr)
 {
 	struct kmem_cache *kmem_cache_ptr;
 	struct slab *slab_ptr;
@@ -400,7 +457,7 @@ void ka_free(void *ptr)
 
 #if CONFIG_MALLOC && CONFIG_ASSERT_DEBUG
 
-void _KA_FREE(void *ptr,const char* file_name,unsigned line,const char* function_name)
+void KA_FREE(void *ptr,const char* file_name,unsigned line,const char* function_name)
 {
 	if(FUN_EXECUTE_SUCCESSFULLY != in_os_memory(ptr))
 	{
@@ -410,7 +467,7 @@ void _KA_FREE(void *ptr,const char* file_name,unsigned line,const char* function
 		ASSERT(0);
 		return ;
 	}
-	ka_free(ptr);
+	_ka_free(ptr);
 }
 
 #endif

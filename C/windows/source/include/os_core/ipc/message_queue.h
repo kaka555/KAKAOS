@@ -9,7 +9,7 @@ typedef enum MSG_WAIT_FLAG {
 	MSG_FLAG_NON_BLOCKING 		= 1
 }MSG_FLAG;
 
-/*use KA_MALLOC to allocate the room for message*/
+/*use ka_malloc to allocate the room for message*/
 struct message{
 	struct list_head message_list;
 	unsigned int message_size;

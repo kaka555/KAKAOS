@@ -167,7 +167,6 @@ void shell_module(int argc, char const *argv[])
 {
 	void *buf;
 	char *shell_buf_ptr;
-	int buf_is_allo = KA_FALSE;
 	int error;
 	unsigned int stack_size = D_MODULE_DEFAULT_STACK_SIZE;
 	TASK_PRIO_TYPE prio = D_MODULE_DEFAULT_PRIO;
@@ -214,25 +213,20 @@ void shell_module(int argc, char const *argv[])
 	value_ptr = get_para_add(argc,argv,"-filesize=");
 	if(NULL != value_ptr)
 	{
-		buf = KA_MALLOC(ka_atoi(value_ptr));
-		buf_is_allo = KA_TRUE;
+		buf = ka_malloc(ka_atoi(value_ptr));
 	}
 	else
 	{
-		buf = _alloc_power3_page();
+		buf = ka_malloc(2047);
 	}
 	if (NULL == buf)
 	{
 		ka_printf("no enough room for module\n");
 		return ;
 	}
-	if ((!buf_is_allo) && (0 > add_page_alloc_record(3,buf)))
-	{
-		ASSERT(0);
-	}
 /* allocate room for shell*/
 	struct shell_buffer shell_buffer;
-	shell_buf_ptr = (char *)KA_MALLOC(20);
+	shell_buf_ptr = (char *)ka_malloc(20);
 	if(NULL == shell_buf_ptr)
 	{
 		ka_printf("no enough room for module\n");
@@ -253,17 +247,17 @@ void shell_module(int argc, char const *argv[])
 	show_get_size();
 
 	_change_shell_buffer(sys_shell_buffer_ptr);
-	KA_FREE(shell_buf_ptr);
+	ka_free(shell_buf_ptr);
 
 	ka_printf("execute module\n");
 	_dlmodule_exec(stack_size,prio,name);
-	KA_FREE(buf);
+	ka_free(buf);
 	_clear_module_buffer();
 	return ;
 out1:
-	KA_FREE(shell_buf_ptr);
+	ka_free(shell_buf_ptr);
 out:
-	KA_FREE(buf);
+	ka_free(buf);
 	return ;
 }
 #endif

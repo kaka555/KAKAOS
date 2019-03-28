@@ -110,7 +110,7 @@ int timer_create(
 	unsigned int num)
 {
 	struct timer *ptr;
-	ptr = KA_MALLOC(sizeof(struct timer));
+	ptr = ka_malloc(sizeof(struct timer));
 	if(NULL == ptr)
 	{
 		return -ERROR_NO_MEM;
@@ -212,7 +212,7 @@ int _timer_delete(struct timer *timer_ptr)
 	}
 	if(TIMER_IS_CREAT(timer_ptr))
 	{
-		KA_FREE(timer_ptr);
+		ka_free(timer_ptr);
 	}
 	CPU_CRITICAL_EXIT();
 	return FUN_EXECUTE_SUCCESSFULLY;
@@ -284,7 +284,7 @@ void timer_task(void *para)
 					case TIMER_ONE_TIME:
 						if(TIMER_IS_CREAT(timer_ptr))
 						{
-							KA_FREE(timer_ptr);
+							ka_free(timer_ptr);
 						}
 						break;
 					case TIMER_TIME:
@@ -293,7 +293,7 @@ void timer_task(void *para)
 						{
 							if(TIMER_IS_CREAT(timer_ptr))
 							{
-								KA_FREE(timer_ptr);
+								ka_free(timer_ptr);
 							}
 							break;
 						}

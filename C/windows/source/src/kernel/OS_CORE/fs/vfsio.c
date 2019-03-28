@@ -107,7 +107,7 @@ int _close(struct file *file_ptr)
 	CPU_CRITICAL_ENTER();
 	ASSERT(_dref(file_ptr->f_den) > 0);
 	_dput(file_ptr->f_den);
-	KA_FREE(file_ptr);
+	ka_free(file_ptr);
 	CPU_CRITICAL_EXIT();
 	return FUN_EXECUTE_SUCCESSFULLY;
 }
