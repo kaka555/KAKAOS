@@ -295,6 +295,7 @@ void cpu_rate(int argc, char const *argv[])
 #endif
 
 #if CONFIG_DEBUG_ON
+extern int in_os_memory(void *ptr);
 void shell_check_memory(int argc, char const *argv[])
 {
 	if(2 != argc)
@@ -302,8 +303,13 @@ void shell_check_memory(int argc, char const *argv[])
 		ka_printf("parameter error\n");
 		return ;
 	}
-	unsigned int num = ka_atoi(argv[1]);
-	ka_printf("value of add %p is %d\n",(void *)num,*(int *)num);
+	UINT32 num = ka_atoi(argv[1]);
+	if(in_os_memory((void *)num) < 0)
+	{
+		ka_printf("add 0x%p is not a legal address\n",(void *)num);
+		return ;
+	}
+	ka_printf("value of add %p is 0x%x\n",(void *)num,*(UINT32 *)num);
 }
 #endif
 

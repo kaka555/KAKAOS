@@ -96,8 +96,8 @@ void init_malloc(void)
 	insert_into_cache_chain(&cache_chain_head,&kmem_cache16,16);
 	INIT_SINGLY_LIST_HEAD(&page_alloc_record_head);
 }
+
 /**
- * This is a system function
  * @Author      kaka
  * @param       the num witch will be get the higest "1"
  * @DateTime    2018-09-26
@@ -296,7 +296,8 @@ void *_ka_malloc(unsigned int size)
 					slab_ptr = (struct slab *)_case_alloc_buddy(level);
 					if(NULL != slab_ptr)
 					{
-						load_slab((void *)slab_ptr,slab_ptr->end_ptr,kmem_cache_ptr->kmem_cache_slab_size,&kmem_cache_ptr->slabs_partial);
+						kmem_cache_ptr->kmem_cache_slab_size = 
+							load_slab((void *)slab_ptr,slab_ptr->end_ptr,kmem_cache_ptr->kmem_cache_slab_size,&kmem_cache_ptr->slabs_partial);
 						ptr = slab_ptr->block_head.next; 	 /* ptr is the point of the allocated space*/
 						list_del(slab_ptr->block_head.next); /* delete it from slab chain "block_head"*/
 						--(slab_ptr->current_block_num);
@@ -535,7 +536,7 @@ void shell_check_kmem(int argc, char const *argv[])
 
 #if CONFIG_DEBUG_ON
 
-static void slab_list_check(const struct slab *slab_ptr)
+void slab_list_check(const struct slab *slab_ptr)
 {
 	ASSERT(NULL != slab_ptr);
 	unsigned int i = 0;
@@ -567,7 +568,7 @@ static void slab_list_check(const struct slab *slab_ptr)
 	}
 	if(i != slab_ptr->current_block_num)
 	{
-		ka_printf("current_block_num error\n");
+		ka_printf("current_block_num error, get num is %u\n",i);
 		goto error;
 	}
 	if(slab_ptr->current_block_num > slab_ptr->full_block_num)
@@ -611,7 +612,7 @@ void shell_check_slab(int argc, char const *argv[])
 	(void)argc;
 	(void)argv;
 	struct kmem_cache *kmem_cache_ptr;
-	int i = 0;
+	unsigned int i = 0;
 	CPU_SR_ALLOC();
 	CPU_CRITICAL_ENTER();
 	singly_list_for_each_entry(kmem_cache_ptr, &cache_chain_head, node)
@@ -621,11 +622,11 @@ void shell_check_slab(int argc, char const *argv[])
 		if(!list_empty(&kmem_cache_ptr->slabs_full))
 		{
 			struct list_head *buffer;
-			int num = 0;
+			unsigned int num = 0;
 			ka_printf("in chain slabs_full\n");
 			list_for_each(buffer,&kmem_cache_ptr->slabs_full)
 			{
-				ka_printf("the NO.%d slab information:\n",++num);
+				ka_printf("the NO.%u slab information:\n",++num);
 				const struct slab *slab_ptr = list_entry(buffer,struct slab,slab_chain);
 				ka_printf("start_ptr is %x\n",(int)slab_ptr->start_ptr);
 				ka_printf("end_ptr is %x\n",(int)slab_ptr->end_ptr);
@@ -647,11 +648,11 @@ void shell_check_slab(int argc, char const *argv[])
 		if(!list_empty(&kmem_cache_ptr->slabs_partial))
 		{
 			struct list_head *buffer;
-			int num = 0;
+			unsigned int num = 0;
 			ka_printf("in chain slabs_partial\n");
 			list_for_each(buffer,&kmem_cache_ptr->slabs_partial)
 			{
-				ka_printf("the NO.%d slab information:\n",++num);
+				ka_printf("the NO.%u slab information:\n",++num);
 				const struct slab *slab_ptr = list_entry(buffer,struct slab,slab_chain);
 				ka_printf("start_ptr is %x\n",(int)slab_ptr->start_ptr);
 				ka_printf("end_ptr is %x\n",(int)slab_ptr->end_ptr);
@@ -673,11 +674,11 @@ void shell_check_slab(int argc, char const *argv[])
 		if(!list_empty(&kmem_cache_ptr->slabs_empty))
 		{
 			struct list_head *buffer;
-			int num = 0;
+			unsigned int num = 0;
 			ka_printf("in chain slabs_empty\n");
 			list_for_each(buffer,&kmem_cache_ptr->slabs_empty)
 			{
-				ka_printf("the NO.%d slab information:\n",++num);
+				ka_printf("the NO.%u slab information:\n",++num);
 				const struct slab *slab_ptr = list_entry(buffer,struct slab,slab_chain);
 				ka_printf("start_ptr is %x\n",(int)slab_ptr->start_ptr);
 				ka_printf("end_ptr is %x\n",(int)slab_ptr->end_ptr);

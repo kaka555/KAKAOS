@@ -130,7 +130,6 @@ void shell_check_os_ready(void)
 		}
 	}
 	/*according to TCB_list's information, check ready_table*/
-	ka_printf("according to TCB_list's information, check ready_table...\n");
 	for(i=0;i<PRIO_MAX;++i)
 	{
 		head = _get_from_TCB_list(i);
@@ -162,9 +161,7 @@ void shell_check_os_ready(void)
 			}
 		}
 	}
-	ka_printf("complete...\n\n");
 	/*according to ready_table's information, check TCB_list*/
-	ka_printf("according to ready_table's information, check TCB_list...\n");
 	for(i=0;i<sizeof(READY_GROUP_TYPE)*8;++i)
 	{
 		for(j=0;j<8*sizeof(READY_TABLE_TYPE);++j)
@@ -191,10 +188,6 @@ out:
 	if(num)
 	{
 		ka_printf("checking complete....%u error\n",num);
-	}
-	else
-	{
-		ka_printf("checking complete....everything okay\n");
 	}
 }
 #endif

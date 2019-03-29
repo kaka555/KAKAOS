@@ -16,10 +16,6 @@ extern volatile TCB *OSTCBHighRdyPtr;
 extern volatile int g_interrupt_count;
 extern UINT64 g_time_tick_count;
 
-#if PRECISE_TIME_DELAY
-	extern UINT64 num_pre_tick;
-#endif
-
 volatile int g_schedule_lock = 0;/* 0:do not lock;  !0: lock*/
 
 static void _schedule(void)

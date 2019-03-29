@@ -30,7 +30,7 @@ struct slab
 	struct list_head block_head;
 };
 
-void load_slab(
+unsigned int load_slab(
 	void *start_ptr,
 	void *end_ptr,
 	unsigned int   block_size,

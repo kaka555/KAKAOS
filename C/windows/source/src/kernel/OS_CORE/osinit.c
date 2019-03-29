@@ -22,7 +22,7 @@
 #endif
 static TCB TCB_init;
 static TCB TCB_idle;
-TCB TCB_count_init;
+static TCB TCB_count_init;
 
 #if CONFIG_TIMER_EN
 	TCB TCB_timer_task;
@@ -81,7 +81,7 @@ void __INIT _os_start(void)
 /*============================================*/
 
 /*==============register initialization task===================*/
-	if(0 != task_init_ready(&TCB_count_init,500,PRIO_MAX-2,5,"count_init",count_init,NULL))
+	if(0 != task_init_ready(&TCB_count_init,1023,PRIO_MAX-2,5,"count_init",count_init,NULL))
 	{
 		ka_printf("os_init_fail...stop booting...\n");
 		while(1);
@@ -91,13 +91,6 @@ void __INIT _os_start(void)
 		ka_printf("os_init_fail...stop booting...\n");
 		while(1);
 	}
-#if PRECISE_TIME_DELAY
-	if(0 != task_init_ready(&TCB_precise_timing,128,PRIO_MAX-2,HZ,"precise timing",precise_timing,NULL))
-	{
-		ka_printf("os_init_fail...stop booting...\n");
-		while(1);
-	}
-#endif
 /*==================================================================*/
 
 	OSTCBCurPtr = _get_highest_prio_ready_TCB();
@@ -124,7 +117,7 @@ void start_kernel(void)
 
 void task_start(void)
 {
-	if(0 != task_init_ready(&TCB_init,500,0,3,"init",thread_init,NULL))
+	if(0 != task_init_ready(&TCB_init,508,0,3,"init",thread_init,NULL))
 	{
 		ka_printf("os_init_fail...stop booting...\n");
 		while(1);
@@ -172,16 +165,6 @@ void task_start(void)
 static void count_init(void *para)	
 {
 	(void)para;
-#if PRECISE_TIME_DELAY
-	sleep(2); /* for synchronization*/
-	num_pre_tick = 0;
-	sleep(PRECISE_DELAY_NUM);
-	num_pre_tick /= PRECISE_DELAY_NUM;
-#if CONFIG_DEBUG_COUNT_INIT
-	ka_printf("succeed to get num_pre_tick = %l \n",num_pre_tick);
-#endif
-	task_delete(&TCB_precise_timing);
-#endif
 	
 	sleep(2); /* for synchronization*/
 	idle_num = 0;
@@ -196,7 +179,6 @@ static void count_init(void *para)
 	SYS_ENTER_CRITICAL();
 	task_start();
 	SYS_EXIT_CRITICAL();
-	schedule();
 }
 
 static void idle(void *para)
@@ -210,17 +192,6 @@ static void idle(void *para)
 		CPU_CRITICAL_EXIT();
 	}
 }
-
-#if PRECISE_TIME_DELAY
-static void precise_timing(void *para)
-{
-	(void)para;
-	while(1)
-	{
-		++num_pre_tick;
-	}
-}
-#endif
 
 /* set the stack for interrupt */
 static void set_inter_stack(void)
@@ -332,6 +303,42 @@ static void thread_init(void *para)
 			}
 		}
 	}
+#if CONFIG_MALLOC && CONFIG_ASSERT_DEBUG
+extern void slab_list_check(const struct slab *slab_ptr);
+	CPU_SR_ALLOC();
+	CPU_CRITICAL_ENTER();
+	singly_list_for_each_entry(kmem_cache_ptr, cache_chain_head_ptr, node)
+	{
+		if(!list_empty(&kmem_cache_ptr->slabs_full))
+		{
+			struct list_head *buffer;
+			list_for_each(buffer,&kmem_cache_ptr->slabs_full)
+			{
+				const struct slab *slab_ptr = list_entry(buffer,struct slab,slab_chain);
+				slab_list_check(slab_ptr);
+			}
+		}
+		if(!list_empty(&kmem_cache_ptr->slabs_partial))
+		{
+			struct list_head *buffer;
+			list_for_each(buffer,&kmem_cache_ptr->slabs_partial)
+			{
+				const struct slab *slab_ptr = list_entry(buffer,struct slab,slab_chain);
+				slab_list_check(slab_ptr);
+			}
+		}
+		if(!list_empty(&kmem_cache_ptr->slabs_empty))
+		{
+			struct list_head *buffer;
+			list_for_each(buffer,&kmem_cache_ptr->slabs_empty)
+			{
+				const struct slab *slab_ptr = list_entry(buffer,struct slab,slab_chain);
+				slab_list_check(slab_ptr);
+			}
+		}
+	}
+	CPU_CRITICAL_EXIT();
+#endif
 }
 
 void recycle_memory(void)

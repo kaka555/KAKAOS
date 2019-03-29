@@ -107,20 +107,22 @@ TCB* _delay_heap_remove_top_TCB(void)
 void shell_delay_heap_check(void)
 {
 	TCB *TCB_ptr1,*TCB_ptr2;
-	unsigned int len;
+	unsigned int delay_TCB_num;
 	unsigned int i;
-	len = heap_get_cur_len(&delay_heap);
-	ka_printf("now start checking delay_heap\n");
-	for(i=len-1;i>0;--i)
+	delay_TCB_num = heap_get_cur_len(&delay_heap) - 1;
+	for(i=1;i<=delay_TCB_num;--i)
 	{
-		TCB_ptr1 = heap_get_index_data(&delay_heap,i);
-		TCB_ptr2 = heap_get_index_data(&delay_heap,i/2);
+		if(2 * i > delay_TCB_num)
+		{
+			break;
+		}
+		TCB_ptr1 = heap_get_index_data(&delay_heap,2*i);
+		TCB_ptr2 = heap_get_index_data(&delay_heap,i);
 		if(TIME_FIRST_SMALLER_THAN_SECOND(TCB_ptr1->delay_reach_time,TCB_ptr2->delay_reach_time))
 		{
 			ka_printf("heap member %u has incorrect position with member %u\n",i,i/2);
 		}
 	}
-	ka_printf("delay_heap check complete\n");
 }
 #endif
 

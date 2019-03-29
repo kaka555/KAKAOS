@@ -466,8 +466,9 @@ int ka_atoi(const char *char_ptr)
 	{
 		++char_ptr;
 	}
-	if((ka_strlen(char_ptr) > 2) && (ka_strncmp("0x",char_ptr,2)))
+	if((ka_strlen(char_ptr) > 2) && (0 == ka_strncmp("0x",char_ptr,2)))
 	{
+		char_ptr +=2;
 		while(IS_NUM(*char_ptr) || IS_HEX(*char_ptr))
 		{
 			if(IS_NUM(*char_ptr))

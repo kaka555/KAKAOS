@@ -118,7 +118,7 @@ void four(void *para)
 
 #endif
 
-#if 1 /* test breakpoint */
+#if 0 /* test breakpoint */
 void three(void *para)
 {
 	int i = 5;
@@ -214,7 +214,7 @@ int i;
 }
 #endif
 
-#if 0 // test int sleep(unsigned int)
+#if 1 // test int sleep(unsigned int)
 
 void three(void *para)
 {
@@ -231,7 +231,7 @@ void three(void *para)
 		while(1);
 	}
 	ka_printf("now task three going to sleep\n");
-	int ret = sleep(3*HZ);
+	int ret = sleep(30*HZ);
 	ka_printf("task three ret is %d\n",ret);
 /*
 	ka_printf("task three ret is %d\n",ret);
@@ -250,14 +250,14 @@ void three(void *para)
 
 void five(void *para)
 {
-	int ret = sleep(5*HZ);
+	int ret = sleep(50*HZ);
 	ka_printf("task five ret is %d\n",ret);
 	suspend();
 	while(1);
 }
 void four(void *para)
 {
-	int ret = sleep(4*HZ);
+	int ret = sleep(40*HZ);
 	ka_printf("task four ret is %d\n",ret);
 	suspend();
 	while(1);
