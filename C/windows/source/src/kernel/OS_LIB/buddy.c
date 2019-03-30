@@ -822,7 +822,6 @@ static int _check_buddy_level_flag(void)
 static int check_buddy(void)
 {
 	unsigned int i,j;
-	ka_printf("now going to step1:check from flag to level array\n");
 	for(i=0;i<current_used_buddy_ptr->info.flag_array_num;++i)
 	{
 		if(0 != current_used_buddy_ptr->flag[i])
@@ -841,8 +840,6 @@ static int check_buddy(void)
 			}
 		}
 	}
-	ka_printf("Inspection step 1:check from flag to level array is completed.Nothing wrong\n");
-	ka_printf("now going to step2:check from level array to flag\n");
 
 	/*then check from level to flag*/
 	return _check_buddy_level_flag();
@@ -907,17 +904,15 @@ void shell_buddy_debug(int argc, char const *argv[])
 	/*=========================================================================*/
 #if CONFIG_DEBUG_ON
 	/*start check the buddy info*/
-		ka_printf("\nnow going to check the buddy info.......\n");
 		if(0 == check_buddy())
 		{
-			ka_printf("correct!\n");
+			
 		}
 		else
 		{
 			ka_printf("something wrong!\n");
 		}
 #endif
-		ka_printf("\n\n");
 		buddy_ptr = (struct buddy *)_get_next_buddy_ptr_head(buddy_ptr);
 	}
 	ka_printf("now going to display the page allocation's info\n");

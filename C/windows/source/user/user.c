@@ -231,7 +231,7 @@ void three(void *para)
 		while(1);
 	}
 	ka_printf("now task three going to sleep\n");
-	int ret = sleep(30*HZ);
+	int ret = sleep(3*HZ);
 	ka_printf("task three ret is %d\n",ret);
 /*
 	ka_printf("task three ret is %d\n",ret);
@@ -250,14 +250,14 @@ void three(void *para)
 
 void five(void *para)
 {
-	int ret = sleep(50*HZ);
+	int ret = sleep(5*HZ);
 	ka_printf("task five ret is %d\n",ret);
 	suspend();
 	while(1);
 }
 void four(void *para)
 {
-	int ret = sleep(40*HZ);
+	int ret = sleep(4*HZ);
 	ka_printf("task four ret is %d\n",ret);
 	suspend();
 	while(1);
@@ -603,7 +603,7 @@ void three(void *para)
 
 #if 0 /* test vfs */
 
-#include <bsp_usart.h>
+#include <bsp_support.h>
 static int open(struct file *file_ptr)
 {
 	ka_printf("open file %s\n",file_ptr->f_den->name);
