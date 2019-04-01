@@ -309,7 +309,7 @@ void shell_check_memory(int argc, char const *argv[])
 		ka_printf("add 0x%p is not a legal address\n",(void *)num);
 		return ;
 	}
-	ka_printf("value of add %p is 0x%x\n",(void *)num,*(UINT32 *)num);
+	ka_printf("value of add 0x%p is 0x%x\n",(void *)num,*(UINT32 *)num);
 }
 #endif
 

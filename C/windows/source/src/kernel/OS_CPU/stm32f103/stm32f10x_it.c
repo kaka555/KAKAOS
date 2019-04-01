@@ -29,6 +29,11 @@
 #include <TCB.h>
 #include <shell.h>
 #include <os_cpu.h>
+#include <os_TCB_list.h>
+#include <shell_fun.h>
+#include <buddy.h>
+#include <slab.h>
+#include <os_time.h>
 /** @addtogroup STM32F10x_StdPeriph_Template
   * @{
   */
@@ -134,18 +139,25 @@ ka_printf ("HFSR = 0x%lx\r\n", (*((volatile unsigned long *)(0xE000ED2C))));
 
 ka_printf ("DFSR = 0x%lx\r\n", (*((volatile unsigned long *)(0xE000ED30))));   
 
-ka_printf ("AFSR = 0x%lx\r\n", (*((volatile unsigned long *)(0xE000ED3C))));   
+ka_printf ("AFSR = 0x%lx\r\n", (*((volatile unsigned long *)(0xE000ED3C))));  
 
-  
-
-    
+#if CONFIG_SHELL_EN
+  shell_stack_check(1,NULL);
+  shell_TCB_check(1,NULL);
+  shell_buddy_debug(1,NULL);
+  shell_check_slab(1,NULL);
+  shell_memory(1,NULL);
+  system_time_display();
+  ka_printf("tick is %llu\n",get_tick());
+#endif
+#if CONFIG_POWER_MANAGEMENT
+extern void sys_sleep(void);
+    sys_sleep();
+#endif
 
 while(1) 
-
 { 
-
         ;; 
-
 } 
 
   

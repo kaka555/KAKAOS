@@ -4,9 +4,15 @@
 #include <myMicroLIB.h>
 
 static const struct dev_mem_para para1 = {
-	.start = (void *)0x20000000,
+	.start = (void *)0x10000000,
 	.size = 64, /* KB*/
 	.prio = 1,
+};
+
+static const struct dev_mem_para para2 = {
+	.start = (void *)0x20000000,
+	.size = 128, /* KB*/
+	.prio = 2,
 };
 
 static const struct device device_array[] = {
@@ -31,6 +37,14 @@ static const struct device device_array[] = {
 		.head.type = DEV_MEM,
 		.u.mem.init_fun = __buddy_init,
 		.u.mem.para = &para1,
+	},
+
+	{	
+		.head.dev_name = "second mem",
+		.head.dev_info = NULL,
+		.head.type = DEV_MEM,
+		.u.mem.init_fun = __buddy_init,
+		.u.mem.para = &para2,
 	}
 	
 };
