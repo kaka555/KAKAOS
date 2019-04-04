@@ -1,6 +1,1 @@
-PROJECT := stm32f407
-export PROJECT
-FLAGS_AUXILIARY := -mcpu=cortex-m4 -mthumb
-export FLAGS_AUXILIARY
-DEF := -D STM32F40XX -D USE_STDPERIPH_DRIVER
-export DEF
+

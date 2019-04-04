@@ -37,9 +37,9 @@ export INCLUDE = -I$(HEAD_DIR1) -I$(HEAD_DIR2) -I$(HEAD_DIR3) -I$(HEAD_DIR4) -I$
 
 OPTIMIZE = O2
 
-export FLAGS = -W -Wall -$(OPTIMIZE) $(INCLUDE) $(FLAGS_AUXILIARY) -ffunction-sections -fdata-sections
+export FLAGS = -Wall -$(OPTIMIZE) $(INCLUDE) $(FLAGS_AUXILIARY) #-ffunction-sections -fdata-sections
 
-export ASFLAGS = -W -Wall -$(OPTIMIZE) $(INCLUDE) $(FLAGS_AUXILIARY) -ffunction-sections -fdata-sections
+export ASFLAGS = -Wall -$(OPTIMIZE) $(INCLUDE) $(FLAGS_AUXILIARY) #-ffunction-sections -fdata-sections
 
 export SUB_TGT = built-in.o
 ########################################################################
@@ -49,6 +49,7 @@ $(TARGET): $(SUB_DIR)
 	$(LD)  $(^:=/$(SUB_TGT)) -T $(SCRIPT) -nostartfiles -nodefaultlibs -nostdlib --gc-sections -o $@ -static $(LIBPATH) -lgcc -lc
 	$(OBJCOPY) $(TARGET)  $(TARGET:.elf=.bin) -Obinary
 	$(OBJCOPY) $(TARGET)  $(TARGET:.elf=.hex) -Oihex
+	@echo $(FLAGS)
 
 $(SUB_DIR):
 	make -C $@

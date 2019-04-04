@@ -255,10 +255,10 @@ g_pfnVectors:
 *******************************************************************************/
    .weak      NMI_Handler
    .thumb_set NMI_Handler,Default_Handler
-  
+/*
    .weak      HardFault_Handler
    .thumb_set HardFault_Handler,Default_Handler
-  
+*/  
    .weak      MemManage_Handler
    .thumb_set MemManage_Handler,Default_Handler
   
@@ -274,10 +274,10 @@ g_pfnVectors:
    .weak      DebugMon_Handler
    .thumb_set DebugMon_Handler,Default_Handler
 
-   .weak      PendSV_Handler
+   .weak      OS_CPU_PendSVHandler
    .thumb_set PendSV_Handler,Default_Handler
 
-   .weak      SysTick_Handler
+   .weak      OS_CPU_SysTickHandler
    .thumb_set SysTick_Handler,Default_Handler              
   
    .weak      WWDG_IRQHandler                   

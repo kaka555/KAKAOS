@@ -200,6 +200,7 @@ static void *_case_alloc_buddy(unsigned int level)
 		}
 		return slab_ptr;
 	}
+	_get_os_buddy_ptr_head();
 	ka_printf("no space!!!\n");
 	return NULL;
 }

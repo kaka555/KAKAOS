@@ -385,7 +385,7 @@ int dlmodule_load_relocated_object(struct dynamic_module* module, void *module_p
                       shdr[index].sh_size);
             rodata_addr = (UINT32)ptr;
             KA_WARN(DEBUG_TYPE_MODULE,"load rodata 0x%p, size %d, rodata 0x%x\n", ptr, 
-                shdr[index].sh_size, *(UINT32 *)data_addr);
+                shdr[index].sh_size, rodata_addr);
             ptr += shdr[index].sh_size;
         }
 

@@ -226,12 +226,13 @@ void __buddy_init(const struct dev_mem_para *dev_mem_para_ptr)
 	unsigned int buffer;
 	UINT32 size_sum = 0;
 	struct buddy *buddy_ptr;
-	if(1 != dev_mem_para_ptr->prio)
+	if(TYPE_NORMAL == dev_mem_para_ptr->type)
 	{
 	 	buddy_ptr = (struct buddy *)(dev_mem_para_ptr->start);
 	}
 	else
 	{
+		ASSERT(TYPE_SYS == dev_mem_para_ptr->type);
 		buddy_ptr = (struct buddy *)(&_ebss + 1);
 	}
 	current_used_buddy_ptr = buddy_ptr;

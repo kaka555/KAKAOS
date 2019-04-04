@@ -24,6 +24,14 @@ int ka_atoi(const char *char_ptr);
 double ka_atof(const char *char_ptr);
 int ka_strcmp(const char * str1, const char * str2);
 
+/* flag of malloc */
+#define FLAG_MALLOC_NORMAL  	0X00
+/* bit 0 */
+#define FLAG_MALLOC_FIRST  		0X01  /* request the highest priority's memory */
+/* bit 1 */
+#define FLAG_MALLOC_NOT_FIRST  	0X02  /* request not the highest priority's memory */
+/* end of flag of malloc */
+
 #if CONFIG_MALLOC && CONFIG_ASSERT_DEBUG
 	void *ka_malloc(unsigned int size);
 	void KA_FREE(void *ptr,const char* file_name,unsigned line,const char* function_name);

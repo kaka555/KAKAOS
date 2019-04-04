@@ -11,10 +11,18 @@ struct dev_normal{
 	void (*init_fun)(void);
 };
 
+/* macro of struct dev_mem_para's member-->prio */
+enum mem_type
+{
+	TYPE_NORMAL,
+	TYPE_SYS /* the os data store in memory with prio PRIO_SYS */
+};
+
 struct dev_mem_para{
-	unsigned int prio; /*1 is internal memory, others is external memory*/
-	void *start;
+	unsigned int prio;
+	enum mem_type type;
 	UINT32 size; /*KB  must be 2^n*/
+	void *start;
 };
 
 struct dev_mem{

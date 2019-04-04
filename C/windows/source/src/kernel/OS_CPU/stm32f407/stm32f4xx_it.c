@@ -60,6 +60,11 @@ void NMI_Handler(void)
 #include <TCB.h>
 #include <shell.h>
 #include <os_cpu.h>
+#include <os_TCB_list.h>
+#include <shell_fun.h>
+#include <buddy.h>
+#include <slab.h>
+#include <os_time.h>
 
 void hard_fault_handler_c(unsigned int * hardfault_args)   
 
@@ -132,7 +137,19 @@ ka_printf ("DFSR = 0x%lx\r\n", (*((volatile unsigned long *)(0xE000ED30))));
 ka_printf ("AFSR = 0x%lx\r\n", (*((volatile unsigned long *)(0xE000ED3C))));   
 
   
-
+//#if CONFIG_SHELL_EN
+//  shell_stack_check(1,NULL);
+//  shell_TCB_check(1,NULL);
+//  shell_buddy_debug(1,NULL);
+//  shell_check_slab(1,NULL);
+//  shell_memory(1,NULL);
+//  system_time_display();
+//  ka_printf("tick is %llu\n",get_tick());
+//#endif
+//#if CONFIG_POWER_MANAGEMENT
+//extern void sys_sleep(void);
+//    sys_sleep();
+//#endif
     
 
 while(1) 
@@ -147,21 +164,6 @@ while(1)
 
 } 
 
-
-
-
-/**
-  * @brief  This function handles Hard Fault exception.
-  * @param  None
-  * @retval None
-  */
-void HardFault_Handler(void)
-{
-  /* Go to infinite loop when Hard Fault exception occurs */
-  while (1)
-  {
-  }
-}
 
 /**
   * @brief  This function handles Memory Manage exception.

@@ -8,8 +8,6 @@
 #include <os_schedule.h>
 #include <osinit.h>
 
-extern void led(void);
-
 int a = 5;
 
 static int init(void)
@@ -38,7 +36,6 @@ int main()
 	ka_printf("a is %d\n",a); 
 	a = 66;
 
-	led();
 	return 0;
 }
 

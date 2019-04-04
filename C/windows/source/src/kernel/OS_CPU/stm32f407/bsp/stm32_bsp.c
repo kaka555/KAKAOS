@@ -6,13 +6,15 @@
 static const struct dev_mem_para para1 = {
 	.start = (void *)0x10000000,
 	.size = 64, /* KB*/
-	.prio = 1,
+	.prio = 2,
+	.type = TYPE_SYS,
 };
 
 static const struct dev_mem_para para2 = {
 	.start = (void *)0x20000000,
 	.size = 128, /* KB*/
-	.prio = 2,
+	.prio = 1,
+	.type = TYPE_NORMAL,
 };
 
 static const struct device device_array[] = {
