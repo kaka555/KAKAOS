@@ -52,6 +52,9 @@ static struct dentry *current_dentry_ptr = NULL;
 static struct inode root_inode;
 static struct inode dev_inode;
 
+static struct inode fat_inode;
+static struct dentry fat_dentry;
+
 #if CONFIG_SHELL_EN
 static void update_para_arv_vector(void);
 #endif
@@ -365,10 +368,12 @@ static int __add_file(struct dentry *target_dentry_ptr,const char *file_name,str
 	KA_WARN(DEBUG_TYPE_VFS,"__add_file() get dentry name is %s\nfile name is %s\n",target_dentry_ptr->name,file_name);
 	if(has_same_name_file(target_dentry_ptr,file_name))
 	{
+		KA_WARN(DEBUG_TYPE_VFS,"same name file already exist\n");
 		return -ERROR_LOGIC;
 	}
 	if(target_dentry_ptr->d_inode->inode_ops->add_sub_file(target_dentry_ptr->d_inode,file_name) < 0)
 	{
+		KA_WARN(DEBUG_TYPE_VFS,"disk add fail\n");
 		return -ERROR_DISK;
 	}
 	unsigned int len = ka_strlen(file_name)+1;
@@ -804,7 +809,7 @@ void shell_vfs_echo(char const *argv[])
 }
 
 #endif
-
+extern struct inode_operations fat_inode_operations;
 static void __init_vfs(void)
 {
 #if CONFIG_SHELL_EN
@@ -819,12 +824,16 @@ static void __init_vfs(void)
 #endif
 	_inode_init(NULL,NULL,FLAG_INODE_SOFT|FLAG_INODE_READ|FLAG_INODE_WRITE,&root_inode);
 	_inode_init(NULL,NULL,FLAG_INODE_SOFT|FLAG_INODE_READ|FLAG_INODE_WRITE,&dev_inode);
+	_inode_init(&fat_inode_operations,NULL,FLAG_INODE_HARD|FLAG_INODE_READ|FLAG_INODE_WRITE,&fat_inode);
 	_init_dentry(&root_dentry,&root_dentry,
 		&root_inode,"/",
 		FLAG_FOLDER|FLAG_NAME_CHANGE_DIS|FLAG_DENTRY_NOT_RELEASED);
 	root_dentry.d_parent = &root_dentry;
 	_init_dentry(&dev_dentry,&root_dentry,
 		&dev_inode,"dev",
+		FLAG_FOLDER|FLAG_NAME_CHANGE_DIS|FLAG_DENTRY_NOT_RELEASED);
+	_init_dentry(&fat_dentry,&root_dentry,
+		&fat_inode,"fat",
 		FLAG_FOLDER|FLAG_NAME_CHANGE_DIS|FLAG_DENTRY_NOT_RELEASED);
 	current_dentry_ptr = &root_dentry; /* set pwd */
 #if CONFIG_SHELL_EN

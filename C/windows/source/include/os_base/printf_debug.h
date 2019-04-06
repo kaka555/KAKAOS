@@ -23,6 +23,7 @@
 	#define DEBUG_TYPE_VECTOR 		1	
 	#define DEBUG_TYPE_SHELL 		0
 	#define DEBUG_TYPE_MALLOC		1
+	#define DEBUG_FAT				1
 #else
 	#define KA_WARN(type, format, ...)   
 #endif
