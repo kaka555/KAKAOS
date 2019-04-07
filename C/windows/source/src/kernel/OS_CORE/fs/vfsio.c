@@ -98,7 +98,7 @@ EXPORT_SYMBOL(ka_open);
 int _close(struct file *file_ptr)
 {
 	ASSERT(NULL != file_ptr);
-	ASSERT(file_ptr->offset <= file_ptr->file_len);
+	//ASSERT(file_ptr->offset <= file_ptr->file_len);
 	if(file_ptr->f_op->close)
 	{
 		file_ptr->f_op->close(file_ptr);
@@ -148,6 +148,7 @@ int _read(struct file *file_ptr,void *buffer,unsigned int len,enum llseek_from o
 				break ;
 		}
 		int offset = file_ptr->f_op->read(file_ptr,buffer,len,file_ptr->offset);
+		KA_WARN(CONFIG_VFS,"read data is %s\n",(char *)buffer);
 		if(offset < 0)
 		{
 			file_ptr->offset = offset_backup;
@@ -158,7 +159,7 @@ int _read(struct file *file_ptr,void *buffer,unsigned int len,enum llseek_from o
 		{
 			file_ptr->offset += offset;
 		}
-		ASSERT(file_ptr->offset <= file_ptr->file_len);
+		//ASSERT(file_ptr->offset <= file_ptr->file_len);
 		return offset;
 	}
 	else
@@ -234,7 +235,7 @@ int _write(struct file *file_ptr,void *buffer,unsigned int len,enum llseek_from 
 		{
 			file_ptr->offset += offset;
 		}
-		ASSERT(file_ptr->offset <= file_ptr->file_len);
+		//ASSERT(file_ptr->offset <= file_ptr->file_len);
 		return offset;
 	}
 	else

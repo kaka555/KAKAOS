@@ -192,11 +192,7 @@ void _put_in_shell_buffer(char c)  /* deal with input layer*/
 		ka_printf("%s",using_shell_buffer_ptr->buffer);
 		return ;
 	}
-	if(IS_UPPER(c)) 
-	{
-		c += 'a' - 'A'; 
-	}
-	else if(0x08 == c) /* backspace key*/
+	if(0x08 == c) /* backspace key*/
 	{
 		if(using_shell_buffer_ptr->index > 0)
 		{

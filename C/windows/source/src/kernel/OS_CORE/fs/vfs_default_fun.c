@@ -30,7 +30,7 @@ int default_read(struct file *file_ptr,void *buffer,unsigned int len,unsigned in
 	}
 	ka_memset(buffer,0,len);
 	struct inode *inode_ptr = file_ptr->f_den->d_inode;
-	return inode_ptr->inode_ops->read_data(inode_ptr,buffer,len,offset);
+	return inode_ptr->inode_ops->read_data(file_ptr->f_den,buffer,len,offset);
 }
 
 int default_write(struct file *file_ptr,void *buffer,unsigned int len,unsigned int offset)
@@ -41,7 +41,7 @@ int default_write(struct file *file_ptr,void *buffer,unsigned int len,unsigned i
 		len = BLOCK_SIZE - offset;
 	}
 	struct inode *inode_ptr = file_ptr->f_den->d_inode;
-	return inode_ptr->inode_ops->write_data(inode_ptr,buffer,len,offset);
+	return inode_ptr->inode_ops->write_data(file_ptr->f_den,buffer,len,offset);
 }
 
 int default_llseek(struct file *file_ptr,int offset,enum llseek_from from)
@@ -97,6 +97,11 @@ int default_ioctl(struct file *file_ptr,int cmd,int args)
 
 /**  inode_operations default function  **/
 
+void default_cd(struct dentry *dentry_ptr)
+{
+	(void)dentry_ptr;
+}
+
 int default_change_name(struct inode *inode_ptr,struct dentry *dentry_ptr)
 {
 	(void)inode_ptr;
@@ -131,22 +136,34 @@ int add_sub_folder(struct inode *inode_ptr,const char *folder_name)
 	return FUN_EXECUTE_SUCCESSFULLY;
 }
 
-int default_read_data(struct inode *inode_ptr,void *store_ptr,unsigned int len,unsigned int offset)
+int default_read_data(struct dentry *dentry_ptr,void *store_ptr,unsigned int len,unsigned int offset)
 {
-	(void)inode_ptr;
+	(void)dentry_ptr;
 	(void)store_ptr;
 	(void)len;
 	(void)offset;
 	return len;
 }
 
-int default_write_data(struct inode *inode_ptr,void *data_ptr,unsigned int len,unsigned int offset)
+int default_write_data(struct dentry *dentry_ptr,void *data_ptr,unsigned int len,unsigned int offset)
 {
-	(void)inode_ptr;
+	(void)dentry_ptr;
 	(void)data_ptr;
 	(void)len;
 	(void)offset;
 	return len;
+}
+
+int default_remove(struct dentry *dentry_ptr)
+{
+	(void)dentry_ptr;
+	return FUN_EXECUTE_SUCCESSFULLY;
+}
+
+int default_remove_dir(struct dentry *dentry_ptr)
+{
+	(void)dentry_ptr;
+	return FUN_EXECUTE_SUCCESSFULLY;
 }
 
 /**  end of inode_operations default function  **/

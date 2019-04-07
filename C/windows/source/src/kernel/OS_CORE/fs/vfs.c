@@ -27,21 +27,24 @@ static struct file_operations default_file_operations = {
 };
 #define defalut_file_operations_ptr (&default_file_operations)
 
+extern void default_cd(struct dentry *dentry_ptr);
 extern int default_change_name(struct inode *inode_ptr,struct dentry *dentry_ptr);
 extern int default_refresh(struct inode *inode_ptr,struct dentry *dentry_ptr);
-extern int default_floader_cmp_file_name(struct inode *inode_ptr,const char *name);
 extern int default_add_sub_file(struct inode *inode_ptr,const char *name);
 extern int add_sub_folder(struct inode *inode_ptr,const char *folder_name);
-extern int default_read_data(struct inode *inode_ptr,void *store_ptr,unsigned int len,unsigned int offset);
-extern int default_write_data(struct inode *inode_ptr,void *data_ptr,unsigned int len,unsigned int offset);
+extern int default_read_data(struct dentry *dentry_ptr,void *store_ptr,unsigned int len,unsigned int offset);
+extern int default_write_data(struct dentry *dentry_ptr,void *data_ptr,unsigned int len,unsigned int offset);
+extern int default_remove(struct dentry *dentry_ptr);
+extern int default_remove_dir(struct dentry *dentry_ptr);
 static struct inode_operations default_inode_operations = {
+	default_cd,
 	default_change_name,
 	default_refresh,
-	default_floader_cmp_file_name,
 	default_add_sub_file,
 	add_sub_folder,
 	default_read_data,
-	default_write_data
+	default_write_data,
+	default_remove
 };
 #define defalut_inode_operations_ptr (&default_inode_operations)
 
@@ -74,15 +77,7 @@ static void _init_dentry(
 	dentry_ptr->ref = 0;
 	INIT_LIST_HEAD(&dentry_ptr->subdirs);
 	INIT_LIST_HEAD(&dentry_ptr->child);
-	dentry_ptr->flag = FLAG_DENTRY_DEFAULT;
-	if((FLAG_FOLDER & flag) == FLAG_FOLDER)
-	{
-		set_dentry_flag(dentry_ptr,FLAG_DENTRY_FOLDER);
-	}
-	if(dentry_name_not_changable(dentry_ptr))
-	{
-		set_dentry_flag(dentry_ptr,FLAG_DENTRY_NAME_CHANGE_DIS);
-	}
+	dentry_ptr->flag = FLAG_DENTRY_DEFAULT | flag;
 	if(dentry_ptr == parent_ptr) /* root */
 	{
 		set_dentry_flag(dentry_ptr,FLAG_DENTRY_ROOT);
@@ -201,10 +196,10 @@ int rename(struct file *file_ptr,const char *name)
 }
 EXPORT_SYMBOL(rename);
 
-int has_same_name_file(struct dentry *dentry_ptr,const char *file_name)
+int has_same_name_file(struct dentry *parent_dentry_ptr,const char *file_name)
 {
 	struct dentry *buffer_ptr;
-	struct list_head *head = &dentry_ptr->subdirs;
+	struct list_head *head = &parent_dentry_ptr->subdirs;
 	list_for_each_entry(buffer_ptr,head,child)
 	{
 		if(0 == ka_strcmp(file_name,buffer_ptr->name))
@@ -272,15 +267,6 @@ struct dentry *_find_dentry(const char *path)
 		dentry_ptr = current_dentry_ptr;
 		cur_path = (char *)(path);
 	}
-	if(dentry_need_refresh(dentry_ptr))
-	{
-		if(dentry_ptr->d_inode->inode_ops->refresh(dentry_ptr->d_inode,dentry_ptr) < 0)
-		{
-			ka_printf("disk error\n");
-			return NULL;
-		}
-		dentry_clear_refresh_flag(dentry_ptr);
-	}
 	unsigned int name_len = _get_subdir_name_len(cur_path);
 	while(0 != name_len) /* not the last dentry */
 	{
@@ -295,17 +281,9 @@ struct dentry *_find_dentry(const char *path)
 	return _get_subdir(dentry_ptr,cur_path,ka_strlen(cur_path));
 }
 
-int __add_folder(struct dentry *target_dentry_ptr,const char *folder_name,struct file_operations *file_operations_ptr)
+int ___add_folder(struct dentry *target_dentry_ptr,const char *folder_name,struct file_operations *file_operations_ptr)
 {
 	ASSERT(is_folder(target_dentry_ptr));
-	if(has_same_name_file(target_dentry_ptr,folder_name))
-	{
-		return -ERROR_LOGIC;
-	}
-	if(target_dentry_ptr->d_inode->inode_ops->add_sub_folder(target_dentry_ptr->d_inode,folder_name) < 0)
-	{
-		return -ERROR_DISK;
-	}
 	unsigned int len = ka_strlen(folder_name)+1;
 	char *name_buffer = ka_malloc(len);
 	if(NULL == name_buffer)
@@ -330,7 +308,7 @@ int __add_folder(struct dentry *target_dentry_ptr,const char *folder_name,struct
 		ka_free(name_buffer);
 		return -ERROR_NO_MEM;
 	}
-	struct dentry *buffer = _folder_dentry_alloc_and_init(target_dentry_ptr,inode_ptr,name_buffer,FLAG_DEFAULT);
+	struct dentry *buffer = _folder_dentry_alloc_and_init(target_dentry_ptr,inode_ptr,name_buffer,FLAG_DENTRY_DEFAULT|FLAG_NEED_REFLASH);
 	if(NULL == buffer)
 	{
 		ka_free(name_buffer);
@@ -338,6 +316,20 @@ int __add_folder(struct dentry *target_dentry_ptr,const char *folder_name,struct
 		return -ERROR_NO_MEM;
 	}
 	return FUN_EXECUTE_SUCCESSFULLY;
+}
+
+int __add_folder(struct dentry *target_dentry_ptr,const char *folder_name,struct file_operations *file_operations_ptr)
+{
+	ASSERT(is_folder(target_dentry_ptr));
+	if(has_same_name_file(target_dentry_ptr,folder_name))
+	{
+		return -ERROR_LOGIC;
+	}
+	if(target_dentry_ptr->d_inode->inode_ops->add_sub_folder(target_dentry_ptr->d_inode,folder_name) < 0)
+	{
+		return -ERROR_DISK;
+	}
+	return ___add_folder(target_dentry_ptr,folder_name,file_operations_ptr);
 }
 
 int _add_folder(const char *path,const char *folder_name,struct file_operations *file_operations_ptr)
@@ -362,20 +354,9 @@ int add_folder(const char *path,const char *folder_name,struct file_operations *
 }
 EXPORT_SYMBOL(add_folder);
 
-static int __add_file(struct dentry *target_dentry_ptr,const char *file_name,struct file_operations *file_operations_ptr)
+int ___add_file(struct dentry *target_dentry_ptr,const char *file_name,struct file_operations *file_operations_ptr)
 {
 	ASSERT(is_folder(target_dentry_ptr));
-	KA_WARN(DEBUG_TYPE_VFS,"__add_file() get dentry name is %s\nfile name is %s\n",target_dentry_ptr->name,file_name);
-	if(has_same_name_file(target_dentry_ptr,file_name))
-	{
-		KA_WARN(DEBUG_TYPE_VFS,"same name file already exist\n");
-		return -ERROR_LOGIC;
-	}
-	if(target_dentry_ptr->d_inode->inode_ops->add_sub_file(target_dentry_ptr->d_inode,file_name) < 0)
-	{
-		KA_WARN(DEBUG_TYPE_VFS,"disk add fail\n");
-		return -ERROR_DISK;
-	}
 	unsigned int len = ka_strlen(file_name)+1;
 	char *name_buffer = ka_malloc(len);
 	if(NULL == name_buffer)
@@ -398,7 +379,7 @@ static int __add_file(struct dentry *target_dentry_ptr,const char *file_name,str
 		ka_free(name_buffer);
 		return -ERROR_NO_MEM;
 	}
-	struct dentry *buffer = _file_dentry_alloc_and_init(target_dentry_ptr,inode_ptr,name_buffer,FLAG_DEFAULT);
+	struct dentry *buffer = _file_dentry_alloc_and_init(target_dentry_ptr,inode_ptr,name_buffer,FLAG_DENTRY_DEFAULT);
 	if(NULL == buffer)
 	{
 		ka_free(name_buffer);
@@ -406,6 +387,23 @@ static int __add_file(struct dentry *target_dentry_ptr,const char *file_name,str
 		return -ERROR_NO_MEM;
 	}
 	return FUN_EXECUTE_SUCCESSFULLY;
+}
+
+static int __add_file(struct dentry *target_dentry_ptr,const char *file_name,struct file_operations *file_operations_ptr)
+{
+	ASSERT(is_folder(target_dentry_ptr));
+	KA_WARN(DEBUG_TYPE_VFS,"__add_file() get dentry name is %s\nfile name is %s\n",target_dentry_ptr->name,file_name);
+	if(has_same_name_file(target_dentry_ptr,file_name))
+	{
+		KA_WARN(DEBUG_TYPE_VFS,"same name file already exist\n");
+		return -ERROR_LOGIC;
+	}
+	if(target_dentry_ptr->d_inode->inode_ops->add_sub_file(target_dentry_ptr->d_inode,file_name) < 0)
+	{
+		KA_WARN(DEBUG_TYPE_VFS,"disk add fail\n");
+		return -ERROR_DISK;
+	}
+	return ___add_file(target_dentry_ptr,file_name,file_operations_ptr);
 }
 
 int _add_file(const char *path,const char *file_name,struct file_operations *file_operations_ptr)
@@ -437,6 +435,7 @@ int __delete_file(struct dentry *dentry_ptr)
 	ASSERT(is_file(dentry_ptr));
 	if(0 == _dref(dentry_ptr))
 	{
+		dentry_ptr->d_inode->inode_ops->remove(dentry_ptr);
 		list_del(&dentry_ptr->child);
 		ka_free(dentry_ptr);
 		KA_WARN(DEBUG_TYPE_VFS,"remove file %s\n",dentry_ptr->name);
@@ -486,8 +485,11 @@ static int remove_all_dentry(struct dentry *root_dentry_ptr)
 		{
 			if(remove_all_dentry(dentry_buffer_ptr) < 0)
 			{
+				KA_WARN(DEBUG_TYPE_VFS,"remove_all_dentry error,current dentry is %s\n"
+					,dentry_buffer_ptr->name);
 				return -ERROR_SYS;
 			}
+			dentry_buffer_ptr->d_inode->inode_ops->remove_dir(dentry_buffer_ptr);
 			list_del(&dentry_buffer_ptr->child);
 			ka_free(dentry_buffer_ptr);
 			KA_WARN(DEBUG_TYPE_VFS,"remove floder %s\n",dentry_buffer_ptr->name);
@@ -497,10 +499,13 @@ static int remove_all_dentry(struct dentry *root_dentry_ptr)
 			ASSERT(is_file(dentry_buffer_ptr));
 			if(__delete_file(dentry_buffer_ptr) < 0)
 			{
+				KA_WARN(DEBUG_TYPE_VFS,"__delete_file error,current dentry is %s\n"
+					,dentry_buffer_ptr->name);
 				return -ERROR_SYS;
 			}
 		}
 	}
+	root_dentry_ptr->d_inode->inode_ops->remove_dir(root_dentry_ptr);
 	list_del(&root_dentry_ptr->child);
 	ka_free(root_dentry_ptr);
 	return FUN_EXECUTE_SUCCESSFULLY;
@@ -649,6 +654,17 @@ void shell_cd(int argc, char const *argv[])
 		return ;
 	}
 	current_dentry_ptr = dentry_ptr;
+	dentry_ptr->d_inode->inode_ops->cd(dentry_ptr);
+	if(dentry_need_refresh(dentry_ptr))
+	{
+		if(dentry_ptr->d_inode->inode_ops->refresh(dentry_ptr->d_inode,dentry_ptr) < 0)
+		{
+			ka_printf("disk error\n");
+			return ;
+		}
+		KA_WARN(DEBUG_TYPE_VFS,"dentry refresh\n");
+		dentry_clear_refresh_flag(dentry_ptr);
+	}
 	update_para_arv_vector();
 	return ;
 }
@@ -697,14 +713,14 @@ void shell_cat(int argc, char const *argv[])
 		return ;
 	}
 	ASSERT(NULL != file_ptr);
-	int buffer;
-	error = _read(file_ptr,&buffer,sizeof(int),FILE_CURRENT);
+	char buffer[16];
+	error = _read(file_ptr,buffer,sizeof(buffer),FILE_CURRENT);
+	ka_printf("%s\n",buffer);
 	if(error < 0)
 	{
 		ka_printf("read fail\n");
 	}
 	_close(file_ptr);
-	ka_printf("%d\n",buffer);
 }
 
 /*
@@ -827,14 +843,14 @@ static void __init_vfs(void)
 	_inode_init(&fat_inode_operations,NULL,FLAG_INODE_HARD|FLAG_INODE_READ|FLAG_INODE_WRITE,&fat_inode);
 	_init_dentry(&root_dentry,&root_dentry,
 		&root_inode,"/",
-		FLAG_FOLDER|FLAG_NAME_CHANGE_DIS|FLAG_DENTRY_NOT_RELEASED);
+		FLAG_DENTRY_FOLDER|FLAG_DENTRY_NAME_CHANGE_DIS|FLAG_DENTRY_NOT_RELEASED);
 	root_dentry.d_parent = &root_dentry;
 	_init_dentry(&dev_dentry,&root_dentry,
 		&dev_inode,"dev",
-		FLAG_FOLDER|FLAG_NAME_CHANGE_DIS|FLAG_DENTRY_NOT_RELEASED);
+		FLAG_DENTRY_FOLDER|FLAG_DENTRY_NAME_CHANGE_DIS|FLAG_DENTRY_NOT_RELEASED);
 	_init_dentry(&fat_dentry,&root_dentry,
 		&fat_inode,"fat",
-		FLAG_FOLDER|FLAG_NAME_CHANGE_DIS|FLAG_DENTRY_NOT_RELEASED);
+		FLAG_DENTRY_FOLDER|FLAG_DENTRY_NAME_CHANGE_DIS|FLAG_DENTRY_NOT_RELEASED|FLAG_NEED_REFLASH);
 	current_dentry_ptr = &root_dentry; /* set pwd */
 #if CONFIG_SHELL_EN
 /* add tab feature */
