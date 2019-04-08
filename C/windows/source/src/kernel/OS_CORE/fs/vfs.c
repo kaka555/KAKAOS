@@ -9,6 +9,7 @@
 #include <vector.h>
 #include <command_processor.h>
 #include <shell.h>
+#include <fs.h>
 
 extern int default_open(struct file *file_ptr);
 extern int default_close(struct file *file_ptr);
@@ -27,7 +28,6 @@ static struct file_operations default_file_operations = {
 };
 #define defalut_file_operations_ptr (&default_file_operations)
 
-//extern void default_cd(struct dentry *dentry_ptr);
 extern int default_change_name(struct inode *inode_ptr,struct dentry *dentry_ptr);
 extern int default_refresh(struct inode *inode_ptr,struct dentry *dentry_ptr);
 extern int default_add_sub_file(struct dentry *dentry_ptr,const char *name);
@@ -37,7 +37,6 @@ extern int default_write_data(struct dentry *dentry_ptr,void *data_ptr,unsigned 
 extern int default_remove(struct dentry *dentry_ptr);
 extern int default_remove_dir(struct dentry *dentry_ptr);
 static struct inode_operations default_inode_operations = {
-	//default_cd,
 	default_change_name,
 	default_refresh,
 	default_add_sub_file,
@@ -54,9 +53,6 @@ static struct dentry dev_dentry;
 static struct dentry *current_dentry_ptr = NULL;
 static struct inode root_inode;
 static struct inode dev_inode;
-
-static struct inode fat_inode;
-static struct dentry fat_dentry;
 
 #if CONFIG_SHELL_EN
 static void update_para_arv_vector(void);
@@ -281,7 +277,8 @@ struct dentry *_find_dentry(const char *path)
 	return _get_subdir(dentry_ptr,cur_path,ka_strlen(cur_path));
 }
 
-int ___add_folder(struct dentry *target_dentry_ptr,const char *folder_name,struct file_operations *file_operations_ptr)
+int ___add_folder(struct dentry *target_dentry_ptr,const char *folder_name,
+	struct file_operations *file_operations_ptr)
 {
 	ASSERT(is_folder(target_dentry_ptr));
 	unsigned int len = ka_strlen(folder_name)+1;
@@ -296,11 +293,13 @@ int ___add_folder(struct dentry *target_dentry_ptr,const char *folder_name,struc
 	struct inode *inode_ptr;
 	if(file_operations_ptr)
 	{
-		inode_ptr = _inode_alloc_and_init(target_dentry_ptr->d_inode->inode_ops,file_operations_ptr,target_dentry_ptr->d_inode->flag);
+		inode_ptr = _inode_alloc_and_init(target_dentry_ptr->d_inode->inode_ops,
+			file_operations_ptr,target_dentry_ptr->d_inode->flag);
 	}
 	else
 	{
-		inode_ptr = _inode_alloc_and_init(target_dentry_ptr->d_inode->inode_ops,target_dentry_ptr->d_inode->i_f_ops,target_dentry_ptr->d_inode->flag);
+		inode_ptr = _inode_alloc_and_init(target_dentry_ptr->d_inode->inode_ops,
+			target_dentry_ptr->d_inode->i_f_ops,target_dentry_ptr->d_inode->flag);
 	}
 	if(NULL == inode_ptr)
 	{
@@ -318,7 +317,8 @@ int ___add_folder(struct dentry *target_dentry_ptr,const char *folder_name,struc
 	return FUN_EXECUTE_SUCCESSFULLY;
 }
 
-int __add_folder(struct dentry *target_dentry_ptr,const char *folder_name,struct file_operations *file_operations_ptr)
+int __add_folder(struct dentry *target_dentry_ptr,const char *folder_name,
+	struct file_operations *file_operations_ptr)
 {
 	ASSERT(is_folder(target_dentry_ptr));
 	if(has_same_name_file(target_dentry_ptr,folder_name))
@@ -332,7 +332,8 @@ int __add_folder(struct dentry *target_dentry_ptr,const char *folder_name,struct
 	return ___add_folder(target_dentry_ptr,folder_name,file_operations_ptr);
 }
 
-int _add_folder(const char *path,const char *folder_name,struct file_operations *file_operations_ptr)
+int _add_folder(const char *path,const char *folder_name,
+	struct file_operations *file_operations_ptr)
 {
 	ASSERT((NULL != path) && (NULL != folder_name));
 	/* find the corresponding dentry */
@@ -344,7 +345,8 @@ int _add_folder(const char *path,const char *folder_name,struct file_operations 
 	return __add_folder(target_dentry_ptr,folder_name,file_operations_ptr);
 }
 
-int add_folder(const char *path,const char *folder_name,struct file_operations *file_operations_ptr)
+int add_folder(const char *path,const char *folder_name,
+	struct file_operations *file_operations_ptr)
 {
 	if((NULL == path) || (NULL == folder_name))
 	{
@@ -661,7 +663,6 @@ void shell_cd(int argc, char const *argv[])
 		return ;
 	}
 	current_dentry_ptr = dentry_ptr;
-	//dentry_ptr->d_inode->inode_ops->cd(dentry_ptr);
 	if(dentry_need_refresh(dentry_ptr))
 	{
 		if(dentry_ptr->d_inode->inode_ops->refresh(dentry_ptr->d_inode,dentry_ptr) < 0)
@@ -838,6 +839,76 @@ void shell_vfs_echo(char const *argv[])
 }
 
 #endif
+
+int _fs_register(const char *mount_point,fs_init_fun init,void *para,struct inode_operations *i_opts_ptr)
+{
+	ASSERT(NULL != mount_point);
+	ASSERT(NULL != init);
+	struct dentry *dentry_ptr = &root_dentry;
+	const char *cur_path = mount_point + 1;
+	unsigned int name_len = _get_subdir_name_len(cur_path);
+	while(0 != name_len) /* not the last dentry */
+	{
+		dentry_ptr = _get_subdir(dentry_ptr,cur_path,name_len);
+		if(NULL == dentry_ptr) /* no such dentry */
+		{
+			KA_WARN(DEBUG_TYPE_VFS,"_fs_register mount_point error\n");
+			return -ERROR_LOGIC;
+		}
+		cur_path += name_len + 1;
+		name_len = _get_subdir_name_len(cur_path);
+	}
+	if(NULL != _get_subdir(dentry_ptr,cur_path,ka_strlen(cur_path)))
+	{
+		KA_WARN(DEBUG_TYPE_VFS,"mount_point exists\n");
+		return -ERROR_LOGIC;
+	}
+	unsigned int len = ka_strlen(cur_path)+1;
+	char *name_buffer = ka_malloc(len);
+	if(NULL == name_buffer)
+	{
+		KA_WARN(DEBUG_TYPE_VFS,"name_buffer malloc fail\n");
+		return -ERROR_NO_MEM;
+	}
+	ka_strcpy(name_buffer,cur_path);
+	name_buffer[len-1] = '\0';
+	struct inode *inode_ptr = _inode_alloc_and_init(i_opts_ptr,defalut_file_operations_ptr,
+		FLAG_INODE_HARD|FLAG_INODE_READ|FLAG_INODE_WRITE);
+	if(NULL == inode_ptr)
+	{
+		KA_WARN(DEBUG_TYPE_VFS,"inode malloc fail\n");
+		ka_free(name_buffer);
+		return -ERROR_NO_MEM;
+	}
+	struct dentry *buffer = _folder_dentry_alloc_and_init(dentry_ptr,inode_ptr,name_buffer,
+		FLAG_DENTRY_FOLDER|FLAG_DENTRY_NAME_CHANGE_DIS|FLAG_DENTRY_NOT_RELEASED|FLAG_NEED_REFLASH);
+	if(NULL == buffer)
+	{
+		ka_free(name_buffer);
+		ka_free(inode_ptr);
+		return -ERROR_NO_MEM;
+	}
+	if(init(para) < 0)
+	{
+		KA_WARN(DEBUG_TYPE_VFS,"fs init fail\n");
+		return -ERROR_DISK;
+	}
+	return FUN_EXECUTE_SUCCESSFULLY;
+}
+
+int fs_register(const char *mount_point,fs_init_fun init,void *para,struct inode_operations *i_opts_ptr)
+{
+	if((NULL == mount_point) || (NULL == init))
+	{
+		return -ERROR_NULL_INPUT_PTR;
+	}
+	if('/' != *mount_point)
+	{
+		return -ERROR_LOGIC;
+	}
+	return _fs_register(mount_point,init,i_opts_ptr,i_opts_ptr);
+}
+
 extern struct inode_operations fat_inode_operations;
 static void __init_vfs(void)
 {
@@ -853,7 +924,6 @@ static void __init_vfs(void)
 #endif
 	_inode_init(NULL,NULL,FLAG_INODE_SOFT|FLAG_INODE_READ|FLAG_INODE_WRITE,&root_inode);
 	_inode_init(NULL,NULL,FLAG_INODE_SOFT|FLAG_INODE_READ|FLAG_INODE_WRITE,&dev_inode);
-	_inode_init(&fat_inode_operations,NULL,FLAG_INODE_HARD|FLAG_INODE_READ|FLAG_INODE_WRITE,&fat_inode);
 	_init_dentry(&root_dentry,&root_dentry,
 		&root_inode,"/",
 		FLAG_DENTRY_FOLDER|FLAG_DENTRY_NAME_CHANGE_DIS|FLAG_DENTRY_NOT_RELEASED);
@@ -861,9 +931,6 @@ static void __init_vfs(void)
 	_init_dentry(&dev_dentry,&root_dentry,
 		&dev_inode,"dev",
 		FLAG_DENTRY_FOLDER|FLAG_DENTRY_NAME_CHANGE_DIS|FLAG_DENTRY_NOT_RELEASED);
-	_init_dentry(&fat_dentry,&root_dentry,
-		&fat_inode,"fat",
-		FLAG_DENTRY_FOLDER|FLAG_DENTRY_NAME_CHANGE_DIS|FLAG_DENTRY_NOT_RELEASED|FLAG_NEED_REFLASH);
 	current_dentry_ptr = &root_dentry; /* set pwd */
 #if CONFIG_SHELL_EN
 /* add tab feature */

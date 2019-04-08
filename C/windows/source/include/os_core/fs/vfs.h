@@ -33,7 +33,6 @@ struct file_operations
  */
 struct inode_operations 
 {
-	//void (*cd)(struct dentry *dentry_ptr);  /* fs change parameter--path */
 	int (*change_name)(struct inode *inode_ptr,struct dentry *dentry_ptr);
 	int (*refresh)(struct inode *inode_ptr,struct dentry *dentry_ptr);
 	int (*add_sub_file)(struct dentry *dentry_ptr,const char *file_name);
@@ -281,9 +280,12 @@ int rename(struct file *file_ptr,const char *name);
 
 int has_same_name_file(struct dentry *dentry_ptr,const char *file_name);
 struct dentry *_find_dentry(const char *path);
-int ___add_file(struct dentry *target_dentry_ptr,const char *file_name,struct file_operations *file_operations_ptr);
-int ___add_folder(struct dentry *target_dentry_ptr,const char *folder_name,struct file_operations *file_operations_ptr);
-int add_folder(const char *path,const char *folder_name,struct file_operations *file_operations_ptr);
+int ___add_file(struct dentry *target_dentry_ptr,const char *file_name,
+	struct file_operations *file_operations_ptr);
+int ___add_folder(struct dentry *target_dentry_ptr,const char *folder_name,
+	struct file_operations *file_operations_ptr);
+int add_folder(const char *path,const char *folder_name,
+	struct file_operations *file_operations_ptr);
 int add_file(const char *path,const char *file_name,struct file_operations *file_operations_ptr);
 int delete_file(const char *path);
 int delete_folder(const char *path);

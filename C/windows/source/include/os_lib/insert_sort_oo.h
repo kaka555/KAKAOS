@@ -45,7 +45,7 @@ PRIVATE
 	/*if return value is positive,means data1>data2*/
 	int (*compare)(struct insert_sort_data *data1,struct insert_sort_data *data2);		/*must realize*/
 	int (*get_data_ptr)(struct insert_sort_data *insert_sort_data_ptr,void *data_ptr); 	/* can be NULL*/
-	int (*value_cmp)(void *data1,void *data2);//must realize
+	int (*value_cmp)(void *data1,void *data2);/*must realize*/
 };
 
 int init_insert_sort_entity(

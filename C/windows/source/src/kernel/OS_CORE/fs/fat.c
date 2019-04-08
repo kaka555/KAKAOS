@@ -4,6 +4,10 @@
 #include <printf_debug.h>
 #include <sys_init_fun.h>
 #include <myassert.h>
+#include <fs.h>
+
+#define FAT_ROOT "/fat"
+#define FAT_NAME "fat"
 
 static FIL f;
 
@@ -85,7 +89,7 @@ static FRESULT scan_files (struct inode *inode_ptr,struct dentry *dentry_ptr,cha
 static void _fat_cd(struct dentry *dentry_ptr)
 {
 	const char *name = dentry_ptr->name;
-	if(0 == ka_strcmp(name,"fat"))
+	if(0 == ka_strcmp(name,FAT_NAME))
 	{
 		return ;
 	}
@@ -208,7 +212,6 @@ static int fat_write_data(struct dentry *dentry_ptr,void *data_ptr,unsigned int 
 	int num;
 	KA_WARN(DEBUG_FAT,"fat_write_data\n");
 	fat_cd(dentry_ptr);
-	path_add(dentry_ptr->name);
 	KA_WARN(DEBUG_FAT,"fat_path is %s\n",fat_path);
 	error = f_open(&f,fat_path,FA_OPEN_ALWAYS|FA_WRITE);
 	if(error != FR_OK)
@@ -227,7 +230,7 @@ static int fat_write_data(struct dentry *dentry_ptr,void *data_ptr,unsigned int 
 	return num;
 }
 
-int fat_remove(struct dentry *dentry_ptr)
+static int fat_remove(struct dentry *dentry_ptr)
 {
 	ASSERT(NULL != dentry_ptr);
 	fat_cd(dentry_ptr->d_parent);
@@ -241,7 +244,7 @@ int fat_remove(struct dentry *dentry_ptr)
 	return FUN_EXECUTE_SUCCESSFULLY;
 }
 
-int fat_remove_dir(struct dentry *dentry_ptr)
+static int fat_remove_dir(struct dentry *dentry_ptr)
 {
 	ASSERT(NULL != dentry_ptr);
 	fat_cd(dentry_ptr->d_parent);
@@ -255,8 +258,7 @@ int fat_remove_dir(struct dentry *dentry_ptr)
 	return FUN_EXECUTE_SUCCESSFULLY;
 }
 
-struct inode_operations fat_inode_operations = {
-	//.cd = fat_cd,
+static struct inode_operations fat_inode_operations = {
 	.change_name = fat_change_name,
 	.refresh = fat_refresh,
 	.add_sub_file = fat_add_sub_file,
@@ -267,18 +269,31 @@ struct inode_operations fat_inode_operations = {
 	.remove_dir = fat_remove_dir,
 };
 
-void __init_fat(void)
+static int init_fat(void *para)
 {
+	(void)para;
 	FATFS fs;
 	FRESULT res_flash;
 	res_flash = f_mount(&fs,"1:",1);
 	if(res_flash!=FR_OK)
 	{
 		KA_WARN(DEBUG_FAT,"fat init fail\n");
+		return -ERROR_DISK;
 	}
 	else
 	{
 		KA_WARN(DEBUG_FAT,"fat init succeed\n");
+		return FUN_EXECUTE_SUCCESSFULLY;
 	}
 }
-INIT_FUN(__init_fat,1);
+
+void __init_fat(void)
+{
+	int error = fs_register(FAT_ROOT,init_fat,NULL,&fat_inode_operations);
+	if(error < 0)
+	{
+		ka_printf("fat init fail,error code is %d\n",error);
+		ASSERT(0);
+	}
+}
+INIT_FUN(__init_fat,2);
