@@ -51,7 +51,7 @@ static void __INIT __init_timer(void)
 	{
 		ka_printf("init_delay_heap error!\nstop booting.....\n");
 		while(1);
-		//os stop here
+		/* os stop here */
 	}
 }
 INIT_FUN(__init_timer,1);

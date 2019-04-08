@@ -96,12 +96,12 @@ int default_ioctl(struct file *file_ptr,int cmd,int args)
 /**  end of file_operations default function   **/
 
 /**  inode_operations default function  **/
-
+/*
 void default_cd(struct dentry *dentry_ptr)
 {
 	(void)dentry_ptr;
 }
-
+*/
 int default_change_name(struct inode *inode_ptr,struct dentry *dentry_ptr)
 {
 	(void)inode_ptr;
@@ -122,16 +122,16 @@ int default_floader_cmp_file_name(struct inode *inode_ptr,const char *name)
 	return FUN_EXECUTE_SUCCESSFULLY;
 }
 
-int default_add_sub_file(struct inode *inode_ptr,const char *name)
+int default_add_sub_file(struct dentry *dentry_ptr,const char *name)
 {
-	(void)inode_ptr;
+	(void)dentry_ptr;
 	(void)name;
 	return FUN_EXECUTE_SUCCESSFULLY;
 }
 
-int add_sub_folder(struct inode *inode_ptr,const char *folder_name)
+int add_sub_folder(struct dentry *dentry_ptr,const char *folder_name)
 {
-	(void)inode_ptr;
+	(void)dentry_ptr;
 	(void)folder_name;
 	return FUN_EXECUTE_SUCCESSFULLY;
 }

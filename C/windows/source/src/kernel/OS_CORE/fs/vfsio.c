@@ -148,13 +148,13 @@ int _read(struct file *file_ptr,void *buffer,unsigned int len,enum llseek_from o
 				break ;
 		}
 		int offset = file_ptr->f_op->read(file_ptr,buffer,len,file_ptr->offset);
-		KA_WARN(CONFIG_VFS,"read data is %s\n",(char *)buffer);
 		if(offset < 0)
 		{
 			file_ptr->offset = offset_backup;
 			KA_WARN(CONFIG_VFS,"f_op->read fail\n");
 			return offset;
 		}
+		KA_WARN(CONFIG_VFS,"read data is %s\n",(char *)buffer);
 		if(!inode_is_soft(file_ptr->f_den->d_inode))
 		{
 			file_ptr->offset += offset;

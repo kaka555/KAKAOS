@@ -27,17 +27,17 @@ static struct file_operations default_file_operations = {
 };
 #define defalut_file_operations_ptr (&default_file_operations)
 
-extern void default_cd(struct dentry *dentry_ptr);
+//extern void default_cd(struct dentry *dentry_ptr);
 extern int default_change_name(struct inode *inode_ptr,struct dentry *dentry_ptr);
 extern int default_refresh(struct inode *inode_ptr,struct dentry *dentry_ptr);
-extern int default_add_sub_file(struct inode *inode_ptr,const char *name);
-extern int add_sub_folder(struct inode *inode_ptr,const char *folder_name);
+extern int default_add_sub_file(struct dentry *dentry_ptr,const char *name);
+extern int add_sub_folder(struct dentry *dentry_ptr,const char *folder_name);
 extern int default_read_data(struct dentry *dentry_ptr,void *store_ptr,unsigned int len,unsigned int offset);
 extern int default_write_data(struct dentry *dentry_ptr,void *data_ptr,unsigned int len,unsigned int offset);
 extern int default_remove(struct dentry *dentry_ptr);
 extern int default_remove_dir(struct dentry *dentry_ptr);
 static struct inode_operations default_inode_operations = {
-	default_cd,
+	//default_cd,
 	default_change_name,
 	default_refresh,
 	default_add_sub_file,
@@ -325,7 +325,7 @@ int __add_folder(struct dentry *target_dentry_ptr,const char *folder_name,struct
 	{
 		return -ERROR_LOGIC;
 	}
-	if(target_dentry_ptr->d_inode->inode_ops->add_sub_folder(target_dentry_ptr->d_inode,folder_name) < 0)
+	if(target_dentry_ptr->d_inode->inode_ops->add_sub_folder(target_dentry_ptr,folder_name) < 0)
 	{
 		return -ERROR_DISK;
 	}
@@ -398,7 +398,7 @@ static int __add_file(struct dentry *target_dentry_ptr,const char *file_name,str
 		KA_WARN(DEBUG_TYPE_VFS,"same name file already exist\n");
 		return -ERROR_LOGIC;
 	}
-	if(target_dentry_ptr->d_inode->inode_ops->add_sub_file(target_dentry_ptr->d_inode,file_name) < 0)
+	if(target_dentry_ptr->d_inode->inode_ops->add_sub_file(target_dentry_ptr,file_name) < 0)
 	{
 		KA_WARN(DEBUG_TYPE_VFS,"disk add fail\n");
 		return -ERROR_DISK;
@@ -479,20 +479,27 @@ static int remove_all_dentry(struct dentry *root_dentry_ptr)
 {
 	ASSERT(NULL != root_dentry_ptr);
 	struct dentry *dentry_buffer_ptr,*n;
+	if(dentry_need_refresh(root_dentry_ptr))
+	{
+		if(root_dentry_ptr->d_inode->inode_ops->refresh(root_dentry_ptr->d_inode,root_dentry_ptr) < 0)
+		{
+			ka_printf("disk refresh error\n");
+			return -ERROR_DISK;
+		}
+		KA_WARN(DEBUG_TYPE_VFS,"dentry refresh\n");
+		dentry_clear_refresh_flag(root_dentry_ptr);
+	}
 	list_for_each_entry_safe(dentry_buffer_ptr,n,&root_dentry_ptr->subdirs,child)
 	{
 		if(is_folder(dentry_buffer_ptr))
 		{
+			KA_WARN(DEBUG_TYPE_VFS,"remove floder %s\n",dentry_buffer_ptr->name);
 			if(remove_all_dentry(dentry_buffer_ptr) < 0)
 			{
 				KA_WARN(DEBUG_TYPE_VFS,"remove_all_dentry error,current dentry is %s\n"
 					,dentry_buffer_ptr->name);
 				return -ERROR_SYS;
 			}
-			dentry_buffer_ptr->d_inode->inode_ops->remove_dir(dentry_buffer_ptr);
-			list_del(&dentry_buffer_ptr->child);
-			ka_free(dentry_buffer_ptr);
-			KA_WARN(DEBUG_TYPE_VFS,"remove floder %s\n",dentry_buffer_ptr->name);
 		}
 		else
 		{
@@ -654,12 +661,12 @@ void shell_cd(int argc, char const *argv[])
 		return ;
 	}
 	current_dentry_ptr = dentry_ptr;
-	dentry_ptr->d_inode->inode_ops->cd(dentry_ptr);
+	//dentry_ptr->d_inode->inode_ops->cd(dentry_ptr);
 	if(dentry_need_refresh(dentry_ptr))
 	{
 		if(dentry_ptr->d_inode->inode_ops->refresh(dentry_ptr->d_inode,dentry_ptr) < 0)
 		{
-			ka_printf("disk error\n");
+			ka_printf("disk refresh error\n");
 			return ;
 		}
 		KA_WARN(DEBUG_TYPE_VFS,"dentry refresh\n");
@@ -713,13 +720,19 @@ void shell_cat(int argc, char const *argv[])
 		return ;
 	}
 	ASSERT(NULL != file_ptr);
-	char buffer[16];
-	error = _read(file_ptr,buffer,sizeof(buffer),FILE_CURRENT);
-	ka_printf("%s\n",buffer);
+	void *buffer = ka_malloc(64);
+	if(NULL == buffer)
+	{
+		ka_printf("allocate room for display error\n");
+		return ;
+	}
+	error = _read(file_ptr,buffer,64,FILE_CURRENT);
+	ka_printf("%s\n",(char *)buffer);
 	if(error < 0)
 	{
 		ka_printf("read fail\n");
 	}
+	ka_free(buffer);
 	_close(file_ptr);
 }
 

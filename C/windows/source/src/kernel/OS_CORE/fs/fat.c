@@ -107,6 +107,7 @@ static int fat_refresh(struct inode *inode_ptr,struct dentry *dentry_ptr)
 	ASSERT(NULL != inode_ptr);
 	ASSERT(NULL != dentry_ptr);
 	KA_WARN(DEBUG_FAT,"fat_refresh\n");
+	fat_cd(dentry_ptr);
 	if(is_folder(dentry_ptr))
 	{
 		scan_files(inode_ptr,dentry_ptr,fat_path);
@@ -129,11 +130,12 @@ static int fat_change_name(struct inode *inode_ptr,struct dentry *dentry_ptr)
 	return -error;
 }
 
-static int fat_add_sub_file(struct inode *inode_ptr,const char *file_name)
+static int fat_add_sub_file(struct dentry *dentry_ptr,const char *file_name)
 {
-	ASSERT(NULL != inode_ptr);
+	ASSERT(NULL != dentry_ptr);
 	ASSERT(NULL != file_name);
 	KA_WARN(DEBUG_FAT,"fat_add_sub_file\n");
+	fat_cd(dentry_ptr);
 	path_add(file_name);
 	KA_WARN(DEBUG_FAT,"fat_path is %s\n",fat_path);
 	FRESULT error = f_open(&f,fat_path,FA_CREATE_ALWAYS);
@@ -153,11 +155,12 @@ static int fat_add_sub_file(struct inode *inode_ptr,const char *file_name)
 	return FUN_EXECUTE_SUCCESSFULLY;
 }
 
-static int fat_add_sub_folder(struct inode *inode_ptr,const char *folder_name)
+static int fat_add_sub_folder(struct dentry *dentry_ptr,const char *folder_name)
 {
-	ASSERT(NULL != inode_ptr);
+	ASSERT(NULL != dentry_ptr);
 	ASSERT(NULL != folder_name);
 	KA_WARN(DEBUG_FAT,"fat_add_sub_file\n");
+	fat_cd(dentry_ptr);
 	path_add(folder_name);
 	KA_WARN(DEBUG_FAT,"fat_path is %s\n",fat_path);
 	FRESULT error = f_mkdir(fat_path);
@@ -178,7 +181,7 @@ static int fat_read_data(struct dentry *dentry_ptr,void *store_ptr,unsigned int 
 	FRESULT error;
 	int num;
 	KA_WARN(DEBUG_FAT,"fat_read_data\n");
-	path_add(dentry_ptr->name);
+	fat_cd(dentry_ptr);
 	KA_WARN(DEBUG_FAT,"fat_path is %s\n",fat_path);
 	error = f_open(&f,fat_path,FA_OPEN_ALWAYS|FA_READ);
 	if(error != FR_OK)
@@ -204,6 +207,7 @@ static int fat_write_data(struct dentry *dentry_ptr,void *data_ptr,unsigned int 
 	FRESULT error;
 	int num;
 	KA_WARN(DEBUG_FAT,"fat_write_data\n");
+	fat_cd(dentry_ptr);
 	path_add(dentry_ptr->name);
 	KA_WARN(DEBUG_FAT,"fat_path is %s\n",fat_path);
 	error = f_open(&f,fat_path,FA_OPEN_ALWAYS|FA_WRITE);
@@ -252,7 +256,7 @@ int fat_remove_dir(struct dentry *dentry_ptr)
 }
 
 struct inode_operations fat_inode_operations = {
-	.cd = fat_cd,
+	//.cd = fat_cd,
 	.change_name = fat_change_name,
 	.refresh = fat_refresh,
 	.add_sub_file = fat_add_sub_file,

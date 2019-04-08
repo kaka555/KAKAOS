@@ -29,12 +29,14 @@ void init_insert_sort_data_with_id(struct insert_sort_data *insert_sort_data_ptr
 struct insert_sort_entity
 {
 PUBLIC
-//	int (*insert_into)(struct insert_sort_data *data_ptr,struct insert_sort_entity *insert_sort_entity_ptr);
-//	struct insert_sort_data *(*find_data_with_id)(struct insert_sort_entity *insert_sort_entity_ptr,void *data_ptr,id_type identify_data);
-//	struct insert_sort_data *(*find_data)(struct insert_sort_entity *insert_sort_entity_ptr,void *data_ptr);
-//	struct insert_sort_data * (*delete_head)(struct insert_sort_entity *insert_sort_entity_ptr);
-//	struct insert_sort_data * (*delete_data)(struct insert_sort_entity *insert_sort_entity_ptr,void *data_ptr);
-//	struct insert_sort_data * (*delete_data_with_id)(struct insert_sort_entity *insert_sort_entity_ptr,void *data_ptr,id_type identify_data);
+/*
+	int (*insert_into)(struct insert_sort_data *data_ptr,struct insert_sort_entity *insert_sort_entity_ptr);
+	struct insert_sort_data *(*find_data_with_id)(struct insert_sort_entity *insert_sort_entity_ptr,void *data_ptr,id_type identify_data);
+	struct insert_sort_data *(*find_data)(struct insert_sort_entity *insert_sort_entity_ptr,void *data_ptr);
+	struct insert_sort_data * (*delete_head)(struct insert_sort_entity *insert_sort_entity_ptr);
+	struct insert_sort_data * (*delete_data)(struct insert_sort_entity *insert_sort_entity_ptr,void *data_ptr);
+	struct insert_sort_data * (*delete_data_with_id)(struct insert_sort_entity *insert_sort_entity_ptr,void *data_ptr,id_type identify_data);
+*/
 PRIVATE
 	struct list_head data_list_head;
 	unsigned int data_num;

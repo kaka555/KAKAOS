@@ -650,7 +650,6 @@ void shell(void *para)
 #endif
 	(void)para;
 	int result;
-	//task_delete(&TCB_count_init);
 	shell_pre();
 	ka_printf("%s\n","/*************************");
 	ka_printf("%s\n","*");

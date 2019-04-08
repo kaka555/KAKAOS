@@ -33,11 +33,11 @@ struct file_operations
  */
 struct inode_operations 
 {
-	void (*cd)(struct dentry *dentry_ptr);  /* fs change parameter--path */
+	//void (*cd)(struct dentry *dentry_ptr);  /* fs change parameter--path */
 	int (*change_name)(struct inode *inode_ptr,struct dentry *dentry_ptr);
 	int (*refresh)(struct inode *inode_ptr,struct dentry *dentry_ptr);
-	int (*add_sub_file)(struct inode *inode_ptr,const char *file_name);
-	int (*add_sub_folder)(struct inode *inode_ptr,const char *folder_name);
+	int (*add_sub_file)(struct dentry *dentry_ptr,const char *file_name);
+	int (*add_sub_folder)(struct dentry *dentry_ptr,const char *folder_name);
 	int (*read_data)(struct dentry *dentry_ptr,void *store_ptr,unsigned int len,unsigned int offset);
 	int (*write_data)(struct dentry *dentry_ptr,void *data_ptr,unsigned int len,unsigned int offset);
 	int (*remove)(struct dentry *dentry_ptr);
