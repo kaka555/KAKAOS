@@ -28,22 +28,29 @@ static struct file_operations default_file_operations = {
 };
 #define defalut_file_operations_ptr (&default_file_operations)
 
+extern int default_inode_open(struct file *file_ptr);
+extern int default_inode_close(struct file *file_ptr);
 extern int default_change_name(struct inode *inode_ptr,struct dentry *dentry_ptr);
 extern int default_refresh(struct inode *inode_ptr,struct dentry *dentry_ptr);
 extern int default_add_sub_file(struct dentry *dentry_ptr,const char *name);
-extern int add_sub_folder(struct dentry *dentry_ptr,const char *folder_name);
-extern int default_read_data(struct dentry *dentry_ptr,void *store_ptr,unsigned int len,unsigned int offset);
-extern int default_write_data(struct dentry *dentry_ptr,void *data_ptr,unsigned int len,unsigned int offset);
+extern int default_add_sub_folder(struct dentry *dentry_ptr,const char *folder_name);
+extern int default_read_data(struct file *file_ptr,void *store_ptr,unsigned int len,unsigned int offset);
+extern int default_write_data(struct file *file_ptr,void *data_ptr,unsigned int len,unsigned int offset);
 extern int default_remove(struct dentry *dentry_ptr);
 extern int default_remove_dir(struct dentry *dentry_ptr);
+extern int default_get_size(struct file *file_ptr);
 static struct inode_operations default_inode_operations = {
+	default_inode_open,
+	default_inode_close,
 	default_change_name,
 	default_refresh,
 	default_add_sub_file,
-	add_sub_folder,
+	default_add_sub_folder,
 	default_read_data,
 	default_write_data,
-	default_remove
+	default_remove,
+	default_remove_dir,
+	default_get_size
 };
 #define defalut_inode_operations_ptr (&default_inode_operations)
 

@@ -4,7 +4,7 @@
 #include <double_linked_list.h>
 #include <mutex.h>
 
-#define BLOCK_SIZE 1024 /* bytes */
+//#define BLOCK_SIZE 1024 /* bytes */
 
 struct file;
 struct dentry_operations;
@@ -33,14 +33,17 @@ struct file_operations
  */
 struct inode_operations 
 {
+	int (*inode_open)(struct file *file_ptr);
+	int (*inode_close)(struct file *file_ptr);
 	int (*change_name)(struct inode *inode_ptr,struct dentry *dentry_ptr);
 	int (*refresh)(struct inode *inode_ptr,struct dentry *dentry_ptr);
 	int (*add_sub_file)(struct dentry *dentry_ptr,const char *file_name);
 	int (*add_sub_folder)(struct dentry *dentry_ptr,const char *folder_name);
-	int (*read_data)(struct dentry *dentry_ptr,void *store_ptr,unsigned int len,unsigned int offset);
-	int (*write_data)(struct dentry *dentry_ptr,void *data_ptr,unsigned int len,unsigned int offset);
+	int (*read_data)(struct file *file_ptr,void *store_ptr,unsigned int len,unsigned int offset);
+	int (*write_data)(struct file *file_ptr,void *data_ptr,unsigned int len,unsigned int offset);
 	int (*remove)(struct dentry *dentry_ptr);
 	int (*remove_dir)(struct dentry *dentry_ptr);
+	int (*get_size)(struct file *file_ptr); /* fill the file_len of struct file */
 };
 
 /*************the element 'flag' of struct dentry*************/

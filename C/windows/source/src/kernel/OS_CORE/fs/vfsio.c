@@ -54,6 +54,11 @@ int __open(struct dentry *dentry_ptr,enum FILE_FLAG flag,const struct file **fil
 			return -ERROR_LOGIC;
 	}
 	ASSERT(NULL != file_ptr);
+	if(dentry_ptr->d_inode->inode_ops->get_size(file_ptr))
+	{
+		KA_WARN(DEBUG_TYPE_VFS,"function open get_size error\n");
+		return -ERROR_DISK;
+	}
 	ASSERT(file_ptr->offset <= file_ptr->file_len);
 	CPU_SR_ALLOC();
 	CPU_CRITICAL_ENTER();
@@ -98,7 +103,7 @@ EXPORT_SYMBOL(ka_open);
 int _close(struct file *file_ptr)
 {
 	ASSERT(NULL != file_ptr);
-	//ASSERT(file_ptr->offset <= file_ptr->file_len);
+	ASSERT(file_ptr->offset <= file_ptr->file_len);
 	if(file_ptr->f_op->close)
 	{
 		file_ptr->f_op->close(file_ptr);
@@ -155,11 +160,11 @@ int _read(struct file *file_ptr,void *buffer,unsigned int len,enum llseek_from o
 			return offset;
 		}
 		KA_WARN(CONFIG_VFS,"read data is %s\n",(char *)buffer);
-		if(!inode_is_soft(file_ptr->f_den->d_inode))
+		if(inode_is_soft(file_ptr->f_den->d_inode))
 		{
 			file_ptr->offset += offset;
 		}
-		//ASSERT(file_ptr->offset <= file_ptr->file_len);
+		ASSERT(file_ptr->offset <= file_ptr->file_len);
 		return offset;
 	}
 	else
@@ -231,11 +236,12 @@ int _write(struct file *file_ptr,void *buffer,unsigned int len,enum llseek_from 
 
 			return offset;
 		}
-		if(!inode_is_soft(file_ptr->f_den->d_inode))
+		file_ptr->f_den->d_inode->inode_ops->get_size(file_ptr);
+		if(inode_is_soft(file_ptr->f_den->d_inode))
 		{
 			file_ptr->offset += offset;
 		}
-		//ASSERT(file_ptr->offset <= file_ptr->file_len);
+		ASSERT(file_ptr->offset <= file_ptr->file_len);
 		return offset;
 	}
 	else

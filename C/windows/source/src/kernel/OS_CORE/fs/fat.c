@@ -106,6 +106,41 @@ static void fat_cd(struct dentry *dentry_ptr)
 	KA_WARN(DEBUG_FAT,"fat_path is %s\n",fat_path);
 }
 
+static int fat_get_size(struct file *file_ptr)
+{
+	file_ptr->file_len = f_size((FIL*)(file_ptr->private_data));
+	return FUN_EXECUTE_SUCCESSFULLY;
+}
+
+static int fat_inode_open(struct file *file_ptr)
+{
+	ASSERT(NULL != file_ptr);
+	FIL *fnew = ka_malloc(sizeof(FIL));
+	if(NULL == fnew)
+	{
+		KA_WARN(DEBUG_FAT,"fat_inode_open allocate mem fail\n");
+		return -ERROR_NO_MEM;
+	}
+	fat_cd(file_ptr->f_den);
+	FRESULT res_flash = f_open(fnew,fat_path,FA_OPEN_ALWAYS | file_ptr->f_mode);
+	if(res_flash != FR_OK)
+	{
+		KA_WARN(DEBUG_FAT,"fat_inode_open fail\n");
+		return -ERROR_DISK;
+	}
+	file_ptr->private_data = fnew;
+	fat_get_size(file_ptr);  /* fill the file_len */
+	return FUN_EXECUTE_SUCCESSFULLY;
+}
+
+static int fat_inode_close(struct file *file_ptr)
+{
+	ASSERT(NULL != file_ptr);
+	f_close(file_ptr->private_data);
+	ka_free(file_ptr->private_data);
+	return FUN_EXECUTE_SUCCESSFULLY;
+}
+
 static int fat_refresh(struct inode *inode_ptr,struct dentry *dentry_ptr)
 {
 	ASSERT(NULL != inode_ptr);
@@ -178,55 +213,39 @@ static int fat_add_sub_folder(struct dentry *dentry_ptr,const char *folder_name)
 	return FUN_EXECUTE_SUCCESSFULLY;
 }
 
-static int fat_read_data(struct dentry *dentry_ptr,void *store_ptr,unsigned int len,unsigned int offset)
+static int fat_read_data(struct file *file_ptr,void *store_ptr,unsigned int len,unsigned int offset)
 {
-	ASSERT(NULL != dentry_ptr);
+	ASSERT(NULL != file_ptr);
 	ASSERT(NULL != store_ptr);
 	FRESULT error;
 	int num;
 	KA_WARN(DEBUG_FAT,"fat_read_data\n");
-	fat_cd(dentry_ptr);
-	KA_WARN(DEBUG_FAT,"fat_path is %s\n",fat_path);
-	error = f_open(&f,fat_path,FA_OPEN_ALWAYS|FA_READ);
-	if(error != FR_OK)
+	ASSERT(offset <= file_ptr->file_len);
+	if(f_lseek(file_ptr->private_data,offset))
 	{
-		return -ERROR_LOGIC;
-	}
-	error = f_read(&f,store_ptr,len,(unsigned int *)&num);
-	KA_WARN(DEBUG_FAT,"read error code is %u\n",error);
-	path_back(dentry_ptr->name);
-	error = f_close(&f); 
-	if(FR_OK != error)
-	{
-		ka_printf("f_close error,code is %u\n",error);
+		ASSERT(0);
 		return -ERROR_DISK;
 	}
+	error = f_read(file_ptr->private_data,store_ptr,len,(unsigned int *)&num);
+	KA_WARN(DEBUG_FAT,"read error code is %u\n",error);
 	return num;
 }
 
-static int fat_write_data(struct dentry *dentry_ptr,void *data_ptr,unsigned int len,unsigned int offset)
+static int fat_write_data(struct file *file_ptr,void *data_ptr,unsigned int len,unsigned int offset)
 {
-	ASSERT(NULL != dentry_ptr);
+	ASSERT(NULL != file_ptr);
 	ASSERT(NULL != data_ptr);
 	FRESULT error;
 	int num;
 	KA_WARN(DEBUG_FAT,"fat_write_data\n");
-	fat_cd(dentry_ptr);
-	KA_WARN(DEBUG_FAT,"fat_path is %s\n",fat_path);
-	error = f_open(&f,fat_path,FA_OPEN_ALWAYS|FA_WRITE);
-	if(error != FR_OK)
+	ASSERT(offset <= file_ptr->file_len);
+	if(f_lseek(file_ptr->private_data,offset))
 	{
-		return -ERROR_LOGIC;
-	}
-	error = f_write(&f,data_ptr,len,(unsigned int *)&num);
-	KA_WARN(DEBUG_FAT,"write error code is %u\n",error);
-	path_back(dentry_ptr->name);
-	error = f_close(&f); 
-	if(FR_OK != error)
-	{
-		KA_WARN(DEBUG_FAT,"f_close error,code is %u\n",error);
+		ASSERT(0);
 		return -ERROR_DISK;
 	}
+	error = f_write(file_ptr->private_data,data_ptr,len,(unsigned int *)&num);
+	KA_WARN(DEBUG_FAT,"write error code is %u\n",error);
 	return num;
 }
 
@@ -259,6 +278,8 @@ static int fat_remove_dir(struct dentry *dentry_ptr)
 }
 
 static struct inode_operations fat_inode_operations = {
+	.inode_open = fat_inode_open,
+	.inode_close = fat_inode_close,
 	.change_name = fat_change_name,
 	.refresh = fat_refresh,
 	.add_sub_file = fat_add_sub_file,
@@ -267,6 +288,7 @@ static struct inode_operations fat_inode_operations = {
 	.write_data = fat_write_data,
 	.remove = fat_remove,
 	.remove_dir = fat_remove_dir,
+	.get_size = fat_get_size,
 };
 
 static int init_fat(void *para)
