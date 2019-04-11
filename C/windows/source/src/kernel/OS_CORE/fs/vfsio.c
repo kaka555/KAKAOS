@@ -167,27 +167,7 @@ int _read(struct file *file_ptr,void *buffer,unsigned int len,enum llseek_from o
 		ASSERT(file_ptr->offset <= file_ptr->file_len);
 		return offset;
 	}
-	else
-	{
-		if(!inode_is_soft(file_ptr->f_den->d_inode))
-		{
-			if(file_ptr->offset + len < file_ptr->file_len)
-			{
-				file_ptr->offset += len; 
-			}
-			else
-			{
-				len = file_ptr->file_len - file_ptr->offset;
-				file_ptr->offset = file_ptr->file_len;
-			}
-		}
-		else
-		{
-			ASSERT((0 == file_ptr->file_len) && (0 == file_ptr->offset));
-		}
-		ASSERT(file_ptr->offset <= file_ptr->file_len);
-		return len;
-	}
+	return 0;
 }
 
 int ka_read(struct file *file_ptr,void *buffer,unsigned int len,enum llseek_from offset_flag)
@@ -237,34 +217,10 @@ int _write(struct file *file_ptr,void *buffer,unsigned int len,enum llseek_from 
 			return offset;
 		}
 		file_ptr->f_den->d_inode->inode_ops->get_size(file_ptr);
-		if(inode_is_soft(file_ptr->f_den->d_inode))
-		{
-			file_ptr->offset += offset;
-		}
 		ASSERT(file_ptr->offset <= file_ptr->file_len);
 		return offset;
 	}
-	else
-	{
-		if(!inode_is_soft(file_ptr->f_den->d_inode))
-		{
-			if(file_ptr->offset + len < file_ptr->file_len)
-			{
-				file_ptr->offset += len; 
-			}
-			else
-			{
-				len = file_ptr->file_len - file_ptr->offset;
-				file_ptr->offset = file_ptr->file_len;
-			}
-		}
-		else
-		{
-			ASSERT((0 == file_ptr->file_len) && (0 == file_ptr->offset));
-		}
-		ASSERT(file_ptr->offset <= file_ptr->file_len);
-		return len;
-	}
+	return 0;
 }
 
 int ka_write(struct file *file_ptr,void *buffer,unsigned int len,enum llseek_from offset_flag)

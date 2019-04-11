@@ -9,7 +9,7 @@
 
 #include "diskio.h"		/* FatFs lower layer API */
 #include "ff.h"
-#include "./flash/bsp_spi_flash.h"
+#include "bsp_spi_flash.h"
 
 
 /* 为每个设备定义一个物理编号 */

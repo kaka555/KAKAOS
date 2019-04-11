@@ -15,7 +15,7 @@
   ******************************************************************************
   */
   
-#include "./flash/bsp_spi_flash.h"
+#include "bsp_spi_flash.h"
 #include <stm32f10x_spi.h>
 
 static __IO uint32_t  SPITimeout = SPIT_LONG_TIMEOUT;    
