@@ -297,6 +297,7 @@ void timer_task(void *para)
 							}
 							break;
 						}
+						/* FALL THROUGH */
 					case TIMER_PERIODIC:
 						timer_ptr->wake_time += timer_ptr->period;
 						heap_push(&timer_heap,timer_ptr);

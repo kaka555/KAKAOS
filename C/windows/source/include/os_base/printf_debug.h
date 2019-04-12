@@ -28,5 +28,11 @@
 	#define KA_WARN(type, format, ...)   
 #endif
 
+#define panic(format, ...) \
+		do{ \
+			ka_printf("panic::" format,##__VA_ARGS__);\
+			while(1);\
+		}while(0)
+
 #endif
 		

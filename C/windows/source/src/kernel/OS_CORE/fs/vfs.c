@@ -728,13 +728,18 @@ void shell_cat(int argc, char const *argv[])
 		return ;
 	}
 	ASSERT(NULL != file_ptr);
-	void *buffer = ka_malloc(64);
+	if(0 == file_ptr->file_len)
+	{
+		_close(file_ptr);
+		return ;
+	}
+	void *buffer = ka_malloc(file_ptr->file_len);
 	if(NULL == buffer)
 	{
 		ka_printf("allocate room for display error\n");
 		return ;
 	}
-	error = _read(file_ptr,buffer,64,FILE_CURRENT);
+	error = _read(file_ptr,buffer,file_ptr->file_len,FILE_CURRENT);
 	ka_printf("%s\n",(char *)buffer);
 	if(error < 0)
 	{
@@ -924,8 +929,7 @@ static void __init_vfs(void)
 	error = Vector_init(&para_arv_vector,16,MKVFADD(16));
 	if(error < 0)
 	{
-		ka_printf("vfs init fail\n");
-		while(1);
+		panic("vfs init fail\n");
 	}
 	ASSERT(FUN_EXECUTE_SUCCESSFULLY == error);
 #endif
