@@ -167,7 +167,6 @@ void shell_module(int argc, char const *argv[])
 {
 	void *buf;
 	char *shell_buf_ptr;
-	int buf_is_allo = KA_FALSE;
 	int error;
 	unsigned int stack_size = D_MODULE_DEFAULT_STACK_SIZE;
 	TASK_PRIO_TYPE prio = D_MODULE_DEFAULT_PRIO;
@@ -215,20 +214,15 @@ void shell_module(int argc, char const *argv[])
 	if(NULL != value_ptr)
 	{
 		buf = ka_malloc(ka_atoi(value_ptr));
-		buf_is_allo = KA_TRUE;
 	}
 	else
 	{
-		buf = _alloc_power3_page();
+		buf = ka_malloc(2047);
 	}
 	if (NULL == buf)
 	{
 		ka_printf("no enough room for module\n");
 		return ;
-	}
-	if ((!buf_is_allo) && (0 > add_page_alloc_record(3,buf)))
-	{
-		ASSERT(0);
 	}
 /* allocate room for shell*/
 	struct shell_buffer shell_buffer;
@@ -301,6 +295,7 @@ void cpu_rate(int argc, char const *argv[])
 #endif
 
 #if CONFIG_DEBUG_ON
+extern int in_os_memory(void *ptr);
 void shell_check_memory(int argc, char const *argv[])
 {
 	if(2 != argc)
@@ -308,8 +303,13 @@ void shell_check_memory(int argc, char const *argv[])
 		ka_printf("parameter error\n");
 		return ;
 	}
-	unsigned int num = ka_atoi(argv[1]);
-	ka_printf("value of add %p is %d\n",(void *)num,*(int *)num);
+	UINT32 num = ka_atoi(argv[1]);
+//	if(in_os_memory((void *)num) < 0)
+//	{
+//		ka_printf("add 0x%p is not a legal address\n",(void *)num);
+//		return ;
+//	}
+	ka_printf("value of add 0x%p is 0x%x\n",(void *)num,*(UINT32 *)num);
 }
 #endif
 

@@ -26,6 +26,8 @@ INIT_FUN(__init_module,1);
 
 void shell_modinfo(int argc, char const *argv[])
 {
+    (void)argc;
+    (void)argv;
     struct dynamic_module *dynamic_module_ptr;
     unsigned int i;
     list_for_each_entry(dynamic_module_ptr,&module_list_head,module_list)
@@ -57,6 +59,8 @@ void shell_modinfo(int argc, char const *argv[])
 
 void shell_list_module(int argc, char const *argv[])
 {
+    (void)argc;
+    (void)argv;
     struct dynamic_module *dynamic_module_ptr;
     unsigned int i = 0;
     list_for_each_entry(dynamic_module_ptr,&module_list_head,module_list)
@@ -381,7 +385,7 @@ int dlmodule_load_relocated_object(struct dynamic_module* module, void *module_p
                       shdr[index].sh_size);
             rodata_addr = (UINT32)ptr;
             KA_WARN(DEBUG_TYPE_MODULE,"load rodata 0x%p, size %d, rodata 0x%x\n", ptr, 
-                shdr[index].sh_size, *(UINT32 *)data_addr);
+                shdr[index].sh_size, rodata_addr);
             ptr += shdr[index].sh_size;
         }
 
@@ -757,7 +761,7 @@ int dlmodule_load_shared_object(struct dynamic_module* module, void *module_ptr)
     /* found .dynsym section */
     if (index != elf_module->e_shnum)
     {
-        int i, count = 0;
+        unsigned int i, count = 0;
         Elf32_Sym  *symtab = NULL;
         UINT8 *strtab = NULL;
 

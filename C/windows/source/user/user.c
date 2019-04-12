@@ -118,7 +118,7 @@ void four(void *para)
 
 #endif
 
-#if 1 /* test breakpoint */
+#if 0 /* test breakpoint */
 void three(void *para)
 {
 	int i = 5;
@@ -176,13 +176,13 @@ void three(void *para)
 int i;
 	for(i=0;i<64;++i)
 	{
-		ptr[i] = KA_MALLOC(sizeof(int));
+		ptr[i] = ka_malloc(sizeof(int));
 		ka_printf("%d get ptr address is %x \n",i,(int)ptr[i]);
 		ka_printf("value %d is %x\n",i,*(int *)ptr[i]);
 		*(int *)ptr[i] = 66;
 	}
 	
-	void *kaka = KA_MALLOC(48);
+	void *kaka = ka_malloc(48);
 	ka_printf("ptr--kaka get ptr address is %x \n",(int)kaka);
 	
 	//sleep(300);
@@ -200,7 +200,7 @@ int i;
 	
 	ka_printf("free complete\n");
 	
-	kaka = KA_MALLOC(120);
+	kaka = ka_malloc(120);
 	ka_printf("ptr--kaka get ptr address is %x \n",(int)kaka);
 	
 	//sleep(300);
@@ -214,11 +214,11 @@ int i;
 }
 #endif
 
-#if 0 // test int sleep(unsigned int)
-
+#if 1 // test int sleep(unsigned int)
+#include <myassert.h>
 void three(void *para)
 {
-
+	
 	TCB *TCB_ptr4,*TCB_ptr5;
 	if(0 != task_creat_ready(256,5,5,"five",five,NULL,&TCB_ptr5))
 	{
@@ -603,7 +603,7 @@ void three(void *para)
 
 #if 0 /* test vfs */
 
-#include <bsp_usart.h>
+#include <bsp_support.h>
 static int open(struct file *file_ptr)
 {
 	ka_printf("open file %s\n",file_ptr->f_den->name);
