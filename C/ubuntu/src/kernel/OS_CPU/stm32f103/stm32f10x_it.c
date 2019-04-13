@@ -58,19 +58,6 @@ void NMI_Handler(void)
 {
 }
 
-/**
-  * @brief  This function handles Hard Fault exception.
-  * @param  None
-  * @retval None
-  */
-//void HardFault_Handler(void)
-//{
-//  /* Go to infinite loop when Hard Fault exception occurs */
-//  while (1)
-//  {
-//  }
-//}
-
 void hard_fault_handler_c(unsigned int * hardfault_args)   
 
 {   
@@ -140,21 +127,23 @@ ka_printf ("HFSR = 0x%lx\r\n", (*((volatile unsigned long *)(0xE000ED2C))));
 ka_printf ("DFSR = 0x%lx\r\n", (*((volatile unsigned long *)(0xE000ED30))));   
 
 ka_printf ("AFSR = 0x%lx\r\n", (*((volatile unsigned long *)(0xE000ED3C))));  
-
+/*
 #if CONFIG_SHELL_EN
   shell_stack_check(1,NULL);
   shell_TCB_check(1,NULL);
   shell_buddy_debug(1,NULL);
   shell_check_slab(1,NULL);
   shell_memory(1,NULL);
+#if CONFIG_TIME_EN
   system_time_display();
+#endif
   ka_printf("tick is %llu\n",get_tick());
 #endif
 #if CONFIG_POWER_MANAGEMENT
 extern void sys_sleep(void);
     sys_sleep();
 #endif
-
+*/
 while(1) 
 { 
         ;; 

@@ -52,6 +52,8 @@ extern unsigned long _ka_init_fun_begin1;
 extern unsigned long _ka_init_fun_end1;
 extern unsigned long _ka_init_fun_begin2;
 extern unsigned long _ka_init_fun_end2;
+extern unsigned long _ka_init_fun_begin3;
+extern unsigned long _ka_init_fun_end3;
 static void __INIT os_init(void)
 {	
 	bsp_init();
@@ -70,6 +72,11 @@ static void __INIT os_init(void)
 	}
 	for(struct_init_fun_ptr=(struct init_fun *)(&_ka_init_fun_begin2);
 		struct_init_fun_ptr != (struct init_fun *)(&_ka_init_fun_end2);++struct_init_fun_ptr)
+	{
+		(*(struct_init_fun_ptr->fun))(); /* execute all the init function */
+	}
+	for(struct_init_fun_ptr=(struct init_fun *)(&_ka_init_fun_begin3);
+		struct_init_fun_ptr != (struct init_fun *)(&_ka_init_fun_end3);++struct_init_fun_ptr)
 	{
 		(*(struct_init_fun_ptr->fun))(); /* execute all the init function */
 	}

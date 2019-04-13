@@ -6,6 +6,7 @@
 #include <os_ready.h>
 #include <myMicroLIB.h>
 #include <sys_init_fun.h>
+#include <printf_debug.h>
 
 #define TIME_FIRST_SMALLER_THAN_SECOND(first,second) ((INT64)(first)-(INT64)(second) < 0)
 #define TIME_FIRST_BIGGER_THAN_SECOND(first,second)  ((INT64)(first)-(INT64)(second) > 0)
@@ -43,8 +44,7 @@ static void __INIT __init_delay_heap(void)
 {
 	if(0 != heap_init(&delay_heap,PRIO_MAX/4,_cmp,index_change_record))
 	{
-		ka_printf("init_delay_heap error!\nstop booting.....\n");
-		while(1);
+		panic("init_delay_heap error!\nstop booting.....\n");
 		/*os stop here*/
 	}
 }

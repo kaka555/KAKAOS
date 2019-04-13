@@ -207,7 +207,6 @@ void shell_show_tasks_registers(int argc, char const *argv[])
 	(void)argc;
 	(void)argv;
 	unsigned int i;
-	//struct list_head *pos;
 	TCB *TCB_ptr;
 	for(i=0;i<PRIO_MAX;++i)
 	{

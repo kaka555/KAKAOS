@@ -144,7 +144,7 @@ int _p(
 	insert_sort_insert_into(&data,&MCB_ptr->MCB_insert_sort_list);
 	if(time == 0)/*0 represent forever*/
 	{
-		CPU_CRITICAL_EXIT(); //exit  critical
+		CPU_CRITICAL_EXIT(); /* exit  critical */
 		sys_suspend(STATE_WAIT_MCB_FOREVER);
 		/*go back here=========go back here*/
 		CPU_CRITICAL_ENTER();/*enter critical*/

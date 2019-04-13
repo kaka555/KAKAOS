@@ -3,8 +3,6 @@
 
 #define __INIT  __attribute__((section(".INIT.TEXT"))) 
 
-#define __RAMFUNC __attribute__ ((long_call, section (".ramfunctions")))
-
 typedef void (*init_fun_type)(void);
 
 struct init_fun
