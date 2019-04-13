@@ -155,17 +155,34 @@ static int fat_refresh(struct inode *inode_ptr,struct dentry *dentry_ptr)
 	return FUN_EXECUTE_SUCCESSFULLY;
 }
 
-static int fat_change_name(struct inode *inode_ptr,struct dentry *dentry_ptr)
+static int fat_change_name(struct inode *inode_ptr,struct dentry *dentry_ptr,const char *new_name)
 {
 	ASSERT(NULL != inode_ptr);
 	ASSERT(NULL != dentry_ptr);
+	ASSERT(NULL != new_name);
 	FRESULT error;
 	KA_WARN(DEBUG_FAT,"fat_change_name\n");
-	error = f_rename(dentry_ptr->name,"kaka");
+	fat_cd(dentry_ptr->d_parent);
+	unsigned int new_name_len = fat_path_len + ka_strlen(new_name) + 1;
+	char *name = ka_malloc(new_name_len);
+	if(NULL == name)
+	{
+		KA_WARN(DEBUG_FAT,"fat_change_name allocate room fail\n");
+		return -ERROR_NO_MEM;
+	}
+	ka_strcpy(name,fat_path);
+	ka_strcpy(name+fat_path_len,new_name);
+	name[new_name_len-1] = '\0';
+	path_add(dentry_ptr->name);
+	KA_WARN(DEBUG_FAT,"fat_path is %s\n",fat_path);
+	error = f_rename(fat_path,name);
+	path_back(dentry_ptr->name);
+	ka_free(name);
 	if(FR_OK == error)
 	{
 		return FUN_EXECUTE_SUCCESSFULLY;
 	}
+	KA_WARN(DEBUG_FAT,"fat_change_name fail\n");
 	return -error;
 }
 

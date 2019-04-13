@@ -16,6 +16,7 @@
 #include <vfs.h>
 #include <printf_debug.h>
 #include <sys_init_fun.h>
+#include <vfs.h>
 
 #if CONFIG_SHELL_EN
 
@@ -449,6 +450,12 @@ static struct command resident_command_6[] =
 		.command_name = "reboot",
 		.f = shell_reboot,
 	}
+#if CONFIG_VFS
+	,{
+		.command_name = "rename",
+		.f = shell_rename,
+	}
+#endif
 #if CONFIG_MODULE
 	,{
 		.command_name = "insmod",
@@ -540,6 +547,7 @@ static void shell_pre(void)
 #endif
 	ASSERT(FUN_EXECUTE_SUCCESSFULLY == error);
 	using_shell_buffer_ptr = &main_shell_buffer;
+	update_para_arv_vector();
 }
 
 extern void __init_command_n_ptr_hash_array(void);

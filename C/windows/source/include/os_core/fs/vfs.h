@@ -35,7 +35,7 @@ struct inode_operations
 {
 	int (*inode_open)(struct file *file_ptr);
 	int (*inode_close)(struct file *file_ptr);
-	int (*change_name)(struct inode *inode_ptr,struct dentry *dentry_ptr);
+	int (*change_name)(struct inode *inode_ptr,struct dentry *dentry_ptr,const char *new_name);
 	int (*refresh)(struct inode *inode_ptr,struct dentry *dentry_ptr);
 	int (*add_sub_file)(struct dentry *dentry_ptr,const char *file_name);
 	int (*add_sub_folder)(struct dentry *dentry_ptr,const char *folder_name);
@@ -279,7 +279,7 @@ struct inode *_inode_alloc_and_init(
 	struct file_operations *file_operations_ptr,
 	UINT32 flag);
 
-int rename(struct file *file_ptr,const char *name);
+int rename(struct dentry *dentry_ptr,const char *name);
 
 int has_same_name_file(struct dentry *dentry_ptr,const char *file_name);
 struct dentry *_find_dentry(const char *path);
@@ -321,5 +321,8 @@ void shell_mkdir(int argc, char const *argv[]);
 void shell_rm(int argc, char const *argv[]);
 void shell_rmdir(int argc, char const *argv[]);
 void shell_vfs_echo(char const *argv[]); /* argc == 4 argc[3] == ">" or ">>" */
+void shell_rename(int argc, char const *argv[]);
+
+void update_para_arv_vector(void);
 
 #endif

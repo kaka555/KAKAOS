@@ -120,10 +120,11 @@ int default_inode_close(struct file *file_ptr)
 	return FUN_EXECUTE_SUCCESSFULLY;
 }
 
-int default_change_name(struct inode *inode_ptr,struct dentry *dentry_ptr)
+int default_change_name(struct inode *inode_ptr,struct dentry *dentry_ptr,const char *new_name)
 {
 	(void)inode_ptr;
 	(void)dentry_ptr;
+	(void)new_name;
 	return FUN_EXECUTE_SUCCESSFULLY;
 }
 
