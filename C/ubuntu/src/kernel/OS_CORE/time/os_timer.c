@@ -51,7 +51,7 @@ static void __INIT __init_timer(void)
 	{
 		ka_printf("init_delay_heap error!\nstop booting.....\n");
 		while(1);
-		//os stop here
+		/* os stop here */
 	}
 }
 INIT_FUN(__init_timer,1);
@@ -297,6 +297,7 @@ void timer_task(void *para)
 							}
 							break;
 						}
+						/* FALL THROUGH */
 					case TIMER_PERIODIC:
 						timer_ptr->wake_time += timer_ptr->period;
 						heap_push(&timer_heap,timer_ptr);

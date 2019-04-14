@@ -16,6 +16,7 @@
 #include <double_linked_list.h>
 #include <module.h>
 #include <sys_init_fun.h>
+#include <printf_debug.h>
 
 #if CONFIG_SHELL_EN
 	static TCB TCB_shell;
@@ -51,6 +52,8 @@ extern unsigned long _ka_init_fun_begin1;
 extern unsigned long _ka_init_fun_end1;
 extern unsigned long _ka_init_fun_begin2;
 extern unsigned long _ka_init_fun_end2;
+extern unsigned long _ka_init_fun_begin3;
+extern unsigned long _ka_init_fun_end3;
 static void __INIT os_init(void)
 {	
 	bsp_init();
@@ -72,6 +75,11 @@ static void __INIT os_init(void)
 	{
 		(*(struct_init_fun_ptr->fun))(); /* execute all the init function */
 	}
+	for(struct_init_fun_ptr=(struct init_fun *)(&_ka_init_fun_begin3);
+		struct_init_fun_ptr != (struct init_fun *)(&_ka_init_fun_end3);++struct_init_fun_ptr)
+	{
+		(*(struct_init_fun_ptr->fun))(); /* execute all the init function */
+	}
 }
 
 void __INIT _os_start(void)
@@ -83,13 +91,11 @@ void __INIT _os_start(void)
 /*==============register initialization task===================*/
 	if(0 != task_init_ready(&TCB_count_init,1023,PRIO_MAX-2,5,"count_init",count_init,NULL))
 	{
-		ka_printf("os_init_fail...stop booting...\n");
-		while(1);
+		panic("create task count_init error\n");
 	}
 	if(0 != task_init_ready(&TCB_idle,128,PRIO_MAX-1,HZ,"idle",idle,NULL))
 	{
-		ka_printf("os_init_fail...stop booting...\n");
-		while(1);
+		panic("create task idle error\n");
 	}
 /*==================================================================*/
 
@@ -102,62 +108,52 @@ void __INIT _os_start(void)
 	set_inter_stack();
 	OSStartHighRdy();
 	ASSERT(0);
-	while(1);/*should no go here*/
+	panic("should not go to the end of function _os_start()");/*should no go here*/
 }
 
 void start_kernel(void)
 {
 	CPU_IntDis();
 	_os_start();
-	while(1)
-	{
-		;/*should never go here;*/
-	}
+	panic("start_kernel() should not go here\n");
 }
 
 void task_start(void)
 {
 	if(0 != task_init_ready(&TCB_init,508,0,3,"init",thread_init,NULL))
 	{
-		ka_printf("os_init_fail...stop booting...\n");
-		while(1);
+		panic("create task init error\n");
 	}
 #if CONFIG_SHELL_EN
 	if(0 != task_init_ready(&TCB_shell,1000,0,3,"shell",shell,NULL))
 	{
-		ka_printf("os_init_fail...stop booting...\n");
-		while(1);
+		panic("create task shell error\n");
 	}
 	#endif
 #if CONFIG_TIMER_EN
 	if(0 != task_init_ready(&TCB_timer_task,256,0,3,"timer_task",timer_task,NULL))
 	{
-		ka_printf("os_init_fail...stop booting...\n");
-		while(1);
+		panic("create task timer_task error\n");
 	}
 #endif
 	if(0 != task_creat_ready(500,4,5,"three",three,NULL,NULL))
 	{
-		ka_printf("os_init_fail...stop booting...\n");
-		while(1);
+		panic("create task three error\n");
 	}
 /*
 	if(0 != task_creat_ready(256,5,5,"four",four,NULL,NULL))
 	{
-		ka_printf("os_init_fail...stop booting...\n");
-		while(1);
+		panic("create task four error\n");
 	}
 */
 /*
 	if(0 != task_creat_ready(256,6,5,"five",five,NULL,NULL))
 	{
-		ka_printf("os_init_fail...stop booting...\n");
-		while(1);
+		panic("create task five error\n");
 	}
 	if(0 != task_creat_ready(256,7,3,"six",six,NULL,NULL))
 	{
-		ka_printf("os_init_fail...stop booting...\n");
-		while(1);
+		panic("create task six error\n");
 	}
 */
 }

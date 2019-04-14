@@ -452,9 +452,8 @@ void _ka_free(void *ptr)
 		CPU_CRITICAL_EXIT();
 		return;
 	}
-	ka_printf("not in a slab or record,fatal error\n");
 	ASSERT(0);/*should not go here*/
-	while(1);
+	panic("not in a slab or record,fatal error, goto the end of function _ka_free()\n");
 }
 
 #if CONFIG_MALLOC && CONFIG_ASSERT_DEBUG
@@ -466,6 +465,12 @@ void KA_FREE(void *ptr,const char* file_name,unsigned line,const char* function_
 		ka_printf(
 			"free addr not in os legal scope. Error file: %s,line :%u, function name: %s\n",
 			file_name,line,function_name);
+		ASSERT(0);
+		return ;
+	}
+	if(NULL == ptr)
+	{
+		ka_printf("warning: try to free a pointer whose value is NULL\n");
 		ASSERT(0);
 		return ;
 	}

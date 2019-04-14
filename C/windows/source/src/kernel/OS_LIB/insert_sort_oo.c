@@ -14,7 +14,7 @@ int insert_sort_insert_into(struct insert_sort_data *data_ptr,struct insert_sort
 	list_for_each(pos,&insert_sort_entity_ptr->data_list_head)
 	{
 		buffer = list_entry(pos,struct insert_sort_data,data_list);
-		if(insert_sort_entity_ptr->compare(buffer,data_ptr) > 0) // data_ptr<=buffer
+		if(insert_sort_entity_ptr->compare(buffer,data_ptr) > 0) /* data_ptr<=buffer */
 		{
 			/*insert it here*/
 			list_add_tail(&data_ptr->data_list,pos);

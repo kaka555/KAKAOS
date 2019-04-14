@@ -107,7 +107,7 @@ int _task_change_prio(TCB *TCB_ptr,TASK_PRIO_TYPE prio)
 	{
 		case STATE_READY:
 			_delete_TCB_from_ready(TCB_ptr);break;
-		//add other state's handling code here
+		/* add other state's handling code here */
 		/*
 		 *
 		 *
@@ -125,7 +125,7 @@ int _task_change_prio(TCB *TCB_ptr,TASK_PRIO_TYPE prio)
 	{
 		case STATE_READY:
 			_insert_ready_TCB(TCB_ptr);break;
-		//add other state's handling code here
+		/* add other state's handling code here */
 		/*
 		 *
 		 *

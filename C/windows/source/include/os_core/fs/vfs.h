@@ -4,7 +4,7 @@
 #include <double_linked_list.h>
 #include <mutex.h>
 
-#define BLOCK_SIZE 1024 /* bytes */
+//#define BLOCK_SIZE 1024 /* bytes */
 
 struct file;
 struct dentry_operations;
@@ -33,13 +33,17 @@ struct file_operations
  */
 struct inode_operations 
 {
-	int (*change_name)(struct inode *inode_ptr,struct dentry *dentry_ptr);
+	int (*inode_open)(struct file *file_ptr);
+	int (*inode_close)(struct file *file_ptr);
+	int (*change_name)(struct inode *inode_ptr,struct dentry *dentry_ptr,const char *new_name);
 	int (*refresh)(struct inode *inode_ptr,struct dentry *dentry_ptr);
-	int (*floader_cmp_file_name)(struct inode *inode_ptr,const char *name);
-	int (*add_sub_file)(struct inode *inode_ptr,const char *file_name);
-	int (*add_sub_folder)(struct inode *inode_ptr,const char *folder_name);
-	int (*read_data)(struct inode *inode_ptr,void *store_ptr,unsigned int len,unsigned int offset);
-	int (*write_data)(struct inode *inode_ptr,void *data_ptr,unsigned int len,unsigned int offset);
+	int (*add_sub_file)(struct dentry *dentry_ptr,const char *file_name);
+	int (*add_sub_folder)(struct dentry *dentry_ptr,const char *folder_name);
+	int (*read_data)(struct file *file_ptr,void *store_ptr,unsigned int len,unsigned int offset);
+	int (*write_data)(struct file *file_ptr,void *data_ptr,unsigned int len,unsigned int offset);
+	int (*remove)(struct dentry *dentry_ptr);
+	int (*remove_dir)(struct dentry *dentry_ptr);
+	int (*get_size)(struct file *file_ptr); /* fill the file_len of struct file */
 };
 
 /*************the element 'flag' of struct dentry*************/
@@ -250,16 +254,6 @@ static inline int inode_is_dirty(struct inode *inode_ptr)
 int _iget(struct dentry *d_parent); 
 int _iput(struct dentry *d_parent); 
 
-/* DENTRY_INIT_FLAG */
-#define FLAG_DEFAULT  			0x00
-/* BIT 0 */
-#define FLAG_FILE 				0x00
-#define FLAG_FOLDER 			0x01
-/* BIT 1 */
-#define FLAG_NAME_CHANGE_EN  	0x00
-#define FLAG_NAME_CHANGE_DIS 	0x02
-/*************************************/
-
 struct dentry *_dentry_alloc_and_init(
 	struct dentry *parent_ptr,  
 	struct inode *inode_ptr,
@@ -267,9 +261,9 @@ struct dentry *_dentry_alloc_and_init(
 	UINT32 flag
 	);
 #define _file_dentry_alloc_and_init(parent_ptr,inode_ptr,name,flag) \
-	_dentry_alloc_and_init(parent_ptr,inode_ptr,name,FLAG_FILE|flag)
+	_dentry_alloc_and_init(parent_ptr,inode_ptr,name,FLAG_DENTRY_FILE|flag)
 #define _folder_dentry_alloc_and_init(parent_ptr,inode_ptr,name,flag) \
-	_dentry_alloc_and_init(parent_ptr,inode_ptr,name,FLAG_FOLDER|flag)
+	_dentry_alloc_and_init(parent_ptr,inode_ptr,name,FLAG_DENTRY_FOLDER|flag)
 
 struct file *_file_alloc_and_init(
 	struct dentry *dentry_ptr,UINT32 flag);
@@ -285,11 +279,16 @@ struct inode *_inode_alloc_and_init(
 	struct file_operations *file_operations_ptr,
 	UINT32 flag);
 
-int rename(struct file *file_ptr,const char *name);
+int rename(struct dentry *dentry_ptr,const char *name);
 
 int has_same_name_file(struct dentry *dentry_ptr,const char *file_name);
 struct dentry *_find_dentry(const char *path);
-int add_folder(const char *path,const char *folder_name,struct file_operations *file_operations_ptr);
+int ___add_file(struct dentry *target_dentry_ptr,const char *file_name,
+	struct file_operations *file_operations_ptr);
+int ___add_folder(struct dentry *target_dentry_ptr,const char *folder_name,
+	struct file_operations *file_operations_ptr);
+int add_folder(const char *path,const char *folder_name,
+	struct file_operations *file_operations_ptr);
 int add_file(const char *path,const char *file_name,struct file_operations *file_operations_ptr);
 int delete_file(const char *path);
 int delete_folder(const char *path);
@@ -322,5 +321,8 @@ void shell_mkdir(int argc, char const *argv[]);
 void shell_rm(int argc, char const *argv[]);
 void shell_rmdir(int argc, char const *argv[]);
 void shell_vfs_echo(char const *argv[]); /* argc == 4 argc[3] == ">" or ">>" */
+void shell_rename(int argc, char const *argv[]);
+
+void update_para_arv_vector(void);
 
 #endif

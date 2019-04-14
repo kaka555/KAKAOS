@@ -158,8 +158,10 @@ extern void show_get_size(void);
 extern int add_page_alloc_record(unsigned int level,void *ptr);
 /******************
 * 
-*   insmod -name=dmodule -prio=20 -stacksize=2048 -filesize=4096 // install a new module
-*   insmod -r -name=dmodule -prio=20 -stacksize=2048 -filesize=4096//restart a module which has been loaded 
+*   insmod -name=dmodule -prio=20 -stacksize=2048 -filesize=4096 
+*   		--> install a new module
+*   insmod -r -name=dmodule -prio=20 -stacksize=2048 -filesize=4096 
+*   		-->restart a module which has been loaded 
 *
 *******************/
 
@@ -237,7 +239,7 @@ void shell_module(int argc, char const *argv[])
 		ka_printf("module change buffer error\n");
 		goto out1;
 	}
-	struct shell_buffer *sys_shell_buffer_ptr = _change_shell_buffer(&shell_buffer); // save the system input buffer
+	struct shell_buffer *sys_shell_buffer_ptr = _change_shell_buffer(&shell_buffer); /* save the system input buffer */
 	_set_module_buffer(buf);
 
 	ka_printf("now transfer the module,input 'end' to end the transformation\n");
@@ -304,11 +306,11 @@ void shell_check_memory(int argc, char const *argv[])
 		return ;
 	}
 	UINT32 num = ka_atoi(argv[1]);
-//	if(in_os_memory((void *)num) < 0)
-//	{
-//		ka_printf("add 0x%p is not a legal address\n",(void *)num);
-//		return ;
-//	}
+	if(in_os_memory((void *)num) < 0)
+	{
+		ka_printf("add 0x%p is not a legal address\n",(void *)num);
+		return ;
+	}
 	ka_printf("value of add 0x%p is 0x%x\n",(void *)num,*(UINT32 *)num);
 }
 #endif

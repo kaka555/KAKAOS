@@ -323,7 +323,7 @@ static Page_Num_Type _alloc_page(unsigned int level)
 {
 	ASSERT((level>=1)&&(level<=current_used_buddy_ptr->info.max_level));
 	Page_Num_Type buffer;
-	if(NOTHING != current_used_buddy_ptr->order_array[level-1]) //if this level has free page
+	if(NOTHING != current_used_buddy_ptr->order_array[level-1]) /* if this level has free page */
 	{
 		Page_Num_Type index = current_used_buddy_ptr->order_array[level-1];
 		buffer = current_used_buddy_ptr->link_body[index].num;

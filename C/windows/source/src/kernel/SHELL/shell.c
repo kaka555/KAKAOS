@@ -16,6 +16,7 @@
 #include <vfs.h>
 #include <printf_debug.h>
 #include <sys_init_fun.h>
+#include <vfs.h>
 
 #if CONFIG_SHELL_EN
 
@@ -192,11 +193,7 @@ void _put_in_shell_buffer(char c)  /* deal with input layer*/
 		ka_printf("%s",using_shell_buffer_ptr->buffer);
 		return ;
 	}
-	if(IS_UPPER(c)) 
-	{
-		c += 'a' - 'A'; 
-	}
-	else if(0x08 == c) /* backspace key*/
+	if(0x08 == c) /* backspace key*/
 	{
 		if(using_shell_buffer_ptr->index > 0)
 		{
@@ -453,6 +450,12 @@ static struct command resident_command_6[] =
 		.command_name = "reboot",
 		.f = shell_reboot,
 	}
+#if CONFIG_VFS
+	,{
+		.command_name = "rename",
+		.f = shell_rename,
+	}
+#endif
 #if CONFIG_MODULE
 	,{
 		.command_name = "insmod",
@@ -544,6 +547,7 @@ static void shell_pre(void)
 #endif
 	ASSERT(FUN_EXECUTE_SUCCESSFULLY == error);
 	using_shell_buffer_ptr = &main_shell_buffer;
+	update_para_arv_vector();
 }
 
 extern void __init_command_n_ptr_hash_array(void);
@@ -654,7 +658,6 @@ void shell(void *para)
 #endif
 	(void)para;
 	int result;
-	//task_delete(&TCB_count_init);
 	shell_pre();
 	ka_printf("%s\n","/*************************");
 	ka_printf("%s\n","*");

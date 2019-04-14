@@ -20,7 +20,7 @@ int _device_register(const char *dev_name,struct file_operations *file_operation
 	{
 		return -ERROR_NO_MEM;
 	}
-	struct dentry *buffer = _file_dentry_alloc_and_init(dev_dentry_ptr,inode_ptr,dev_name,FLAG_DEFAULT);
+	struct dentry *buffer = _file_dentry_alloc_and_init(dev_dentry_ptr,inode_ptr,dev_name,FLAG_DENTRY_DEFAULT);
 	if(NULL == buffer)
 	{
 		ka_free(inode_ptr);

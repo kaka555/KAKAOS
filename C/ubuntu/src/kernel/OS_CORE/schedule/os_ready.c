@@ -93,7 +93,7 @@ TCB *_get_highest_prio_ready_TCB(void)
 	TCB *TCB_ptr;
 	/*according to the ready_group and ready_table,get the highest priority
 	**than, get the respoding head of the same-priority TCB_list*/
-	y = unmap[ready_group]; // the lowest '1' bit
+	y = unmap[ready_group]; /* the lowest '1' bit */
 	head = _get_from_TCB_list(y*8*sizeof(READY_TABLE_TYPE) + unmap[ready_table[y]]);
 	list_for_each(pos,head)
 	{

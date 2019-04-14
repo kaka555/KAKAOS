@@ -279,7 +279,7 @@
               <MiscControls>-mcpu=cortex-m3 -mthumb</MiscControls>
               <Define>STM32F10X_HD, USE_STDPERIPH_DRIVER</Define>
               <Undefine></Undefine>
-              <IncludePath>..\..\source\include;..\..\source\include\os_base;..\..\source\include\os_core;..\..\source\include\os_core\schedule;..\..\source\include\shell;..\..\source\include\os_lib;..\..\source\main;..\..\source\src\FWlib\src;..\..\source\src\kernel\OS_CORE;..\..\source\src\kernel\OS_CORE\schedule;..\..\source\src\kernel\OS_CPU;..\..\source\src\kernel\OS_CPU\bsp;..\..\source\src\kernel\OS_LIB;..\..\source\src\kernel\shell;..\..\source\include;..\..\source\include\os_core\dmodule;..\..\source\include\os_core\ipc;..\..\source\include\os_core\time;..\..\source\include\os_core\fs;..\..\source\src\stm32f103\FWlib\inc;..\..\source\include\os_cpu\stm32f103;..\..\source\include\os_cpu\stm32f103\bsp;..\..\source\src\kernel\OS_CPU\stm32f103\FWlib\inc</IncludePath>
+              <IncludePath>..\..\source\include;..\..\source\include\os_base;..\..\source\include\os_core;..\..\source\include\os_core\schedule;..\..\source\include\shell;..\..\source\include\os_lib;..\..\source\main;..\..\source\src\FWlib\src;..\..\source\src\kernel\OS_CORE;..\..\source\src\kernel\OS_CORE\schedule;..\..\source\src\kernel\OS_CPU;..\..\source\src\kernel\OS_CPU\bsp;..\..\source\src\kernel\OS_LIB;..\..\source\src\kernel\shell;..\..\source\include;..\..\source\include\os_core\dmodule;..\..\source\include\os_core\ipc;..\..\source\include\os_core\time;..\..\source\include\os_core\fs;..\..\source\src\stm32f103\FWlib\inc;..\..\source\include\os_cpu\stm32f103;..\..\source\include\os_cpu\stm32f103\bsp;..\..\source\src\kernel\OS_CPU\stm32f103\FWlib\inc;..\..\source\src\kernel\OS_CORE\fs\FATFS</IncludePath>
             </VariousControls>
           </Carm>
           <Aarm>
@@ -602,6 +602,11 @@
               <FileType>1</FileType>
               <FilePath>..\..\source\src\kernel\OS_CORE\fs\device.c</FilePath>
             </File>
+            <File>
+              <FileName>fat.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\source\src\kernel\OS_CORE\fs\fat.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -641,6 +646,11 @@
               <FileName>stm32_bsp.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\source\src\kernel\OS_CPU\stm32f103\bsp\stm32_bsp.c</FilePath>
+            </File>
+            <File>
+              <FileName>bsp_spi_flash.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\source\src\kernel\OS_CPU\stm32f103\bsp\flash\bsp_spi_flash.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -851,6 +861,21 @@
               <FileName>stm32f10x_wwdg.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\source\src\kernel\OS_CPU\stm32f103\FWlib\src\stm32f10x_wwdg.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>fat</GroupName>
+          <Files>
+            <File>
+              <FileName>diskio.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\source\src\kernel\OS_CORE\fs\FATFS\diskio.c</FilePath>
+            </File>
+            <File>
+              <FileName>ff.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\source\src\kernel\OS_CORE\fs\FATFS\ff.c</FilePath>
             </File>
           </Files>
         </Group>
