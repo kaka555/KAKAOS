@@ -13,7 +13,7 @@ int heap_init(struct little_heap *const little_heap_ptr,
 	void (*index_change_record)(Vector *Vector_ptr,int index))
 {
 	int ret;
-	ASSERT((NULL != little_heap_ptr) && (NULL != cmp));
+	ASSERT((NULL != little_heap_ptr) && (NULL != cmp),ASSERT_INPUT);
 	ret = Vector_init(&little_heap_ptr->data,size,MKVFMUL(2));
 	if(ret < 0)
 	{
@@ -54,14 +54,14 @@ static void heap_adjust(struct little_heap *little_heap_ptr,int index,int size)
 /*add a data with push_data_ptr, then adjust the heap */
 int heap_push(struct little_heap *little_heap_ptr,void *push_data_ptr)
 {
-	ASSERT((NULL != little_heap_ptr) && (NULL != push_data_ptr));
+	ASSERT((NULL != little_heap_ptr) && (NULL != push_data_ptr),ASSERT_INPUT);
 	int ret,i,size;
 	ret = Vector_push_back(&little_heap_ptr->data,push_data_ptr);
 	if(little_heap_ptr->index_change_record)
 	{
 		little_heap_ptr->index_change_record(&little_heap_ptr->data,heap_get_cur_len(little_heap_ptr)-1);
 	}
-	ASSERT(0 == ret);
+	ASSERT(0 == ret,ASSERT_PARA_AFFIRM);
 	if(ret < 0)
 		return ret;
 	size = get_Vector_cur_len(&little_heap_ptr->data) - 1;
@@ -74,7 +74,7 @@ int heap_push(struct little_heap *little_heap_ptr,void *push_data_ptr)
 
 int heap_get_index_data_safe(struct little_heap *little_heap_ptr,void **data_store_ptr,unsigned int index)
 {
-	ASSERT((NULL != little_heap_ptr) && (NULL != data_store_ptr));
+	ASSERT((NULL != little_heap_ptr) && (NULL != data_store_ptr),ASSERT_INPUT);
 	if(get_Vector_cur_len(&little_heap_ptr->data) <= index)
 	{
 		return -ERROR_USELESS_INPUT;
@@ -86,7 +86,7 @@ int heap_get_index_data_safe(struct little_heap *little_heap_ptr,void **data_sto
 /*get the data with index "index" with data *data_store_ptr; then adjust the heap*/
 int heap_set_index_data(struct little_heap *little_heap_ptr,unsigned int index,void *data_store_ptr)
 {
-	ASSERT((NULL != little_heap_ptr) && (NULL != data_store_ptr));
+	ASSERT((NULL != little_heap_ptr) && (NULL != data_store_ptr),ASSERT_INPUT);
 	Vector_set_index_data(&little_heap_ptr->data,index,data_store_ptr);
 	unsigned int size = get_Vector_cur_len(&little_heap_ptr->data) - 1;
 	unsigned int i;
@@ -100,8 +100,8 @@ int heap_set_index_data(struct little_heap *little_heap_ptr,unsigned int index,v
 /*remove the data with index "index" and store it into *data_store_ptr; then adjust the heap*/
 int heap_remove_index_data(struct little_heap *little_heap_ptr,unsigned int index,void *data_store_ptr)
 {
-	ASSERT(NULL != little_heap_ptr);
-	ASSERT(0 != index);
+	ASSERT(NULL != little_heap_ptr,ASSERT_INPUT);
+	ASSERT(0 != index,ASSERT_INPUT);
 	int ret,i;
 	ret = Vector_remove_index_data(&little_heap_ptr->data,index,data_store_ptr);
 	if(ret < 0)
@@ -120,7 +120,7 @@ int heap_remove_index_data(struct little_heap *little_heap_ptr,unsigned int inde
 /*erase the data between index "from" to "to"; then adjust the heap*/
 int heap_erase_data(struct little_heap *little_heap_ptr,unsigned int from,unsigned int to)
 {
-	ASSERT(NULL != little_heap_ptr);
+	ASSERT(NULL != little_heap_ptr,ASSERT_INPUT);
 	int ret,i;
 	ret = Vector_erase_data(&little_heap_ptr->data,from,to);
 	if(ret < 0)

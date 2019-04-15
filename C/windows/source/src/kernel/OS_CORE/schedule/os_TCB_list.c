@@ -22,7 +22,7 @@ INIT_FUN(__init_TCB_list,1);
 /*os must set the task_state before using this function*/
 void _register_in_TCB_list(TCB *TCB_ptr)
 {
-	ASSERT(NULL != TCB_ptr);
+	ASSERT(NULL != TCB_ptr,ASSERT_INPUT);
 	list_add(&TCB_ptr->same_prio_list,&TCB_list[TCB_ptr->prio].head);
 	++(TCB_list[TCB_ptr->prio].TCB_num);
 }
@@ -39,58 +39,58 @@ void _register_in_TCB_list(TCB *TCB_ptr)
  */
 int _delete_from_TCB_list(TCB *TCB_ptr)
 {
-	ASSERT(NULL != TCB_ptr);
+	ASSERT(NULL != TCB_ptr,ASSERT_INPUT);
 	struct list_head *pos;
 	list_for_each(pos,&TCB_list[TCB_ptr->prio].head)
 	{
 		if(&TCB_ptr->same_prio_list == pos)
 		{
 			list_del(pos);
-			ASSERT(0 != TCB_list[TCB_ptr->prio].TCB_num);
+			ASSERT(0 != TCB_list[TCB_ptr->prio].TCB_num,ASSERT_PARA_AFFIRM);
 			--(TCB_list[TCB_ptr->prio].TCB_num);
 			return FUN_EXECUTE_SUCCESSFULLY;
 		}
 	}
 	/*should not go here*/
-	ASSERT(0);
+	ASSERT(0,ASSERT_BAD_EXE_LOCATION);
 	return ERROR_USELESS_INPUT;
 }
 
 struct list_head *_get_from_TCB_list(unsigned int index)
 {
-	ASSERT(index < PRIO_MAX);
+	ASSERT(index < PRIO_MAX,ASSERT_INPUT);
 	return &TCB_list[index].head;
 }
 
 unsigned char _get_ready_num_from_TCB_list(unsigned int index)
 {
-	ASSERT(index < PRIO_MAX);
+	ASSERT(index < PRIO_MAX,ASSERT_INPUT);
 	return TCB_list[index].ready_num;
 }
 
 void _decrease_ready_num(unsigned int index)
 {
-	ASSERT(index < PRIO_MAX);
-	ASSERT(0 != TCB_list[index].ready_num);
+	ASSERT(index < PRIO_MAX,ASSERT_INPUT);
+	ASSERT(0 != TCB_list[index].ready_num,ASSERT_PARA_AFFIRM);
 	--(TCB_list[index].ready_num);
 }
 
 void _increase_ready_num(unsigned int index)
 {
-	ASSERT(index < PRIO_MAX);
+	ASSERT(index < PRIO_MAX,ASSERT_INPUT);
 	++(TCB_list[index].ready_num);
 }
 
 void _decrease_TCB_num(unsigned int index)
 {
-	ASSERT(index < PRIO_MAX);
-	ASSERT(0 != TCB_list[index].TCB_num);
+	ASSERT(index < PRIO_MAX,ASSERT_INPUT);
+	ASSERT(0 != TCB_list[index].TCB_num,ASSERT_INPUT);
 	--(TCB_list[index].TCB_num);
 }
 
 void _increase_TCB_num(unsigned int index)
 {
-	ASSERT(index < PRIO_MAX);
+	ASSERT(index < PRIO_MAX,ASSERT_INPUT);
 	++(TCB_list[index].TCB_num);
 }
 
@@ -180,7 +180,7 @@ void shell_stack_check(int argc, char const *argv[])
 				if(0 != *(unsigned int *)(TCB_ptr->stack_end))
 				{
 					ka_printf("stack full!!!!\n");
-					ASSERT(0);
+					ASSERT(0,ASSERT_BAD_EXE_LOCATION);
 				}
 #endif
 				while(0 == *ptr)

@@ -31,8 +31,8 @@ int _must_check _task_init(
 	void *para,
 	TASK_STATE state)
 {
-	ASSERT(prio < PRIO_MAX);
-	ASSERT((NULL != name) && (NULL != TCB_ptr) && (NULL != function));
+	ASSERT(prio < PRIO_MAX,ASSERT_INPUT);
+	ASSERT((NULL != name) && (NULL != TCB_ptr) && (NULL != function),ASSERT_INPUT);
 	stack_size &= (~0x03);/* according to CPU : 32bit?64bit*/
 	TCB_ptr->stack_end = (STACK_TYPE *)ka_malloc(stack_size);
 	if(NULL == TCB_ptr->stack_end)
@@ -41,7 +41,7 @@ int _must_check _task_init(
 	}
 	TCB_ptr->stack_size = stack_size;
 	TCB_ptr->stack = (STACK_TYPE *)TCB_ptr->stack_end + stack_size/4 - 1;
-	ASSERT((char *)(TCB_ptr->stack) == (char *)(TCB_ptr->stack_end) + stack_size - 4);
+	ASSERT((char *)(TCB_ptr->stack) == (char *)(TCB_ptr->stack_end) + stack_size - 4,ASSERT_PARA_AFFIRM);
 	ka_memset(TCB_ptr->stack_end,0,stack_size);
 	set_register((void **)&TCB_ptr->stack,function,delete_myself,para);
 	TCB_ptr->prio = prio;
@@ -69,8 +69,8 @@ TCB *_must_check _task_creat(
 	void *para,
 	TASK_STATE state)
 {
-	ASSERT((prio < PRIO_MAX));
-	ASSERT((NULL != name) && (NULL != function));
+	ASSERT((prio < PRIO_MAX),ASSERT_INPUT);
+	ASSERT((NULL != name) && (NULL != function),ASSERT_INPUT);
 	TCB *TCB_ptr = ka_malloc(sizeof(TCB));
 	if(NULL == TCB_ptr)
 	{
@@ -96,8 +96,8 @@ TCB *_must_check _task_creat(
 
 int _task_change_prio(TCB *TCB_ptr,TASK_PRIO_TYPE prio)
 {
-	ASSERT(prio < PRIO_MAX);
-	ASSERT(NULL != TCB_ptr);
+	ASSERT(prio < PRIO_MAX,ASSERT_INPUT);
+	ASSERT(NULL != TCB_ptr,ASSERT_INPUT);
 	CPU_SR_ALLOC();
 	CPU_CRITICAL_ENTER();
 	/*1 step: delete it from TCB_list*/
@@ -156,7 +156,7 @@ EXPORT_SYMBOL(task_change_prio);
 
 int _task_delete(TCB *TCB_ptr)
 {
-	ASSERT(NULL != TCB_ptr);
+	ASSERT(NULL != TCB_ptr,ASSERT_INPUT);
 	CPU_SR_ALLOC();
 	CPU_CRITICAL_ENTER();
 	_delete_from_TCB_list(TCB_ptr);
@@ -184,7 +184,7 @@ int _task_delete(TCB *TCB_ptr)
 	}
 	if(is_module(TCB_ptr))
 	{
-		ASSERT(TCB_ptr->dynamic_module_ptr);
+		ASSERT(TCB_ptr->dynamic_module_ptr,ASSERT_PARA_AFFIRM);
 		set_module_state(TCB_ptr->dynamic_module_ptr,MODULE_STATE_LOADED);
 	}
 	if(TCB_ptr == OSTCBCurPtr)

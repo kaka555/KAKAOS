@@ -20,7 +20,7 @@ static void __INIT __init_shell_debug(void)
 #else
 	init_MCB(&MCB_for_shell_debug,0,MCB_TYPE_FLAG_BINARY);
 #endif
-	ASSERT(FUN_EXECUTE_SUCCESSFULLY == error);
+	ASSERT(FUN_EXECUTE_SUCCESSFULLY == error,ASSERT_PARA_AFFIRM);
 	__init_shell_variable_array();
 }
 INIT_FUN(__init_shell_debug,1);
@@ -39,7 +39,7 @@ void insert_break_point(const char* file_name,unsigned line,const char* function
 #else
 		_p(&MCB_for_shell_debug,MCB_FLAG_WAIT,0);
 #endif
-		ASSERT(FUN_EXECUTE_SUCCESSFULLY == error);
+		ASSERT(FUN_EXECUTE_SUCCESSFULLY == error,ASSERT_PARA_AFFIRM);
 	}
 }
 
@@ -104,7 +104,7 @@ struct shell_variable *find_in_variable_array(const char *name)
 		return NULL;
 	}
 	unsigned int hash_value = shell_v_hash(name);
-	ASSERT(hash_value < SHELL_V_ARRAY_SIZE);
+	ASSERT(hash_value < SHELL_V_ARRAY_SIZE,ASSERT_PARA_AFFIRM);
 	struct shell_variable *shell_variable_ptr;
 	struct singly_list_head *pos;
 	singly_list_for_each(pos,&variable_array[hash_value])
@@ -120,7 +120,7 @@ struct shell_variable *find_in_variable_array(const char *name)
 
 void shell_insert_variable(char *name,void *data_ptr,Shell_V_Type type)
 {
-	ASSERT(NULL != data_ptr);
+	ASSERT(NULL != data_ptr,ASSERT_INPUT);
 	ASSERT( (SHELL_V_TYPE_UINT8  == type)  ||
 			(SHELL_V_TYPE_UINT16 == type)  ||
 			(SHELL_V_TYPE_UINT32 == type)  ||
@@ -129,9 +129,9 @@ void shell_insert_variable(char *name,void *data_ptr,Shell_V_Type type)
 			(SHELL_V_TYPE_INT32  == type)  ||
 			(SHELL_V_TYPE_FLOAT  == type)  ||
 			(SHELL_V_TYPE_DOUBLE == type)  ||
-			(SHELL_V_TYPE_CHAR   == type)   ) ;
+			(SHELL_V_TYPE_CHAR   == type),ASSERT_INPUT   ) ;
 	struct shell_variable *ptr = ka_malloc(sizeof(struct shell_variable));
-	ASSERT(NULL != ptr);
+	ASSERT(NULL != ptr,ASSERT_INPUT);
 	ptr->shell_v_name = name;
 	ptr->shell_v_type = type;
 	ptr->data_ptr = data_ptr;
@@ -151,7 +151,7 @@ unsigned int shell_v_hash(const char *name)
 
 void shell_v_display(struct shell_variable *shell_variable_ptr)
 {
-	ASSERT(shell_variable_ptr != NULL);
+	ASSERT(shell_variable_ptr != NULL,ASSERT_INPUT);
 	switch(shell_variable_ptr->shell_v_type)
 	{
 		case SHELL_V_TYPE_UINT8:
@@ -178,21 +178,21 @@ void shell_v_display(struct shell_variable *shell_variable_ptr)
 			break ;
 
 		default :
-			ASSERT(0);
+			ASSERT(0,ASSERT_BAD_EXE_LOCATION);
 			break ;
 	}
 }
 
 void shell_v_display_addr(struct shell_variable *shell_variable_ptr)
 {
-	ASSERT(shell_variable_ptr != NULL);
+	ASSERT(shell_variable_ptr != NULL,ASSERT_INPUT);
 	ka_printf("variable %s address is %p\n",shell_variable_ptr->shell_v_name,shell_variable_ptr->data_ptr);
 }
 
 void shell_v_write(struct shell_variable *shell_variable_ptr,const char *input_buffer_ptr)
 {
-	ASSERT(NULL != shell_variable_ptr);
-	ASSERT(NULL != input_buffer_ptr);
+	ASSERT(NULL != shell_variable_ptr,ASSERT_INPUT);
+	ASSERT(NULL != input_buffer_ptr,ASSERT_INPUT);
 	switch(shell_variable_ptr->shell_v_type)
 	{
 		case SHELL_V_TYPE_UINT8:
@@ -232,7 +232,7 @@ void shell_v_write(struct shell_variable *shell_variable_ptr,const char *input_b
 		}
 
 		default :
-			ASSERT(0);
+			ASSERT(0,ASSERT_BAD_EXE_LOCATION);
 			break ;
 	}
 }

@@ -64,8 +64,8 @@ int sys_delay(unsigned int delay_ticks_num,TASK_STATE state)
 	ASSERT((STATE_DELAY == state) 						|| 
 		   (STATE_WAIT_MCB_TIMEOUT == state) 			|| 
 		   (STATE_WAIT_MESSAGE_QUEUE_TIMEOUT == state) 	|| 
-		   (STATE_PUT_MESSAGE_QUEUE_TIMEOUT == state));
-	ASSERT(0 != delay_ticks_num);
+		   (STATE_PUT_MESSAGE_QUEUE_TIMEOUT == state),ASSERT_INPUT);
+	ASSERT(0 != delay_ticks_num,ASSERT_INPUT);
 	if(!((STATE_DELAY == state) || (STATE_WAIT_MCB_TIMEOUT == state) || 
 		(STATE_WAIT_MESSAGE_QUEUE_TIMEOUT == state) || (STATE_PUT_MESSAGE_QUEUE_TIMEOUT == state)))
 	{
@@ -104,7 +104,7 @@ int sys_suspend(TASK_STATE state)
 		   (STATE_WAIT_MCB_FOREVER == state) 			||
 		   (STATE_WAIT_MESSAGE_QUEUE_FOREVER == state) 	||
 		   (STATE_PUT_MESSAGE_QUEUE_FOREVER == state)	||
-		   (STATE_WAIT_MUTEX_FOREVER == state));
+		   (STATE_WAIT_MUTEX_FOREVER == state),ASSERT_INPUT);
 	if(!((STATE_SUSPEND_NORMAL == state) 				||
 		   (STATE_WAIT_MCB_FOREVER == state) 			||
 		   (STATE_WAIT_MESSAGE_QUEUE_FOREVER == state) 	||

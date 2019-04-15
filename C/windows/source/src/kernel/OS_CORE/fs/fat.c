@@ -114,7 +114,7 @@ static int fat_get_size(struct file *file_ptr)
 
 static int fat_inode_open(struct file *file_ptr)
 {
-	ASSERT(NULL != file_ptr);
+	ASSERT(NULL != file_ptr,ASSERT_INPUT);
 	FIL *fnew = ka_malloc(sizeof(FIL));
 	if(NULL == fnew)
 	{
@@ -135,7 +135,7 @@ static int fat_inode_open(struct file *file_ptr)
 
 static int fat_inode_close(struct file *file_ptr)
 {
-	ASSERT(NULL != file_ptr);
+	ASSERT(NULL != file_ptr,ASSERT_INPUT);
 	f_close(file_ptr->private_data);
 	ka_free(file_ptr->private_data);
 	return FUN_EXECUTE_SUCCESSFULLY;
@@ -143,8 +143,8 @@ static int fat_inode_close(struct file *file_ptr)
 
 static int fat_refresh(struct inode *inode_ptr,struct dentry *dentry_ptr)
 {
-	ASSERT(NULL != inode_ptr);
-	ASSERT(NULL != dentry_ptr);
+	ASSERT(NULL != inode_ptr,ASSERT_INPUT);
+	ASSERT(NULL != dentry_ptr,ASSERT_INPUT);
 	KA_WARN(DEBUG_FAT,"fat_refresh\n");
 	fat_cd(dentry_ptr);
 	if(is_folder(dentry_ptr))
@@ -157,9 +157,9 @@ static int fat_refresh(struct inode *inode_ptr,struct dentry *dentry_ptr)
 
 static int fat_change_name(struct inode *inode_ptr,struct dentry *dentry_ptr,const char *new_name)
 {
-	ASSERT(NULL != inode_ptr);
-	ASSERT(NULL != dentry_ptr);
-	ASSERT(NULL != new_name);
+	ASSERT(NULL != inode_ptr,ASSERT_INPUT);
+	ASSERT(NULL != dentry_ptr,ASSERT_INPUT);
+	ASSERT(NULL != new_name,ASSERT_INPUT);
 	FRESULT error;
 	KA_WARN(DEBUG_FAT,"fat_change_name\n");
 	fat_cd(dentry_ptr->d_parent);
@@ -188,8 +188,8 @@ static int fat_change_name(struct inode *inode_ptr,struct dentry *dentry_ptr,con
 
 static int fat_add_sub_file(struct dentry *dentry_ptr,const char *file_name)
 {
-	ASSERT(NULL != dentry_ptr);
-	ASSERT(NULL != file_name);
+	ASSERT(NULL != dentry_ptr,ASSERT_INPUT);
+	ASSERT(NULL != file_name,ASSERT_INPUT);
 	KA_WARN(DEBUG_FAT,"fat_add_sub_file\n");
 	fat_cd(dentry_ptr);
 	path_add(file_name);
@@ -213,8 +213,8 @@ static int fat_add_sub_file(struct dentry *dentry_ptr,const char *file_name)
 
 static int fat_add_sub_folder(struct dentry *dentry_ptr,const char *folder_name)
 {
-	ASSERT(NULL != dentry_ptr);
-	ASSERT(NULL != folder_name);
+	ASSERT(NULL != dentry_ptr,ASSERT_INPUT);
+	ASSERT(NULL != folder_name,ASSERT_INPUT);
 	KA_WARN(DEBUG_FAT,"fat_add_sub_file\n");
 	fat_cd(dentry_ptr);
 	path_add(folder_name);
@@ -232,15 +232,15 @@ static int fat_add_sub_folder(struct dentry *dentry_ptr,const char *folder_name)
 
 static int fat_read_data(struct file *file_ptr,void *store_ptr,unsigned int len,unsigned int offset)
 {
-	ASSERT(NULL != file_ptr);
-	ASSERT(NULL != store_ptr);
+	ASSERT(NULL != file_ptr,ASSERT_INPUT);
+	ASSERT(NULL != store_ptr,ASSERT_INPUT);
 	FRESULT error;
 	int num;
 	KA_WARN(DEBUG_FAT,"fat_read_data\n");
-	ASSERT(offset <= file_ptr->file_len);
+	ASSERT(offset <= file_ptr->file_len,ASSERT_PARA_AFFIRM);
 	if(f_lseek(file_ptr->private_data,offset))
 	{
-		ASSERT(0);
+		ASSERT(0,ASSERT_BAD_EXE_LOCATION);
 		return -ERROR_DISK;
 	}
 	error = f_read(file_ptr->private_data,store_ptr,len,(unsigned int *)&num);
@@ -250,15 +250,15 @@ static int fat_read_data(struct file *file_ptr,void *store_ptr,unsigned int len,
 
 static int fat_write_data(struct file *file_ptr,void *data_ptr,unsigned int len,unsigned int offset)
 {
-	ASSERT(NULL != file_ptr);
-	ASSERT(NULL != data_ptr);
+	ASSERT(NULL != file_ptr,ASSERT_INPUT);
+	ASSERT(NULL != data_ptr,ASSERT_INPUT);
 	FRESULT error;
 	int num;
 	KA_WARN(DEBUG_FAT,"fat_write_data\n");
-	ASSERT(offset <= file_ptr->file_len);
+	ASSERT(offset <= file_ptr->file_len,ASSERT_PARA_AFFIRM);
 	if(f_lseek(file_ptr->private_data,offset))
 	{
-		ASSERT(0);
+		ASSERT(0,ASSERT_BAD_EXE_LOCATION);
 		return -ERROR_DISK;
 	}
 	error = f_write(file_ptr->private_data,data_ptr,len,(unsigned int *)&num);
@@ -268,7 +268,7 @@ static int fat_write_data(struct file *file_ptr,void *data_ptr,unsigned int len,
 
 static int fat_remove(struct dentry *dentry_ptr)
 {
-	ASSERT(NULL != dentry_ptr);
+	ASSERT(NULL != dentry_ptr,ASSERT_INPUT);
 	fat_cd(dentry_ptr->d_parent);
 	path_add(dentry_ptr->name);
 	int error = f_unlink(fat_path);
@@ -282,7 +282,7 @@ static int fat_remove(struct dentry *dentry_ptr)
 
 static int fat_remove_dir(struct dentry *dentry_ptr)
 {
-	ASSERT(NULL != dentry_ptr);
+	ASSERT(NULL != dentry_ptr,ASSERT_INPUT);
 	fat_cd(dentry_ptr->d_parent);
 	path_add(dentry_ptr->name);
 	int error = f_unlink(fat_path);
@@ -332,7 +332,8 @@ void __init_fat(void)
 	if(error < 0)
 	{
 		ka_printf("fat init fail,error code is %d\n",error);
-		ASSERT(0);
+		ASSERT(0,ASSERT_BAD_EXE_LOCATION);
+		panic("fat initialization fail\n");
 	}
 }
 INIT_FUN(__init_fat,3); /* excute after initialization of vfs */

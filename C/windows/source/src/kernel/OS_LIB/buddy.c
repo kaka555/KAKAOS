@@ -68,22 +68,22 @@ static struct order_link *_alloc_order_link(void) /*allocate a struct order_link
  then, insert the struct order_link into corresponding level's order_array*/
 static void _add_to_order_array(unsigned int level,Page_Num_Type page_num)
 {
-	ASSERT((level>=1)&&(level<=current_used_buddy_ptr->info.max_level));
-	ASSERT(0 == (((0x0001<<(level-1))-1) & page_num));
+	ASSERT((level>=1)&&(level<=current_used_buddy_ptr->info.max_level),ASSERT_INPUT);
+	ASSERT(0 == (((0x0001<<(level-1))-1) & page_num),ASSERT_INPUT);
 	UINT16 first = current_used_buddy_ptr->order_link_first;
 	struct order_link *order_link_ptr = _alloc_order_link();
-	ASSERT(NULL != order_link_ptr);
+	ASSERT(NULL != order_link_ptr,ASSERT_PARA_AFFIRM);
 	order_link_ptr->num  = page_num;
 	order_link_ptr->next = current_used_buddy_ptr->order_array[level-1];
-	ASSERT(order_link_ptr->num <= current_used_buddy_ptr->info.page_num-1);
-	ASSERT((order_link_ptr->next <= current_used_buddy_ptr->info.page_num-1) || (NOTHING == order_link_ptr->next));
+	ASSERT(order_link_ptr->num <= current_used_buddy_ptr->info.page_num-1,ASSERT_PARA_AFFIRM);
+	ASSERT((order_link_ptr->next <= current_used_buddy_ptr->info.page_num-1) || (NOTHING == order_link_ptr->next),ASSERT_PARA_AFFIRM);
 	current_used_buddy_ptr->order_array[level-1] = first;
 }
 
 static Page_Num_Type _buddy_page_num(unsigned int level,Page_Num_Type page_num)
 {
-	ASSERT((level>=1)&&(level<=current_used_buddy_ptr->info.max_level));
-	ASSERT(0 == (((0x0001<<(level-1))-1) & page_num));
+	ASSERT((level>=1)&&(level<=current_used_buddy_ptr->info.max_level),ASSERT_INPUT);
+	ASSERT(0 == (((0x0001<<(level-1))-1) & page_num),ASSERT_INPUT);
 	if(page_num & (0x0001<<(level-1))) /*it's buddy is ahead of it*/
 		return (page_num - sizeof_level(level));
 	else 
@@ -95,12 +95,12 @@ static void _add_to_order_array_loop(unsigned int level,Page_Num_Type page_num)
 	/*non - recursion*/
 	unsigned int i;
 	Page_Num_Type buddy_page_num;
-	ASSERT((level>=1)&&(level<=current_used_buddy_ptr->info.max_level));
-	ASSERT(0 == (((0x0001<<(level-1))-1) & page_num));
+	ASSERT((level>=1)&&(level<=current_used_buddy_ptr->info.max_level),ASSERT_INPUT);
+	ASSERT(0 == (((0x0001<<(level-1))-1) & page_num),ASSERT_INPUT);
 	for(i=level;i<=current_used_buddy_ptr->info.max_level;++i)
 	{
-		ASSERT((i<=current_used_buddy_ptr->info.max_level)&&(i>=1));
-		ASSERT(0 == (page_num & ((0x0001<<(i-1))-1)));
+		ASSERT((i<=current_used_buddy_ptr->info.max_level)&&(i>=1),ASSERT_PARA_AFFIRM);
+		ASSERT(0 == (page_num & ((0x0001<<(i-1))-1)),ASSERT_PARA_AFFIRM);
 		if(current_used_buddy_ptr->info.max_level == i) /* if it is the max level, just insert it into chain order_array[max_level]*/
 		{
 			_add_to_order_array(i,page_num);
@@ -111,7 +111,7 @@ static void _add_to_order_array_loop(unsigned int level,Page_Num_Type page_num)
 			buddy_page_num = _buddy_page_num(i,page_num); /* get it's buddy page's num*/
 			if(0 == _check_flag(i,page_num)) /* if flag is 0 , means it's buddy is in chain order_array[level]*/
 			{
-				ASSERT(0 == assert_in_chain(i,buddy_page_num)); /*assert it's buddy is in chain "order_array"*/
+				ASSERT(0 == assert_in_chain(i,buddy_page_num),ASSERT_PARA_AFFIRM); /*assert it's buddy is in chain "order_array"*/
 				_delete_from_chain(i,buddy_page_num); /* delete it's buddy from chain order_array[level] so that they can combine into a big block to insert into the next level*/
 				if(page_num < buddy_page_num)
 				{
@@ -127,7 +127,7 @@ static void _add_to_order_array_loop(unsigned int level,Page_Num_Type page_num)
 			}
 			else /*if(1 == _check_flag(i,page_num))*/  /* if flag is not 0 , means it's buddy is in chain order_array[level]*/
 			{
-				ASSERT(-1 == assert_in_chain(i,buddy_page_num));
+				ASSERT(-1 == assert_in_chain(i,buddy_page_num),ASSERT_PARA_AFFIRM);
 				_add_to_order_array(i,page_num); /* insert into chain order_array[level]*/
 				break ;
 			}
@@ -144,16 +144,16 @@ static inline void *_add_of_num(UINT16 page_num)
 /* XOR the corresponding bit*/
 static void _deal_with_flag_alloc(unsigned int level,Page_Num_Type page_num)
 {
-	ASSERT((level>=1)&&(level<=current_used_buddy_ptr->info.max_level));
-	ASSERT(0 == (((0x0001<<(level-1))-1) & page_num));
+	ASSERT((level>=1)&&(level<=current_used_buddy_ptr->info.max_level),ASSERT_INPUT);
+	ASSERT(0 == (((0x0001<<(level-1))-1) & page_num),ASSERT_INPUT);
 	unsigned int index = page_num>>level;
 	current_used_buddy_ptr->flag[(current_used_buddy_ptr->level_flag_base[level-1]+index)/(sizeof(Flag_Type)*8)] ^= (0x80000000>>((current_used_buddy_ptr->level_flag_base[level-1]+index)%(sizeof(Flag_Type)*8)));
 }
 
 static void _return_link_body(Page_Num_Type buffer) /*return struct order_link "link_body[buffer]"*/
 {
-	ASSERT(buffer<=current_used_buddy_ptr->info.page_num-1);
-	ASSERT(NOTHING == current_used_buddy_ptr->order_link_flag[buffer]);
+	ASSERT(buffer<=current_used_buddy_ptr->info.page_num-1,ASSERT_INPUT);
+	ASSERT(NOTHING == current_used_buddy_ptr->order_link_flag[buffer],ASSERT_INPUT);
 	current_used_buddy_ptr->order_link_flag[buffer] = current_used_buddy_ptr->order_link_first;
 	current_used_buddy_ptr->order_link_first = buffer; /*change list's head*/
 }
@@ -232,7 +232,7 @@ void __buddy_init(const struct dev_mem_para *dev_mem_para_ptr)
 	}
 	else
 	{
-		ASSERT(TYPE_SYS == dev_mem_para_ptr->type);
+		ASSERT(TYPE_SYS == dev_mem_para_ptr->type,ASSERT_PARA_AFFIRM);
 		buddy_ptr = (struct buddy *)(&_ebss + 1);
 	}
 	current_used_buddy_ptr = buddy_ptr;
@@ -311,7 +311,7 @@ void __buddy_init(const struct dev_mem_para *dev_mem_para_ptr)
 			goto final_step;
 		}
 	}
-	ASSERT(0);/*allocation fail*/
+	ASSERT(0,ASSERT_BAD_EXE_LOCATION);/*allocation fail*/
 final_step:
 /*add the struct buddy to OS*/
 	add_to_os(buddy_ptr);
@@ -321,7 +321,7 @@ final_step:
 **  else, get NOTHING*/
 static Page_Num_Type _alloc_page(unsigned int level)
 {
-	ASSERT((level>=1)&&(level<=current_used_buddy_ptr->info.max_level));
+	ASSERT((level>=1)&&(level<=current_used_buddy_ptr->info.max_level),ASSERT_INPUT);
 	Page_Num_Type buffer;
 	if(NOTHING != current_used_buddy_ptr->order_array[level-1]) /* if this level has free page */
 	{
@@ -533,8 +533,8 @@ static inline Page_Num_Type _get_page_num(void *ptr) /*according to adress*/
 
 static inline int _check_flag(unsigned int level,Page_Num_Type page_num) 
 {
-	ASSERT((level>=1)&&(level<=current_used_buddy_ptr->info.max_level));
-	ASSERT(0 == (((0x0001<<(level-1))-1) & page_num));
+	ASSERT((level>=1)&&(level<=current_used_buddy_ptr->info.max_level),ASSERT_INPUT);
+	ASSERT(0 == (((0x0001<<(level-1))-1) & page_num),ASSERT_INPUT);
 	int index = page_num>>level;
 	return (current_used_buddy_ptr->flag[(current_used_buddy_ptr->level_flag_base[level-1]+index)/(sizeof(Flag_Type)*8)]
 		&(0x80000000>>((current_used_buddy_ptr->level_flag_base[level-1]+index)%(sizeof(Flag_Type)*8))));
@@ -543,9 +543,9 @@ static inline int _check_flag(unsigned int level,Page_Num_Type page_num)
 static void _delete_from_chain(unsigned int level,Page_Num_Type page_num)
 {
 	Page_Num_Type buffer1,buffer2;
-	ASSERT((level>=1)&&(level<=current_used_buddy_ptr->info.max_level));
-	ASSERT(0 == (((0x0001<<(level-1))-1) & page_num));
-	ASSERT(NOTHING != current_used_buddy_ptr->order_array[level-1]);
+	ASSERT((level>=1)&&(level<=current_used_buddy_ptr->info.max_level),ASSERT_INPUT);
+	ASSERT(0 == (((0x0001<<(level-1))-1) & page_num),ASSERT_INPUT);
+	ASSERT(NOTHING != current_used_buddy_ptr->order_array[level-1],ASSERT_PARA_AFFIRM);
 	buffer1 = current_used_buddy_ptr->order_array[level-1];
 	if(page_num == current_used_buddy_ptr->link_body[buffer1].num) /*delete from linked-list*/
 	{
@@ -567,22 +567,22 @@ static void _delete_from_chain(unsigned int level,Page_Num_Type page_num)
 			buffer1 = buffer2;
 			buffer2 = current_used_buddy_ptr->link_body[buffer2].next;
 		}
-		ASSERT(0);
+		ASSERT(0,ASSERT_BAD_EXE_LOCATION);
 	}
 }
 
 static void _return_page(void *ptr,unsigned int level) /*return page to system*/
 {
+	ASSERT(NULL != ptr,ASSERT_INPUT);
 	if(NULL == ptr)
 	{
 		return ;
 	}
-	ASSERT(NULL != ptr);
-	ASSERT((level>=1)&&(level<=current_used_buddy_ptr->info.max_level));
+	ASSERT((level>=1)&&(level<=current_used_buddy_ptr->info.max_level),ASSERT_INPUT);
 	ASSERT(((UINT32)current_used_buddy_ptr->buddy_space_start_ptr <= (UINT32)ptr)
 		&&
-		((UINT32)&current_used_buddy_ptr->buddy_space_start_ptr[BUDDY_SPACE_SIZE] >= (UINT32)ptr));
-	ASSERT(0 == in_buddy_range(ptr));
+		((UINT32)&current_used_buddy_ptr->buddy_space_start_ptr[BUDDY_SPACE_SIZE] >= (UINT32)ptr),ASSERT_INPUT);
+	ASSERT(0 == in_buddy_range(ptr),ASSERT_INPUT);
 	Page_Num_Type page_num = _get_page_num(ptr);
 	_deal_with_flag_alloc(level,page_num);  /*XOR the flag bit*/
 	_add_to_order_array_loop(level,page_num); /* then going to loop to finish the return*/
@@ -693,8 +693,8 @@ void _return_power10_page(void *ptr)
 #if CONFIG_DEBUG_ON
 static int _check_buddy_flag_level(unsigned int level,unsigned int offset)
 {
-	ASSERT((level>=1) && (level<=10));
-	ASSERT((offset<((current_used_buddy_ptr->info.page_num>>1)/sizeof_level(level))));
+	ASSERT((level>=1) && (level<=10),ASSERT_INPUT);
+	ASSERT((offset<((current_used_buddy_ptr->info.page_num>>1)/sizeof_level(level))),ASSERT_INPUT);
 	unsigned int num = 0;
 	unsigned int page_num = sizeof_level(level)*2*offset;
 	if(NOTHING == current_used_buddy_ptr->order_array[level-1])
@@ -735,7 +735,7 @@ static int _check_buddy_flag_level(unsigned int level,unsigned int offset)
 static unsigned int _get_level(unsigned int array_index,unsigned int array_offset)
 {
 	unsigned int num = array_index * 8 * sizeof(Flag_Type) + array_offset;
-	ASSERT(num < 1024);
+	ASSERT(num < 1024,ASSERT_INPUT);
 	unsigned int i;
 	for(i=0;i<current_used_buddy_ptr->info.level_flag_base_size;++i)
 	{
@@ -744,7 +744,7 @@ static unsigned int _get_level(unsigned int array_index,unsigned int array_offse
 			return i;
 		}
 	}
-	ASSERT(current_used_buddy_ptr->info.page_num - 2 == num);
+	ASSERT(current_used_buddy_ptr->info.page_num - 2 == num,ASSERT_PARA_AFFIRM);
 	return current_used_buddy_ptr->info.max_level;
 }
 
@@ -856,7 +856,7 @@ void shell_buddy_debug(int argc, char const *argv[])
 	unsigned int j;
 	struct order_link buffer;
 	struct buddy *buddy_ptr = (struct buddy *)_get_os_buddy_ptr_head();
-	ASSERT(NULL != buddy_ptr);
+	ASSERT(NULL != buddy_ptr,ASSERT_PARA_AFFIRM);
 	j = 1;
 	while(NULL != buddy_ptr)
 	{

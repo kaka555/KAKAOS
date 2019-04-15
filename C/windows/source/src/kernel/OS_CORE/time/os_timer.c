@@ -71,7 +71,7 @@ int timer_init(
 	unsigned int period,
 	unsigned int num)
 {
-	ASSERT((NULL != timer_ptr) && (NULL != name) && (NULL != fun));
+	ASSERT((NULL != timer_ptr) && (NULL != name) && (NULL != fun),ASSERT_INPUT);
 	if((NULL == timer_ptr) || (NULL == name) || (NULL == fun))
 	{
 		OS_ERROR_PARA_MESSAGE_DISPLAY(timer_init,timer_ptr);
@@ -136,7 +136,7 @@ EXPORT_SYMBOL(timer_create);
  */
 int _timer_enable(struct timer *timer_ptr)
 {
-	ASSERT(NULL != timer_ptr);
+	ASSERT(NULL != timer_ptr,ASSERT_INPUT);
 	CPU_SR_ALLOC();
 	CPU_CRITICAL_ENTER();
 	timer_ptr->state = TIMER_ENABLE;
@@ -167,7 +167,7 @@ EXPORT_SYMBOL(timer_enable);
  */
 int _timer_disable(struct timer *timer_ptr)
 {
-	ASSERT(NULL != timer_ptr);
+	ASSERT(NULL != timer_ptr,ASSERT_INPUT);
 	CPU_SR_ALLOC();
 	CPU_CRITICAL_ENTER();
 	int ret = heap_remove_index_data(&timer_heap,timer_ptr->heap_position_index,NULL);
@@ -203,7 +203,7 @@ EXPORT_SYMBOL(timer_disable);
  */
 int _timer_delete(struct timer *timer_ptr)
 {
-	ASSERT(NULL != timer_ptr);
+	ASSERT(NULL != timer_ptr,ASSERT_INPUT);
 	CPU_SR_ALLOC();
 	CPU_CRITICAL_ENTER();
 	if(TIMER_ENABLE == timer_ptr->state)
@@ -240,7 +240,7 @@ EXPORT_SYMBOL(timer_delete);
  */
 int _get_timer_heap_top(struct timer **timer_ptr)
 {
-	ASSERT(NULL != timer_ptr);
+	ASSERT(NULL != timer_ptr,ASSERT_INPUT);
 	CPU_SR_ALLOC();
 	CPU_CRITICAL_ENTER();
 	int ret = heap_get_top_safe(&timer_heap,(void **)timer_ptr);
@@ -303,7 +303,7 @@ void timer_task(void *para)
 						heap_push(&timer_heap,timer_ptr);
 						break;
 					default:
-						ASSERT(0);
+						ASSERT(0,ASSERT_BAD_EXE_LOCATION);
 						break;
 				}
 			}
