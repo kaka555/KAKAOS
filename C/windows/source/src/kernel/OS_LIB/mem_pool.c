@@ -9,6 +9,7 @@
 #include <os_schedule.h>
 #include <double_linked_list.h>
 #include <buddy.h>
+#include <export.h>
 
 #if CONFIG_MEM_POOL
 
@@ -95,6 +96,7 @@ int init_mp(mp *mp_ptr,const char *name,void *start_add,UINT32 block_num,UINT32 
 	}
 	return _init_mp(mp_ptr,name,start_add,block_num,block_size);
 }
+EXPORT_SYMBOL(init_mp);
 
 int _create_mp(const char *name,UINT32 block_num,UINT32 block_size,mp **mp_store_ptr)
 {
@@ -157,6 +159,7 @@ int create_mp(const char *name,UINT32 block_num,UINT32 block_size,mp **mp_store_
 	}
 	return _create_mp(name,block_num,block_size,mp_store_ptr);
 }
+EXPORT_SYMBOL(create_mp);
 
 int _delete_mp(mp *mp_ptr)
 {
@@ -212,6 +215,7 @@ int delete_mp(mp *mp_ptr)
 	}
 	return _delete_mp(mp_ptr);
 }
+EXPORT_SYMBOL(delete_mp);
 
 /* allocate a block with no check */
 static void *mp_get_a_block(mp *mp_ptr)
@@ -288,6 +292,7 @@ void *mp_alloc(mp *mp_ptr,UINT32 wait_time)
 	}
 	return _mp_alloc(mp_ptr,wait_time);
 }
+EXPORT_SYMBOL(mp_alloc);
 
 void _mp_free(void *ptr)
 {
@@ -333,6 +338,7 @@ void mp_free(void *ptr)
 	}
 	_mp_free(ptr);
 }
+EXPORT_SYMBOL(mp_free);
 
 void shell_mem_pool(int argc, char const *argv[])
 {
