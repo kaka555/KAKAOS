@@ -50,16 +50,16 @@ int __open(struct dentry *dentry_ptr,enum FILE_FLAG flag,const struct file **fil
 			break;
 		default:
 			KA_WARN(DEBUG_TYPE_VFS,"function open flag error\n");
-			ASSERT(0);
+			ASSERT(0,ASSERT_BAD_EXE_LOCATION);
 			return -ERROR_LOGIC;
 	}
-	ASSERT(NULL != file_ptr);
+	ASSERT(NULL != file_ptr,ASSERT_PARA_AFFIRM);
 	if(dentry_ptr->d_inode->inode_ops->get_size(file_ptr))
 	{
 		KA_WARN(DEBUG_TYPE_VFS,"function open get_size error\n");
 		return -ERROR_DISK;
 	}
-	ASSERT(file_ptr->offset <= file_ptr->file_len);
+	ASSERT(file_ptr->offset <= file_ptr->file_len,ASSERT_PARA_AFFIRM);
 	CPU_SR_ALLOC();
 	CPU_CRITICAL_ENTER();
 	_dget(file_ptr->f_den);
@@ -78,7 +78,7 @@ int __open(struct dentry *dentry_ptr,enum FILE_FLAG flag,const struct file **fil
 
 int _open(const char *path,enum FILE_FLAG flag,const struct file **file_store_ptr)
 {
-	ASSERT(NULL != path);
+	ASSERT(NULL != path,ASSERT_INPUT);
 	struct dentry *dentry_ptr = _find_dentry(path);
 	if(NULL == dentry_ptr)
 	{
@@ -102,15 +102,15 @@ EXPORT_SYMBOL(ka_open);
 
 int _close(struct file *file_ptr)
 {
-	ASSERT(NULL != file_ptr);
-	ASSERT(file_ptr->offset <= file_ptr->file_len);
+	ASSERT(NULL != file_ptr,ASSERT_INPUT);
+	ASSERT(file_ptr->offset <= file_ptr->file_len,ASSERT_PARA_AFFIRM);
 	if(file_ptr->f_op->close)
 	{
 		file_ptr->f_op->close(file_ptr);
 	}
 	CPU_SR_ALLOC();
 	CPU_CRITICAL_ENTER();
-	ASSERT(_dref(file_ptr->f_den) > 0);
+	ASSERT(_dref(file_ptr->f_den) > 0,ASSERT_PARA_AFFIRM);
 	_dput(file_ptr->f_den);
 	ka_free(file_ptr);
 	CPU_CRITICAL_EXIT();
@@ -130,8 +130,8 @@ EXPORT_SYMBOL(ka_close);
 
 int _read(struct file *file_ptr,void *buffer,unsigned int len,enum llseek_from offset_flag)
 {
-	ASSERT((NULL != file_ptr) && (NULL != buffer) && (len > 0));
-	ASSERT(file_ptr->offset <= file_ptr->file_len);
+	ASSERT((NULL != file_ptr) && (NULL != buffer) && (len > 0),ASSERT_INPUT);
+	ASSERT(file_ptr->offset <= file_ptr->file_len,ASSERT_PARA_AFFIRM);
 	if(!(file_ptr->f_mode & FILE_MODE_READ))
 	{
 		KA_WARN(CONFIG_VFS,"file %s cannot be read\n",file_ptr->f_den->name);
@@ -149,7 +149,7 @@ int _read(struct file *file_ptr,void *buffer,unsigned int len,enum llseek_from o
 				file_ptr->offset = file_ptr->file_len;
 				break ;
 			default :
-				ASSERT(FILE_CURRENT == offset_flag);
+				ASSERT(FILE_CURRENT == offset_flag,ASSERT_PARA_AFFIRM);
 				break ;
 		}
 		int offset = file_ptr->f_op->read(file_ptr,buffer,len,file_ptr->offset);
@@ -164,7 +164,7 @@ int _read(struct file *file_ptr,void *buffer,unsigned int len,enum llseek_from o
 		{
 			file_ptr->offset += offset;
 		}
-		ASSERT(file_ptr->offset <= file_ptr->file_len);
+		ASSERT(file_ptr->offset <= file_ptr->file_len,ASSERT_PARA_AFFIRM);
 		return offset;
 	}
 	return 0;
@@ -186,8 +186,8 @@ EXPORT_SYMBOL(ka_read);
 
 int _write(struct file *file_ptr,void *buffer,unsigned int len,enum llseek_from offset_flag)
 {
-	ASSERT((NULL != file_ptr) && (NULL != buffer) && (len > 0));
-	ASSERT(file_ptr->offset <= file_ptr->file_len);
+	ASSERT((NULL != file_ptr) && (NULL != buffer) && (len > 0),ASSERT_INPUT);
+	ASSERT(file_ptr->offset <= file_ptr->file_len,ASSERT_PARA_AFFIRM);
 	if(!(file_ptr->f_mode & FILE_MODE_WRITE))
 	{
 		KA_WARN(CONFIG_VFS,"file %s cannot be written\n",file_ptr->f_den->name);
@@ -205,7 +205,7 @@ int _write(struct file *file_ptr,void *buffer,unsigned int len,enum llseek_from 
 				file_ptr->offset = file_ptr->file_len;
 				break ;
 			default :
-				ASSERT(FILE_CURRENT == offset_flag);
+				ASSERT(FILE_CURRENT == offset_flag,ASSERT_PARA_AFFIRM);
 				break ;
 		}
 		int offset = file_ptr->f_op->write(file_ptr,buffer,len,file_ptr->offset);
@@ -217,7 +217,7 @@ int _write(struct file *file_ptr,void *buffer,unsigned int len,enum llseek_from 
 			return offset;
 		}
 		file_ptr->f_den->d_inode->inode_ops->get_size(file_ptr);
-		ASSERT(file_ptr->offset <= file_ptr->file_len);
+		ASSERT(file_ptr->offset <= file_ptr->file_len,ASSERT_PARA_AFFIRM);
 		return offset;
 	}
 	return 0;
@@ -239,7 +239,7 @@ EXPORT_SYMBOL(ka_write);
 
 int _llseek(struct file *file_ptr,int offset,enum llseek_from from)
 {
-	ASSERT(NULL != file_ptr);
+	ASSERT(NULL != file_ptr,ASSERT_INPUT);
 	if(file_ptr->f_op->llseek)
 	{
 		return file_ptr->f_op->llseek(file_ptr,offset,from);
@@ -259,7 +259,7 @@ EXPORT_SYMBOL(ka_llseek);
 
 int _ioctl(struct file *file_ptr,int cmd,int args)
 {
-	ASSERT(NULL != file_ptr);
+	ASSERT(NULL != file_ptr,ASSERT_INPUT);
 	if(file_ptr->f_op->ioctl)
 	{
 		return file_ptr->f_op->ioctl(file_ptr,cmd,args);

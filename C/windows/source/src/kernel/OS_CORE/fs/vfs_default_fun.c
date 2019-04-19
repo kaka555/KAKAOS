@@ -7,7 +7,7 @@
 
 int default_open(struct file *file_ptr)
 {
-	ASSERT(NULL != file_ptr);
+	ASSERT(NULL != file_ptr,ASSERT_INPUT);
 	(void)file_ptr;
 	KA_WARN(DEBUG_TYPE_VFS,"open file %s\n",file_ptr->f_den->name);
 	if(file_ptr->f_den->d_inode->inode_ops->inode_open(file_ptr) < 0)
@@ -20,7 +20,7 @@ int default_open(struct file *file_ptr)
 
 int default_close(struct file *file_ptr)
 {
-	ASSERT(NULL != file_ptr);
+	ASSERT(NULL != file_ptr,ASSERT_INPUT);
 	(void)file_ptr;
 	KA_WARN(DEBUG_TYPE_VFS,"close file %s\n",file_ptr->f_den->name);
 	if(file_ptr->f_den->d_inode->inode_ops->inode_close(file_ptr) < 0)
@@ -33,7 +33,7 @@ int default_close(struct file *file_ptr)
 
 int default_read(struct file *file_ptr,void *buffer,unsigned int len,unsigned int offset)
 {
-	ASSERT((NULL != file_ptr) && (NULL != buffer) && (len > 0));
+	ASSERT((NULL != file_ptr) && (NULL != buffer) && (len > 0),ASSERT_INPUT);
 	ka_memset(buffer,0,len);
 	struct inode *inode_ptr = file_ptr->f_den->d_inode;
 	int num = inode_ptr->inode_ops->read_data(file_ptr,buffer,len,offset);
@@ -48,7 +48,7 @@ int default_read(struct file *file_ptr,void *buffer,unsigned int len,unsigned in
 
 int default_write(struct file *file_ptr,void *buffer,unsigned int len,unsigned int offset)
 {
-	ASSERT((NULL != file_ptr) && (NULL != buffer) && (len > 0));
+	ASSERT((NULL != file_ptr) && (NULL != buffer) && (len > 0),ASSERT_INPUT);
 	struct inode *inode_ptr = file_ptr->f_den->d_inode;
 	int num = inode_ptr->inode_ops->write_data(file_ptr,buffer,len,offset);
 	if(num < 0)
@@ -62,7 +62,7 @@ int default_write(struct file *file_ptr,void *buffer,unsigned int len,unsigned i
 
 int default_llseek(struct file *file_ptr,int offset,enum llseek_from from)
 {
-	ASSERT(NULL != file_ptr);
+	ASSERT(NULL != file_ptr,ASSERT_INPUT);
 	switch (from)
 	{
 		case FILE_START:
@@ -84,14 +84,14 @@ int default_llseek(struct file *file_ptr,int offset,enum llseek_from from)
 			return FUN_EXECUTE_SUCCESSFULLY;
 		default :
 			KA_WARN(DEBUG_TYPE_VFS,"llseek flag error\n");
-			ASSERT(0);
+			ASSERT(0,ASSERT_BAD_EXE_LOCATION);
 	}
 	return -ERROR_LOGIC;
 }
 
 int default_ioctl(struct file *file_ptr,int cmd,int args)
 {
-	ASSERT(NULL != file_ptr);
+	ASSERT(NULL != file_ptr,ASSERT_INPUT);
 	(void)file_ptr;
 	(void)cmd;
 	(void)args;

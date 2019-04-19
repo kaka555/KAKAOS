@@ -29,7 +29,7 @@ _init_MCB(
 	unsigned int flag
 	)
 {
-	ASSERT(NULL != MCB_ptr);
+	ASSERT(NULL != MCB_ptr,ASSERT_INPUT);
 	CPU_SR_ALLOC();
 	CPU_CRITICAL_ENTER();
 	MCB_ptr->resource_num = num;
@@ -73,7 +73,7 @@ EXPORT_SYMBOL(init_MCB);
 
 int _delete_MCB(MCB *MCB_ptr)
 {
-	ASSERT(NULL != MCB_ptr);
+	ASSERT(NULL != MCB_ptr,ASSERT_INPUT);
 	TCB *TCB_ptr;
 	CPU_SR_ALLOC();
 	CPU_CRITICAL_ENTER();/*enter critical*/
@@ -87,7 +87,7 @@ int _delete_MCB(MCB *MCB_ptr)
 		}
 		else
 		{
-			ASSERT(STATE_WAIT_MCB_TIMEOUT == TCB_ptr->task_state);
+			ASSERT(STATE_WAIT_MCB_TIMEOUT == TCB_ptr->task_state,ASSERT_PARA_AFFIRM);
 			_remove_from_delay_heap(TCB_ptr);
 		}
 		set_bad_state(TCB_ptr);
@@ -115,7 +115,7 @@ int _p(
 	unsigned int time
 )
 {
-	ASSERT(NULL != MCB_ptr);
+	ASSERT(NULL != MCB_ptr,ASSERT_INPUT);
 	CPU_SR_ALLOC();
 	CPU_CRITICAL_ENTER();/*enter critical*/
 	
@@ -190,12 +190,12 @@ EXPORT_SYMBOL(p);
 
 int _v(MCB *MCB_ptr)
 {
-	ASSERT(NULL != MCB_ptr);
+	ASSERT(NULL != MCB_ptr,ASSERT_INPUT);
 	CPU_SR_ALLOC();
 	CPU_CRITICAL_ENTER();/*enter critical*/
 	if((++(MCB_ptr->resource_num) > 1) && MCB_type_is_binary(MCB_ptr))
 	{
-		ASSERT(2 == MCB_ptr->resource_num);
+		ASSERT(2 == MCB_ptr->resource_num,ASSERT_PARA_AFFIRM);
 		MCB_ptr->resource_num = 1;
 	}
 	if(MCB_ptr->resource_num <= 0)
@@ -225,7 +225,7 @@ EXPORT_SYMBOL(v);
 
 void _clear_MCB_index(MCB *MCB_ptr)
 {
-	ASSERT(NULL != MCB_ptr);
+	ASSERT(NULL != MCB_ptr,ASSERT_INPUT);
 	CPU_SR_ALLOC();
 	CPU_CRITICAL_ENTER();
 	if(MCB_ptr->resource_num > 0)

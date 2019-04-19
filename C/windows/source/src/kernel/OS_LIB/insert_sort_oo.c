@@ -6,8 +6,8 @@
 /*public function for insert sort*/
 int insert_sort_insert_into(struct insert_sort_data *data_ptr,struct insert_sort_entity *insert_sort_entity_ptr)
 {
-	ASSERT(NULL != data_ptr);
-	ASSERT(NULL != insert_sort_entity_ptr);
+	ASSERT(NULL != data_ptr,ASSERT_INPUT);
+	ASSERT(NULL != insert_sort_entity_ptr,ASSERT_INPUT);
 	struct insert_sort_data *buffer;
 	struct list_head *pos;
 	/* find a suitable position to insert it*/
@@ -19,14 +19,14 @@ int insert_sort_insert_into(struct insert_sort_data *data_ptr,struct insert_sort
 			/*insert it here*/
 			list_add_tail(&data_ptr->data_list,pos);
 			++(insert_sort_entity_ptr->data_num);
-			ASSERT(insert_sort_entity_ptr->data_num > 0);
+			ASSERT(insert_sort_entity_ptr->data_num > 0,ASSERT_PARA_AFFIRM);
 			return FUN_EXECUTE_SUCCESSFULLY;
 		}
 	}
 	/*insert it at the end*/
 	list_add_tail(&data_ptr->data_list,pos);
 	++(insert_sort_entity_ptr->data_num);
-	ASSERT(insert_sort_entity_ptr->data_num > 0);
+	ASSERT(insert_sort_entity_ptr->data_num > 0,ASSERT_PARA_AFFIRM);
 	return FUN_EXECUTE_SUCCESSFULLY;
 }
 
@@ -34,8 +34,8 @@ int insert_sort_insert_into(struct insert_sort_data *data_ptr,struct insert_sort
 **else , return NULL*/
 struct insert_sort_data * insert_sort_find_data(struct insert_sort_entity *insert_sort_entity_ptr,void *data_ptr)
 {
-	ASSERT(NULL != data_ptr);
-	ASSERT(NULL != insert_sort_entity_ptr);
+	ASSERT(NULL != data_ptr,ASSERT_INPUT);
+	ASSERT(NULL != insert_sort_entity_ptr,ASSERT_INPUT);
 	struct list_head *pos;
 	struct insert_sort_data *buffer;
 	/*find from start to the end*/
@@ -53,8 +53,8 @@ struct insert_sort_data * insert_sort_find_data(struct insert_sort_entity *inser
 /*the same function with insert_sort_find_data() but also match id*/
 struct insert_sort_data * insert_sort_find_data_with_id(struct insert_sort_entity *insert_sort_entity_ptr,void *data_ptr,id_type identify_data)
 {
-	ASSERT(NULL != data_ptr);
-	ASSERT(NULL != insert_sort_entity_ptr);
+	ASSERT(NULL != data_ptr,ASSERT_INPUT);
+	ASSERT(NULL != insert_sort_entity_ptr,ASSERT_INPUT);
 	struct list_head *pos;
 	struct insert_sort_data *buffer;
 	list_for_each(pos,&insert_sort_entity_ptr->data_list_head)
@@ -72,7 +72,7 @@ struct insert_sort_data * insert_sort_find_data_with_id(struct insert_sort_entit
 **if there is no data in the list , then return NULL*/
 struct insert_sort_data * insert_sort_delete_head(struct insert_sort_entity *insert_sort_entity_ptr)
 {
-	ASSERT(NULL != insert_sort_entity_ptr);
+	ASSERT(NULL != insert_sort_entity_ptr,ASSERT_INPUT);
 	if(list_empty(&insert_sort_entity_ptr->data_list_head))
 	{
 		return NULL;
@@ -80,7 +80,7 @@ struct insert_sort_data * insert_sort_delete_head(struct insert_sort_entity *ins
 	struct list_head *pos;
 	pos = insert_sort_entity_ptr->data_list_head.next;
 	list_del(pos);
-	ASSERT(insert_sort_entity_ptr->data_num > 0);
+	ASSERT(insert_sort_entity_ptr->data_num > 0,ASSERT_PARA_AFFIRM);
 	--(insert_sort_entity_ptr->data_num);
 	return list_entry(pos,struct insert_sort_data,data_list);
 }
@@ -89,7 +89,7 @@ struct insert_sort_data * insert_sort_delete_head(struct insert_sort_entity *ins
 **if there is no data matched , then return NULL*/
 struct insert_sort_data * insert_sort_delete_data(struct insert_sort_entity *insert_sort_entity_ptr,void *data_ptr)
 {
-	ASSERT(NULL != insert_sort_entity_ptr);
+	ASSERT(NULL != insert_sort_entity_ptr,ASSERT_INPUT);
 	struct insert_sort_data *buffer_ptr;
 	buffer_ptr = insert_sort_find_data(insert_sort_entity_ptr,data_ptr);
 	if(NULL == buffer_ptr)/*no such data*/
@@ -99,7 +99,7 @@ struct insert_sort_data * insert_sort_delete_data(struct insert_sort_entity *ins
 	else
 	{
 		list_del(&buffer_ptr->data_list);
-		ASSERT(insert_sort_entity_ptr->data_num > 0);
+		ASSERT(insert_sort_entity_ptr->data_num > 0,ASSERT_PARA_AFFIRM);
 		--(insert_sort_entity_ptr->data_num);
 		return buffer_ptr;
 	}
@@ -111,7 +111,7 @@ struct insert_sort_data * insert_sort_delete_data_with_id(
 	void *data_ptr,
 	id_type identify_data)
 {
-	ASSERT(NULL != insert_sort_entity_ptr);
+	ASSERT(NULL != insert_sort_entity_ptr,ASSERT_INPUT);
 	struct insert_sort_data *buffer_ptr;
 	buffer_ptr = insert_sort_find_data_with_id(insert_sort_entity_ptr,data_ptr,identify_data);
 	if(NULL == buffer_ptr)/*no such data*/
@@ -121,7 +121,7 @@ struct insert_sort_data * insert_sort_delete_data_with_id(
 	else
 	{
 		list_del(&buffer_ptr->data_list);
-		ASSERT(insert_sort_entity_ptr->data_num > 0);
+		ASSERT(insert_sort_entity_ptr->data_num > 0,ASSERT_PARA_AFFIRM);
 		--(insert_sort_entity_ptr->data_num);
 		return buffer_ptr;
 	}
@@ -130,8 +130,8 @@ struct insert_sort_data * insert_sort_delete_data_with_id(
 /*initialize the struct insert_sort_data with data (*data_ptr)*/
 void init_insert_sort_data(struct insert_sort_data *insert_sort_data_ptr,void *data_ptr)
 {
-	ASSERT(NULL != insert_sort_data_ptr);
-	ASSERT(NULL != data_ptr);
+	ASSERT(NULL != insert_sort_data_ptr,ASSERT_INPUT);
+	ASSERT(NULL != data_ptr,ASSERT_INPUT);
 	insert_sort_data_ptr->data_ptr = data_ptr;
 	INIT_LIST_HEAD(&insert_sort_data_ptr->data_list);
 }
@@ -152,7 +152,7 @@ int init_insert_sort_entity(
 	int (*value_cmp)(void *data1,void *data2)
 )
 {
-	ASSERT(NULL != insert_sort_entity_ptr);
+	ASSERT(NULL != insert_sort_entity_ptr,ASSERT_INPUT);
 PRIVATE
 	insert_sort_entity_ptr->data_num             = 0;
 	insert_sort_entity_ptr->compare              = compare;
@@ -165,7 +165,7 @@ PRIVATE
 
 struct insert_sort_data * insert_sort_get_first_data_ptr(struct insert_sort_entity *insert_sort_entity_ptr)
 {
-	ASSERT(NULL != insert_sort_entity_ptr);
+	ASSERT(NULL != insert_sort_entity_ptr,ASSERT_INPUT);
 	if(list_empty(&insert_sort_entity_ptr->data_list_head))
 	{
 		return NULL;

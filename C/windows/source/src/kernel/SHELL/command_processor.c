@@ -44,7 +44,7 @@ struct command_processer *_get_command_processer(unsigned int num)
 unsigned int command_list_hash(const char *command_ptr)
 {
 	unsigned int sum = 0;
-	ASSERT(NULL != command_ptr);
+	ASSERT(NULL != command_ptr,ASSERT_INPUT);
 	while((*command_ptr != ' ') && (*command_ptr != 0x0d) && (*command_ptr != 0x0a) && ('\0' != *command_ptr))
 	{
 		sum += *command_ptr++ - 'a';
@@ -98,7 +98,7 @@ int _match_and_execute_command(
 
 static inline void insert_struct_command(struct command *command_ptr,struct singly_list_head *hash_array)
 {
-	ASSERT(NULL != command_ptr);
+	ASSERT(NULL != command_ptr,ASSERT_INPUT);
 	unsigned int hash = command_list_hash(command_ptr->command_name);
 	singly_list_add(&command_ptr->list,&hash_array[hash]);
 }

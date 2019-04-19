@@ -17,6 +17,7 @@
 #include <printf_debug.h>
 #include <sys_init_fun.h>
 #include <vfs.h>
+#include <mem_pool.h>
 
 #if CONFIG_SHELL_EN
 
@@ -38,7 +39,7 @@ static inline void clear_input_buffer(void)
 
 void _shell_buffer_wait_str(const char *str_ptr) /* thread will going to sleep*/
 {
-	ASSERT(NULL != str_ptr);
+	ASSERT(NULL != str_ptr,ASSERT_INPUT);
 #if CONFIG_ASSERT_DEBUG
 	int error;
 #endif
@@ -49,7 +50,7 @@ void _shell_buffer_wait_str(const char *str_ptr) /* thread will going to sleep*/
 #else 
 		_p(&MCB_for_shell,MCB_FLAG_WAIT,0);
 #endif
-		ASSERT(FUN_EXECUTE_SUCCESSFULLY == error);
+		ASSERT(FUN_EXECUTE_SUCCESSFULLY == error,ASSERT_PARA_AFFIRM);
 		if(0 == ka_strncmp(using_shell_buffer_ptr->buffer,str_ptr,ka_strlen(str_ptr)))
 		{
 			return ;
@@ -74,7 +75,7 @@ char *get_para_add(int argc, char const *argv[], const char *pre_name)
 
 struct shell_buffer *_change_shell_buffer(struct shell_buffer *shell_buffer_ptr)
 {
-	ASSERT(NULL != shell_buffer_ptr);
+	ASSERT(NULL != shell_buffer_ptr,ASSERT_INPUT);
 	CPU_SR_ALLOC();
 	CPU_CRITICAL_ENTER();
 	struct shell_buffer *buffer = using_shell_buffer_ptr;
@@ -89,7 +90,7 @@ int __init_shell_buffer(struct shell_buffer *shell_buffer_ptr,
 	unsigned int buffer_size) /* if buffer_reserve_ptr is NULL,means no reserve buffer*/
 {
 	ASSERT((shell_buffer_ptr != NULL) 	&& 
-			(buffer_ptr != NULL));
+			(buffer_ptr != NULL),ASSERT_INPUT);
 	shell_buffer_ptr->buffer 			= buffer_ptr;
 	shell_buffer_ptr->buffer_reserve 	= buffer_reserve_ptr;
 	shell_buffer_ptr->index 			= 0;
@@ -101,7 +102,7 @@ int __init_shell_buffer(struct shell_buffer *shell_buffer_ptr,
 extern unsigned int command_list_hash(const char *command_ptr);
 static void deal_with_tab(void)
 {
-	ASSERT(using_shell_buffer_ptr->buffer != NULL);
+	ASSERT(using_shell_buffer_ptr->buffer != NULL,ASSERT_INPUT);
 	unsigned int num = _process(using_shell_buffer_ptr->buffer);
 	if((num <= 1) || (num >= ARGV_SIZE)) /* useless input */
 	{
@@ -151,7 +152,7 @@ static void deal_with_tab(void)
 			}
 			else
 			{
-				ASSERT(1 == same);
+				ASSERT(1 == same,ASSERT_PARA_AFFIRM);
 				ka_strcpy(using_shell_buffer_ptr->buffer + using_shell_buffer_ptr->index,
 						struct_command_ptr->para_arv[index] + len);
 				using_shell_buffer_ptr->index += ka_strlen(struct_command_ptr->para_arv[index]) - len;
@@ -202,7 +203,7 @@ void _put_in_shell_buffer(char c)  /* deal with input layer*/
 		}
 		else
 		{
-			ASSERT(0 == using_shell_buffer_ptr->index);
+			ASSERT(0 == using_shell_buffer_ptr->index,ASSERT_PARA_AFFIRM);
 		}
 		return ;
 	}
@@ -270,7 +271,7 @@ static void redo(int argc, char const *argv[])
 	if(using_shell_buffer_ptr->buffer_reserve)
 	{
 		unsigned int i;
-		ASSERT(using_shell_buffer_ptr->index_reserve < BUFFER_SIZE);
+		ASSERT(using_shell_buffer_ptr->index_reserve < BUFFER_SIZE,ASSERT_PARA_AFFIRM);
 		ka_printf("redo command: ");
 		for(i=0;i<using_shell_buffer_ptr->index_reserve;++i)
 		{
@@ -322,6 +323,12 @@ static struct command resident_command_2[] =
 	{
 		.command_name = "ka",
 		.f = test,
+	},
+#endif
+#if CONFIG_MEM_POOL
+	{
+		.command_name = "mp",
+		.f = shell_mem_pool,
 	},
 #endif
 	{
@@ -539,13 +546,13 @@ static void shell_pre(void)
 #else
 	init_MCB(&MCB_for_shell,0,MCB_TYPE_FLAG_BINARY);
 #endif
-	ASSERT(FUN_EXECUTE_SUCCESSFULLY == error);
+	ASSERT(FUN_EXECUTE_SUCCESSFULLY == error,ASSERT_PARA_AFFIRM);
 #if CONFIG_ASSERT_DEBUG
 	error = __init_shell_buffer(&main_shell_buffer,main_buffer,main_buffer_reserve,BUFFER_SIZE);
 #else
 	__init_shell_buffer(&main_shell_buffer,main_buffer,main_buffer_reserve,BUFFER_SIZE);
 #endif
-	ASSERT(FUN_EXECUTE_SUCCESSFULLY == error);
+	ASSERT(FUN_EXECUTE_SUCCESSFULLY == error,ASSERT_PARA_AFFIRM);
 	using_shell_buffer_ptr = &main_shell_buffer;
 	update_para_arv_vector();
 }
@@ -672,7 +679,7 @@ void shell(void *para)
 #else
 		_p(&MCB_for_shell,MCB_FLAG_WAIT,0);
 #endif
-		ASSERT(FUN_EXECUTE_SUCCESSFULLY == error);
+		ASSERT(FUN_EXECUTE_SUCCESSFULLY == error,ASSERT_PARA_AFFIRM);
 		result = process(using_shell_buffer_ptr->buffer);
 		if(0 != result && using_shell_buffer_ptr->buffer_reserve)
 		{

@@ -46,7 +46,7 @@ void shell_memory(int argc, char const *argv[])
 	(void)argc;
 	(void)argv;
 	struct buddy *buddy_ptr = (struct buddy *)_get_os_buddy_ptr_head();
-	ASSERT(NULL != buddy_ptr);
+	ASSERT(NULL != buddy_ptr,ASSERT_PARA_AFFIRM);
 	unsigned int j = 0;
 	while(NULL != buddy_ptr)
 	{

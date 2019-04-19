@@ -38,7 +38,7 @@ void shell_modinfo(int argc, char const *argv[])
         {
             default :
                 PRINTF("bad state num is %d\n",dynamic_module_ptr->module_state);
-                ASSERT(0);ka_printf("\n"); break;
+                ASSERT(0,ASSERT_BAD_EXE_LOCATION);ka_printf("\n"); break;
             case MODULE_STATE_INIT:
                 ka_printf("STATE_INIT\n"); break;
             case MODULE_STATE_LOADED:
@@ -116,7 +116,7 @@ void _restart_module(
     {
         if(0 == ka_strcmp(name,dynamic_module_ptr->name))
         {
-            ASSERT(MODULE_STATE_LOADED == dynamic_module_ptr->module_state);
+            ASSERT(MODULE_STATE_LOADED == dynamic_module_ptr->module_state,ASSERT_PARA_AFFIRM);
             if(prio >= PRIO_MAX)
             {
                 prio = D_MODULE_DEFAULT_PRIO;
@@ -177,13 +177,13 @@ out:
 
 static int _remove_a_module(struct dynamic_module *dynamic_module_ptr)
 {
-    ASSERT(NULL != dynamic_module_ptr);
+    ASSERT(NULL != dynamic_module_ptr,ASSERT_INPUT);
     PRINTF("remove module name is %s\n",dynamic_module_ptr->name);
     CPU_SR_ALLOC();
     CPU_CRITICAL_ENTER();
     if(MODULE_STATE_RUN == dynamic_module_ptr->module_state)
     {
-        ASSERT(dynamic_module_ptr->thread_TCB_ptr);
+        ASSERT(dynamic_module_ptr->thread_TCB_ptr,ASSERT_PARA_AFFIRM);
         task_delete(dynamic_module_ptr->thread_TCB_ptr);
     }
     if(dynamic_module_ptr->exit)
@@ -595,7 +595,7 @@ int dlmodule_load_shared_object(struct dynamic_module* module, void *module_ptr)
     Elf32_Addr vstart_addr, vend_addr;
     int has_vstart = KA_FALSE;
 
-    ASSERT(module_ptr != NULL);
+    ASSERT(module_ptr != NULL,ASSERT_INPUT);
 
     /* get the ELF image size */
     vstart_addr = vend_addr = NULL;

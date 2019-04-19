@@ -107,7 +107,7 @@ void __INIT _os_start(void)
 /*==========================================*/
 	set_inter_stack();
 	OSStartHighRdy();
-	ASSERT(0);
+	ASSERT(0,ASSERT_BAD_EXE_LOCATION);
 	panic("should not go to the end of function _os_start()");/*should no go here*/
 }
 
@@ -221,17 +221,17 @@ void _case_slab_free_buddy(void *ptr,void *end_ptr)
 	{
 		return ;
 	}
-	ASSERT(0 == in_os_memory(ptr));
+	ASSERT(0 == in_os_memory(ptr),"return ptr not in os legal scope\n");
 	if(0 != in_os_memory(ptr))
 	{
 		OS_ERROR_PARA_MESSAGE_DISPLAY(_case_free_buddy,ptr);
 		return ;
 	}
 	unsigned int level = ((unsigned int)end_ptr - (unsigned int)ptr) / PAGE_SIZE_BYTE;
-	ASSERT(0 == (level & (level-1)));
+	ASSERT(0 == (level & (level-1)),"level should be 2^n\n");
 	level = FastLog2(level) + 1;
 	struct buddy *buddy_ptr = (struct buddy *)_get_os_buddy_ptr_head();
-	ASSERT(NULL != buddy_ptr);
+	ASSERT(NULL != buddy_ptr,ASSERT_PARA_AFFIRM);
 	while(NULL != buddy_ptr)
 	{
 		if(0 == in_buddy_range(ptr))
@@ -261,7 +261,7 @@ void _case_slab_free_buddy(void *ptr,void *end_ptr)
 					break;
 				default :
 					ka_printf("error level! FATAL ERROR!\n");
-					ASSERT(0);
+					ASSERT(0,"should not go here\n");
 			}
 			return ;
 		}
@@ -291,8 +291,8 @@ static void thread_init(void *para)
 				list_for_each_safe(pos1,pos2,&kmem_cache_ptr->slabs_empty)
 				{
 					struct slab *slab_ptr = list_entry(pos1,struct slab,slab_chain);
-					ASSERT(slab_ptr->current_block_num == slab_ptr->full_block_num);
-					ASSERT(slab_ptr->block_size == kmem_cache_ptr->kmem_cache_slab_size);
+					ASSERT(slab_ptr->current_block_num == slab_ptr->full_block_num,ASSERT_PARA_AFFIRM);
+					ASSERT(slab_ptr->block_size == kmem_cache_ptr->kmem_cache_slab_size,ASSERT_PARA_AFFIRM);
 					list_del(pos1);
 					_case_slab_free_buddy(slab_ptr,slab_ptr->end_ptr);
 				}
