@@ -127,6 +127,7 @@ void shell_check_TCB_list(void)
 					case STATE_WAIT_MCB_TIMEOUT:
 					case STATE_WAIT_MESSAGE_QUEUE_TIMEOUT:
 					case STATE_PUT_MESSAGE_QUEUE_TIMEOUT:
+					case STATE_WAIT_MEM_POOL_TIMEOUT:
 						ka_printf("STATE_DELAY\n");
 						ka_printf("delay reach time is %lu\n",(unsigned long)TCB_ptr->delay_reach_time);
 						break;

@@ -21,7 +21,7 @@ typedef struct message_struct{
 	struct insert_sort_entity MCB_insert_sort_list;
 	int   resource_num;	
 	unsigned int flag;
-}MCB;/*message control block*/
+}MCB;/*signal control block*/
 
 #define MCB_OUT_OF_RESOURCE  	1
 #define MCB_OUT_OF_TIME			2

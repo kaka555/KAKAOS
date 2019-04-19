@@ -64,10 +64,12 @@ int sys_delay(unsigned int delay_ticks_num,TASK_STATE state)
 	ASSERT((STATE_DELAY == state) 						|| 
 		   (STATE_WAIT_MCB_TIMEOUT == state) 			|| 
 		   (STATE_WAIT_MESSAGE_QUEUE_TIMEOUT == state) 	|| 
-		   (STATE_PUT_MESSAGE_QUEUE_TIMEOUT == state),ASSERT_INPUT);
+		   (STATE_PUT_MESSAGE_QUEUE_TIMEOUT == state)	|| 
+		   (STATE_WAIT_MEM_POOL_TIMEOUT == state),ASSERT_INPUT);
 	ASSERT(0 != delay_ticks_num,ASSERT_INPUT);
 	if(!((STATE_DELAY == state) || (STATE_WAIT_MCB_TIMEOUT == state) || 
-		(STATE_WAIT_MESSAGE_QUEUE_TIMEOUT == state) || (STATE_PUT_MESSAGE_QUEUE_TIMEOUT == state)))
+		(STATE_WAIT_MESSAGE_QUEUE_TIMEOUT == state) || (STATE_PUT_MESSAGE_QUEUE_TIMEOUT == state)
+		|| (STATE_WAIT_MEM_POOL_TIMEOUT == state)))
 	{
 		OS_ERROR_PARA_MESSAGE_DISPLAY(sys_delay,state);
 		return -ERROR_USELESS_INPUT;

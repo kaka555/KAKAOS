@@ -117,7 +117,7 @@ int get_set_bit_place(unsigned int num)
     return 31-n;
 }
 
-static void *_case_alloc_buddy(unsigned int level)
+void *_case_alloc_buddy(unsigned int level)
 {
 	struct slab *slab_ptr;
 	struct buddy *buddy_ptr = (struct buddy *)_get_os_buddy_ptr_head();

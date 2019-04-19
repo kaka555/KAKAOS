@@ -17,6 +17,7 @@
 #include <printf_debug.h>
 #include <sys_init_fun.h>
 #include <vfs.h>
+#include <mem_pool.h>
 
 #if CONFIG_SHELL_EN
 
@@ -322,6 +323,12 @@ static struct command resident_command_2[] =
 	{
 		.command_name = "ka",
 		.f = test,
+	},
+#endif
+#if CONFIG_MEM_POOL
+	{
+		.command_name = "mp",
+		.f = shell_mem_pool,
 	},
 #endif
 	{

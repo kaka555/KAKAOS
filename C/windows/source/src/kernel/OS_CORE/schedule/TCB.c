@@ -164,8 +164,16 @@ int _task_delete(TCB *TCB_ptr)
 	switch(TCB_ptr->task_state)
 	{
 		case STATE_SUSPEND_NORMAL:
+		case STATE_WAIT_MCB_FOREVER:
+		case STATE_WAIT_MESSAGE_QUEUE_FOREVER:
+		case STATE_PUT_MESSAGE_QUEUE_FOREVER:
+		case STATE_WAIT_MUTEX_FOREVER:
 			_remove_from_suspend_list(TCB_ptr);break;
 		case STATE_DELAY:
+		case STATE_WAIT_MCB_TIMEOUT:
+		case STATE_WAIT_MESSAGE_QUEUE_TIMEOUT:
+		case STATE_PUT_MESSAGE_QUEUE_TIMEOUT:
+		case STATE_WAIT_MEM_POOL_TIMEOUT:
 			_remove_from_delay_heap(TCB_ptr);break;
 		case STATE_READY:
 			_delete_TCB_from_ready(TCB_ptr);break;
@@ -176,11 +184,8 @@ int _task_delete(TCB *TCB_ptr)
 		 * 
 		 */
 		default:
+			ASSERT(0,ASSERT_BAD_EXE_LOCATION);
 			break;
-	}
-	if(TCB_IS_CREATED(TCB_ptr))
-	{
-		ka_free(TCB_ptr);
 	}
 	if(is_module(TCB_ptr))
 	{
@@ -190,6 +195,10 @@ int _task_delete(TCB *TCB_ptr)
 	if(TCB_ptr == OSTCBCurPtr)
 	{
 		OSTCBCurPtr = NULL;
+	}
+	if(TCB_IS_CREATED(TCB_ptr))
+	{
+		ka_free(TCB_ptr);
 	}
 	CPU_CRITICAL_EXIT();
 	schedule();

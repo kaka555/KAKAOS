@@ -240,6 +240,7 @@ static int fat_read_data(struct file *file_ptr,void *store_ptr,unsigned int len,
 	ASSERT(offset <= file_ptr->file_len,ASSERT_PARA_AFFIRM);
 	if(f_lseek(file_ptr->private_data,offset))
 	{
+		KA_WARN(DEBUG_FAT,"offset is %u\n",offset);
 		ASSERT(0,ASSERT_BAD_EXE_LOCATION);
 		return -ERROR_DISK;
 	}
