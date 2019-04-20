@@ -58,7 +58,7 @@ INIT_FUN(__init_ready_group,1);
 
 int _insert_ready_TCB(TCB *TCB_ptr)
 {
-	ASSERT(NULL != TCB_ptr);
+	ASSERT(NULL != TCB_ptr,ASSERT_INPUT);
 	TCB_ptr->task_state = STATE_READY;
 	_increase_ready_num(TCB_ptr->prio);
 	/*deal with the ready_group and ready_table*/
@@ -70,7 +70,7 @@ int _insert_ready_TCB(TCB *TCB_ptr)
 /*if os delete a task,use _delete_from_TCB_list() first*/
 int _delete_TCB_from_ready(TCB *TCB_ptr)
 {
-	ASSERT(NULL != TCB_ptr);
+	ASSERT(NULL != TCB_ptr,ASSERT_INPUT);
 	_decrease_ready_num(TCB_ptr->prio);
 	if(0 != _get_ready_num_from_TCB_list(TCB_ptr->prio))
 	{
@@ -104,7 +104,7 @@ TCB *_get_highest_prio_ready_TCB(void)
 		}
 	}
 	/*should not go here*/
-	ASSERT(0);
+	ASSERT(0,ASSERT_BAD_EXE_LOCATION);
 	return NULL;
 }
 

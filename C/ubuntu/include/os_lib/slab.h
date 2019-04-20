@@ -7,7 +7,6 @@
 
 struct kmem_cache
 {
-	//IL kmem_cache_insert_chain;		/*used for sort*/
 	struct singly_list_head node;
 	unsigned int kmem_cache_slab_size;	/*used for sort*/
 	struct list_head slabs_full; 	/* which space is fully exhausted*/

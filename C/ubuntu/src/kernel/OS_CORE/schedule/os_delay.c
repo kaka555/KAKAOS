@@ -55,13 +55,13 @@ this function do not change the task_state of the TCB,os shoule
 change it before using this function*/
 int _insert_into_delay_heap(TCB *TCB_ptr)
 {
-	ASSERT(NULL != TCB_ptr);
+	ASSERT(NULL != TCB_ptr,ASSERT_INPUT);
 	return heap_push(&delay_heap,TCB_ptr);
 }
 
 int _remove_from_delay_heap(TCB *TCB_ptr)
 {
-	ASSERT(NULL != TCB_ptr);
+	ASSERT(NULL != TCB_ptr,ASSERT_INPUT);
 	TCB *TCB_ptr_buffer;
 	int i;
 	int ret;

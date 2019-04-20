@@ -27,7 +27,7 @@ extern volatile int g_interrupt_count;
 /**** attribution macro ****/
 #define DEFAULT_ATTRIBUTION 	0
 /**** bit 0 ****/
-//identify the struct TCB is created or init
+/* identify the struct TCB is created or init */
 #define TCB_ATTRIBUTION_INIT 				(0X00<<0)
 #define TCB_ATTRIBUTION_CREATE 				(0X01<<0)
 #define TCB_IS_CREATED(TCB_ptr) 			((TCB_ptr)->attribution & TCB_ATTRIBUTION_CREATE)
@@ -51,7 +51,7 @@ extern volatile int g_interrupt_count;
 #define clear_module_flag(TCB_ptr)			((TCB_ptr)->attribution &= ~TCB_ATTRIBUTION_IS_DYNAMIC_MODULE)
 /****end of attribution macro ****/
 
-struct dynamic_module; //a declaration
+struct dynamic_module; 
 typedef struct task_control_block_struct{
 	STACK_TYPE *stack; 						/*the stack top of the task*/
 	unsigned int stack_size;				/*bytes*/

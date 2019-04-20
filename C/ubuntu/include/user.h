@@ -15,6 +15,7 @@
 #include <mutex.h>
 #include <device.h>
 #include <vfs.h>
+#include <mem_pool.h>
 
 void three(void *para);
 void four(void *para);

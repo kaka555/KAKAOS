@@ -111,7 +111,7 @@ EXPORT_SYMBOL(system_time_display);
 
 int _set_time(struct time *time_ptr)
 {
-	ASSERT(NULL != time_ptr);
+	ASSERT(NULL != time_ptr,ASSERT_INPUT);
 	CPU_SR_ALLOC();
 	CPU_CRITICAL_ENTER();
 	sys_time.date    =   time_ptr->date;

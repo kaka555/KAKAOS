@@ -157,7 +157,7 @@ int ka_printf(const char *str,...)
 	                    {
 	                    	val_f *= 10;
 	                    	val = (int)val_f;
-	                    	ASSERT(val<10 && val>-10);
+	                    	ASSERT(val<10 && val>-10,ASSERT_PARA_AFFIRM);
 	                    	ka_putchar(val + '0');
 							val_f -= val;
 	                    }

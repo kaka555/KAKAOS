@@ -1,8 +1,13 @@
-SRCS = ${shell ls *.c}
+SRCS = device.c vfs.c vfs_default_fun.c vfsio.c
 
 ASM_SRCS = 
 
-SUB_DIR = FATFS
+SUB_DIR = 
+
+ifeq (stm32f103,$(PROJECT))
+SRCS += fat.c
+SUB_DIR += FATFS
+endif
 
 $(SUB_TGT): $(SRCS:.c=.o) $(ASM_SRCS:.s=.o) $(SUB_DIR)
 	$(LD) $(SRCS:.c=.o) $(ASM_SRCS:.s=.o) $(SUB_DIR:=/$(SUB_TGT)) $(LDFLAG)  -r -o $@

@@ -85,10 +85,10 @@ unsigned int load_slab(
 	boundary_ptr = (void *)((unsigned int)start_ptr + sizeof(struct slab));
 	while((unsigned int)list_head_ptr >= (unsigned int)boundary_ptr)
 	{
-		ASSERT((unsigned int)list_head_ptr >= (unsigned int)start_ptr + sizeof(struct slab));
+		ASSERT((unsigned int)list_head_ptr >= (unsigned int)start_ptr + sizeof(struct slab),ASSERT_PARA_AFFIRM);
 		list_add(list_head_ptr,&slab_ptr->block_head);
 		list_head_ptr = (struct list_head *)((unsigned int)list_head_ptr - block_size);
-		ASSERT(++i <= slab_ptr->full_block_num);
+		ASSERT(++i <= slab_ptr->full_block_num,ASSERT_PARA_AFFIRM);
 	}
 	return block_size;
 }
