@@ -7,6 +7,10 @@
 #include <task_state.h>
 #include <sys_init_fun.h>
 
+/**
+ * use array to manage ready TCB
+ */
+
 /*==============================================*/
 /*this typedef associate with macro PRIO_MAX in TCB.h*/
 typedef unsigned char READY_GROUP_TYPE;

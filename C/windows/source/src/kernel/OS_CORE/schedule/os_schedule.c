@@ -35,6 +35,11 @@ static void _schedule(void)
 	return ;
 }
 
+/**
+ * @Author      kaka
+ * @DateTime    2019-04-21
+ * @description : ask for task change
+ */
 void schedule(void)
 {
 	_schedule();
@@ -59,6 +64,14 @@ int _sys_delay(unsigned int delay_ticks_num,TASK_STATE state)
 	return (unsigned int)(OSTCBCurPtr->delay_reach_time - _get_tick());
 }
 
+/**
+ * @Author      kaka
+ * @DateTime    2019-04-21
+ * @description : delay function, unit is tick
+ * @param       delay_ticks_num [description]
+ * @param       state           [description]
+ * @return                      [description]
+ */
 int sys_delay(unsigned int delay_ticks_num,TASK_STATE state)
 {
 	ASSERT((STATE_DELAY == state) 						|| 
@@ -100,6 +113,13 @@ int _sys_suspend(TASK_STATE state)
 	return FUN_EXECUTE_SUCCESSFULLY;
 }
 
+/**
+ * @Author      kaka
+ * @DateTime    2019-04-21
+ * @description : suspend function
+ * @param       state      [description]
+ * @return                 [description]
+ */
 int sys_suspend(TASK_STATE state)
 {
 	ASSERT((STATE_SUSPEND_NORMAL == state) 				||
@@ -151,6 +171,19 @@ static _must_check int _task_creat_ready(
 	return FUN_EXECUTE_SUCCESSFULLY;
 }
 
+/**
+ * @Author      kaka
+ * @DateTime    2019-04-21
+ * @description : request room for TCB, and then init it
+ * @param       stack_size          [description]
+ * @param       prio                [description]
+ * @param       timeslice_hope_time [description]
+ * @param       name                [description]
+ * @param       function            [description]
+ * @param       para                [description]
+ * @param       ptr                 [description]
+ * @return                          [description]
+ */
 int _must_check task_creat_ready(
 	unsigned int stack_size,
 	TASK_PRIO_TYPE prio,
@@ -211,6 +244,19 @@ int _must_check _task_init_ready(
 	return FUN_EXECUTE_SUCCESSFULLY;
 }
 
+/**
+ * @Author      kaka
+ * @DateTime    2019-04-21
+ * @description : init the TCB
+ * @param       TCB_ptr             [description]
+ * @param       stack_size          [description]
+ * @param       prio                [description]
+ * @param       timeslice_hope_time [description]
+ * @param       name                [description]
+ * @param       function            [description]
+ * @param       para                [description]
+ * @return                          [description]
+ */
 int _must_check task_init_ready(
 	TCB *TCB_ptr,
 	unsigned int stack_size,
@@ -243,6 +289,11 @@ int _must_check task_init_ready(
 }
 EXPORT_SYMBOL(task_init_ready);
 
+/**
+ * @Author      kaka
+ * @DateTime    2019-04-21
+ * @description : use this function to prohibit the task change
+ */
 void sys_schedule_lock(void)
 {
 	CPU_SR_ALLOC();

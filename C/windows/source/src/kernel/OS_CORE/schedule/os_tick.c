@@ -138,11 +138,10 @@ static void run_task_handler(void)
 }
 
 /**
- * This is a system function
- * @Author   kaka
- * @param    none
- * @DateTime 2018-09-23
- * @return   [none]
+ * @Author      kaka
+ * @DateTime    2019-04-21
+ * @description : this function should be the OS tick interrupt service function
+ * @return                 [description]
  */
 void  OS_CPU_SysTickHandler(void)
 {
