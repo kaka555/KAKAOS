@@ -11,6 +11,7 @@
 #include <os_schedule.h>
 #include <os_timer.h>
 #include <os_suspend.h>
+#include <export.h>
 
 #if CONFIG_CPU_USE_RATE_CALCULATION
 	static unsigned int use_rate = 0;
@@ -26,7 +27,20 @@ extern volatile TCB *OSTCBHighRdyPtr;
 #endif
 
 
-extern volatile UINT64 g_time_tick_count;	
+volatile UINT64 g_time_tick_count = 0;
+
+UINT64 _get_tick(void)
+{
+	UINT64 num;
+	num = g_time_tick_count;
+	return num;
+}
+
+UINT64 get_tick(void)
+{
+	return _get_tick();
+}
+EXPORT_SYMBOL(get_tick);	
 
 /**
  * This is a system function
@@ -46,7 +60,9 @@ static inline void tick_time_handler(void)
 	if(TICK_PER_SEC == time_flag)
 	{
 		time_flag = 0;
+#if CONFIG_TIME_EN
 		_system_time_increase();
+#endif
 #if CONFIG_CPU_USE_RATE_CALCULATION
 		use_rate = idle_num / (count_max_num/100);
 		idle_num = 0;

@@ -16,7 +16,6 @@ export OBJCOPY = ${CROSS_COMPILER}objcopy
 
 export HOME = ${shell pwd}
 
-include $(HOME)/config.mk
 ###############################################
 
 export HEAD_DIR1  = ${HOME}/include 
@@ -63,8 +62,12 @@ clean:
 
 cleanconfig:
 	@echo "" > $(HOME)/config.mk
+	@echo "" > $(HOME)/.ka_config
 
 .PHONY: clean $(SUB_DIR)
+
+include $(HOME)/config.mk
+include $(HOME)/.ka_config
 
 MKCONFIG := $(HOME)/mkconfig
 

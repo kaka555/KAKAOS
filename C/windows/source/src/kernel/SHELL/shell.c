@@ -554,7 +554,9 @@ static void shell_pre(void)
 #endif
 	ASSERT(FUN_EXECUTE_SUCCESSFULLY == error,ASSERT_PARA_AFFIRM);
 	using_shell_buffer_ptr = &main_shell_buffer;
+#if CONFIG_VFS
 	update_para_arv_vector();
+#endif
 }
 
 extern void __init_command_n_ptr_hash_array(void);

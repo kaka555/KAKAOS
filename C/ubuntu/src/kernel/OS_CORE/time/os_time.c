@@ -6,21 +6,6 @@
 #include <export.h>
 #include <sys_init_fun.h>
 
-volatile UINT64 g_time_tick_count = 0;
-
-UINT64 _get_tick(void)
-{
-	UINT64 num;
-	num = g_time_tick_count;
-	return num;
-}
-
-UINT64 get_tick(void)
-{
-	return _get_tick();
-}
-EXPORT_SYMBOL(get_tick);
-
 #if CONFIG_TIME_EN
 
 static struct time sys_time;

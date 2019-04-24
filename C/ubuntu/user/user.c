@@ -528,7 +528,7 @@ void five(void *para)
 
 #endif
 
-#if 0 //test MCB
+#if 1 //test MCB
 
 MCB kaka;
 
@@ -658,7 +658,7 @@ void three(void *para)
 
 #endif
 
-#if 1 /* test mem pool */
+#if 0 /* test mem pool */
 
 void three(void *para)
 {
