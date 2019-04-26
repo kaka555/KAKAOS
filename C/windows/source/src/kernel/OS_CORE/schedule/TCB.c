@@ -25,7 +25,7 @@ volatile int g_interrupt_count = 0;
  * @DateTime    2019-04-21
  * @description : the addr of this function will be the value of the return register
  */
-static void delete_myself(void)
+void delete_myself(void)
 {
 	task_delete((TCB *)OSTCBCurPtr);
 }

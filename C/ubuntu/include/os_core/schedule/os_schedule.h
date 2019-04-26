@@ -23,7 +23,8 @@ int _must_check task_creat_ready(
 	const char *name,
 	functionptr function,
 	void *para,
-	TCB **ptr);
+	TCB **ptr
+);
 
 int _must_check task_init_ready(
 	TCB *TCB_ptr,
@@ -32,7 +33,14 @@ int _must_check task_init_ready(
 	unsigned int timeslice_hope_time,
 	const char *name,
 	functionptr function,
-	void *para);
+	void *para
+);
+
+int exec(
+	const char *name,
+	functionptr function,
+	void *para
+);
 
 void sys_schedule_lock(void);
 void sys_schedule_unlock(void);

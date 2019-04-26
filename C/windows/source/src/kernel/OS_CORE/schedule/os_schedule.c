@@ -314,3 +314,59 @@ int sys_schedule_islock(void)
 {
 	return (0 != g_schedule_lock);
 }
+
+int _exec(
+	const char *name,
+	functionptr function,
+	void *para
+)
+{
+	ASSERT(NULL != function,ASSERT_INPUT);
+/* get the TCB of this task */
+	TCB *this_TCB_ptr = (TCB *)OSTCBCurPtr;
+	CPU_SR_ALLOC();
+	CPU_CRITICAL_ENTER();
+/* change the responding attribute */
+	/* 1.name */
+	if(name)
+	{
+		this_TCB_ptr->name = (char *)name;
+	}
+	/* 2.stack */
+	this_TCB_ptr->stack = (STACK_TYPE *)this_TCB_ptr->stack_end + 
+								this_TCB_ptr->stack_size/4 - 1;
+	/* 3.register */
+extern void delete_myself(void);
+	set_register((void **)&this_TCB_ptr->stack,function,delete_myself,para);
+	/* set OSTCBCurPtr to NULL to make sure the execution of
+	   context switch function */
+	OSTCBCurPtr = NULL;
+/* request context switch */
+	_schedule();
+/* exit critical area */
+	CPU_CRITICAL_EXIT();
+	return FUN_EXECUTE_SUCCESSFULLY;
+}
+
+/**
+ * @Author      kaka
+ * @DateTime    2019-04-26
+ * @description : use new function to replace this thread, retain 
+ * the former settings
+ * @param       name       new task name,NULL means do not change
+ * @param       function   
+ * @param       para       
+ * @return                 
+ */
+int exec(
+	const char *name,
+	functionptr function,
+	void *para
+)
+{
+	if(NULL == function)
+	{
+		return -ERROR_NULL_INPUT_PTR;
+	}
+	return _exec(name,function,para);
+}

@@ -56,7 +56,10 @@ int default_write(struct file *file_ptr,void *buffer,unsigned int len,unsigned i
 		KA_WARN(DEBUG_TYPE_VFS,"default_write fail\n");
 		return num;
 	}
-	file_ptr->offset += num;
+	if(!inode_is_soft(file_ptr->f_den->d_inode))
+	{
+		file_ptr->offset += num;
+	}
 	return num;
 }
 
