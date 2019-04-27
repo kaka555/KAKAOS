@@ -51,6 +51,11 @@ _init_MCB(
 	return FUN_EXECUTE_SUCCESSFULLY;
 }
 
+/**
+ * init the MCB,
+ * num: the value of MCB
+ * flag: point out that the MCB is b signal or c signal
+ */
 int
 init_MCB(
 	MCB *MCB_ptr,
@@ -174,6 +179,15 @@ int _p(
 	return FUN_EXECUTE_SUCCESSFULLY;
 }
 
+/**
+ * @Author      kaka
+ * @DateTime    2019-04-21
+ * @description : p operation of signal
+ * @param       MCB_ptr    [description]
+ * @param       flag       [point out that if the task want to wait for signal]
+ * @param       time       [the wait time]
+ * @return      error code
+ */
 int p(
 	MCB *MCB_ptr,
 	MCB_WAIT_FLAG flag,
@@ -212,6 +226,13 @@ int _v(MCB *MCB_ptr)
 	return FUN_EXECUTE_SUCCESSFULLY;
 }
 
+/**
+ * @Author      kaka
+ * @DateTime    2019-04-21
+ * @description : the v operation of signal
+ * @param       MCB_ptr    [description]
+ * @return                 [description]
+ */
 int v(MCB *MCB_ptr)
 {
 	if(NULL == MCB_ptr)
@@ -233,6 +254,13 @@ void _clear_MCB_index(MCB *MCB_ptr)
 	CPU_CRITICAL_EXIT();
 }
 
+/**
+ * @Author      kaka
+ * @DateTime    2019-04-21
+ * @description : set the MCB value to 0
+ * @param       MCB_ptr    [description]
+ * @return                 [description]
+ */
 int clear_MCB_index(MCB *MCB_ptr)
 {
 	if(NULL == MCB_ptr)

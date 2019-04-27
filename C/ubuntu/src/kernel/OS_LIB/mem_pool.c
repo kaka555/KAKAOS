@@ -57,6 +57,7 @@ int _init_mp(mp *mp_ptr,const char *name,void *start_add,UINT32 block_num,UINT32
 	{
 		return -ERROR_SYS;
 	}
+
 /* build the list so that we can get mem easily */
 	unsigned int i;
 	struct list_head *list_head_ptr = (struct list_head *)start_add;
@@ -108,10 +109,12 @@ int _create_mp(const char *name,UINT32 block_num,UINT32 block_size,mp **mp_store
 		KA_WARN(DEBUG_MEM_POOL,"mem pool allocate struct fail\n");
 		goto out2;
 	}
+
 /* calculate the space that the pool need and increase the actual block_num if can*/
 	unsigned int mem_len = block_num * block_size;
 	unsigned int level = get_set_bit_place(mem_len / PAGE_SIZE_BYTE) + 2;
 	unsigned int actual_block_num = ka_pow(2,level-1) * PAGE_SIZE_BYTE / block_size;
+
 /* use malloc for a space for pool */
 extern void *_case_alloc_buddy(unsigned int level);
 	void *start_add = _case_alloc_buddy(level);
@@ -120,7 +123,8 @@ extern void *_case_alloc_buddy(unsigned int level);
 		KA_WARN(DEBUG_MEM_POOL,"mem pool space allocate struct fail\n");
 		goto out1;
 	}
-/* and than init it */
+
+/* and then init it */
 	int error = init_mp(mp_ptr,name,start_add,actual_block_num,block_size);
 	if(error < 0)
 	{
@@ -174,6 +178,7 @@ int _delete_mp(mp *mp_ptr)
 		CPU_CRITICAL_EXIT();
 		return -ERROR_SYS;
 	}
+
 /* delete mp record from os mp list */
 	mp *mp_buffer_ptr = mp_head;
 	ASSERT(mp_buffer_ptr != NULL,ASSERT_PARA_AFFIRM);
@@ -187,6 +192,7 @@ int _delete_mp(mp *mp_ptr)
 	    mp_buffer_ptr = mp_buffer_ptr->next_mem_pool_ptr;
 	    ASSERT(mp_buffer_ptr != NULL,ASSERT_BAD_EXE_LOCATION);
 	}
+
 /* check the flag to see if the mem pool should return to OS */
 	if(mp_is_create(mp_ptr))
 	{
@@ -224,6 +230,7 @@ static void *mp_get_a_block(mp *mp_ptr)
 	ASSERT(!list_empty(&mp_ptr->block_head),ASSERT_INPUT);
 	ASSERT(mp_ptr->current_block_num > 0,ASSERT_INPUT);
 	struct list_head *block_addr = mp_ptr->block_head.next;
+
 /* and than deal with the member of mp */
 	list_del(block_addr);
 	--(mp_ptr->current_block_num);
@@ -245,13 +252,15 @@ void *_mp_alloc(mp *mp_ptr,UINT32 wait_time)
 		CPU_CRITICAL_EXIT();
 		return buffer;
 	}
+
 /* if there is not free pool, check the input para */
 	if(0 == wait_time)
 	{
-/* if the task do not want to wait */
+		/* if the task do not want to wait */
 		CPU_CRITICAL_EXIT();
 		return NULL;
 	}
+
 /* if the task want to wait in a window */
 	DECLEAR_INSERT_SORT_DATA(data);
 	init_insert_sort_data(&data,OSTCBCurPtr);
@@ -259,6 +268,7 @@ void *_mp_alloc(mp *mp_ptr,UINT32 wait_time)
 	UINT64 time_record = _get_tick();
 	CPU_CRITICAL_EXIT(); /*exit  critical*/
 	sys_delay(wait_time,STATE_WAIT_MEM_POOL_TIMEOUT);
+
 /* go back here=========go back here */
 	CPU_CRITICAL_ENTER();/*enter critical*/
 	if(_get_tick() >= (time_record + wait_time))/*prove that timeout happened*/
@@ -269,7 +279,7 @@ void *_mp_alloc(mp *mp_ptr,UINT32 wait_time)
 	}
 	else
 	{
-/* now there is a free pool for allocation */
+		/* now there is a free pool for allocation */
 		void *buffer = mp_get_a_block(mp_ptr);
 		CPU_CRITICAL_EXIT();
 		return buffer;
@@ -312,6 +322,7 @@ void _mp_free(void *ptr)
 		}
 		mp_ptr = mp_ptr->next_mem_pool_ptr;
 	}
+
 /* then check the ptr location*/ 
 	if((NULL == mp_ptr) || 
 			(((UINT32)ptr - (UINT32)mp_ptr->start_add) % mp_ptr->block_size))
@@ -320,6 +331,7 @@ void _mp_free(void *ptr)
 		CPU_CRITICAL_EXIT();
 		return ;
 	}
+	
 /* if ptr legal, deal with the member of mp to return */
 	struct list_head *list_head_ptr = (struct list_head *)ptr;
 	list_add(list_head_ptr,&mp_ptr->block_head);

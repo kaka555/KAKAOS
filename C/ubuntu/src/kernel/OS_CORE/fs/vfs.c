@@ -88,6 +88,16 @@ static void _init_dentry(
 	_mutex_init(&dentry_ptr->d_mutex);
 }
 
+/**
+ * @Author      kaka
+ * @DateTime    2019-04-21
+ * @description : allocate a struct dentry and init it
+ * @param       parent_ptr parent dentry pointer
+ * @param       inode_ptr  
+ * @param       name       
+ * @param       flag       
+ * @return                 
+ */
 struct dentry *_dentry_alloc_and_init(
 	struct dentry *parent_ptr,  
 	struct inode *inode_ptr,
@@ -108,6 +118,14 @@ struct dentry *_dentry_alloc_and_init(
 	return dentry_ptr;
 }
 
+/**
+ * @Author      kaka
+ * @DateTime    2019-04-21
+ * @description : allocate a struct file and init it
+ * @param       dentry_ptr corresponding dentry
+ * @param       flag       
+ * @return                 
+ */
 struct file *_file_alloc_and_init(
 	struct dentry *dentry_ptr,UINT32 flag)
 {
@@ -149,6 +167,15 @@ static void _inode_init(
 	}
 }
 
+/**
+ * @Author      kaka
+ * @DateTime    2019-04-21
+ * @description : allocate a struct inode and init it
+ * @param       inode_operations_ptr [description]
+ * @param       file_operations_ptr  [description]
+ * @param       flag                 [description]
+ * @return                           [description]
+ */
 struct inode *_inode_alloc_and_init(
 	struct inode_operations *inode_operations_ptr,
 	struct file_operations *file_operations_ptr,
@@ -186,6 +213,14 @@ int _rename(struct dentry *dentry_ptr,const char *name)
 	return FUN_EXECUTE_SUCCESSFULLY;
 }
 
+/**
+ * @Author      kaka
+ * @DateTime    2019-04-21
+ * @description : rename a dentry
+ * @param       dentry_ptr [description]
+ * @param       name       [description]
+ * @return                 [description]
+ */
 int rename(struct dentry *dentry_ptr,const char *name)
 {
 	if((NULL == dentry_ptr) || (NULL == name))
@@ -196,6 +231,14 @@ int rename(struct dentry *dentry_ptr,const char *name)
 }
 EXPORT_SYMBOL(rename);
 
+/**
+ * @Author      kaka
+ * @DateTime    2019-04-21
+ * @description : check if there is a same-name-dentry under the parent_dentry
+ * @param       parent_dentry_ptr [description]
+ * @param       file_name         [description]
+ * @return      1 means there is a same-name-dentry, 0 means no
+ */
 int has_same_name_file(struct dentry *parent_dentry_ptr,const char *file_name)
 {
 	struct dentry *buffer_ptr;
@@ -210,6 +253,15 @@ int has_same_name_file(struct dentry *parent_dentry_ptr,const char *file_name)
 	return 0;
 }
 
+/**
+ * @Author      kaka
+ * @DateTime    2019-04-21
+ * @description : get the dentry pointer with with name "path_name"
+ * @param       parent          [description]
+ * @param       path_name       [description]
+ * @param       subdir_name_len [description]
+ * @return                      [description]
+ */
 static struct dentry *_get_subdir(struct dentry *parent,const char *path_name,unsigned int subdir_name_len)
 {
 	ASSERT((NULL != parent) && (NULL != path_name),ASSERT_INPUT);
@@ -252,6 +304,13 @@ static unsigned int _get_subdir_name_len(const char *path_name)
 	return i;
 }
 
+/**
+ * @Author      kaka
+ * @DateTime    2019-04-21
+ * @description : get the dentry pointer of path
+ * @param       path       the full path of file
+ * @return      the dentry pointer 
+ */
 struct dentry *_find_dentry(const char *path)
 {
 	ASSERT(NULL != path,ASSERT_INPUT);
@@ -488,6 +547,10 @@ int delete_file(const char *path)
 }
 EXPORT_SYMBOL(delete_file);
 
+/*
+ remove all the folder and file under the root_dentry_ptr,
+ and then remove the root_dentry_ptr
+ */
 static int remove_all_dentry(struct dentry *root_dentry_ptr)
 {
 	ASSERT(NULL != root_dentry_ptr,ASSERT_INPUT);
@@ -582,6 +645,14 @@ static void pwd(struct dentry *dentry_ptr)
 	return ;
 }
 
+/**
+ * @Author      kaka
+ * @DateTime    2019-04-21
+ * @description : show the current path, this function should only be 
+ * called by thread "shell"
+ * @param       argc       insignificant
+ * @param       argv       insignificant
+ */
 void shell_pwd(int argc, char const *argv[])
 {
 	(void)argc;
@@ -939,6 +1010,17 @@ int _fs_register(const char *mount_point,fs_init_fun init,void *para,struct inod
 	return FUN_EXECUTE_SUCCESSFULLY;
 }
 
+/**
+ * @Author      kaka
+ * @DateTime    2019-04-21
+ * @description : use this function to register a real file system
+ * into VFS
+ * @param       mount_point the root path of the fs
+ * @param       init        [description]
+ * @param       para        [description]
+ * @param       i_opts_ptr  [description]
+ * @return                  [description]
+ */
 int fs_register(const char *mount_point,fs_init_fun init,void *para,struct inode_operations *i_opts_ptr)
 {
 	if((NULL == mount_point) || (NULL == init))
@@ -952,6 +1034,9 @@ int fs_register(const char *mount_point,fs_init_fun init,void *para,struct inode
 	return _fs_register(mount_point,init,i_opts_ptr,i_opts_ptr);
 }
 
+/*
+ init the VFS
+ */
 extern struct inode_operations fat_inode_operations;
 static void __init_vfs(void)
 {

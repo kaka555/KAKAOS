@@ -1,7 +1,9 @@
 #ifndef _SYS_INIT_FUN_H
 #define _SYS_INIT_FUN_H
 
-#define __INIT  __attribute__((section(".INIT.TEXT"))) 
+#define __section(S) __attribute__ ((__section__(S)))
+
+#define __INIT  __section(".INIT.TEXT")
 
 #define __RAMFUNC __attribute__ ((long_call, section (".ramfunctions")))
 
@@ -13,7 +15,7 @@ struct init_fun
 };
 
 #define INIT_FUN(function,level)	\
-const struct init_fun __init_fun_##function __attribute__((section(".INIT_FUN" #level))) = \
+const struct init_fun __init_fun_##function __section(".INIT_FUN" #level) = \
 {	\
 	.fun = function,\
 }

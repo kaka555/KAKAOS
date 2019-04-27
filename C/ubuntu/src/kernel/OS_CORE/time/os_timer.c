@@ -125,15 +125,6 @@ int timer_create(
 }
 EXPORT_SYMBOL(timer_create);
 
-/**
- * This is a system function
- * @Author      kaka
- * @DateTime    2018-10-03
- * @description : after using timer_create(), use this function to 
- * activate the timer
- * @param       timer_ptr  
- * @return      0 means success
- */
 int _timer_enable(struct timer *timer_ptr)
 {
 	ASSERT(NULL != timer_ptr,ASSERT_INPUT);
@@ -146,6 +137,15 @@ int _timer_enable(struct timer *timer_ptr)
 	return ret;
 }
 
+/**
+ * This is a system function
+ * @Author      kaka
+ * @DateTime    2018-10-03
+ * @description : after using timer_create(), use this function to 
+ * activate the timer
+ * @param       timer_ptr  
+ * @return      0 means success
+ */
 int timer_enable(struct timer *timer_ptr)
 {
 	if(NULL == timer_ptr)
@@ -157,14 +157,6 @@ int timer_enable(struct timer *timer_ptr)
 }
 EXPORT_SYMBOL(timer_enable);
 
-/**
- * This is a system function
- * @Author      kaka
- * @DateTime    2018-10-03
- * @description :	use this function to inactivate the timer
- * @param       timer_ptr  
- * @return      0 means success
- */
 int _timer_disable(struct timer *timer_ptr)
 {
 	ASSERT(NULL != timer_ptr,ASSERT_INPUT);
@@ -181,6 +173,14 @@ int _timer_disable(struct timer *timer_ptr)
 	return FUN_EXECUTE_SUCCESSFULLY;
 }
 
+/**
+ * This is a system function
+ * @Author      kaka
+ * @DateTime    2018-10-03
+ * @description :	use this function to inactivate the timer
+ * @param       timer_ptr  
+ * @return      0 means success
+ */
 int timer_disable(struct timer *timer_ptr)
 {
 	if(NULL == timer_ptr)
@@ -192,15 +192,6 @@ int timer_disable(struct timer *timer_ptr)
 }
 EXPORT_SYMBOL(timer_disable);
 
-/**
- * This is a system function
- * @Author      kaka
- * @DateTime    2018-10-03
- * @description :	use this function to inactivate the timer and free
- * the memory if necessary
- * @param       timer_ptr  
- * @return                 
- */
 int _timer_delete(struct timer *timer_ptr)
 {
 	ASSERT(NULL != timer_ptr,ASSERT_INPUT);
@@ -218,6 +209,15 @@ int _timer_delete(struct timer *timer_ptr)
 	return FUN_EXECUTE_SUCCESSFULLY;
 }
 
+/**
+ * This is a system function
+ * @Author      kaka
+ * @DateTime    2018-10-03
+ * @description :	use this function to inactivate the timer and free
+ * the memory if necessary
+ * @param       timer_ptr  
+ * @return                 
+ */
 int timer_delete(struct timer *timer_ptr)
 {
 	if(NULL == timer_ptr)

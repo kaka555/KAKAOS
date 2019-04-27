@@ -12,7 +12,7 @@
 #define CONFIG_PRINTF_DEBUG             1
 #define CONFIG_POWER_MANAGEMENT         1
 #define CONFIG_MODULE                   1
-#define CONFIG_VFS                      0
+#define CONFIG_VFS                      1
 #define CONFIG_DEBUG_ON                 1
 #define CONFIG_MALLOC                   1
 #define CONFIG_MEM_POOL                 1

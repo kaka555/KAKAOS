@@ -326,6 +326,11 @@ int _exec(
 	TCB *this_TCB_ptr = (TCB *)OSTCBCurPtr;
 	CPU_SR_ALLOC();
 	CPU_CRITICAL_ENTER();
+	if (g_interrupt_count > 0)
+	{
+		CPU_CRITICAL_EXIT();
+		return -ERROR_FUN_USE_IN_INTER;
+	}
 /* change the responding attribute */
 	/* 1.name */
 	if(name)

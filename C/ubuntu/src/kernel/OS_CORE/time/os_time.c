@@ -41,7 +41,7 @@ INIT_FUN(__init_system_time,1);
  * This is a system function
  * @Author      kaka
  * @DateTime    2018-10-12
- * @description : this function can only be used by os
+ * @description : this function can only be used by os, be used in tick interrupt
  */
 void 
 _system_time_increase(void)
