@@ -658,7 +658,7 @@ void three(void *para)
 
 #endif
 
-#if 1 /* test mem pool */
+#if 0 /* test mem pool */
 
 void three(void *para)
 {
@@ -688,6 +688,45 @@ void three(void *para)
 	}
 	ka_printf("complete\n");
 	error = create_mp("qq",11,100,&mp_ptr);
+}
+
+#endif
+
+#if 1  /* test exec() */
+
+void five(void *para)
+{
+	while(1)
+	{
+		ka_printf("now come into function five()\n");
+		sleep(10*HZ);
+	}
+}
+
+void kaka(void *para)
+{
+	ka_printf("now come into function kaka()\n");
+	ka_printf("para is %u\n",(unsigned int)para);
+	if(0 != task_creat_ready(256,5,5,"five",five,NULL,NULL))
+	{
+		ka_printf("os_init_fail...stop booting...\n");
+		while(1);
+	}
+	while(1)
+	{
+		sleep(5*HZ);
+		ka_printf("now come into function kaka()\n");
+	}
+}
+
+#include <printf_debug.h>
+void three(void *para)
+{
+	ka_printf("now come into function three()\n");
+	INSERT_BREAK_POINT();
+	exec("kaka",kaka,(void *)5);
+	ka_printf("function three() end!!!\n");
+	panic("should not go here\n");
 }
 
 #endif

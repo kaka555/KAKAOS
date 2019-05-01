@@ -54,7 +54,7 @@ static void check_debug_record(const void *ptr,unsigned int size)
 		{
 			ka_printf("provide_size is %u\n",record_ptr->provide_size);
 			ka_printf("debug info broken,addr is %p,size is %u,req_size maybe %u\n",ptr,size,record_ptr->req_size);
-			ASSERT(0);
+			ASSERT(0,ASSERT_BAD_EXE_LOCATION);
 		}
 		return ;
 	}
@@ -117,11 +117,11 @@ int get_set_bit_place(unsigned int num)
     return 31-n;
 }
 
-static void *_case_alloc_buddy(unsigned int level)
+void *_case_alloc_buddy(unsigned int level)
 {
 	struct slab *slab_ptr;
 	struct buddy *buddy_ptr = (struct buddy *)_get_os_buddy_ptr_head();
-	ASSERT(NULL != buddy_ptr);
+	ASSERT(NULL != buddy_ptr,ASSERT_PARA_AFFIRM);
 	while(NULL != buddy_ptr)
 	{
 		if(buddy_ptr->info.max_level < level)
@@ -196,7 +196,7 @@ static void *_case_alloc_buddy(unsigned int level)
 				break;
 			default :
 				ka_printf("too big! FATAL ERROR!\n");
-				ASSERT(0);
+				ASSERT(0,ASSERT_BAD_EXE_LOCATION);
 		}
 		return slab_ptr;
 	}
@@ -208,7 +208,7 @@ static void *_case_alloc_buddy(unsigned int level)
 int in_os_memory(void *ptr)
 {
 	struct buddy *buddy_ptr = (struct buddy *)_get_os_buddy_ptr_head();
-	ASSERT(NULL != buddy_ptr);
+	ASSERT(NULL != buddy_ptr,ASSERT_PARA_AFFIRM);
 	while(NULL != buddy_ptr)
 	{
 		if(FUN_EXECUTE_SUCCESSFULLY == in_buddy_range(ptr))
@@ -224,7 +224,7 @@ int in_os_memory(void *ptr)
 
 void add_debug_info(unsigned int req_size,unsigned int provide_size,void *ptr)
 {
-	ASSERT((NULL != ptr) &&(req_size <= provide_size));
+	ASSERT((NULL != ptr) &&(req_size <= provide_size),ASSERT_INPUT);
 	ka_memset(ptr,0,provide_size);
 	if(sizeof(struct malloc_debug_record) > (provide_size - req_size))
 	{
@@ -324,10 +324,11 @@ void *_ka_malloc(unsigned int size)
 			else /* NULL == IL_ptr*/
 			{
 				kmem_cache_ptr = ka_malloc(sizeof(struct kmem_cache));
-				ASSERT(NULL != kmem_cache_ptr);
+				ASSERT(NULL != kmem_cache_ptr,ASSERT_PARA_AFFIRM);
 				if(NULL == kmem_cache_ptr)
 				{
 					CPU_CRITICAL_EXIT();
+					panic("no room for malloc record\n");
 					return NULL;
 				}
 				insert_into_cache_chain(&cache_chain_head,kmem_cache_ptr,size);
@@ -374,7 +375,8 @@ void *ka_malloc(unsigned int size)
 	if(in_os_memory(return_ptr) < 0)
 	{
 		ka_printf("fatal error of malloc: not in scope\n");
-		ASSERT(0);
+		ASSERT(0,ASSERT_BAD_EXE_LOCATION);
+		panic("malloc fatal error\n");
 	}
 	ka_memset(return_ptr,0xff,size);
 	return return_ptr;
@@ -394,9 +396,9 @@ static struct slab *free_find_in_slab_chain(struct list_head *head,void *ptr)
 		slab_ptr = list_entry(pos,struct slab,slab_chain);
 		if(((unsigned int)ptr > (unsigned int)slab_ptr->start_ptr) && ((unsigned int)ptr < (unsigned int)slab_ptr->end_ptr))
 		{
-			ASSERT(0 == (((unsigned int)slab_ptr->end_ptr - (unsigned int)ptr) % (slab_ptr->block_size)));
+			ASSERT(0 == (((unsigned int)slab_ptr->end_ptr - (unsigned int)ptr) % (slab_ptr->block_size)),ASSERT_PARA_AFFIRM);
 			++(slab_ptr->current_block_num);
-			ASSERT(slab_ptr->current_block_num <= slab_ptr->full_block_num);
+			ASSERT(slab_ptr->current_block_num <= slab_ptr->full_block_num,ASSERT_PARA_AFFIRM);
 #if CONFIG_MALLOC && CONFIG_ASSERT_DEBUG
 			check_debug_record(ptr,slab_ptr->block_size);
 			barrier();
@@ -452,7 +454,7 @@ void _ka_free(void *ptr)
 		CPU_CRITICAL_EXIT();
 		return;
 	}
-	ASSERT(0);/*should not go here*/
+	ASSERT(0,ASSERT_BAD_EXE_LOCATION);/*should not go here*/
 	panic("not in a slab or record,fatal error, goto the end of function _ka_free()\n");
 }
 
@@ -465,13 +467,13 @@ void KA_FREE(void *ptr,const char* file_name,unsigned line,const char* function_
 		ka_printf(
 			"free addr not in os legal scope. Error file: %s,line :%u, function name: %s\n",
 			file_name,line,function_name);
-		ASSERT(0);
+		ASSERT(0,ASSERT_BAD_EXE_LOCATION);
 		return ;
 	}
 	if(NULL == ptr)
 	{
 		ka_printf("warning: try to free a pointer whose value is NULL\n");
-		ASSERT(0);
+		ASSERT(0,ASSERT_BAD_EXE_LOCATION);
 		return ;
 	}
 	_ka_free(ptr);
@@ -544,7 +546,7 @@ void shell_check_kmem(int argc, char const *argv[])
 
 void slab_list_check(const struct slab *slab_ptr)
 {
-	ASSERT(NULL != slab_ptr);
+	ASSERT(NULL != slab_ptr,ASSERT_INPUT);
 	unsigned int i = 0;
 	struct list_head *node;
 	list_for_each(node,&slab_ptr->block_head)
@@ -557,16 +559,16 @@ void slab_list_check(const struct slab *slab_ptr)
 				if(((unsigned int)node->next - (unsigned int)node) % slab_ptr->block_size)
 				{
 					ka_printf("round %u,error node addr is 0x%p,error next addr is 0x%p\n",i,node,node->next);
-					ASSERT(0);
+					ASSERT(0,ASSERT_BAD_EXE_LOCATION);
 				}
 			}
 			else
 			{
-				ASSERT((unsigned int)node->next != (unsigned int)node);
+				ASSERT((unsigned int)node->next != (unsigned int)node,ASSERT_PARA_AFFIRM);
 				if(((unsigned int)node - (unsigned int)node->next) % slab_ptr->block_size)
 				{
 					ka_printf("round %u,error node addr is 0x%p,error next addr is 0x%p\n",i,node,node->next);
-					ASSERT(0);
+					ASSERT(0,ASSERT_BAD_EXE_LOCATION);
 				}
 			}
 			
@@ -606,7 +608,7 @@ error:
 	ka_printf("slab full_block_num is %u\n",slab_ptr->full_block_num);
 	ka_printf("slab block_size is %u\n",slab_ptr->block_size);
 	ka_printf("slab addr is 0x%p\n",slab_ptr->block_head.next);
-	ASSERT(0);
+	ASSERT(0,ASSERT_BAD_EXE_LOCATION);
 	return ;
 }
 

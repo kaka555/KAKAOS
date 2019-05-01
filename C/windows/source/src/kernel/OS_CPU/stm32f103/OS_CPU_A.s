@@ -39,6 +39,16 @@ OSStartHang:
     .global OS_CPU_PendSVHandler
     .type OS_CPU_PendSVHandler, %function
 
+/**
+ * context switch function, this function should reconize three status:
+ * 1. status start: OS just boot to last step
+ * 2. OSTCBCurPtr == NULL: a task was just deleted or some status ask for 
+ *    necessary context switch
+ * 3. normal status: save one context and recover another context
+ *
+ * status 1 and 2 should jump to Handler_nosave immediately, status 3 
+ * should excute all code
+ */
 OS_CPU_PendSVHandler:
     CPSID   I                                                  /* ; Prevent interruption during context switch*/
 

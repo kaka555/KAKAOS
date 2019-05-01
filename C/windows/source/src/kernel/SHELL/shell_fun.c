@@ -88,10 +88,12 @@ void shell_echo(int argc, char const *argv[])
 		}
 		shell_v_display(shell_variable_ptr);
 	}
+#if CONFIG_VFS
 	else if(4 == argc)
 	{
 		shell_vfs_echo(argv);
 	}
+#endif
 	else
 	{
 		ka_printf("command error\n");

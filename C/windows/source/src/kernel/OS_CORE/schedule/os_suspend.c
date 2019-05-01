@@ -5,6 +5,10 @@
 #include <os_ready.h>
 #include <sys_init_fun.h>
 
+/*
+*  use linked list to manage suspend TCB
+ */
+
 static struct list_head suspend_list_head;
 
 static void __INIT __init_suspend_list(void)

@@ -5,6 +5,10 @@
 #include <myMicroLIB.h>
 #include <sys_init_fun.h>
 
+/*
+use array to mark TCB with different priority
+ */
+
 static struct TCB_list TCB_list[PRIO_MAX];
 
 static void __INIT __init_TCB_list(void)

@@ -35,6 +35,11 @@ static void _schedule(void)
 	return ;
 }
 
+/**
+ * @Author      kaka
+ * @DateTime    2019-04-21
+ * @description : ask for task change
+ */
 void schedule(void)
 {
 	_schedule();
@@ -59,6 +64,14 @@ int _sys_delay(unsigned int delay_ticks_num,TASK_STATE state)
 	return (unsigned int)(OSTCBCurPtr->delay_reach_time - _get_tick());
 }
 
+/**
+ * @Author      kaka
+ * @DateTime    2019-04-21
+ * @description : delay function, unit is tick
+ * @param       delay_ticks_num [description]
+ * @param       state           [description]
+ * @return                      [description]
+ */
 int sys_delay(unsigned int delay_ticks_num,TASK_STATE state)
 {
 	ASSERT((STATE_DELAY == state) 						|| 
@@ -100,6 +113,13 @@ int _sys_suspend(TASK_STATE state)
 	return FUN_EXECUTE_SUCCESSFULLY;
 }
 
+/**
+ * @Author      kaka
+ * @DateTime    2019-04-21
+ * @description : suspend function
+ * @param       state      [description]
+ * @return                 [description]
+ */
 int sys_suspend(TASK_STATE state)
 {
 	ASSERT((STATE_SUSPEND_NORMAL == state) 				||
@@ -151,6 +171,19 @@ static _must_check int _task_creat_ready(
 	return FUN_EXECUTE_SUCCESSFULLY;
 }
 
+/**
+ * @Author      kaka
+ * @DateTime    2019-04-21
+ * @description : request room for TCB, and then init it
+ * @param       stack_size          [description]
+ * @param       prio                [description]
+ * @param       timeslice_hope_time [description]
+ * @param       name                [description]
+ * @param       function            [description]
+ * @param       para                [description]
+ * @param       ptr                 [description]
+ * @return                          [description]
+ */
 int _must_check task_creat_ready(
 	unsigned int stack_size,
 	TASK_PRIO_TYPE prio,
@@ -211,6 +244,19 @@ int _must_check _task_init_ready(
 	return FUN_EXECUTE_SUCCESSFULLY;
 }
 
+/**
+ * @Author      kaka
+ * @DateTime    2019-04-21
+ * @description : init the TCB
+ * @param       TCB_ptr             [description]
+ * @param       stack_size          [description]
+ * @param       prio                [description]
+ * @param       timeslice_hope_time [description]
+ * @param       name                [description]
+ * @param       function            [description]
+ * @param       para                [description]
+ * @return                          [description]
+ */
 int _must_check task_init_ready(
 	TCB *TCB_ptr,
 	unsigned int stack_size,
@@ -243,6 +289,11 @@ int _must_check task_init_ready(
 }
 EXPORT_SYMBOL(task_init_ready);
 
+/**
+ * @Author      kaka
+ * @DateTime    2019-04-21
+ * @description : use this function to prohibit the task change
+ */
 void sys_schedule_lock(void)
 {
 	CPU_SR_ALLOC();
@@ -262,4 +313,65 @@ void sys_schedule_unlock(void)
 int sys_schedule_islock(void)
 {
 	return (0 != g_schedule_lock);
+}
+
+int _exec(
+	const char *name,
+	functionptr function,
+	void *para
+)
+{
+	ASSERT(NULL != function,ASSERT_INPUT);
+/* get the TCB of this task */
+	TCB *this_TCB_ptr = (TCB *)OSTCBCurPtr;
+	CPU_SR_ALLOC();
+	CPU_CRITICAL_ENTER();
+	if (g_interrupt_count > 0)
+	{
+		CPU_CRITICAL_EXIT();
+		return -ERROR_FUN_USE_IN_INTER;
+	}
+/* change the responding attribute */
+	/* 1.name */
+	if(name)
+	{
+		this_TCB_ptr->name = (char *)name;
+	}
+	/* 2.stack */
+	this_TCB_ptr->stack = (STACK_TYPE *)this_TCB_ptr->stack_end + 
+								this_TCB_ptr->stack_size/4 - 1;
+	/* 3.register */
+extern void delete_myself(void);
+	set_register((void **)&this_TCB_ptr->stack,function,delete_myself,para);
+	/* set OSTCBCurPtr to NULL to make sure the execution of
+	   context switch function */
+	OSTCBCurPtr = NULL;
+/* request context switch */
+	_schedule();
+/* exit critical area */
+	CPU_CRITICAL_EXIT();
+	return FUN_EXECUTE_SUCCESSFULLY;
+}
+
+/**
+ * @Author      kaka
+ * @DateTime    2019-04-26
+ * @description : use new function to replace this thread, retain 
+ * the former settings
+ * @param       name       new task name,NULL means do not change
+ * @param       function   
+ * @param       para       
+ * @return                 
+ */
+int exec(
+	const char *name,
+	functionptr function,
+	void *para
+)
+{
+	if(NULL == function)
+	{
+		return -ERROR_NULL_INPUT_PTR;
+	}
+	return _exec(name,function,para);
 }

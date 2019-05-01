@@ -32,21 +32,22 @@ static int expand_room(Vector *vector_ptr)
 	ASSERT(NULL != vector_ptr,ASSERT_INPUT);
 	ASSERT(vector_ptr->cur_len == vector_ptr->max_len,ASSERT_INPUT);
 
-	void **buffer_ptr = vector_ptr->data_ptr;
+	void **buffer_ptr;
 	if(VFISMUL(vector_ptr->extension_factor))
 	{
-		vector_ptr->data_ptr = f_malloc(GET_EXPENSION_FACTOR(vector_ptr->extension_factor) * vector_ptr->max_len * VECTOR_DATA_SIZE);
+		buffer_ptr = f_malloc(GET_EXPENSION_FACTOR(vector_ptr->extension_factor) * vector_ptr->max_len * VECTOR_DATA_SIZE);
 	}
 	else
 	{
-		vector_ptr->data_ptr = f_malloc((GET_EXPENSION_FACTOR(vector_ptr->extension_factor) + vector_ptr->max_len) * VECTOR_DATA_SIZE);
+		buffer_ptr = f_malloc((GET_EXPENSION_FACTOR(vector_ptr->extension_factor) + vector_ptr->max_len) * VECTOR_DATA_SIZE);
 	}
-	if(NULL == vector_ptr->data_ptr)
+	if(NULL == buffer_ptr)
 	{
 		return -ERROR_ALLOCATE_ROOM;
 	}
-	ASSERT(NULL != vector_ptr->data_ptr,ASSERT_PARA_AFFIRM);
-	f_memcpy(vector_ptr->data_ptr,buffer_ptr,vector_ptr->max_len * VECTOR_DATA_SIZE);
+/* now allocation is successful */
+	ASSERT(NULL != buffer_ptr,ASSERT_PARA_AFFIRM);
+	f_memcpy(buffer_ptr,vector_ptr->data_ptr,vector_ptr->max_len * VECTOR_DATA_SIZE);
 	if(VFISMUL(vector_ptr->extension_factor))
 	{
 		vector_ptr->max_len *= GET_EXPENSION_FACTOR(vector_ptr->extension_factor);
@@ -55,7 +56,8 @@ static int expand_room(Vector *vector_ptr)
 	{
 		vector_ptr->max_len += GET_EXPENSION_FACTOR(vector_ptr->extension_factor);
 	}
-	f_free(buffer_ptr);
+	f_free(vector_ptr->data_ptr);
+	vector_ptr->data_ptr = buffer_ptr;
 	return FUN_EXECUTE_SUCCESSFULLY;
 }
 

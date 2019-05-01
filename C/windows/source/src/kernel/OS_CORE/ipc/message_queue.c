@@ -45,6 +45,15 @@ int _msg_init(MQB *MQB_ptr,char *name,unsigned int max_message_num)
 	return FUN_EXECUTE_SUCCESSFULLY;
 }
 
+/**
+ * @Author      kaka
+ * @DateTime    2019-04-21
+ * @description : init the mqb
+ * @param       MQB_ptr         
+ * @param       name            
+ * @param       max_message_num 
+ * @return                      
+ */
 int msg_init(MQB *MQB_ptr,char *name,unsigned int max_message_num)
 {
 	if((NULL == MQB_ptr) || (NULL == name))
@@ -147,6 +156,17 @@ int _msg_send(MQB *MQB_ptr,struct message *message_ptr,MSG_FLAG flag,unsigned in
 	return FUN_EXECUTE_SUCCESSFULLY;
 }
 
+/**
+ * @Author      kaka
+ * @DateTime    2019-04-21
+ * @description : send a message, user should use struct message to define message,
+ * also, user can choose weather to wait for sending or not
+ * @param       MQB_ptr     
+ * @param       message_ptr 
+ * @param       flag        
+ * @param       time        
+ * @return                  
+ */
 int msg_send(MQB *MQB_ptr,struct message *message_ptr,MSG_FLAG flag,unsigned int time)
 {
 	if((NULL == MQB_ptr) || (NULL == message_ptr))
@@ -244,6 +264,16 @@ int _msg_receive(MQB *MQB_ptr,struct message **message_ptr,MSG_FLAG flag,unsigne
 	return FUN_EXECUTE_SUCCESSFULLY;
 }
 
+/**
+ * @Author      kaka
+ * @DateTime    2019-04-21
+ * @description : get a message
+ * @param       MQB_ptr     [description]
+ * @param       message_ptr [description]
+ * @param       flag        [description]
+ * @param       time        [description]
+ * @return                  [description]
+ */
 int msg_receive(MQB *MQB_ptr,struct message **message_ptr,MSG_FLAG flag,unsigned int time)
 {
 	if((NULL == MQB_ptr) || (NULL == message_ptr))
@@ -310,6 +340,15 @@ int msg_del(MQB *MQB_ptr)
 }
 EXPORT_SYMBOL(msg_del);
 
+/**
+ * @Author      kaka
+ * @DateTime    2019-04-21
+ * @description : init the struct message
+ * @param       message_ptr  [description]
+ * @param       message_size [description]
+ * @param       data         [description]
+ * @return                   [description]
+ */
 int message_init(struct message *message_ptr,unsigned int message_size,void *data)
 {
 	ASSERT(NULL != message_ptr,ASSERT_INPUT);

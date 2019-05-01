@@ -24,6 +24,14 @@ static void __INIT __init_module(void)
 }
 INIT_FUN(__init_module,1);
 
+/**
+ * @Author      kaka
+ * @DateTime    2019-04-21
+ * @description : this function should only be called by thread "shell",
+ *  it will display the details of all the module rigistered in OS
+ * @param       argc       insignificant
+ * @param       argv       insignificant
+ */
 void shell_modinfo(int argc, char const *argv[])
 {
     (void)argc;
@@ -38,7 +46,7 @@ void shell_modinfo(int argc, char const *argv[])
         {
             default :
                 PRINTF("bad state num is %d\n",dynamic_module_ptr->module_state);
-                ASSERT(0);ka_printf("\n"); break;
+                ASSERT(0,ASSERT_BAD_EXE_LOCATION);ka_printf("\n"); break;
             case MODULE_STATE_INIT:
                 ka_printf("STATE_INIT\n"); break;
             case MODULE_STATE_LOADED:
@@ -57,6 +65,14 @@ void shell_modinfo(int argc, char const *argv[])
     }
 }
 
+/**
+ * @Author      kaka
+ * @DateTime    2019-04-21
+ * @description : this function should only be called by thread "shell",
+ * it will display the name of all the module rigistered in OS
+ * @param       argc       insignificant
+ * @param       argv       insignificant
+ */
 void shell_list_module(int argc, char const *argv[])
 {
     (void)argc;
@@ -71,6 +87,14 @@ void shell_list_module(int argc, char const *argv[])
     ka_printf("total %u modules\n",i);
 }
 
+/**
+ * @Author      kaka
+ * @DateTime    2019-04-21
+ * @description : find that if there is a function name provided by 
+ * module fit the fun_name
+ * @param       fun_name   
+ * @return      the addr of function name,or NULL if fail
+ */
 static UINT32 get_mod_export_function_addr(const char *fun_name)
 {
     struct dynamic_module *dynamic_module_ptr;
@@ -90,8 +114,7 @@ static UINT32 get_mod_export_function_addr(const char *fun_name)
 
 /*
 check that if there is a same-name-module exists
-
-exist ? 1,0
+exist ? 1:0
  */
 int _check_same_mod_name(const char *name)
 {
@@ -106,6 +129,15 @@ int _check_same_mod_name(const char *name)
     return 0;
 }
 
+#if CONFIG_SHELL_EN
+/**
+ * @Author      kaka
+ * @DateTime    2019-04-21
+ * @description : restart the module
+ * @param       stack_size 
+ * @param       prio       
+ * @param       name     the name of module   
+ */
 void _restart_module(
     unsigned int stack_size,
     TASK_PRIO_TYPE prio,
@@ -116,7 +148,7 @@ void _restart_module(
     {
         if(0 == ka_strcmp(name,dynamic_module_ptr->name))
         {
-            ASSERT(MODULE_STATE_LOADED == dynamic_module_ptr->module_state);
+            ASSERT(MODULE_STATE_LOADED == dynamic_module_ptr->module_state,ASSERT_PARA_AFFIRM);
             if(prio >= PRIO_MAX)
             {
                 prio = D_MODULE_DEFAULT_PRIO;
@@ -141,7 +173,6 @@ void _restart_module(
     }
 }
 
-#if CONFIG_SHELL_EN
 /******************
 * 
 *   rmmod -name=dmodule
@@ -175,15 +206,22 @@ out:
 }
 #endif
 
+/**
+ * @Author      kaka
+ * @DateTime    2019-04-21
+ * @description : delete the module
+ * @param       dynamic_module_ptr 
+ * @return      the error code
+ */
 static int _remove_a_module(struct dynamic_module *dynamic_module_ptr)
 {
-    ASSERT(NULL != dynamic_module_ptr);
+    ASSERT(NULL != dynamic_module_ptr,ASSERT_INPUT);
     PRINTF("remove module name is %s\n",dynamic_module_ptr->name);
     CPU_SR_ALLOC();
     CPU_CRITICAL_ENTER();
     if(MODULE_STATE_RUN == dynamic_module_ptr->module_state)
     {
-        ASSERT(dynamic_module_ptr->thread_TCB_ptr);
+        ASSERT(dynamic_module_ptr->thread_TCB_ptr,ASSERT_PARA_AFFIRM);
         task_delete(dynamic_module_ptr->thread_TCB_ptr);
     }
     if(dynamic_module_ptr->exit)
@@ -212,6 +250,15 @@ int remove_module(struct dynamic_module *dynamic_module_ptr)
     return _remove_a_module(dynamic_module_ptr);
 }
 
+/**
+ * @Author      kaka
+ * @DateTime    2019-04-21
+ * @description : relocate the symbol
+ * @param       module     [description]
+ * @param       rel        [description]
+ * @param       sym_val    [description]
+ * @return                 [description]
+ */
 static int dlmodule_relocate(struct dynamic_module *module, Elf32_Rel *rel, Elf32_Addr sym_val)
 {
     Elf32_Addr *where, tmp;
@@ -311,6 +358,14 @@ static int dlmodule_relocate(struct dynamic_module *module, Elf32_Rel *rel, Elf3
     return 0;
 }
 
+/**
+ * @Author      kaka
+ * @DateTime    2019-04-21
+ * @description : load the relocated object
+ * @param       module     pointer of struct dynamic_module
+ * @param       module_ptr the start addr of module data
+ * @return      error code
+ */
 int dlmodule_load_relocated_object(struct dynamic_module* module, void *module_ptr)
 {
     UINT32 index, rodata_addr = 0, bss_addr = 0, data_addr = 0;
@@ -587,7 +642,14 @@ int dlmodule_load_relocated_object(struct dynamic_module* module, void *module_p
     return FUN_EXECUTE_SUCCESSFULLY;
 }
 
-
+/**
+ * @Author      kaka
+ * @DateTime    2019-04-21
+ * @description : load the shared object
+ * @param       module     pointer of struct dynamic_module
+ * @param       module_ptr the start addr of module data
+ * @return      error code
+ */
 int dlmodule_load_shared_object(struct dynamic_module* module, void *module_ptr)
 {
     int linked   = KA_FALSE;
@@ -595,7 +657,7 @@ int dlmodule_load_shared_object(struct dynamic_module* module, void *module_ptr)
     Elf32_Addr vstart_addr, vend_addr;
     int has_vstart = KA_FALSE;
 
-    ASSERT(module_ptr != NULL);
+    ASSERT(module_ptr != NULL,ASSERT_INPUT);
 
     /* get the ELF image size */
     vstart_addr = vend_addr = NULL;
@@ -834,6 +896,12 @@ static void __init_d_module(struct dynamic_module *dynamic_module_ptr)
     dynamic_module_ptr->thread_TCB_ptr          = NULL;
 }
 
+/**
+ * @Author      kaka
+ * @DateTime    2019-04-21
+ * @description : load the dynamic module
+ * @return        the pointer of struct dynamic_module, or NULL if fail
+ */
 struct dynamic_module* dlmodule_load(void)
 {
     CPU_SR_ALLOC();
@@ -904,7 +972,18 @@ __exit:
     return NULL;
 }
 
-
+/**
+ * @Author      kaka
+ * @DateTime    2019-04-21
+ * @description : execute the module, include three step:
+ * 1. load the module
+ * 2. create a thread
+ * 3. call the initialized function of module
+ * @param       stack_size 
+ * @param       prio       
+ * @param       name       
+ * @return      error code           
+ */
 int _dlmodule_exec(
     unsigned int stack_size,
     TASK_PRIO_TYPE prio,
@@ -960,6 +1039,12 @@ int _dlmodule_exec(
     return FUN_EXECUTE_SUCCESSFULLY;
 }
 
+/**
+ * @Author      kaka
+ * @DateTime    2019-04-21
+ * @description : this function should be called in interrupt
+ * @param       c          the data that will be put into module's buffer
+ */
 void _put_in_module_buffer(char c)
 {
 	if(module_buffer)

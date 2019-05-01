@@ -30,7 +30,7 @@ static struct file_operations default_file_operations = {
 
 extern int default_inode_open(struct file *file_ptr);
 extern int default_inode_close(struct file *file_ptr);
-extern int default_change_name(struct inode *inode_ptr,struct dentry *dentry_ptr);
+extern int default_change_name(struct inode *inode_ptr,struct dentry *dentry_ptr,const char *new_name);
 extern int default_refresh(struct inode *inode_ptr,struct dentry *dentry_ptr);
 extern int default_add_sub_file(struct dentry *dentry_ptr,const char *name);
 extern int default_add_sub_folder(struct dentry *dentry_ptr,const char *folder_name);
@@ -61,10 +61,6 @@ static struct dentry *current_dentry_ptr = NULL;
 static struct inode root_inode;
 static struct inode dev_inode;
 
-#if CONFIG_SHELL_EN
-static void update_para_arv_vector(void);
-#endif
-
 static void _init_dentry(
 	struct dentry *dentry_ptr,
 	struct dentry *parent_ptr,  
@@ -73,7 +69,7 @@ static void _init_dentry(
 	UINT32 flag
 	)
 {
-	ASSERT(NULL != dentry_ptr);
+	ASSERT(NULL != dentry_ptr,ASSERT_INPUT);
 	dentry_ptr->d_parent = parent_ptr;
 	dentry_ptr->d_inode = inode_ptr;
 	dentry_ptr->name = (char *)name;
@@ -92,6 +88,16 @@ static void _init_dentry(
 	_mutex_init(&dentry_ptr->d_mutex);
 }
 
+/**
+ * @Author      kaka
+ * @DateTime    2019-04-21
+ * @description : allocate a struct dentry and init it
+ * @param       parent_ptr parent dentry pointer
+ * @param       inode_ptr  
+ * @param       name       
+ * @param       flag       
+ * @return                 
+ */
 struct dentry *_dentry_alloc_and_init(
 	struct dentry *parent_ptr,  
 	struct inode *inode_ptr,
@@ -99,28 +105,37 @@ struct dentry *_dentry_alloc_and_init(
 	UINT32 flag
 	)
 {
-	ASSERT(NULL != parent_ptr);
-	ASSERT(NULL != name);
-	ASSERT(NULL != inode_ptr);
+	ASSERT(NULL != parent_ptr,ASSERT_INPUT);
+	ASSERT(NULL != name,ASSERT_INPUT);
+	ASSERT(NULL != inode_ptr,ASSERT_INPUT);
 	struct dentry *dentry_ptr = ka_malloc(sizeof(struct dentry));
 	if(NULL == dentry_ptr)
 	{
 		return NULL;
 	}
+	flag &= ~FLAG_DENTRY_NAME_CHANGE_DIS; /* new file should be name-changable */
 	_init_dentry(dentry_ptr,parent_ptr,inode_ptr,name,flag);
 	return dentry_ptr;
 }
 
+/**
+ * @Author      kaka
+ * @DateTime    2019-04-21
+ * @description : allocate a struct file and init it
+ * @param       dentry_ptr corresponding dentry
+ * @param       flag       
+ * @return                 
+ */
 struct file *_file_alloc_and_init(
 	struct dentry *dentry_ptr,UINT32 flag)
 {
-	ASSERT(NULL != dentry_ptr);
+	ASSERT(NULL != dentry_ptr,ASSERT_INPUT);
 	struct file *file_ptr = ka_malloc(sizeof(struct file));
 	if(NULL == file_ptr)
 	{
 		return NULL;
 	}
-	ASSERT(NULL != dentry_ptr->d_inode->i_f_ops);
+	ASSERT(NULL != dentry_ptr->d_inode->i_f_ops,ASSERT_PARA_AFFIRM);
 	file_ptr->f_op = dentry_ptr->d_inode->i_f_ops;
 	file_ptr->offset = 0;
 	file_ptr->file_len = 0;
@@ -136,7 +151,7 @@ static void _inode_init(
 	UINT32 flag,
 	struct inode *inode_ptr)
 {
-	ASSERT(NULL != inode_ptr);
+	ASSERT(NULL != inode_ptr,ASSERT_INPUT);
 	inode_ptr->ref = 0;
 	inode_ptr->inode_ops = inode_operations_ptr;
 	inode_ptr->i_f_ops = file_operations_ptr;
@@ -152,6 +167,15 @@ static void _inode_init(
 	}
 }
 
+/**
+ * @Author      kaka
+ * @DateTime    2019-04-21
+ * @description : allocate a struct inode and init it
+ * @param       inode_operations_ptr [description]
+ * @param       file_operations_ptr  [description]
+ * @param       flag                 [description]
+ * @return                           [description]
+ */
 struct inode *_inode_alloc_and_init(
 	struct inode_operations *inode_operations_ptr,
 	struct file_operations *file_operations_ptr,
@@ -166,13 +190,17 @@ struct inode *_inode_alloc_and_init(
 	return inode_ptr;
 }
 
-int _rename(struct file *file_ptr,const char *name)
+int _rename(struct dentry *dentry_ptr,const char *name)
 {
-	ASSERT((NULL != file_ptr) && (NULL != name));
-	struct dentry *dentry_ptr = file_ptr->f_den;
-	if(dentry_ptr->flag | FLAG_DENTRY_NAME_CHANGE_DIS)
+	ASSERT((NULL != dentry_ptr) && (NULL != name),ASSERT_INPUT);
+	if(dentry_ptr->flag & FLAG_DENTRY_NAME_CHANGE_DIS)
 	{
 		return -ERROR_SYS;
+	}
+	if(dentry_ptr->d_inode->inode_ops->change_name(dentry_ptr->d_inode,dentry_ptr,name) < 0)
+	{
+		ka_printf("write disk error\n");
+		return -ERROR_DISK;
 	}
 	char *buffer = (char *)ka_malloc(ka_strlen(name));
 	if(NULL == buffer)
@@ -182,23 +210,35 @@ int _rename(struct file *file_ptr,const char *name)
 	ka_strcpy(buffer,name);
 	ka_free(dentry_ptr->name);
 	dentry_ptr->name = buffer;
-	if(dentry_ptr->d_inode->inode_ops->change_name(dentry_ptr->d_inode,dentry_ptr) < 0)
-	{
-		ka_printf("write disk error\n");
-	}
 	return FUN_EXECUTE_SUCCESSFULLY;
 }
 
-int rename(struct file *file_ptr,const char *name)
+/**
+ * @Author      kaka
+ * @DateTime    2019-04-21
+ * @description : rename a dentry
+ * @param       dentry_ptr [description]
+ * @param       name       [description]
+ * @return                 [description]
+ */
+int rename(struct dentry *dentry_ptr,const char *name)
 {
-	if((NULL == file_ptr) || (NULL == name))
+	if((NULL == dentry_ptr) || (NULL == name))
 	{
 		return -ERROR_NULL_INPUT_PTR;
 	}
-	return _rename(file_ptr,name);
+	return _rename(dentry_ptr,name);
 }
 EXPORT_SYMBOL(rename);
 
+/**
+ * @Author      kaka
+ * @DateTime    2019-04-21
+ * @description : check if there is a same-name-dentry under the parent_dentry
+ * @param       parent_dentry_ptr [description]
+ * @param       file_name         [description]
+ * @return      1 means there is a same-name-dentry, 0 means no
+ */
 int has_same_name_file(struct dentry *parent_dentry_ptr,const char *file_name)
 {
 	struct dentry *buffer_ptr;
@@ -213,9 +253,18 @@ int has_same_name_file(struct dentry *parent_dentry_ptr,const char *file_name)
 	return 0;
 }
 
+/**
+ * @Author      kaka
+ * @DateTime    2019-04-21
+ * @description : get the dentry pointer with with name "path_name"
+ * @param       parent          [description]
+ * @param       path_name       [description]
+ * @param       subdir_name_len [description]
+ * @return                      [description]
+ */
 static struct dentry *_get_subdir(struct dentry *parent,const char *path_name,unsigned int subdir_name_len)
 {
-	ASSERT((NULL != parent) && (NULL != path_name));
+	ASSERT((NULL != parent) && (NULL != path_name),ASSERT_INPUT);
 	if('\0' == *path_name)
 	{
 		return parent;
@@ -241,7 +290,7 @@ static struct dentry *_get_subdir(struct dentry *parent,const char *path_name,un
  */
 static unsigned int _get_subdir_name_len(const char *path_name)
 {
-	ASSERT(NULL != path_name);
+	ASSERT(NULL != path_name,ASSERT_INPUT);
 	unsigned int i = 0;
 	while('/' != *path_name)
 	{
@@ -255,9 +304,16 @@ static unsigned int _get_subdir_name_len(const char *path_name)
 	return i;
 }
 
+/**
+ * @Author      kaka
+ * @DateTime    2019-04-21
+ * @description : get the dentry pointer of path
+ * @param       path       the full path of file
+ * @return      the dentry pointer 
+ */
 struct dentry *_find_dentry(const char *path)
 {
-	ASSERT(NULL != path);
+	ASSERT(NULL != path,ASSERT_INPUT);
 	struct dentry *dentry_ptr;
 	char *cur_path;
 	if('/' == *path)
@@ -287,13 +343,13 @@ struct dentry *_find_dentry(const char *path)
 int ___add_folder(struct dentry *target_dentry_ptr,const char *folder_name,
 	struct file_operations *file_operations_ptr)
 {
-	ASSERT(is_folder(target_dentry_ptr));
+	ASSERT(is_folder(target_dentry_ptr),"make sure is folder\n");
 	unsigned int len = ka_strlen(folder_name)+1;
 	char *name_buffer = ka_malloc(len);
 	if(NULL == name_buffer)
 	{
 		KA_WARN(DEBUG_TYPE_VFS,"name_buffer malloc fail\n");
-		return -ERROR_NO_MEM;
+		goto out3;
 	}
 	ka_strcpy(name_buffer,folder_name);
 	name_buffer[len-1] = '\0';
@@ -311,23 +367,27 @@ int ___add_folder(struct dentry *target_dentry_ptr,const char *folder_name,
 	if(NULL == inode_ptr)
 	{
 		KA_WARN(DEBUG_TYPE_VFS,"inode malloc fail\n");
-		ka_free(name_buffer);
-		return -ERROR_NO_MEM;
+		goto out2;
 	}
 	struct dentry *buffer = _folder_dentry_alloc_and_init(target_dentry_ptr,inode_ptr,name_buffer,FLAG_DENTRY_DEFAULT|FLAG_NEED_REFLASH);
 	if(NULL == buffer)
 	{
-		ka_free(name_buffer);
-		ka_free(inode_ptr);
-		return -ERROR_NO_MEM;
+		KA_WARN(DEBUG_TYPE_VFS,"dentry malloc fail\n");
+		goto out1;
 	}
 	return FUN_EXECUTE_SUCCESSFULLY;
+out1:
+	ka_free(inode_ptr);
+out2:
+	ka_free(name_buffer);
+out3:
+	return -ERROR_NO_MEM;
 }
 
 int __add_folder(struct dentry *target_dentry_ptr,const char *folder_name,
 	struct file_operations *file_operations_ptr)
 {
-	ASSERT(is_folder(target_dentry_ptr));
+	ASSERT(is_folder(target_dentry_ptr),"make sure is folder\n");
 	if(has_same_name_file(target_dentry_ptr,folder_name))
 	{
 		return -ERROR_LOGIC;
@@ -342,7 +402,7 @@ int __add_folder(struct dentry *target_dentry_ptr,const char *folder_name,
 int _add_folder(const char *path,const char *folder_name,
 	struct file_operations *file_operations_ptr)
 {
-	ASSERT((NULL != path) && (NULL != folder_name));
+	ASSERT((NULL != path) && (NULL != folder_name),ASSERT_INPUT);
 	/* find the corresponding dentry */
 	struct dentry *target_dentry_ptr = _find_dentry(path);
 	if(NULL == target_dentry_ptr)
@@ -365,12 +425,12 @@ EXPORT_SYMBOL(add_folder);
 
 int ___add_file(struct dentry *target_dentry_ptr,const char *file_name,struct file_operations *file_operations_ptr)
 {
-	ASSERT(is_folder(target_dentry_ptr));
+	ASSERT(is_folder(target_dentry_ptr),"make sure is folder\n");
 	unsigned int len = ka_strlen(file_name)+1;
 	char *name_buffer = ka_malloc(len);
 	if(NULL == name_buffer)
 	{
-		return -ERROR_NO_MEM;
+		goto out3;
 	}
 	ka_strcpy(name_buffer,file_name);
 	name_buffer[len-1] = '\0';
@@ -385,22 +445,25 @@ int ___add_file(struct dentry *target_dentry_ptr,const char *file_name,struct fi
 	}
 	if(NULL == inode_ptr)
 	{
-		ka_free(name_buffer);
-		return -ERROR_NO_MEM;
+		goto out2;
 	}
 	struct dentry *buffer = _file_dentry_alloc_and_init(target_dentry_ptr,inode_ptr,name_buffer,FLAG_DENTRY_DEFAULT);
 	if(NULL == buffer)
 	{
-		ka_free(name_buffer);
-		ka_free(inode_ptr);
-		return -ERROR_NO_MEM;
+		goto out1;
 	}
 	return FUN_EXECUTE_SUCCESSFULLY;
+out1:
+	ka_free(inode_ptr);
+out2:
+	ka_free(name_buffer);
+out3:
+	return -ERROR_NO_MEM;
 }
 
 static int __add_file(struct dentry *target_dentry_ptr,const char *file_name,struct file_operations *file_operations_ptr)
 {
-	ASSERT(is_folder(target_dentry_ptr));
+	ASSERT(is_folder(target_dentry_ptr),"make sure is folder\n");
 	KA_WARN(DEBUG_TYPE_VFS,"__add_file() get dentry name is %s\nfile name is %s\n",target_dentry_ptr->name,file_name);
 	if(has_same_name_file(target_dentry_ptr,file_name))
 	{
@@ -417,7 +480,7 @@ static int __add_file(struct dentry *target_dentry_ptr,const char *file_name,str
 
 int _add_file(const char *path,const char *file_name,struct file_operations *file_operations_ptr)
 {
-	ASSERT((NULL != path) && (NULL != file_name));
+	ASSERT((NULL != path) && (NULL != file_name),ASSERT_INPUT);
 	/* find the corresponding dentry */
 	struct dentry *target_dentry_ptr = _find_dentry(path);
 	if(NULL == target_dentry_ptr)
@@ -439,9 +502,9 @@ EXPORT_SYMBOL(add_file);
 
 int __delete_file(struct dentry *dentry_ptr)
 {
-	ASSERT(NULL != dentry_ptr);
-	ASSERT(list_empty(&dentry_ptr->subdirs));
-	ASSERT(is_file(dentry_ptr));
+	ASSERT(NULL != dentry_ptr,ASSERT_INPUT);
+	ASSERT(list_empty(&dentry_ptr->subdirs),ASSERT_PARA_AFFIRM);
+	ASSERT(is_file(dentry_ptr),ASSERT_PARA_AFFIRM);
 	if(0 == _dref(dentry_ptr))
 	{
 		dentry_ptr->d_inode->inode_ops->remove(dentry_ptr);
@@ -459,7 +522,7 @@ int __delete_file(struct dentry *dentry_ptr)
 
 int _delete_file(const char *path)
 {
-	ASSERT(NULL != path);
+	ASSERT(NULL != path,ASSERT_INPUT);
 	struct dentry *target_dentry_ptr = _find_dentry(path);
 	if((NULL == target_dentry_ptr) || (!is_file(target_dentry_ptr)))
 	{
@@ -484,9 +547,13 @@ int delete_file(const char *path)
 }
 EXPORT_SYMBOL(delete_file);
 
+/*
+ remove all the folder and file under the root_dentry_ptr,
+ and then remove the root_dentry_ptr
+ */
 static int remove_all_dentry(struct dentry *root_dentry_ptr)
 {
-	ASSERT(NULL != root_dentry_ptr);
+	ASSERT(NULL != root_dentry_ptr,ASSERT_INPUT);
 	struct dentry *dentry_buffer_ptr,*n;
 	if(dentry_need_refresh(root_dentry_ptr))
 	{
@@ -512,7 +579,7 @@ static int remove_all_dentry(struct dentry *root_dentry_ptr)
 		}
 		else
 		{
-			ASSERT(is_file(dentry_buffer_ptr));
+			ASSERT(is_file(dentry_buffer_ptr),ASSERT_PARA_AFFIRM);
 			if(__delete_file(dentry_buffer_ptr) < 0)
 			{
 				KA_WARN(DEBUG_TYPE_VFS,"__delete_file error,current dentry is %s\n"
@@ -529,7 +596,7 @@ static int remove_all_dentry(struct dentry *root_dentry_ptr)
 
 int _delete_folder(const char *path)
 {
-	ASSERT(NULL != path);
+	ASSERT(NULL != path,ASSERT_INPUT);
 	struct dentry *target_dentry_ptr = _find_dentry(path);
 	if((NULL == target_dentry_ptr) || (!is_folder(target_dentry_ptr)))
 	{
@@ -563,10 +630,11 @@ static struct command *command_rmdir_ptr = NULL;
 static struct command *command_ls_ptr = NULL;
 static struct command *command_cat_ptr = NULL;
 static struct command *command_echo_ptr = NULL;
+static struct command *command_rename_ptr = NULL;
 
 static void pwd(struct dentry *dentry_ptr)
 {
-	ASSERT(is_folder(dentry_ptr));
+	ASSERT(is_folder(dentry_ptr),ASSERT_PARA_AFFIRM);
 	if(dentry_ptr == (dentry_ptr->d_parent)) /* root */
 	{
 		ka_printf("/");
@@ -577,12 +645,20 @@ static void pwd(struct dentry *dentry_ptr)
 	return ;
 }
 
+/**
+ * @Author      kaka
+ * @DateTime    2019-04-21
+ * @description : show the current path, this function should only be 
+ * called by thread "shell"
+ * @param       argc       insignificant
+ * @param       argv       insignificant
+ */
 void shell_pwd(int argc, char const *argv[])
 {
 	(void)argc;
 	(void)argv;
 	struct dentry *dentry_ptr = current_dentry_ptr;
-	ASSERT(NULL != dentry_ptr);
+	ASSERT(NULL != dentry_ptr,ASSERT_PARA_AFFIRM);
 	if(dentry_ptr == (dentry_ptr->d_parent)) /* root */
 	{
 		ka_printf("/\n");
@@ -608,7 +684,7 @@ output:
  */
 void shell_ls(int argc, char const *argv[])
 {
-	ASSERT(NULL != current_dentry_ptr);
+	ASSERT(NULL != current_dentry_ptr,ASSERT_PARA_AFFIRM);
 	struct dentry *dentry_ptr;
 	struct list_head *head = &current_dentry_ptr->subdirs;
 	if(1 == argc)
@@ -727,7 +803,7 @@ void shell_cat(int argc, char const *argv[])
 		ka_printf("open file fail\n");
 		return ;
 	}
-	ASSERT(NULL != file_ptr);
+	ASSERT(NULL != file_ptr,ASSERT_PARA_AFFIRM);
 	if(0 == file_ptr->file_len)
 	{
 		_close(file_ptr);
@@ -747,6 +823,25 @@ void shell_cat(int argc, char const *argv[])
 	}
 	ka_free(buffer);
 	_close(file_ptr);
+}
+
+void shell_rename(int argc, char const *argv[])
+{
+	if(3 != argc)
+	{
+		ka_printf("command error\n");
+		return ;
+	}
+	struct dentry *dentry_ptr = _get_subdir(current_dentry_ptr,argv[1],ka_strlen(argv[2]));
+	if(NULL == dentry_ptr)
+	{
+		ka_printf("file name error\n");
+		return ;
+	}
+	if(_rename(dentry_ptr,argv[2]) < 0)
+	{
+		ka_printf("rename fail\n");
+	}
 }
 
 /*
@@ -790,9 +885,15 @@ void shell_rmdir(int argc, char const *argv[])
 	return ;
 }
 
-static void update_para_arv_vector(void)
+/**
+ * @Author      kaka
+ * @DateTime    2019-04-13
+ * @description : this function update the file and folder name into a 
+ * vector so we can use command like "cd" "rm" ... with TAB easily
+ */
+void update_para_arv_vector(void)
 {
-	ASSERT(NULL != current_dentry_ptr);
+	ASSERT(NULL != current_dentry_ptr,ASSERT_PARA_AFFIRM);
 	Vector_clean_up(&para_arv_vector);
 	struct dentry *dentry_ptr;
 	list_for_each_entry(dentry_ptr,&current_dentry_ptr->subdirs,child)
@@ -805,6 +906,7 @@ static void update_para_arv_vector(void)
 	_set_command_para_list(command_ls_ptr,(char **)para_arv_vector.data_ptr,para_arv_vector.cur_len);
 	_set_command_para_list(command_cat_ptr,(char **)para_arv_vector.data_ptr,para_arv_vector.cur_len);
 	_set_command_para_list(command_echo_ptr,(char **)para_arv_vector.data_ptr,para_arv_vector.cur_len);
+	_set_command_para_list(command_rename_ptr,(char **)para_arv_vector.data_ptr,para_arv_vector.cur_len);
 }
 
 void shell_vfs_echo(char const *argv[])
@@ -833,14 +935,14 @@ void shell_vfs_echo(char const *argv[])
 		ka_printf("open file fail\n");
 		return ;
 	}
-	ASSERT(NULL != file_ptr);
+	ASSERT(NULL != file_ptr,ASSERT_PARA_AFFIRM);
 	if(0 == ka_strcmp(">",argv[2]))
 	{
 		error = _write(file_ptr,(void *)argv[1],ka_strlen(argv[1]),FILE_CURRENT);
 	}
 	else
 	{
-		ASSERT(0 == ka_strcmp(">>",argv[2]));
+		ASSERT(0 == ka_strcmp(">>",argv[2]),ASSERT_PARA_AFFIRM);
 		error = _write(file_ptr,(void *)argv[1],ka_strlen(argv[1]),FILE_TAIL);
 	}
 	if(error < 0)
@@ -854,8 +956,8 @@ void shell_vfs_echo(char const *argv[])
 
 int _fs_register(const char *mount_point,fs_init_fun init,void *para,struct inode_operations *i_opts_ptr)
 {
-	ASSERT(NULL != mount_point);
-	ASSERT(NULL != init);
+	ASSERT(NULL != mount_point,ASSERT_INPUT);
+	ASSERT(NULL != init,ASSERT_INPUT);
 	struct dentry *dentry_ptr = &root_dentry;
 	const char *cur_path = mount_point + 1;
 	unsigned int name_len = _get_subdir_name_len(cur_path);
@@ -908,6 +1010,17 @@ int _fs_register(const char *mount_point,fs_init_fun init,void *para,struct inod
 	return FUN_EXECUTE_SUCCESSFULLY;
 }
 
+/**
+ * @Author      kaka
+ * @DateTime    2019-04-21
+ * @description : use this function to register a real file system
+ * into VFS
+ * @param       mount_point the root path of the fs
+ * @param       init        [description]
+ * @param       para        [description]
+ * @param       i_opts_ptr  [description]
+ * @return                  [description]
+ */
 int fs_register(const char *mount_point,fs_init_fun init,void *para,struct inode_operations *i_opts_ptr)
 {
 	if((NULL == mount_point) || (NULL == init))
@@ -921,6 +1034,9 @@ int fs_register(const char *mount_point,fs_init_fun init,void *para,struct inode
 	return _fs_register(mount_point,init,i_opts_ptr,i_opts_ptr);
 }
 
+/*
+ init the VFS
+ */
 extern struct inode_operations fat_inode_operations;
 static void __init_vfs(void)
 {
@@ -931,7 +1047,7 @@ static void __init_vfs(void)
 	{
 		panic("vfs init fail\n");
 	}
-	ASSERT(FUN_EXECUTE_SUCCESSFULLY == error);
+	ASSERT(FUN_EXECUTE_SUCCESSFULLY == error,ASSERT_PARA_AFFIRM);
 #endif
 	_inode_init(NULL,NULL,FLAG_INODE_SOFT|FLAG_INODE_READ|FLAG_INODE_WRITE,&root_inode);
 	_inode_init(NULL,NULL,FLAG_INODE_SOFT|FLAG_INODE_READ|FLAG_INODE_WRITE,&dev_inode);
@@ -947,22 +1063,25 @@ static void __init_vfs(void)
 /* add tab feature */
 /* command cd */
 	command_cd_ptr = _get_command_ptr("cd");
-	ASSERT(NULL != command_cd_ptr);
+	ASSERT(NULL != command_cd_ptr,ASSERT_PARA_AFFIRM);
 /* command rm */
 	command_rm_ptr = _get_command_ptr("rm");
-	ASSERT(NULL != command_rm_ptr);
+	ASSERT(NULL != command_rm_ptr,ASSERT_PARA_AFFIRM);
 /* command rmdir */
 	command_rmdir_ptr = _get_command_ptr("rmdir");
-	ASSERT(NULL != command_rmdir_ptr);	
+	ASSERT(NULL != command_rmdir_ptr,ASSERT_PARA_AFFIRM);	
 /* command ls */
 	command_ls_ptr = _get_command_ptr("ls");
-	ASSERT(NULL != command_ls_ptr);
+	ASSERT(NULL != command_ls_ptr,ASSERT_PARA_AFFIRM);
 /* command cat */
 	command_cat_ptr = _get_command_ptr("cat");
-	ASSERT(NULL != command_cat_ptr);
+	ASSERT(NULL != command_cat_ptr,ASSERT_PARA_AFFIRM);
 /* command echo */
 	command_echo_ptr = _get_command_ptr("echo");
-	ASSERT(NULL != command_echo_ptr);	
+	ASSERT(NULL != command_echo_ptr,ASSERT_PARA_AFFIRM);
+/* command rename */
+	command_rename_ptr = _get_command_ptr("rename");
+	ASSERT(NULL != command_rename_ptr,ASSERT_PARA_AFFIRM);	
 /* last step */
 	update_para_arv_vector(); /* set tab list */
 #endif

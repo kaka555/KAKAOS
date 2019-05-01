@@ -19,7 +19,7 @@ static int value_cmp(void *data1,void *data2)
 
 int _mutex_init(MUTEX *MUTEX_ptr)
 {
-	ASSERT(NULL != MUTEX_ptr);
+	ASSERT(NULL != MUTEX_ptr,ASSERT_INPUT);
 	CPU_SR_ALLOC();
 	CPU_CRITICAL_ENTER();
 	MUTEX_ptr->mutex_flag = MUTEX_UNLOCK;
@@ -47,7 +47,7 @@ EXPORT_SYMBOL(mutex_init);
 
 int _mutex_lock(MUTEX *MUTEX_ptr)
 {
-	ASSERT(NULL != MUTEX_ptr);
+	ASSERT(NULL != MUTEX_ptr,ASSERT_INPUT);
 	CPU_SR_ALLOC();
 	CPU_CRITICAL_ENTER();/*enter critical*/
 	if(MUTEX_UNLOCK == MUTEX_ptr->mutex_flag)
@@ -58,7 +58,7 @@ int _mutex_lock(MUTEX *MUTEX_ptr)
 	}
 	else
 	{
-		ASSERT(MUTEX_LOCK == MUTEX_ptr->mutex_flag);
+		ASSERT(MUTEX_LOCK == MUTEX_ptr->mutex_flag,ASSERT_PARA_AFFIRM);
 		if(MUTEX_ptr->owner_TCB_ptr == (TCB *)OSTCBCurPtr)
 		{
 			CPU_CRITICAL_EXIT();
@@ -91,6 +91,13 @@ int _mutex_lock(MUTEX *MUTEX_ptr)
 	return FUN_EXECUTE_SUCCESSFULLY;
 }
 
+/**
+ * @Author      kaka
+ * @DateTime    2019-04-21
+ * @description : get the mutex, function will return until task get it
+ * @param       MUTEX_ptr  [description]
+ * @return                 [description]
+ */
 int mutex_lock(MUTEX *MUTEX_ptr)
 {
 	if(NULL == MUTEX_ptr)
@@ -108,7 +115,7 @@ EXPORT_SYMBOL(mutex_lock);
 
 int _mutex_try_lock(MUTEX *MUTEX_ptr)
 {
-	ASSERT(NULL != MUTEX_ptr);
+	ASSERT(NULL != MUTEX_ptr,ASSERT_INPUT);
 	CPU_SR_ALLOC();
 	CPU_CRITICAL_ENTER();
 	if(MUTEX_UNLOCK == MUTEX_ptr->mutex_flag)
@@ -120,12 +127,19 @@ int _mutex_try_lock(MUTEX *MUTEX_ptr)
 	}
 	else
 	{
-		ASSERT(MUTEX_LOCK == MUTEX_ptr->mutex_flag);
+		ASSERT(MUTEX_LOCK == MUTEX_ptr->mutex_flag,ASSERT_PARA_AFFIRM);
 		CPU_CRITICAL_EXIT(); 
 		return -ERROR_SYS;
 	}
 }
 
+/**
+ * @Author      kaka
+ * @DateTime    2019-04-21
+ * @description : check if the mutex is free, if free, lock it, else, return error code
+ * @param       MUTEX_ptr  [description]
+ * @return      if mutex not free, return -ERROR_SYS
+ */
 int mutex_try_lock(MUTEX *MUTEX_ptr)
 {
 	if(NULL == MUTEX_ptr)
@@ -139,7 +153,7 @@ EXPORT_SYMBOL(mutex_try_lock);
 
 int _mutex_unlock(MUTEX *MUTEX_ptr)
 {
-	ASSERT(NULL != MUTEX_ptr);
+	ASSERT(NULL != MUTEX_ptr,ASSERT_INPUT);
 	CPU_SR_ALLOC();
 	CPU_CRITICAL_ENTER();
 	if(MUTEX_UNLOCK == MUTEX_ptr->mutex_flag)
@@ -174,6 +188,13 @@ int _mutex_unlock(MUTEX *MUTEX_ptr)
 	return FUN_EXECUTE_SUCCESSFULLY;
 }
 
+/**
+ * @Author      kaka
+ * @DateTime    2019-04-21
+ * @description : unlock the mutex
+ * @param       MUTEX_ptr  [description]
+ * @return                 [description]
+ */
 int mutex_unlock(MUTEX *MUTEX_ptr)
 {
 	if(NULL == MUTEX_ptr)
@@ -187,13 +208,13 @@ EXPORT_SYMBOL(mutex_unlock);
 
 int _mutex_del(MUTEX *MUTEX_ptr)
 {
-	ASSERT(NULL != MUTEX_ptr);
+	ASSERT(NULL != MUTEX_ptr,ASSERT_INPUT);
 	TCB *TCB_ptr;
 	struct insert_sort_data *insert_sort_data_ptr = insert_sort_delete_head(&MUTEX_ptr->mutex_insert_sort_TCB_list);
 	while(NULL != insert_sort_data_ptr)
 	{
 		TCB_ptr = (TCB *)(insert_sort_data_ptr->data_ptr);
-		ASSERT(STATE_WAIT_MUTEX_FOREVER == TCB_ptr->task_state);
+		ASSERT(STATE_WAIT_MUTEX_FOREVER == TCB_ptr->task_state,ASSERT_PARA_AFFIRM);
 		_remove_from_suspend_list(TCB_ptr);
 		set_bad_state(TCB_ptr);
 		insert_sort_data_ptr = insert_sort_delete_head(&MUTEX_ptr->mutex_insert_sort_TCB_list);

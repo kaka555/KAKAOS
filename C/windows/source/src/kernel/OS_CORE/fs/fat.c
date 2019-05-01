@@ -98,6 +98,12 @@ static void _fat_cd(struct dentry *dentry_ptr)
 	return ;
 }
 
+/**
+ * @Author      kaka
+ * @DateTime    2019-04-21
+ * @description : adjust the path of fat FS
+ * @param       dentry_ptr [description]
+ */
 static void fat_cd(struct dentry *dentry_ptr)
 {
 	fat_path_len = 2;

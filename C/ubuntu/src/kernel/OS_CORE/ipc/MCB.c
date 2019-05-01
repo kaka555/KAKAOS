@@ -29,7 +29,7 @@ _init_MCB(
 	unsigned int flag
 	)
 {
-	ASSERT(NULL != MCB_ptr);
+	ASSERT(NULL != MCB_ptr,ASSERT_INPUT);
 	CPU_SR_ALLOC();
 	CPU_CRITICAL_ENTER();
 	MCB_ptr->resource_num = num;
@@ -51,6 +51,11 @@ _init_MCB(
 	return FUN_EXECUTE_SUCCESSFULLY;
 }
 
+/**
+ * init the MCB,
+ * num: the value of MCB
+ * flag: point out that the MCB is b signal or c signal
+ */
 int
 init_MCB(
 	MCB *MCB_ptr,
@@ -73,7 +78,7 @@ EXPORT_SYMBOL(init_MCB);
 
 int _delete_MCB(MCB *MCB_ptr)
 {
-	ASSERT(NULL != MCB_ptr);
+	ASSERT(NULL != MCB_ptr,ASSERT_INPUT);
 	TCB *TCB_ptr;
 	CPU_SR_ALLOC();
 	CPU_CRITICAL_ENTER();/*enter critical*/
@@ -87,7 +92,7 @@ int _delete_MCB(MCB *MCB_ptr)
 		}
 		else
 		{
-			ASSERT(STATE_WAIT_MCB_TIMEOUT == TCB_ptr->task_state);
+			ASSERT(STATE_WAIT_MCB_TIMEOUT == TCB_ptr->task_state,ASSERT_PARA_AFFIRM);
 			_remove_from_delay_heap(TCB_ptr);
 		}
 		set_bad_state(TCB_ptr);
@@ -115,7 +120,7 @@ int _p(
 	unsigned int time
 )
 {
-	ASSERT(NULL != MCB_ptr);
+	ASSERT(NULL != MCB_ptr,ASSERT_INPUT);
 	CPU_SR_ALLOC();
 	CPU_CRITICAL_ENTER();/*enter critical*/
 	
@@ -174,6 +179,15 @@ int _p(
 	return FUN_EXECUTE_SUCCESSFULLY;
 }
 
+/**
+ * @Author      kaka
+ * @DateTime    2019-04-21
+ * @description : p operation of signal
+ * @param       MCB_ptr    [description]
+ * @param       flag       [point out that if the task want to wait for signal]
+ * @param       time       [the wait time]
+ * @return      error code
+ */
 int p(
 	MCB *MCB_ptr,
 	MCB_WAIT_FLAG flag,
@@ -190,12 +204,12 @@ EXPORT_SYMBOL(p);
 
 int _v(MCB *MCB_ptr)
 {
-	ASSERT(NULL != MCB_ptr);
+	ASSERT(NULL != MCB_ptr,ASSERT_INPUT);
 	CPU_SR_ALLOC();
 	CPU_CRITICAL_ENTER();/*enter critical*/
 	if((++(MCB_ptr->resource_num) > 1) && MCB_type_is_binary(MCB_ptr))
 	{
-		ASSERT(2 == MCB_ptr->resource_num);
+		ASSERT(2 == MCB_ptr->resource_num,ASSERT_PARA_AFFIRM);
 		MCB_ptr->resource_num = 1;
 	}
 	if(MCB_ptr->resource_num <= 0)
@@ -212,6 +226,13 @@ int _v(MCB *MCB_ptr)
 	return FUN_EXECUTE_SUCCESSFULLY;
 }
 
+/**
+ * @Author      kaka
+ * @DateTime    2019-04-21
+ * @description : the v operation of signal
+ * @param       MCB_ptr    [description]
+ * @return                 [description]
+ */
 int v(MCB *MCB_ptr)
 {
 	if(NULL == MCB_ptr)
@@ -225,7 +246,7 @@ EXPORT_SYMBOL(v);
 
 void _clear_MCB_index(MCB *MCB_ptr)
 {
-	ASSERT(NULL != MCB_ptr);
+	ASSERT(NULL != MCB_ptr,ASSERT_INPUT);
 	CPU_SR_ALLOC();
 	CPU_CRITICAL_ENTER();
 	if(MCB_ptr->resource_num > 0)
@@ -233,6 +254,13 @@ void _clear_MCB_index(MCB *MCB_ptr)
 	CPU_CRITICAL_EXIT();
 }
 
+/**
+ * @Author      kaka
+ * @DateTime    2019-04-21
+ * @description : set the MCB value to 0
+ * @param       MCB_ptr    [description]
+ * @return                 [description]
+ */
 int clear_MCB_index(MCB *MCB_ptr)
 {
 	if(NULL == MCB_ptr)

@@ -21,8 +21,8 @@ static int value_cmp(void *data1,void *data2)
 
 int _msg_init(MQB *MQB_ptr,char *name,unsigned int max_message_num)
 {
-	ASSERT(NULL != MQB_ptr);
-	ASSERT(max_message_num > 0);
+	ASSERT(NULL != MQB_ptr,ASSERT_INPUT);
+	ASSERT(max_message_num > 0,ASSERT_INPUT);
 	CPU_SR_ALLOC();
 	CPU_CRITICAL_ENTER();
 	INIT_LIST_HEAD(&MQB_ptr->message_list);
@@ -45,6 +45,15 @@ int _msg_init(MQB *MQB_ptr,char *name,unsigned int max_message_num)
 	return FUN_EXECUTE_SUCCESSFULLY;
 }
 
+/**
+ * @Author      kaka
+ * @DateTime    2019-04-21
+ * @description : init the mqb
+ * @param       MQB_ptr         
+ * @param       name            
+ * @param       max_message_num 
+ * @return                      
+ */
 int msg_init(MQB *MQB_ptr,char *name,unsigned int max_message_num)
 {
 	if((NULL == MQB_ptr) || (NULL == name))
@@ -68,8 +77,8 @@ EXPORT_SYMBOL(msg_init);
 
 int _msg_send(MQB *MQB_ptr,struct message *message_ptr,MSG_FLAG flag,unsigned int time)
 {
-	ASSERT(NULL != MQB_ptr);
-	ASSERT(NULL != message_ptr);
+	ASSERT(NULL != MQB_ptr,ASSERT_INPUT);
+	ASSERT(NULL != message_ptr,ASSERT_INPUT);
 	CPU_SR_ALLOC();
 	CPU_CRITICAL_ENTER();
 	if(MQB_ptr->current_message_num < MQB_ptr->max_message_num)
@@ -83,7 +92,7 @@ int _msg_send(MQB *MQB_ptr,struct message *message_ptr,MSG_FLAG flag,unsigned in
 			struct insert_sort_data *insert_sort_data_ptr;
 			TCB *TCB_ptr;
 			insert_sort_data_ptr = insert_sort_delete_head(&MQB_ptr->message_array_insert_sort_wait_TCB_list);
-			ASSERT(NULL != insert_sort_data_ptr);
+			ASSERT(NULL != insert_sort_data_ptr,ASSERT_PARA_AFFIRM);
 			TCB_ptr = (TCB *)(insert_sort_data_ptr->data_ptr);
 			if(STATE_WAIT_MESSAGE_QUEUE_FOREVER == TCB_ptr->task_state)
 			{
@@ -91,7 +100,7 @@ int _msg_send(MQB *MQB_ptr,struct message *message_ptr,MSG_FLAG flag,unsigned in
 			}
 			else
 			{
-				ASSERT(STATE_WAIT_MESSAGE_QUEUE_TIMEOUT == TCB_ptr->task_state);
+				ASSERT(STATE_WAIT_MESSAGE_QUEUE_TIMEOUT == TCB_ptr->task_state,ASSERT_PARA_AFFIRM);
 				_remove_from_delay_heap(TCB_ptr);
 			}
 			schedule();
@@ -100,7 +109,7 @@ int _msg_send(MQB *MQB_ptr,struct message *message_ptr,MSG_FLAG flag,unsigned in
 		return FUN_EXECUTE_SUCCESSFULLY;
 	}
 	/* else : MQB_ptr->current_message_num == MQB_ptr->max_message_num*/
-	ASSERT(MQB_ptr->current_message_num == MQB_ptr->max_message_num);
+	ASSERT(MQB_ptr->current_message_num == MQB_ptr->max_message_num,ASSERT_PARA_AFFIRM);
 	if(MSG_FLAG_NON_BLOCKING == flag)
 	{
 		CPU_CRITICAL_EXIT();
@@ -142,11 +151,22 @@ int _msg_send(MQB *MQB_ptr,struct message *message_ptr,MSG_FLAG flag,unsigned in
 	/*add to tail*/
 	list_add_tail(&message_ptr->message_list,&MQB_ptr->message_list);
 	++(MQB_ptr->current_message_num);
-	ASSERT(MQB_ptr->current_message_num <= MQB_ptr->max_message_num);
+	ASSERT(MQB_ptr->current_message_num <= MQB_ptr->max_message_num,ASSERT_PARA_AFFIRM);
 	CPU_CRITICAL_EXIT();
 	return FUN_EXECUTE_SUCCESSFULLY;
 }
 
+/**
+ * @Author      kaka
+ * @DateTime    2019-04-21
+ * @description : send a message, user should use struct message to define message,
+ * also, user can choose weather to wait for sending or not
+ * @param       MQB_ptr     
+ * @param       message_ptr 
+ * @param       flag        
+ * @param       time        
+ * @return                  
+ */
 int msg_send(MQB *MQB_ptr,struct message *message_ptr,MSG_FLAG flag,unsigned int time)
 {
 	if((NULL == MQB_ptr) || (NULL == message_ptr))
@@ -161,8 +181,8 @@ EXPORT_SYMBOL(msg_send);
 
 int _msg_receive(MQB *MQB_ptr,struct message **message_ptr,MSG_FLAG flag,unsigned int time)
 {
-	ASSERT(NULL != MQB_ptr);
-	ASSERT(NULL != message_ptr);
+	ASSERT(NULL != MQB_ptr,ASSERT_INPUT);
+	ASSERT(NULL != message_ptr,ASSERT_INPUT);
 	CPU_SR_ALLOC();
 	CPU_CRITICAL_ENTER();
 	if(0 < MQB_ptr->current_message_num)
@@ -178,7 +198,7 @@ int _msg_receive(MQB *MQB_ptr,struct message **message_ptr,MSG_FLAG flag,unsigne
 			struct insert_sort_data *insert_sort_data_ptr;
 			TCB *TCB_ptr;
 			insert_sort_data_ptr = insert_sort_delete_head(&MQB_ptr->message_array_insert_sort_put_TCB_list);
-			ASSERT(NULL != insert_sort_data_ptr);
+			ASSERT(NULL != insert_sort_data_ptr,ASSERT_PARA_AFFIRM);
 			TCB_ptr = (TCB *)(insert_sort_data_ptr->data_ptr);
 			if(STATE_PUT_MESSAGE_QUEUE_FOREVER == TCB_ptr->task_state)
 			{
@@ -186,7 +206,7 @@ int _msg_receive(MQB *MQB_ptr,struct message **message_ptr,MSG_FLAG flag,unsigne
 			}
 			else
 			{
-				ASSERT(STATE_PUT_MESSAGE_QUEUE_TIMEOUT == TCB_ptr->task_state);
+				ASSERT(STATE_PUT_MESSAGE_QUEUE_TIMEOUT == TCB_ptr->task_state,ASSERT_PARA_AFFIRM);
 				_remove_from_delay_heap(TCB_ptr);
 			}
 			schedule();
@@ -195,7 +215,7 @@ int _msg_receive(MQB *MQB_ptr,struct message **message_ptr,MSG_FLAG flag,unsigne
 		return FUN_EXECUTE_SUCCESSFULLY;
 	}
 	/* else : MQB_ptr->current_message_num == 0*/
-	ASSERT(0 == MQB_ptr->current_message_num);
+	ASSERT(0 == MQB_ptr->current_message_num,ASSERT_PARA_AFFIRM);
 	if(MSG_FLAG_NON_BLOCKING == flag)
 	{
 		CPU_CRITICAL_EXIT();
@@ -234,7 +254,7 @@ int _msg_receive(MQB *MQB_ptr,struct message **message_ptr,MSG_FLAG flag,unsigne
 		return -ERROR_MODULE_DELETED;
 	}
 	--(MQB_ptr->wait_num);
-	ASSERT(MQB_ptr->current_message_num > 0);
+	ASSERT(MQB_ptr->current_message_num > 0,ASSERT_PARA_AFFIRM);
 	--(MQB_ptr->current_message_num);
 	/*get the first message*/
 	*message_ptr = list_entry(MQB_ptr->message_list.next,struct message,message_list);
@@ -244,6 +264,16 @@ int _msg_receive(MQB *MQB_ptr,struct message **message_ptr,MSG_FLAG flag,unsigne
 	return FUN_EXECUTE_SUCCESSFULLY;
 }
 
+/**
+ * @Author      kaka
+ * @DateTime    2019-04-21
+ * @description : get a message
+ * @param       MQB_ptr     [description]
+ * @param       message_ptr [description]
+ * @param       flag        [description]
+ * @param       time        [description]
+ * @return                  [description]
+ */
 int msg_receive(MQB *MQB_ptr,struct message **message_ptr,MSG_FLAG flag,unsigned int time)
 {
 	if((NULL == MQB_ptr) || (NULL == message_ptr))
@@ -262,7 +292,7 @@ EXPORT_SYMBOL(msg_receive);
 
 int _msg_del(MQB *MQB_ptr)
 {
-	ASSERT(NULL != MQB_ptr);
+	ASSERT(NULL != MQB_ptr,ASSERT_INPUT);
 	TCB *TCB_ptr;
 	struct insert_sort_data *insert_sort_data_ptr = insert_sort_delete_head(&MQB_ptr->message_array_insert_sort_wait_TCB_list);
 	while(NULL != insert_sort_data_ptr)
@@ -274,7 +304,7 @@ int _msg_del(MQB *MQB_ptr)
 		}
 		else
 		{
-			ASSERT(STATE_WAIT_MESSAGE_QUEUE_TIMEOUT == TCB_ptr->task_state);
+			ASSERT(STATE_WAIT_MESSAGE_QUEUE_TIMEOUT == TCB_ptr->task_state,ASSERT_PARA_AFFIRM);
 			_remove_from_delay_heap(TCB_ptr);
 		}
 		set_bad_state(TCB_ptr);
@@ -290,7 +320,7 @@ int _msg_del(MQB *MQB_ptr)
 		}
 		else
 		{
-			ASSERT(STATE_PUT_MESSAGE_QUEUE_TIMEOUT == TCB_ptr->task_state);
+			ASSERT(STATE_PUT_MESSAGE_QUEUE_TIMEOUT == TCB_ptr->task_state,ASSERT_PARA_AFFIRM);
 			_remove_from_delay_heap(TCB_ptr);
 		}
 		set_bad_state(TCB_ptr);
@@ -310,9 +340,18 @@ int msg_del(MQB *MQB_ptr)
 }
 EXPORT_SYMBOL(msg_del);
 
+/**
+ * @Author      kaka
+ * @DateTime    2019-04-21
+ * @description : init the struct message
+ * @param       message_ptr  [description]
+ * @param       message_size [description]
+ * @param       data         [description]
+ * @return                   [description]
+ */
 int message_init(struct message *message_ptr,unsigned int message_size,void *data)
 {
-	ASSERT(NULL != message_ptr);
+	ASSERT(NULL != message_ptr,ASSERT_INPUT);
 	if(NULL == message_ptr)
 	{
 		OS_ERROR_PARA_MESSAGE_DISPLAY(message_init,message_ptr);

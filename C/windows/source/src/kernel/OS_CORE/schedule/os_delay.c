@@ -8,6 +8,11 @@
 #include <sys_init_fun.h>
 #include <printf_debug.h>
 
+/**
+ * the delay TCB use heap to manage, the value of comparation is the reach time
+ * the top TCB will be the soonest reach TCB
+*/
+
 #define TIME_FIRST_SMALLER_THAN_SECOND(first,second) ((INT64)(first)-(INT64)(second) < 0)
 #define TIME_FIRST_BIGGER_THAN_SECOND(first,second)  ((INT64)(first)-(INT64)(second) > 0)
 

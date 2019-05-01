@@ -1,0 +1,20 @@
+#!/bin/bash
+num=0
+config=NULL
+echo > .ka_config
+cat ./include/os_base/ka_configuration.h |
+while read line
+do
+	num=$[num+1]
+	if [ $num -gt 3 -a $num -lt 19 ]
+	then
+		config=`echo $line | awk '{print $2}'`
+		flag=`echo $line | awk '{print $3}'`
+		if [ $flag -eq 1 ]
+		then
+			echo "export $config=y" >> .ka_config
+		else
+			echo "export $config=n" >> .ka_config
+		fi
+	fi	
+done
