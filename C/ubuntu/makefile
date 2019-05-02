@@ -34,7 +34,7 @@ export HEAD_DIR13 = ${HOME}/include/os_core/time
 
 export INCLUDE = -I$(HEAD_DIR1) -I$(HEAD_DIR2) -I$(HEAD_DIR3) -I$(HEAD_DIR4) -I$(HEAD_DIR5) -I$(HEAD_DIR6) -I$(HEAD_DIR7) -I$(HEAD_DIR8) -I$(HEAD_DIR9) -I$(HEAD_DIR10) -I$(HEAD_DIR11) -I$(HEAD_DIR12) -I$(HEAD_DIR13)
 
-OPTIMIZE = O0
+OPTIMIZE = Os
 
 export FLAGS = -Wall -g -$(OPTIMIZE) $(INCLUDE) $(FLAGS_AUXILIARY) #-ffunction-sections -fdata-sections
 

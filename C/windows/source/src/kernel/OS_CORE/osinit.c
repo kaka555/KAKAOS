@@ -54,6 +54,13 @@ extern unsigned long _ka_init_fun_begin2;
 extern unsigned long _ka_init_fun_end2;
 extern unsigned long _ka_init_fun_begin3;
 extern unsigned long _ka_init_fun_end3;
+
+/**
+ * @Author      kaka
+ * @DateTime    2019-05-02
+ * @description : this function is used by function _os_start
+ * @return                 
+ */
 static void __INIT os_init(void)
 {	
 	bsp_init();
@@ -82,6 +89,15 @@ static void __INIT os_init(void)
 	}
 }
 
+/**
+ * @Author      kaka
+ * @DateTime    2019-05-02
+ * @description : this function is used by function start_kernel();
+ * it call the bsp init function, the C lib init function, and than all the
+ * os init function, than create some necessary task, active the system's clock
+ * and run the task
+ * @return                
+ */
 void __INIT _os_start(void)
 {
 /*===========init all module==================*/
@@ -140,24 +156,15 @@ void task_start(void)
 	{
 		panic("create task three error\n");
 	}
-/*
-	if(0 != task_creat_ready(256,5,5,"four",four,NULL,NULL))
-	{
-		panic("create task four error\n");
-	}
-*/
-/*
-	if(0 != task_creat_ready(256,6,5,"five",five,NULL,NULL))
-	{
-		panic("create task five error\n");
-	}
-	if(0 != task_creat_ready(256,7,3,"six",six,NULL,NULL))
-	{
-		panic("create task six error\n");
-	}
-*/
 }
 
+/**
+ * @Author      kaka
+ * @DateTime    2019-05-02
+ * @description : the code of task "count_init", it will do some counting job,
+ * and than init a task named "three" for user, and than finally delete itself
+ * @param       para       [description]
+ */
 static void count_init(void *para)	
 {
 	(void)para;
@@ -175,8 +182,15 @@ static void count_init(void *para)
 	SYS_ENTER_CRITICAL();
 	task_start();
 	SYS_EXIT_CRITICAL();
+	/* delete itselt */
 }
 
+/**
+ * @Author      kaka
+ * @DateTime    2019-05-02
+ * @description : idel task
+ * @param       para       
+ */
 static void idle(void *para)
 {
 	CPU_SR_ALLOC();
@@ -201,6 +215,13 @@ static void set_inter_stack(void)
 		);
 }
 
+/**
+ * @Author      kaka
+ * @DateTime    2019-05-02
+ * @description : calculate the log2(x)
+ * @param       x          
+ * @return      the result of log2(x)
+ */
 static int __attribute__((optimize("O1"))) FastLog2(int x)
 {
     float fx;
@@ -275,6 +296,13 @@ void _case_slab_free_buddy(void *ptr,void *end_ptr)
 	return ;
 }
 
+/**
+ * @Author      kaka
+ * @DateTime    2019-05-02
+ * @description : every THREAD_INIT_PERIOD seconds this task will free the 
+ * free memory in slab system, and than check the flag of slab system
+ * @param       para       [description]
+ */
 static void thread_init(void *para)	
 {
 	(void)para;
@@ -337,6 +365,11 @@ extern void slab_list_check(const struct slab *slab_ptr);
 #endif
 }
 
+/**
+ * @Author      kaka
+ * @DateTime    2019-05-02
+ * @description : use this function to active task "thread_init"
+ */
 void recycle_memory(void)
 {
 	_remove_from_delay_heap(&TCB_init);

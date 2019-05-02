@@ -2,6 +2,7 @@
 #define _EXPORT_H
 #include <kakaosstdint.h>
 #include <ka_configuration.h>
+#include <osbase.h>
 
 #if CONFIG_MODULE
 
@@ -12,8 +13,8 @@ struct ka_module_symtab
 };
 
 #define EXPORT_SYMBOL(symbol)                                            \
-const char __rtmsym_##symbol##_name[] __attribute__((section(".rodata.name"))) = #symbol; \
-const struct ka_module_symtab __rtmsym_##symbol __attribute__((section(".RTMSymTab")))= \
+const char __rtmsym_##symbol##_name[]  __section(".rodata.name") = #symbol; \
+const struct ka_module_symtab __rtmsym_##symbol  __section(".RTMSymTab")= \
 {                                                                     \
     .addr = (void *)&symbol,                                                  \
     .name = __rtmsym_##symbol##_name,                                         \

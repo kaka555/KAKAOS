@@ -1,7 +1,7 @@
 #ifndef _OS_CPU_STM32_H
 #define _OS_CPU_STM32_H
 
-#include <barrier.h>
+#include <osbase.h>
 
 typedef  unsigned  int         CPU_INT32U;
 typedef  volatile  CPU_INT32U  CPU_REG32;

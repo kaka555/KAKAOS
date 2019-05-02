@@ -5,6 +5,9 @@
 #include <kakaosstdint.h>
 #include <printf_debug.h>
 
+/* this file realize the vector, it can enlarge or shrink itself if necessary,
+ some component of OS use it to to do some management job */
+
 /*
 initilize the Vector entity with vector_ptr->max_len = size,vector_ptr->cur_len = 0,
 vector_ptr->data_size = len_per_data; then use malloc() to allocate room 

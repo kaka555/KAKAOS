@@ -1,7 +1,7 @@
 #ifndef _SYS_INIT_FUN_H
 #define _SYS_INIT_FUN_H
 
-#define __section(S) __attribute__ ((__section__(S)))
+#include <osbase.h>
 
 #define __INIT  __section(".INIT.TEXT")
 

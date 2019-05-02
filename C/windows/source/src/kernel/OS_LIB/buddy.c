@@ -219,6 +219,13 @@ static void add_to_os(struct buddy *buddy_ptr)
 |		 .						|	V
 |-------------------------------|  high
  */
+/**
+ * @Author      kaka
+ * @DateTime    2019-05-02
+ * @description : this function init the buddy system, it use the front memory 
+ * to record the flag for management
+ * @param       dev_mem_para_ptr [description]
+ */
 void __buddy_init(const struct dev_mem_para *dev_mem_para_ptr)
 {
 	unsigned int size;

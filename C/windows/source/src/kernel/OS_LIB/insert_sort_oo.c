@@ -3,6 +3,8 @@
 #include <ka_configuration.h>
 #include <os_error.h>
 
+/* insert sort library, the data will be sort from small to big */
+
 /*public function for insert sort*/
 int insert_sort_insert_into(struct insert_sort_data *data_ptr,struct insert_sort_entity *insert_sort_entity_ptr)
 {
