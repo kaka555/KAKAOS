@@ -1,13 +1,14 @@
 # KAKAOS内核代码
 
 ## 介绍
-    因为我是卡卡的球迷，故将该OS取名为KAKAOS，虽然名字如此，但这OS用起来一点都不卡。KAKAOS目前超过11000行代码，个文件，支持的MCU有stm32f103、stm32f407。</br>
-    为了更好地管理内存空间，本项目使用GCC进行编译，测试时使用的GCC版本是gcc-arm-none-eabi-7-2018-q2。</br>
-    OS全部编译为库后生成的二进制代码大小约为 100k，通过裁剪保留基本的IPC、调度、内存管理和时间功能最小可以缩小到低于40K</br>
-    OS工程里使用了某些公司的BSP提供某些功能的驱动</br>
-    内核的入口函数为start_kernel（）</br>
-    源码中分别包含了windows下和linux下的工程，其中windows下的工程使用keil作为IDE，工程文件位于C\windows\Project\下，linux下使用make工具，以类似于uboot老版工程的形式进行工程的构建，比如编译stm32f103的工程，先输入命令make stm32f103_config，然后make，具体参考主makefile下的各项配置；而且，linux下的工程代码通过shell脚本的帮助可以更轻松地对内核进行配置和裁剪</br>
-    极短的任务切换时间，在stm32f103zet6平台下以两个任务切换测试为例，挂起函数suspend()上下文切换时长为6.94us，延时函数sleep()上下文切换时长为12.35us；作为对比，ucosiii挂起函数上下文切换时长为15.3us，延时函数上下文切换时长为16.3us</br>
+•	因为我是卡卡的球迷，故将该OS取名为KAKAOS，虽然名字如此，但这OS用起来一点都不卡。KAKAOS目前超过11000行代码，个文件，支持的MCU有stm32f103、stm32f407。</br>
+•	为了更好地管理内存空间，本项目使用GCC进行编译，测试时使用的GCC版本是gcc-arm-none-eabi-7-2018-q2。</br>
+•	OS全部编译为库后生成的二进制代码大小约为 100k，通过裁剪保留基本的IPC、调度、内存管理和时间功能最小可以缩小到低于40K</br>
+•	OS工程里使用了某些公司的BSP提供某些功能的驱动</br>
+•	内核的入口函数为start_kernel（）</br>
+•	源码中分别包含了windows下和linux下的工程，其中windows下的工程使用keil作为IDE，工程文件位于C\windows\Project\下，linux下使用make工具，以类似于uboot老版工程的形式进行工程的构建，比如编译stm32f103的工程，先输入命令make stm32f103_config，然后make，具体参考主makefile下的各项配置；而且，linux下的工程代码通过shell脚本的帮助可以更轻松地对内核进行配置和裁剪</br>
+•	极短的任务切换时间，在stm32f103zet6平台下以两个任务切换测试为例，挂起函数suspend()上下文切换时长为6.94us，延时函数sleep()上下文切换时长为12.35us；作为对比，ucosiii挂起函数上下文切换时长为15.3us，延时函数上下文切换时长为16.3us</br>
+•	./KAKAOS.png为本文件导出的思维导图
 
 ## 内核包括的模块及功能简介：
 
