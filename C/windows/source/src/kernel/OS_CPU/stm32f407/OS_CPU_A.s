@@ -1,4 +1,4 @@
-    
+#include <core_cm4.h>
     .global  OSTCBCurPtr
     .global  OSTCBHighRdyPtr
 
@@ -7,7 +7,7 @@
     .global  OS_CPU_PendSVHandler
 
     .cpu    cortex-m4
-    .fpu    softvfp
+
     .syntax unified
     .thumb
     .text
@@ -58,6 +58,11 @@ OS_CPU_PendSVHandler:
     LDR     R1, [R1]
     CBZ     R1, OS_CPU_PendSVHandler_nosave
 
+#if ((__FPU_PRESENT == 1)&&(__FPU_USED == 1) )  /*if enable the FPU*/
+    /*SUBS    R0, R0, #0X40
+    VSTM    R0, {S16-S31}*/
+#endif
+
     SUBS    R0, R0, #0x20                                       /*; Save remaining regs r4-11 on process stack*/
     STM     R0, {R4-R11}
 
@@ -73,6 +78,11 @@ OS_CPU_PendSVHandler_nosave:
     LDR     R0, [R2] /*; R0 is new process SP; SP = OSTCBHighRdyPtr->StkPtr;*/
     LDM     R0, {R4-R11}                                        
     ADDS    R0, R0, #0x20
+
+#if ((__FPU_PRESENT == 1)&&(__FPU_USED == 1) )  /*if enable the FPU*/
+   /* VLDM    R0, {S16-S31}
+    ADDS    R0, R0, #0X40*/
+#endif
 
     MSR     PSP, R0                                           
     ORR     LR, LR, #0x04                                      

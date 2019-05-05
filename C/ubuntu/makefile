@@ -4,7 +4,8 @@ CROSS_COMPILER = arm-none-eabi-
 
 SCRIPT = $(HOME)/src/kernel/OS_CPU/$(PROJECT)/stm32_flash.ld
 
-LIBPATH = -L/home/ka/stm32/gcc-arm-none-eabi-5_4-2016q3/lib/gcc/arm-none-eabi/5.4.1/armv7e-m/softfp/ -L/home/ka/stm32/gcc-arm-none-eabi-5_4-2016q3/arm-none-eabi/lib/armv7e-m/softfp/
+LIBPATH = -L/home/ka/stm32/gcc-arm-none-eabi-5_4-2016q3/lib/gcc/arm-none-eabi/5.4.1/armv7e-m/softfp/ \
+          -L/home/ka/stm32/gcc-arm-none-eabi-5_4-2016q3/arm-none-eabi/lib/armv7e-m/softfp/           \
 
 export CC = ${CROSS_COMPILER}gcc
 
@@ -32,7 +33,9 @@ export HEAD_DIR11 = ${HOME}/include/os_core/fs
 export HEAD_DIR12 = ${HOME}/include/os_core/ipc
 export HEAD_DIR13 = ${HOME}/include/os_core/time
 
-export INCLUDE = -I$(HEAD_DIR1) -I$(HEAD_DIR2) -I$(HEAD_DIR3) -I$(HEAD_DIR4) -I$(HEAD_DIR5) -I$(HEAD_DIR6) -I$(HEAD_DIR7) -I$(HEAD_DIR8) -I$(HEAD_DIR9) -I$(HEAD_DIR10) -I$(HEAD_DIR11) -I$(HEAD_DIR12) -I$(HEAD_DIR13)
+export INCLUDE = -I$(HEAD_DIR1) -I$(HEAD_DIR2) -I$(HEAD_DIR3) -I$(HEAD_DIR4) -I$(HEAD_DIR5) \
+                 -I$(HEAD_DIR6) -I$(HEAD_DIR7) -I$(HEAD_DIR8) -I$(HEAD_DIR9) -I$(HEAD_DIR10) \
+				 -I$(HEAD_DIR11) -I$(HEAD_DIR12) -I$(HEAD_DIR13) \
 
 OPTIMIZE = Os
 
@@ -75,5 +78,10 @@ stm32f103_config:
 	@$(MKCONFIG) $(@:_config=) "-mcpu=cortex-m3 -mthumb" "-D STM32F10X_HD -D USE_STDPERIPH_DRIVER"
 
 stm32f407_config:
-	@$(MKCONFIG) $(@:_config=) "-mcpu=cortex-m4 -mthumb" "-D STM32F40XX -D USE_STDPERIPH_DRIVER"
+	@$(MKCONFIG) $(@:_config=) "-mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16" \
+	"-D STM32F40XX -D USE_STDPERIPH_DRIVER -D __VFP_FP__"
+	
+stm32f407_config_no_fpu:
+	@$(MKCONFIG) $(@:_config=) "-mcpu=cortex-m4 -mthumb" \
+	"-D STM32F40XX -D USE_STDPERIPH_DRIVER -D __SOFTFP__"
 

@@ -105,11 +105,11 @@ void __INIT _os_start(void)
 /*============================================*/
 
 /*==============register initialization task===================*/
-	if(0 != task_init_ready(&TCB_count_init,1023,PRIO_MAX-2,5,"count_init",count_init,NULL))
+	if(0 != task_init_ready(&TCB_count_init,600,PRIO_MAX-2,5,"count_init",count_init,NULL))
 	{
 		panic("create task count_init error\n");
 	}
-	if(0 != task_init_ready(&TCB_idle,128,PRIO_MAX-1,HZ,"idle",idle,NULL))
+	if(0 != task_init_ready(&TCB_idle,600,PRIO_MAX-1,HZ,"idle",idle,NULL))
 	{
 		panic("create task idle error\n");
 	}
@@ -152,7 +152,7 @@ void task_start(void)
 		panic("create task timer_task error\n");
 	}
 #endif
-	if(0 != task_creat_ready(500,4,5,"three",three,NULL,NULL))
+	if(0 != task_creat_ready(1000,4,5,"three",three,NULL,NULL))
 	{
 		panic("create task three error\n");
 	}

@@ -1,5 +1,6 @@
+
     .cpu    cortex-m4
-    .fpu    softvfp
+
     .syntax unified
     .thumb
     .text
