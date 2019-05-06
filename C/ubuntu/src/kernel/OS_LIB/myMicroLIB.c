@@ -6,6 +6,8 @@
 #include <os_cpu.h>
 #include <export.h>
 
+/* this file realize a small C lib for OS */
+
 unsigned long ka_pow(int x,unsigned int y)
 {
 	unsigned long sum = 1;

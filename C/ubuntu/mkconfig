@@ -1,11 +1,31 @@
+#!/bin/bash
+
 [ $# -lt 1 ] && exit 1
-[ $# -gt 3 ] && exit 1
+[ $# -gt 6 ] && exit 1
 
 ./kaconfig
-echo "PROJECT := $1" > config.mk
+echo "CONFIG_NAME := $1" > config.mk
+echo "export CONFIG_NAME" >> config.mk
+echo "PROJECT := $2" >> config.mk
 echo "export PROJECT" >> config.mk
-echo "FLAGS_AUXILIARY := $2" >> config.mk
+echo "FLAGS_AUXILIARY := $3" >> config.mk
 echo "export FLAGS_AUXILIARY" >> config.mk
-echo "DEF := $3" >> config.mk
+echo "DEF := $4" >> config.mk
 echo "export DEF" >> config.mk
+
+default="DEFAULT"
+
+if [ $# -ge 5 ];then
+	libpath=`echo "$5" | sed s/[[:space:]]//g`
+	if [ "$libpath" != "$default" ];then
+		echo "LIBPATH := $5" >> config.mk
+	fi
+fi
+
+if [ $# -ge 6 ];then
+	ldflag=`echo "$6" | sed s/[[:space:]]//g`
+	if [ "$6" != "$default" ];then
+		echo "LDFLAGS := $6" >> config.mk
+	fi
+fi
 

@@ -1,7 +1,6 @@
 #include <slab.h>
 #include <myassert.h>
 
-
 void insert_into_cache_chain(
 	struct singly_list_head *head,
 	struct kmem_cache *kmem_cache_ptr,
@@ -52,6 +51,16 @@ struct kmem_cache *find_first_bigger_cache(struct singly_list_head *head,unsigne
 	return NULL;
 }
 
+/**
+ * @Author      kaka
+ * @DateTime    2019-05-02
+ * @description : this function build the slab system
+ * @param       start_ptr      memory start addr
+ * @param       end_ptr        memory end addr
+ * @param       block_size     
+ * @param       slab_chain_ptr 
+ * @return      the block size of slab system              
+ */
 unsigned int load_slab(
 	void *start_ptr,
 	void *end_ptr,

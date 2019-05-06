@@ -18,7 +18,8 @@ void set_register(void **stack_ptr,void *entry_ptr,void *return_ptr,void *para)
 {
 	STACK_P stack = *stack_ptr;
 	stack += 1;
-#if(__FPU_PRESENT == 1)&&(__FPU_USED == 1)
+#if __FPU_USED == 1
+    #warning use VFP
     *--stack = (unsigned int)0x00000000u;    /*unknow register*/
     *--stack = (unsigned int)0x00000000u;    /*FPSCR          */
     *--stack = (unsigned int)0x15151515u;    /*S15            */
@@ -37,6 +38,10 @@ void set_register(void **stack_ptr,void *entry_ptr,void *return_ptr,void *para)
     *--stack = (unsigned int)0x02020202u;    /*S02            */
     *--stack = (unsigned int)0x01010101u;    /*S01            */
     *--stack = (unsigned int)0x00000000u;    /*S00            */
+#elif __FPU_USED == 0
+    #warning use soft FP
+#else
+    #error user should define __VFP_FP__ or __FPU_USED=0
 #endif
 	*(--stack) = (unsigned int)0x01000000u;		         /*xPSR*/
 	*(--stack) = (unsigned int)entry_ptr;  		     /*R15 PC*/
@@ -46,7 +51,7 @@ void set_register(void **stack_ptr,void *entry_ptr,void *return_ptr,void *para)
 	*(--stack) = (unsigned int)0x02020202u;	         /*R2*/
 	*(--stack) = (unsigned int)0x01010101u;          /*R1*/
 	*(--stack) = (unsigned int)para;                 /*R0*/
-#if(__FPU_PRESENT == 1)&&(__FPU_USED == 1)
+#if __FPU_USED == 1
     *--stack = (unsigned int)0x31313131u;            /*S31*/
     *--stack = (unsigned int)0x30303030u;            /*S30*/
     *--stack = (unsigned int)0x29292929u;            /*S29*/

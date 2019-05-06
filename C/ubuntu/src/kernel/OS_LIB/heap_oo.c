@@ -5,6 +5,9 @@
 #include <ka_configuration.h>
 #include <kakaosstdint.h>
 
+/* this file realize the heap, some component of OS use it to to do some 
+   management job */
+
 #define MIN(a,b) ((a) < (b) ? (a) : (b))
 
 int heap_init(struct little_heap *const little_heap_ptr,
@@ -25,7 +28,7 @@ int heap_init(struct little_heap *const little_heap_ptr,
 	return FUN_EXECUTE_SUCCESSFULLY;
 }
 
-/*subfunction for heap sort*/
+/* subfunction for heap sort*/
 static void heap_adjust(struct little_heap *little_heap_ptr,int index,int size)
 {
 	int j;

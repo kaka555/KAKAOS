@@ -276,7 +276,7 @@
             <uThumb>1</uThumb>
             <VariousControls>
               <MiscControls>-mcpu=cortex-m4 -mthumb</MiscControls>
-              <Define>STM32F40_41xxx,USE_STDPERIPH_DRIVER,__SOFTFP__</Define>
+              <Define>STM32F40_41xxx,USE_STDPERIPH_DRIVER,__FPU_USED=0</Define>
               <Undefine></Undefine>
               <IncludePath>..\..\source\include;..\..\source\include\os_base;..\..\source\include\os_core;..\..\source\include\os_core\schedule;..\..\source\include\shell;..\..\source\include\os_lib;..\..\source\main;..\..\source\src\kernel\OS_CORE;..\..\source\src\kernel\OS_CORE\schedule;..\..\source\src\kernel\OS_CPU;..\..\source\src\kernel\OS_CPU\bsp;..\..\source\src\kernel\OS_LIB;..\..\source\src\kernel\shell;..\..\source\include;..\..\source\include\os_core\dmodule;..\..\source\include\os_core\ipc;..\..\source\include\os_core\time;..\..\source\include\os_core\fs;..\..\source\src\stm32f407\FWlib\inc;..\..\source\include\os_cpu\stm32f407;..\..\source\include\os_cpu\stm32f407\bsp;..\..\source\src\stm32f407\FWlib\inc;..\..\source\src\kernel\OS_CPU\stm32f407\FWlib\inc</IncludePath>
             </VariousControls>
@@ -432,16 +432,6 @@
           <GroupName>OS_CPU</GroupName>
           <Files>
             <File>
-              <FileName>CPU_A.s</FileName>
-              <FileType>2</FileType>
-              <FilePath>..\..\source\src\kernel\OS_CPU\stm32f407\CPU_A.s</FilePath>
-            </File>
-            <File>
-              <FileName>OS_CPU_A.s</FileName>
-              <FileType>2</FileType>
-              <FilePath>..\..\source\src\kernel\OS_CPU\stm32f407\OS_CPU_A.s</FilePath>
-            </File>
-            <File>
               <FileName>OS_CPU_STM32.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\source\src\kernel\OS_CPU\stm32f407\OS_CPU_STM32.c</FilePath>
@@ -465,6 +455,16 @@
               <FileName>sys.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\source\src\kernel\OS_CPU\stm32f407\bsp\sys.c</FilePath>
+            </File>
+            <File>
+              <FileName>CPU_A.S</FileName>
+              <FileType>2</FileType>
+              <FilePath>..\..\source\src\kernel\OS_CPU\stm32f407\CPU_A.S</FilePath>
+            </File>
+            <File>
+              <FileName>OS_CPU_A.S</FileName>
+              <FileType>2</FileType>
+              <FilePath>..\..\source\src\kernel\OS_CPU\stm32f407\OS_CPU_A.S</FilePath>
             </File>
           </Files>
         </Group>
