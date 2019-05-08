@@ -147,6 +147,14 @@ int _task_change_prio(TCB *TCB_ptr,TASK_PRIO_TYPE prio)
 	return FUN_EXECUTE_SUCCESSFULLY;
 }
 
+/**
+ * @Author      kaka
+ * @DateTime    2019-05-02
+ * @description : use this function to change the priority of the task
+ * @param       TCB_ptr    
+ * @param       prio       
+ * @return      error code
+ */
 int task_change_prio(TCB *TCB_ptr,TASK_PRIO_TYPE prio)
 {
 	if(prio >= PRIO_MAX)
@@ -214,6 +222,13 @@ int _task_delete(TCB *TCB_ptr)
 	return FUN_EXECUTE_SUCCESSFULLY;
 }
 
+/**
+ * @Author      kaka
+ * @DateTime    2019-05-02
+ * @description : use this function to remove a task from os
+ * @param       TCB_ptr    [description]
+ * @return                 [description]
+ */
 int task_delete(TCB *TCB_ptr)
 {
 	if(NULL == TCB_ptr)

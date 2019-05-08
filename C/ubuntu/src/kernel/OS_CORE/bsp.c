@@ -1,7 +1,13 @@
 #include <bsp.h>
 #include <myMicroLIB.h>
 
-
+/**
+ * @Author      kaka
+ * @DateTime    2019-05-02
+ * @description : this function is used for xxx_bsp.c to init the hardware
+ * @param       device_array [description]
+ * @param       num          [description]
+ */
 void _bsp_init(const struct device *device_array,unsigned int num)
 {
 	unsigned int i;

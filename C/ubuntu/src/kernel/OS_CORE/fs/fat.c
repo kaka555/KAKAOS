@@ -6,6 +6,10 @@
 #include <myassert.h>
 #include <fs.h>
 
+/**
+ *  this file is used for fat to fit the vfs
+ */
+
 #define FAT_ROOT "/fat"
 #define FAT_NAME "fat"
 

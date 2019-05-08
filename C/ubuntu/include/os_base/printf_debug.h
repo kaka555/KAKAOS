@@ -31,6 +31,8 @@
 
 #define panic(format, ...) \
 		do{ \
+			ka_printf("file_name: %s\nline_num: %u\nfunction_name: %s\n", \
+				__FILE__,__LINE__,__FUNCTION__); \
 			ka_printf("panic::" format,##__VA_ARGS__);\
 			while(1);\
 		}while(0)

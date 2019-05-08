@@ -1,6 +1,9 @@
 #include <singly_linked_list.h>
 #include <kakaosstdint.h>
 
+/* this file imitate the linux struct node, realizes a singly linked list with
+ singly_linked_list.h */
+
 static void _singly_list_del(
 	struct singly_list_head *head,
 	const struct singly_list_head *entity)

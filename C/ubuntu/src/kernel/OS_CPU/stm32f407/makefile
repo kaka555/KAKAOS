@@ -1,11 +1,19 @@
 SRCS = ${shell ls *.c}
 
-ASM_SRCS = ${shell ls *.s}
+ASM_SRCS = CPU_A.S
 
 SUB_DIR = bsp CMSIS FWlib/src
 
-$(SUB_TGT): $(SRCS:.c=.o) $(ASM_SRCS:.s=.o) $(SUB_DIR)
-	$(LD) $(SRCS:.c=.o) $(ASM_SRCS:.s=.o) $(SUB_DIR:=/$(SUB_TGT)) $(LDFLAG)  -r -o $@
+ifeq ($(CONFIG_NAME), stm32f407_config_no_fpu)
+#do not use fpu
+ASM_SRCS += OS_CPU_A_NO_FPU.S
+else
+#use fpu
+ASM_SRCS += OS_CPU_A.S
+endif
+
+$(SUB_TGT): $(SRCS:.c=.o) $(ASM_SRCS:.S=.o) $(SUB_DIR)
+	$(LD) $(SRCS:.c=.o) $(ASM_SRCS:.S=.o) $(SUB_DIR:=/$(SUB_TGT)) $(LDFLAG)  -r -o $@
 
 %.o: %.c
 	@echo "CC $@"
@@ -14,9 +22,9 @@ $(SUB_TGT): $(SRCS:.c=.o) $(ASM_SRCS:.s=.o) $(SUB_DIR)
 %.d :%.c
 	@$(CC) $(FLAGS) $< -MM > $@ $(DEF)
 
-%.o :%.s
-	@echo "CC $@"
-	@$(CC) $(ASFLAGS) -c $< -o $@
+%.o :%.S
+	@echo "AS $@"
+	@$(AS) $(ASFLAGS) -c $< -o $@ 
 
 sinclude $(SRCS:.c=.d)
 
@@ -26,7 +34,7 @@ $(SUB_DIR) :
 	@make -C $@
 
 clean:
-	rm -vf $(SUB_TGT) $(SRCS:.c=.o) $(ASM_SRCS:.s=.o) $(SRCS:.c=.d)
+	rm -vf $(SUB_TGT) $(SRCS:.c=.o) $(ASM_SRCS:.S=.o) $(SRCS:.c=.d)
 	for dir in $(SUB_DIR);do \
 	    make -C $$dir clean;\
 	done

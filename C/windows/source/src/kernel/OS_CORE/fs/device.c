@@ -34,7 +34,7 @@ int _device_register(const char *dev_name,struct file_operations *file_operation
  * @DateTime    2019-04-21
  * @description : used this function to register a device into VFS, 
  * user must offer the struct file_operations which contain the operation pointer
- * including open, close and so on
+ * including open, close and so on, the path of the device is /device/dev_name
  * @param       dev_name            
  * @param       file_operations_ptr 
  * @param       flag                

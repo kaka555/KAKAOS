@@ -168,9 +168,9 @@ void  OS_CPU_SysTickHandler(void)
 	timer_task_check();
 #endif
 	run_task_handler();
-	if(need_rescheduled() && !sys_schedule_islock())
-	{
-		clear_rescheduled_flag();
+	if(need_rescheduled() && !sys_schedule_islock()) /* g_schedule_lock lock here */
+	{                                                /* which means we can use schedule() */
+		clear_rescheduled_flag();                    /* to force context switching */
 		schedule();
 	}
 	SYS_EXIT_INTERRUPT();

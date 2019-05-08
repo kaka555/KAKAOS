@@ -11,8 +11,8 @@ ifeq ($(findstring y, $(CONFIG_TIME_EN) $(CONFIG_TIMER_EN)), y)
 SUB_DIR_y += time
 endif
 
-$(SUB_TGT): $(SRCS:.c=.o) $(ASM_SRCS:.s=.o) $(SUB_DIR_y)
-	$(LD) $(SRCS:.c=.o) $(ASM_SRCS:.s=.o) $(SUB_DIR_y:=/$(SUB_TGT)) $(LDFLAG)  -r -o $@
+$(SUB_TGT): $(SRCS:.c=.o) $(ASM_SRCS:.S=.o) $(SUB_DIR_y)
+	$(LD) $(SRCS:.c=.o) $(ASM_SRCS:.S=.o) $(SUB_DIR_y:=/$(SUB_TGT)) $(LDFLAG)  -r -o $@
 
 %.o: %.c
 	@echo "CC $@"
@@ -21,9 +21,9 @@ $(SUB_TGT): $(SRCS:.c=.o) $(ASM_SRCS:.s=.o) $(SUB_DIR_y)
 %.d :%.c
 	@$(CC) $(FLAGS) $< -MM > $@ $(DEF)
 
-%.o :%.s
+%.o :%.S
 	@echo "CC $@"
-	@$(CC) $(ASFLAGS) -c $< -o $@
+	@$(CC) $(ASFLAGS) -c $< -o $@ $(DEF)
 
 sinclude $(SRCS:.c=.d)
 
@@ -33,7 +33,7 @@ $(SUB_DIR_y) :
 	@make -C $@
 
 clean:
-	rm -vf $(SUB_TGT) $(SRCS:.c=.o) $(ASM_SRCS:.s=.o) $(SRCS:.c=.d)
+	rm -vf $(SUB_TGT) $(SRCS:.c=.o) $(ASM_SRCS:.S=.o) $(SRCS:.c=.d)
 	for dir in $(SUB_DIR_y);do \
 	    make -C $$dir clean;\
 	done

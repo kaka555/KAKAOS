@@ -1,4 +1,4 @@
-    
+
     .global  OSTCBCurPtr
     .global  OSTCBHighRdyPtr
 
@@ -6,8 +6,8 @@
                                     
     .global  OS_CPU_PendSVHandler
 
-    .cpu    cortex-m3
-    .fpu    softvfp
+    .cpu    cortex-m4
+
     .syntax unified
     .thumb
     .text
@@ -58,6 +58,9 @@ OS_CPU_PendSVHandler:
     LDR     R1, [R1]
     CBZ     R1, OS_CPU_PendSVHandler_nosave
 
+    SUBS    R0, R0, #0X40
+    VSTM    R0, {S16-S31}
+
     SUBS    R0, R0, #0x20                                       /*; Save remaining regs r4-11 on process stack*/
     STM     R0, {R4-R11}
 
@@ -73,6 +76,9 @@ OS_CPU_PendSVHandler_nosave:
     LDR     R0, [R2] /*; R0 is new process SP; SP = OSTCBHighRdyPtr->StkPtr;*/
     LDM     R0, {R4-R11}                                        
     ADDS    R0, R0, #0x20
+
+    VLDM    R0, {S16-S31}
+    ADDS    R0, R0, #0X40
 
     MSR     PSP, R0                                           
     ORR     LR, LR, #0x04                                      

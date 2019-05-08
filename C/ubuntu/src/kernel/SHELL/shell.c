@@ -19,6 +19,8 @@
 #include <vfs.h>
 #include <mem_pool.h>
 
+/* this file do the main job of shell */
+
 #if CONFIG_SHELL_EN
 
 static unsigned int _process(char *buffer_ptr);

@@ -5,6 +5,10 @@
 #include <printf_debug.h>
 #include <os_cpu.h>
 
+/* 
+user should use the function in this file to operate the file
+ */
+
 int __open(struct dentry *dentry_ptr,enum FILE_FLAG flag,const struct file **file_store_ptr)
 {
 	if(get_dentry_flag(dentry_ptr) & FLAG_DENTRY_FOLDER)

@@ -4,8 +4,8 @@ ASM_SRCS =
 
 SUB_DIR =
 
-$(SUB_TGT): $(SRCS:.c=.o) $(ASM_SRCS:.s=.o) $(SUB_DIR)
-	$(LD) $(SRCS:.c=.o) $(ASM_SRCS:.s=.o) $(SUB_DIR:=/$(SUB_TGT)) $(LDFLAG)  -r -o $@
+$(SUB_TGT): $(SRCS:.c=.o) $(ASM_SRCS:.S=.o) $(SUB_DIR)
+	$(LD) $(SRCS:.c=.o) $(ASM_SRCS:.S=.o) $(SUB_DIR:=/$(SUB_TGT)) $(LDFLAG)  -r -o $@
 
 %.o: %.c
 	@echo "CC $@"
@@ -14,7 +14,7 @@ $(SUB_TGT): $(SRCS:.c=.o) $(ASM_SRCS:.s=.o) $(SUB_DIR)
 %.d :%.c
 	@$(CC) $(FLAGS) $< -MM > $@ $(DEF)
 
-%.o :%.s
+%.o :%.S
 	@echo "CC $@"
 	@$(CC) $(ASFLAGS) -c $< -o $@
 
@@ -26,7 +26,7 @@ $(SUB_DIR) :
 	@make -C $@
 
 clean:
-	rm -vf $(SUB_TGT) $(SRCS:.c=.o) $(ASM_SRCS:.s=.o) $(SRCS:.c=.d)
+	rm -vf $(SUB_TGT) $(SRCS:.c=.o) $(ASM_SRCS:.S=.o) $(SRCS:.c=.d)
 	for dir in $(SUB_DIR);do \
 	    make -C $$dir clean;\
 	done
