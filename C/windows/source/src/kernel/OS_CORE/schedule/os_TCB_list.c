@@ -120,8 +120,9 @@ void shell_check_TCB_list(void)
 				}
 				ka_printf("name: %s\n",TCB_ptr->name);
 				ka_printf("timeslice_hope_time: %d\n",TCB_ptr->timeslice_hope_time);
-				ka_printf("stack: %p\n",(void *)TCB_ptr->stack);
+				ka_printf("stack: 0x%p\n",(void *)TCB_ptr->stack);
 				ka_printf("stack_size: %d\n",TCB_ptr->stack_size);
+				ka_printf("stack-base: 0x%p\n",(void *)TCB_ptr->stack_end);
 				ka_printf("task_state: ");
 				switch(TCB_ptr->task_state)
 				{
@@ -180,7 +181,7 @@ void shell_stack_check(int argc, char const *argv[])
 				unsigned int *ptr = (unsigned int *)(TCB_ptr->stack_end);
 				ka_printf("=====================================================\n");
 				ka_printf("task name : %s\n",TCB_ptr->name);
-				ka_printf("The stack space is from %p to %p\n",TCB_ptr->stack_end,(STACK_TYPE *)TCB_ptr->stack_end + TCB_ptr->stack_size/4);
+				ka_printf("The stack space is from 0x%p to 0x%p\n",TCB_ptr->stack_end,(STACK_TYPE *)TCB_ptr->stack_end + TCB_ptr->stack_size/4);
 #if CONFIG_DEBUG_ON
 				if(0 != *(unsigned int *)(TCB_ptr->stack_end))
 				{

@@ -46,7 +46,7 @@ int _must_check _task_init(
 	TCB_ptr->stack_end = (STACK_TYPE *)ka_malloc(stack_size);
 	if(NULL == TCB_ptr->stack_end)
 	{
-		return -ERROR_ALLOCATE_STACK;
+		return -ERROR_NO_MEM;
 	}
 	TCB_ptr->stack_size = stack_size;
 	TCB_ptr->stack = (STACK_TYPE *)TCB_ptr->stack_end + stack_size/4 - 1;
@@ -177,6 +177,7 @@ int _task_delete(TCB *TCB_ptr)
 	CPU_SR_ALLOC();
 	CPU_CRITICAL_ENTER();
 	_delete_from_TCB_list(TCB_ptr);
+	/* free the stack */
 	ka_free(TCB_ptr->stack_end);
 	switch(TCB_ptr->task_state)
 	{

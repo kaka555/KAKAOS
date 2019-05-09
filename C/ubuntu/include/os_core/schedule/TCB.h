@@ -20,8 +20,6 @@ extern volatile int g_interrupt_count;
 
 #define PRIO_MAX 64
 
-#define ERROR_ALLOCATE_STACK 1 
-
 #define RESERVED_PRIO	0
 
 /**** attribution macro ****/

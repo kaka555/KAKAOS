@@ -109,7 +109,7 @@ void __INIT _os_start(void)
 	{
 		panic("create task count_init error\n");
 	}
-	if(0 != task_init_ready(&TCB_idle,600,PRIO_MAX-1,HZ,"idle",idle,NULL))
+	if(0 != task_init_ready(&TCB_idle,256,PRIO_MAX-1,HZ,"idle",idle,NULL))
 	{
 		panic("create task idle error\n");
 	}

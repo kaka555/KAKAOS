@@ -25,6 +25,7 @@
 	#define DEBUG_TYPE_MALLOC		1
 	#define DEBUG_FAT				1
 	#define DEBUG_MEM_POOL			1
+	#define DEBUG_EXEC              1
 #else
 	#define KA_WARN(type, format, ...)   
 #endif
