@@ -118,7 +118,7 @@ struct shell_variable *find_in_variable_array(const char *name)
 	return NULL;
 }
 
-void shell_insert_variable(char *name,void *data_ptr,Shell_V_Type type)
+void shell_insert_variable(const char *name,void *data_ptr,Shell_V_Type type)
 {
 	ASSERT(NULL != data_ptr,ASSERT_INPUT);
 	ASSERT( (SHELL_V_TYPE_UINT8  == type)  ||

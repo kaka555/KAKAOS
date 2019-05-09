@@ -23,7 +23,7 @@ void shell_echo(int argc, char const *argv[]);
 
 #if CONFIG_SHELL_DEBUG_EN && CONFIG_SHELL_EN
 struct set_variable{
-	char *shell_v_name;
+	const char *shell_v_name;
 	Shell_V_Type shell_v_type;
 	void *data_ptr;
 };

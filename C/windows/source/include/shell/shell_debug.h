@@ -32,7 +32,7 @@ typedef char Shell_V_Type;
 #define SHELL_V_ARRAY_SIZE 8
 struct shell_variable
 {
-	char *shell_v_name;
+	const char *shell_v_name;
 	Shell_V_Type shell_v_type;
 	void *data_ptr;
 	struct singly_list_head list;
@@ -42,7 +42,7 @@ unsigned int shell_v_hash(const char *name);
 void shell_v_display(struct shell_variable *shell_variable_ptr);
 void shell_v_display_addr(struct shell_variable *shell_variable_ptr);
 void shell_v_write(struct shell_variable *shell_variable_ptr,const char *input_buffer_ptr);
-void shell_insert_variable(char *name,void *ptr,Shell_V_Type type);
+void shell_insert_variable(const char *name,void *ptr,Shell_V_Type type);
 struct shell_variable *find_in_variable_array(const char *name);
 
 

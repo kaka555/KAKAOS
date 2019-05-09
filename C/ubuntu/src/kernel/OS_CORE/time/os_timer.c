@@ -65,7 +65,7 @@ INIT_FUN(__init_timer,1);
 int timer_init(
 	struct timer *timer_ptr,
 	TIMER_TYPE type,
-	char *name,
+	const char *name,
 	void (*fun)(void *para),
 	void *para,
 	unsigned int period,
@@ -103,7 +103,7 @@ EXPORT_SYMBOL(timer_init);
 int timer_create(
 	struct timer **timer_ptr,
 	TIMER_TYPE type,
-	char *name,
+	const char *name,
 	void (*fun)(void *para),
 	void *para,
 	unsigned int period,
