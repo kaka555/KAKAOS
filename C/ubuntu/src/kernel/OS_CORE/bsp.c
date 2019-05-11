@@ -1,5 +1,7 @@
 #include <bsp.h>
 #include <myMicroLIB.h>
+#include <os_time.h>
+#include <osinit.h>
 
 /**
  * @Author      kaka
@@ -13,6 +15,9 @@ void _bsp_init(const struct device *device_array,unsigned int num)
 	unsigned int i;
 	for(i=0;i<num;++i)
 	{
+		volatile UINT32 tick;
+		tick = (UINT32)_get_tick();
+		ka_printf("[%u]",tick);
 		switch(device_array[i].head.type)
 		{
 			case DEV_NORMAL:
@@ -26,11 +31,15 @@ void _bsp_init(const struct device *device_array,unsigned int num)
 				ka_printf("DEV_MEM\n");
 				break;
 			default :
-				ka_printf("error!!!\n");break;
+				ka_printf("error device!!!\n");break;
 		}
+		tick = (UINT32)_get_tick();
+		ka_printf("[%u]",tick);
 		ka_printf("dev_name is %s\n",device_array[i].head.dev_name);
 		if(NULL != device_array[i].head.dev_info)
 		{
+			tick = (UINT32)_get_tick();
+			ka_printf("[%u]",tick);
 			ka_printf("dev_info is %s\n",device_array[i].head.dev_info);
 		}
 	}
