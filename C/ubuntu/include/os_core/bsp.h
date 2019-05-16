@@ -31,8 +31,8 @@ struct dev_mem{
 };
 
 struct device_head{
-	char *dev_name;
-	char *dev_info;
+	const char *dev_name;
+	const char *dev_info;
 	enum device_type type;
 };
 

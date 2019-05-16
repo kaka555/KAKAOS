@@ -30,7 +30,7 @@ struct timer
 	TIMER_TYPE  type;
 	TIMER_STATE state;
 	unsigned int rest_num;
-	char *timer_name;
+	const char *timer_name;
 	void (*fun)(void *para);
 	void *para;
 	unsigned int period; /*ticks*/
@@ -41,7 +41,7 @@ struct timer
 int timer_init(
 	struct timer *timer_ptr,
 	TIMER_TYPE type,
-	char *name,
+	const char *name,
 	void (*fun)(void *para),
 	void *para,
 	unsigned int period,
@@ -50,7 +50,7 @@ int timer_init(
 int timer_create(
 	struct timer **timer_ptr,
 	TIMER_TYPE type,
-	char *name,
+	const char *name,
 	void (*fun)(void *para),
 	void *para,
 	unsigned int period,

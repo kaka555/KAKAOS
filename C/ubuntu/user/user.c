@@ -706,7 +706,7 @@ void five(void *para)
 	}
 }
 
-void three(void *para)
+void kaka(void *para)
 {
 	ka_printf("now come into function kaka()\n");
 	ka_printf("para is %u\n",(unsigned int)para);
@@ -717,15 +717,16 @@ void three(void *para)
 	}
 	while(1)
 	{
-		float a = 3.3*4.5;
-		ka_printf("a is %f\n",a);
+		float b = 4.5;
+		float a = 3.3;
+		ka_printf("a is %f\n",a*b);
 		sleep(5*HZ);
 		ka_printf("now come into function kaka()\n");
 	}
 }
 
 #include <printf_debug.h>
-void kaka(void *para)
+void three(void *para)
 {
 	ka_printf("now come into function three()\n");
 	INSERT_BREAK_POINT();

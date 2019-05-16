@@ -10,6 +10,7 @@
 #include <myMicroLIB.h>
 #include <os_time.h>
 #include <export.h>
+#include <printf_debug.h>
 
 extern volatile TCB *OSTCBCurPtr;
 extern volatile TCB *OSTCBHighRdyPtr;
@@ -332,15 +333,25 @@ int _exec(
 		return -ERROR_FUN_USE_IN_INTER;
 	}
 /* change the responding attribute */
-	/* 1.name */
+	/* 1.prepare stack */
+	STACK_TYPE *stack_addr = ka_malloc(this_TCB_ptr->stack_size);
+	if(NULL == stack_addr)
+	{
+		KA_WARN(DEBUG_EXEC,"alloc new stack fail\n");
+		return -ERROR_NO_MEM;
+	}
+	/* free the former stack */
+	ka_free(this_TCB_ptr->stack_end);
+	/* change TCB stack attrbution */
+	this_TCB_ptr->stack_end = stack_addr;
+	this_TCB_ptr->stack = (STACK_TYPE *)this_TCB_ptr->stack_end + 
+								this_TCB_ptr->stack_size/4 - 1;
+	/* 2.change name */
 	if(name)
 	{
 		this_TCB_ptr->name = (char *)name;
 	}
-	/* 2.stack */
-	this_TCB_ptr->stack = (STACK_TYPE *)this_TCB_ptr->stack_end + 
-								this_TCB_ptr->stack_size/4 - 1;
-	/* 3.register */
+	/* 3.set register */
 extern void delete_myself(void);
 	set_register((void **)&this_TCB_ptr->stack,function,delete_myself,para);
 	/* set OSTCBCurPtr to NULL to make sure the execution of

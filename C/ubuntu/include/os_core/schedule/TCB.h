@@ -20,8 +20,6 @@ extern volatile int g_interrupt_count;
 
 #define PRIO_MAX 64
 
-#define ERROR_ALLOCATE_STACK 1 
-
 #define RESERVED_PRIO	0
 
 /**** attribution macro ****/
@@ -62,7 +60,7 @@ typedef struct task_control_block_struct{
 	unsigned int delay_heap_position;
 	struct list_head same_prio_list;
 	struct list_head suspend_list;
-	char *name;
+	const char *name;
 	unsigned int timeslice_hope_time;
 	unsigned int timeslice_rest_time;
 	UINT32 attribution;							/*each bit of this element present an attribution*/

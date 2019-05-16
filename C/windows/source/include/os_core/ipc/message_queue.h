@@ -23,7 +23,7 @@ typedef struct message_queue_block{
 	struct insert_sort_entity message_array_insert_sort_put_TCB_list;
 	unsigned int put_num; /* the task num that wait for put message*/
 	unsigned int wait_num;/* the task num that wait for get message*/
-	char *name;
+	const char *name;
 	unsigned int current_message_num; /* current message's num; should <= max_message_num*/
 	unsigned int max_message_num;	  /* the max message's num that this MQB can hold */
 }MQB;

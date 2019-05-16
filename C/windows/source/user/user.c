@@ -706,7 +706,7 @@ void five(void *para)
 	}
 }
 
-void three(void *para)
+void kaka(void *para)
 {
 	ka_printf("now come into function kaka()\n");
 	ka_printf("para is %u\n",(unsigned int)para);
@@ -725,7 +725,7 @@ void three(void *para)
 }
 
 #include <printf_debug.h>
-void kaka(void *para)
+void three(void *para)
 {
 	ka_printf("now come into function three()\n");
 	INSERT_BREAK_POINT();
