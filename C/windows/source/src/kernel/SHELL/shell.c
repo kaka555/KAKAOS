@@ -21,6 +21,10 @@
 
 /* this file do the main job of shell */
 
+/**
+ * every interaction port use struct shell_buffer to manage the relevant infomation
+ */
+
 #if CONFIG_SHELL_EN
 
 static unsigned int _process(char *buffer_ptr);
@@ -39,6 +43,13 @@ static inline void clear_input_buffer(void)
 	using_shell_buffer_ptr->buffer[0] = '\0';
 }
 
+/**
+ * @Author      kaka
+ * @DateTime    2019-06-11
+ * @description : this function will cause the thread to sleep, until the user input 
+ * the same string as str_ptr represents
+ * @param       str_ptr    [string pointer]
+ */
 void _shell_buffer_wait_str(const char *str_ptr) /* thread will going to sleep*/
 {
 	ASSERT(NULL != str_ptr,ASSERT_INPUT);
@@ -102,6 +113,11 @@ int __init_shell_buffer(struct shell_buffer *shell_buffer_ptr,
 }
 
 extern unsigned int command_list_hash(const char *command_ptr);
+/**
+ * @Author      kaka
+ * @DateTime    2019-06-11
+ * @description : this function will be call with a 'TAB' input
+ */
 static void deal_with_tab(void)
 {
 	ASSERT(using_shell_buffer_ptr->buffer != NULL,ASSERT_INPUT);
@@ -180,12 +196,19 @@ static void recover_shell_buffer(void)
 	}
 }
 
+/**
+ * @Author      kaka
+ * @DateTime    2019-06-11
+ * @description : this function should be called in the interrput 
+ * @param       c          [input char]
+ */
 void _put_in_shell_buffer(char c)  /* deal with input layer*/
 {
 	if(c == 0x0a)
 	{
 		return ;
 	}
+	/* check the input char */
 	if( ! (	IS_LOWER(c) || IS_UPPER(c) || (0x0d == c) || 
 			(0x03 == c) || (0x08 == c) || (' ' == c)  || 
 			IS_NUM(c) 	|| IS_DOT(c)   || ('-' == c)  || 
@@ -227,7 +250,7 @@ void _put_in_shell_buffer(char c)  /* deal with input layer*/
 	}
 	if(using_shell_buffer_ptr->index < using_shell_buffer_ptr->buffer_size)
 	{
-		ka_putchar(c);
+		ka_putchar(c); /* echo */
 		using_shell_buffer_ptr->buffer[(using_shell_buffer_ptr->index)++] = c;
 		using_shell_buffer_ptr->buffer[using_shell_buffer_ptr->index] = '\0';
 	}
@@ -256,6 +279,13 @@ static int _shell_exec(const char *command)
 	return FUN_EXECUTE_SUCCESSFULLY;
 }
 
+/**
+ * @Author      kaka
+ * @DateTime    2019-06-11
+ * @description : thread can use this function to simulate a command line's input
+ * @param       command    [command string]
+ * @return      error code
+ */
 int shell_exec(const char *command)
 {
 	if(NULL == command)
@@ -645,6 +675,13 @@ static unsigned int _process(char *buffer_ptr)
 	return num;
 }
 
+/**
+ * @Author      kaka
+ * @DateTime    2019-06-11
+ * @description : called by thread "shell", process the input buffer
+ * @param       buffer_ptr [description]
+ * @return                 [description]
+ */
 static int process(char *buffer_ptr)
 {
 	unsigned int num = _process(buffer_ptr);
@@ -662,6 +699,12 @@ static int process(char *buffer_ptr)
     return num;
 }
 
+/**
+ * @Author      kaka
+ * @DateTime    2019-06-11
+ * @description : the shell thread codes
+ * @param       para       [description]
+ */
 void shell(void *para)
 {
 #if CONFIG_ASSERT_DEBUG

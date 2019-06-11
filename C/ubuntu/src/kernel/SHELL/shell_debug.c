@@ -5,6 +5,10 @@
 #include <kakaosstdint.h>
 #include <sys_init_fun.h>
 
+/**
+ * this file realize the shell debug function
+ */
+
 #if CONFIG_SHELL_DEBUG_EN && CONFIG_SHELL_EN
 
 static MCB MCB_for_shell_debug;
@@ -25,6 +29,15 @@ static void __INIT __init_shell_debug(void)
 }
 INIT_FUN(__init_shell_debug,1);
 
+/**
+ * @Author      kaka
+ * @DateTime    2019-06-11
+ * @description : user is not recommanded to call this function, 
+ * it is strongly recommanded to use the macro INSERT_BREAK_POINT()
+ * @param       file_name     [description]
+ * @param       line          [description]
+ * @param       function_name [description]
+ */
 void insert_break_point(const char* file_name,unsigned line,const char* function_name)
 {
 #if CONFIG_ASSERT_DEBUG
@@ -43,6 +56,13 @@ void insert_break_point(const char* file_name,unsigned line,const char* function
 	}
 }
 
+/**
+ * @Author      kaka
+ * @DateTime    2019-06-11
+ * @description : "next" command
+ * @param       argc       [description]
+ * @param       argv       [description]
+ */
 void shell_debug_next(int argc, char const *argv[])
 {
 	(void)argc;
@@ -50,6 +70,13 @@ void shell_debug_next(int argc, char const *argv[])
 	_v(&MCB_for_shell_debug);
 }
 
+/**
+ * @Author      kaka
+ * @DateTime    2019-06-11
+ * @description : "run" command
+ * @param       argc       [description]
+ * @param       argv       [description]
+ */
 void shell_debug_run(int argc, char const *argv[])
 {
 	(void)argc;
@@ -58,6 +85,13 @@ void shell_debug_run(int argc, char const *argv[])
 	flag_for_shell_debug = 0;
 }
 
+/**
+ * @Author      kaka
+ * @DateTime    2019-06-11
+ * @description : "stop" command
+ * @param       argc       [description]
+ * @param       argv       [description]
+ */
 void shell_debug_stop(int argc, char const *argv[])
 {
 	(void)argc;
@@ -118,7 +152,16 @@ struct shell_variable *find_in_variable_array(const char *name)
 	return NULL;
 }
 
-void shell_insert_variable(char *name,void *data_ptr,Shell_V_Type type)
+/**
+ * @Author      kaka
+ * @DateTime    2019-06-11
+ * @description : user call this function to insert a variable for debug, and then you can
+ * write, read, and print it in the shell
+ * @param       name       [description]
+ * @param       data_ptr   [description]
+ * @param       type       [description]
+ */
+void shell_insert_variable(const char *name,void *data_ptr,Shell_V_Type type)
 {
 	ASSERT(NULL != data_ptr,ASSERT_INPUT);
 	ASSERT( (SHELL_V_TYPE_UINT8  == type)  ||

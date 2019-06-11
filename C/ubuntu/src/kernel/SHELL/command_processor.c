@@ -41,6 +41,13 @@ struct command_processer *_get_command_processer(unsigned int num)
 	return command_processer_ptr_array[num-1];
 }
 
+/**
+ * @Author      kaka
+ * @DateTime    2019-06-11
+ * @description : hash method for command list
+ * @param       command_ptr [command name]
+ * @return      the hash value
+ */
 unsigned int command_list_hash(const char *command_ptr)
 {
 	unsigned int sum = 0;
@@ -67,6 +74,15 @@ void __init_command_n_ptr_hash_array(void)
 	}
 }
 
+/**
+ * @Author      kaka
+ * @DateTime    2019-06-11
+ * @description : find the struct command entity, if found, excutes the corresponding function
+ * @param       num                  
+ * @param       argv                 
+ * @param       command_processer_ptr
+ * @return                           
+ */
 int _match_and_execute_command(
 	int num,
 	char const *argv[],

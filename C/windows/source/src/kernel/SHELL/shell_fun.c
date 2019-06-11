@@ -14,6 +14,8 @@
 #include <module.h>
 #include <vfs.h>
 
+/* this file realize most of the shell function */
+
 #if CONFIG_SHELL_EN
 
 /*add corresponding function here*/
