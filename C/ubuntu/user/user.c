@@ -214,7 +214,7 @@ int i;
 }
 #endif
 
-#if 0 // test int sleep(unsigned int)
+#if 1 // test int sleep(unsigned int)
 #include <myassert.h>
 void three(void *para)
 {
@@ -257,6 +257,9 @@ void five(void *para)
 }
 void four(void *para)
 {
+	ka_printf("three is %p\n"
+		"four is %p\n"
+		"five is %p\n",three,four,five);
 	int ret = sleep(4*HZ);
 	ka_printf("task four ret is %d\n",ret);
 	suspend();
@@ -692,7 +695,7 @@ void three(void *para)
 
 #endif
 
-#if 1  /* test exec() */
+#if 0  /* test exec() */
 
 void five(void *para)
 {

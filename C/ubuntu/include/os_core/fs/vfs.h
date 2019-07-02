@@ -26,6 +26,7 @@ struct file_operations
 	int (*llseek)(struct file *file_ptr,int offset,enum llseek_from from);
 	int (*ioctl)(struct file *file_ptr,int cmd,int args);
 };
+
 /*
 	realize by bottom file system
 	if the file system does not support some operation,just give
@@ -80,7 +81,6 @@ struct dentry
 	unsigned int ref;
 	struct list_head subdirs; /* this is the list head of it's subdirs */
 	struct list_head child;	/* this is the node of the subdirs's list */
-	MUTEX d_mutex;
 };
 
 static inline void _dget(struct dentry *dentry_ptr)

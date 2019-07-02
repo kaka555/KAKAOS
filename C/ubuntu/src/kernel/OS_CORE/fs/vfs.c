@@ -85,7 +85,6 @@ static void _init_dentry(
 	{
 		list_add_tail(&dentry_ptr->child,&parent_ptr->subdirs);
 	}
-	_mutex_init(&dentry_ptr->d_mutex);
 }
 
 /**
@@ -193,24 +192,35 @@ struct inode *_inode_alloc_and_init(
 int _rename(struct dentry *dentry_ptr,const char *name)
 {
 	ASSERT((NULL != dentry_ptr) && (NULL != name),ASSERT_INPUT);
+	int ret = FUN_EXECUTE_SUCCESSFULLY;
+	const char *pre_name = dentry_ptr->name;
+	if(ret < 0)
+	{
+		return ret;
+	}
 	if(dentry_ptr->flag & FLAG_DENTRY_NAME_CHANGE_DIS)
 	{
-		return -ERROR_SYS;
+		ret = -ERROR_SYS;
+		goto out;
 	}
 	if(dentry_ptr->d_inode->inode_ops->change_name(dentry_ptr->d_inode,dentry_ptr,name) < 0)
 	{
 		ka_printf("write disk error\n");
-		return -ERROR_DISK;
+		ret = -ERROR_DISK;
+		goto out;
 	}
 	char *buffer = (char *)ka_malloc(ka_strlen(name));
 	if(NULL == buffer)
 	{
-		return -ERROR_NO_MEM;
+		ret = -ERROR_NO_MEM;
+		dentry_ptr->d_inode->inode_ops->change_name(dentry_ptr->d_inode,dentry_ptr,pre_name);
+		goto out;
 	}
 	ka_strcpy(buffer,name);
 	ka_free(dentry_ptr->name);
 	dentry_ptr->name = buffer;
-	return FUN_EXECUTE_SUCCESSFULLY;
+out:
+	return ret;
 }
 
 /**

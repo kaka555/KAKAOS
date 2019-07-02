@@ -104,12 +104,6 @@ int default_ioctl(struct file *file_ptr,int cmd,int args)
 /**  end of file_operations default function   **/
 
 /**  inode_operations default function  **/
-/*
-void default_cd(struct dentry *dentry_ptr)
-{
-	(void)dentry_ptr;
-}
-*/
 
 int default_inode_open(struct file *file_ptr)
 {
