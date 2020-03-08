@@ -14,16 +14,16 @@
 #include <export.h>
 
 #if CONFIG_CPU_USE_RATE_CALCULATION
-	static unsigned int use_rate = 0;
-	extern UINT64 idle_num;
-	extern UINT64 count_max_num;
+static unsigned int use_rate = 0;
+extern UINT64 idle_num;
+extern UINT64 count_max_num;
 #endif
 
 extern volatile TCB *OSTCBCurPtr;
 extern volatile TCB *OSTCBHighRdyPtr;
 
 #if CONFIG_TIMER_EN
-	extern TCB TCB_timer_task;
+extern TCB TCB_timer_task;
 #endif
 
 
@@ -57,16 +57,14 @@ static inline void tick_time_handler(void)
 #endif
 	++g_time_tick_count;
 #if CONFIG_TIME_EN
-	if(TICK_PER_SEC == time_flag)
+	if (TICK_PER_SEC == time_flag)
 	{
 		time_flag = 0;
-#if CONFIG_TIME_EN
 		_system_time_increase();
-#endif
 #if CONFIG_CPU_USE_RATE_CALCULATION
-		use_rate = idle_num / (count_max_num/100);
+		use_rate = idle_num / (count_max_num / 100);
 		idle_num = 0;
-#endif		
+#endif
 	}
 #endif
 }
@@ -76,7 +74,7 @@ unsigned int get_cpu_use_rate(void)
 {
 	return use_rate;
 }
-#endif	
+#endif
 
 /**
  * This is a system function
@@ -88,9 +86,9 @@ unsigned int get_cpu_use_rate(void)
 static void delay_task_check(void)
 {
 	TCB *TCB_ptr = _delay_heap_get_top_TCB();
-	while(NULL != TCB_ptr)
+	while (NULL != TCB_ptr)
 	{
-		if(TCB_ptr->delay_reach_time == g_time_tick_count)
+		if (TCB_ptr->delay_reach_time == g_time_tick_count)
 		{
 			_delay_heap_remove_top_TCB();
 			_insert_ready_TCB(TCB_ptr);
@@ -109,9 +107,9 @@ static void delay_task_check(void)
 void timer_task_check(void)
 {
 	struct timer *timer_ptr;
-	if(FUN_EXECUTE_SUCCESSFULLY == _get_timer_heap_top(&timer_ptr))
+	if (FUN_EXECUTE_SUCCESSFULLY == _get_timer_heap_top(&timer_ptr))
 	{
-		if(TIME_FIRST_SMALLER_THAN_SECOND(_get_tick(),timer_ptr->wake_time))
+		if (TIME_FIRST_SMALLER_THAN_SECOND(_get_tick(), timer_ptr->wake_time))
 		{
 			return;
 		}
@@ -134,12 +132,12 @@ void timer_task_check(void)
 static void run_task_handler(void)
 {
 	TCB *TCB_ptr = (TCB *)OSTCBCurPtr;
-	if(--(TCB_ptr->timeslice_rest_time))
+	if (--(TCB_ptr->timeslice_rest_time))
 	{
 		return ;
 	}
 	TCB_ptr->timeslice_rest_time = TCB_ptr->timeslice_hope_time;
-	if(1 == _get_ready_num_from_TCB_list(TCB_ptr->prio))
+	if (1 == _get_ready_num_from_TCB_list(TCB_ptr->prio))
 	{
 		return ;
 	}
@@ -148,7 +146,7 @@ static void run_task_handler(void)
 		struct list_head *head;
 		head = _get_from_TCB_list(TCB_ptr->prio);
 		list_del(&TCB_ptr->same_prio_list);
-		list_add_tail(&TCB_ptr->same_prio_list,head);
+		list_add_tail(&TCB_ptr->same_prio_list, head);
 		set_rescheduled_flag();
 	}
 }
@@ -168,8 +166,8 @@ void  OS_CPU_SysTickHandler(void)
 	timer_task_check();
 #endif
 	run_task_handler();
-	if(need_rescheduled() && !sys_schedule_islock()) /* g_schedule_lock lock here */
-	{                                                /* which means we can use schedule() */
+	if (need_rescheduled() && !sys_schedule_islock()) /* g_schedule_lock lock here */
+	{	/* which means we can use schedule() */
 		clear_rescheduled_flag();                    /* to force context switching */
 		schedule();
 	}
