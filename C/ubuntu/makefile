@@ -55,7 +55,7 @@ SUB_DIR =  src/kernel user
 $(TARGET): $(SUB_DIR)
 	echo "LIBPATH is $(LIBPATH)"
 	echo "LDFLAGS is $(LDFLAGS)"
-	$(LD)  $(^:=/$(SUB_TGT)) -T $(SCRIPT) $(LDFLAGS) -nostartfiles -nodefaultlibs -nostdlib --gc-sections -o $@ -static $(LIBPATH) -lgcc -lc
+	$(LD)  $(^:=/$(SUB_TGT)) -T $(SCRIPT) $(LDFLAGS) -nostartfiles -nodefaultlibs -nostdlib --gc-sections -o $@ -static $(LIBPATH) -lgcc
 	$(OBJCOPY) $(TARGET)  $(TARGET:.elf=.bin) -Obinary
 	$(OBJCOPY) $(TARGET)  $(TARGET:.elf=.hex) -Oihex
 
@@ -82,16 +82,17 @@ MKCONFIG := $(HOME)/mkconfig
 ## DEFAULT means default
 
 stm32f103_config:
-	@$(MKCONFIG) $@ $(@:_config=) "-mcpu=cortex-m3 -mthumb" "-D STM32F10X_HD -D USE_STDPERIPH_DRIVER"
+	@$(MKCONFIG) $@ $(@:_config=) "-mcpu=cortex-m3 -mthumb" "-D STM32F10X_HD -D USE_STDPERIPH_DRIVER" \
+	"-L/home/ka/stm32/gcc-arm-none-eabi-5_4-2016q3/lib/gcc/arm-none-eabi/5.4.1/armv7e-m/softfp/"
 
 stm32f407_config:
 	@$(MKCONFIG) $@ $(@:_config=) "-mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16" \
 	"-D STM32F40XX -D USE_STDPERIPH_DRIVER -D __VFP_FP__" \
 	"-L/home/ka/stm32/gcc-arm-none-eabi-5_4-2016q3/lib/gcc/arm-none-eabi/5.4.1/armv7e-m/fpu/ \
-	-L/home/ka/stm32/gcc-arm-none-eabi-5_4-2016q3/arm-none-eabi/lib/armv7e-m/fpu" \
 	"DEFAULT"
 	
 stm32f407_config_no_fpu:
 	@$(MKCONFIG) $@ stm32f407 "-mcpu=cortex-m4 -mthumb" \
-	"-D STM32F40XX -D USE_STDPERIPH_DRIVER -D __FPU_USED=0"
+	"-D STM32F40XX -D USE_STDPERIPH_DRIVER -D __FPU_USED=0" \
+	"-L/home/ka/stm32/gcc-arm-none-eabi-5_4-2016q3/lib/gcc/arm-none-eabi/5.4.1/armv7e-m/softfp/"
 

@@ -8,9 +8,9 @@
 #if CONFIG_SHELL_DEBUG_EN && CONFIG_SHELL_EN
 
 #if CONFIG_BREAK_POINT_DEBUG
-	#define INSERT_BREAK_POINT() insert_break_point(__FILE__,__LINE__,__FUNCTION__)
+#define INSERT_BREAK_POINT() insert_break_point(__FILE__,__LINE__,__FUNCTION__)
 #else
-	#define INSERT_BREAK_POINT()  
+#define INSERT_BREAK_POINT()
 #endif
 
 typedef char Shell_V_Type;
@@ -41,13 +41,13 @@ struct shell_variable
 unsigned int shell_v_hash(const char *name);
 void shell_v_display(struct shell_variable *shell_variable_ptr);
 void shell_v_display_addr(struct shell_variable *shell_variable_ptr);
-void shell_v_write(struct shell_variable *shell_variable_ptr,const char *input_buffer_ptr);
-void shell_insert_variable(char *name,void *ptr,Shell_V_Type type);
+void shell_v_write(struct shell_variable *shell_variable_ptr, const char *input_buffer_ptr);
+void shell_insert_variable(const char *name, void *ptr, Shell_V_Type type);
 struct shell_variable *find_in_variable_array(const char *name);
 
 
 void shell_debug_info(int argc, char const *argv[]);
-void insert_break_point(const char* file_name,unsigned line,const char* function_name);
+void insert_break_point(const char* file_name, unsigned line, const char* function_name);
 void shell_debug_next(int argc, char const *argv[]);
 void shell_debug_run(int argc, char const *argv[]);
 void shell_debug_stop(int argc, char const *argv[]);
