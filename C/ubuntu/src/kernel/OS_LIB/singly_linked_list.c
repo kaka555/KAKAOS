@@ -4,33 +4,29 @@
 /* this file imitate the linux struct node, realizes a singly linked list with
  singly_linked_list.h */
 
-static void _singly_list_del(
-	struct singly_list_head *head,
-	const struct singly_list_head *entity)
+void singly_list_del(
+    struct singly_list_head *head,
+    struct singly_list_head *entity)
 {
-	struct singly_list_head *pos,*pre;
-	singly_list_for_each_del(pos,pre,head)
+	struct singly_list_head **cur = &head->next;
+	while (*cur != head)
 	{
-		if(pos == entity)
+		struct singly_list_head *entry = *cur;
+		if (entity == entry)
 		{
-			_singly_list_del_next(pre);
+			*cur = entry->next;
 			return ;
 		}
+		cur = &entry->next;
 	}
 }
 
-void singly_list_del(
-	struct singly_list_head *head,
-	struct singly_list_head *entity,
-	void (*copy_data)(struct singly_list_head *from,struct singly_list_head *to))
+void singly_list_add_tail(struct singly_list_head *new, struct singly_list_head *head)
 {
-	if((NULL != copy_data) && (head != entity->next))
+	struct singly_list_head **cur = &head->next;
+	while (*cur != head)
 	{
-		copy_data(entity->next,entity);
-		_singly_list_del_next(entity);
+		cur = &(*cur)->next;
 	}
-	else
-	{
-		_singly_list_del(head,entity);
-	}
+	singly_list_add(new, *cur);
 }

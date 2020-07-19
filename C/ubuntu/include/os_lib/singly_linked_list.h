@@ -1,8 +1,8 @@
 #ifndef _SINGLY_LINKED_LIST_H
 #define _SINGLY_LINKED_LIST_H
 
-struct singly_list_head{
-	struct singly_list_head *next;
+struct singly_list_head {
+    struct singly_list_head *next;
 };
 
 #define SINGLY_LIST_HEAD_INIT(name) { &(name) }
@@ -12,23 +12,23 @@ struct singly_list_head{
 
 static inline void INIT_SINGLY_LIST_HEAD(struct singly_list_head *list)
 {
-	list->next = list;
+    list->next = list;
 }
 
-static inline void singly_list_add(struct singly_list_head *new,struct singly_list_head *head)
+static inline void singly_list_add(struct singly_list_head *new, struct singly_list_head *head)
 {
-	new->next = head->next;
-	head->next = new;
+    new->next = head->next;
+    head->next = new;
 }
 
 static inline void _singly_list_del_next(struct singly_list_head *pre)
 {
-	pre->next = pre->next->next;
+    pre->next = pre->next->next;
 }
 
 static inline int singly_list_empty(struct singly_list_head *head)
 {
-	return head->next == head;
+    return head->next == head;
 }
 
 #define singly_ka_offsetof(TYPE, MEMBER) ((size_t) &((TYPE *)0)->MEMBER)
@@ -61,11 +61,9 @@ static inline int singly_list_empty(struct singly_list_head *head)
          pos = n, n = singly_list_entry(n->member.next, typeof(*n), member))
 
 void singly_list_del(
-	struct singly_list_head *head,
-	struct singly_list_head *entity,
-	void (*copy_data)(struct singly_list_head *from,struct singly_list_head *to));
+    struct singly_list_head *head,
+    struct singly_list_head *entity);
 
-#define singly_list_del_safe(head,entity) 				singly_list_del(head,entity,NULL)
-#define singly_list_del_quick(head,entity,copy_data) 	singly_list_del(head,entity,copy_data)
+void singly_list_add_tail(struct singly_list_head *new, struct singly_list_head *head);
 
 #endif
