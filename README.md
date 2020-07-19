@@ -9,6 +9,7 @@
 * 源码中分别包含了windows下和linux下的工程，其中windows下的工程使用keil作为IDE，工程文件位于C\windows\Project\下，linux下使用make工具，以类似于linux工程的形式进行工程的构建，比如编译stm32f103的工程，先输入命令make stm32f103_config，然后make，具体参考主makefile下的各项配置；而且，linux下的工程代码通过shell脚本的帮助可以更轻松地对内核进行配置和裁剪</br>
 * 极短的任务切换时间，在stm32f103zet6平台下以两个任务切换测试为例，挂起函数suspend()上下文切换时长为6.94us，延时函数sleep()上下文切换时长为12.35us；作为对比，ucosiii挂起函数上下文切换时长为15.3us，延时函数上下文切换时长为16.3us</br>
 * ./KAKAOS.png为本文件导出的思维导图
+* testcase目录下有测试本项目的测试用例
 
 ## 内核包括的模块及功能简介：
 
